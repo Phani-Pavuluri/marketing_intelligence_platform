@@ -55,3 +55,9 @@ def test_workflows_readiness_imports() -> None:
     import mip.workflows.readiness as readiness
 
     assert readiness.__doc__ is not None
+
+
+def test_workflows_configs_imports() -> None:
+    import mip.workflows.configs as configs
+
+    assert configs.__doc__ is not None
