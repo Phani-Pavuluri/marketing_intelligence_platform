@@ -26,9 +26,11 @@ No autonomous agents or production decision automation in early phases.
 
 **Phase 5C (done):** Deterministic `MockLLMProvider` in `mip.llm.providers` explaining `WorkflowRunSummary` via `mip.llm.explanations`. No real LLM APIs, Streamlit, or engine execution.
 
+**Phase 5D (done):** Thin Streamlit shell in `mip.app.streamlit_app` via `mip-app` over `run_local_workflow()` and `MockLLMProvider`. No new workflow logic, real LLM APIs, or engine execution.
+
 **Platform prerequisites (largely done):** contracts, gates, `TrustReport` assembly, evidence registry, calibration audit, model calibration readiness.
 
-**Not started:** Streamlit shell, real LLM providers (Ollama/cloud), dashboards.
+**Not started:** real LLM providers (Ollama/cloud), dashboards.
 
 ## 3. Current agreed defaults
 
@@ -152,13 +154,16 @@ No autonomous agents or production decision automation in early phases.
 
 ## 12. Phase 5D: Streamlit shell
 
+**Status: implemented** in `mip.app.streamlit_app`.
+
 **Deliver:**
 
-- Minimal local Streamlit UI over `mip-demo` / `run_local_workflow`
-- Objective selection and record upload/path input
-- Display summary, warnings, blockers, config draft
+- `parse_json_input`, `run_streamlit_workflow_from_json`, `summary_sections`, `format_status_badge`
+- `mip-app` console script for local Streamlit demo
+- Paste/upload JSON, run workflow on button click, render summary + mock explanation
+- No new workflow logic, real LLM APIs, or engine execution
 
-**Exit:** Browser-based local demo without LLM providers.
+**Exit:** Browser-based local demo over deterministic workflow stack.
 
 ## 13. Phase 6: MMM-focused dashboard/report demo
 

@@ -29,9 +29,10 @@ The following is **implemented and tested** in this repository today:
 | **Local workflow orchestrator (Phase 5A)** | `run_local_workflow()` wires intake → readiness → config draft into `WorkflowRunSummary`—**no UI or engine execution** |
 | **Local CLI demo runner (Phase 5B)** | `mip-demo` reads JSON input and prints/saves a governed `WorkflowRunSummary`—**no Streamlit, LLM, or engine execution** |
 | **Mock LLM explanation (Phase 5C)** | `MockLLMProvider` explains `WorkflowRunSummary` conversationally and deterministically—**no real LLM APIs or engine execution** |
+| **Streamlit demo shell (Phase 5D)** | `mip-app` provides a thin UI over `run_local_workflow()` and `MockLLMProvider`—**no new workflow logic or engine execution** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy |
 
-**Not implemented yet:** engine adapters, MMM/GeoX execution, Streamlit shell, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
+**Not implemented yet:** engine adapters, MMM/GeoX execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
 
 ## Target product experience
 
@@ -98,7 +99,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 5A — Local workflow orchestrator | **Done** (`mip.workflows.orchestrator`) |
 | Phase 5B — Local CLI demo runner | **Done** (`mip.cli.demo`, `mip-demo`) |
 | Phase 5C — MockLLM explanation provider | **Done** (`mip.llm.providers`, `mip.llm.explanations`) |
-| Phase 5D+ — Streamlit shell, adapters | **Planned** |
+| Phase 5D — Streamlit demo shell | **Done** (`mip.app.streamlit_app`, `mip-app`) |
+| Phase 6+ — Adapters, dashboards | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -151,11 +153,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 ## Current status
 
-**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5C deterministic workflow layers are implemented with passing tests.
+**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5D deterministic workflow layers are implemented with passing tests.
 
-**Product surface: minimal CLI + mock explanation.** `mip-demo` runs the local workflow from JSON; `MockLLMProvider` explains summaries without real LLM APIs. No Streamlit shell, no adapters wired to sibling engine repos, no dashboards or reports.
+**Product surface: CLI + mock explanation + Streamlit shell.** `mip-demo` and `mip-app` run the local workflow from JSON with governed summaries and mock explanations. No adapters wired to sibling engine repos, no dashboards or reports.
 
-**Near-term focus:** Phase 5D Streamlit shell on top of `mip-demo` / `MockLLMProvider`, then adapter interfaces.
+**Near-term focus:** MMM/GeoX adapter interfaces, then Phase 6 dashboard/report demo.
 
 ## Roadmap
 
@@ -176,8 +178,8 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Next (LLM):**
 
-1. Phase 5D — Streamlit shell over `mip-demo` / `MockLLMProvider`
-2. Adapter interfaces under `src/mip/adapters/`
+1. MMM/GeoX adapter interfaces under `src/mip/adapters/`
+2. Phase 6 — MMM-focused dashboard/report demo
 
 ## Repository layout
 
