@@ -180,6 +180,12 @@ def validate_adapter_output(output_bundle: AdapterOutputBundle) -> AdapterValida
         if not output_bundle.reason or not output_bundle.reason.strip():
             msg = "failed or blocked adapter output requires reason"
             raise ValueError(msg)
+        if output_bundle.validation is not None:
+            return output_bundle.validation
+        return AdapterValidationReport(
+            status=output_bundle.status,
+            blocking_reasons=[output_bundle.reason],
+        )
 
     if output_bundle.validation is not None:
         return output_bundle.validation

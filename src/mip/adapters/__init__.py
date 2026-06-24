@@ -14,6 +14,15 @@ from mip.adapters.geox import (
     build_geox_adapter_input,
     build_geox_adapter_output_placeholder,
 )
+from mip.adapters.governance import (
+    AdapterRegistrationResult,
+    adapter_output_id,
+    adapter_output_to_decision_surface,
+    adapter_output_to_experiment_evidence,
+    gate_outcomes_for_adapter_output,
+    register_adapter_output,
+    trust_report_for_adapter_output,
+)
 from mip.adapters.mmm import (
     MMMAdapterInput,
     MMMAdapterOutputPlaceholder,
@@ -37,6 +46,7 @@ AdapterOutputBundle.model_rebuild(
 __all__ = [
     "AdapterInputBundle",
     "AdapterOutputBundle",
+    "AdapterRegistrationResult",
     "AdapterRunKind",
     "AdapterRunStatus",
     "AdapterValidationReport",
@@ -44,9 +54,15 @@ __all__ = [
     "GeoXAdapterOutputPlaceholder",
     "MMMAdapterInput",
     "MMMAdapterOutputPlaceholder",
+    "adapter_output_id",
+    "adapter_output_to_decision_surface",
+    "adapter_output_to_experiment_evidence",
     "build_geox_adapter_input",
     "build_geox_adapter_output_placeholder",
     "build_mmm_adapter_input",
     "build_mmm_adapter_output_placeholder",
+    "gate_outcomes_for_adapter_output",
+    "register_adapter_output",
+    "trust_report_for_adapter_output",
     "validate_adapter_output",
 ]
