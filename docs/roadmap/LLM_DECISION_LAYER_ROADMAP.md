@@ -345,6 +345,14 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Canonical producer contract documented; sibling repos can implement JSON writers to `integrations/mip/exports/`. Read-only consumer bridge (8B–8E) complete. Live engine execution remains blocked.
 
+## 19i. Critical invariants and golden scenarios (G1–G10)
+
+**Status: documented** in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). **No runtime implementation.** **Final roadmap addendum** — do not add further roadmap layers.
+
+Golden scenarios, demo artifacts, sibling conformance suite, severity normalization, no-silent-upgrade invariant, local persistence plan, explanation rubric, decision packet gates, and roadmap dependency graph prove end-to-end product behavior.
+
+**Next implementation:** Phase 8G (explanation payload) + 8H (usage policy + diagnostic taxonomy)—not live engine execution.
+
 ## 20. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**
@@ -445,5 +453,6 @@ Deferred scope:
 ## Related documents
 
 - [LLM_DECISION_LAYER_VISION.md](../architecture/LLM_DECISION_LAYER_VISION.md)
+- [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
 - [LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md](../architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
 - [ROADMAP.md](./ROADMAP.md)

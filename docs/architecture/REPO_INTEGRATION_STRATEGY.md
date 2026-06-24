@@ -176,6 +176,8 @@ Failed/blocked adapter outputs produce blocked `TrustReport` values and are not 
 
 **Phase 8F (implemented):** Producer-side export specifications in `docs/integrations/` define the JSON contract sibling repos must write to `integrations/mip/exports/`. MIP is ready to consume static sibling exports via the 8B–8E read-only bridge. Next sibling-repo work should implement producer writers emitting the documented contract. This remains a file-based handoff—not a Python dependency or execution path. Live engine execution remains blocked on the MIP side.
 
+**Critical invariants and golden scenarios (documented, not implemented):** [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) defines G1–G10: golden end-to-end scenarios, demo artifacts, sibling conformance suite, schema compatibility, severity normalization, no-silent-upgrade invariant, local persistence, explanation rubric, decision packet gates, and roadmap dependency graph. Final roadmap addendum—next work is 8G/8H implementation, not more docs.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -301,3 +303,4 @@ Until extraction, engines SHOULD NOT take a runtime dependency on full MIP—onl
 - [../adr/ADR-001-full-panel-delta-mu-decision-surface.md](../adr/ADR-001-full-panel-delta-mu-decision-surface.md)
 - [../adr/ADR-002-experiments-as-calibration-evidence.md](../adr/ADR-002-experiments-as-calibration-evidence.md)
 - [../roadmap/ROADMAP.md](../roadmap/ROADMAP.md)
+- [../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
