@@ -30,11 +30,13 @@ def test_discovers_pinned_fixture_files_from_sample_directory() -> None:
     directory_ref = SiblingExportDirectoryRef(directory_path=str(_SAMPLE_EXPORT_DIR))
     discovery = discover_sibling_export_files(directory_ref)
     assert discovery.status == SiblingExportHookStatus.DISCOVERED
-    assert len(discovery.discovered_file_paths) == 2
+    assert len(discovery.discovered_file_paths) == 4
     names = {Path(path).name for path in discovery.discovered_file_paths}
     assert names == {
         "mmm_adapter_export_fixture.json",
         "geox_adapter_export_fixture.json",
+        "producer_spec_mmm_minimal_valid.json",
+        "producer_spec_panel_exp_minimal_valid.json",
     }
 
 
@@ -43,7 +45,7 @@ def test_loads_valid_exports_from_directory() -> None:
     discovery = load_sibling_exports_from_directory(directory_ref)
     validated = validate_sibling_export_directory(discovery)
     assert validated.status == SiblingExportHookStatus.VALIDATED
-    assert len(validated.loaded_exports) == 2
+    assert len(validated.loaded_exports) == 4
 
 
 def test_registers_valid_geox_export_into_registry_path() -> None:

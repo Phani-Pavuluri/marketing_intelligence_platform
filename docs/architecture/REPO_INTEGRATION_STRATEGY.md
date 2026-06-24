@@ -174,6 +174,8 @@ Failed/blocked adapter outputs produce blocked `TrustReport` values and are not 
 
 **Phase 8E (implemented):** `mip.adapters.local_sibling_paths` provides default local path wiring for sibling `mmm` and `panel_exp` export directories, builds compatibility registries, and registers exports only when compatible. Missing local repos return safe `not_found` results without crashing.
 
+**Phase 8F (implemented):** Producer-side export specifications in `docs/integrations/` define the JSON contract sibling repos must write to `integrations/mip/exports/`. MIP is ready to consume static sibling exports via the 8B–8E read-only bridge. Next sibling-repo work should implement producer writers emitting the documented contract. This remains a file-based handoff—not a Python dependency or execution path. Live engine execution remains blocked on the MIP side.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -198,7 +200,7 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/` | Placeholder stubs; logic stays in engine repos |
 | `orchestration/` | Phase 7A–7C manifest, planner/router, approvals; Phase 8A fixture engine orchestration |
-| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A–8E fixture/export/compatibility/local-path wiring via `engine_fixtures`, `sibling_fixtures`, `sibling_export_hooks`, `sibling_compatibility`, `local_sibling_paths` |
+| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A–8F fixture/export/compatibility/local-path/producer-spec paths |
 | `reports/` | **MMM fixture governance report implemented** (`mmm_fixture.py`); HTML export deferred |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
 | `dashboard/`, `reports/` | **Not yet created** |

@@ -29,8 +29,12 @@ from mip.contracts.base import ContractBaseModel
 from mip.evidence.registry import EvidenceRegistry
 
 _REQUIRED_LABELS = (
-    "pinned_sibling_repo_fixture_only",
     "not_live_engine_execution",
+)
+
+_SOURCE_MARKER_LABELS = (
+    "pinned_sibling_repo_fixture_only",
+    "static_export_file_only",
 )
 
 _FORBIDDEN_CLAIM_PHRASES = (
@@ -124,6 +128,12 @@ class SiblingFixtureExport(ContractBaseModel):
             if label not in self.labels:
                 msg = f"sibling fixture labels must include {label}"
                 raise ValueError(msg)
+        if not any(marker in self.labels for marker in _SOURCE_MARKER_LABELS):
+            msg = (
+                "sibling fixture labels must include one of: "
+                + ", ".join(_SOURCE_MARKER_LABELS)
+            )
+            raise ValueError(msg)
 
         if self.source_repo == SiblingFixtureSource.MMM:
             if self.engine_kind != AdapterRunKind.MMM:
@@ -193,6 +203,11 @@ def validate_sibling_fixture_export(export: SiblingFixtureExport) -> list[str]:
     for label in _REQUIRED_LABELS:
         if label not in export.labels:
             issues.append(f"missing required label: {label}")
+    if not any(marker in export.labels for marker in _SOURCE_MARKER_LABELS):
+        issues.append(
+            "missing source marker label: "
+            + " or ".join(_SOURCE_MARKER_LABELS)
+        )
 
     if not export.source_commit_marker.strip():
         issues.append("missing source_commit_marker")

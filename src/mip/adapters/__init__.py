@@ -93,6 +93,15 @@ from mip.adapters.sibling_fixtures import (
     trust_report_for_sibling_fixture,
     validate_sibling_fixture_export,
 )
+from mip.adapters.sibling_producer_specs import (
+    assert_valid_producer_spec_example,
+    build_producer_spec_compatibility_config,
+    expected_export_directory_for_source_repo,
+    producer_spec_doc_paths,
+    producer_spec_example_paths,
+    producer_spec_summary_sections,
+    required_producer_labels,
+)
 
 AdapterInputBundle.model_rebuild(
     _types_namespace={
@@ -164,6 +173,13 @@ __all__ = [
     "default_local_sibling_path_config",
     "local_sibling_path_sections",
     "register_compatible_local_sibling_exports",
+    "assert_valid_producer_spec_example",
+    "build_producer_spec_compatibility_config",
+    "expected_export_directory_for_source_repo",
+    "producer_spec_doc_paths",
+    "producer_spec_example_paths",
+    "producer_spec_summary_sections",
+    "required_producer_labels",
     "AdapterInputBundle",
     "AdapterOutputBundle",
     "AdapterRegistrationResult",

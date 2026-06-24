@@ -331,6 +331,20 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Local sibling export directories can be wired and validated read-only without executing sibling code.
 
+## 19f. Phase 8F: Sibling-side export producer specifications
+
+**Status: implemented** in `docs/integrations/` and `mip.adapters.sibling_producer_specs`.
+
+**Deliver:**
+
+- `MIP_SIBLING_EXPORT_PRODUCER_SPEC.md`, `MMM_MIP_EXPORT_PRODUCER_SPEC.md`, `PANEL_EXP_MIP_EXPORT_PRODUCER_SPEC.md`
+- Minimal valid producer examples under `tests/fixtures/sibling_exports/`
+- `expected_export_directory_for_source_repo`, `required_producer_labels`, `assert_valid_producer_spec_example`
+
+**Not in scope:** Poetry path dependencies, sibling Python imports, subprocess, live engine execution.
+
+**Exit:** Canonical producer contract documented; sibling repos can implement JSON writers to `integrations/mip/exports/`. Read-only consumer bridge (8B–8E) complete. Live engine execution remains blocked.
+
 ## 20. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**
