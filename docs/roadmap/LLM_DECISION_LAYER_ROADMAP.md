@@ -345,9 +345,19 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Canonical producer contract documented; sibling repos can implement JSON writers to `integrations/mip/exports/`. Read-only consumer bridge (8B–8E) complete. Live engine execution remains blocked.
 
+## 19h. Semantic and decision-readiness tracks (S1–S12)
+
+**Status: documented** in [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](./PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md). **No runtime implementation.**
+
+Beyond governance ingestion and platform completion, MIP needs metric/estimand registries, scope alignment, business action ontology, decision review packets, explanation templates, red-team prompts, export completeness scoring, source-of-truth policy, failure-mode catalog, and package release gates.
+
+**Key decision:** Structurally valid exports are not sufficient for decision guidance—semantic completeness (metric, estimand, scope, usage policy, `TrustReport`, evidence readiness, approval) is required.
+
+**Ownership:** MIP owns semantic control plane; sibling repos tag exports with `metric_id`, `estimand_id`, scope metadata, and diagnostic codes.
+
 ## 19i. Critical invariants and golden scenarios (G1–G10)
 
-**Status: documented** in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). **No runtime implementation.** **Final roadmap addendum** — do not add further roadmap layers.
+**Status: documented** in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). **No runtime implementation.**
 
 Golden scenarios, demo artifacts, sibling conformance suite, severity normalization, no-silent-upgrade invariant, local persistence plan, explanation rubric, decision packet gates, and roadmap dependency graph prove end-to-end product behavior.
 
@@ -453,6 +463,7 @@ Deferred scope:
 ## Related documents
 
 - [LLM_DECISION_LAYER_VISION.md](../architecture/LLM_DECISION_LAYER_VISION.md)
+- [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](./PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)
 - [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
 - [LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md](../architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
 - [ROADMAP.md](./ROADMAP.md)
