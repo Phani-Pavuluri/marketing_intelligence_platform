@@ -33,7 +33,8 @@ The following is **implemented and tested** in this repository today:
 | **Adapter interface contracts (Phase 6A)** | `mip.adapters` defines governed MMM/GeoX input/output bundle shapes—**no engine imports or model results** |
 | **Adapter governance wiring (Phase 6B)** | Placeholder adapter outputs map to `ExperimentEvidence` / `DecisionSurface` fixtures, gates, and `TrustReport`—**no engine execution** |
 | **MMM fixture dashboard/report (Phase 6C)** | `mip.reports.mmm_fixture` + Streamlit section show governed MMM placeholder flow—**no model execution** |
-| **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy |
+| **Workflow run manifest (Phase 7A)** | `mip.orchestration` defines `WorkflowRunManifest`, deterministic plan/manifest builders, and safety assertions—**no autonomous agents or LLM planning** |
+| **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy, agentic workflow governance roadmap |
 
 **Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
 
@@ -106,7 +107,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 6A — Adapter interface contracts | **Done** (`mip.adapters`) |
 | Phase 6B — Adapter fixture governance wiring | **Done** (`mip.adapters.governance`) |
 | Phase 6C — MMM fixture dashboard/report demo | **Done** (`mip.reports.mmm_fixture`) |
-| Phase 7+ — Engine orchestration, measurement gaps | **Planned** |
+| Phase 7A — Workflow run manifest governance | **Done** (`mip.orchestration`) |
+| Phase 7B+ — Planner/router, measurement gaps, engine orchestration | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -163,7 +165,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface: CLI + mock explanation + Streamlit shell + MMM fixture governance demo.** Governed placeholder artifacts only; no engines wired.
 
-**Near-term focus:** Phase 8 engine orchestration through adapters (pinned engine fixtures), then measurement gap layer.
+**Near-term focus:** Phase 7B governed planner/router over deterministic steps, then Phase 8 fixture engine orchestration through adapters.
 
 ## Roadmap
 
@@ -184,8 +186,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Next (LLM):**
 
-1. Phase 8 — engine orchestration through adapters (fixture pins first)
-2. Phase 7 — measurement gap and experiment opportunity layer
+1. Phase 7B — governed planner/router over existing deterministic steps
+2. Phase 8 — engine orchestration through adapters (fixture pins first)
+3. Phase 7 — measurement gap and experiment opportunity layer
 
 ## Repository layout
 
@@ -211,6 +214,7 @@ marketing_intelligence_platform/
       readiness/      # Dataset profiling and readiness reports
       configs/        # MMM and GeoX config drafts
       orchestrator/   # Local workflow runner and summary
+    orchestration/    # Workflow run manifest and plan builders (Phase 7A)
     app/              # Planned: local CLI and Streamlit entry
     dashboard/        # Planned: tier-aware views
     reports/          # Planned: governed report export
@@ -227,6 +231,7 @@ marketing_intelligence_platform/
 - [LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md)
 - [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
 - [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md)
+- [Agentic workflow governance roadmap](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
 - [Roadmap](docs/roadmap/ROADMAP.md)
 - [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md)
 - ADRs: [001 Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md) · [002 Experiments](docs/adr/ADR-002-experiments-as-calibration-evidence.md) · [003 LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md)

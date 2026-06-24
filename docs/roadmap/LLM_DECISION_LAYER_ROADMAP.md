@@ -212,7 +212,22 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Product-facing governed MMM demo shape without engine connection.
 
-## 16. Phase 6: MMM-focused dashboard/report demo (full product)
+## 16. Phase 7A: Workflow run manifest and agentic governance roadmap
+
+**Status: implemented** in `mip.orchestration`.
+
+**Deliver:**
+
+- `WorkflowPlan`, `WorkflowRunManifest`, step/action/approval contracts
+- Deterministic builders: `build_plan_from_workflow_summary`, `build_manifest_from_workflow_summary`, `build_manifest_with_mmm_fixture`
+- `assert_safe_workflow_manifest` — rejects forbidden causal/model/agent claims
+- [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
+
+**Not in scope:** LangGraph, autonomous agents, real LLM planning, engine execution, budget actions.
+
+**Exit:** Durable workflow lineage for future planner/router; manifests clearly marked `deterministic_local_no_agent`.
+
+## 17. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**
 
@@ -227,7 +242,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** End-to-end local demo without real MMM repo required.
 
-## 17. Phase 7: Measurement gap and experiment opportunity layer
+## 18. Phase 7: Measurement gap and experiment opportunity layer
 
 **Deliver:**
 
@@ -239,7 +254,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Gap → recommendation → TrustReport → UI path demonstrated.
 
-## 18. Phase 8: Engine orchestration through adapters
+## 19. Phase 8: Engine orchestration through adapters
 
 **Deliver:**
 
@@ -250,7 +265,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Real or pinned engine outputs pass contract + gate tests.
 
-## 19. Phase 9: Scenario workbench
+## 20. Phase 9: Scenario workbench
 
 **Deliver:**
 
@@ -262,7 +277,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Scenario exploration with tier enforcement.
 
-## 20. Phase 10: Governed recommendations and approval workflow
+## 21. Phase 10: Governed recommendations and approval workflow
 
 **Deliver:**
 
@@ -273,7 +288,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** No decision-grade export without approval record.
 
-## 21. Phase 11: Hosted/team mode
+## 22. Phase 11: Hosted/team mode
 
 **Deliver (later):**
 
@@ -284,7 +299,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Multi-user pilot; not required for initial local demo.
 
-## 22. Future: Within-channel tactical optimization
+## 23. Future: Within-channel tactical optimization
 
 Deferred scope:
 
@@ -293,7 +308,7 @@ Deferred scope:
 - Experiment-calibrated attribution, tactical signals
 - No immediate implementation
 
-## 23. Deferred / non-goals
+## 24. Deferred / non-goals
 
 - Autonomous budget execution
 - Ad-platform bidding
@@ -302,7 +317,7 @@ Deferred scope:
 - Hiding blocked tiers in narrative or UI
 - Production recommendations without human approval where policy requires
 
-## 24. Open questions
+## 25. Open questions
 
 - Streamlit vs. FastAPI timing for Phase 5–6
 - When to introduce real Ollama vs. keep MockLLM through Phase 7
