@@ -81,6 +81,12 @@ def test_adapters_imports() -> None:
     assert adapters.__doc__ is not None
 
 
+def test_reports_imports() -> None:
+    import mip.reports as reports
+
+    assert reports.__doc__ is not None
+
+
 def test_app_imports() -> None:
     import mip.app as app
 

@@ -11,6 +11,7 @@ from mip.app.streamlit_app import (
     parse_json_input,
     run_streamlit_workflow_from_json,
     summary_sections,
+    summary_sections_with_mmm_fixture,
 )
 from mip.workflows.orchestrator import WorkflowRunStatus
 
@@ -83,9 +84,42 @@ def test_format_status_badge() -> None:
     assert format_status_badge("completed_with_warnings") == "[COMPLETED WITH WARNINGS]"
 
 
+def _long_history_json() -> str:
+    records = [
+        {
+            "date": (date(2024, 1, 1) + timedelta(days=7 * index)).isoformat(),
+            "spend": 100,
+            "conversions": 10,
+            "channel": "search" if index % 2 == 0 else "social",
+            "geo": "us" if index % 2 == 0 else "uk",
+        }
+        for index in range(60)
+    ]
+    return json.dumps({"objective": {"objective_type": "conversion_roi"}, "records": records})
+
+
+def test_streamlit_sections_include_mmm_fixture_safely() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    assert "mmm_fixture_report" in sections
+    mmm_fixture = sections["mmm_fixture_report"]
+    assert isinstance(mmm_fixture, dict)
+    assert mmm_fixture["decision_surface_type"] == "diagnostic_curve"
+    labels = mmm_fixture["placeholder_labels"]
+    assert isinstance(labels, list)
+    assert "not_model_execution" in labels
+
+
+def test_awareness_workflow_has_no_mmm_fixture_section() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_weekly_json("awareness"))
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    assert "mmm_fixture_report" not in sections
+
+
 def test_public_imports() -> None:
     from mip.app.streamlit_app import main
 
     assert callable(main)
     assert callable(parse_json_input)
     assert callable(run_streamlit_workflow_from_json)
+    assert callable(summary_sections_with_mmm_fixture)

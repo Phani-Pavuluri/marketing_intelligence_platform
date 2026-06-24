@@ -164,6 +164,8 @@ These contracts define governed input/output bundle shapes only. They do not imp
 
 Failed/blocked adapter outputs produce blocked `TrustReport` values and are not registered as decision-ready artifacts. No engine execution or numeric effect claims.
 
+**Phase 6C (implemented):** `mip.reports.mmm_fixture` and Streamlit MMM Fixture Governance Demo section show the governed MMM product shape from workflow summary through adapter placeholders to `DecisionSurface` fixture and `TrustReport`. No model execution.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -188,6 +190,7 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/`, `orchestration/` | Placeholder stubs; logic stays in engine repos |
 | `adapters/` | **Interface contracts + governance wiring implemented**; engine execution not wired |
+| `reports/` | **MMM fixture governance report implemented** (`mmm_fixture.py`); HTML export deferred |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
 | `dashboard/`, `reports/` | **Not yet created** |
 

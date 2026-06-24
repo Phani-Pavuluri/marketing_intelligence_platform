@@ -32,9 +32,11 @@ No autonomous agents or production decision automation in early phases.
 
 **Phase 6B (done):** Adapter placeholder governance wiring in `mip.adapters.governance` into fixtures, gates, `TrustReport`, and registry paths. No engine execution.
 
+**Phase 6C (done):** MMM fixture dashboard/report demo in `mip.reports.mmm_fixture` with Streamlit integration. Governed placeholders only; no model execution.
+
 **Platform prerequisites (largely done):** contracts, gates, `TrustReport` assembly, evidence registry, calibration audit, model calibration readiness.
 
-**Not started:** dashboard/report demo, real LLM providers (Ollama/cloud).
+**Not started:** real engine orchestration, real LLM providers (Ollama/cloud).
 
 ## 3. Current agreed defaults
 
@@ -196,7 +198,21 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Adapter placeholders enter the MIP trust spine without engine execution.
 
-## 15. Phase 6: MMM-focused dashboard/report demo
+## 15. Phase 6C: MMM fixture dashboard/report demo
+
+**Status: implemented** in `mip.reports.mmm_fixture` and `mip.app.streamlit_app`.
+
+**Deliver:**
+
+- `build_mmm_fixture_report`, `mmm_fixture_report_sections`, safety assertions
+- Streamlit MMM Fixture Governance Demo section
+- Workflow → MMM config → adapter placeholders → DecisionSurface fixture → TrustReport
+- Clear placeholder labels and missing production requirements list
+- No model execution, ROI/lift claims, or budget recommendations
+
+**Exit:** Product-facing governed MMM demo shape without engine connection.
+
+## 16. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**
 
@@ -211,7 +227,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** End-to-end local demo without real MMM repo required.
 
-## 16. Phase 7: Measurement gap and experiment opportunity layer
+## 17. Phase 7: Measurement gap and experiment opportunity layer
 
 **Deliver:**
 
@@ -223,7 +239,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Gap → recommendation → TrustReport → UI path demonstrated.
 
-## 17. Phase 8: Engine orchestration through adapters
+## 18. Phase 8: Engine orchestration through adapters
 
 **Deliver:**
 
@@ -234,7 +250,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Real or pinned engine outputs pass contract + gate tests.
 
-## 18. Phase 9: Scenario workbench
+## 19. Phase 9: Scenario workbench
 
 **Deliver:**
 
@@ -246,7 +262,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Scenario exploration with tier enforcement.
 
-## 19. Phase 10: Governed recommendations and approval workflow
+## 20. Phase 10: Governed recommendations and approval workflow
 
 **Deliver:**
 
@@ -257,7 +273,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** No decision-grade export without approval record.
 
-## 20. Phase 11: Hosted/team mode
+## 21. Phase 11: Hosted/team mode
 
 **Deliver (later):**
 
@@ -268,7 +284,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Multi-user pilot; not required for initial local demo.
 
-## 21. Future: Within-channel tactical optimization
+## 22. Future: Within-channel tactical optimization
 
 Deferred scope:
 
@@ -277,7 +293,7 @@ Deferred scope:
 - Experiment-calibrated attribution, tactical signals
 - No immediate implementation
 
-## 22. Deferred / non-goals
+## 23. Deferred / non-goals
 
 - Autonomous budget execution
 - Ad-platform bidding
@@ -286,7 +302,7 @@ Deferred scope:
 - Hiding blocked tiers in narrative or UI
 - Production recommendations without human approval where policy requires
 
-## 23. Open questions
+## 24. Open questions
 
 - Streamlit vs. FastAPI timing for Phase 5–6
 - When to introduce real Ollama vs. keep MockLLM through Phase 7
