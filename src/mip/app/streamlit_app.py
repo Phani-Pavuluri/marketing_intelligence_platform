@@ -8,6 +8,12 @@ from typing import Any
 
 from pydantic import ValidationError
 
+from mip.adapters.local_sibling_paths import (
+    build_default_local_sibling_path_sections,
+    build_local_sibling_compatibility_registry,
+    default_local_sibling_path_config,
+    local_sibling_path_sections,
+)
 from mip.adapters.sibling_compatibility import build_default_sibling_compatibility_sections
 from mip.adapters.sibling_export_hooks import (
     build_default_sibling_export_hook_sections,
@@ -162,6 +168,7 @@ def summary_sections_with_mmm_fixture(
     sections["sibling_fixture_imports"] = build_default_sibling_fixture_import_sections()
     sections["sibling_export_hook"] = build_default_sibling_export_hook_sections()
     sections["sibling_compatibility"] = build_default_sibling_compatibility_sections()
+    sections["local_sibling_paths"] = build_default_local_sibling_path_sections()
     return sections
 
 
@@ -185,6 +192,26 @@ def main() -> None:
         "Deterministic intake, readiness, and config draft review. "
         "No engine execution or real LLM APIs."
     )
+
+    with st.expander("Local Sibling Export Paths", expanded=False):
+        st.caption("Reads static export JSON only; no live engine execution.")
+        defaults = default_local_sibling_path_config()
+        mmm_path = st.text_input("MMM repo path", value=defaults.mmm_repo_path)
+        panel_path = st.text_input("panel_exp repo path", value=defaults.panel_exp_repo_path)
+        if st.button("Check local sibling paths", key="check_local_sibling_paths"):
+            updated_defaults = defaults.model_copy(
+                update={
+                    "mmm_repo_path": mmm_path,
+                    "panel_exp_repo_path": panel_path,
+                }
+            )
+            result = build_local_sibling_compatibility_registry(updated_defaults)
+            _render_local_sibling_paths_section(st, local_sibling_path_sections(result))
+        else:
+            _render_local_sibling_paths_section(
+                st,
+                build_default_local_sibling_path_sections(),
+            )
 
     with st.expander("Sibling Repo Compatibility", expanded=False):
         st.caption("Compatibility check only. No live sibling repo execution.")
@@ -306,6 +333,38 @@ def main() -> None:
             st.subheader("Sibling Repo Compatibility")
             st.caption("Compatibility check only; no live sibling repo execution.")
             _render_sibling_compatibility_section(st, sibling_compatibility)
+
+        local_sibling_paths = sections.get("local_sibling_paths")
+        if isinstance(local_sibling_paths, dict):
+            st.divider()
+            st.subheader("Local Sibling Export Paths")
+            st.caption("Reads static export JSON only; no live sibling repo execution.")
+            _render_local_sibling_paths_section(st, local_sibling_paths)
+
+
+def _render_local_sibling_paths_section(
+    st: Any,
+    path_sections: dict[str, object],
+) -> None:
+    st.write(f"MMM repo path: `{path_sections.get('mmm_repo_path')}`")
+    st.write(f"panel_exp repo path: `{path_sections.get('panel_exp_repo_path')}`")
+    st.write(
+        "Expected export directory: "
+        f"`{path_sections.get('export_directory_relative_path')}`"
+    )
+    st.write(f"Expected schema version: `{path_sections.get('expected_schema_version')}`")
+    st.write(f"Aggregate status: `{path_sections.get('aggregate_status')}`")
+    st.write(f"MMM status: `{path_sections.get('mmm_status')}`")
+    st.write(f"panel_exp status: `{path_sections.get('panel_exp_status')}`")
+    st.write(f"MMM compatible exports: `{path_sections.get('mmm_compatible_export_count')}`")
+    st.write(
+        f"panel_exp compatible exports: "
+        f"`{path_sections.get('panel_exp_compatible_export_count')}`"
+    )
+    _render_list_section(st, "Labels", path_sections.get("labels", []))
+    _render_list_section(st, "Warnings", path_sections.get("warnings", []))
+    _render_list_section(st, "Blocking reasons", path_sections.get("blocking_reasons", []))
+    st.info(str(path_sections.get("disclaimer", "")))
 
 
 def _render_sibling_compatibility_section(

@@ -14,6 +14,7 @@ def test_public_imports() -> None:
         SiblingFixtureSource,
         assert_safe_sibling_fixture_export,
         build_geox_adapter_input,
+        build_local_mmm_export_config,
         build_mmm_adapter_input,
         check_sibling_repo_compatibility,
         discover_sibling_export_files,
@@ -44,6 +45,7 @@ def test_public_imports() -> None:
     assert callable(discover_sibling_export_files)
     assert callable(register_sibling_exports_from_directory)
     assert callable(check_sibling_repo_compatibility)
+    assert callable(build_local_mmm_export_config)
     assert AdapterInputBundle is not None
     assert AdapterOutputBundle is not None
     assert AdapterValidationReport is not None

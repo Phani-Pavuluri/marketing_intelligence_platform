@@ -107,6 +107,14 @@ Read-only sibling export hooks scan explicit local directories for `.json` expor
 
 Sibling repo compatibility registry resolves configured export directories, validates schema/source/engine expectations before Phase 8C discovery, and blocks registration when incompatible. Required labels include `sibling_repo_compatibility_check_only` and `readonly_export_contract_only`.
 
+## Phase 8E artifacts
+
+| Module | Role |
+|--------|------|
+| `mip.adapters.local_sibling_paths` | `LocalSiblingRepoPathDefaults`, `build_local_sibling_compatibility_registry`, `register_compatible_local_sibling_exports` |
+
+Local sibling export path wiring configures default absolute paths for sibling `mmm` and `panel_exp` export directories, runs Phase 8D compatibility checks, and registers static JSON exports read-only. Required labels include `local_sibling_export_path_wiring_only` and `readonly_export_contract_only`.
+
 ## Phase 7C artifacts
 
 | Module | Role |
@@ -153,6 +161,7 @@ JSON input
   → load_sibling_fixture_export() / register_sibling_fixture_export()   [Phase 8B]
   → discover_sibling_export_files() / register_sibling_exports_from_directory()   [Phase 8C]
   → check_sibling_repo_compatibility() / register_exports_for_compatible_repo()   [Phase 8D]
+  → build_local_sibling_compatibility_registry() / register_compatible_local_sibling_exports()   [Phase 8E]
   → (optional) build_manifest_with_mmm_fixture()
   → TrustReport / UI / report
 ```
