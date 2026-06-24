@@ -20,9 +20,11 @@ No autonomous agents or production decision automation in early phases.
 
 **Phase 4 (done):** Deterministic `MMMConfigDraft` and `GeoXConfigDraft` generation in `mip.workflows.configs` from objective, feasibility, and readiness artifacts. No engine execution.
 
+**Phase 5A (done):** Local deterministic workflow orchestrator in `mip.workflows.orchestrator` via `run_local_workflow()` returning `WorkflowRunSummary`. No UI, CLI, or engine execution.
+
 **Platform prerequisites (largely done):** contracts, gates, `TrustReport` assembly, evidence registry, calibration audit, model calibration readiness.
 
-**Not started:** `MockLLMProvider`, workflow orchestration graphs, `mip.app`, dashboards, LLM providers.
+**Not started:** `MockLLMProvider`, Streamlit shell, `mip.app` CLI, dashboards, LLM providers.
 
 ## 3. Current agreed defaults
 
@@ -105,19 +107,38 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Draft + validate round-trip tests; configs blocked when feasibility or readiness is blocked.
 
-## 9. Phase 5: Local-first demo app
+## 9. Phase 5A: Local workflow orchestrator
+
+**Status: implemented** in `mip.workflows.orchestrator`.
 
 **Deliver:**
 
-- Local command: `mip demo` or `mip app`
-- Streamlit UI
-- Sample SaaS data path
-- Deterministic readiness + config workflows
-- No production decision automation
+- `run_local_workflow(objective, records)` end-to-end pipeline
+- `WorkflowRunSummary` with profile, feasibility, readiness, config draft, status, warnings, blockers, next questions/fixes, narrative summary
+- No UI, CLI, LLM, or engine execution
 
-**Exit:** User can complete intake → readiness → config draft locally.
+**Exit:** Deterministic local demo backbone ready for Streamlit shell (Phase 5B).
 
-## 10. Phase 6: MMM-focused dashboard/report demo
+## 10. Phase 5B: Streamlit shell
+
+**Deliver:**
+
+- Minimal local Streamlit UI over `run_local_workflow`
+- Objective selection and record upload/path input
+- Display summary, warnings, blockers, config draft
+
+**Exit:** Browser-based local demo without LLM providers.
+
+## 11. Phase 5C: MockLLM conversational explanation wrapper
+
+**Deliver:**
+
+- `MockLLMProvider` explaining `WorkflowRunSummary` and `TrustReport` context deterministically
+- No cloud or Ollama providers yet
+
+**Exit:** Conversational explanation over orchestrator output without real LLM APIs.
+
+## 12. Phase 6: MMM-focused dashboard/report demo
 
 **Deliver:**
 

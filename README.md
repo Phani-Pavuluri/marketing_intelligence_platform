@@ -26,9 +26,10 @@ The following is **implemented and tested** in this repository today:
 | **Objective intake framework (Phase 2)** | Deterministic mapping of business objectives to data requirements, declared availability checks, and feasibility reports—**no LLM calls** |
 | **Data readiness diagnostics (Phase 3)** | Structural dataset profiling from records, readiness checks, and `DataReadinessReport` with optional objective feasibility integration—**no LLM calls or engine execution** |
 | **Config drafting (Phase 4)** | Deterministic `MMMConfigDraft` and `GeoXConfigDraft` from objective, feasibility, and readiness—**no engine execution** |
+| **Local workflow orchestrator (Phase 5A)** | `run_local_workflow()` wires intake → readiness → config draft into `WorkflowRunSummary`—**no UI or engine execution** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy |
 
-**Not implemented yet:** engine adapters, MMM/GeoX execution, workflow orchestration graphs, `MockLLMProvider`, Streamlit or FastAPI apps, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
+**Not implemented yet:** engine adapters, MMM/GeoX execution, `mip demo` CLI, Streamlit shell, `MockLLMProvider`, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
 
 ## Target product experience
 
@@ -92,7 +93,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 2 — Business objective intake and data requirements | **Done** (`mip.workflows.intake`) |
 | Phase 3 — Data readiness diagnostics | **Done** (`mip.workflows.readiness`) |
 | Phase 4 — MMM/GeoX config drafting | **Done** (`mip.workflows.configs`) |
-| Phase 5+ — Local demo app, providers, adapters | **Planned** |
+| Phase 5A — Local workflow orchestrator | **Done** (`mip.workflows.orchestrator`) |
+| Phase 5B+ — Streamlit shell, MockLLM, adapters | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -145,11 +147,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 ## Current status
 
-**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–4 deterministic workflow layers are implemented with passing tests.
+**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5A deterministic workflow layers are implemented with passing tests.
 
-**Product surface: not started.** No Streamlit app, no `mip demo` command, no adapters wired to sibling engine repos, no workflow orchestration graphs, no dashboards or reports.
+**Product surface: not started.** No Streamlit shell, no `mip demo` CLI, no adapters wired to sibling engine repos, no dashboards or reports.
 
-**Near-term focus:** LLM Phase 5 (local-first Streamlit demo app with `MockLLMProvider`), then adapter interfaces.
+**Near-term focus:** Phase 5B Streamlit shell on top of `run_local_workflow()`, then Phase 5C `MockLLMProvider` explanation wrapper.
 
 ## Roadmap
 
@@ -192,10 +194,11 @@ marketing_intelligence_platform/
     evaluation/       # Release gates
     trust/            # TrustReport assembly and routing
     llm/              # Deterministic safety and explanation context (Phase 1)
-    workflows/        # Workflow intake and feasibility (Phase 2–3)
+    workflows/        # Workflow intake, readiness, configs, orchestrator (Phase 2–5A)
       intake/         # Business objectives, data requirements, feasibility
       readiness/      # Dataset profiling and readiness reports
       configs/        # MMM and GeoX config drafts
+      orchestrator/   # Local workflow runner and summary
     app/              # Planned: local CLI and Streamlit entry
     dashboard/        # Planned: tier-aware views
     reports/          # Planned: governed report export
