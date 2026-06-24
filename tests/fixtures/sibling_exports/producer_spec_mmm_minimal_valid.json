@@ -1,0 +1,26 @@
+{
+  "fixture_id": "producer-spec-mmm-minimal-valid",
+  "source_repo": "mmm",
+  "source_commit_marker": "example-mmm-commit-marker",
+  "export_schema_version": "1.0.0",
+  "artifact_kind": "mmm_adapter_output",
+  "engine_kind": "mmm",
+  "config_marker": "example-mmm-config-marker",
+  "validation_status": "validated_fixture",
+  "labels": [
+    "static_export_file_only",
+    "not_live_engine_execution",
+    "not_real_model_result",
+    "diagnostic_only",
+    "not_decision_ready"
+  ],
+  "warnings": [
+    "Producer spec example only; no MMM model execution is represented."
+  ],
+  "blocking_reasons": [],
+  "disclaimer": "Static producer-spec example only. No live MMM execution, causal estimate, ROI, lift, or production recommendation is represented.",
+  "payload": {
+    "placeholder": true,
+    "producer_spec_example_only": true
+  }
+}

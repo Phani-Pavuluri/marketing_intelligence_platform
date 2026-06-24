@@ -78,6 +78,7 @@ def test_cli_imports() -> None:
 def test_adapters_imports() -> None:
     import mip.adapters as adapters
     from mip.adapters import (
+        assert_valid_producer_spec_example,
         build_local_sibling_compatibility_registry,
         check_sibling_repo_compatibility,
         default_local_sibling_path_config,
@@ -92,6 +93,7 @@ def test_adapters_imports() -> None:
     assert callable(check_sibling_repo_compatibility)
     assert callable(default_local_sibling_path_config)
     assert callable(build_local_sibling_compatibility_registry)
+    assert callable(assert_valid_producer_spec_example)
     assert callable(discover_sibling_export_files)
     assert callable(load_sibling_exports_from_directory)
     assert callable(register_sibling_exports_from_directory)

@@ -115,6 +115,17 @@ Sibling repo compatibility registry resolves configured export directories, vali
 
 Local sibling export path wiring configures default absolute paths for sibling `mmm` and `panel_exp` export directories, runs Phase 8D compatibility checks, and registers static JSON exports read-only. Required labels include `local_sibling_export_path_wiring_only` and `readonly_export_contract_only`.
 
+## Phase 8F artifacts
+
+| Module / docs | Role |
+|---------------|------|
+| `docs/integrations/MIP_SIBLING_EXPORT_PRODUCER_SPEC.md` | Canonical sibling export producer contract |
+| `docs/integrations/MMM_MIP_EXPORT_PRODUCER_SPEC.md` | MMM producer writer guidance |
+| `docs/integrations/PANEL_EXP_MIP_EXPORT_PRODUCER_SPEC.md` | panel_exp producer writer guidance |
+| `mip.adapters.sibling_producer_specs` | `required_producer_labels`, `assert_valid_producer_spec_example` |
+
+Producer specifications document the JSON contract for `integrations/mip/exports/`. Read-only consumer bridge (8B–8E) is complete. Live engine execution remains blocked.
+
 ## Phase 7C artifacts
 
 | Module | Role |
@@ -162,6 +173,7 @@ JSON input
   → discover_sibling_export_files() / register_sibling_exports_from_directory()   [Phase 8C]
   → check_sibling_repo_compatibility() / register_exports_for_compatible_repo()   [Phase 8D]
   → build_local_sibling_compatibility_registry() / register_compatible_local_sibling_exports()   [Phase 8E]
+  → sibling producer JSON in integrations/mip/exports/ per docs/integrations/*_PRODUCER_SPEC.md   [Phase 8F]
   → (optional) build_manifest_with_mmm_fixture()
   → TrustReport / UI / report
 ```

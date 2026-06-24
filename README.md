@@ -41,6 +41,7 @@ The following is **implemented and tested** in this repository today:
 | **Read-only sibling export hooks (Phase 8C)** | `mip.adapters.sibling_export_hooks` discovers static JSON exports from explicit directories—**no sibling code execution** |
 | **Sibling repo compatibility registry (Phase 8D)** | `mip.adapters.sibling_compatibility` validates configured export paths and schema contracts before discovery—**read-only** |
 | **Local sibling export path wiring (Phase 8E)** | `mip.adapters.local_sibling_paths` wires default local `mmm`/`panel_exp` export directories through compatibility checks—**read-only JSON only** |
+| **Sibling export producer specs (Phase 8F)** | `docs/integrations/*_PRODUCER_SPEC.md` and `mip.adapters.sibling_producer_specs` define the sibling-side JSON writer contract—**no sibling code execution** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy, agentic workflow governance roadmap |
 
 **Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
@@ -122,7 +123,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 8C — Read-only sibling export hooks | **Done** (`mip.adapters.sibling_export_hooks`) |
 | Phase 8D — Sibling repo compatibility registry | **Done** (`mip.adapters.sibling_compatibility`) |
 | Phase 8E — Local sibling export path wiring | **Done** (`mip.adapters.local_sibling_paths`) |
-| Phase 8F+ — Live engine adapters, measurement gaps | **Planned** |
+| Phase 8F — Sibling export producer specs | **Done** (`docs/integrations/`, `mip.adapters.sibling_producer_specs`) |
+| Phase 8G+ — Live engine adapters, measurement gaps | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -179,7 +181,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface: CLI + mock explanation + Streamlit shell + MMM fixture governance demo.** Governed placeholder artifacts only; no engines wired.
 
-**Near-term focus:** Phase 8F live engine adapter integration (after local path wiring remains read-only), then measurement gap layer.
+**Near-term focus:** Implement sibling-repo producer writers per Phase 8F specs; live engine execution on the MIP side remains blocked until a later explicitly governed phase.
 
 ## Roadmap
 
@@ -200,7 +202,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Next (LLM):**
 
-1. Phase 8F — live engine adapters (after local export path wiring, governance intact)
+1. Sibling-repo producer writers emitting JSON to `integrations/mip/exports/` per Phase 8F specs
 2. Phase 7 — measurement gap and experiment opportunity layer
 
 ## Repository layout
