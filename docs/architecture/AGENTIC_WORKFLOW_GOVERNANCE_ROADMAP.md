@@ -65,8 +65,8 @@ Agentic behavior is **advisory and routing**, not statistical computation or pro
 7B  Governed planner/router (this phase)
       PlannerRoute, route_next_actions, display-only next safe action guidance
 
-7C  Human approval checkpoints
-      Approval metadata on manifest steps; blocked_until_approved semantics
+7C  Human approval checkpoints (this phase)
+      ApprovalRequest, blocked_until_approved enforcement, display-only UI status
 
 8   Fixture engine orchestration through adapters
       Orchestrate placeholder/MMM fixture paths; still no real engine claims
@@ -74,6 +74,14 @@ Agentic behavior is **advisory and routing**, not statistical computation or pro
 Later  Real engine adapters
       Only after manifest, gates, and approval lineage remain intact
 ```
+
+## Phase 7C artifacts
+
+| Module | Role |
+|--------|------|
+| `mip.orchestration.approvals` | `ApprovalRequest`, `ApprovalCheckpoint`, `enforce_approval_for_route`, `apply_approval_decision` |
+
+Approval state is **local in-memory contract state only**. No database, auth/RBAC, external approval systems, or automatic approval. Approved actions may move to `allowed` in the router for visibility only—they are **not executed**.
 
 ## Phase 7B artifacts
 
@@ -108,6 +116,7 @@ JSON input
   → WorkflowRunSummary
   → build_manifest_from_workflow_summary()   [Phase 7A]
   → route_next_actions() / planner_route_from_summary()   [Phase 7B]
+  → enforce_approval_for_route() / approval checkpoints   [Phase 7C]
   → (optional) build_manifest_with_mmm_fixture()
   → TrustReport / UI / report
 ```

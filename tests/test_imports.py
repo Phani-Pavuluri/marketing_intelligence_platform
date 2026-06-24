@@ -89,20 +89,26 @@ def test_reports_imports() -> None:
 
 def test_orchestration_imports() -> None:
     from mip.orchestration import (
+        ApprovalRequest,
         PlannerRoute,
         WorkflowRunManifest,
+        build_governed_planner_route,
         build_manifest_from_workflow_summary,
         build_plan_from_workflow_summary,
+        create_approval_request,
         planner_route_from_summary,
         route_next_actions,
     )
 
     assert WorkflowRunManifest is not None
     assert PlannerRoute is not None
+    assert ApprovalRequest is not None
     assert callable(build_plan_from_workflow_summary)
     assert callable(build_manifest_from_workflow_summary)
     assert callable(route_next_actions)
     assert callable(planner_route_from_summary)
+    assert callable(build_governed_planner_route)
+    assert callable(create_approval_request)
 
 
 def test_app_imports() -> None:

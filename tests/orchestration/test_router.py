@@ -4,6 +4,7 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 
+from mip.orchestration.approvals import ApprovalCheckpoint
 from mip.orchestration.manifest import HumanApprovalRequirement, WorkflowActionType
 from mip.orchestration.router import (
     PlannerDecision,
@@ -157,6 +158,21 @@ def test_format_planner_route_for_display_is_safe() -> None:
     assert display["recommended_next_action"] == "build_adapter_output_fixture"
     assert display["allowed_actions"]
     assert display["blocked_actions"]
+
+
+def test_approval_required_decisions_include_checkpoint_after_finalize() -> None:
+    summary = _summary("conversion_roi", _long_history_rows())
+    route = planner_route_from_summary(summary)
+    gated = [
+        decision
+        for decision in route.allowed_decisions
+        if decision.status == PlannerDecisionStatus.REQUIRES_APPROVAL
+    ]
+    if not gated:
+        pytest.skip("workflow summary did not require human approval")
+    checkpoint = gated[0].approval_checkpoint
+    assert isinstance(checkpoint, ApprovalCheckpoint)
+    assert checkpoint.blocked_until_approved is True
 
 
 def test_public_imports() -> None:

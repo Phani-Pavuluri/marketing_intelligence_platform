@@ -175,6 +175,17 @@ class WorkflowStep(ContractBaseModel):
         return self
 
 
+def step_requires_approval_gate(step: WorkflowStep) -> bool:
+    """Return whether a workflow step is gated by human approval."""
+    if step.status == WorkflowStepStatus.REQUIRES_APPROVAL:
+        return True
+    return step.human_approval_requirement in (
+        HumanApprovalRequirement.REQUIRED,
+        HumanApprovalRequirement.BLOCKED_UNTIL_APPROVED,
+        HumanApprovalRequirement.RECOMMENDED,
+    )
+
+
 class WorkflowPlan(ContractBaseModel):
     """Deterministic workflow plan over governed local steps."""
 

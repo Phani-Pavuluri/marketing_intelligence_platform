@@ -98,6 +98,25 @@ def test_completed_step_accepts_output_artifacts() -> None:
     assert step.status == WorkflowStepStatus.COMPLETED
 
 
+def test_step_requires_approval_gate() -> None:
+    from mip.orchestration.manifest import (
+        HumanApprovalRequirement,
+        WorkflowActionType,
+        WorkflowStep,
+        WorkflowStepStatus,
+        step_requires_approval_gate,
+    )
+
+    gated = WorkflowStep(
+        step_id="step:request_human_approval",
+        action_type=WorkflowActionType.REQUEST_HUMAN_APPROVAL,
+        status=WorkflowStepStatus.REQUIRES_APPROVAL,
+        human_approval_requirement=HumanApprovalRequirement.RECOMMENDED,
+        completion_note="needs review",
+    )
+    assert step_requires_approval_gate(gated) is True
+
+
 def test_public_imports() -> None:
     from mip.orchestration.manifest import WorkflowRunManifest
 

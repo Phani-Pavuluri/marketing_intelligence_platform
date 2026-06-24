@@ -1,5 +1,23 @@
 """Governed workflow planning and run manifest assembly."""
 
+from mip.orchestration.approvals import (
+    ApprovalCheckpoint,
+    ApprovalDecision,
+    ApprovalDecisionType,
+    ApprovalRequest,
+    ApprovalStatus,
+    apply_approval_decision,
+    approval_checkpoints_for_route,
+    approval_requests_for_route,
+    assert_safe_approval_checkpoint,
+    build_governed_planner_route,
+    checkpoint_for_action,
+    create_approval_request,
+    enforce_approval_for_route,
+    finalize_planner_route,
+    format_approval_checkpoints_for_display,
+    is_action_approved,
+)
 from mip.orchestration.manifest import (
     HumanApprovalRequirement,
     WorkflowActionType,
@@ -10,6 +28,7 @@ from mip.orchestration.manifest import (
     WorkflowStep,
     WorkflowStepStatus,
     assert_safe_workflow_manifest,
+    step_requires_approval_gate,
 )
 from mip.orchestration.plans import (
     build_manifest_from_workflow_summary,
@@ -28,6 +47,11 @@ from mip.orchestration.router import (
 )
 
 __all__ = [
+    "ApprovalCheckpoint",
+    "ApprovalDecision",
+    "ApprovalDecisionType",
+    "ApprovalRequest",
+    "ApprovalStatus",
     "HumanApprovalRequirement",
     "PlannerDecision",
     "PlannerDecisionStatus",
@@ -39,13 +63,25 @@ __all__ = [
     "WorkflowRunManifest",
     "WorkflowStep",
     "WorkflowStepStatus",
+    "apply_approval_decision",
+    "approval_checkpoints_for_route",
+    "approval_requests_for_route",
+    "assert_safe_approval_checkpoint",
     "assert_safe_planner_route",
     "assert_safe_workflow_manifest",
+    "build_governed_planner_route",
     "build_manifest_from_workflow_summary",
     "build_manifest_with_mmm_fixture",
     "build_plan_from_workflow_summary",
+    "checkpoint_for_action",
+    "create_approval_request",
+    "enforce_approval_for_route",
+    "finalize_planner_route",
+    "format_approval_checkpoints_for_display",
     "format_planner_route_for_display",
+    "is_action_approved",
     "planner_route_from_summary",
     "planner_route_with_mmm_fixture",
     "route_next_actions",
+    "step_requires_approval_gate",
 ]

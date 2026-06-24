@@ -58,6 +58,7 @@ class PlannerDecision(ContractBaseModel):
     produced_artifact_type: str | None = None
     produced_artifact_marker: str | None = None
     human_approval_requirement: HumanApprovalRequirement = HumanApprovalRequirement.NOT_REQUIRED
+    approval_checkpoint: object | None = None
     safety_notes: list[str] = Field(default_factory=list)
 
     @field_validator("reason")
@@ -185,19 +186,29 @@ def route_next_actions(manifest: WorkflowRunManifest) -> PlannerRoute:
     return route
 
 
-def planner_route_from_summary(summary: WorkflowRunSummary) -> PlannerRoute:
+def planner_route_from_summary(
+    summary: WorkflowRunSummary,
+    approvals: list[object] | None = None,
+) -> PlannerRoute:
     """Build a manifest and governed planner route from a workflow summary."""
+    from mip.orchestration.approvals import build_governed_planner_route
+
     manifest = build_manifest_from_workflow_summary(summary)
-    return route_next_actions(manifest)
+    route, _ = build_governed_planner_route(manifest, approvals)  # type: ignore[arg-type]
+    return route
 
 
 def planner_route_with_mmm_fixture(
     summary: WorkflowRunSummary,
     mmm_fixture_report: MMMFixtureReport,
+    approvals: list[object] | None = None,
 ) -> PlannerRoute:
     """Build a manifest with MMM fixture lineage and return the governed route."""
+    from mip.orchestration.approvals import build_governed_planner_route
+
     manifest = build_manifest_with_mmm_fixture(summary, mmm_fixture_report)
-    return route_next_actions(manifest)
+    route, _ = build_governed_planner_route(manifest, approvals)  # type: ignore[arg-type]
+    return route
 
 
 def assert_safe_planner_route(route: PlannerRoute) -> None:
@@ -582,7 +593,22 @@ def _decision_display(decision: PlannerDecision) -> dict[str, object]:
         "produced_artifact_type": decision.produced_artifact_type,
         "produced_artifact_marker": decision.produced_artifact_marker,
         "human_approval_requirement": _enum_value(decision.human_approval_requirement),
+        "approval_checkpoint": _checkpoint_display(decision.approval_checkpoint),
         "safety_notes": list(decision.safety_notes),
+    }
+
+
+def _checkpoint_display(checkpoint: object) -> dict[str, object] | None:
+    if checkpoint is None:
+        return None
+    request = getattr(checkpoint, "approval_request", None)
+    return {
+        "action_type": _enum_value(getattr(checkpoint, "action_type", "")),
+        "requirement": _enum_value(getattr(checkpoint, "requirement", "")),
+        "approval_status": _enum_value(getattr(checkpoint, "approval_status", "")),
+        "blocked_until_approved": getattr(checkpoint, "blocked_until_approved", False),
+        "reason": getattr(checkpoint, "reason", ""),
+        "approval_id": getattr(request, "approval_id", None) if request is not None else None,
     }
 
 
