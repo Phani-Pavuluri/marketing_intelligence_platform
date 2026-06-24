@@ -157,6 +157,13 @@ src/mip/adapters/
 
 These contracts define governed input/output bundle shapes only. They do not import engine packages, run MMM/GeoX, or emit model estimates.
 
+**Phase 6B (implemented):** `mip.adapters.governance` maps completed placeholder `AdapterOutputBundle` artifacts into:
+
+- GeoX → `ExperimentEvidence` fixture → experiment evidence gate → `TrustReport` → `EvidenceRegistry`
+- MMM → `DecisionSurface` diagnostic fixture → decision surface gate → `TrustReport`
+
+Failed/blocked adapter outputs produce blocked `TrustReport` values and are not registered as decision-ready artifacts. No engine execution or numeric effect claims.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -180,7 +187,7 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 |---------|--------|
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/`, `orchestration/` | Placeholder stubs; logic stays in engine repos |
-| `adapters/` | **Interface contracts implemented** (`base.py`, `mmm.py`, `geox.py`); engine execution not wired |
+| `adapters/` | **Interface contracts + governance wiring implemented**; engine execution not wired |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
 | `dashboard/`, `reports/` | **Not yet created** |
 
