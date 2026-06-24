@@ -18,6 +18,8 @@ No autonomous agents or production decision automation in early phases.
 
 **Phase 3 (done):** Deterministic dataset profiling from records, structural readiness checks, and `DataReadinessReport` in `mip.workflows.readiness`, with optional integration to `ObjectiveFeasibilityReport`.
 
+**Phase 4 (done):** Deterministic `MMMConfigDraft` and `GeoXConfigDraft` generation in `mip.workflows.configs` from objective, feasibility, and readiness artifacts. No engine execution.
+
 **Platform prerequisites (largely done):** contracts, gates, `TrustReport` assembly, evidence registry, calibration audit, model calibration readiness.
 
 **Not started:** `MockLLMProvider`, workflow orchestration graphs, `mip.app`, dashboards, LLM providers.
@@ -90,13 +92,18 @@ No autonomous agents or production decision automation in early phases.
 
 ## 8. Phase 4: Config drafting for MMM and GeoX
 
+**Status: implemented** in `mip.workflows.configs`.
+
 **Deliver:**
 
-- `MMMConfigDraft` and `ExperimentConfigDraft` schemas
-- `ConfigValidationReport`
+- `MMMConfigDraft` and `GeoXConfigDraft` schemas
+- `ConfigDraftValidationReport` and `DraftConfigStatus`
+- `draft_mmm_config`, `draft_geox_config`, `draft_config_for_objective`
 - No engine execution
 
-**Exit:** Draft + validate round-trip tests; GeoX draft stub acceptable.
+**Implemented:** governed drafts with production eligibility flags, warnings, blocking reasons, and deterministic `generated_marker`.
+
+**Exit:** Draft + validate round-trip tests; configs blocked when feasibility or readiness is blocked.
 
 ## 9. Phase 5: Local-first demo app
 

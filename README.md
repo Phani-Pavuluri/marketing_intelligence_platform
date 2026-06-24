@@ -25,6 +25,7 @@ The following is **implemented and tested** in this repository today:
 | **LLM safety layer (Phase 1)** | Deterministic intent classification, confidence-tier action policies, and `TrustReport` explanation context—**no real LLM calls** |
 | **Objective intake framework (Phase 2)** | Deterministic mapping of business objectives to data requirements, declared availability checks, and feasibility reports—**no LLM calls** |
 | **Data readiness diagnostics (Phase 3)** | Structural dataset profiling from records, readiness checks, and `DataReadinessReport` with optional objective feasibility integration—**no LLM calls or engine execution** |
+| **Config drafting (Phase 4)** | Deterministic `MMMConfigDraft` and `GeoXConfigDraft` from objective, feasibility, and readiness—**no engine execution** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy |
 
 **Not implemented yet:** engine adapters, MMM/GeoX execution, workflow orchestration graphs, `MockLLMProvider`, Streamlit or FastAPI apps, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
@@ -89,8 +90,9 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 0 — Documentation and scope lock | **Done** |
 | Phase 1 — Deterministic safety and explanation context | **Done** (`mip.llm`: intents, safety rules, `context_from_trust_report`) |
 | Phase 2 — Business objective intake and data requirements | **Done** (`mip.workflows.intake`) |
-| Phase 3 — Data readiness diagnostics | **Done** (`mip.workflows.readiness`: profile, checks, report) |
-| Phase 4+ — Config drafts, providers, app | **Planned** |
+| Phase 3 — Data readiness diagnostics | **Done** (`mip.workflows.readiness`) |
+| Phase 4 — MMM/GeoX config drafting | **Done** (`mip.workflows.configs`) |
+| Phase 5+ — Local demo app, providers, adapters | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -143,11 +145,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 ## Current status
 
-**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, LLM Phase 1–3 deterministic layers are implemented with passing tests.
+**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–4 deterministic workflow layers are implemented with passing tests.
 
 **Product surface: not started.** No Streamlit app, no `mip demo` command, no adapters wired to sibling engine repos, no workflow orchestration graphs, no dashboards or reports.
 
-**Near-term focus:** LLM Phase 4 (MMM/GeoX config draft schemas), then adapter interfaces and contract tests.
+**Near-term focus:** LLM Phase 5 (local-first Streamlit demo app with `MockLLMProvider`), then adapter interfaces.
 
 ## Roadmap
 
@@ -193,6 +195,7 @@ marketing_intelligence_platform/
     workflows/        # Workflow intake and feasibility (Phase 2–3)
       intake/         # Business objectives, data requirements, feasibility
       readiness/      # Dataset profiling and readiness reports
+      configs/        # MMM and GeoX config drafts
     app/              # Planned: local CLI and Streamlit entry
     dashboard/        # Planned: tier-aware views
     reports/          # Planned: governed report export
