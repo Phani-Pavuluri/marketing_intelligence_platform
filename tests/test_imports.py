@@ -49,3 +49,9 @@ def test_workflows_intake_imports() -> None:
     import mip.workflows.intake as intake
 
     assert intake.__doc__ is not None
+
+
+def test_workflows_readiness_imports() -> None:
+    import mip.workflows.readiness as readiness
+
+    assert readiness.__doc__ is not None

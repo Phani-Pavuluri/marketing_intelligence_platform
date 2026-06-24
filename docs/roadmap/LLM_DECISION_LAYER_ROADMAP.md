@@ -14,11 +14,13 @@ No autonomous agents or production decision automation in early phases.
 
 **Phase 1 (done):** Deterministic LLM safety and explanation context in `mip.llm`.
 
-**Phase 2 (done):** Deterministic business objective intake, data requirement catalog, declared availability profiles, and feasibility evaluation in `mip.workflows.intake`. No LLM calls, dataframe inspection, or statistical diagnostics yet.
+**Phase 2 (done):** Deterministic business objective intake, data requirement catalog, declared availability profiles, and feasibility evaluation in `mip.workflows.intake`.
+
+**Phase 3 (done):** Deterministic dataset profiling from records, structural readiness checks, and `DataReadinessReport` in `mip.workflows.readiness`, with optional integration to `ObjectiveFeasibilityReport`.
 
 **Platform prerequisites (largely done):** contracts, gates, `TrustReport` assembly, evidence registry, calibration audit, model calibration readiness.
 
-**Not started:** `MockLLMProvider`, `mip.workflows` orchestration graphs, `mip.app`, dashboards, LLM providers, upload-based readiness inference.
+**Not started:** `MockLLMProvider`, workflow orchestration graphs, `mip.app`, dashboards, LLM providers.
 
 ## 3. Current agreed defaults
 
@@ -73,15 +75,18 @@ No autonomous agents or production decision automation in early phases.
 
 ## 7. Phase 3: Data readiness and workflow feasibility
 
+**Status: implemented** in `mip.workflows.readiness`.
+
 **Deliver:**
 
-- `DataAvailabilityProfile` inference from uploads
-- Readiness diagnostics (weeks, geos, KPI, spend, controls, grain)
-- Workflow eligibility classification
+- `DatasetProfile` inference from in-memory records
+- Structural readiness diagnostics (rows, date field, grain, history, missingness, breakdowns)
+- `DataReadinessReport` with block/warn/pass paths
+- Integration with `ObjectiveFeasibilityReport` via `build_readiness_from_records`
 
-**Future concepts:** `DataReadinessReport`, `WorkflowFeasibilityReport`, `AnalysisReadinessReport`.
+**Implemented:** `DatasetProfile`, `profile_from_records`, `profile_to_availability`, `run_readiness_checks`, `DataReadinessReport`, `build_data_readiness_report`, `build_readiness_from_records`.
 
-**Exit:** Block/warn/pass paths tested without engines.
+**Exit:** Block/warn/pass paths tested without engines. Statistical model diagnostics (collinearity, sparsity) deferred.
 
 ## 8. Phase 4: Config drafting for MMM and GeoX
 
