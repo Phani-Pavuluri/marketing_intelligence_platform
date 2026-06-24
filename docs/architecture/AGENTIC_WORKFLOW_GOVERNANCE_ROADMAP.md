@@ -68,11 +68,13 @@ Agentic behavior is **advisory and routing**, not statistical computation or pro
 7C  Human approval checkpoints (this phase)
       ApprovalRequest, blocked_until_approved enforcement, display-only UI status
 
-8   Fixture engine orchestration through adapters (this phase)
-      orchestrate_mmm_fixture_engine / orchestrate_geox_fixture_engine
+8F  Sibling export producer specifications (this phase)
+      docs/integrations/*_PRODUCER_SPEC.md, sibling_producer_specs helpers
 
-Later  Real engine adapters
-      Only after manifest, gates, and approval lineage remain intact
+G1–G10  Critical invariants and golden scenarios (documented addendum; final roadmap layer)
+      golden scenarios, conformance suite, no-silent-upgrade, dependency graph
+
+Next  Phase 8G/8H implementation (explanation payload + usage policy)—not live engine execution
 ```
 
 ## Phase 8A artifacts
@@ -125,6 +127,10 @@ Local sibling export path wiring configures default absolute paths for sibling `
 | `mip.adapters.sibling_producer_specs` | `required_producer_labels`, `assert_valid_producer_spec_example` |
 
 Producer specifications document the JSON contract for `integrations/mip/exports/`. Read-only consumer bridge (8B–8E) is complete. Live engine execution remains blocked.
+
+## Critical invariants and golden scenarios (G1–G10)
+
+Documented in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). Final roadmap addendum: golden scenarios prove end-to-end product behavior; G6 enforces no silent readiness upgrade; G3 defines sibling conformance suite. **Stop adding roadmap layers**—implement 8G/8H next.
 
 ## Phase 7C artifacts
 
@@ -185,4 +191,5 @@ The manifest records lineage; it does not replace `WorkflowRunSummary`, `TrustRe
 - [ORCHESTRATION_BOUNDARIES.md](./ORCHESTRATION_BOUNDARIES.md)
 - [LLM_DECISION_LAYER_VISION.md](./LLM_DECISION_LAYER_VISION.md)
 - [LLM_DECISION_LAYER_ROADMAP.md](../roadmap/LLM_DECISION_LAYER_ROADMAP.md)
+- [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
 - [REPO_INTEGRATION_STRATEGY.md](./REPO_INTEGRATION_STRATEGY.md)
