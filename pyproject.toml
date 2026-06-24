@@ -11,9 +11,11 @@ python = ">=3.11,<4.0"
 pydantic = "^2.0"
 pandas = "^2.0"
 numpy = "^2.0"
+streamlit = "^1.40"
 
 [tool.poetry.scripts]
 mip-demo = "mip.cli.demo:main"
+mip-app = "mip.app.streamlit_app:main"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0"
