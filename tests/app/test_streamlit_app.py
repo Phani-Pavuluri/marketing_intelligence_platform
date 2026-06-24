@@ -186,6 +186,21 @@ def test_streamlit_sections_include_sibling_fixture_imports_safely() -> None:
     assert "budget recommendation" not in combined
 
 
+def test_streamlit_sections_include_sibling_export_hook_safely() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    hook_sections = sections["sibling_export_hook"]
+    assert isinstance(hook_sections, dict)
+    assert hook_sections["status"] == "validated"
+    labels = hook_sections["labels"]
+    assert isinstance(labels, list)
+    assert "readonly_sibling_export_hook_only" in labels
+    assert "static_export_file_only" in labels
+    combined = str(hook_sections).lower()
+    assert "actual roi" not in combined
+    assert "budget recommendation" not in combined
+
+
 def test_public_imports() -> None:
     from mip.app.streamlit_app import main
 

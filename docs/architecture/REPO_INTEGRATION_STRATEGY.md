@@ -168,6 +168,8 @@ Failed/blocked adapter outputs produce blocked `TrustReport` values and are not 
 
 **Phase 8B (implemented):** `mip.adapters.sibling_fixtures` loads pinned sibling-repo export JSON committed under `tests/fixtures/sibling_exports/`, validates structural metadata only, converts to `AdapterOutputBundle`, and routes through existing governance (`validate_adapter_output`, `register_adapter_output`, `TrustReport`). No sibling-repo Python imports or live engine execution.
 
+**Phase 8C (implemented):** `mip.adapters.sibling_export_hooks` discovers `.json` files from explicitly provided sibling export directories (no symlinks by default), loads each through the Phase 8B schema, and registers valid exports through the same governance path. Malformed JSON and expectation mismatches produce blocked/invalid hook results without exception leakage.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -192,7 +194,7 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/` | Placeholder stubs; logic stays in engine repos |
 | `orchestration/` | Phase 7A–7C manifest, planner/router, approvals; Phase 8A fixture engine orchestration |
-| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A fixture orchestration via `engine_fixtures`; Phase 8B pinned sibling fixture imports via `sibling_fixtures` |
+| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A fixture orchestration via `engine_fixtures`; Phase 8B pinned sibling fixture imports via `sibling_fixtures`; Phase 8C read-only export hooks via `sibling_export_hooks` |
 | `reports/` | **MMM fixture governance report implemented** (`mmm_fixture.py`); HTML export deferred |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
 | `dashboard/`, `reports/` | **Not yet created** |
