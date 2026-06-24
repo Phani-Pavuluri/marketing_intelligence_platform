@@ -11,6 +11,7 @@ from pydantic import ValidationError
 from mip.cli.demo import DemoInput
 from mip.llm.explanations import EXECUTION_DISCLAIMER, assert_safe_explanation
 from mip.llm.providers import LLMProviderResponse, MockLLMProvider
+from mip.reports.mmm_fixture import build_mmm_fixture_report, mmm_fixture_report_sections
 from mip.workflows.orchestrator import WorkflowRunSummary, run_local_workflow
 
 _FORBIDDEN_OUTPUT_PHRASES = (
@@ -115,6 +116,20 @@ def summary_sections(
     return sections
 
 
+def summary_sections_with_mmm_fixture(
+    summary: WorkflowRunSummary,
+    explanation_response: LLMProviderResponse,
+) -> dict[str, str | list[str] | bool | dict[str, str | list[str] | bool]]:
+    """Build workflow summary sections plus optional MMM fixture governance sections."""
+    sections: dict[str, str | list[str] | bool | dict[str, str | list[str] | bool]] = dict(
+        summary_sections(summary, explanation_response)
+    )
+    mmm_report = build_mmm_fixture_report(summary)
+    if mmm_report is not None:
+        sections["mmm_fixture_report"] = mmm_fixture_report_sections(mmm_report)
+    return sections
+
+
 def main() -> None:
     """Streamlit entrypoint for the local workflow demo shell."""
     import streamlit as st
@@ -136,7 +151,7 @@ def main() -> None:
         try:
             input_text = uploaded.getvalue().decode("utf-8") if uploaded is not None else json_text
             summary, explanation = run_streamlit_workflow_from_json(input_text)
-            sections = summary_sections(summary, explanation)
+            sections = summary_sections_with_mmm_fixture(summary, explanation)
         except ValueError as exc:
             st.error(str(exc))
             return
@@ -167,15 +182,62 @@ def main() -> None:
 
         st.info(sections["execution_disclaimer"])
 
+        mmm_fixture = sections.get("mmm_fixture_report")
+        if isinstance(mmm_fixture, dict):
+            _render_mmm_fixture_section(st, mmm_fixture)
+
+
+def _render_mmm_fixture_section(
+    st: Any,
+    mmm_fixture: dict[str, str | list[str] | bool],
+) -> None:
+    st.divider()
+    st.subheader("MMM Fixture Governance Demo")
+    st.warning(str(mmm_fixture.get("placeholder_banner", "")))
+    st.write(f"TrustReport confidence tier: `{mmm_fixture.get('trust_report_confidence_tier')}`")
+    st.write(f"Config draft status: `{mmm_fixture.get('config_draft_status')}`")
+    st.write(f"Production eligible: `{mmm_fixture.get('production_eligible')}`")
+    st.write(f"Adapter input status: `{mmm_fixture.get('adapter_input_status')}`")
+    st.write(f"Adapter output status: `{mmm_fixture.get('adapter_output_status')}`")
+    st.write(f"Source config marker: `{mmm_fixture.get('source_config_marker')}`")
+    st.write(f"Adapter output id: `{mmm_fixture.get('adapter_output_id')}`")
+    st.write(f"Decision surface id: `{mmm_fixture.get('decision_surface_id')}`")
+    st.write(f"Decision surface type: `{mmm_fixture.get('decision_surface_type')}`")
+    st.write(
+        "Decision surface certification: "
+        f"`{mmm_fixture.get('decision_surface_certification_status')}`"
+    )
+    _render_list_section(st, "TrustReport warnings", mmm_fixture.get("trust_report_warnings", []))
+    _render_list_section(
+        st,
+        "TrustReport unsupported claims",
+        mmm_fixture.get("trust_report_unsupported_claims", []),
+    )
+    _render_list_section(
+        st,
+        "TrustReport assumptions",
+        mmm_fixture.get("trust_report_assumptions", []),
+    )
+    st.write(str(mmm_fixture.get("placeholder_explanation", "")))
+    _render_list_section(
+        st,
+        "Requirements before production MMM use",
+        mmm_fixture.get("missing_production_requirements", []),
+    )
+    st.info(str(mmm_fixture.get("disclaimer", "")))
+
 
 def _render_list_section(
     st: Any,
     title: str,
-    items: str | list[str],
+    items: object,
 ) -> None:
     st.subheader(title)
     if isinstance(items, str):
         st.write(items)
+        return
+    if not isinstance(items, list):
+        st.write(str(items))
         return
     if not items:
         st.write("None")

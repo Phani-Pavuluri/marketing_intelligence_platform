@@ -32,6 +32,7 @@ The following is **implemented and tested** in this repository today:
 | **Streamlit demo shell (Phase 5D)** | `mip-app` provides a thin UI over `run_local_workflow()` and `MockLLMProvider`—**no new workflow logic or engine execution** |
 | **Adapter interface contracts (Phase 6A)** | `mip.adapters` defines governed MMM/GeoX input/output bundle shapes—**no engine imports or model results** |
 | **Adapter governance wiring (Phase 6B)** | Placeholder adapter outputs map to `ExperimentEvidence` / `DecisionSurface` fixtures, gates, and `TrustReport`—**no engine execution** |
+| **MMM fixture dashboard/report (Phase 6C)** | `mip.reports.mmm_fixture` + Streamlit section show governed MMM placeholder flow—**no model execution** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy |
 
 **Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
@@ -104,7 +105,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 5D — Streamlit demo shell | **Done** (`mip.app.streamlit_app`, `mip-app`) |
 | Phase 6A — Adapter interface contracts | **Done** (`mip.adapters`) |
 | Phase 6B — Adapter fixture governance wiring | **Done** (`mip.adapters.governance`) |
-| Phase 6C+ — Dashboard/report demo | **Planned** |
+| Phase 6C — MMM fixture dashboard/report demo | **Done** (`mip.reports.mmm_fixture`) |
+| Phase 7+ — Engine orchestration, measurement gaps | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -159,9 +161,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5D deterministic workflow layers are implemented with passing tests.
 
-**Product surface: CLI + mock explanation + Streamlit shell.** `mip-demo` and `mip-app` run the local workflow from JSON with governed summaries and mock explanations. Adapter interface contracts exist; no engines wired yet.
+**Product surface: CLI + mock explanation + Streamlit shell + MMM fixture governance demo.** Governed placeholder artifacts only; no engines wired.
 
-**Near-term focus:** Phase 6C MMM-focused dashboard/report demo using governed fixture artifacts.
+**Near-term focus:** Phase 8 engine orchestration through adapters (pinned engine fixtures), then measurement gap layer.
 
 ## Roadmap
 
@@ -182,8 +184,8 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Next (LLM):**
 
-1. Phase 6C — MMM-focused dashboard/report demo
-2. Phase 8 — engine orchestration through adapters (real engine pins)
+1. Phase 8 — engine orchestration through adapters (fixture pins first)
+2. Phase 7 — measurement gap and experiment opportunity layer
 
 ## Repository layout
 
