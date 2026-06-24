@@ -109,6 +109,9 @@ def test_orchestration_imports() -> None:
     assert callable(planner_route_from_summary)
     assert callable(build_governed_planner_route)
     assert callable(create_approval_request)
+    from mip.orchestration import orchestrate_mmm_fixture_engine
+
+    assert callable(orchestrate_mmm_fixture_engine)
 
 
 def test_app_imports() -> None:

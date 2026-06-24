@@ -18,6 +18,16 @@ from mip.orchestration.approvals import (
     format_approval_checkpoints_for_display,
     is_action_approved,
 )
+from mip.orchestration.engine_fixtures import (
+    FixtureEngineKind,
+    FixtureEngineRunResult,
+    FixtureEngineRunStatus,
+    assert_safe_fixture_engine_result,
+    fixture_engine_result_sections,
+    orchestrate_fixture_engine,
+    orchestrate_geox_fixture_engine,
+    orchestrate_mmm_fixture_engine,
+)
 from mip.orchestration.manifest import (
     HumanApprovalRequirement,
     WorkflowActionType,
@@ -77,11 +87,19 @@ __all__ = [
     "create_approval_request",
     "enforce_approval_for_route",
     "finalize_planner_route",
+    "fixture_engine_result_sections",
     "format_approval_checkpoints_for_display",
     "format_planner_route_for_display",
     "is_action_approved",
+    "orchestrate_fixture_engine",
+    "orchestrate_geox_fixture_engine",
+    "orchestrate_mmm_fixture_engine",
     "planner_route_from_summary",
     "planner_route_with_mmm_fixture",
     "route_next_actions",
     "step_requires_approval_gate",
+    "assert_safe_fixture_engine_result",
+    "FixtureEngineKind",
+    "FixtureEngineRunResult",
+    "FixtureEngineRunStatus",
 ]

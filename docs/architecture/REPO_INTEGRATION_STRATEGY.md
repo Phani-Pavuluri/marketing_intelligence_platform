@@ -189,8 +189,8 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 |---------|--------|
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/` | Placeholder stubs; logic stays in engine repos |
-| `orchestration/` | Phase 7A run manifest and plan builders; planner/router future |
-| `adapters/` | **Interface contracts + governance wiring implemented**; engine execution not wired |
+| `orchestration/` | Phase 7A–7C manifest, planner/router, approvals; Phase 8A fixture engine orchestration |
+| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A fixture orchestration via `engine_fixtures` |
 | `reports/` | **MMM fixture governance report implemented** (`mmm_fixture.py`); HTML export deferred |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
 | `dashboard/`, `reports/` | **Not yet created** |

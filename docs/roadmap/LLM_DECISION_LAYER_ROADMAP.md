@@ -255,7 +255,22 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Approval state is explicit and auditable; `blocked_until_approved` enforced in router output.
 
-## 19. Phase 6: MMM-focused dashboard/report demo (full product)
+## 19. Phase 8A: Fixture engine orchestration through adapters
+
+**Status: implemented** in `mip.orchestration.engine_fixtures` and Streamlit display section.
+
+**Deliver:**
+
+- `FixtureEngineRunResult`, `orchestrate_mmm_fixture_engine`, `orchestrate_geox_fixture_engine`
+- Manifest → planner/router → approval checkpoints → adapter fixtures → governance artifacts → TrustReport
+- Required labels: `fixture_engine_orchestration_only`, `not_real_engine_execution`
+- Streamlit **Fixture Engine Orchestration** panel (display-only)
+
+**Not in scope:** real MMM/GeoX package imports, model training, ROI/lift claims, automatic approval.
+
+**Exit:** Governed fixture engine path proven end-to-end without real engine execution.
+
+## 20. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**
 
@@ -270,7 +285,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** End-to-end local demo without real MMM repo required.
 
-## 20. Phase 7: Measurement gap and experiment opportunity layer
+## 21. Phase 7: Measurement gap and experiment opportunity layer
 
 **Deliver:**
 
@@ -282,7 +297,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Gap → recommendation → TrustReport → UI path demonstrated.
 
-## 21. Phase 8: Engine orchestration through adapters
+## 22. Phase 8: Engine orchestration through adapters
 
 **Deliver:**
 
