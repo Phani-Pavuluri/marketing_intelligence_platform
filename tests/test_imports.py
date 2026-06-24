@@ -20,6 +20,7 @@ def test_subpackages_import() -> None:
         "mip.orchestration",
         "mip.trust",
         "mip.evaluation",
+        "mip.llm",
     ]
     for name in subpackages:
         mod = importlib.import_module(name)
@@ -37,5 +38,6 @@ def test_discoverable_subpackages() -> None:
         "mip.orchestration",
         "mip.trust",
         "mip.evaluation",
+        "mip.llm",
     }
     assert expected.issubset(names)

@@ -1,47 +1,174 @@
 # Marketing Intelligence Platform (MIP)
 
-Causal marketing intelligence operating system for experimentation intelligence, MMM calibration, budget planning, explainable recommendations, and conversational orchestration over certified analytical engines.
+Causal marketing intelligence **control plane** for governed experimentation, MMM calibration, budget planning, explainable recommendations, and—eventually—a conversational workbench over certified analytical engines.
 
-## Platform Purpose
+## What this is
 
-MIP helps marketing science and strategy teams make **defensible mix-level decisions** under uncertainty. Statistical engines compute estimands, run optimization, and register evidence; language models orchestrate approved workflows and explain certified outputs—not invent causal effects.
+MIP is the **control-plane layer** for causal marketing intelligence. It owns contracts, evidence, release gates, `TrustReport` assembly, orchestration boundaries, and the planned LLM Decision Layer. Statistical engines compute estimands, run inference, and emit artifacts; MIP governs what may be trusted, promoted, or explained.
 
-## What This Platform Is
+**MMM** and **GeoX/panel_exp** remain **separate analytical engine repositories**. MIP connects to those engines through **versioned adapters and governed contracts**—not by vendoring engine source inside this repo.
 
-- A **modular, contract-driven** system connecting experimentation, MMM, calibration, planning optimization, trust/explanation, and evaluation
-- Focused on **strategic budget planning** and measurement health
-- Built for **transparency**: diagnostics, uncertainty, evidence pointers, and confidence tiers on every decision-grade path
+The intended product direction is a **local-first causal marketing intelligence workbench**: users describe a business goal, provide data, receive guidance on KPIs and controls, run diagnostics, draft configs, execute MMM and GeoX workflows through adapters, inspect governed artifacts, view dashboards and reports, and ask follow-up questions—all through an LLM-guided interface that routes to certified tools rather than inventing causal effects.
 
-## What This Platform Is Not
+## Current implemented spine
 
-- A generic dashboard or BI tool
-- A marketing chatbot that answers from model weights alone
-- An ad-platform bidding or auction optimization product
-- A black-box attribution or “single number” storyteller
+The following is **implemented and tested** in this repository today:
 
-## Major Pillars
+| Area | Status |
+|------|--------|
+| **Contracts** | Pydantic models for estimands, experiment evidence, calibration signals, decision surfaces, recommendations, and `TrustReport` |
+| **Evidence registry** | In-memory registry with add/get/list/find and trust-report helpers |
+| **Evaluation gates** | Release gates for evidence, calibration, decision surfaces, recommendations, and trust reports |
+| **TrustReport assembly/router** | Gate-driven confidence tiers, trust report construction, artifact routing |
+| **Calibration audit** | Trace and audit calibration signals against source evidence |
+| **Model calibration readiness** | Evaluate whether a model has compatible, non-blocked calibration signals |
+| **LLM safety layer (Phase 1)** | Deterministic intent classification, confidence-tier action policies, and `TrustReport` explanation context—**no real LLM calls** |
+| **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy |
 
-| Pillar | Role |
-|--------|------|
-| **Experimentation intelligence** | Quality-gated experiment evidence for calibration |
-| **MMM calibration** | Reliability-first models; full-panel Δμ for decisions |
-| **Budget planning** | Constrained optimization on certified surfaces |
-| **Explainable recommendations** | Structured contracts with rationale and limits |
-| **Conversational orchestration** | Control plane over certified tools only |
-| **Trust & evaluation** | Tiers, traces, benchmarks, and release gates |
+**Not implemented yet:** engine adapters, MMM/GeoX execution, workflows, `MockLLMProvider`, Streamlit or FastAPI apps, dashboards, reports, cloud or Ollama LLM providers, APIs, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
 
-## Current Development Status
+## Target product experience
 
-**Phase 1 — Platform constitution (in progress)**
+The long-term user flow MIP is designed to support:
 
-- Documentation, ADRs, glossary, and operating model: **present**
-- Python package skeleton (`mip`): **present**
-- Analytical engines, APIs, UI, and LLM workflows: **not implemented**
-- No fake model logic or placeholder estimators in engine paths
+```text
+User business question
+  → domain / objective intake
+  → data requirement guidance (KPIs, controls, granularity)
+  → data readiness diagnostics
+  → MMM / GeoX config draft
+  → engine execution via adapters
+  → governed artifacts (evidence, surfaces, recommendations)
+  → TrustReport
+  → dashboard / report
+  → follow-up Q&A over structured artifacts
+```
 
-See [docs/roadmap/ROADMAP.md](docs/roadmap/ROADMAP.md).
+Users should eventually be able to:
 
-## Repository Layout
+- Describe a business goal and receive guidance on required KPIs, controls, and data granularity
+- Upload or point to local data and run readiness diagnostics
+- Draft MMM and GeoX configurations for engine validation and execution
+- Inspect outputs with tier-appropriate language, warnings, and blockers
+- View local dashboards and export governed reports
+- Ask follow-up questions grounded in artifacts, lineage, and `TrustReport`
+
+This experience is **planned**, not shipped. The governance spine above exists so future UI and LLM layers can be contract-driven from day one.
+
+## LLM Decision Layer
+
+The **LLM Decision Layer lives in MIP**, not inside the MMM or GeoX engine repos. It is intended to become the **primary interaction layer** for users: guiding intake, routing workflows, drafting configs, summarizing artifacts, and explaining `TrustReport` verdicts.
+
+### What LLMs will do
+
+- Guide users through objective and data intake
+- Configure and route approved workflows
+- Summarize diagnostics, gates, and uncertainty
+- Explain `TrustReport`, evidence quality, and calibration readiness
+- Surface measurement gaps and experiment opportunities
+- Draft MMM/GeoX configs for engine validation
+- Support follow-up Q&A over governed artifacts
+
+### What LLMs will not do
+
+- Estimate causal effects or run GeoX inference directly
+- Train MMM models or invent statistical results
+- Certify evidence or upgrade confidence tiers
+- Override `TrustReport` verdicts or bypass `CalibrationSignal` governance
+- Send raw experiment evidence into MMM
+- Approve production recommendations or bypass release gates
+
+Production-facing results must pass evaluation gates and be labeled by **confidence tier** (`decision_ready`, `directional`, `diagnostic_only`, `research_only`, `blocked`).
+
+### LLM implementation status
+
+| Phase | Status |
+|-------|--------|
+| Phase 0 — Documentation and scope lock | **Done** |
+| Phase 1 — Deterministic safety and explanation context | **Done** (`mip.llm`: intents, safety rules, `context_from_trust_report`) |
+| Phase 2+ — Intake, readiness, config drafts, providers, app | **Planned** |
+
+Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
+
+See [docs/architecture/LLM_DECISION_LAYER_VISION.md](docs/architecture/LLM_DECISION_LAYER_VISION.md) and [docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md).
+
+## Local-first workbench
+
+Initial product direction is **local-first**:
+
+```text
+poetry install
+  → mip demo / mip app   (planned CLI entry points)
+  → localhost UI opens
+  → user provides local data
+  → diagnostics, workflows, dashboards, reports run locally
+  → follow-up Q&A over run artifacts
+```
+
+- **Streamlit** is planned first for demo speed and iteration
+- **FastAPI / hosted mode** is a later optional extension
+- Marketing data stays on the user's machine in early releases
+- Reports export to local run folders (HTML first, Markdown second, PDF later)
+
+No cloud accounts, remote data upload, or autonomous production actions are required for the initial experience.
+
+See [docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md).
+
+## Repository architecture
+
+Three-repo model:
+
+| Repository | Role |
+|------------|------|
+| **MIP** (this repo) | Control plane: contracts, evidence, gates, `TrustReport`, orchestration, LLM layer, workflows, dashboards, reports, adapters |
+| **mmm** | MMM analytical engine: training, Δμ surfaces, diagnostics |
+| **panel_exp / GeoX** | Experimentation engine: geo/panel lift, design and inference diagnostics |
+
+MIP consumes engine outputs through **`src/mip/adapters/{mmm,geox}/`** (planned). Engines expose integration hooks under their own repos (e.g. `mmm/integrations/mip/`, `panel_exp/integrations/mip/`). MIP does not vendor engine source.
+
+See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTEGRATION_STRATEGY.md).
+
+## Governance principles
+
+- **`TrustReport`** is the sole trust verdict on engine and recommendation outputs; every production-facing path is tier-labeled.
+- **`CalibrationSignal`** is the only governed path from experiment evidence into MMM calibration—not raw experiment payloads.
+- **Release gates** block or downgrade artifacts that fail diagnostics, compatibility, or evidence requirements.
+- **Research vs production:** `research_only` and `diagnostic_only` tiers may inform exploration but not production automation without explicit human review.
+- **Full-panel Δμ** is the decision estimand for mix-level budget decisions (see ADR-001).
+- **LLMs explain and route**; statistical systems compute and certify.
+
+## Current status
+
+**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1 deterministic safety are implemented with passing tests.
+
+**Product surface: not started.** No Streamlit app, no `mip demo` command, no adapters wired to sibling engine repos, no workflow orchestration, no dashboards or reports.
+
+**Near-term focus:** adapter interfaces and contract tests, then LLM Phase 2 (business objective intake and data requirement framework).
+
+## Roadmap
+
+| Document | Contents |
+|----------|----------|
+| [Platform roadmap](docs/roadmap/ROADMAP.md) | Phased delivery across contracts, engines, trust, APIs, orchestration |
+| [LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md) | Product vision, responsibilities, and hard boundaries |
+| [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md) | Phased LLM and workbench delivery |
+| [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md) | `mip demo` / `mip app`, Streamlit, providers, local artifacts |
+| [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md) | Three-repo boundaries and adapter contracts |
+
+**Next 4–6 weeks (platform):**
+
+1. Define MMM and GeoX adapter interfaces under `src/mip/adapters/`
+2. Adapter contract tests with fixture engine outputs
+3. Pilot local path dependencies to sibling `mmm` and `panel_exp` repos
+4. Wire adapter outputs into evidence registry and readiness paths
+
+**Next (LLM):**
+
+1. Phase 2 — business objective intake and data requirement framework
+2. Phase 3 — data readiness diagnostics integration
+3. Phase 4–5 — config draft schemas and `MockLLMProvider`
+
+## Repository layout
 
 ```text
 marketing_intelligence_platform/
@@ -49,33 +176,40 @@ marketing_intelligence_platform/
   pyproject.toml
   docs/
     vision/           # Vision and principles
-    architecture/     # Layers, boundaries, trust
+    architecture/     # Layers, boundaries, trust, LLM, local-first
     roadmap/          # Phased delivery
     adr/              # Architecture decision records
     glossary/         # Estimands and measurement terms
     operating_model/  # Intake, evaluation, release gates
-  src/mip/            # Python package (engines by subdomain)
-  tests/              # Pytest suites (mirrors engines)
+  src/mip/
+    contracts/        # Governed Pydantic contracts
+    evidence/         # Registry, calibration audit, readiness
+    evaluation/       # Release gates
+    trust/            # TrustReport assembly and routing
+    llm/              # Deterministic safety and explanation context (Phase 1)
+    adapters/         # Planned: mmm, geox engine adapters
+    workflows/        # Planned: orchestration graphs
+    app/              # Planned: local CLI and Streamlit entry
+    dashboard/        # Planned: tier-aware views
+    reports/          # Planned: governed report export
+  tests/              # Pytest suites
 ```
 
-## Documentation Index
+## Documentation index
 
 - [Platform vision](docs/vision/PLATFORM_VISION.md)
 - [Platform principles](docs/vision/PLATFORM_PRINCIPLES.md)
 - [Architecture](docs/architecture/ARCHITECTURE.md)
 - [Orchestration boundaries](docs/architecture/ORCHESTRATION_BOUNDARIES.md)
 - [Trust architecture](docs/architecture/TRUST_ARCHITECTURE.md)
+- [LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md)
+- [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
+- [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md)
 - [Roadmap](docs/roadmap/ROADMAP.md)
+- [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md)
 - ADRs: [001 Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md) · [002 Experiments](docs/adr/ADR-002-experiments-as-calibration-evidence.md) · [003 LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md)
 
-## Near-Term Roadmap
-
-1. Core **Pydantic contracts** (`EvidenceRecord`, `DeltaMuSurface`, `RecommendationContract`)
-2. Contract validation tests and gate stubs (`blocked` until engines exist)
-3. **MMM foundation** with Δμ artifact versioning (no heavy Bayes stack yet)
-4. **Evidence registry** schema and experimentation ingestion contracts
-
-## Development Setup
+## Development setup
 
 Requires Python ≥ 3.11. Uses Poetry-compatible `pyproject.toml`.
 
@@ -87,7 +221,7 @@ poetry run ruff check src tests
 poetry run mypy src
 ```
 
-Minimal dependencies only: `pydantic`, `pandas`, `numpy`, plus dev tools `pytest`, `ruff`, `mypy`.
+Minimal runtime dependencies: `pydantic`, `pandas`, `numpy`. Dev tools: `pytest`, `ruff`, `mypy`.
 
 ## License
 
