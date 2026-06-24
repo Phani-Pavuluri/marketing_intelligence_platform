@@ -37,6 +37,7 @@ The following is **implemented and tested** in this repository today:
 | **Governed planner/router (Phase 7B)** | `mip.orchestration.router` selects allowed/blocked next actions from manifests—**display and routing only; no execution** |
 | **Human approval checkpoints (Phase 7C)** | `mip.orchestration.approvals` tracks local approval requests and enforces `blocked_until_approved`—**no automatic approval or execution** |
 | **Fixture engine orchestration (Phase 8A)** | `mip.orchestration.engine_fixtures` orchestrates MMM/GeoX adapter fixture paths—**placeholder outputs only** |
+| **Pinned sibling fixture imports (Phase 8B)** | `mip.adapters.sibling_fixtures` reads committed sibling-repo export JSON fixtures through adapter governance—**no live engine execution** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy, agentic workflow governance roadmap |
 
 **Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
@@ -114,7 +115,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 7B — Governed planner/router | **Done** (`mip.orchestration.router`) |
 | Phase 7C — Human approval checkpoints | **Done** (`mip.orchestration.approvals`) |
 | Phase 8A — Fixture engine orchestration | **Done** (`mip.orchestration.engine_fixtures`) |
-| Phase 8B+ — Real engine adapters, measurement gaps | **Planned** |
+| Phase 8B — Pinned sibling fixture adapter imports | **Done** (`mip.adapters.sibling_fixtures`) |
+| Phase 8C+ — Real engine adapters, measurement gaps | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -171,7 +173,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface: CLI + mock explanation + Streamlit shell + MMM fixture governance demo.** Governed placeholder artifacts only; no engines wired.
 
-**Near-term focus:** Phase 8B real engine adapter integration (after governance remains intact), then measurement gap layer.
+**Near-term focus:** Phase 8C real engine adapter integration (after governance remains intact), then measurement gap layer.
 
 ## Roadmap
 
@@ -192,7 +194,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Next (LLM):**
 
-1. Phase 8B — real engine adapters (pinned fixtures first, governance intact)
+1. Phase 8C — real engine adapters (live sibling wiring after pinned fixtures, governance intact)
 2. Phase 7 — measurement gap and experiment opportunity layer
 
 ## Repository layout

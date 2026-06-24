@@ -166,6 +166,8 @@ Failed/blocked adapter outputs produce blocked `TrustReport` values and are not 
 
 **Phase 6C (implemented):** `mip.reports.mmm_fixture` and Streamlit MMM Fixture Governance Demo section show the governed MMM product shape from workflow summary through adapter placeholders to `DecisionSurface` fixture and `TrustReport`. No model execution.
 
+**Phase 8B (implemented):** `mip.adapters.sibling_fixtures` loads pinned sibling-repo export JSON committed under `tests/fixtures/sibling_exports/`, validates structural metadata only, converts to `AdapterOutputBundle`, and routes through existing governance (`validate_adapter_output`, `register_adapter_output`, `TrustReport`). No sibling-repo Python imports or live engine execution.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -190,7 +192,7 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/` | Placeholder stubs; logic stays in engine repos |
 | `orchestration/` | Phase 7A–7C manifest, planner/router, approvals; Phase 8A fixture engine orchestration |
-| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A fixture orchestration via `engine_fixtures` |
+| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A fixture orchestration via `engine_fixtures`; Phase 8B pinned sibling fixture imports via `sibling_fixtures` |
 | `reports/` | **MMM fixture governance report implemented** (`mmm_fixture.py`); HTML export deferred |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
 | `dashboard/`, `reports/` | **Not yet created** |

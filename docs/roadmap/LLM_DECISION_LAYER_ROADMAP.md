@@ -270,6 +270,21 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Governed fixture engine path proven end-to-end without real engine execution.
 
+## 19b. Phase 8B: Pinned sibling-repo fixture adapter integration
+
+**Status: implemented** in `mip.adapters.sibling_fixtures`, committed fixture JSON under `tests/fixtures/sibling_exports/`, and Streamlit **Pinned Sibling-Repo Fixture Import** panel (display-only).
+
+**Deliver:**
+
+- `SiblingFixtureExport`, `load_sibling_fixture_export`, `sibling_fixture_to_adapter_output`
+- `validate_sibling_fixture_export`, `trust_report_for_sibling_fixture`, `register_sibling_fixture_export`
+- Pinned JSON → `AdapterOutputBundle` → governance artifact → `TrustReport` / registry
+- Required labels: `pinned_sibling_repo_fixture_only`, `not_live_engine_execution`, `not_real_model_result`, `diagnostic_only`, `not_decision_ready`
+
+**Not in scope:** real mmm/panel_exp imports, subprocess execution, model training, ROI/lift claims, live repo connection.
+
+**Exit:** Sibling-repo export shape validated and wired through existing adapter governance without live engines.
+
 ## 20. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**

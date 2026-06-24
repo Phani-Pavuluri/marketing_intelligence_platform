@@ -83,6 +83,14 @@ Later  Real engine adapters
 
 Fixture engine orchestration wires manifest → planner/router → approval checkpoints → adapter input/output placeholders → governance artifacts → TrustReport. All outputs are labeled `fixture_engine_orchestration_only` and `not_real_engine_execution`.
 
+## Phase 8B artifacts
+
+| Module | Role |
+|--------|------|
+| `mip.adapters.sibling_fixtures` | `SiblingFixtureExport`, `load_sibling_fixture_export`, `register_sibling_fixture_export` |
+
+Pinned sibling-repo fixture imports read committed JSON exports only (no live repo connection). Exports validate structural metadata, convert to `AdapterOutputBundle`, and flow through existing adapter governance. Required labels include `pinned_sibling_repo_fixture_only` and `not_live_engine_execution`. Blocked/invalid fixtures produce blocked `TrustReport` values and are not registered as usable evidence.
+
 ## Phase 7C artifacts
 
 | Module | Role |
@@ -126,6 +134,7 @@ JSON input
   → route_next_actions() / planner_route_from_summary()   [Phase 7B]
   → enforce_approval_for_route() / approval checkpoints   [Phase 7C]
   → orchestrate_*_fixture_engine()                          [Phase 8A]
+  → load_sibling_fixture_export() / register_sibling_fixture_export()   [Phase 8B]
   → (optional) build_manifest_with_mmm_fixture()
   → TrustReport / UI / report
 ```
