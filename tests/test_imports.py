@@ -91,3 +91,15 @@ def test_app_imports() -> None:
     import mip.app as app
 
     assert app.__doc__ is not None
+
+
+def test_orchestration_imports() -> None:
+    from mip.orchestration import (
+        WorkflowRunManifest,
+        build_manifest_from_workflow_summary,
+        build_plan_from_workflow_summary,
+    )
+
+    assert WorkflowRunManifest is not None
+    assert callable(build_plan_from_workflow_summary)
+    assert callable(build_manifest_from_workflow_summary)

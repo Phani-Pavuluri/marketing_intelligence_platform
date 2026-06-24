@@ -103,7 +103,7 @@ marketing_intelligence_platform/
     evidence/           # registry, calibration audit, model readiness
     evaluation/         # release gates
     trust/              # trust assembly, artifact router
-    orchestration/      # workflow planner, tool router (future)
+    orchestration/      # workflow run manifest, plan builders (Phase 7A); planner/router (future)
     llm/                # LLM control plane (future)
       providers/
       prompts/
@@ -188,7 +188,8 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 | Package | Status |
 |---------|--------|
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
-| `experimentation/`, `mmm/`, `optimization/`, `orchestration/` | Placeholder stubs; logic stays in engine repos |
+| `experimentation/`, `mmm/`, `optimization/` | Placeholder stubs; logic stays in engine repos |
+| `orchestration/` | Phase 7A run manifest and plan builders; planner/router future |
 | `adapters/` | **Interface contracts + governance wiring implemented**; engine execution not wired |
 | `reports/` | **MMM fixture governance report implemented** (`mmm_fixture.py`); HTML export deferred |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
