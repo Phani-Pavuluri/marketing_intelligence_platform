@@ -61,3 +61,9 @@ def test_workflows_configs_imports() -> None:
     import mip.workflows.configs as configs
 
     assert configs.__doc__ is not None
+
+
+def test_workflows_orchestrator_imports() -> None:
+    import mip.workflows.orchestrator as orchestrator
+
+    assert orchestrator.__doc__ is not None
