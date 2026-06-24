@@ -172,6 +172,8 @@ Failed/blocked adapter outputs produce blocked `TrustReport` values and are not 
 
 **Phase 8D (implemented):** `mip.adapters.sibling_compatibility` adds a governed `SiblingRepoExportConfig` registry that resolves repo export paths, checks schema/source/engine compatibility via Phase 8C discovery, and only registers exports when status is `compatible` or `compatible_with_warnings`. No sibling code execution.
 
+**Phase 8E (implemented):** `mip.adapters.local_sibling_paths` provides default local path wiring for sibling `mmm` and `panel_exp` export directories, builds compatibility registries, and registers exports only when compatible. Missing local repos return safe `not_found` results without crashing.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -196,7 +198,7 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/` | Placeholder stubs; logic stays in engine repos |
 | `orchestration/` | Phase 7A–7C manifest, planner/router, approvals; Phase 8A fixture engine orchestration |
-| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A–8D fixture/export/compatibility paths via `engine_fixtures`, `sibling_fixtures`, `sibling_export_hooks`, `sibling_compatibility` |
+| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A–8E fixture/export/compatibility/local-path wiring via `engine_fixtures`, `sibling_fixtures`, `sibling_export_hooks`, `sibling_compatibility`, `local_sibling_paths` |
 | `reports/` | **MMM fixture governance report implemented** (`mmm_fixture.py`); HTML export deferred |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
 | `dashboard/`, `reports/` | **Not yet created** |

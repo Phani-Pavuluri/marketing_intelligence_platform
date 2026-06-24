@@ -215,6 +215,18 @@ def test_streamlit_sections_include_sibling_compatibility_safely() -> None:
     assert "actual roi" not in combined
 
 
+def test_streamlit_sections_include_local_sibling_paths_safely() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    local_paths = sections["local_sibling_paths"]
+    assert isinstance(local_paths, dict)
+    assert local_paths["mmm_repo_path"]
+    assert local_paths["aggregate_status"]
+    combined = str(local_paths).lower()
+    assert "local_sibling_export_path_wiring_only" in combined
+    assert "actual roi" not in combined
+
+
 def test_public_imports() -> None:
     from mip.app.streamlit_app import main
 

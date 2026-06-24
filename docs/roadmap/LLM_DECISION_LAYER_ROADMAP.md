@@ -316,6 +316,21 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** MIP can verify where sibling exports should be read from and whether they are compatible before import.
 
+## 19e. Phase 8E: Local sibling export path wiring
+
+**Status: implemented** in `mip.adapters.local_sibling_paths` and Streamlit **Local Sibling Export Paths** panel (display-only).
+
+**Deliver:**
+
+- `LocalSiblingRepoPathDefaults`, `LocalSiblingPathRegistryResult`, `build_local_sibling_compatibility_registry`
+- Default paths for local `mmm` and `panel_exp` export directories (`integrations/mip/exports`)
+- `register_compatible_local_sibling_exports` through Phase 8D/8C/8B governance path
+- Required labels: `local_sibling_export_path_wiring_only`, `readonly_export_contract_only`
+
+**Not in scope:** sibling Python imports, subprocess, live engine execution, ROI/lift claims.
+
+**Exit:** Local sibling export directories can be wired and validated read-only without executing sibling code.
+
 ## 20. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**
