@@ -110,6 +110,32 @@ def test_streamlit_sections_include_mmm_fixture_safely() -> None:
     assert "not_model_execution" in labels
 
 
+def test_streamlit_sections_include_planner_route_safely() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    planner_route = sections["planner_route"]
+    assert isinstance(planner_route, dict)
+    assert planner_route["recommended_next_action"] == "render_report"
+    assert planner_route["allowed_actions"]
+    assert planner_route["blocked_actions"]
+    combined = str(planner_route).lower()
+    assert "actual roi" not in combined
+    assert "budget recommendation" not in combined
+
+
+def test_awareness_workflow_planner_route_requests_missing_data() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_weekly_json("awareness"))
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    planner_route = sections["planner_route"]
+    assert isinstance(planner_route, dict)
+    assert planner_route["recommended_next_action"] == "parse_input"
+    allowed = planner_route["allowed_actions"]
+    assert isinstance(allowed, list)
+    assert any(
+        isinstance(item, dict) and item.get("action_type") == "parse_input" for item in allowed
+    )
+
+
 def test_awareness_workflow_has_no_mmm_fixture_section() -> None:
     summary, explanation = run_streamlit_workflow_from_json(_weekly_json("awareness"))
     sections = summary_sections_with_mmm_fixture(summary, explanation)

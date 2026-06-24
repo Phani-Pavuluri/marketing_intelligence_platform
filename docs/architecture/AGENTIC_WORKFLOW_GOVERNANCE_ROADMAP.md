@@ -62,8 +62,8 @@ Agentic behavior is **advisory and routing**, not statistical computation or pro
 7A  Run manifest + contracts (this phase)
       WorkflowPlan, WorkflowRunManifest, deterministic builders, safety assertions
 
-7B  Governed planner/router
-      Route to existing deterministic steps; no new execution paths
+7B  Governed planner/router (this phase)
+      PlannerRoute, route_next_actions, display-only next safe action guidance
 
 7C  Human approval checkpoints
       Approval metadata on manifest steps; blocked_until_approved semantics
@@ -74,6 +74,14 @@ Agentic behavior is **advisory and routing**, not statistical computation or pro
 Later  Real engine adapters
       Only after manifest, gates, and approval lineage remain intact
 ```
+
+## Phase 7B artifacts
+
+| Module | Role |
+|--------|------|
+| `mip.orchestration.router` | `PlannerRoute`, `route_next_actions`, `planner_route_from_summary`, `format_planner_route_for_display` |
+
+The router reads `WorkflowRunManifest` state and returns allowed, blocked, and approval-gated next actions. It does **not** execute workflow steps or enable autonomous planning (`agentic_planning_enabled` remains `false`).
 
 ## Phase 7A artifacts
 
@@ -99,6 +107,7 @@ JSON input
   → run_local_workflow()
   → WorkflowRunSummary
   → build_manifest_from_workflow_summary()   [Phase 7A]
+  → route_next_actions() / planner_route_from_summary()   [Phase 7B]
   → (optional) build_manifest_with_mmm_fixture()
   → TrustReport / UI / report
 ```
