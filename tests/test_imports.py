@@ -87,19 +87,25 @@ def test_reports_imports() -> None:
     assert reports.__doc__ is not None
 
 
+def test_orchestration_imports() -> None:
+    from mip.orchestration import (
+        PlannerRoute,
+        WorkflowRunManifest,
+        build_manifest_from_workflow_summary,
+        build_plan_from_workflow_summary,
+        planner_route_from_summary,
+        route_next_actions,
+    )
+
+    assert WorkflowRunManifest is not None
+    assert PlannerRoute is not None
+    assert callable(build_plan_from_workflow_summary)
+    assert callable(build_manifest_from_workflow_summary)
+    assert callable(route_next_actions)
+    assert callable(planner_route_from_summary)
+
+
 def test_app_imports() -> None:
     import mip.app as app
 
     assert app.__doc__ is not None
-
-
-def test_orchestration_imports() -> None:
-    from mip.orchestration import (
-        WorkflowRunManifest,
-        build_manifest_from_workflow_summary,
-        build_plan_from_workflow_summary,
-    )
-
-    assert WorkflowRunManifest is not None
-    assert callable(build_plan_from_workflow_summary)
-    assert callable(build_manifest_from_workflow_summary)

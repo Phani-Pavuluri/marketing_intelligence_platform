@@ -11,6 +11,11 @@ from pydantic import ValidationError
 from mip.cli.demo import DemoInput
 from mip.llm.explanations import EXECUTION_DISCLAIMER, assert_safe_explanation
 from mip.llm.providers import LLMProviderResponse, MockLLMProvider
+from mip.orchestration.router import (
+    format_planner_route_for_display,
+    planner_route_from_summary,
+    planner_route_with_mmm_fixture,
+)
 from mip.reports.mmm_fixture import build_mmm_fixture_report, mmm_fixture_report_sections
 from mip.workflows.orchestrator import WorkflowRunSummary, run_local_workflow
 
@@ -119,14 +124,16 @@ def summary_sections(
 def summary_sections_with_mmm_fixture(
     summary: WorkflowRunSummary,
     explanation_response: LLMProviderResponse,
-) -> dict[str, str | list[str] | bool | dict[str, str | list[str] | bool]]:
+) -> dict[str, object]:
     """Build workflow summary sections plus optional MMM fixture governance sections."""
-    sections: dict[str, str | list[str] | bool | dict[str, str | list[str] | bool]] = dict(
-        summary_sections(summary, explanation_response)
-    )
+    sections: dict[str, object] = dict(summary_sections(summary, explanation_response))
     mmm_report = build_mmm_fixture_report(summary)
     if mmm_report is not None:
         sections["mmm_fixture_report"] = mmm_fixture_report_sections(mmm_report)
+        route = planner_route_with_mmm_fixture(summary, mmm_report)
+    else:
+        route = planner_route_from_summary(summary)
+    sections["planner_route"] = format_planner_route_for_display(route)
     return sections
 
 
@@ -186,10 +193,52 @@ def main() -> None:
         if isinstance(mmm_fixture, dict):
             _render_mmm_fixture_section(st, mmm_fixture)
 
+        planner_route = sections.get("planner_route")
+        if isinstance(planner_route, dict):
+            _render_planner_route_section(st, planner_route)
+
+
+def _render_planner_route_section(
+    st: Any,
+    planner_route: dict[str, object],
+) -> None:
+    st.divider()
+    st.subheader("Governed Planner / Next Safe Actions")
+    st.caption("Display-only routing guidance. No actions are executed from this panel.")
+    recommended = planner_route.get("recommended_next_action")
+    st.write(f"Recommended next safe action: `{recommended}`")
+    st.write(f"Human approval required: `{planner_route.get('human_approval_required')}`")
+    _render_list_section(st, "Routing notes", planner_route.get("routing_notes", []))
+    _render_list_section(
+        st,
+        "Allowed actions",
+        _format_route_actions(planner_route.get("allowed_actions")),
+    )
+    _render_list_section(
+        st,
+        "Blocked actions",
+        _format_route_actions(planner_route.get("blocked_actions")),
+    )
+    _render_list_section(st, "Safety notes", planner_route.get("safety_notes", []))
+
+
+def _format_route_actions(actions: object) -> list[str]:
+    if not isinstance(actions, list):
+        return []
+    formatted: list[str] = []
+    for item in actions:
+        if not isinstance(item, dict):
+            continue
+        action_type = item.get("action_type", "unknown")
+        status = item.get("status", "unknown")
+        reason = item.get("reason", "")
+        formatted.append(f"{action_type} [{status}]: {reason}")
+    return formatted
+
 
 def _render_mmm_fixture_section(
     st: Any,
-    mmm_fixture: dict[str, str | list[str] | bool],
+    mmm_fixture: dict[str, object],
 ) -> None:
     st.divider()
     st.subheader("MMM Fixture Governance Demo")
