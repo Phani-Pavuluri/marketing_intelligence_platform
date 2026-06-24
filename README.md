@@ -35,6 +35,7 @@ The following is **implemented and tested** in this repository today:
 | **MMM fixture dashboard/report (Phase 6C)** | `mip.reports.mmm_fixture` + Streamlit section show governed MMM placeholder flow—**no model execution** |
 | **Workflow run manifest (Phase 7A)** | `mip.orchestration` defines `WorkflowRunManifest`, deterministic plan/manifest builders, and safety assertions—**no autonomous agents or LLM planning** |
 | **Governed planner/router (Phase 7B)** | `mip.orchestration.router` selects allowed/blocked next actions from manifests—**display and routing only; no execution** |
+| **Human approval checkpoints (Phase 7C)** | `mip.orchestration.approvals` tracks local approval requests and enforces `blocked_until_approved`—**no automatic approval or execution** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy, agentic workflow governance roadmap |
 
 **Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
@@ -110,7 +111,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 6C — MMM fixture dashboard/report demo | **Done** (`mip.reports.mmm_fixture`) |
 | Phase 7A — Workflow run manifest governance | **Done** (`mip.orchestration`) |
 | Phase 7B — Governed planner/router | **Done** (`mip.orchestration.router`) |
-| Phase 7C+ — Human approval checkpoints, engine orchestration | **Planned** |
+| Phase 7C — Human approval checkpoints | **Done** (`mip.orchestration.approvals`) |
+| Phase 8+ — Engine orchestration, measurement gaps | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -167,7 +169,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface: CLI + mock explanation + Streamlit shell + MMM fixture governance demo.** Governed placeholder artifacts only; no engines wired.
 
-**Near-term focus:** Phase 7C human approval checkpoints, then Phase 8 fixture engine orchestration through adapters.
+**Near-term focus:** Phase 8 fixture engine orchestration through adapters, then measurement gap layer.
 
 ## Roadmap
 
@@ -188,9 +190,8 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Next (LLM):**
 
-1. Phase 7C — human approval checkpoints on manifest steps
-2. Phase 8 — engine orchestration through adapters (fixture pins first)
-3. Phase 7 — measurement gap and experiment opportunity layer
+1. Phase 8 — engine orchestration through adapters (fixture pins first)
+2. Phase 7 — measurement gap and experiment opportunity layer
 
 ## Repository layout
 
@@ -216,7 +217,7 @@ marketing_intelligence_platform/
       readiness/      # Dataset profiling and readiness reports
       configs/        # MMM and GeoX config drafts
       orchestrator/   # Local workflow runner and summary
-    orchestration/    # Workflow run manifest, plan builders, planner router (Phase 7A–7B)
+    orchestration/    # Workflow manifest, planner router, approval checkpoints (Phase 7A–7C)
     app/              # Planned: local CLI and Streamlit entry
     dashboard/        # Planned: tier-aware views
     reports/          # Planned: governed report export

@@ -142,6 +142,15 @@ def test_awareness_workflow_has_no_mmm_fixture_section() -> None:
     assert "mmm_fixture_report" not in sections
 
 
+def test_streamlit_sections_include_approval_checkpoints_safely() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    approval_checkpoints = sections["approval_checkpoints"]
+    assert isinstance(approval_checkpoints, dict)
+    assert "safety_note" in approval_checkpoints
+    assert "local demo state only" in str(approval_checkpoints["safety_note"]).lower()
+
+
 def test_public_imports() -> None:
     from mip.app.streamlit_app import main
 

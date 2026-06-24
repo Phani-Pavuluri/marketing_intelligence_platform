@@ -11,11 +11,16 @@ from pydantic import ValidationError
 from mip.cli.demo import DemoInput
 from mip.llm.explanations import EXECUTION_DISCLAIMER, assert_safe_explanation
 from mip.llm.providers import LLMProviderResponse, MockLLMProvider
-from mip.orchestration.router import (
-    format_planner_route_for_display,
-    planner_route_from_summary,
-    planner_route_with_mmm_fixture,
+from mip.orchestration.approvals import (
+    approval_checkpoints_for_route,
+    build_governed_planner_route,
+    format_approval_checkpoints_for_display,
 )
+from mip.orchestration.plans import (
+    build_manifest_from_workflow_summary,
+    build_manifest_with_mmm_fixture,
+)
+from mip.orchestration.router import format_planner_route_for_display
 from mip.reports.mmm_fixture import build_mmm_fixture_report, mmm_fixture_report_sections
 from mip.workflows.orchestrator import WorkflowRunSummary, run_local_workflow
 
@@ -130,10 +135,13 @@ def summary_sections_with_mmm_fixture(
     mmm_report = build_mmm_fixture_report(summary)
     if mmm_report is not None:
         sections["mmm_fixture_report"] = mmm_fixture_report_sections(mmm_report)
-        route = planner_route_with_mmm_fixture(summary, mmm_report)
+        manifest = build_manifest_with_mmm_fixture(summary, mmm_report)
     else:
-        route = planner_route_from_summary(summary)
+        manifest = build_manifest_from_workflow_summary(summary)
+    route, approvals = build_governed_planner_route(manifest)
     sections["planner_route"] = format_planner_route_for_display(route)
+    checkpoints = approval_checkpoints_for_route(manifest, route, approvals)
+    sections["approval_checkpoints"] = format_approval_checkpoints_for_display(checkpoints)
     return sections
 
 
@@ -196,6 +204,34 @@ def main() -> None:
         planner_route = sections.get("planner_route")
         if isinstance(planner_route, dict):
             _render_planner_route_section(st, planner_route)
+
+        approval_checkpoints = sections.get("approval_checkpoints")
+        if isinstance(approval_checkpoints, dict):
+            _render_approval_checkpoints_section(st, approval_checkpoints)
+
+
+def _render_approval_checkpoints_section(
+    st: Any,
+    approval_checkpoints: dict[str, object],
+) -> None:
+    st.divider()
+    st.subheader("Human Approval Checkpoints")
+    st.caption(str(approval_checkpoints.get("safety_note", "")))
+    checkpoints = approval_checkpoints.get("checkpoints", [])
+    if not isinstance(checkpoints, list) or not checkpoints:
+        st.write("No approval checkpoints for this workflow.")
+        return
+    for checkpoint in checkpoints:
+        if not isinstance(checkpoint, dict):
+            continue
+        st.write(
+            f"- `{checkpoint.get('action_type')}` "
+            f"[{checkpoint.get('approval_status')}] "
+            f"blocked_until_approved={checkpoint.get('blocked_until_approved')}"
+        )
+        st.write(f"  Reason: {checkpoint.get('reason')}")
+        if checkpoint.get("required_approver_role"):
+            st.write(f"  Required approver role: `{checkpoint.get('required_approver_role')}`")
 
 
 def _render_planner_route_section(
