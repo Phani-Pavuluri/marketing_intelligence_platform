@@ -285,6 +285,21 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Sibling-repo export shape validated and wired through existing adapter governance without live engines.
 
+## 19c. Phase 8C: Read-only sibling export hooks
+
+**Status: implemented** in `mip.adapters.sibling_export_hooks` and Streamlit **Read-Only Sibling Export Hook** panel (display-only).
+
+**Deliver:**
+
+- `SiblingExportDirectoryRef`, `SiblingExportDiscoveryResult`, `discover_sibling_export_files`
+- `load_sibling_exports_from_directory`, `register_sibling_exports_from_directory`
+- Explicit directory → JSON discovery → Phase 8B schema validation → adapter governance path
+- Required labels: `readonly_sibling_export_hook_only`, `static_export_file_only`, `not_live_engine_execution`
+
+**Not in scope:** sibling Python imports, subprocess, file watching, model training, ROI/lift claims.
+
+**Exit:** Static export directories can be scanned and imported read-only without executing sibling code.
+
 ## 20. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**

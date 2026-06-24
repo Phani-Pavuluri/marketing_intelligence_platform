@@ -8,8 +8,15 @@ from typing import Any
 
 from pydantic import ValidationError
 
+from mip.adapters.sibling_export_hooks import (
+    build_default_sibling_export_hook_sections,
+    default_sample_export_directory,
+    register_sibling_exports_from_directory,
+    sibling_export_discovery_sections,
+)
 from mip.adapters.sibling_fixtures import build_default_sibling_fixture_import_sections
 from mip.cli.demo import DemoInput
+from mip.evidence.registry import EvidenceRegistry
 from mip.llm.explanations import EXECUTION_DISCLAIMER, assert_safe_explanation
 from mip.llm.providers import LLMProviderResponse, MockLLMProvider
 from mip.orchestration.approvals import (
@@ -152,6 +159,7 @@ def summary_sections_with_mmm_fixture(
     sections["approval_checkpoints"] = format_approval_checkpoints_for_display(checkpoints)
     sections["fixture_engine_results"] = _fixture_engine_sections(summary)
     sections["sibling_fixture_imports"] = build_default_sibling_fixture_import_sections()
+    sections["sibling_export_hook"] = build_default_sibling_export_hook_sections()
     return sections
 
 
@@ -175,6 +183,28 @@ def main() -> None:
         "Deterministic intake, readiness, and config draft review. "
         "No engine execution or real LLM APIs."
     )
+
+    with st.expander("Read-Only Sibling Export Hook", expanded=False):
+        st.caption(
+            "Static export file import only. No live sibling repo execution."
+        )
+        default_path = str(default_sample_export_directory())
+        export_dir = st.text_input("Sibling export directory", value=default_path)
+        if st.button("Discover sibling exports", key="discover_sibling_exports"):
+            from mip.adapters.sibling_export_hooks import SiblingExportDirectoryRef
+
+            directory_ref = SiblingExportDirectoryRef(directory_path=export_dir)
+            discovery, registrations = register_sibling_exports_from_directory(
+                EvidenceRegistry(),
+                directory_ref,
+            )
+            hook_sections = sibling_export_discovery_sections(discovery, registrations)
+            _render_sibling_export_hook_section(st, hook_sections)
+        else:
+            _render_sibling_export_hook_section(
+                st,
+                build_default_sibling_export_hook_sections(),
+            )
 
     with st.expander("Pinned Sibling-Repo Fixture Import", expanded=False):
         st.caption(
@@ -253,6 +283,37 @@ def main() -> None:
             for item in sibling_fixture_imports:
                 if isinstance(item, dict):
                     _render_sibling_fixture_import_section(st, item)
+
+        sibling_export_hook = sections.get("sibling_export_hook")
+        if isinstance(sibling_export_hook, dict):
+            st.divider()
+            st.subheader("Read-Only Sibling Export Hook")
+            st.caption("Static export file import only; no live sibling repo execution.")
+            _render_sibling_export_hook_section(st, sibling_export_hook)
+
+
+def _render_sibling_export_hook_section(
+    st: Any,
+    hook_sections: dict[str, object],
+) -> None:
+    st.write(f"Directory path: `{hook_sections.get('directory_path')}`")
+    st.write(f"Hook status: `{hook_sections.get('status')}`")
+    _render_list_section(st, "Files discovered", hook_sections.get("discovered_file_paths", []))
+    _render_list_section(st, "Labels", hook_sections.get("labels", []))
+    _render_list_section(st, "Validation warnings", hook_sections.get("validation_warnings", []))
+    _render_list_section(st, "Blocking reasons", hook_sections.get("blocking_reasons", []))
+    registrations = hook_sections.get("registration_results", [])
+    if isinstance(registrations, list):
+        for item in registrations:
+            if not isinstance(item, dict):
+                continue
+            st.write(f"- `{item.get('source_path')}` [{item.get('status')}]")
+            st.write(f"  Fixture id: `{item.get('export_fixture_id')}`")
+            st.write(f"  Registered in registry: `{item.get('registered_in_registry')}`")
+            st.write(f"  TrustReport: `{item.get('trust_report_marker')}`")
+            _render_list_section(st, "Warnings", item.get("warnings", []))
+            _render_list_section(st, "Blocking reasons", item.get("blocking_reasons", []))
+    st.info(str(hook_sections.get("disclaimer", "")))
 
 
 def _render_sibling_fixture_import_section(

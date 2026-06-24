@@ -91,6 +91,14 @@ Fixture engine orchestration wires manifest → planner/router → approval chec
 
 Pinned sibling-repo fixture imports read committed JSON exports only (no live repo connection). Exports validate structural metadata, convert to `AdapterOutputBundle`, and flow through existing adapter governance. Required labels include `pinned_sibling_repo_fixture_only` and `not_live_engine_execution`. Blocked/invalid fixtures produce blocked `TrustReport` values and are not registered as usable evidence.
 
+## Phase 8C artifacts
+
+| Module | Role |
+|--------|------|
+| `mip.adapters.sibling_export_hooks` | `SiblingExportDirectoryRef`, `discover_sibling_export_files`, `register_sibling_exports_from_directory` |
+
+Read-only sibling export hooks scan explicit local directories for `.json` export files, validate via Phase 8B contracts, and register through adapter governance. Required labels include `readonly_sibling_export_hook_only` and `static_export_file_only`. No sibling code imports, subprocess execution, or file watching.
+
 ## Phase 7C artifacts
 
 | Module | Role |
@@ -135,6 +143,7 @@ JSON input
   → enforce_approval_for_route() / approval checkpoints   [Phase 7C]
   → orchestrate_*_fixture_engine()                          [Phase 8A]
   → load_sibling_fixture_export() / register_sibling_fixture_export()   [Phase 8B]
+  → discover_sibling_export_files() / register_sibling_exports_from_directory()   [Phase 8C]
   → (optional) build_manifest_with_mmm_fixture()
   → TrustReport / UI / report
 ```
