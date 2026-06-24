@@ -142,6 +142,22 @@ def test_awareness_workflow_has_no_mmm_fixture_section() -> None:
     assert "mmm_fixture_report" not in sections
 
 
+def test_streamlit_sections_include_fixture_engine_result_safely() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    results = sections["fixture_engine_results"]
+    assert isinstance(results, list)
+    assert results
+    first = results[0]
+    assert isinstance(first, dict)
+    assert first["engine_kind"] == "mmm"
+    assert first["status"] in ("completed_placeholder", "approval_required")
+    labels = first["labels"]
+    assert isinstance(labels, list)
+    assert "fixture_engine_orchestration_only" in labels
+    assert "not_real_engine_execution" in labels
+
+
 def test_streamlit_sections_include_approval_checkpoints_safely() -> None:
     summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
     sections = summary_sections_with_mmm_fixture(summary, explanation)

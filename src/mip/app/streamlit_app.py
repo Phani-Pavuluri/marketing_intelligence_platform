@@ -16,12 +16,19 @@ from mip.orchestration.approvals import (
     build_governed_planner_route,
     format_approval_checkpoints_for_display,
 )
+from mip.orchestration.engine_fixtures import (
+    fixture_engine_result_sections,
+    orchestrate_geox_fixture_engine,
+    orchestrate_mmm_fixture_engine,
+)
 from mip.orchestration.plans import (
     build_manifest_from_workflow_summary,
     build_manifest_with_mmm_fixture,
 )
 from mip.orchestration.router import format_planner_route_for_display
 from mip.reports.mmm_fixture import build_mmm_fixture_report, mmm_fixture_report_sections
+from mip.workflows.configs.geox import GeoXConfigDraft
+from mip.workflows.configs.mmm import MMMConfigDraft
 from mip.workflows.orchestrator import WorkflowRunSummary, run_local_workflow
 
 _FORBIDDEN_OUTPUT_PHRASES = (
@@ -142,7 +149,18 @@ def summary_sections_with_mmm_fixture(
     sections["planner_route"] = format_planner_route_for_display(route)
     checkpoints = approval_checkpoints_for_route(manifest, route, approvals)
     sections["approval_checkpoints"] = format_approval_checkpoints_for_display(checkpoints)
+    sections["fixture_engine_results"] = _fixture_engine_sections(summary)
     return sections
+
+
+def _fixture_engine_sections(summary: WorkflowRunSummary) -> list[dict[str, object]]:
+    """Build display sections for governed fixture engine orchestration attempts."""
+    results: list[dict[str, object]] = []
+    if isinstance(summary.config_draft, MMMConfigDraft):
+        results.append(fixture_engine_result_sections(orchestrate_mmm_fixture_engine(summary)))
+    if isinstance(summary.config_draft, GeoXConfigDraft):
+        results.append(fixture_engine_result_sections(orchestrate_geox_fixture_engine(summary)))
+    return results
 
 
 def main() -> None:
@@ -208,6 +226,50 @@ def main() -> None:
         approval_checkpoints = sections.get("approval_checkpoints")
         if isinstance(approval_checkpoints, dict):
             _render_approval_checkpoints_section(st, approval_checkpoints)
+
+        fixture_engine_results = sections.get("fixture_engine_results")
+        if isinstance(fixture_engine_results, list):
+            for item in fixture_engine_results:
+                if isinstance(item, dict):
+                    _render_fixture_engine_section(st, item)
+
+
+def _render_fixture_engine_section(
+    st: Any,
+    fixture_engine: dict[str, object],
+) -> None:
+    st.divider()
+    st.subheader("Fixture Engine Orchestration")
+    st.caption("Fixture-only orchestration through governed adapters. No real engine execution.")
+    st.write(f"Engine kind: `{fixture_engine.get('engine_kind')}`")
+    st.write(f"Run status: `{fixture_engine.get('status')}`")
+    st.write(f"Approval status: `{fixture_engine.get('approval_status')}`")
+    _render_list_section(st, "Labels", fixture_engine.get("labels", []))
+    _render_list_section(st, "Warnings", fixture_engine.get("warnings", []))
+    _render_list_section(st, "Blocking reasons", fixture_engine.get("blocking_reasons", []))
+    for title, key in (
+        ("Adapter input ref", "adapter_input_ref"),
+        ("Adapter output ref", "adapter_output_ref"),
+        ("Governance artifact ref", "governance_artifact_ref"),
+        ("TrustReport ref", "trust_report_ref"),
+    ):
+        ref = fixture_engine.get(key)
+        if isinstance(ref, dict):
+            st.write(
+                f"{title}: `{ref.get('artifact_type')}` / `{ref.get('artifact_id')}`"
+            )
+    tier = fixture_engine.get("trust_report_confidence_tier")
+    if tier:
+        st.write(f"TrustReport confidence tier: `{tier}`")
+    checkpoint = fixture_engine.get("approval_checkpoint")
+    if isinstance(checkpoint, dict):
+        st.write(
+            "Approval checkpoint: "
+            f"`{checkpoint.get('action_type')}` "
+            f"[{checkpoint.get('approval_status')}] "
+            f"blocked_until_approved={checkpoint.get('blocked_until_approved')}"
+        )
+    st.info(str(fixture_engine.get("disclaimer", "")))
 
 
 def _render_approval_checkpoints_section(

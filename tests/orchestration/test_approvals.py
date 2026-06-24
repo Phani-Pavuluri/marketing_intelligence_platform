@@ -17,7 +17,11 @@ from mip.orchestration.approvals import (
     enforce_approval_for_route,
     is_action_approved,
 )
-from mip.orchestration.manifest import HumanApprovalRequirement, WorkflowActionType, WorkflowRunManifest
+from mip.orchestration.manifest import (
+    HumanApprovalRequirement,
+    WorkflowActionType,
+    WorkflowRunManifest,
+)
 from mip.orchestration.plans import build_manifest_from_workflow_summary
 from mip.orchestration.router import PlannerDecisionStatus, route_next_actions
 from mip.workflows.intake import BusinessObjective, BusinessObjectiveType

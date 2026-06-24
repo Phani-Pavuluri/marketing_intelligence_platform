@@ -68,12 +68,20 @@ Agentic behavior is **advisory and routing**, not statistical computation or pro
 7C  Human approval checkpoints (this phase)
       ApprovalRequest, blocked_until_approved enforcement, display-only UI status
 
-8   Fixture engine orchestration through adapters
-      Orchestrate placeholder/MMM fixture paths; still no real engine claims
+8   Fixture engine orchestration through adapters (this phase)
+      orchestrate_mmm_fixture_engine / orchestrate_geox_fixture_engine
 
 Later  Real engine adapters
       Only after manifest, gates, and approval lineage remain intact
 ```
+
+## Phase 8A artifacts
+
+| Module | Role |
+|--------|------|
+| `mip.orchestration.engine_fixtures` | `FixtureEngineRunResult`, `orchestrate_mmm_fixture_engine`, `orchestrate_geox_fixture_engine` |
+
+Fixture engine orchestration wires manifest → planner/router → approval checkpoints → adapter input/output placeholders → governance artifacts → TrustReport. All outputs are labeled `fixture_engine_orchestration_only` and `not_real_engine_execution`.
 
 ## Phase 7C artifacts
 
@@ -117,6 +125,7 @@ JSON input
   → build_manifest_from_workflow_summary()   [Phase 7A]
   → route_next_actions() / planner_route_from_summary()   [Phase 7B]
   → enforce_approval_for_route() / approval checkpoints   [Phase 7C]
+  → orchestrate_*_fixture_engine()                          [Phase 8A]
   → (optional) build_manifest_with_mmm_fixture()
   → TrustReport / UI / report
 ```
