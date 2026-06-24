@@ -1,0 +1,41 @@
+"""Smoke tests: package and subpackages import cleanly."""
+
+import importlib
+import pkgutil
+
+import mip
+
+
+def test_mip_version() -> None:
+    assert mip.__version__ == "0.1.0"
+
+
+def test_subpackages_import() -> None:
+    subpackages = [
+        "mip.contracts",
+        "mip.evidence",
+        "mip.experimentation",
+        "mip.mmm",
+        "mip.optimization",
+        "mip.orchestration",
+        "mip.trust",
+        "mip.evaluation",
+    ]
+    for name in subpackages:
+        mod = importlib.import_module(name)
+        assert mod.__doc__ is not None
+
+
+def test_discoverable_subpackages() -> None:
+    names = {m.name for m in pkgutil.iter_modules(mip.__path__, mip.__name__ + ".")}
+    expected = {
+        "mip.contracts",
+        "mip.evidence",
+        "mip.experimentation",
+        "mip.mmm",
+        "mip.optimization",
+        "mip.orchestration",
+        "mip.trust",
+        "mip.evaluation",
+    }
+    assert expected.issubset(names)
