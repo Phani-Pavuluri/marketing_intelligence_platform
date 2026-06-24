@@ -24,9 +24,11 @@ No autonomous agents or production decision automation in early phases.
 
 **Phase 5B (done):** Local CLI demo runner in `mip.cli.demo` via `mip-demo` reading JSON input and printing/saving governed summaries. No Streamlit, LLM, or engine execution.
 
+**Phase 5C (done):** Deterministic `MockLLMProvider` in `mip.llm.providers` explaining `WorkflowRunSummary` via `mip.llm.explanations`. No real LLM APIs, Streamlit, or engine execution.
+
 **Platform prerequisites (largely done):** contracts, gates, `TrustReport` assembly, evidence registry, calibration audit, model calibration readiness.
 
-**Not started:** `MockLLMProvider`, Streamlit shell, dashboards, LLM providers.
+**Not started:** Streamlit shell, real LLM providers (Ollama/cloud), dashboards.
 
 ## 3. Current agreed defaults
 
@@ -136,10 +138,15 @@ No autonomous agents or production decision automation in early phases.
 
 ## 11. Phase 5C: MockLLM conversational explanation wrapper
 
+**Status: implemented** in `mip.llm.providers` and `mip.llm.explanations`.
+
 **Deliver:**
 
-- `MockLLMProvider` explaining `WorkflowRunSummary` and `TrustReport` context deterministically
-- No cloud or Ollama providers yet
+- `LLMProviderName`, `LLMProviderResponse`, `MockLLMProvider`
+- `explain_workflow_summary`, `explain_blockers`, `explain_next_steps`
+- Deterministic conversational text from `WorkflowRunSummary` fields only
+- Execution disclaimer and forbidden-phrase safety checks
+- No cloud, Ollama, or engine execution
 
 **Exit:** Conversational explanation over orchestrator output without real LLM APIs.
 
