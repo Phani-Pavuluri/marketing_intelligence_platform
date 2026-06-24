@@ -99,6 +99,14 @@ Pinned sibling-repo fixture imports read committed JSON exports only (no live re
 
 Read-only sibling export hooks scan explicit local directories for `.json` export files, validate via Phase 8B contracts, and register through adapter governance. Required labels include `readonly_sibling_export_hook_only` and `static_export_file_only`. No sibling code imports, subprocess execution, or file watching.
 
+## Phase 8D artifacts
+
+| Module | Role |
+|--------|------|
+| `mip.adapters.sibling_compatibility` | `SiblingRepoExportConfig`, `check_sibling_repo_compatibility`, `build_sibling_repo_compatibility_registry` |
+
+Sibling repo compatibility registry resolves configured export directories, validates schema/source/engine expectations before Phase 8C discovery, and blocks registration when incompatible. Required labels include `sibling_repo_compatibility_check_only` and `readonly_export_contract_only`.
+
 ## Phase 7C artifacts
 
 | Module | Role |
@@ -144,6 +152,7 @@ JSON input
   → orchestrate_*_fixture_engine()                          [Phase 8A]
   → load_sibling_fixture_export() / register_sibling_fixture_export()   [Phase 8B]
   → discover_sibling_export_files() / register_sibling_exports_from_directory()   [Phase 8C]
+  → check_sibling_repo_compatibility() / register_exports_for_compatible_repo()   [Phase 8D]
   → (optional) build_manifest_with_mmm_fixture()
   → TrustReport / UI / report
 ```

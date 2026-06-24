@@ -201,6 +201,20 @@ def test_streamlit_sections_include_sibling_export_hook_safely() -> None:
     assert "budget recommendation" not in combined
 
 
+def test_streamlit_sections_include_sibling_compatibility_safely() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    compatibility = sections["sibling_compatibility"]
+    assert isinstance(compatibility, dict)
+    assert compatibility["aggregate_status"]
+    reports = compatibility["reports"]
+    assert isinstance(reports, list)
+    assert reports
+    combined = str(compatibility).lower()
+    assert "sibling_repo_compatibility_check_only" in combined
+    assert "actual roi" not in combined
+
+
 def test_public_imports() -> None:
     from mip.app.streamlit_app import main
 

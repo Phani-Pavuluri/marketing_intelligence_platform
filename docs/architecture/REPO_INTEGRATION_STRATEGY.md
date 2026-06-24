@@ -170,6 +170,8 @@ Failed/blocked adapter outputs produce blocked `TrustReport` values and are not 
 
 **Phase 8C (implemented):** `mip.adapters.sibling_export_hooks` discovers `.json` files from explicitly provided sibling export directories (no symlinks by default), loads each through the Phase 8B schema, and registers valid exports through the same governance path. Malformed JSON and expectation mismatches produce blocked/invalid hook results without exception leakage.
 
+**Phase 8D (implemented):** `mip.adapters.sibling_compatibility` adds a governed `SiblingRepoExportConfig` registry that resolves repo export paths, checks schema/source/engine compatibility via Phase 8C discovery, and only registers exports when status is `compatible` or `compatible_with_warnings`. No sibling code execution.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -194,7 +196,7 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/` | Placeholder stubs; logic stays in engine repos |
 | `orchestration/` | Phase 7A–7C manifest, planner/router, approvals; Phase 8A fixture engine orchestration |
-| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A fixture orchestration via `engine_fixtures`; Phase 8B pinned sibling fixture imports via `sibling_fixtures`; Phase 8C read-only export hooks via `sibling_export_hooks` |
+| `adapters/` | **Interface contracts + governance wiring implemented**; Phase 8A–8D fixture/export/compatibility paths via `engine_fixtures`, `sibling_fixtures`, `sibling_export_hooks`, `sibling_compatibility` |
 | `reports/` | **MMM fixture governance report implemented** (`mmm_fixture.py`); HTML export deferred |
 | `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
 | `dashboard/`, `reports/` | **Not yet created** |

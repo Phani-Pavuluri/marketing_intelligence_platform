@@ -8,6 +8,7 @@ from typing import Any
 
 from pydantic import ValidationError
 
+from mip.adapters.sibling_compatibility import build_default_sibling_compatibility_sections
 from mip.adapters.sibling_export_hooks import (
     build_default_sibling_export_hook_sections,
     default_sample_export_directory,
@@ -160,6 +161,7 @@ def summary_sections_with_mmm_fixture(
     sections["fixture_engine_results"] = _fixture_engine_sections(summary)
     sections["sibling_fixture_imports"] = build_default_sibling_fixture_import_sections()
     sections["sibling_export_hook"] = build_default_sibling_export_hook_sections()
+    sections["sibling_compatibility"] = build_default_sibling_compatibility_sections()
     return sections
 
 
@@ -183,6 +185,13 @@ def main() -> None:
         "Deterministic intake, readiness, and config draft review. "
         "No engine execution or real LLM APIs."
     )
+
+    with st.expander("Sibling Repo Compatibility", expanded=False):
+        st.caption("Compatibility check only. No live sibling repo execution.")
+        _render_sibling_compatibility_section(
+            st,
+            build_default_sibling_compatibility_sections(),
+        )
 
     with st.expander("Read-Only Sibling Export Hook", expanded=False):
         st.caption(
@@ -290,6 +299,43 @@ def main() -> None:
             st.subheader("Read-Only Sibling Export Hook")
             st.caption("Static export file import only; no live sibling repo execution.")
             _render_sibling_export_hook_section(st, sibling_export_hook)
+
+        sibling_compatibility = sections.get("sibling_compatibility")
+        if isinstance(sibling_compatibility, dict):
+            st.divider()
+            st.subheader("Sibling Repo Compatibility")
+            st.caption("Compatibility check only; no live sibling repo execution.")
+            _render_sibling_compatibility_section(st, sibling_compatibility)
+
+
+def _render_sibling_compatibility_section(
+    st: Any,
+    compatibility_sections: dict[str, object],
+) -> None:
+    st.write(f"Aggregate status: `{compatibility_sections.get('aggregate_status')}`")
+    _render_list_section(st, "Warnings", compatibility_sections.get("warnings", []))
+    _render_list_section(st, "Blocking reasons", compatibility_sections.get("blocking_reasons", []))
+    reports = compatibility_sections.get("reports", [])
+    if isinstance(reports, list):
+        for report in reports:
+            if not isinstance(report, dict):
+                continue
+            st.write(f"Repo: `{report.get('repo_name')}` [{report.get('status')}]")
+            st.write(f"Repo path: `{report.get('repo_path')}`")
+            st.write(f"Resolved export directory: `{report.get('resolved_export_directory')}`")
+            st.write(f"Expected schema version: `{report.get('expected_schema_version')}`")
+            _render_list_section(
+                st,
+                "Source commit markers found",
+                report.get("source_commit_markers_found", []),
+            )
+            st.write(f"Discovered exports: `{report.get('discovered_export_count')}`")
+            st.write(f"Compatible exports: `{report.get('compatible_export_count')}`")
+            st.write(f"Incompatible exports: `{report.get('incompatible_export_count')}`")
+            _render_list_section(st, "Labels", report.get("labels", []))
+            _render_list_section(st, "Warnings", report.get("warnings", []))
+            _render_list_section(st, "Blocking reasons", report.get("blocking_reasons", []))
+    st.info(str(compatibility_sections.get("disclaimer", "")))
 
 
 def _render_sibling_export_hook_section(

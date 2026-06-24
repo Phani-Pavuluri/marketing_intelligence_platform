@@ -300,6 +300,22 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Static export directories can be scanned and imported read-only without executing sibling code.
 
+## 19d. Phase 8D: Sibling repo compatibility registry
+
+**Status: implemented** in `mip.adapters.sibling_compatibility` and Streamlit **Sibling Repo Compatibility** panel (display-only).
+
+**Deliver:**
+
+- `SiblingRepoExportConfig`, `SiblingRepoCompatibilityReport`, `SiblingRepoCompatibilityRegistry`
+- `check_sibling_repo_compatibility`, `build_sibling_repo_compatibility_registry`
+- `compatibility_report_to_directory_ref`, `register_exports_for_compatible_repo`
+- Config → path resolution → Phase 8C discovery → Phase 8B validation → adapter governance
+- Required labels: `sibling_repo_compatibility_check_only`, `readonly_export_contract_only`
+
+**Not in scope:** sibling Python imports, subprocess, live engine execution, ROI/lift claims.
+
+**Exit:** MIP can verify where sibling exports should be read from and whether they are compatible before import.
+
 ## 20. Phase 6: MMM-focused dashboard/report demo (full product)
 
 **Deliver:**
