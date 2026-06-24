@@ -78,6 +78,7 @@ def test_cli_imports() -> None:
 def test_adapters_imports() -> None:
     import mip.adapters as adapters
     from mip.adapters import (
+        check_sibling_repo_compatibility,
         discover_sibling_export_files,
         load_sibling_exports_from_directory,
         register_sibling_exports_from_directory,
@@ -86,6 +87,7 @@ def test_adapters_imports() -> None:
 
     assert adapters.__doc__ is not None
     assert callable(register_sibling_fixture_export)
+    assert callable(check_sibling_repo_compatibility)
     assert callable(discover_sibling_export_files)
     assert callable(load_sibling_exports_from_directory)
     assert callable(register_sibling_exports_from_directory)
