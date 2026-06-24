@@ -167,6 +167,25 @@ def test_streamlit_sections_include_approval_checkpoints_safely() -> None:
     assert "local demo state only" in str(approval_checkpoints["safety_note"]).lower()
 
 
+def test_streamlit_sections_include_sibling_fixture_imports_safely() -> None:
+    summary, explanation = run_streamlit_workflow_from_json(_long_history_json())
+    sections = summary_sections_with_mmm_fixture(summary, explanation)
+    sibling_imports = sections["sibling_fixture_imports"]
+    assert isinstance(sibling_imports, list)
+    assert len(sibling_imports) == 2
+    mmm_item = sibling_imports[0]
+    assert isinstance(mmm_item, dict)
+    assert mmm_item["source_repo"] == "mmm"
+    assert mmm_item["engine_kind"] == "mmm"
+    labels = mmm_item["labels"]
+    assert isinstance(labels, list)
+    assert "pinned_sibling_repo_fixture_only" in labels
+    assert "not_live_engine_execution" in labels
+    combined = str(sibling_imports).lower()
+    assert "actual roi" not in combined
+    assert "budget recommendation" not in combined
+
+
 def test_public_imports() -> None:
     from mip.app.streamlit_app import main
 

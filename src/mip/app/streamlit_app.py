@@ -8,6 +8,7 @@ from typing import Any
 
 from pydantic import ValidationError
 
+from mip.adapters.sibling_fixtures import build_default_sibling_fixture_import_sections
 from mip.cli.demo import DemoInput
 from mip.llm.explanations import EXECUTION_DISCLAIMER, assert_safe_explanation
 from mip.llm.providers import LLMProviderResponse, MockLLMProvider
@@ -150,6 +151,7 @@ def summary_sections_with_mmm_fixture(
     checkpoints = approval_checkpoints_for_route(manifest, route, approvals)
     sections["approval_checkpoints"] = format_approval_checkpoints_for_display(checkpoints)
     sections["fixture_engine_results"] = _fixture_engine_sections(summary)
+    sections["sibling_fixture_imports"] = build_default_sibling_fixture_import_sections()
     return sections
 
 
@@ -173,6 +175,14 @@ def main() -> None:
         "Deterministic intake, readiness, and config draft review. "
         "No engine execution or real LLM APIs."
     )
+
+    with st.expander("Pinned Sibling-Repo Fixture Import", expanded=False):
+        st.caption(
+            "Display-only import of pinned local fixture exports. "
+            "No live engine execution or sibling-repo connection."
+        )
+        for item in build_default_sibling_fixture_import_sections():
+            _render_sibling_fixture_import_section(st, item)
 
     with st.expander("Sample JSON"):
         st.code(SAMPLE_JSON, language="json")
@@ -232,6 +242,47 @@ def main() -> None:
             for item in fixture_engine_results:
                 if isinstance(item, dict):
                     _render_fixture_engine_section(st, item)
+
+        sibling_fixture_imports = sections.get("sibling_fixture_imports")
+        if isinstance(sibling_fixture_imports, list):
+            st.divider()
+            st.subheader("Pinned Sibling-Repo Fixture Import")
+            st.caption(
+                "Pinned fixture import only; no live engine execution or real model results."
+            )
+            for item in sibling_fixture_imports:
+                if isinstance(item, dict):
+                    _render_sibling_fixture_import_section(st, item)
+
+
+def _render_sibling_fixture_import_section(
+    st: Any,
+    sibling_fixture: dict[str, object],
+) -> None:
+    st.write(f"Fixture id: `{sibling_fixture.get('fixture_id')}`")
+    st.write(f"Source repo: `{sibling_fixture.get('source_repo')}`")
+    st.write(f"Source commit marker: `{sibling_fixture.get('source_commit_marker')}`")
+    st.write(f"Engine kind: `{sibling_fixture.get('engine_kind')}`")
+    st.write(f"Validation status: `{sibling_fixture.get('validation_status')}`")
+    _render_list_section(st, "Labels", sibling_fixture.get("labels", []))
+    adapter_output_ref = sibling_fixture.get("adapter_output_ref")
+    if isinstance(adapter_output_ref, dict):
+        st.write(
+            "Adapter output ref: "
+            f"`{adapter_output_ref.get('artifact_type')}` / "
+            f"`{adapter_output_ref.get('artifact_id')}`"
+        )
+    governance_ref = sibling_fixture.get("governance_artifact_ref")
+    if isinstance(governance_ref, dict):
+        st.write(
+            "Governance artifact ref: "
+            f"`{governance_ref.get('artifact_type')}` / "
+            f"`{governance_ref.get('artifact_id')}`"
+        )
+    st.write(f"TrustReport verdict: `{sibling_fixture.get('trust_report_verdict')}`")
+    _render_list_section(st, "Warnings", sibling_fixture.get("warnings", []))
+    _render_list_section(st, "Blocking reasons", sibling_fixture.get("blocking_reasons", []))
+    st.info(str(sibling_fixture.get("disclaimer", "")))
 
 
 def _render_fixture_engine_section(

@@ -77,8 +77,11 @@ def test_cli_imports() -> None:
 
 def test_adapters_imports() -> None:
     import mip.adapters as adapters
+    from mip.adapters import load_sibling_fixture_export, register_sibling_fixture_export
 
     assert adapters.__doc__ is not None
+    assert callable(load_sibling_fixture_export)
+    assert callable(register_sibling_fixture_export)
 
 
 def test_reports_imports() -> None:

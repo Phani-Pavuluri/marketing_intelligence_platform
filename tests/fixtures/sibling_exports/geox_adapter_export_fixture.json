@@ -1,0 +1,26 @@
+{
+  "fixture_id": "geox-export-fixture-001",
+  "source_repo": "panel_exp",
+  "source_commit_marker": "panel_exp@fixture-pin-8b-001",
+  "export_schema_version": "1.0.0",
+  "artifact_kind": "geox_adapter_output",
+  "engine_kind": "geox",
+  "config_marker": "draft:experiment_design:geox_experiment_design:fixture-001",
+  "validation_status": "validated_fixture",
+  "labels": [
+    "pinned_sibling_repo_fixture_only",
+    "not_live_engine_execution",
+    "not_real_model_result",
+    "diagnostic_only",
+    "not_decision_ready"
+  ],
+  "warnings": [
+    "Pinned GeoX sibling-repo export fixture only; no live engine execution."
+  ],
+  "blocking_reasons": [],
+  "disclaimer": "Pinned sibling-repo fixture import only. Structural metadata placeholder; not a real model result and not decision-ready.",
+  "payload": {
+    "placeholder_marker": "non_inferential_diagnostic_placeholder",
+    "workflow_notes": "Pinned GeoX sibling export fixture only; no experiment estimates or lift claims."
+  }
+}
