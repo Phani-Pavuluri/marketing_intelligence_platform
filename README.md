@@ -23,9 +23,10 @@ The following is **implemented and tested** in this repository today:
 | **Calibration audit** | Trace and audit calibration signals against source evidence |
 | **Model calibration readiness** | Evaluate whether a model has compatible, non-blocked calibration signals |
 | **LLM safety layer (Phase 1)** | Deterministic intent classification, confidence-tier action policies, and `TrustReport` explanation context—**no real LLM calls** |
+| **Objective intake framework (Phase 2)** | Deterministic mapping of business objectives to data requirements, declared availability checks, and feasibility reports—**no LLM calls or dataframe inspection** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy |
 
-**Not implemented yet:** engine adapters, MMM/GeoX execution, workflows, `MockLLMProvider`, Streamlit or FastAPI apps, dashboards, reports, cloud or Ollama LLM providers, APIs, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
+**Not implemented yet:** engine adapters, MMM/GeoX execution, workflow orchestration graphs, `MockLLMProvider`, Streamlit or FastAPI apps, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical data diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
 
 ## Target product experience
 
@@ -86,7 +87,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 |-------|--------|
 | Phase 0 — Documentation and scope lock | **Done** |
 | Phase 1 — Deterministic safety and explanation context | **Done** (`mip.llm`: intents, safety rules, `context_from_trust_report`) |
-| Phase 2+ — Intake, readiness, config drafts, providers, app | **Planned** |
+| Phase 2 — Business objective intake and data requirements | **Done** (`mip.workflows.intake`: objectives, requirements, availability, feasibility) |
+| Phase 3+ — Data readiness, config drafts, providers, app | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -139,11 +141,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 ## Current status
 
-**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1 deterministic safety are implemented with passing tests.
+**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, LLM Phase 1 deterministic safety, and LLM Phase 2 objective/data feasibility framework are implemented with passing tests.
 
-**Product surface: not started.** No Streamlit app, no `mip demo` command, no adapters wired to sibling engine repos, no workflow orchestration, no dashboards or reports.
+**Product surface: not started.** No Streamlit app, no `mip demo` command, no adapters wired to sibling engine repos, no workflow orchestration graphs, no dashboards or reports.
 
-**Near-term focus:** adapter interfaces and contract tests, then LLM Phase 2 (business objective intake and data requirement framework).
+**Near-term focus:** LLM Phase 3 (data readiness diagnostics from uploads), then adapter interfaces and contract tests.
 
 ## Roadmap
 
@@ -164,9 +166,8 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Next (LLM):**
 
-1. Phase 2 — business objective intake and data requirement framework
-2. Phase 3 — data readiness diagnostics integration
-3. Phase 4–5 — config draft schemas and `MockLLMProvider`
+1. Phase 3 — data readiness diagnostics integration
+2. Phase 4–5 — config draft schemas and `MockLLMProvider`
 
 ## Repository layout
 
@@ -187,8 +188,8 @@ marketing_intelligence_platform/
     evaluation/       # Release gates
     trust/            # TrustReport assembly and routing
     llm/              # Deterministic safety and explanation context (Phase 1)
-    adapters/         # Planned: mmm, geox engine adapters
-    workflows/        # Planned: orchestration graphs
+    workflows/        # Workflow intake and feasibility (Phase 2)
+      intake/         # Business objectives, data requirements, feasibility
     app/              # Planned: local CLI and Streamlit entry
     dashboard/        # Planned: tier-aware views
     reports/          # Planned: governed report export
