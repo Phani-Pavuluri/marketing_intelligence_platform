@@ -75,6 +75,12 @@ def test_cli_imports() -> None:
     assert cli.__doc__ is not None
 
 
+def test_adapters_imports() -> None:
+    import mip.adapters as adapters
+
+    assert adapters.__doc__ is not None
+
+
 def test_app_imports() -> None:
     import mip.app as app
 

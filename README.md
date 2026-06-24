@@ -30,9 +30,10 @@ The following is **implemented and tested** in this repository today:
 | **Local CLI demo runner (Phase 5B)** | `mip-demo` reads JSON input and prints/saves a governed `WorkflowRunSummary`—**no Streamlit, LLM, or engine execution** |
 | **Mock LLM explanation (Phase 5C)** | `MockLLMProvider` explains `WorkflowRunSummary` conversationally and deterministically—**no real LLM APIs or engine execution** |
 | **Streamlit demo shell (Phase 5D)** | `mip-app` provides a thin UI over `run_local_workflow()` and `MockLLMProvider`—**no new workflow logic or engine execution** |
+| **Adapter interface contracts (Phase 6A)** | `mip.adapters` defines governed MMM/GeoX input/output bundle shapes—**no engine imports or model results** |
 | **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, local-first strategy |
 
-**Not implemented yet:** engine adapters, MMM/GeoX execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
+**Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
 
 ## Target product experience
 
@@ -100,7 +101,8 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 5B — Local CLI demo runner | **Done** (`mip.cli.demo`, `mip-demo`) |
 | Phase 5C — MockLLM explanation provider | **Done** (`mip.llm.providers`, `mip.llm.explanations`) |
 | Phase 5D — Streamlit demo shell | **Done** (`mip.app.streamlit_app`, `mip-app`) |
-| Phase 6+ — Adapters, dashboards | **Planned** |
+| Phase 6A — Adapter interface contracts | **Done** (`mip.adapters`) |
+| Phase 6B+ — Adapter execution, dashboards | **Planned** |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
@@ -155,9 +157,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5D deterministic workflow layers are implemented with passing tests.
 
-**Product surface: CLI + mock explanation + Streamlit shell.** `mip-demo` and `mip-app` run the local workflow from JSON with governed summaries and mock explanations. No adapters wired to sibling engine repos, no dashboards or reports.
+**Product surface: CLI + mock explanation + Streamlit shell.** `mip-demo` and `mip-app` run the local workflow from JSON with governed summaries and mock explanations. Adapter interface contracts exist; no engines wired yet.
 
-**Near-term focus:** MMM/GeoX adapter interfaces, then Phase 6 dashboard/report demo.
+**Near-term focus:** Phase 6B adapter fixture tests and evidence registry wiring, then dashboard/report demo.
 
 ## Roadmap
 
@@ -178,8 +180,8 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Next (LLM):**
 
-1. MMM/GeoX adapter interfaces under `src/mip/adapters/`
-2. Phase 6 — MMM-focused dashboard/report demo
+1. Phase 6B — adapter fixture tests and evidence registry wiring
+2. Phase 6C — MMM-focused dashboard/report demo
 
 ## Repository layout
 
