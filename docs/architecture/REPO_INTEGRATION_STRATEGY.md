@@ -145,17 +145,17 @@ panel_exp/
 | **Engine `integrations/mip/`** | Outbound serialization of engine results into a stable export shape consumed by MIP adapters |
 | **MIP `contracts/`** | Canonical schemas until optional `mip-contracts` extraction |
 
-MIP adapters (planned):
+MIP adapters (Phase 6A — interface contracts implemented):
 
 ```text
 src/mip/adapters/
-  geox/
-    base.py
-    geox.py
-  mmm/
-    base.py
-    mmm.py
+  __init__.py
+  base.py             # AdapterInputBundle, AdapterOutputBundle, validation
+  mmm.py              # build_mmm_adapter_input, MMM placeholders
+  geox.py             # build_geox_adapter_input, GeoX placeholders
 ```
+
+These contracts define governed input/output bundle shapes only. They do not import engine packages, run MMM/GeoX, or emit model estimates.
 
 Engine integrations (optional, thin):
 
@@ -180,7 +180,9 @@ Adapters are thin: field mapping, tier/status defaults, and registration into `E
 |---------|--------|
 | `contracts/`, `evidence/`, `evaluation/`, `trust/` | **Implemented** (constitution, gates, registry, readiness) |
 | `experimentation/`, `mmm/`, `optimization/`, `orchestration/` | Placeholder stubs; logic stays in engine repos |
-| `adapters/`, `llm/`, `workflows/`, `dashboard/`, `reports/`, `app/` | **Not yet created** — target layout above |
+| `adapters/` | **Interface contracts implemented** (`base.py`, `mmm.py`, `geox.py`); engine execution not wired |
+| `llm/`, `workflows/`, `app/` | **Implemented** (deterministic workflow spine + local demo shell) |
+| `dashboard/`, `reports/` | **Not yet created** |
 
 ## 6. Local development workflow
 
