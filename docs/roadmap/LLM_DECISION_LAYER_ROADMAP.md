@@ -20,11 +20,13 @@ No autonomous agents or production decision automation in early phases.
 
 **Phase 4 (done):** Deterministic `MMMConfigDraft` and `GeoXConfigDraft` generation in `mip.workflows.configs` from objective, feasibility, and readiness artifacts. No engine execution.
 
-**Phase 5A (done):** Local deterministic workflow orchestrator in `mip.workflows.orchestrator` via `run_local_workflow()` returning `WorkflowRunSummary`. No UI, CLI, or engine execution.
+**Phase 5A (done):** Local deterministic workflow orchestrator in `mip.workflows.orchestrator` via `run_local_workflow()` returning `WorkflowRunSummary`. No UI, CLI, LLM, or engine execution.
+
+**Phase 5B (done):** Local CLI demo runner in `mip.cli.demo` via `mip-demo` reading JSON input and printing/saving governed summaries. No Streamlit, LLM, or engine execution.
 
 **Platform prerequisites (largely done):** contracts, gates, `TrustReport` assembly, evidence registry, calibration audit, model calibration readiness.
 
-**Not started:** `MockLLMProvider`, Streamlit shell, `mip.app` CLI, dashboards, LLM providers.
+**Not started:** `MockLLMProvider`, Streamlit shell, dashboards, LLM providers.
 
 ## 3. Current agreed defaults
 
@@ -117,17 +119,20 @@ No autonomous agents or production decision automation in early phases.
 - `WorkflowRunSummary` with profile, feasibility, readiness, config draft, status, warnings, blockers, next questions/fixes, narrative summary
 - No UI, CLI, LLM, or engine execution
 
-**Exit:** Deterministic local demo backbone ready for Streamlit shell (Phase 5B).
+**Exit:** Deterministic local demo backbone ready for CLI runner (Phase 5B).
 
-## 10. Phase 5B: Streamlit shell
+## 10. Phase 5B: Local CLI demo runner
+
+**Status: implemented** in `mip.cli.demo`.
 
 **Deliver:**
 
-- Minimal local Streamlit UI over `run_local_workflow`
-- Objective selection and record upload/path input
-- Display summary, warnings, blockers, config draft
+- `load_demo_input`, `run_demo_from_file`, `format_workflow_summary`
+- `mip-demo` console script reading JSON objective + records
+- Optional `-o/--output` to save formatted summary
+- No Streamlit, LLM, or engine execution
 
-**Exit:** Browser-based local demo without LLM providers.
+**Exit:** Stable command surface for local demos and future Streamlit shell.
 
 ## 11. Phase 5C: MockLLM conversational explanation wrapper
 
@@ -138,7 +143,17 @@ No autonomous agents or production decision automation in early phases.
 
 **Exit:** Conversational explanation over orchestrator output without real LLM APIs.
 
-## 12. Phase 6: MMM-focused dashboard/report demo
+## 12. Phase 5D: Streamlit shell
+
+**Deliver:**
+
+- Minimal local Streamlit UI over `mip-demo` / `run_local_workflow`
+- Objective selection and record upload/path input
+- Display summary, warnings, blockers, config draft
+
+**Exit:** Browser-based local demo without LLM providers.
+
+## 13. Phase 6: MMM-focused dashboard/report demo
 
 **Deliver:**
 
@@ -153,7 +168,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** End-to-end local demo without real MMM repo required.
 
-## 11. Phase 7: Measurement gap and experiment opportunity layer
+## 14. Phase 7: Measurement gap and experiment opportunity layer
 
 **Deliver:**
 
@@ -165,7 +180,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Gap → recommendation → TrustReport → UI path demonstrated.
 
-## 12. Phase 8: Engine orchestration through adapters
+## 15. Phase 8: Engine orchestration through adapters
 
 **Deliver:**
 
@@ -176,7 +191,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Real or pinned engine outputs pass contract + gate tests.
 
-## 13. Phase 9: Scenario workbench
+## 16. Phase 9: Scenario workbench
 
 **Deliver:**
 
@@ -188,7 +203,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Scenario exploration with tier enforcement.
 
-## 14. Phase 10: Governed recommendations and approval workflow
+## 17. Phase 10: Governed recommendations and approval workflow
 
 **Deliver:**
 
@@ -199,7 +214,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** No decision-grade export without approval record.
 
-## 15. Phase 11: Hosted/team mode
+## 18. Phase 11: Hosted/team mode
 
 **Deliver (later):**
 
@@ -210,7 +225,7 @@ Fixture-based MMM artifacts allowed if **clearly labeled demo fixtures**.
 
 **Exit:** Multi-user pilot; not required for initial local demo.
 
-## 16. Future: Within-channel tactical optimization
+## 19. Future: Within-channel tactical optimization
 
 Deferred scope:
 
@@ -219,7 +234,7 @@ Deferred scope:
 - Experiment-calibrated attribution, tactical signals
 - No immediate implementation
 
-## 17. Deferred / non-goals
+## 20. Deferred / non-goals
 
 - Autonomous budget execution
 - Ad-platform bidding
@@ -228,7 +243,7 @@ Deferred scope:
 - Hiding blocked tiers in narrative or UI
 - Production recommendations without human approval where policy requires
 
-## 18. Open questions
+## 21. Open questions
 
 - Streamlit vs. FastAPI timing for Phase 5–6
 - When to introduce real Ollama vs. keep MockLLM through Phase 7

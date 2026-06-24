@@ -67,3 +67,9 @@ def test_workflows_orchestrator_imports() -> None:
     import mip.workflows.orchestrator as orchestrator
 
     assert orchestrator.__doc__ is not None
+
+
+def test_cli_imports() -> None:
+    import mip.cli as cli
+
+    assert cli.__doc__ is not None
