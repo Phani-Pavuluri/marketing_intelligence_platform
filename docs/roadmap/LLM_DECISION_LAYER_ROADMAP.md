@@ -10,11 +10,15 @@ No autonomous agents or production decision automation in early phases.
 
 ## 2. Current status
 
-**Phase 0 (in progress):** Vision, roadmap, and local-first deployment strategy documented.
+**Phase 0 (done):** Vision, roadmap, and local-first deployment strategy documented.
+
+**Phase 1 (done):** Deterministic LLM safety and explanation context in `mip.llm`.
+
+**Phase 2 (done):** Deterministic business objective intake, data requirement catalog, declared availability profiles, and feasibility evaluation in `mip.workflows.intake`. No LLM calls, dataframe inspection, or statistical diagnostics yet.
 
 **Platform prerequisites (largely done):** contracts, gates, `TrustReport` assembly, evidence registry, calibration audit, model calibration readiness.
 
-**Not started:** `mip.llm`, `mip.workflows`, `mip.app`, dashboards, LLM providers, intake schemas.
+**Not started:** `MockLLMProvider`, `mip.workflows` orchestration graphs, `mip.app`, dashboards, LLM providers, upload-based readiness inference.
 
 ## 3. Current agreed defaults
 
@@ -54,15 +58,18 @@ No autonomous agents or production decision automation in early phases.
 
 ## 6. Phase 2: Business objective intake and data requirement framework
 
+**Status: implemented** in `mip.workflows.intake`.
+
 **Deliver:**
 
 - Catalog mapping objective → KPI / controls / grain
-- Feasibility check from available data profile
-- Fallback when objective unsupported
+- Feasibility check from declared available data profile
+- Fallback when objective unsupported by available fields
+- Follow-up intake questions for missing fields
 
-**Future concepts:** `BusinessObjective`, `MeasurementGoal`, `KPIRequirement`, `DataRequirement`, `ObjectiveFeasibilityReport`.
+**Implemented:** `BusinessObjective`, `BusinessObjectiveType`, `ObjectiveDataRequirement`, `DataAvailabilityProfile`, `ObjectiveFeasibilityReport`, `evaluate_objective_feasibility`, `recommended_next_questions`.
 
-**Exit:** SaaS demo objectives covered with deterministic feasibility responses.
+**Exit:** SaaS demo objectives covered with deterministic feasibility responses. Achieved for declared-field profiles; upload inference deferred to Phase 3.
 
 ## 7. Phase 3: Data readiness and workflow feasibility
 

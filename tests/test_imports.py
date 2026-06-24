@@ -21,6 +21,7 @@ def test_subpackages_import() -> None:
         "mip.trust",
         "mip.evaluation",
         "mip.llm",
+        "mip.workflows",
     ]
     for name in subpackages:
         mod = importlib.import_module(name)
@@ -39,5 +40,12 @@ def test_discoverable_subpackages() -> None:
         "mip.trust",
         "mip.evaluation",
         "mip.llm",
+        "mip.workflows",
     }
     assert expected.issubset(names)
+
+
+def test_workflows_intake_imports() -> None:
+    import mip.workflows.intake as intake
+
+    assert intake.__doc__ is not None
