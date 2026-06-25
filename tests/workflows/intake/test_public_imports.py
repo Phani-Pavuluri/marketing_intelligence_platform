@@ -46,6 +46,10 @@ def test_public_imports() -> None:
         IntakePlan,
         IntakeRecommendationStatus,
         IntakeSessionStatus,
+        LLMExplanationPlan,
+        LLMExplanationStatus,
+        LLMProviderConfig,
+        LLMProviderMode,
         MeasurementIntakeSession,
         MeasurementWorkflowKind,
         MMMDataReadinessReport,
@@ -65,22 +69,31 @@ def test_public_imports() -> None:
         WorkflowSupportRoute,
         WorkflowSupportStatus,
         WorkflowType,
+        build_bring_your_own_key_provider_config,
         build_calibration_mapping_report,
         build_calibration_signal_readiness_report,
         build_cold_start_advisory_plan,
         build_cold_start_business_profile,
         build_common_intake_workbench,
         build_decision_review_readiness_report,
+        build_default_llm_provider_config,
         build_experiment_design_intake,
         build_experiment_diagnostic_request,
         build_geox_design_readiness_report,
+        build_governed_input_reference,
+        build_hosted_open_source_provider_config,
         build_intake_manifest,
         build_intake_plan,
         build_llm_answer_grounding_context,
+        build_llm_explanation_plan,
+        build_llm_explanation_request,
+        build_local_ollama_provider_config,
         build_mmm_data_readiness_report,
+        build_platform_managed_key_later_config,
         build_semantic_mapping_report,
         build_workflow_readiness_reports,
         build_workflow_support_assessment,
+        default_forbidden_claim_topics,
         evaluate_objective_feasibility,
         has_field_or_alias,
         map_evidence_to_calibration_signal,
@@ -178,3 +191,16 @@ def test_public_imports() -> None:
     assert DataFieldRequirement is not None
     assert ObjectiveDataRequirement is not None
     assert ObjectiveFeasibilityReport is not None
+    assert callable(build_llm_explanation_plan)
+    assert callable(build_default_llm_provider_config)
+    assert callable(build_bring_your_own_key_provider_config)
+    assert callable(build_governed_input_reference)
+    assert callable(build_hosted_open_source_provider_config)
+    assert callable(build_llm_explanation_request)
+    assert callable(build_local_ollama_provider_config)
+    assert callable(build_platform_managed_key_later_config)
+    assert LLMProviderMode.DISABLED.value == "disabled"
+    assert LLMExplanationStatus.DETERMINISTIC_ONLY.value == "deterministic_only"
+    assert LLMProviderConfig is not None
+    assert LLMExplanationPlan is not None
+    assert "roi" in default_forbidden_claim_topics()

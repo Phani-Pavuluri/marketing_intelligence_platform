@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 from mip.contracts.advisory import ColdStartAdvisoryPlan
 from mip.contracts.calibration_intake import CalibrationMappingReport
+from mip.contracts.llm_provider import LLMExplanationPlan, LLMProviderConfig
 from mip.contracts.workflow_readiness import BaseWorkflowReadinessReport
 
 _STATUS_BADGES = {
@@ -22,7 +23,9 @@ _STATUS_BADGES = {
     "draft": "[DRAFT]",
     "advisory_plan_ready": "[ADVISORY PLAN READY]",
     "needs_tracking_setup": "[NEEDS TRACKING SETUP]",
-    "needs_business_details": "[NEEDS BUSINESS DETAILS]",
+    "deterministic_only": "[DETERMINISTIC ONLY]",
+    "needs_provider": "[NEEDS PROVIDER]",
+    "future_only": "[FUTURE ONLY]",
 }
 
 BLOCKED_CLAIM_TOPICS: tuple[str, ...] = (
@@ -224,4 +227,35 @@ def mode_banner() -> dict[str, str]:
     return {
         "mode": DETERMINISTIC_MODE_LABEL,
         "description": DETERMINISTIC_MODE_DESCRIPTION,
+    }
+
+
+def format_provider_mode(config: LLMProviderConfig) -> dict[str, str]:
+    """Format provider mode configuration for display."""
+    return {
+        "mode": _enum_value(config.mode),
+        "status": _enum_value(config.status),
+        "provider_name": config.provider_name or "none",
+        "model_name": config.model_name or "none",
+        "is_experimental": str(config.is_experimental),
+        "requires_user_key": str(config.requires_user_key),
+        "requires_local_runtime": str(config.requires_local_runtime),
+    }
+
+
+def format_explanation_plan(plan: LLMExplanationPlan) -> dict[str, Any]:
+    """Format an LLM explanation plan for display (not a generated answer)."""
+    return {
+        "plan_id": plan.plan_id,
+        "status": _enum_value(plan.status),
+        "status_badge": format_status_badge(plan.status),
+        "provider_mode": _enum_value(plan.provider_mode),
+        "use_case": _enum_value(plan.use_case),
+        "allowed_inputs": list(plan.allowed_inputs),
+        "blocked_inputs": list(plan.blocked_inputs),
+        "required_labels": list(plan.required_labels),
+        "required_warnings": summarize_warnings(plan.required_warnings),
+        "blocked_output_claim_types": list(plan.blocked_output_claim_types),
+        "blocking_reasons": summarize_blocking_reasons(plan.blocking_reasons),
+        "system_guardrails": list(plan.system_guardrails),
     }

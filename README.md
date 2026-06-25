@@ -197,9 +197,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5D deterministic workflow layers are implemented with passing tests.
 
-**Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) demonstrates advisory, readiness, and calibration mapping workflows. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. **P7b** pluggable LLM provider contracts are next.
+**Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos.
 
-**Near-term focus:** **P7b** pluggable LLM provider contracts, then **P8** demo profiling implementation.
+**Near-term focus:** **P8** demo profiling implementation, then public demo path planning.
 
 ## Roadmap
 
@@ -238,14 +238,15 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P7 implemented:** Local deterministic Streamlit workflow shell (`app/streamlit_app.py`). The UI exposes cold-start advisory, workflow readiness, CalibrationSignal mapping, and intake overview flows using sample fixtures and MIP core helpers. Deterministic mode only—no LLMs, MMM, GeoX, external APIs, or public hosting.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P7b** — Pluggable LLM provider contracts and explanation governance.
+**P7b implemented:** Pluggable LLM provider and explanation-governance contracts (`LLMProviderConfig`, `LLMExplanationRequest`, `LLMExplanationPlan`, `mip.workflows.intake.llm_explanation`). Represents disabled/deterministic, local Ollama, hosted open-source, BYOK, and future platform-managed-key modes. No LLM provider calls; governed input boundaries and explanation plans only.
 
-1. **P7b** — Pluggable LLM provider contracts and explanation governance
-2. **P8** — Demo fixtures and local/demo profiling
-4. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
-5. **P10** — FastAPI/Docker service wrapper
-6. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
-7. **P17** — LangGraph orchestration skeleton (after P7–P8 stabilize)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P8** — Demo fixtures and local/demo profiling.
+
+1. **P8** — Demo fixtures and local/demo profiling
+2. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+3. **P10** — FastAPI/Docker service wrapper
+4. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
+5. **P17** — LangGraph orchestration skeleton (after P7–P8 stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 

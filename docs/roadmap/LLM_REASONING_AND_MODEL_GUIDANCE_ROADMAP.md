@@ -412,7 +412,7 @@ MIP consumers continue to validate the envelope first; richer sections unlock de
 
 ## 8. P7b — Pluggable LLM provider modes and explanation governance
 
-**Timing:** P7b follows P7 local UI and **precedes P9** public hosted demo so provider and explanation-mode boundaries exist before public deployment.
+**Status:** ✓ implemented — `src/mip/contracts/llm_provider.py`, `src/mip/workflows/intake/llm_explanation.py`. Contract/helper-only: no LLM provider calls, SDKs, or API keys.
 
 ### 8.1 Product decision: no canned explanations
 

@@ -91,3 +91,30 @@ def test_app_package_imports() -> None:
     assert callable(streamlit_app.main)
     assert hasattr(demo_fixtures, "build_advisory_plan")
     assert hasattr(ui_renderers, "advisory_plan_to_display_dict")
+    assert hasattr(ui_renderers, "format_provider_mode")
+    assert hasattr(ui_renderers, "format_explanation_plan")
+
+
+def test_format_provider_mode_and_explanation_plan() -> None:
+    from app.ui_renderers import format_explanation_plan, format_provider_mode
+    from mip.contracts.llm_provider import LLMGovernedInputSourceType, LLMUseCase
+    from mip.workflows.intake.llm_explanation import (
+        build_default_llm_provider_config,
+        build_governed_input_reference,
+        build_llm_explanation_plan,
+        build_llm_explanation_request,
+    )
+
+    config = build_default_llm_provider_config()
+    provider_display = format_provider_mode(config)
+    assert provider_display["mode"] == "disabled"
+    ref = build_governed_input_reference(
+        LLMGovernedInputSourceType.COLD_START_ADVISORY_PLAN.value,
+        "adv-001",
+        "summary",
+    )
+    request = build_llm_explanation_request(config, LLMUseCase.ADVISORY_PLAN_EXPLANATION, [ref])
+    plan = build_llm_explanation_plan(request)
+    plan_display = format_explanation_plan(plan)
+    assert plan_display["status"] == "deterministic_only"
+    assert "generated_answer" not in plan_display

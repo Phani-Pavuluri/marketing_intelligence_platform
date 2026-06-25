@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `24a7506`  
-**Immediate next phase:** **P7b** — Pluggable LLM provider contracts and explanation governance
+**Current main:** `de6bef3`  
+**Immediate next phase:** **P8** — Demo fixtures and local/demo profiling
 
 > **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17**.
 
@@ -21,6 +21,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P5b general advisory / cold-start planning (I8b) | ✓ |
 | P6 CalibrationSignal intake mapping (I9) | ✓ |
 | P7 local deterministic Streamlit workflow shell (I10) | ✓ |
+| P7b pluggable LLM provider + explanation governance contracts | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -103,7 +104,7 @@ P1 session/path
 | **P5b** | **General advisory** and cold-start planning contracts (I8b) | Routes users not ready for formal measurement | ✓ implemented |
 | **P6** | I9 CalibrationSignal mapping | Fixture validation | ✓ implemented |
 | **P7** | I10 local Streamlit/Gradio workflow shell | Display only; deterministic mode default | ✓ implemented |
-| **P7b** | Pluggable LLM provider contracts + explanation governance | Provider modes; no canned explanations | Planned |
+| **P7b** | Pluggable LLM provider contracts + explanation governance | Provider modes; no canned explanations | ✓ implemented |
 | **P8** | I4 demo fixtures + local/demo profiling | Sandbox CSV only | Planned |
 | **P9** | Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces) | Demo-safe; no platform LLM key by default | Planned |
 | **P10** | FastAPI/Docker service wrapper | HTTP boundary; no duplicated MIP logic | Planned |
@@ -351,9 +352,11 @@ No web search integration · no file parsing · no data profiling computation ·
 
 ## P7–P11 — Product surface, LLM providers, and public demo hosting
 
-**P7 status:** ✓ implemented — `app/streamlit_app.py` local deterministic Streamlit shell. Exposes cold-start advisory, workflow readiness, CalibrationSignal mapping, and intake overview via sample fixtures and MIP core helpers. No LLMs, MMM, GeoX, external APIs, or public hosting.
+**P7 status:** ✓ implemented — `app/streamlit_app.py` local deterministic Streamlit shell.
 
-**Remaining (P7b–P11):** Planned.
+**P7b status:** ✓ implemented — `src/mip/contracts/llm_provider.py` and `src/mip/workflows/intake/llm_explanation.py`. Provider modes, governed input boundaries, explanation plans, and blocked canned/sample explanation modes. No LLM provider calls.
+
+**Remaining (P8–P11):** Planned.
 
 ### Architecture layers
 
@@ -417,7 +420,7 @@ Public hosting is **not** the same as production readiness. Public demo mode can
 
 ### P7b — Pluggable LLM provider contracts and explanation governance
 
-**Purpose:** Define explicit provider modes and explanation boundaries before public demo.
+**Status:** ✓ implemented — `LLMProviderConfig`, `LLMGovernedInputReference`, `LLMExplanationRequest`, `LLMExplanationPlan`, and deterministic helpers in `mip.workflows.intake.llm_explanation`. Supports disabled, local Ollama, hosted open-source, BYOK, and platform-managed-key-later modes. Excludes canned/sample explanation modes. No LLM calls, API keys, or provider SDKs.
 
 **Future concept — `LLMProviderMode`:**
 
