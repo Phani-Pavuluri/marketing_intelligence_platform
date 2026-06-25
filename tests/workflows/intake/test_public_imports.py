@@ -7,6 +7,9 @@ def test_public_imports() -> None:
         BusinessObjectiveType,
         ColumnMappingProposal,
         ColumnMappingStatus,
+        CommonDataProfileSummary,
+        CommonIntakeStatus,
+        CommonIntakeWorkbench,
         DataAvailabilityProfile,
         DataFieldRequirement,
         DataFieldRole,
@@ -42,12 +45,18 @@ def test_public_imports() -> None:
         SemanticMappingDimension,
         SemanticMappingReport,
         StandaloneGeoXDesignRequest,
+        WorkflowSupportAssessment,
+        WorkflowSupportRoute,
+        WorkflowSupportStatus,
         WorkflowType,
+        build_common_intake_workbench,
         build_experiment_design_intake,
         build_experiment_diagnostic_request,
         build_intake_manifest,
         build_intake_plan,
+        build_llm_answer_grounding_context,
         build_semantic_mapping_report,
+        build_workflow_support_assessment,
         evaluate_objective_feasibility,
         has_field_or_alias,
         recommend_intake_path,
@@ -67,6 +76,15 @@ def test_public_imports() -> None:
     assert callable(build_intake_plan)
     assert callable(build_intake_manifest)
     assert callable(build_semantic_mapping_report)
+    assert callable(build_workflow_support_assessment)
+    assert callable(build_common_intake_workbench)
+    assert callable(build_llm_answer_grounding_context)
+    assert CommonIntakeWorkbench is not None
+    assert WorkflowSupportRoute.NATIONAL_MMM.value == "national_mmm"
+    assert WorkflowSupportStatus.SUPPORTED.value == "supported"
+    assert CommonIntakeStatus.SUPPORT_ASSESSED.value == "support_assessed"
+    assert WorkflowSupportAssessment is not None
+    assert CommonDataProfileSummary is not None
     assert callable(build_experiment_design_intake)
     assert callable(build_experiment_diagnostic_request)
     assert callable(suggest_kpi_families_for_objective)

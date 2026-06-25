@@ -215,14 +215,15 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P4b implemented:** experiment design objective and data requirement contracts (`ExperimentDesignObjective`, `ExperimentDesignIntake`, `MMMToGeoXDesignBridge`, `StandaloneGeoXDesignRequest`, `ExperimentDiagnosticRequest`, `build_experiment_design_intake`, `build_experiment_diagnostic_request`). MIP can represent MMM-driven and standalone GeoX design intent, map objectives to candidate KPI families, list objective-specific data requirements, and prepare future panel_exp diagnostic requests without executing design diagnostics.
 
-**Architecture principle:** **Common intake first, workflow-specific readiness second.** MIP will use one **Common Data Intake Workbench** for MMM, GeoX/experiment design, CalibrationSignal intake, and decision-review—upload/connect once, then branch readiness by workflow. The LLM is the conversational interface over governed reports, not the measurement brain.
+**P4c implemented:** common data intake workbench and preliminary profiling contracts (`CommonIntakeWorkbench`, `CommonDataProfileSummary`, `WorkflowSupportAssessment`, `LLMAnswerGroundingContext`, `build_common_intake_workbench`, `build_workflow_support_assessment`). MIP can represent shared intake metadata, governed profile summaries, workflow support assessment, and LLM-safe grounding context across MMM, GeoX, CalibrationSignal, and decision-review workflows. Actual ingestion, file parsing, table connectors, profiling computation, and engine diagnostics remain deferred.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P4c** — Common Data Intake Workbench + preliminary profiling contracts.
+**Architecture principle:** **Common intake first, workflow-specific readiness second.** MIP uses one **Common Data Intake Workbench** for MMM, GeoX/experiment design, CalibrationSignal intake, and decision-review—upload/connect once, then branch readiness by workflow. The LLM is the conversational interface over governed reports, not the measurement brain.
 
-1. **P4c** — **Common Data Intake Workbench** + preliminary profiling contracts (shared by MMM and GeoX)
-2. **P5** — Workflow-specific readiness reports (MMM / GeoX / CalibrationSignal / decision-review)
-3. **P6–P8** — CalibrationSignal mapping · Streamlit shell · demo profiling implementation
-4. **P17** — LangGraph orchestration skeleton (after core contracts stabilize)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P5** — workflow-specific readiness reports.
+
+1. **P5** — Workflow-specific readiness reports (MMM / GeoX / CalibrationSignal / decision-review)
+2. **P6–P8** — CalibrationSignal mapping · Streamlit shell · demo profiling implementation
+3. **P17** — LangGraph orchestration skeleton (after core contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
