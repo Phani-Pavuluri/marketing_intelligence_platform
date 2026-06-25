@@ -302,9 +302,11 @@ Example statuses: `supports_national_mmm` · `supports_geo_level_mmm` · `suppor
 
 ### Track I8 — Workflow-Specific Data Readiness Reports (P5)
 
+**Status:** ✓ implemented — structural readiness contracts and deterministic helpers (`build_mmm_data_readiness_report`, `build_geox_design_readiness_report`, `build_calibration_signal_readiness_report`, `build_decision_review_readiness_report`, `build_workflow_readiness_reports`). Engine diagnostics, CalibrationSignal transformation, TrustReport approval, and decision recommendations remain deferred.
+
 **Why:** Readiness is tied to intended use—not a single global flag. After common intake (P4c), readiness **branches by workflow**.
 
-**Future objects:** `MMMDataReadinessReport` · `GeoXDesignReadinessReport` · `CalibrationSignalReadinessReport` · `DecisionReviewReadinessReport`
+**Objects:** `MMMDataReadinessReport` · `GeoXDesignReadinessReport` · `CalibrationSignalReadinessReport` · `DecisionReviewReadinessReport`
 
 **MMM branch decides:** time grain · historical coverage · media channels over time · outcome/media scope alignment · controls/promos/seasonality · calibration evidence · national vs geo-level vs calibrated vs refresh vs decision-surface path
 
@@ -542,11 +544,11 @@ The LLM must not answer from raw files—only from governed reports.
 
 ## 7. Next implementation phase
 
-**P1–P4c complete.** Next:
+**P1–P5 complete.** Next:
 
-1. **P5** — Workflow-specific readiness reports
-2. **P6** — CalibrationSignal intake mapping
-3. **P17** — LangGraph orchestration skeleton (after P5–P8 stabilize)
+1. **P6** — CalibrationSignal intake mapping
+2. **P7–P8** — Streamlit shell · demo profiling implementation
+3. **P17** — LangGraph orchestration skeleton (after P6–P8 stabilize)
 
 Sequence: understand experiment objective → provide data once through common workbench → workflow-specific readiness → diagnostics.
 

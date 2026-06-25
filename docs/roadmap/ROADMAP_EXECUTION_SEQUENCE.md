@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `3779bfd`  
-**Immediate next phase:** **P5** — Workflow-specific readiness reports
+**Current main:** `0ab7a63`  
+**Immediate next phase:** **P6** — CalibrationSignal intake mapping
 
 ## What is already implemented
 
@@ -15,6 +15,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P4 column mapping + semantic confirmation (I6) | ✓ |
 | P4b experiment design objective + data requirements (I6b) | ✓ |
 | P4c common intake workbench + preliminary profiling (I6c) | ✓ |
+| P5 workflow-specific readiness reports (I7–I8) | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -85,7 +86,7 @@ P1 session/path
 | **P4** | I6 column mapping + semantic confirmation | Contracts/fixtures only | ✓ implemented |
 | **P4b** | Experiment design objective + KPI/data requirement contracts | Contracts/fixtures only | ✓ implemented |
 | **P4c** | **Common Data Intake Workbench** + preliminary profiling contracts | Summary records only; shared by MMM and GeoX | ✓ implemented |
-| **P5** | **Workflow-specific** readiness report contracts (I7–I8) | Builds on P4c workbench |
+| **P5** | **Workflow-specific** readiness report contracts (I7–I8) | Builds on P4c workbench | ✓ implemented |
 | **P6** | I9 CalibrationSignal mapping | Fixture validation |
 | **P7** | I10 Streamlit/local workflow shell | Display only |
 | **P8** | I4 demo upload + profiling implementation | Sandbox CSV only |
@@ -136,6 +137,8 @@ Example statuses: `supports_national_mmm` · `supports_geo_level_mmm` · `suppor
 > May support CalibrationSignal intake if metric, estimand, scope, effect, and uncertainty are valid. **Not** sufficient alone for MMM modeling or new GeoX design.
 
 ## P5 — Workflow-specific readiness branching
+
+**Status:** ✓ implemented — structural readiness reports only (`MMMDataReadinessReport`, `GeoXDesignReadinessReport`, `CalibrationSignalReadinessReport`, `DecisionReviewReadinessReport`, `build_workflow_readiness_reports`). Engine diagnostics, CalibrationSignal transformation, TrustReport approval, and decision recommendations remain deferred.
 
 After common intake/profiling (P4c), readiness **branches by workflow**:
 

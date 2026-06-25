@@ -217,12 +217,13 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P4c implemented:** common data intake workbench and preliminary profiling contracts (`CommonIntakeWorkbench`, `CommonDataProfileSummary`, `WorkflowSupportAssessment`, `LLMAnswerGroundingContext`, `build_common_intake_workbench`, `build_workflow_support_assessment`). MIP can represent shared intake metadata, governed profile summaries, workflow support assessment, and LLM-safe grounding context across MMM, GeoX, CalibrationSignal, and decision-review workflows. Actual ingestion, file parsing, table connectors, profiling computation, and engine diagnostics remain deferred.
 
+**P5 implemented:** workflow-specific readiness report contracts (`MMMDataReadinessReport`, `GeoXDesignReadinessReport`, `CalibrationSignalReadinessReport`, `DecisionReviewReadinessReport`, `build_workflow_readiness_reports`). MIP can now branch from common intake/workflow support assessment into MMM data readiness, GeoX design readiness, CalibrationSignal readiness, and decision-review readiness. These reports assess structural readiness only; engine diagnostics, CalibrationSignal transformation, TrustReport approval, and decision recommendations remain deferred.
+
 **Architecture principle:** **Common intake first, workflow-specific readiness second.** MIP uses one **Common Data Intake Workbench** for MMM, GeoX/experiment design, CalibrationSignal intake, and decision-review—upload/connect once, then branch readiness by workflow. The LLM is the conversational interface over governed reports, not the measurement brain.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P5** — workflow-specific readiness reports.
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P6** — CalibrationSignal intake mapping.
 
-1. **P5** — Workflow-specific readiness reports (MMM / GeoX / CalibrationSignal / decision-review)
-2. **P6–P8** — CalibrationSignal mapping · Streamlit shell · demo profiling implementation
+1. **P6–P8** — CalibrationSignal mapping · Streamlit shell · demo profiling implementation
 3. **P17** — LangGraph orchestration skeleton (after core contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
