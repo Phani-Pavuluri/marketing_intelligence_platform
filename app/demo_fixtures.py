@@ -27,6 +27,11 @@ from mip.contracts.common_intake import (
     MetricAvailabilitySummary,
     TimeCoverageSummary,
 )
+from mip.contracts.demo_profile import (
+    DemoDatasetProfile,
+    DemoProfileStatus,
+    DemoProfileToWorkflowSummary,
+)
 from mip.contracts.intake import (
     DataGrain,
     GeoGrain,
@@ -49,6 +54,19 @@ from mip.workflows.intake.advisory import (
 )
 from mip.workflows.intake.calibration_mapping import map_evidence_to_calibration_signal
 from mip.workflows.intake.common_workbench import build_common_intake_workbench
+from mip.workflows.intake.demo_profiling import (
+    DEMO_DATASET_DMA_WEEK,
+    DEMO_DATASET_EXPERIMENT_READOUT,
+    DEMO_DATASET_NATIONAL_MEDIA_OUTCOME,
+    DEMO_DATASET_READOUT_MISSING_UNCERTAINTY,
+    DEMO_DATASET_WEBSITE_TRAFFIC,
+    build_calibration_evidence_input_from_demo_profile,
+    build_common_profile_summary_from_demo_profile,
+    build_demo_dataset_profile_for_key,
+    build_demo_profile_to_workflow_summary,
+    build_website_traffic_profile_from_demo_profile,
+    demo_profiling_sample_labels,
+)
 from mip.workflows.intake.readiness import (
     build_geox_design_readiness_report,
     build_mmm_data_readiness_report,
@@ -528,6 +546,103 @@ def build_intake_overview_examples() -> list[IntakeOverviewExample]:
             recommendation=recommend_intake_path(geox_session),
         ),
     ]
+
+
+@dataclass(frozen=True)
+class DemoProfilingFixture:
+    """Demo profiling fixture output for UI display."""
+
+    profile: DemoDatasetProfile
+    workflow_summary: DemoProfileToWorkflowSummary
+    common_summary: CommonDataProfileSummary | None
+    traffic_profile: WebsiteTrafficSourceProfile | None
+    calibration_input: CalibrationEvidenceInput | None
+    calibration_requirement: CalibrationMappingRequirement | None
+    calibration_report: CalibrationMappingReport | None
+    advisory_plan: ColdStartAdvisoryPlan | None
+
+
+def build_demo_profiling_fixture(dataset_key: str) -> DemoProfilingFixture:
+    """Build demo profiling outputs and downstream workflow links for a dataset key."""
+    profile = build_demo_dataset_profile_for_key(dataset_key)
+    workflow_summary = build_demo_profile_to_workflow_summary(profile)
+    common_summary = (
+        build_common_profile_summary_from_demo_profile(profile)
+        if workflow_summary.common_profile_summary_id
+        else None
+    )
+    traffic_profile = None
+    advisory_plan = None
+    if dataset_key == DEMO_DATASET_WEBSITE_TRAFFIC and profile.status == DemoProfileStatus.PROFILED:
+        traffic_profile = build_website_traffic_profile_from_demo_profile(profile)
+        business_profile = build_cold_start_business_profile(
+            profile_id=f"biz-{profile.profile_id}",
+            created_at=_NOW,
+            product_or_service="Handmade skincare ecommerce",
+            target_audience="Women 25-45",
+            monthly_budget="$2000",
+            primary_objective=ColdStartMediaObjective.SALES,
+            existing_website=True,
+            existing_tracking=True,
+        )
+        advisory_plan = build_cold_start_advisory_plan(business_profile, traffic_profile)
+
+    calibration_input = build_calibration_evidence_input_from_demo_profile(profile)
+    calibration_requirement: CalibrationMappingRequirement | None = None
+    calibration_report: CalibrationMappingReport | None = None
+    if calibration_input is not None:
+        calibration_requirement = CalibrationMappingRequirement(
+            requirement_id=f"req-{calibration_input.input_id}",
+            target_model_id="mmm-demo-fixture",
+            required_metric_id=calibration_input.metric_id,
+            required_estimand_id=calibration_input.estimand_id,
+            required_channel=calibration_input.channel,
+            required_platform=calibration_input.platform,
+            required_geo_scope=calibration_input.geo_scope,
+            required_time_window_start=calibration_input.time_window_start,
+            required_time_window_end=calibration_input.time_window_end,
+        )
+        _, calibration_report = map_evidence_to_calibration_signal(
+            calibration_input,
+            calibration_requirement,
+        )
+
+    return DemoProfilingFixture(
+        profile=profile,
+        workflow_summary=workflow_summary,
+        common_summary=common_summary,
+        traffic_profile=traffic_profile,
+        calibration_input=calibration_input,
+        calibration_requirement=calibration_requirement,
+        calibration_report=calibration_report,
+        advisory_plan=advisory_plan,
+    )
+
+
+def demo_profiling_fixture_labels() -> dict[str, str]:
+    """Human-readable labels for demo profiling dataset keys."""
+    return demo_profiling_sample_labels()
+
+
+def demo_profiling_links_advisory(dataset_key: str) -> bool:
+    """Whether a demo profiling fixture can link to cold-start advisory."""
+    return dataset_key == DEMO_DATASET_WEBSITE_TRAFFIC
+
+
+def demo_profiling_links_calibration(dataset_key: str) -> bool:
+    """Whether a demo profiling fixture has calibration mapping inputs."""
+    return dataset_key in {
+        DEMO_DATASET_EXPERIMENT_READOUT,
+        DEMO_DATASET_READOUT_MISSING_UNCERTAINTY,
+    }
+
+
+def demo_profiling_links_readiness(dataset_key: str) -> bool:
+    """Whether a demo profiling fixture has structural readiness route hints."""
+    return dataset_key in {
+        DEMO_DATASET_NATIONAL_MEDIA_OUTCOME,
+        DEMO_DATASET_DMA_WEEK,
+    }
 
 
 def advisory_sample_labels() -> dict[str, str]:

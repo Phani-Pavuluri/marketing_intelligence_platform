@@ -55,6 +55,17 @@ from mip.contracts.common_intake import (
     WorkflowSupportStatus,
 )
 from mip.contracts.decision_surface import DecisionSurface
+from mip.contracts.demo_profile import (
+    MAX_DEMO_COLUMN_SAMPLE_VALUES,
+    MAX_DEMO_PROFILE_ROWS,
+    DemoColumnProfile,
+    DemoColumnSemanticRole,
+    DemoDatasetKind,
+    DemoDatasetProfile,
+    DemoProfileFindingSeverity,
+    DemoProfileStatus,
+    DemoProfileToWorkflowSummary,
+)
 from mip.contracts.enums import (
     ArtifactStatus,
     CausalQuantity,
@@ -194,6 +205,13 @@ __all__ = [
     "DecisionSurface",
     "DecisionSurfaceType",
     "DiagnosticSummary",
+    "DemoColumnProfile",
+    "DemoColumnSemanticRole",
+    "DemoDatasetKind",
+    "DemoDatasetProfile",
+    "DemoProfileFindingSeverity",
+    "DemoProfileStatus",
+    "DemoProfileToWorkflowSummary",
     "Estimand",
     "EvidenceLevel",
     "FORBIDDEN_ADVISORY_RESULT_FIELD_NAMES",
@@ -226,6 +244,8 @@ __all__ = [
     "GeoXDesignReadinessReport",
     "GeoXIntakeManifest",
     "IntakeManifestStatus",
+    "MAX_DEMO_COLUMN_SAMPLE_VALUES",
+    "MAX_DEMO_PROFILE_ROWS",
     "MMMDataReadinessReport",
     "MMMIntakeManifest",
     "MMMToGeoXDesignBridge",

@@ -10,15 +10,21 @@ from app.demo_fixtures import (
     advisory_sample_labels,
     build_advisory_plan,
     build_calibration_fixture,
+    build_demo_profiling_fixture,
     build_intake_overview_examples,
     build_readiness_reports,
     calibration_sample_labels,
+    demo_profiling_fixture_labels,
+    demo_profiling_links_advisory,
+    demo_profiling_links_calibration,
+    demo_profiling_links_readiness,
     readiness_sample_labels,
 )
 from app.ui_renderers import (
     BLOCKED_CLAIM_TOPICS,
     advisory_plan_to_display_dict,
     calibration_mapping_to_display_dict,
+    demo_profile_to_display_dict,
     intake_recommendation_to_display_dict,
     mode_banner,
     readiness_report_to_display_dict,
@@ -200,6 +206,92 @@ def _render_calibration_tab() -> None:
     _render_blocked_claims()
 
 
+def _render_demo_profiling_tab() -> None:
+    st.header("Demo profiling")
+    st.caption(
+        "Safe local profiling over built-in synthetic tabular datasets. "
+        "Summaries only — no raw rows stored, no file upload, no LLM calls."
+    )
+    labels = demo_profiling_fixture_labels()
+    dataset_key = st.selectbox(
+        "Select demo dataset",
+        options=list(labels.keys()),
+        format_func=lambda key: labels[key],
+        key="demo_profiling_dataset",
+    )
+    fixture = build_demo_profiling_fixture(dataset_key)
+    display = demo_profile_to_display_dict(fixture.profile, fixture.workflow_summary)
+
+    st.write(f"**Dataset kind:** `{display['dataset_kind']}`")
+    st.write(f"**Profile status:** {display['status_badge']} `{display['status']}`")
+    st.write(f"**Rows / columns:** {display['row_count']} / {display['column_count']}")
+
+    st.subheader("Coverage flags")
+    flags = display["flags"]
+    st.write(
+        f"- Time: `{flags['has_time_data']}` · Geo: `{flags['has_geo_data']}` · "
+        f"Media: `{flags['has_media_data']}` · Outcome: `{flags['has_outcome_data']}` · "
+        f"Uncertainty: `{flags['has_uncertainty_data']}`"
+    )
+    st.write(f"**Time coverage:** {display['detected_time_coverage']}")
+    st.write(f"**Geo coverage:** {display['detected_geo_coverage']}")
+    _render_list("Detected sources", display["detected_sources"])
+    _render_list("Detected channels", display["detected_channels"])
+    _render_list("Detected metrics", display["detected_metrics"])
+    _render_list("Warnings", display["warnings"])
+    _render_list("Blocking reasons", display["blocking_reasons"])
+
+    st.subheader("Columns and semantic roles")
+    for column in display["columns"]:
+        st.write(
+            f"- `{column['column_name']}` → `{column['semantic_role']}` "
+            f"({column['dtype_summary']}, distinct={column['distinct_count']})"
+        )
+        if column["sample_values"] != ["None"]:
+            st.write(f"  - sample: {', '.join(column['sample_values'])}")
+
+    st.subheader("Workflow link summary")
+    st.write(f"**Common profile ID:** `{display['common_profile_summary_id'] or 'n/a'}`")
+    st.write(f"**Traffic profile ID:** `{display['traffic_profile_id'] or 'n/a'}`")
+    st.write(
+        f"**Calibration evidence input ID:** "
+        f"`{display['calibration_evidence_input_id'] or 'n/a'}`"
+    )
+    _render_list("Supported workflow routes", display["supported_routes"])
+    _render_list("Blocked workflow routes", display["blocked_routes"])
+    _render_list("Workflow warnings", display["workflow_warnings"])
+    _render_list("Workflow blocking reasons", display["workflow_blocking_reasons"])
+
+    st.subheader("Downstream workflow paths (deterministic)")
+    if demo_profiling_links_advisory(dataset_key) and fixture.advisory_plan is not None:
+        advisory_display = advisory_plan_to_display_dict(fixture.advisory_plan)
+        st.write("**Cold-start advisory (data-informed):**")
+        st.write(f"- Status: {advisory_display['status_badge']} `{advisory_display['status']}`")
+        st.write(f"- Evidence mode: `{advisory_display['evidence_mode']}`")
+    elif demo_profiling_links_advisory(dataset_key):
+        st.write("Cold-start advisory: _not available for current profile status_")
+    else:
+        st.write("Cold-start advisory: _not applicable for this dataset kind_")
+
+    if demo_profiling_links_readiness(dataset_key):
+        st.write("**Readiness:** use supported/blocked routes above with common profile summary.")
+        if fixture.common_summary is not None:
+            st.write(f"- Common profile asset: `{fixture.common_summary.asset_type.value}`")
+    else:
+        st.write("Readiness route hints: _see workflow routes above_")
+
+    if demo_profiling_links_calibration(dataset_key):
+        if fixture.calibration_report is not None:
+            cal_display = calibration_mapping_to_display_dict(fixture.calibration_report)
+            st.write("**Calibration mapping:**")
+            st.write(f"- Status: {cal_display['status_badge']} `{cal_display['status']}`")
+            _render_list("Blocking reasons", cal_display["blocking_reasons"])
+        else:
+            st.write("Calibration mapping: _evidence input not produced_")
+    else:
+        st.write("Calibration mapping: _not applicable for this dataset kind_")
+
+
 def _render_intake_overview_tab() -> None:
     st.header("Intake overview")
     st.caption("Deterministic intake path recommendation examples.")
@@ -234,11 +326,12 @@ def main() -> None:
     _render_mode_banner()
     _render_landing()
 
-    tab_advisory, tab_readiness, tab_calibration, tab_intake = st.tabs(
+    tab_advisory, tab_readiness, tab_calibration, tab_profiling, tab_intake = st.tabs(
         [
             "Cold-start advisory",
             "Readiness reports",
             "Calibration mapping",
+            "Demo profiling",
             "Intake overview",
         ]
     )
@@ -249,6 +342,8 @@ def main() -> None:
         _render_readiness_tab()
     with tab_calibration:
         _render_calibration_tab()
+    with tab_profiling:
+        _render_demo_profiling_tab()
     with tab_intake:
         _render_intake_overview_tab()
 

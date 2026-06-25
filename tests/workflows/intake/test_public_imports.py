@@ -28,6 +28,9 @@ def test_public_imports() -> None:
         DecisionHorizon,
         DecisionReviewReadinessReport,
         DecisionScope,
+        DemoDatasetKind,
+        DemoDatasetProfile,
+        DemoProfileStatus,
         EvidenceLevel,
         ExperimentDesignEntryPath,
         ExperimentDesignIntake,
@@ -75,8 +78,11 @@ def test_public_imports() -> None:
         build_cold_start_advisory_plan,
         build_cold_start_business_profile,
         build_common_intake_workbench,
+        build_common_profile_summary_from_demo_profile,
         build_decision_review_readiness_report,
         build_default_llm_provider_config,
+        build_demo_dataset_profile,
+        build_demo_profile_to_workflow_summary,
         build_experiment_design_intake,
         build_experiment_diagnostic_request,
         build_geox_design_readiness_report,
@@ -96,6 +102,7 @@ def test_public_imports() -> None:
         default_forbidden_claim_topics,
         evaluate_objective_feasibility,
         has_field_or_alias,
+        infer_demo_column_role,
         map_evidence_to_calibration_signal,
         recommend_intake_path,
         recommended_next_questions,
@@ -142,6 +149,13 @@ def test_public_imports() -> None:
     assert DecisionReviewReadinessReport is not None
     assert BaseWorkflowReadinessReport is not None
     assert callable(build_workflow_support_assessment)
+    assert callable(infer_demo_column_role)
+    assert callable(build_demo_dataset_profile)
+    assert DemoDatasetProfile is not None
+    assert DemoProfileStatus.PROFILED.value == "profiled"
+    assert DemoDatasetKind.WEBSITE_TRAFFIC.value == "website_traffic"
+    assert callable(build_common_profile_summary_from_demo_profile)
+    assert callable(build_demo_profile_to_workflow_summary)
     assert callable(build_common_intake_workbench)
     assert callable(build_llm_answer_grounding_context)
     assert CommonIntakeWorkbench is not None

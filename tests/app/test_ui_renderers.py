@@ -3,6 +3,7 @@
 import importlib
 
 from app.demo_fixtures import (
+    build_demo_profiling_fixture,
     build_dtc_skincare_advisory_plan,
     build_national_blocked_readiness_reports,
     build_valid_calibration_fixture,
@@ -11,6 +12,7 @@ from app.ui_renderers import (
     advisory_plan_to_display_dict,
     calibration_mapping_to_display_dict,
     contract_to_display_dict,
+    demo_profile_to_display_dict,
     format_status_badge,
     mode_banner,
     readiness_report_to_display_dict,
@@ -118,3 +120,14 @@ def test_format_provider_mode_and_explanation_plan() -> None:
     plan_display = format_explanation_plan(plan)
     assert plan_display["status"] == "deterministic_only"
     assert "generated_answer" not in plan_display
+
+
+def test_demo_profile_to_display_dict() -> None:
+    from mip.workflows.intake.demo_profiling import DEMO_DATASET_NATIONAL_MEDIA_OUTCOME
+
+    fixture = build_demo_profiling_fixture(DEMO_DATASET_NATIONAL_MEDIA_OUTCOME)
+    display = demo_profile_to_display_dict(fixture.profile, fixture.workflow_summary)
+    assert display["dataset_kind"] == "media_spend"
+    assert display["flags"]["has_media_data"] is True
+    assert "national_mmm" in display["supported_routes"]
+    assert "rows" not in display

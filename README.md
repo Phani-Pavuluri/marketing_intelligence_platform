@@ -240,9 +240,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P7b implemented:** Pluggable LLM provider and explanation-governance contracts (`LLMProviderConfig`, `LLMExplanationRequest`, `LLMExplanationPlan`, `mip.workflows.intake.llm_explanation`). Represents disabled/deterministic, local Ollama, hosted open-source, BYOK, and future platform-managed-key modes. No LLM provider calls; governed input boundaries and explanation plans only.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P8** — Demo fixtures and local/demo profiling.
+**P8 implemented:** Local/demo profiling for small synthetic tabular datasets (`mip.contracts.demo_profile`, `mip.workflows.intake.demo_profiling`). Demo profiles summarize website traffic, national media/outcome, DMA-week media/outcome, and experiment readout-like data into governed summaries used by advisory, readiness, and CalibrationSignal mapping workflows. Demo-only: no production ingestion, external connectors, raw-row LLM access, MMM/GeoX execution, or persistent storage.
 
-1. **P8** — Demo fixtures and local/demo profiling
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P9** — Public hosted demo (after optional Streamlit entrypoint cleanup).
+
+1. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
 2. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
 3. **P10** — FastAPI/Docker service wrapper
 4. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
@@ -310,7 +312,17 @@ marketing_intelligence_platform/
 poetry run streamlit run app/streamlit_app.py
 ```
 
-The P7 UI runs in **deterministic mode**. No LLM provider is required. No external services are called. The UI demonstrates advisory, readiness, and calibration mapping workflows using sample fixtures.
+The P7 UI runs in **deterministic mode**. No LLM provider is required. No external services are called. The UI demonstrates advisory, readiness, calibration mapping, and **demo profiling** workflows using sample fixtures.
+
+## Demo profiling (P8)
+
+P8 adds safe local/demo profiling over small synthetic datasets. It summarizes columns, semantic roles, coverage flags, and workflow suitability without storing raw rows or running MMM/GeoX/LLM providers.
+
+Use the **Demo profiling** tab in the local UI, or call `mip.workflows.intake.demo_profiling` helpers directly in tests and notebooks.
+
+```bash
+poetry run streamlit run app/streamlit_app.py
+```
 
 Legacy Phase 5D workflow shell (JSON input + MockLLM): `poetry run mip-app`
 

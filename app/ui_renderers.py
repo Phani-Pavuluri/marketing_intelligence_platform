@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 from mip.contracts.advisory import ColdStartAdvisoryPlan
 from mip.contracts.calibration_intake import CalibrationMappingReport
+from mip.contracts.demo_profile import DemoDatasetProfile, DemoProfileToWorkflowSummary
 from mip.contracts.llm_provider import LLMExplanationPlan, LLMProviderConfig
 from mip.contracts.workflow_readiness import BaseWorkflowReadinessReport
 
@@ -258,4 +259,62 @@ def format_explanation_plan(plan: LLMExplanationPlan) -> dict[str, Any]:
         "blocked_output_claim_types": list(plan.blocked_output_claim_types),
         "blocking_reasons": summarize_blocking_reasons(plan.blocking_reasons),
         "system_guardrails": list(plan.system_guardrails),
+    }
+
+
+def demo_profile_to_display_dict(
+    profile: DemoDatasetProfile,
+    workflow_summary: DemoProfileToWorkflowSummary,
+) -> dict[str, Any]:
+    """Render demo dataset profile and workflow link summary for display."""
+    columns = [
+        {
+            "column_name": column.column_name,
+            "semantic_role": _enum_value(column.semantic_role),
+            "dtype_summary": column.dtype_summary,
+            "non_null_count": column.non_null_count,
+            "distinct_count": column.distinct_count,
+            "sample_values": list(column.sample_values),
+            "warnings": summarize_warnings(column.warnings),
+        }
+        for column in profile.columns
+    ]
+    return {
+        "profile_id": profile.profile_id,
+        "dataset_kind": _enum_value(profile.dataset_kind),
+        "status": _enum_value(profile.status),
+        "status_badge": format_status_badge(profile.status),
+        "row_count": profile.row_count,
+        "column_count": profile.column_count,
+        "columns": columns,
+        "detected_time_coverage": profile.detected_time_coverage or "None",
+        "detected_geo_coverage": profile.detected_geo_coverage or "None",
+        "detected_sources": list(profile.detected_sources) or ["None"],
+        "detected_channels": list(profile.detected_channels) or ["None"],
+        "detected_metrics": list(profile.detected_metrics) or ["None"],
+        "flags": {
+            "has_time_data": profile.has_time_data,
+            "has_geo_data": profile.has_geo_data,
+            "has_media_data": profile.has_media_data,
+            "has_outcome_data": profile.has_outcome_data,
+            "has_uncertainty_data": profile.has_uncertainty_data,
+        },
+        "warnings": summarize_warnings(profile.warnings),
+        "blocking_reasons": summarize_blocking_reasons(profile.blocking_reasons),
+        "workflow_summary_id": workflow_summary.summary_id,
+        "common_profile_summary_id": workflow_summary.common_profile_summary_id,
+        "traffic_profile_id": workflow_summary.traffic_profile_id,
+        "calibration_evidence_input_id": workflow_summary.calibration_evidence_input_id,
+        "supported_routes": [
+            _enum_value(route) for route in workflow_summary.supported_workflow_routes
+        ]
+        or ["None"],
+        "blocked_routes": [
+            _enum_value(route) for route in workflow_summary.blocked_workflow_routes
+        ]
+        or ["None"],
+        "workflow_warnings": summarize_warnings(workflow_summary.warnings),
+        "workflow_blocking_reasons": summarize_blocking_reasons(
+            workflow_summary.blocking_reasons
+        ),
     }

@@ -8,11 +8,14 @@ from app.demo_fixtures import (
     CALIBRATION_SAMPLE_VALID,
     build_advisory_plan,
     build_calibration_fixture,
+    build_demo_profiling_fixture,
     build_dtc_skincare_advisory_plan,
     build_local_fitness_advisory_plan,
     build_national_blocked_readiness_reports,
     build_traffic_informed_advisory_plan,
     calibration_maps_signal,
+    demo_profiling_fixture_labels,
+    demo_profiling_links_advisory,
     expected_advisory_claim_type,
     expected_advisory_evidence_mode,
     readiness_has_ready_report,
@@ -26,6 +29,7 @@ from mip.contracts.workflow_readiness import (
     WorkflowReadinessReportType,
     WorkflowReadinessStatus,
 )
+from mip.workflows.intake.demo_profiling import DEMO_DATASET_WEBSITE_TRAFFIC
 
 
 def test_demo_fixtures_build_cold_start_ecommerce_advisory_plan() -> None:
@@ -101,3 +105,17 @@ def test_calibration_missing_uncertainty_fixture_does_not_map() -> None:
     assert result.report.status == CalibrationIntakeStatus.NEEDS_MORE_DATA
     blocking = result.report.blocking_reasons
     assert CalibrationIntakeBlockingReason.MISSING_UNCERTAINTY.value in blocking
+
+
+def test_demo_profiling_fixture_labels_cover_builtin_datasets() -> None:
+    labels = demo_profiling_fixture_labels()
+    assert DEMO_DATASET_WEBSITE_TRAFFIC in labels
+    assert len(labels) == 5
+
+
+def test_website_traffic_demo_profiling_links_advisory() -> None:
+    fixture = build_demo_profiling_fixture(DEMO_DATASET_WEBSITE_TRAFFIC)
+    assert demo_profiling_links_advisory(DEMO_DATASET_WEBSITE_TRAFFIC)
+    assert fixture.advisory_plan is not None
+    assert fixture.traffic_profile is not None
+    assert fixture.profile.row_count > 0
