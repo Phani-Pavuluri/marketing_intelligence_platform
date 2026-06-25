@@ -81,14 +81,20 @@ Next  Phase 8G/8H implementation (explanation payload + usage policy)
 
 I1–I15  Conversational intake + data handoff (documented product workflow)
 
-P4b–P4c  Experiment design intake + common profiling contracts (documented; next implementation)
+P4b–P4c  Experiment design intake + Common Data Intake Workbench (documented; next implementation)
 
 P17  LangGraph / stateful workflow orchestration skeleton (after P4b–P8 stabilize)
 ```
 
+## Common Data Intake Workbench (P4c — planned)
+
+**Principle:** Common intake first, workflow-specific readiness second. One workbench for MMM, GeoX, CalibrationSignal, and decision-review—no separate upload flows.
+
+The workbench owns source registration, manifests, mapping, snapshots, structural profiling, `WorkflowSupportAssessment`, and LLM-safe summaries. Readiness then branches by workflow (P5).
+
 ## P17 — LangGraph / stateful workflow orchestration (planned)
 
-**Purpose:** LangGraph (or equivalent) routes users through governed intake, profiling, readiness, and diagnostic-request stages. It is a **workflow controller**, not the measurement brain.
+**Purpose:** LangGraph (or equivalent) routes users through governed intake, workbench profiling, workflow-specific readiness, and diagnostic-request stages. It is a **workflow controller**, not the measurement brain.
 
 ```text
 LLM + LangGraph = conversation router / workflow controller
@@ -98,7 +104,7 @@ MMM               = MMM diagnostics / calibration context
 panel_exp / GeoX  = design diagnostics, power, MDE, readout
 ```
 
-**Graph state holds governed objects only** — `MeasurementIntakeSession`, `IntakePathRecommendation`, `IntakePlan`, manifests, `SemanticMappingReport`, `ExperimentDesignIntake`, `PreliminaryAnalysisReport`, `ReadinessReport`, `TrustReport`. Not raw dataframes.
+**Graph state holds governed objects only** — `MeasurementIntakeSession`, `IntakePathRecommendation`, `IntakePlan`, manifests, `SemanticMappingReport`, `ExperimentDesignIntake`, `PreliminaryAnalysisReport`, `WorkflowSupportAssessment`, `ReadinessReport`, `TrustReport`. Not raw dataframes.
 
 **Future nodes:** `IntentClassifierNode` · `ClarificationNode` · `IntakeSessionNode` · `PathRecommendationNode` · `RequiredDataPlanNode` · `DataSourceManifestNode` · `ColumnMappingNode` · `ExperimentDesignRequirementNode` · `PreliminaryProfilingNode` · `ReadinessReportNode` · `PanelExpDiagnosticRequestNode` · `MMMRefreshRequestNode` · `LLMAnswerGroundingNode` · `HumanApprovalNode`
 

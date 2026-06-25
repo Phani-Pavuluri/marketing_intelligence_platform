@@ -211,18 +211,17 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P3 implemented:** `DataSourceRef` and intake manifest contracts (`MMMIntakeManifest`, `GeoXIntakeManifest`, `build_intake_manifest`). MIP can represent user-selected data source modes and tie them to session/recommendation/plan.
 
-**P4 implemented:** column mapping and semantic confirmation contracts (`ColumnMappingProposal`, `ColumnMappingConfirmation`, `SemanticMappingReport`, `build_semantic_mapping_report`). MIP can represent proposed and user-confirmed mappings from declared sources to expected semantic roles.
+**P4 implemented:** column mapping and semantic confirmation contracts (`ColumnMappingProposal`, `ColumnMappingConfirmation`, `SemanticMappingReport`, `build_semantic_mapping_report`).
 
-The platform uses the LLM as a **conversational interface**, not the measurement brain. Valid data requirements, readiness status, and decision claims are governed by deterministic contracts and engine-produced reports. The LLM must not answer data-grounded questions from raw files.
+**Architecture principle:** **Common intake first, workflow-specific readiness second.** MIP will use one **Common Data Intake Workbench** for MMM, GeoX/experiment design, CalibrationSignal intake, and decision-review—upload/connect once, then branch readiness by workflow. The LLM is the conversational interface over governed reports, not the measurement brain.
 
 **Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P4b** — experiment design objective and data requirement contracts.
 
-1. **P4b** — Experiment design objective/KPI/data requirement contracts (MMM→GeoX bridge, standalone GeoX design)
-2. **P4c** — Common data intake profiling and preliminary analysis contracts
-3. **P5 / I7–I8** — Readiness report contracts
-4. **P6** — CalibrationSignal intake mapping
-5. **P7–P8** — Streamlit shell + local/demo profiling implementation
-6. **P17** — LangGraph/stateful orchestration skeleton (after core contracts stabilize)
+1. **P4b** — Experiment design objective/KPI/data requirements (MMM→GeoX bridge, standalone GeoX)
+2. **P4c** — **Common Data Intake Workbench** + preliminary profiling contracts (shared by MMM and GeoX)
+3. **P5** — Workflow-specific readiness reports (MMM / GeoX / CalibrationSignal / decision-review)
+4. **P6–P8** — CalibrationSignal mapping · Streamlit shell · demo profiling implementation
+5. **P17** — LangGraph orchestration skeleton (after core contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 

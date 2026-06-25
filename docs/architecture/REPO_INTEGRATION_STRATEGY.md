@@ -36,18 +36,18 @@ Control plane and governance layer:
 
 MIP does **not** own geo matching, SCM/TBR/DID inference, MMM fitting, or portfolio optimization math.
 
-MIP **does** own intake contracts, manifests, semantic mappings, preliminary profiling summaries, readiness reports, and LLM grounding context. **panel_exp/GeoX** owns power, MDE, matchability, design feasibility, and readout. **MMM** owns model diagnostics, calibration gaps, and experiment recommendation context for MMM→GeoX bridges.
+### Common Data Intake Workbench
 
-### Intake and experiment-design ownership
+**Common intake first, workflow-specific readiness second.** MIP owns one shared intake workbench (source registration, manifests, mapping, snapshots, structural profiling, `WorkflowSupportAssessment`). Users do not maintain separate MMM and GeoX upload flows. After common intake, readiness branches: MMM-specific · GeoX/experiment-design · CalibrationSignal · decision-review.
 
 | Layer | Owns | Does not own |
 |-------|------|--------------|
-| **MIP** | Intake session/plan/manifest; column mapping; data snapshot summaries; readiness reports; `ExperimentDesignIntake`; `ExperimentDiagnosticRequest` handoff | Power, MDE, matching, model fitting, optimizer |
-| **panel_exp / GeoX** | Design diagnostics, power/MDE, matchability, feasibility, readout, governed export | Intake contracts, LLM grounding, readiness tier certification |
-| **MMM** | Model uncertainty, calibration gap signals, MMM→GeoX recommendation context, MMM diagnostics | Geo experiment design execution, intake manifest assembly |
-| **LLM** | Clarification, explanation, summarization of governed reports | Diagnostic computation, feasibility certification, raw-file analysis |
+| **MIP common intake** | Workbench, snapshots, mapping, profiling summaries, workflow support assessment, LLM grounding context | Power, MDE, matching, model fitting |
+| **MMM** | MMM sufficiency, media time-series, calibration, refresh diagnostics | Geo design execution |
+| **panel_exp / GeoX** | Power/MDE, matchability, design feasibility, readout | Intake workbench, readiness tier certification |
+| **LLM** | Clarification, explanation of governed reports | Raw-file analysis, feasibility certification |
 
-See [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) I6b/I6c and [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P4b–P4c.
+See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P4c and [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) I6c.
 
 ### `panel_exp` / GeoX
 

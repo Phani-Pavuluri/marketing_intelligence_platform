@@ -64,21 +64,17 @@ Live engine execution on the MIP side remains blocked until a later explicitly g
 
 **Governance-valid ≠ answer-valid** also applies at intake: the LLM may draft intake plans and mapping proposals, but **MIP validation** (readiness report, manifest) is the source of truth—see [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md).
 
-### 3.2 LLM answer grounding for intake and profiling
+### 3.1 Common Data Intake Workbench and LLM grounding
 
-The LLM must **not** answer data-grounded questions from raw files. Allowed sources:
+**Common intake first, workflow-specific readiness second.** The LLM helps users interact with the common intake workbench—it must not answer from raw files.
 
-- Intake session, path recommendation, plan, manifest, semantic mapping report
-- Preliminary analysis report, readiness report
-- MMM diagnostic report, GeoX diagnostic report, `TrustReport`
+Allowed sources: intake session · plan · manifest · semantic mapping report · `WorkflowSupportAssessment` · preliminary analysis · workflow-specific readiness reports · diagnostic reports · `TrustReport`.
 
-**Allowed (after P4c preliminary analysis exists):** summarize weeks, DMAs, metric coverage, missingness, and structural suitability for GeoX design diagnostics—while stating panel_exp must still assess match quality and MDE.
+**May explain:** national-only data is insufficient for DMA GeoX; visits may proxy awareness but BSV is absent; data may be structurally ready for GeoX design diagnostics while panel_exp must still assess MDE.
 
-**Disallowed:** lift guarantees, week counts as design advice, matched markets, design validity, budget recommendations.
+**Must not claim:** powered test · week recommendations · matched markets · design validity · budget moves.
 
-LangGraph may route workflow nodes but must not expose raw dataframes to the LLM. See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P17.
-
-### 3.3 Artifact selection and ambiguity design constraints
+### 3.2 Artifact selection and ambiguity design constraints
 
 Phases 8G–8H and 8I must incorporate [G11–G20 policies](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md):
 
