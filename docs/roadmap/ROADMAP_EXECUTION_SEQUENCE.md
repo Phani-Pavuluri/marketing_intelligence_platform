@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `bfa16b6`  
-**Immediate next phase:** **P6** — CalibrationSignal intake mapping
+**Current main:** `d89bc6d`  
+**Immediate next phase:** **P7** — Streamlit/local workflow shell
 
 ## What is already implemented
 
@@ -17,6 +17,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P4c common intake workbench + preliminary profiling (I6c) | ✓ |
 | P5 workflow-specific readiness reports (I7–I8) | ✓ |
 | P5b general advisory / cold-start planning (I8b) | ✓ |
+| P6 CalibrationSignal intake mapping (I9) | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -91,7 +92,7 @@ P1 session/path
 | **P4c** | **Common Data Intake Workbench** + preliminary profiling contracts | Summary records only; shared by MMM and GeoX | ✓ implemented |
 | **P5** | **Workflow-specific** readiness report contracts (I7–I8) | Builds on P4c workbench | ✓ implemented |
 | **P5b** | **General advisory** and cold-start planning contracts (I8b) | Routes users not ready for formal measurement | ✓ implemented |
-| **P6** | I9 CalibrationSignal mapping | Fixture validation |
+| **P6** | I9 CalibrationSignal mapping | Fixture validation | ✓ implemented |
 | **P7** | I10 Streamlit/local workflow shell | Display only |
 | **P8** | I4 demo upload + profiling implementation | Sandbox CSV only |
 | **P9** | I11 production table-ref design | Design only |
@@ -320,6 +321,19 @@ Allowed: Use general knowledge + objective ontology. Ask for business objective 
 
 No web search integration · no file parsing · no data profiling computation · no MMM/GeoX execution · no budget optimizer · no channel ROI model · no causal effect estimation · no automatic recommendation approval
 
+## P6 — CalibrationSignal intake mapping
+
+**Status:** ✓ implemented — `CalibrationEvidenceInput`, `CalibrationMappingRequirement`, `CalibrationMappingReport`, `validate_calibration_evidence_input`, `map_evidence_to_calibration_signal`. Maps governed experiment evidence into existing `CalibrationSignal` contracts with fixture validation. MMM calibration execution, effect estimation, causal certification, and decision approval remain deferred.
+
+**Purpose:** Bridge governed experiment/readout evidence to MMM-consumable calibration signals after P5 readiness and P5b advisory lanes.
+
+**Key behaviors:**
+
+- Validates effect estimate, uncertainty (`standard_error`; CI alone does not auto-derive SE), metric/estimand, scope, and time window alignment
+- Preserves lineage via `source_artifact_id`, `source_readout_id`, `source_experiment_id`, `source_trust_report_id`
+- Blocks stale/non-causal evidence when requirements disallow them
+- Maps valid evidence to `CalibrationSignal` with `DIAGNOSTIC_ONLY` tier and blocked decision/refresh usage
+
 ## P4b — Experiment design objective and data requirement contracts
 
 **Entry paths:** MMM-driven (uncertainty, calibration gap, evidence conflict) · standalone GeoX design.
@@ -374,6 +388,7 @@ No web search integration · no file parsing · no data profiling computation ·
 |------------|---------------|
 | Workflow-specific readiness | P4c workbench + P5 contracts |
 | General advisory / cold-start | P5b contracts + evidence/claim labeling |
+| CalibrationSignal intake mapping | P6 contracts + fixture validation |
 | Experiment design diagnostics | P4b + P4c + P5 + panel_exp gated handoff |
 | LLM current-performance answers | P11 + P12 + S1–S3 + TrustReport + G11–G20 |
 | LangGraph runtime | P4b, P4c, P5, P5b, P8 contracts stable |

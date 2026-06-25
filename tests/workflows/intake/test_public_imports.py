@@ -8,6 +8,9 @@ def test_public_imports() -> None:
         BaseWorkflowReadinessReport,
         BusinessObjective,
         BusinessObjectiveType,
+        CalibrationEvidenceInput,
+        CalibrationIntakeStatus,
+        CalibrationMappingReport,
         CalibrationSignalReadinessReport,
         ColdStartAdvisoryPlan,
         ColdStartBusinessProfile,
@@ -62,6 +65,7 @@ def test_public_imports() -> None:
         WorkflowSupportRoute,
         WorkflowSupportStatus,
         WorkflowType,
+        build_calibration_mapping_report,
         build_calibration_signal_readiness_report,
         build_cold_start_advisory_plan,
         build_cold_start_business_profile,
@@ -79,10 +83,12 @@ def test_public_imports() -> None:
         build_workflow_support_assessment,
         evaluate_objective_feasibility,
         has_field_or_alias,
+        map_evidence_to_calibration_signal,
         recommend_intake_path,
         recommended_next_questions,
         requirement_for_objective,
         suggest_kpi_families_for_objective,
+        validate_calibration_evidence_input,
     )
 
     assert MeasurementWorkflowKind.MMM.value == "mmm"
@@ -103,6 +109,12 @@ def test_public_imports() -> None:
     assert EvidenceLevel.BUSINESS_PROFILE_SIGNAL.value == "business_profile_signal"
     assert ColdStartAdvisoryPlan is not None
     assert ColdStartBusinessProfile is not None
+    assert callable(build_calibration_mapping_report)
+    assert callable(map_evidence_to_calibration_signal)
+    assert callable(validate_calibration_evidence_input)
+    assert CalibrationEvidenceInput is not None
+    assert CalibrationMappingReport is not None
+    assert CalibrationIntakeStatus.MAPPED.value == "mapped"
     assert callable(build_workflow_readiness_reports)
     assert callable(build_mmm_data_readiness_report)
     assert callable(build_geox_design_readiness_report)

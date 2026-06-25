@@ -221,11 +221,13 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P5b implemented:** general advisory and cold-start planning contracts (`ColdStartBusinessProfile`, `ColdStartAdvisoryPlan`, `WebsiteTrafficSourceProfile`, `build_cold_start_advisory_plan`). MIP can now represent advisory-only marketing guidance for users without formal measurement readiness, including business-profile-driven channel hypotheses, website traffic/source-informed hypotheses, tracking setup checklists, starter measurement plans, and learning agendas. Outputs are labeled by evidence mode and claim type and cannot claim ROI, causal lift, optimal mix, or decision authorization.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P6** — CalibrationSignal intake mapping.
+**P6 implemented:** CalibrationSignal intake mapping contracts (`CalibrationEvidenceInput`, `CalibrationMappingRequirement`, `CalibrationMappingReport`, `map_evidence_to_calibration_signal`). MIP can now validate governed experiment evidence for CalibrationSignal compatibility, preserve source lineage, and map structurally valid evidence into `CalibrationSignal` contracts. This does not execute MMM calibration, estimate effects, certify causality, or approve decisions.
 
-1. **P6** — CalibrationSignal intake mapping
-2. **P7–P8** — Streamlit shell · demo profiling implementation
-3. **P17** — LangGraph orchestration skeleton (after P6–P8 stabilize)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P7** — Streamlit/local workflow shell.
+
+1. **P7** — Streamlit/local workflow shell
+2. **P8** — Local/demo profiling implementation
+3. **P17** — LangGraph orchestration skeleton (after P7–P8 stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 

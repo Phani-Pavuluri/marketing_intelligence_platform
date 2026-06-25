@@ -385,13 +385,13 @@ Allowed inputs (later): source/medium · channel group · landing page · geogra
 
 ---
 
-### Track I9 — CalibrationSignal Intake Mapping
+### Track I9 — CalibrationSignal Intake Mapping (P6)
+
+**Status:** ✓ implemented — intake mapping contracts and deterministic helpers (`validate_calibration_evidence_input`, `map_evidence_to_calibration_signal`, `build_calibration_mapping_report`). MMM calibration execution, effect estimation, causal certification, and decision approval remain deferred.
 
 **Why:** Experiment evidence must not enter MMM as loose text.
 
-**Accepted evidence sources:** GeoX export · CLS export · A/B summary · holdout · replay · manual calibration draft
-
-**Future objects:** `CalibrationSignalIntakeCandidate` · `CalibrationSignalMappingReport` · `CalibrationSignalReadinessReport`
+**Objects:** `CalibrationEvidenceInput` · `CalibrationMappingRequirement` · `CalibrationMappingReport` · existing `CalibrationSignal`
 
 **Required fields:** `source` · `metric_id` · `estimand_id` · `effect_estimate` · `standard_error_or_interval` · `time_window` · `geo_scope` · `channel_scope` · `product_scope` · `causal_validity_status` · `freshness_status` · `allowed_use`
 
@@ -400,6 +400,7 @@ Allowed inputs (later): source/medium · channel group · landing page · geogra
 - Map to `CalibrationSignal` contract—not free text.
 - Pass metric, estimand, scope, freshness, and causal validity checks.
 - Misaligned evidence may be `TrustReport`-only or blocked from calibration.
+- Confidence interval alone does not auto-map to uncertainty without `standard_error`.
 
 **Ownership:** **MIP** owns mapping and gates; **GeoX** provides governed exports.
 
@@ -601,11 +602,11 @@ The LLM must not answer from raw files—only from governed reports.
 
 ## 7. Next implementation phase
 
-**P1–P5b complete.** Next:
+**P1–P6 complete.** Next:
 
-1. **P6** — CalibrationSignal intake mapping
-2. **P7–P8** — Streamlit shell · demo profiling implementation
-4. **P17** — LangGraph orchestration skeleton (after P6–P8 stabilize)
+1. **P7** — Streamlit/local workflow shell
+2. **P8** — Local/demo profiling implementation
+3. **P17** — LangGraph orchestration skeleton (after P7–P8 stabilize)
 
 Sequence: understand experiment objective → provide data once through common workbench → workflow-specific readiness → diagnostics.
 
