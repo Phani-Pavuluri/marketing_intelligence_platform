@@ -205,15 +205,17 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 | [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md) | `mip demo` / `mip app`, Streamlit, providers, local artifacts |
 | [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md) | Three-repo boundaries and adapter contracts |
 
-**P1 implemented:** deterministic intake session and path recommendation contracts (`MMMIntakeSession`, `GeoXIntakeSession`, `IntakePathRecommendation`, `recommend_intake_path`). This converts LLM-guided intent into structured, provider-free session/recommendation objects. Uploads, manifests, data readiness, file profiling, and execution remain deferred.
+**P1 implemented:** deterministic intake session and path recommendation contracts (`MMMIntakeSession`, `GeoXIntakeSession`, `IntakePathRecommendation`, `recommend_intake_path`).
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P2** — required data assets and sample schema expectations (I3).
+**P2 implemented:** required data asset and sample schema expectation contracts (`IntakePlan`, `RequiredDataAsset`, `build_intake_plan`). After a path recommendation, MIP can show the expected data shape before upload/connect. Uploads, manifests, profiling, readiness, and execution remain deferred.
 
-1. **P2 / I3** — `IntakePlan`, `RequiredDataAsset` catalog
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P3** — `DataSourceRef` and intake manifest contracts (I5).
+
+1. **P3 / I5** — `DataSourceRef`, `IntakeManifest`
 2. **P4 / S1–S3** — Metric/estimand/scope semantic registry stubs
 3. **P12 / 8G–8H** — LLM explanation payload + usage policy (G11–G20 constraints)
 4. Sibling producer writers per 8F specs with `metric_id`, `estimand_id`, scope metadata
-5. **P3–P5 / I4–I8** — Manifest, mapping, readiness (after P2)
+5. **P3–P5 / I4–I8** — Manifest, mapping, readiness (after P3)
 6. **P13 / G1–G2** — Golden scenario fixtures once 8G–8H contracts exist
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.

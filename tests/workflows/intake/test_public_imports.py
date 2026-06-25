@@ -17,6 +17,7 @@ def test_public_imports() -> None:
         IntakeCandidatePath,
         IntakeIntendedUse,
         IntakePathRecommendation,
+        IntakePlan,
         IntakeRecommendationStatus,
         IntakeSessionStatus,
         MeasurementIntakeSession,
@@ -26,6 +27,7 @@ def test_public_imports() -> None:
         ObjectiveFeasibilityReport,
         RiskTolerance,
         WorkflowType,
+        build_intake_plan,
         evaluate_objective_feasibility,
         has_field_or_alias,
         recommend_intake_path,
@@ -41,6 +43,8 @@ def test_public_imports() -> None:
     assert IntakeRecommendationStatus.RECOMMENDED.value == "recommended"
     assert IntakeIntendedUse.DIAGNOSTIC_ONLY.value == "diagnostic_only"
     assert callable(recommend_intake_path)
+    assert callable(build_intake_plan)
+    assert IntakePlan is not None
     assert MeasurementIntakeSession is not None
     assert MMMIntakeSession is not None
     assert GeoXIntakeSession is not None
