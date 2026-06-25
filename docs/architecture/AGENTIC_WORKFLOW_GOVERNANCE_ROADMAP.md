@@ -80,7 +80,35 @@ G1–G10  Critical invariants and golden scenarios (documented addendum)
 Next  Phase 8G/8H implementation (explanation payload + usage policy)
 
 I1–I15  Conversational intake + data handoff (documented product workflow)
+
+P4b–P4c  Experiment design intake + common profiling contracts (documented; next implementation)
+
+P17  LangGraph / stateful workflow orchestration skeleton (after P4b–P8 stabilize)
 ```
+
+## P17 — LangGraph / stateful workflow orchestration (planned)
+
+**Purpose:** LangGraph (or equivalent) routes users through governed intake, profiling, readiness, and diagnostic-request stages. It is a **workflow controller**, not the measurement brain.
+
+```text
+LLM + LangGraph = conversation router / workflow controller
+MIP contracts     = state, gates, audit trail
+Common profiling  = preliminary data summaries
+MMM               = MMM diagnostics / calibration context
+panel_exp / GeoX  = design diagnostics, power, MDE, readout
+```
+
+**Graph state holds governed objects only** — `MeasurementIntakeSession`, `IntakePathRecommendation`, `IntakePlan`, manifests, `SemanticMappingReport`, `ExperimentDesignIntake`, `PreliminaryAnalysisReport`, `ReadinessReport`, `TrustReport`. Not raw dataframes.
+
+**Future nodes:** `IntentClassifierNode` · `ClarificationNode` · `IntakeSessionNode` · `PathRecommendationNode` · `RequiredDataPlanNode` · `DataSourceManifestNode` · `ColumnMappingNode` · `ExperimentDesignRequirementNode` · `PreliminaryProfilingNode` · `ReadinessReportNode` · `PanelExpDiagnosticRequestNode` · `MMMRefreshRequestNode` · `LLMAnswerGroundingNode` · `HumanApprovalNode`
+
+**Approved typed tools (future):** `recommend_intake_path()` · `build_intake_plan()` · `build_intake_manifest()` · `build_semantic_mapping_report()` · `build_experiment_design_requirements()` · `run_common_profile_summary()` · `build_readiness_report()` · `build_panel_exp_diagnostic_request()` · gated engine diagnostic calls
+
+**Boundaries:** LangGraph may choose the next governed module; must not let LLM write arbitrary analysis code; must not expose raw files to LLM; must not bypass `TrustReport`, readiness gates, or human approval; must not produce causal/budget/design-validity claims without engine outputs.
+
+**Timing:** Do not implement LangGraph runtime before P4b, P4c, P5, and P8 contracts stabilize. Integer phase **P9** remains production table-reference design; orchestration is **P17**.
+
+See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md).
 
 ## Phase 8A artifacts
 
