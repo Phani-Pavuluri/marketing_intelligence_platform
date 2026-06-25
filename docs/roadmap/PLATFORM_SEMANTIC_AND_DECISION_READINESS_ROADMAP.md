@@ -426,6 +426,18 @@ Semantic registries (S1–S3) and scope metadata are **prerequisites** for [conv
 
 Intake sessions (I1) should capture `metric_id` and `estimand_id` before data upload/connect.
 
+## 5.3 Experiment design objective-to-KPI mapping (P4b)
+
+Before generic readiness reports, MIP will add **deterministic** objective-to-KPI-family rules for GeoX/experiment design intake (see [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P4b):
+
+- **Awareness** → BSV, branded search, traffic proxies; requires geo-week/DMA-week KPI and media variation
+- **Demand creation** → visits, trials, leads; requires funnel metrics at geo-time grain
+- **Conversion** → conversions, orders, sales; requires outcome + media + promo/seasonality context
+- **Retention / usage** → active users, renewal, churn; requires geo-time usage panels
+- **MMM calibration** → KPI must align with MMM metric/estimand/channel/scope; readout must be `CalibrationSignal`-compatible
+
+The LLM may explain candidate KPI families and ask clarifying questions. **Platform rules** decide valid mappings. Primary KPI certification requires semantic confirmation, data availability, and engine diagnostics—not LLM judgment.
+
 ## 6. Related documents
 
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)

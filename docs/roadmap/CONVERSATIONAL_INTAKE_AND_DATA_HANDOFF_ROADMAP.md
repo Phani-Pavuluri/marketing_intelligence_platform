@@ -234,9 +234,64 @@ This addendum is **documentation only**. No runtime code, Streamlit changes, con
 
 ---
 
+### Track I6b — Experiment Design Objective and Data Requirement Intake (P4b)
+
+**Why:** Generic intake (P1–P4) does not yet encode domain-tailored GeoX / experiment-design objectives, KPI families, or MMM→GeoX bridges.
+
+**Entry paths:**
+
+1. **MMM-driven experiment design** — uncertainty, calibration gap, evidence conflict, weak support, or decision-surface ambiguity from MMM suggests validating a channel/tactic/product/geography/KPI with GeoX.
+2. **Standalone experiment design** — user initiates geo experiment design directly (e.g. DMA-level Meta awareness test for Acrobat).
+
+**Example requests:** MMM uncertain on Meta for Creative Cloud; validate YouTube demand creation for Photoshop; DMA-level awareness/conversion tests; tactic-specific tests (awareness vs conversion).
+
+**Future objects:** `ExperimentDesignObjective` · `ExperimentDesignUseCase` · `ExperimentObjectiveCategory` · `ExperimentKpiFamily` · `ExperimentDesignIntake` · `ExperimentDesignDataRequirement` · `ExperimentDesignClarificationQuestion` · `ExperimentDiagnosticRequest` · `MMMToGeoXDesignBridge` · `StandaloneGeoXDesignRequest` · `MMMExperimentRecommendationSource` · `ExperimentValidationNeed` · `CalibrationGapReason` · `ExperimentDesignTrigger`
+
+**Objective-to-KPI family rules (deterministic, future):**
+
+| Category | Candidate KPIs | Required data |
+|----------|----------------|---------------|
+| Awareness | BSV, branded search, direct traffic, site visits, visitors, reach proxy | Geo-week/DMA-week KPI, platform spend/exposure, campaign dates, geo mapping |
+| Demand creation | Visits, trials, leads, product-page visits, signups | Geo-week/DMA-week funnel metrics, spend/exposure, controls, campaign/tactic mapping |
+| Conversion | Conversions, orders, sales, ARR/GNARR, trials-to-paid | Geo-week/DMA-week outcome, media spend/exposure, promos/pricing, seasonality |
+| Retention / usage | Active users, usage events, renewal, churn | Geo-time usage/retention panel and exposure/treatment history |
+| MMM calibration | Must match MMM metric/estimand/channel/scope | Design/readout path producing `CalibrationSignal`-compatible effect + uncertainty |
+
+**Rules:**
+
+- LLM may explain mappings and ask clarifying questions; **deterministic rules** decide valid KPI/data mappings.
+- Primary KPI is not certified until semantic confirmation, data availability, and diagnostics exist.
+- MMM→GeoX bridge captures source artifact ID, validation target, and trigger reason; maps to `ExperimentDesignIntake`.
+- Standalone path clarifies objective, scope, KPI family, geo/time grain, and data requirements.
+- May produce `ExperimentDiagnosticRequest` for panel_exp; **must not** run power, MDE, matching, or claim feasibility.
+- Experiment readout intended for MMM calibration must be `CalibrationSignal`-compatible.
+
+**Ownership:** **MIP** owns experiment design intake contracts; **MMM** supplies recommendation/uncertainty context; **panel_exp/GeoX** owns design diagnostics and feasibility (later, gated).
+
+---
+
+### Track I6c — Common Data Intake Profiling and Preliminary Analysis (P4c)
+
+**Why:** Before readiness reports or LLM data-grounded answers, MIP needs governed summaries of snapshotted/ingested data—without exposing raw files to the LLM.
+
+**Future objects:** `DataSnapshot` · `SourceIngestionRecord` · `IngestionMode` · `DataProfileSummary` · `MetricAvailabilitySummary` · `GeoCoverageSummary` · `TimeCoverageSummary` · `MediaCoverageSummary` · `ControlCoverageSummary` · `PreliminaryAnalysisReport` · `LLMAnswerGroundingContext`
+
+**Summary fields (deterministic, future):** date range · week/month count · geo/DMA/market count · missingness · sparsity · geo/media coverage · spend variation · pre-period length · outlier weeks · campaign overlap · KPI/media at required grain · scope alignment · structural sufficiency for MMM or GeoX design diagnostics
+
+**Rules:**
+
+- Structural suitability ≠ design validity, power, or feasibility.
+- **panel_exp/GeoX** owns power, MDE, matchability, design feasibility, readout.
+- **MMM** owns MMM model and calibration diagnostics.
+- LLM may summarize `PreliminaryAnalysisReport` only—not raw files.
+
+**Ownership:** **MIP** owns profiling contracts and grounding context; **common profiling module** produces summaries; engines own downstream diagnostics.
+
+---
+
 ### Track I7 — Data Profiling + Compatibility Validation
 
-**Why:** Compatibility is path-specific and contract-driven—not LLM judgment.
+**Why:** Compatibility is path-specific and contract-driven—not LLM judgment. Builds on **P4c** preliminary analysis summaries.
 
 **Future objects:** `UploadedFileProfile` · `DataCompatibilityReport` · `DataQualityFinding` · `DataGrainValidationReport` · `ScopeValidationReport` · `FreshnessValidationReport`
 
@@ -441,6 +496,8 @@ user selects governed table connection
 | I4 | Data source mode selection |
 | I5 | DataSourceRef + intake manifest |
 | I6 | Column mapping + semantic confirmation |
+| I6b | Experiment design objective + KPI/data requirements (P4b) |
+| I6c | Common data profiling + preliminary analysis (P4c) |
 | I7 | Data profiling + compatibility validation |
 | I8 | MMM data readiness report |
 | I9 | CalibrationSignal intake mapping |
@@ -460,16 +517,35 @@ user selects governed table connection
 | Phase 4 `mip.workflows.configs` | I12 config draft |
 | Phase 5D Streamlit shell | I10 product workflow panels |
 | Phase 8F sibling exports | I4 sibling export mode, I12 handoff |
-| S1–S3 semantic registries | I6 mapping, I7/I8 validation |
+| S1–S3 semantic registries | I6 mapping, I7/I8 validation, P4b KPI rules |
 | G11–G20 artifact selection | I2 path gating, I8 tier semantics |
+
+## 6.1 Diagnostic ownership split
+
+| Owner | Role |
+|-------|------|
+| **LLM** | Clarify objective; follow-up questions; explain KPI/data requirements; summarize governed outputs; no diagnostic computation or decision certification |
+| **MIP / intake** | Session, plan, manifest, mappings, profiling summaries, readiness reports, grounding context |
+| **Common profiling** | Time/geo coverage, missingness, grain checks, metric/media availability, structural sufficiency |
+| **panel_exp / GeoX** | Power/MDE, matchability, design feasibility, readout, governed export |
+| **MMM** | Experiment recommendation source, calibration gap driver, MMM diagnostics, `CalibrationSignal` usage |
+
+## 6.2 LLM answer grounding
+
+The LLM must answer data-grounded questions **only** from: intake session · path recommendation · plan · manifest · semantic mapping report · preliminary analysis report · readiness report · MMM/GeoX diagnostic reports · `TrustReport`.
+
+The LLM must **not** answer from raw files. LangGraph may route workflow state but must not expose raw dataframes to the LLM.
 
 ## 7. Next implementation phase
 
-**P1 complete (I1–I2). P2 complete (I3). P3 complete (I5). P4 complete (I6).** Next:
+**P1–P4 complete.** Next:
 
-1. Data profiling + readiness reports (P5 / I7–I8)
+1. **P4b** — Experiment design objective and data requirement contracts (I6b)
+2. **P4c** — Common data intake profiling and preliminary analysis contracts (I6c)
+3. **P5** — Readiness report contracts (I7–I8)
+4. **P17** — LangGraph orchestration skeleton (after P4b–P8 stabilize)
 
-Keep upload/connect UI **separate** until contracts are validated. Then I5 manifest, I6 mapping, I7–I8 validation.
+Keep upload/connect UI **separate** until contracts are validated. Sequence: understand experiment objective → confirm data exists at right grain → build readiness.
 
 ## 8. Related documents
 
