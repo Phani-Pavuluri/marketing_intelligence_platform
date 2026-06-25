@@ -3,10 +3,14 @@
 
 def test_public_imports() -> None:
     from mip.workflows.intake import (
+        AdvisoryClaimType,
+        AdvisoryEvidenceMode,
         BaseWorkflowReadinessReport,
         BusinessObjective,
         BusinessObjectiveType,
         CalibrationSignalReadinessReport,
+        ColdStartAdvisoryPlan,
+        ColdStartBusinessProfile,
         ColumnMappingProposal,
         ColumnMappingStatus,
         CommonDataProfileSummary,
@@ -21,6 +25,7 @@ def test_public_imports() -> None:
         DecisionHorizon,
         DecisionReviewReadinessReport,
         DecisionScope,
+        EvidenceLevel,
         ExperimentDesignEntryPath,
         ExperimentDesignIntake,
         ExperimentDesignStatus,
@@ -58,6 +63,8 @@ def test_public_imports() -> None:
         WorkflowSupportStatus,
         WorkflowType,
         build_calibration_signal_readiness_report,
+        build_cold_start_advisory_plan,
+        build_cold_start_business_profile,
         build_common_intake_workbench,
         build_decision_review_readiness_report,
         build_experiment_design_intake,
@@ -89,6 +96,13 @@ def test_public_imports() -> None:
     assert callable(build_intake_plan)
     assert callable(build_intake_manifest)
     assert callable(build_semantic_mapping_report)
+    assert callable(build_cold_start_advisory_plan)
+    assert callable(build_cold_start_business_profile)
+    assert AdvisoryEvidenceMode.BUSINESS_PROFILE_ONLY.value == "business_profile_only"
+    assert AdvisoryClaimType.HYPOTHESIS_TO_TEST.value == "hypothesis_to_test"
+    assert EvidenceLevel.BUSINESS_PROFILE_SIGNAL.value == "business_profile_signal"
+    assert ColdStartAdvisoryPlan is not None
+    assert ColdStartBusinessProfile is not None
     assert callable(build_workflow_readiness_reports)
     assert callable(build_mmm_data_readiness_report)
     assert callable(build_geox_design_readiness_report)

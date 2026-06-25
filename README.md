@@ -219,15 +219,13 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P5 implemented:** workflow-specific readiness report contracts (`MMMDataReadinessReport`, `GeoXDesignReadinessReport`, `CalibrationSignalReadinessReport`, `DecisionReviewReadinessReport`, `build_workflow_readiness_reports`). MIP can now branch from common intake/workflow support assessment into MMM data readiness, GeoX design readiness, CalibrationSignal readiness, and decision-review readiness. These reports assess structural readiness only; engine diagnostics, CalibrationSignal transformation, TrustReport approval, and decision recommendations remain deferred.
 
-**P5b planned:** general advisory and cold-start planning contracts. P5 determines whether the user is structurally ready for formal MMM, GeoX, CalibrationSignal, or decision-review workflows. P5b handles users who are **not** measurement-ready but still need useful planning advice—channel hypotheses, tracking setup, learning agendas, and business-profile-driven guidance. LLM general knowledge is allowed for advisory guidance; every answer must be labeled by **evidence level** and **claim type**. Referral traffic, organic search, CRM, and sales summaries may inform cold-start hypotheses but do not authorize causal or ROI claims.
+**P5b implemented:** general advisory and cold-start planning contracts (`ColdStartBusinessProfile`, `ColdStartAdvisoryPlan`, `WebsiteTrafficSourceProfile`, `build_cold_start_advisory_plan`). MIP can now represent advisory-only marketing guidance for users without formal measurement readiness, including business-profile-driven channel hypotheses, website traffic/source-informed hypotheses, tracking setup checklists, starter measurement plans, and learning agendas. Outputs are labeled by evidence mode and claim type and cannot claim ROI, causal lift, optimal mix, or decision authorization.
 
-**Architecture principle:** **Common intake first, workflow-specific readiness second.** After P5, users who are not measurement-ready route to **advisory/cold-start planning** (P5b) rather than forcing MMM or GeoX. The evidence hierarchy is: general knowledge → business profile → customer data summaries → measured diagnostics → TrustReport-authorized decision support.
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P6** — CalibrationSignal intake mapping.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P5b** — general advisory and cold-start planning contracts.
-
-1. **P5b** — General advisory and cold-start planning contracts
-2. **P6–P8** — CalibrationSignal mapping · Streamlit shell · demo profiling implementation
-3. **P17** — LangGraph orchestration skeleton (after P5b–P8 stabilize)
+1. **P6** — CalibrationSignal intake mapping
+2. **P7–P8** — Streamlit shell · demo profiling implementation
+3. **P17** — LangGraph orchestration skeleton (after P6–P8 stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 

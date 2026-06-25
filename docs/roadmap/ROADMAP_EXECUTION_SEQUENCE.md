@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `b58d95a`  
-**Immediate next phase:** **P5b** — General advisory and cold-start planning contracts
+**Current main:** `bfa16b6`  
+**Immediate next phase:** **P6** — CalibrationSignal intake mapping
 
 ## What is already implemented
 
@@ -16,6 +16,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P4b experiment design objective + data requirements (I6b) | ✓ |
 | P4c common intake workbench + preliminary profiling (I6c) | ✓ |
 | P5 workflow-specific readiness reports (I7–I8) | ✓ |
+| P5b general advisory / cold-start planning (I8b) | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -89,7 +90,7 @@ P1 session/path
 | **P4b** | Experiment design objective + KPI/data requirement contracts | Contracts/fixtures only | ✓ implemented |
 | **P4c** | **Common Data Intake Workbench** + preliminary profiling contracts | Summary records only; shared by MMM and GeoX | ✓ implemented |
 | **P5** | **Workflow-specific** readiness report contracts (I7–I8) | Builds on P4c workbench | ✓ implemented |
-| **P5b** | **General advisory** and cold-start planning contracts (I8b) | Routes users not ready for formal measurement | Contracts/fixtures only |
+| **P5b** | **General advisory** and cold-start planning contracts (I8b) | Routes users not ready for formal measurement | ✓ implemented |
 | **P6** | I9 CalibrationSignal mapping | Fixture validation |
 | **P7** | I10 Streamlit/local workflow shell | Display only |
 | **P8** | I4 demo upload + profiling implementation | Sandbox CSV only |
@@ -156,7 +157,7 @@ After common intake/profiling (P4c), readiness **branches by workflow**:
 
 ## P5b — General advisory and cold-start planning
 
-**Status:** planned — product-critical. Many users will not be ready for MMM or GeoX but still need safe, useful guidance.
+**Status:** ✓ implemented — advisory contracts and deterministic helpers (`build_cold_start_advisory_plan`, `build_cold_start_business_profile`, `infer_advisory_evidence_mode`, `build_traffic_source_signals`, `suggest_channel_candidates`, `build_channel_hypotheses`, `build_tracking_readiness_checklist`, `build_starter_measurement_plan`, `build_learning_agenda`). Outputs are labeled by evidence mode and claim type; ROI, causal lift, optimal mix, and decision authorization remain blocked.
 
 **Purpose:** Broader advisory lane for users who are not yet measurement-ready. Covers SMB paid media, no-data channel planning, business-profile-driven hypotheses, website traffic/source-informed advisory, tracking setup, and learning agendas—not only formal MMM/GeoX paths.
 

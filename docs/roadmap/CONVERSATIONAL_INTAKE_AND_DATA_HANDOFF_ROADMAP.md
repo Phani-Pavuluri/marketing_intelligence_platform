@@ -331,7 +331,7 @@ Example statuses: `supports_national_mmm` · `supports_geo_level_mmm` · `suppor
 
 ### Track I8b — General Advisory and Cold-Start Planning (P5b)
 
-**Status:** planned — product-critical. Many users will not be ready for MMM or GeoX but still need safe, useful guidance.
+**Status:** ✓ implemented — advisory contracts and deterministic helpers. Engine diagnostics, CalibrationSignal transformation, TrustReport approval, and decision recommendations remain deferred.
 
 **Why:** P5 workflow-specific readiness reports determine whether the user is structurally ready for formal measurement workflows. If the user is **not** ready but still needs guidance—no paid media history, business profile only, or website traffic without causal readout—MIP should route to **advisory/cold-start planning** rather than forcing MMM or GeoX.
 
@@ -601,12 +601,11 @@ The LLM must not answer from raw files—only from governed reports.
 
 ## 7. Next implementation phase
 
-**P1–P5 complete.** Next:
+**P1–P5b complete.** Next:
 
-1. **P5b** — General advisory and cold-start planning contracts
-2. **P6** — CalibrationSignal intake mapping
-3. **P7–P8** — Streamlit shell · demo profiling implementation
-4. **P17** — LangGraph orchestration skeleton (after P5b–P8 stabilize)
+1. **P6** — CalibrationSignal intake mapping
+2. **P7–P8** — Streamlit shell · demo profiling implementation
+4. **P17** — LangGraph orchestration skeleton (after P6–P8 stabilize)
 
 Sequence: understand experiment objective → provide data once through common workbench → workflow-specific readiness → diagnostics.
 
