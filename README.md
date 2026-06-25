@@ -213,15 +213,16 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P4 implemented:** column mapping and semantic confirmation contracts (`ColumnMappingProposal`, `ColumnMappingConfirmation`, `SemanticMappingReport`, `build_semantic_mapping_report`).
 
+**P4b implemented:** experiment design objective and data requirement contracts (`ExperimentDesignObjective`, `ExperimentDesignIntake`, `MMMToGeoXDesignBridge`, `StandaloneGeoXDesignRequest`, `ExperimentDiagnosticRequest`, `build_experiment_design_intake`, `build_experiment_diagnostic_request`). MIP can represent MMM-driven and standalone GeoX design intent, map objectives to candidate KPI families, list objective-specific data requirements, and prepare future panel_exp diagnostic requests without executing design diagnostics.
+
 **Architecture principle:** **Common intake first, workflow-specific readiness second.** MIP will use one **Common Data Intake Workbench** for MMM, GeoX/experiment design, CalibrationSignal intake, and decision-review—upload/connect once, then branch readiness by workflow. The LLM is the conversational interface over governed reports, not the measurement brain.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P4b** — experiment design objective and data requirement contracts.
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P4c** — Common Data Intake Workbench + preliminary profiling contracts.
 
-1. **P4b** — Experiment design objective/KPI/data requirements (MMM→GeoX bridge, standalone GeoX)
-2. **P4c** — **Common Data Intake Workbench** + preliminary profiling contracts (shared by MMM and GeoX)
-3. **P5** — Workflow-specific readiness reports (MMM / GeoX / CalibrationSignal / decision-review)
-4. **P6–P8** — CalibrationSignal mapping · Streamlit shell · demo profiling implementation
-5. **P17** — LangGraph orchestration skeleton (after core contracts stabilize)
+1. **P4c** — **Common Data Intake Workbench** + preliminary profiling contracts (shared by MMM and GeoX)
+2. **P5** — Workflow-specific readiness reports (MMM / GeoX / CalibrationSignal / decision-review)
+3. **P6–P8** — CalibrationSignal mapping · Streamlit shell · demo profiling implementation
+4. **P17** — LangGraph orchestration skeleton (after core contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 

@@ -542,12 +542,11 @@ The LLM must not answer from raw files—only from governed reports.
 
 ## 7. Next implementation phase
 
-**P1–P4 complete.** Next:
+**P1–P4b complete.** Next:
 
-1. **P4b** — Experiment design objective and data requirement contracts
-2. **P4c** — **Common Data Intake Workbench** + preliminary profiling contracts
-3. **P5** — Workflow-specific readiness reports
-4. **P17** — LangGraph orchestration skeleton (after P4b–P8 stabilize)
+1. **P4c** — **Common Data Intake Workbench** + preliminary profiling contracts
+2. **P5** — Workflow-specific readiness reports
+3. **P17** — LangGraph orchestration skeleton (after P4c–P8 stabilize)
 
 Sequence: understand experiment objective → provide data once through common workbench → workflow-specific readiness → diagnostics.
 

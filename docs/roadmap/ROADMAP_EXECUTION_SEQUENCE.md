@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `2aa4073`  
-**Immediate next phase:** **P4b** — Experiment design objective and data requirement contracts
+**Current main:** `3c907c4` (P4b branch; merge pending)  
+**Immediate next phase:** **P4c** — Common Data Intake Workbench + preliminary profiling contracts
 
 ## What is already implemented
 
@@ -13,6 +13,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P2 required data assets + sample schemas (I3) | ✓ |
 | P3 DataSourceRef + intake manifest (I5) | ✓ |
 | P4 column mapping + semantic confirmation (I6) | ✓ |
+| P4b experiment design objective + data requirements (I6b) | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -81,7 +82,7 @@ P1 session/path
 | **P2** | I3 required data assets | Contracts/fixtures only | ✓ implemented |
 | **P3** | I5 DataSourceRef + manifest | In-memory records | ✓ implemented |
 | **P4** | I6 column mapping + semantic confirmation | Contracts/fixtures only | ✓ implemented |
-| **P4b** | Experiment design objective + KPI/data requirement contracts | Contracts/fixtures only |
+| **P4b** | Experiment design objective + KPI/data requirement contracts | Contracts/fixtures only | ✓ implemented |
 | **P4c** | **Common Data Intake Workbench** + preliminary profiling contracts | Summary records only; shared by MMM and GeoX |
 | **P5** | **Workflow-specific** readiness report contracts (I7–I8) | Builds on P4c workbench |
 | **P6** | I9 CalibrationSignal mapping | Fixture validation |
