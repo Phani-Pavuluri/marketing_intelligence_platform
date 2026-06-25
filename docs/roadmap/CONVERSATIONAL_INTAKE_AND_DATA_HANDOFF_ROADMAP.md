@@ -465,9 +465,9 @@ user selects governed table connection
 
 ## 7. Next implementation phase
 
-**P1 complete (I1–I2). P2 complete (I3). P3 complete (I5).** Next:
+**P1 complete (I1–I2). P2 complete (I3). P3 complete (I5). P4 complete (I6).** Next:
 
-1. Column mapping + semantic confirmation stubs (P4 / I6 + S1–S3)
+1. Data profiling + readiness reports (P5 / I7–I8)
 
 Keep upload/connect UI **separate** until contracts are validated. Then I5 manifest, I6 mapping, I7–I8 validation.
 

@@ -24,6 +24,16 @@ from mip.contracts.intake_assets import (
     SampleRow,
     SampleSchemaExpectation,
 )
+from mip.contracts.intake_mapping import (
+    CanonicalMappingCandidate,
+    CanonicalMappingStatus,
+    ColumnMappingConfidence,
+    ColumnMappingConfirmation,
+    ColumnMappingProposal,
+    ColumnMappingStatus,
+    SemanticMappingDimension,
+    SemanticMappingReport,
+)
 from mip.contracts.intake_sources import (
     DataSourceMode,
     DataSourceRef,
@@ -47,6 +57,7 @@ from mip.workflows.intake.feasibility import (
     recommended_next_questions,
 )
 from mip.workflows.intake.manifest import build_intake_manifest
+from mip.workflows.intake.mapping import build_semantic_mapping_report
 from mip.workflows.intake.objectives import (
     BusinessObjective,
     BusinessObjectiveType,
@@ -84,6 +95,14 @@ __all__ = [
     "SiblingExportSourceRef",
     "TableSourceRef",
     "UploadedFileSourceRef",
+    "CanonicalMappingCandidate",
+    "CanonicalMappingStatus",
+    "ColumnMappingConfidence",
+    "ColumnMappingConfirmation",
+    "ColumnMappingProposal",
+    "ColumnMappingStatus",
+    "SemanticMappingDimension",
+    "SemanticMappingReport",
     "DataGrain",
     "DecisionHorizon",
     "DecisionScope",
@@ -108,6 +127,7 @@ __all__ = [
     "SampleRow",
     "SampleSchemaExpectation",
     "WorkflowType",
+    "build_semantic_mapping_report",
     "build_intake_manifest",
     "build_intake_plan",
     "evaluate_objective_feasibility",

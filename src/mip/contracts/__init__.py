@@ -43,6 +43,16 @@ from mip.contracts.intake_assets import (
     SampleRow,
     SampleSchemaExpectation,
 )
+from mip.contracts.intake_mapping import (
+    CanonicalMappingCandidate,
+    CanonicalMappingStatus,
+    ColumnMappingConfidence,
+    ColumnMappingConfirmation,
+    ColumnMappingProposal,
+    ColumnMappingStatus,
+    SemanticMappingDimension,
+    SemanticMappingReport,
+)
 from mip.contracts.intake_sources import (
     DataSourceMode,
     DataSourceRef,
@@ -90,6 +100,14 @@ __all__ = [
     "SiblingExportSourceRef",
     "TableSourceRef",
     "UploadedFileSourceRef",
+    "CanonicalMappingCandidate",
+    "CanonicalMappingStatus",
+    "ColumnMappingConfidence",
+    "ColumnMappingConfirmation",
+    "ColumnMappingProposal",
+    "ColumnMappingStatus",
+    "SemanticMappingDimension",
+    "SemanticMappingReport",
     "GeoGrain",
     "GeoXIntakeSession",
     "IntakeCandidatePath",
