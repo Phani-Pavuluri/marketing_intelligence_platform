@@ -1,5 +1,19 @@
 """Progressive business objective and data requirement intake."""
 
+from mip.contracts.experiment_design_intake import (
+    ExperimentDesignDataRequirement,
+    ExperimentDesignEntryPath,
+    ExperimentDesignIntake,
+    ExperimentDesignObjective,
+    ExperimentDesignStatus,
+    ExperimentDesignTriggerReason,
+    ExperimentDiagnosticRequest,
+    ExperimentDiagnosticRequestStatus,
+    ExperimentKpiFamily,
+    ExperimentObjectiveCategory,
+    MMMToGeoXDesignBridge,
+    StandaloneGeoXDesignRequest,
+)
 from mip.contracts.intake import (
     DataGrain,
     GeoGrain,
@@ -50,6 +64,14 @@ from mip.contracts.intake_sources import (
 )
 from mip.workflows.intake.assets import build_intake_plan
 from mip.workflows.intake.availability import DataAvailabilityProfile, has_field_or_alias
+from mip.workflows.intake.experiment_design import (
+    build_experiment_design_data_requirements,
+    build_experiment_design_intake,
+    build_experiment_diagnostic_request,
+    build_mmm_to_geox_bridge,
+    suggest_kpi_families_for_objective,
+    suggest_kpi_labels_for_families,
+)
 from mip.workflows.intake.feasibility import (
     FeasibilityStatus,
     ObjectiveFeasibilityReport,
@@ -80,6 +102,16 @@ __all__ = [
     "DataAvailabilityProfile",
     "DataFieldRequirement",
     "DataFieldRole",
+    "ExperimentDesignDataRequirement",
+    "ExperimentDesignEntryPath",
+    "ExperimentDesignIntake",
+    "ExperimentDesignObjective",
+    "ExperimentDesignStatus",
+    "ExperimentDesignTriggerReason",
+    "ExperimentDiagnosticRequest",
+    "ExperimentDiagnosticRequestStatus",
+    "ExperimentKpiFamily",
+    "ExperimentObjectiveCategory",
     "DataAssetPurpose",
     "DataAssetRequirementLevel",
     "DataAssetType",
@@ -92,6 +124,7 @@ __all__ = [
     "GeoXIntakeManifest",
     "IntakeManifestStatus",
     "MMMIntakeManifest",
+    "MMMToGeoXDesignBridge",
     "SiblingExportSourceRef",
     "TableSourceRef",
     "UploadedFileSourceRef",
@@ -126,7 +159,12 @@ __all__ = [
     "SampleColumnSpec",
     "SampleRow",
     "SampleSchemaExpectation",
+    "StandaloneGeoXDesignRequest",
     "WorkflowType",
+    "build_experiment_design_data_requirements",
+    "build_experiment_design_intake",
+    "build_experiment_diagnostic_request",
+    "build_mmm_to_geox_bridge",
     "build_semantic_mapping_report",
     "build_intake_manifest",
     "build_intake_plan",
@@ -135,4 +173,6 @@ __all__ = [
     "recommend_intake_path",
     "recommended_next_questions",
     "requirement_for_objective",
+    "suggest_kpi_families_for_objective",
+    "suggest_kpi_labels_for_families",
 ]

@@ -15,6 +15,12 @@ def test_public_imports() -> None:
         DataSourceRef,
         DecisionHorizon,
         DecisionScope,
+        ExperimentDesignEntryPath,
+        ExperimentDesignIntake,
+        ExperimentDesignStatus,
+        ExperimentDiagnosticRequest,
+        ExperimentKpiFamily,
+        ExperimentObjectiveCategory,
         FeasibilityStatus,
         GeoGrain,
         GeoXIntakeManifest,
@@ -29,12 +35,16 @@ def test_public_imports() -> None:
         MeasurementWorkflowKind,
         MMMIntakeManifest,
         MMMIntakeSession,
+        MMMToGeoXDesignBridge,
         ObjectiveDataRequirement,
         ObjectiveFeasibilityReport,
         RiskTolerance,
         SemanticMappingDimension,
         SemanticMappingReport,
+        StandaloneGeoXDesignRequest,
         WorkflowType,
+        build_experiment_design_intake,
+        build_experiment_diagnostic_request,
         build_intake_manifest,
         build_intake_plan,
         build_semantic_mapping_report,
@@ -43,6 +53,7 @@ def test_public_imports() -> None:
         recommend_intake_path,
         recommended_next_questions,
         requirement_for_objective,
+        suggest_kpi_families_for_objective,
     )
 
     assert MeasurementWorkflowKind.MMM.value == "mmm"
@@ -56,6 +67,17 @@ def test_public_imports() -> None:
     assert callable(build_intake_plan)
     assert callable(build_intake_manifest)
     assert callable(build_semantic_mapping_report)
+    assert callable(build_experiment_design_intake)
+    assert callable(build_experiment_diagnostic_request)
+    assert callable(suggest_kpi_families_for_objective)
+    assert ExperimentDesignEntryPath.MMM_DRIVEN.value == "mmm_driven"
+    assert ExperimentObjectiveCategory.AWARENESS.value == "awareness"
+    assert ExperimentKpiFamily.AWARENESS_SEARCH.value == "awareness_search"
+    assert ExperimentDesignStatus.REQUIREMENTS_READY.value == "requirements_ready"
+    assert MMMToGeoXDesignBridge is not None
+    assert StandaloneGeoXDesignRequest is not None
+    assert ExperimentDesignIntake is not None
+    assert ExperimentDiagnosticRequest is not None
     assert SemanticMappingReport is not None
     assert ColumnMappingProposal is not None
     assert ColumnMappingStatus.PROPOSED.value == "proposed"
