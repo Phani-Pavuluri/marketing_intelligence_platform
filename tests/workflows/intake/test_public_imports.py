@@ -5,6 +5,8 @@ def test_public_imports() -> None:
     from mip.workflows.intake import (
         BusinessObjective,
         BusinessObjectiveType,
+        ColumnMappingProposal,
+        ColumnMappingStatus,
         DataAvailabilityProfile,
         DataFieldRequirement,
         DataFieldRole,
@@ -30,9 +32,12 @@ def test_public_imports() -> None:
         ObjectiveDataRequirement,
         ObjectiveFeasibilityReport,
         RiskTolerance,
+        SemanticMappingDimension,
+        SemanticMappingReport,
         WorkflowType,
         build_intake_manifest,
         build_intake_plan,
+        build_semantic_mapping_report,
         evaluate_objective_feasibility,
         has_field_or_alias,
         recommend_intake_path,
@@ -50,6 +55,11 @@ def test_public_imports() -> None:
     assert callable(recommend_intake_path)
     assert callable(build_intake_plan)
     assert callable(build_intake_manifest)
+    assert callable(build_semantic_mapping_report)
+    assert SemanticMappingReport is not None
+    assert ColumnMappingProposal is not None
+    assert ColumnMappingStatus.PROPOSED.value == "proposed"
+    assert SemanticMappingDimension.DATE.value == "date"
     assert IntakePlan is not None
     assert MMMIntakeManifest is not None
     assert GeoXIntakeManifest is not None
