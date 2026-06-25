@@ -9,7 +9,7 @@ Complements:
 - [Platform Semantic and Decision Readiness Roadmap](./PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md) — S1–S12 metrics, estimands, scope, decision packets (when merged)
 - [MIP Sibling Export Producer Spec](../integrations/MIP_SIBLING_EXPORT_PRODUCER_SPEC.md) — thin governance envelope
 
-**After this addendum, stop adding roadmap layers beyond artifact-selection policies (G11–G20).** The next implementation phase is LLM Explanation Payload Contract + Usage Policy + Diagnostic Taxonomy (Phases 8G–8H), with G11–G20 as design constraints.
+**After this addendum, stop adding roadmap layers.** The next implementation phase is LLM Explanation Payload Contract + Usage Policy + Diagnostic Taxonomy (Phases 8G–8H).
 
 ## 1. Why this addendum exists
 
@@ -39,24 +39,6 @@ This addendum defines the **critical invariants and golden scenarios** needed to
 
 This addendum is **documentation only**. No model execution, optimizer execution, sibling imports, path dependencies, subprocesses, LLM provider calls, production recommendations, or new runtime decision behavior.
 
-### 1.3 Governance-valid vs answer-valid
-
-**Governance-valid does not mean answer-valid.**
-
-A structurally valid, registered artifact can still be the **wrong evidence** for the user's question. The LLM must not answer with the wrong artifact, wrong scope, stale result, superseded model, ambiguous metric, ambiguous estimand, or unsupported claim.
-
-| Question type | Evidence requirements |
-|---------------|----------------------|
-| **Current performance** | Current, non-superseded, scope-matched, metric-matched, estimand-matched, non-blocked evidence |
-| **Historical / trend** | Older artifacts allowed; must be labeled **historical** |
-| **Decision / action** | Stricter evidence than diagnostic or explanation questions |
-
-**Artifact selection rules:**
-
-- The LLM must **never** select artifacts only because they are available in the registry.
-- Selection must be governed by: user intent, time context, scope, metric, estimand, freshness, readiness, approval state, and `TrustReport` status.
-- **Latest** means latest for the requested scope, metric, estimand, and artifact type—not globally latest.
-
 ## 2. Required platform decisions
 
 1. **Structurally valid exports are not sufficient for decision guidance.**
@@ -65,12 +47,6 @@ A structurally valid, registered artifact can still be the **wrong evidence** fo
 4. **Readiness may not be silently upgraded** by adapters, UI, LLM, or downstream workflow steps.
 5. **Live engine execution remains blocked** until golden scenarios and safety evaluations exist.
 6. **Optimizer-backed recommendations remain blocked** until decision-surface certification and optimizer governance are implemented.
-7. **The LLM must never answer current-performance questions** from historical, superseded, expired, blocked, or stale artifacts unless explicitly framed as historical context.
-8. **The LLM must not infer scope, metric, or estimand** when multiple plausible artifacts exist.
-9. **The LLM must distinguish** no result, inconclusive result, blocked result, stale result, and zero effect.
-10. **The LLM must not answer counterfactual, forecast, budget, or curve-based planning questions** unless the artifact is certified for that use.
-11. **Artifact selection must be scope-specific**, not globally latest.
-12. **Claim-level readiness governs answers**; artifact-level validity is not enough.
 
 ## 3. Critical invariant and golden-scenario tracks
 
@@ -327,7 +303,6 @@ Sibling export producer specs (8F)
   → explanation payload contract (8G)
   → usage policy + diagnostic taxonomy (8H)
   → metric / estimand / scope contracts (S1–S3)
-  → artifact selection + ambiguity policies (G11–G20)
   → export completeness scoring (S9)
   → question router / safe answer policy (8I)
   → grounding map (8J)
@@ -341,216 +316,6 @@ Sibling export producer specs (8F)
 **Ownership:**
 
 - **MIP** owns roadmap sequencing and release gates.
-
----
-
-### Track G11 — Temporal Result Selection + Current-State Policy
-
-**Why:** A stale or superseded result can be more dangerous than no result because it sounds precise.
-
-**User terms requiring resolution:** `current`, `latest`, `recent`, `historical`, `trend`, `previous`, `refreshed`, `last model`, `current model`.
-
-**Required future fields:**
-
-`artifact_time_window` · `created_at` · `source_run_at` · `published_at` · `valid_from` · `valid_until` · `freshness_status` · `is_current` · `is_latest_for_scope` · `supersedes` · `superseded_by` · `model_version` · `data_snapshot_id` · `reporting_period` · `refresh_cadence` · `historical_only`
-
-**Rules:**
-
-- If user asks **current**, use only current/latest non-superseded artifacts for the requested scope.
-- If no current artifact exists, say current performance is unavailable; optionally show the most recent artifact as **historical context**.
-- If user asks **recent**, use a configured recency window or latest completed reporting period—do not invent a window silently.
-- If user asks **trend** or **compare over time**, historical artifacts are allowed but must be labeled historical.
-- Never use superseded, expired, blocked, or stale artifacts for decision guidance unless the user explicitly asks about historical records.
-- **Latest** means latest for scope, metric, estimand, and artifact type—not globally latest.
-
-**Ownership:** **MIP** owns selection policy; sibling repos provide timestamps and lineage.
-
----
-
-### Track G12 — Scope / Metric / Estimand Ambiguity Resolution
-
-**Why:** The LLM can sound right while mixing different channels, products, geos, metrics, or estimands.
-
-**Ambiguous question examples:** “How is Meta doing?” · “Did Display work?” · “What was ROI?” · “How are conversions doing?” · “What was lift?”
-
-**Ambiguity dimensions:** channel · platform · campaign · market · geo · product · audience · metric · estimand · time window · artifact type · source system
-
-**Rules:**
-
-- If multiple artifacts match different scopes, ask for clarification or return a scoped comparison.
-- If `metric_id` is missing or ambiguous, answer only at diagnostic level and request metric clarification.
-- If `estimand_id` is missing or ambiguous, do not answer causal/performance claims.
-- Do not collapse Meta/FB/Instagram/paid social or Display/programmatic/source-system channel names without canonical mapping.
-
-**Ownership:** **MIP** owns ambiguity resolution; sibling repos tag exports with S1/S2/S3 metadata.
-
----
-
-### Track G13 — Artifact Precedence + Comparability Gate
-
-**Why:** Evidence comparison is only useful when compared artifacts mean the same thing.
-
-**Precedence examples:**
-
-| Question type | Prefer |
-|---------------|--------|
-| Experiment readout | Governed experiment evidence |
-| Model planning | Certified MMM decision surfaces |
-| Current decision guidance | Aligned, current, non-blocked evidence |
-| Historical explanation | Older artifacts (labeled historical) |
-| Conflict questions | Only artifacts passing comparability checks |
-
-**Comparability dimensions:** KPI alignment · estimand alignment · time-window alignment · geo/channel/product/audience scope · spend/exposure definition · metric transformation alignment
-
-**Rules:**
-
-- Do not compare artifacts just because they mention the same channel.
-- If not comparable, state which dimensions differ.
-- Do not silently average conflicting evidence.
-- If old and new conflict, prefer current for current-state questions; mention prior results only as history.
-
-**Ownership:** **MIP** owns precedence and comparability gates.
-
----
-
-### Track G14 — Claim-Level Governance
-
-**Why:** An artifact may support some statements but not others.
-
-**Examples:**
-
-| Claim | Status |
-|-------|--------|
-| “Diagnostics passed.” | Allowed (if grounded) |
-| “Experiment was underpowered.” | Allowed (if grounded) |
-| “ROI is production-ready.” | Blocked |
-| “Channel does not work.” | Blocked |
-| “Lift is causal” | Blocked unless governed causal evidence supports it |
-
-**Future fields:** `allowed_claims` · `blocked_claims` · `claim_scope` · `claim_evidence_required` · `claim_readiness` · `claim_expiration` · `claim_grounding_fields`
-
-**Rules:**
-
-- LLM may answer supported diagnostic claims while blocking unsupported decision claims from the same artifact.
-- No downstream layer may upgrade a blocked claim without explicit gate evidence plus approval.
-
-**Ownership:** **MIP** owns claim-level policy.
-
----
-
-### Track G15 — Counterfactual / Forecast / Curve Eligibility Policy
-
-**Why:** Users naturally turn diagnostics into counterfactual decisions unless the platform blocks that path.
-
-**User examples:** “What if I increase spend 20%?” · “What if I cut Display?” · “What will happen next month?” · “Can we launch nationally?” · “Use the response curve for budget planning.”
-
-**Rules:**
-
-- Counterfactual answers require certified simulation or decision-surface support.
-- Forecast answers require forecast-eligible artifacts; historical contribution is not a forecast.
-- Diagnostic curves are not optimizer-eligible unless explicitly certified.
-- Do not extrapolate beyond observed/calibrated spend support unless certified.
-- If unsupported, provide limitation and required evidence instead of an answer.
-
-**Ownership:** **MIP** owns eligibility policy; **MMM** owns surface/curve computation.
-
----
-
-### Track G16 — Freshness Decomposition Policy
-
-**Why:** “Fresh” is multi-dimensional; one timestamp must not imply all evidence is current.
-
-**Separate freshness timestamps:**
-
-`model_run_at` · `data_snapshot_at` · `calibration_signal_period` · `experiment_period` · `export_created_at` · `TrustReport_created_at` · `approval_created_at` · `approval_valid_until`
-
-**Rules:**
-
-- Freshly run model + stale calibration ≠ fully current.
-- Fresh export + old data snapshot ≠ current for performance.
-- Current `TrustReport` does not make stale source evidence fresh.
-- Approval must apply to the artifact version and claim scope being used.
-
-**Ownership:** **MIP** owns freshness interpretation; sibling repos provide source timestamps.
-
----
-
-### Track G17 — External Validity + Support Guard
-
-**Why:** Evidence can be valid in one context and invalid in another.
-
-**Required concepts:** `valid_geos` · `valid_products` · `valid_channels` · `valid_audiences` · `valid_spend_range` · `observed_support_range` · `calibrated_support_range` · `transportability_notes` · `extrapolation_allowed`
-
-**Rules:**
-
-- Do not generalize a geo experiment globally unless transportability is certified.
-- Do not use MMM curves outside supported spend range unless certified.
-- Do not infer performance for unsupported products, audiences, or channels.
-
-**Ownership:** **MIP** owns transportability policy; sibling repos declare support ranges.
-
----
-
-### Track G18 — Primary Metric / Multiplicity / Exploratory Analysis Policy
-
-**Why:** The LLM must avoid turning cherry-picked or exploratory evidence into confirmed findings.
-
-**Future fields:** `primary_metric_id` · `secondary_metric_ids` · `guardrail_metric_ids` · `exploratory_metric_ids` · `number_of_tests` · `slice_selection_policy` · `pre_registered_primary_metric` · `exploratory_vs_confirmatory` · `multiplicity_adjustment`
-
-**Rules:**
-
-- Do not declare success from secondary/exploratory metrics if primary failed or is blocked.
-- Do not overstate one significant slice when many slices were tested.
-- Clearly label exploratory findings.
-- Guardrail harms may block action even if primary metric is positive.
-
-**Ownership:** **MIP** owns multiplicity policy; sibling repos declare metric roles.
-
----
-
-### Track G19 — Answer Lineage + Best Available Evidence Policy
-
-**Why:** Users need to know what evidence an answer is based on and what limitations apply.
-
-**Required answer lineage:** `artifact_id` · `source_repo` · `source_commit_marker` · `model_version` · `data_snapshot_id` · `reporting_window` · `TrustReport_id` · `freshness_status` · `approval_status` · `grounding_fields`
-
-**Rules:**
-
-- Every LLM answer should be grounded in specific artifact fields.
-- “Best available evidence” does not mean decision-ready.
-- Best available evidence must list limitations.
-- Blocked artifacts cannot be used for action guidance.
-- If only historical evidence exists, label it historical.
-
-**Ownership:** **MIP** owns answer lineage and best-available policy.
-
----
-
-### Track G20 — Missing Evidence / No Result / Zero Effect Distinction
-
-**Why:** No result, inconclusive result, and zero effect are different states with different business implications.
-
-**States to distinguish:**
-
-| State | Meaning |
-|-------|---------|
-| No artifact available | No governed result exists |
-| Artifact blocked | Governance blocked use |
-| Artifact stale | Outside freshness window |
-| Artifact inconclusive | Insufficient signal |
-| Artifact underpowered | Below MDE / power threshold |
-| Effect estimated near zero | Governed estimate ≈ 0 |
-| Negative effect | Governed negative estimate |
-| Guardrail harm | Guardrail metric violated |
-
-**Rules:**
-
-- Do not say “no lift” when no governed result exists.
-- Do not say “channel did not work” when evidence is inconclusive or underpowered.
-- Do not equate missing evidence with zero effect.
-- When evidence is missing, state what artifact/evidence is needed next.
-
-**Ownership:** **MIP** owns state taxonomy and response policy.
 
 ## 4. Track summary
 
@@ -566,16 +331,6 @@ Sibling export producer specs (8F)
 | G8 | Explanation quality rubric — useful LLM answers |
 | G9 | Decision packet acceptance gate — stakeholder artifact |
 | G10 | Roadmap dependency graph — sequencing discipline |
-| G11 | Temporal result selection + current-state policy |
-| G12 | Scope / metric / estimand ambiguity resolution |
-| G13 | Artifact precedence + comparability gate |
-| G14 | Claim-level governance |
-| G15 | Counterfactual / forecast / curve eligibility |
-| G16 | Freshness decomposition policy |
-| G17 | External validity + support guard |
-| G18 | Primary metric / multiplicity / exploratory policy |
-| G19 | Answer lineage + best available evidence |
-| G20 | Missing evidence / no result / zero effect distinction |
 
 ## 5. Relationship to other roadmap layers
 
@@ -585,18 +340,18 @@ Sibling export producer specs (8F)
 | **8G–8N** | Safe LLM behavior |
 | **P1–P13** | Durable platform operations |
 | **S1–S12** | Semantic correctness |
-| **G1–G10** | End-to-end product behavior proof |
-| **G11–G20** (this doc) | **Artifact selection, ambiguity, and answer-validity policies** |
+| **G1–G10** (this doc) | **End-to-end product behavior** |
+| **I1–I15** | **Conversational intake → data handoff workflow** |
 
-Together these layers move MIP from a collection of safe components to a **proven, semantically correct causal marketing intelligence platform**.
+Together these layers move MIP from a collection of safe components to a **proven causal marketing intelligence platform** with a governed intake-to-execution workflow.
 
-## 6. Next implementation phase (final roadmap expansion)
+## 6. Next implementation phase
 
-**Do not add further roadmap addenda.** Implement next—with **G11–G20 as design constraints** for 8G/8H contracts:
+Do not add further governance roadmap addenda without product need. Implement next:
 
-1. **Phase 8G** — LLM explanation payload contract (include temporal, scope, freshness fields)
-2. **Phase 8H** — Usage policy + diagnostic taxonomy (include claim-level and ambiguity rules)
-3. Minimal fixtures and validation helpers reusing `load_sibling_fixture_export()` from 8B
+1. **I1–I3** — `MMMIntakeSession`, `IntakePlan`, `RequiredDataAsset` (see [intake roadmap](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md))
+2. **Phase 8G** — LLM explanation payload contract
+3. **Phase 8H** — Usage policy + diagnostic taxonomy
 
 Golden scenarios (G1) and conformance suite (G3) follow once explanation and usage contracts exist.
 
@@ -605,6 +360,7 @@ Golden scenarios (G1) and conformance suite (G3) follow once explanation and usa
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)
 - [PLATFORM_COMPLETION_GAPS_ROADMAP.md](./PLATFORM_COMPLETION_GAPS_ROADMAP.md)
 - [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](./PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)
+- [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
 - [REPO_INTEGRATION_STRATEGY.md](../architecture/REPO_INTEGRATION_STRATEGY.md)
 - [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
 - [MIP_SIBLING_EXPORT_PRODUCER_SPEC.md](../integrations/MIP_SIBLING_EXPORT_PRODUCER_SPEC.md)

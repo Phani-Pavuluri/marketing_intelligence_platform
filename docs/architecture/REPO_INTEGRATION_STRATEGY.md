@@ -178,6 +178,8 @@ Failed/blocked adapter outputs produce blocked `TrustReport` values and are not 
 
 **Critical invariants and golden scenarios (documented, not implemented):** [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) defines G1–G10: golden end-to-end scenarios, demo artifacts, sibling conformance suite, schema compatibility, severity normalization, no-silent-upgrade invariant, local persistence, explanation rubric, decision packet gates, and roadmap dependency graph. Final roadmap addendum—next work is 8G/8H implementation, not more docs.
 
+**Conversational intake and data handoff (documented, not implemented):** [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) defines I1–I15: LLM-guided intake session → data source modes (upload/connect/local/production) → manifest → profiling → readiness report → refresh request → sibling export import. LLM guides; MIP validates; MMM/GeoX execute externally.
+
 Engine integrations (optional, thin):
 
 - `panel_exp/integrations/mip/` — export experiment result payloads
@@ -304,3 +306,4 @@ Until extraction, engines SHOULD NOT take a runtime dependency on full MIP—onl
 - [../adr/ADR-002-experiments-as-calibration-evidence.md](../adr/ADR-002-experiments-as-calibration-evidence.md)
 - [../roadmap/ROADMAP.md](../roadmap/ROADMAP.md)
 - [../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
+- [../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)

@@ -416,6 +416,16 @@ The semantic registry tracks **S1–S12 are prerequisites** for [G11–G20 artif
 
 Without S1–S3 populated in sibling exports, G11–G20 policies cannot be enforced at answer time.
 
+## 5.2 Intake workflow prerequisites (I1–I15)
+
+Semantic registries (S1–S3) and scope metadata are **prerequisites** for [conversational intake and data handoff](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) tracks I6–I8:
+
+- **I6** column mapping requires canonical `metric_id`, channel, and geo registries
+- **I7–I8** compatibility and readiness require `estimand_id` and scope alignment
+- **I9** calibration intake requires S2 estimand alignment and `CalibrationSignal` governance
+
+Intake sessions (I1) should capture `metric_id` and `estimand_id` before data upload/connect.
+
 ## 6. Related documents
 
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)
@@ -423,4 +433,5 @@ Without S1–S3 populated in sibling exports, G11–G20 policies cannot be enfor
 - [REPO_INTEGRATION_STRATEGY.md](../architecture/REPO_INTEGRATION_STRATEGY.md)
 - [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
 - [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
+- [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
 - [MIP_SIBLING_EXPORT_PRODUCER_SPEC.md](../integrations/MIP_SIBLING_EXPORT_PRODUCER_SPEC.md)

@@ -74,7 +74,9 @@ Agentic behavior is **advisory and routing**, not statistical computation or pro
 G1–G10  Critical invariants and golden scenarios (documented addendum; final roadmap layer)
       golden scenarios, conformance suite, no-silent-upgrade, dependency graph
 
-Next  Phase 8G/8H implementation (explanation payload + usage policy)—not live engine execution
+Next  Phase 8G/8H implementation (explanation payload + usage policy)
+
+I1–I15  Conversational intake + data handoff (documented product workflow)
 ```
 
 ## Phase 8A artifacts
@@ -130,7 +132,11 @@ Producer specifications document the JSON contract for `integrations/mip/exports
 
 ## Critical invariants and golden scenarios (G1–G10)
 
-Documented in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). Final roadmap addendum: golden scenarios prove end-to-end product behavior; G6 enforces no silent readiness upgrade; G3 defines sibling conformance suite. **Stop adding roadmap layers**—implement 8G/8H next.
+Documented in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). Final roadmap addendum: golden scenarios prove end-to-end product behavior; G6 enforces no silent readiness upgrade; G3 defines sibling conformance suite.
+
+## Conversational intake and data handoff (I1–I15)
+
+Documented in [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md). Product workflow from LLM conversation → structured intake → data profiling → readiness report → refresh request → static export import. **First implementation:** I1–I3 session/plan contracts.
 
 ## Phase 7C artifacts
 
@@ -192,4 +198,5 @@ The manifest records lineage; it does not replace `WorkflowRunSummary`, `TrustRe
 - [LLM_DECISION_LAYER_VISION.md](./LLM_DECISION_LAYER_VISION.md)
 - [LLM_DECISION_LAYER_ROADMAP.md](../roadmap/LLM_DECISION_LAYER_ROADMAP.md)
 - [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
+- [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
 - [REPO_INTEGRATION_STRATEGY.md](./REPO_INTEGRATION_STRATEGY.md)
