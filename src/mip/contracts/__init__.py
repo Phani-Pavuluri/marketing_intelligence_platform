@@ -19,6 +19,19 @@ from mip.contracts.enums import (
 )
 from mip.contracts.estimand import Estimand, TimeWindow
 from mip.contracts.evidence import DiagnosticSummary, ExperimentEvidence
+from mip.contracts.intake import (
+    DataGrain,
+    GeoGrain,
+    GeoXIntakeSession,
+    IntakeCandidatePath,
+    IntakeIntendedUse,
+    IntakePathRecommendation,
+    IntakeRecommendationStatus,
+    IntakeSessionStatus,
+    MeasurementIntakeSession,
+    MeasurementWorkflowKind,
+    MMMIntakeSession,
+)
 from mip.contracts.recommendation import RecommendationContract
 from mip.contracts.trust import TrustReport
 
@@ -36,6 +49,17 @@ __all__ = [
     "EvidenceRole",
     "ExperimentEvidence",
     "ExperimentType",
+    "DataGrain",
+    "GeoGrain",
+    "GeoXIntakeSession",
+    "IntakeCandidatePath",
+    "IntakeIntendedUse",
+    "IntakePathRecommendation",
+    "IntakeRecommendationStatus",
+    "IntakeSessionStatus",
+    "MMMIntakeSession",
+    "MeasurementIntakeSession",
+    "MeasurementWorkflowKind",
     "RecommendationContract",
     "RecommendationType",
     "TimeWindow",
