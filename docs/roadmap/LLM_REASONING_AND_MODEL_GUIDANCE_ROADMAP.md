@@ -62,6 +62,8 @@ The sibling repo may run its own workflow independently, but **MIP must only con
 
 Live engine execution on the MIP side remains blocked until a later explicitly governed phase.
 
+**Governance-valid ≠ answer-valid** also applies at intake: the LLM may draft intake plans and mapping proposals, but **MIP validation** (readiness report, manifest) is the source of truth—see [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md).
+
 ### 3.1 Artifact selection and ambiguity design constraints
 
 Phases 8G–8H and 8I must incorporate [G11–G20 policies](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md):
@@ -360,3 +362,4 @@ MIP consumers continue to validate the envelope first; richer sections unlock de
 - [REPO_INTEGRATION_STRATEGY.md](../architecture/REPO_INTEGRATION_STRATEGY.md)
 - [MIP_SIBLING_EXPORT_PRODUCER_SPEC.md](../integrations/MIP_SIBLING_EXPORT_PRODUCER_SPEC.md) (Phase 8F, planned)
 - [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
+- [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)

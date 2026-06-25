@@ -77,7 +77,9 @@ S1–S12  Semantic and decision-readiness tracks (documented addendum; not imple
 G1–G10  Critical invariants and golden scenarios (documented addendum)
       golden scenarios, conformance suite, no-silent-upgrade, dependency graph
 
-Next  Phase 8G/8H implementation (explanation payload + usage policy)—not live engine execution
+Next  Phase 8G/8H implementation (explanation payload + usage policy)
+
+I1–I15  Conversational intake + data handoff (documented product workflow)
 ```
 
 ## Phase 8A artifacts
@@ -137,9 +139,13 @@ Documented in [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](../roadmap/P
 
 Structurally valid exports are not sufficient for decision guidance; semantic completeness is required before decision-support workflows.
 
-## Critical invariants and golden scenarios (G1–G10)
+## Critical invariants, golden scenarios, and artifact selection (G1–G20)
 
-Documented in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). Golden scenarios prove end-to-end product behavior; G6 enforces no silent readiness upgrade; G3 defines sibling conformance suite.
+Documented in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). Golden scenarios prove end-to-end product behavior; G6 enforces no silent readiness upgrade; G3 defines sibling conformance suite; G11–G20 define artifact selection and ambiguity policies.
+
+## Conversational intake and data handoff (I1–I15)
+
+Documented in [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md). Product workflow from LLM conversation → structured intake → data profiling → readiness report → refresh request → static export import. **First implementation:** I1–I3 session/plan contracts.
 
 ## Phase 7C artifacts
 
@@ -202,4 +208,5 @@ The manifest records lineage; it does not replace `WorkflowRunSummary`, `TrustRe
 - [LLM_DECISION_LAYER_ROADMAP.md](../roadmap/LLM_DECISION_LAYER_ROADMAP.md)
 - [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](../roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)
 - [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
+- [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
 - [REPO_INTEGRATION_STRATEGY.md](./REPO_INTEGRATION_STRATEGY.md)

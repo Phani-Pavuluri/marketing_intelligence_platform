@@ -357,13 +357,23 @@ Beyond governance ingestion and platform completion, MIP needs metric/estimand r
 
 ## 19i. Critical invariants, golden scenarios, and artifact selection (G1–G20)
 
-**Status: documented** in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). **No runtime implementation.** **Final roadmap expansion.**
+**Status: documented** in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). **No runtime implementation.**
 
 Covers golden scenarios (G1–G2), conformance suite (G3), severity normalization (G5), no-silent-upgrade (G6), and **artifact selection + ambiguity policies (G11–G20)**: temporal selection, scope/metric/estimand ambiguity, comparability gates, claim-level governance, counterfactual eligibility, freshness decomposition, and missing-vs-zero-effect distinctions.
 
 **Key invariant:** Governance-valid ≠ answer-valid. The LLM must not select artifacts by registry availability alone.
 
 **Next implementation:** Phase 8G/8H with G11–G20 as design constraints—not more roadmap docs.
+
+## 19j. Conversational intake and data handoff (I1–I15)
+
+**Status: documented** in [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md). **No runtime implementation.**
+
+Product/workflow roadmap from LLM-guided conversation → structured intake session → data source selection (upload/connect/local/production) → profiling → readiness report → config/refresh request → sibling export handoff.
+
+**Key framing:** LLM is intake guide, not validation authority. Manifest is intake source of truth; readiness report is compatibility source of truth.
+
+**First implementation:** I1–I3 (`MMMIntakeSession`, `IntakePlan`, `RequiredDataAsset`)—before upload/connect UI.
 
 ## 20. Phase 6: MMM-focused dashboard/report demo (full product)
 
@@ -467,6 +477,7 @@ Deferred scope:
 - [LLM_DECISION_LAYER_VISION.md](../architecture/LLM_DECISION_LAYER_VISION.md)
 - [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](./LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md)
 - [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](./PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)
+- [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
 - [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
 - [LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md](../architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
 - [ROADMAP.md](./ROADMAP.md)
