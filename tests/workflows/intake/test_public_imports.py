@@ -8,18 +8,43 @@ def test_public_imports() -> None:
         DataAvailabilityProfile,
         DataFieldRequirement,
         DataFieldRole,
+        DataGrain,
         DecisionHorizon,
         DecisionScope,
         FeasibilityStatus,
+        GeoGrain,
+        GeoXIntakeSession,
+        IntakeCandidatePath,
+        IntakeIntendedUse,
+        IntakePathRecommendation,
+        IntakeRecommendationStatus,
+        IntakeSessionStatus,
+        MeasurementIntakeSession,
+        MeasurementWorkflowKind,
+        MMMIntakeSession,
         ObjectiveDataRequirement,
         ObjectiveFeasibilityReport,
         RiskTolerance,
         WorkflowType,
         evaluate_objective_feasibility,
         has_field_or_alias,
+        recommend_intake_path,
         recommended_next_questions,
         requirement_for_objective,
     )
+
+    assert MeasurementWorkflowKind.MMM.value == "mmm"
+    assert IntakeCandidatePath.NATIONAL_DIAGNOSTIC_MMM.value == "national_diagnostic_mmm"
+    assert DataGrain.WEEKLY.value == "weekly"
+    assert GeoGrain.NATIONAL.value == "national"
+    assert IntakeSessionStatus.DRAFT.value == "draft"
+    assert IntakeRecommendationStatus.RECOMMENDED.value == "recommended"
+    assert IntakeIntendedUse.DIAGNOSTIC_ONLY.value == "diagnostic_only"
+    assert callable(recommend_intake_path)
+    assert MeasurementIntakeSession is not None
+    assert MMMIntakeSession is not None
+    assert GeoXIntakeSession is not None
+    assert IntakePathRecommendation is not None
 
     assert BusinessObjectiveType.CONVERSION_ROI.value == "conversion_roi"
     assert WorkflowType.MMM_CHANNEL_ROI.value == "mmm_channel_roi"

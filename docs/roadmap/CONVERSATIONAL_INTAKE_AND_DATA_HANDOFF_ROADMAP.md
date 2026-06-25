@@ -100,6 +100,8 @@ This addendum is **documentation only**. No runtime code, Streamlit changes, con
 
 **Ownership:** **MIP** owns session contracts; **LLM** drafts session fields for user confirmation.
 
+**P1 status:** Implemented in `mip.contracts.intake` and `mip.workflows.intake.recommendation`.
+
 ---
 
 ### Track I2 — Modeling / Measurement Path Recommendation
@@ -122,6 +124,8 @@ This addendum is **documentation only**. No runtime code, Streamlit changes, con
 - Experiment readout for MMM calibration → route through `CalibrationSignal`.
 
 **Ownership:** **MIP** owns path taxonomy and gating; **LLM** proposes paths from structured session.
+
+**P1 status:** `IntakePathRecommendation` and `recommend_intake_path()` implemented deterministically.
 
 ---
 
@@ -459,11 +463,9 @@ user selects governed table connection
 
 ## 7. Next implementation phase
 
-**First implementation (I1–I3 only):**
+**P1 complete (I1–I2).** First implementation after P1:
 
-1. `MMMIntakeSession` / `GeoXIntakeSession` contracts + fixtures  
-2. `IntakePlan` + `RequiredDataAsset` catalog  
-3. Deterministic path recommendation helpers (no LLM provider calls)
+1. `IntakePlan` + `RequiredDataAsset` catalog (P2 / I3)
 
 Keep upload/connect UI **separate** until contracts are validated. Then I5 manifest, I6 mapping, I7–I8 validation.
 

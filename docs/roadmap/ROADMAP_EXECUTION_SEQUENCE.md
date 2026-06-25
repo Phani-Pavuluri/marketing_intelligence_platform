@@ -3,12 +3,13 @@
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
 **Current main:** `1faf0cb`  
-**Immediate next phase:** **P1** — Intake session and path recommendation contracts (I1–I2)
+**Immediate next phase:** **P2** — Required data assets and sample schema expectations (I3)
 
 ## What is already implemented
 
 | Layer | Status |
 |-------|--------|
+| P1 intake session + path recommendation (I1–I2) | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -43,7 +44,7 @@ S1–S3 → I1–I3 → I5 manifest → I6 mapping → I7–I8 readiness → I12
 | Phase | Goal | Runtime allowed |
 |-------|------|-----------------|
 | **P0** | Roadmap audit ✓ | None |
-| **P1** | I1–I2 intake session + path recommendation | Contracts/fixtures only |
+| **P1** | I1–I2 intake session + path recommendation | Contracts/fixtures only | ✓ implemented |
 | **P2** | I3 required data assets | Contracts/fixtures only |
 | **P3** | I5 DataSourceRef + manifest | In-memory records |
 | **P4** | I6 + S1–S3 semantic stubs | Validation on fixtures |
