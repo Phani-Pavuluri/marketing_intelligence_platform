@@ -2,7 +2,7 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `5db32a1`  
+**Current main:** `3779bfd`  
 **Immediate next phase:** **P5** — Workflow-specific readiness reports
 
 ## What is already implemented
