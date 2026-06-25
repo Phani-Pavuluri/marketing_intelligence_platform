@@ -102,6 +102,8 @@ This addendum is **documentation only**. No runtime code, Streamlit changes, con
 
 **P1 status:** Implemented in `mip.contracts.intake` and `mip.workflows.intake.recommendation`.
 
+**P2 status:** Implemented in `mip.contracts.intake_assets` and `mip.workflows.intake.assets` (`IntakePlan`, `RequiredDataAsset`, `build_intake_plan`).
+
 ---
 
 ### Track I2 — Modeling / Measurement Path Recommendation
@@ -463,9 +465,9 @@ user selects governed table connection
 
 ## 7. Next implementation phase
 
-**P1 complete (I1–I2).** First implementation after P1:
+**P1 complete (I1–I2). P2 complete (I3).** Next:
 
-1. `IntakePlan` + `RequiredDataAsset` catalog (P2 / I3)
+1. `DataSourceRef` + intake manifest contracts (P3 / I5)
 
 Keep upload/connect UI **separate** until contracts are validated. Then I5 manifest, I6 mapping, I7–I8 validation.
 

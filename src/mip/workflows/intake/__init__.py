@@ -13,6 +13,18 @@ from mip.contracts.intake import (
     MeasurementWorkflowKind,
     MMMIntakeSession,
 )
+from mip.contracts.intake_assets import (
+    DataAssetPurpose,
+    DataAssetRequirementLevel,
+    DataAssetType,
+    IntakePlan,
+    RequiredDataAsset,
+    SampleColumnRole,
+    SampleColumnSpec,
+    SampleRow,
+    SampleSchemaExpectation,
+)
+from mip.workflows.intake.assets import build_intake_plan
 from mip.workflows.intake.availability import DataAvailabilityProfile, has_field_or_alias
 from mip.workflows.intake.feasibility import (
     FeasibilityStatus,
@@ -42,6 +54,9 @@ __all__ = [
     "DataAvailabilityProfile",
     "DataFieldRequirement",
     "DataFieldRole",
+    "DataAssetPurpose",
+    "DataAssetRequirementLevel",
+    "DataAssetType",
     "DataGrain",
     "DecisionHorizon",
     "DecisionScope",
@@ -51,6 +66,7 @@ __all__ = [
     "IntakeCandidatePath",
     "IntakeIntendedUse",
     "IntakePathRecommendation",
+    "IntakePlan",
     "IntakeRecommendationStatus",
     "IntakeSessionStatus",
     "MMMIntakeSession",
@@ -58,8 +74,14 @@ __all__ = [
     "MeasurementWorkflowKind",
     "ObjectiveDataRequirement",
     "ObjectiveFeasibilityReport",
+    "RequiredDataAsset",
     "RiskTolerance",
+    "SampleColumnRole",
+    "SampleColumnSpec",
+    "SampleRow",
+    "SampleSchemaExpectation",
     "WorkflowType",
+    "build_intake_plan",
     "evaluate_objective_feasibility",
     "has_field_or_alias",
     "recommend_intake_path",
