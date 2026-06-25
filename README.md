@@ -197,9 +197,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5D deterministic workflow layers are implemented with passing tests.
 
-**Product surface:** Phase 5D Streamlit shell + `MockLLMProvider` exist for early workflow demos. **P7** local UI and **P7b** pluggable LLM provider contracts are the next product surface work—deterministic mode default, no canned explanations.
+**Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) demonstrates advisory, readiness, and calibration mapping workflows. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. **P7b** pluggable LLM provider contracts are next.
 
-**Near-term focus:** **P7** local Streamlit/Gradio workflow shell, then **P7b** pluggable LLM provider contracts. P6 CalibrationSignal intake mapping is complete.
+**Near-term focus:** **P7b** pluggable LLM provider contracts, then **P8** demo profiling implementation.
 
 ## Roadmap
 
@@ -236,11 +236,12 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P6 implemented:** CalibrationSignal intake mapping contracts (`CalibrationEvidenceInput`, `CalibrationMappingRequirement`, `CalibrationMappingReport`, `map_evidence_to_calibration_signal`). MIP can now validate governed experiment evidence for CalibrationSignal compatibility, preserve source lineage, and map structurally valid evidence into `CalibrationSignal` contracts. This does not execute MMM calibration, estimate effects, certify causality, or approve decisions.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P7** — Local Streamlit/Gradio workflow shell.
+**P7 implemented:** Local deterministic Streamlit workflow shell (`app/streamlit_app.py`). The UI exposes cold-start advisory, workflow readiness, CalibrationSignal mapping, and intake overview flows using sample fixtures and MIP core helpers. Deterministic mode only—no LLMs, MMM, GeoX, external APIs, or public hosting.
 
-1. **P7** — Local Streamlit/Gradio workflow shell (deterministic mode default)
-2. **P7b** — Pluggable LLM provider contracts and explanation governance
-3. **P8** — Demo fixtures and local/demo profiling
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P7b** — Pluggable LLM provider contracts and explanation governance.
+
+1. **P7b** — Pluggable LLM provider contracts and explanation governance
+2. **P8** — Demo fixtures and local/demo profiling
 4. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
 5. **P10** — FastAPI/Docker service wrapper
 6. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
@@ -301,6 +302,16 @@ marketing_intelligence_platform/
 - [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md)
 - [Roadmap execution audit](docs/audits/ROADMAP_EXECUTION_AUDIT_001.md)
 - ADRs: [001 Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md) · [002 Experiments](docs/adr/ADR-002-experiments-as-calibration-evidence.md) · [003 LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md)
+
+## Run local UI (P7)
+
+```bash
+poetry run streamlit run app/streamlit_app.py
+```
+
+The P7 UI runs in **deterministic mode**. No LLM provider is required. No external services are called. The UI demonstrates advisory, readiness, and calibration mapping workflows using sample fixtures.
+
+Legacy Phase 5D workflow shell (JSON input + MockLLM): `poetry run mip-app`
 
 ## Development setup
 

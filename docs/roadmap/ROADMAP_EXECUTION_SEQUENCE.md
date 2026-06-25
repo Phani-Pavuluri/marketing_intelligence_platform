@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `44c88a1`  
-**Immediate next phase:** **P7** — Local Streamlit/Gradio workflow shell
+**Current main:** `24a7506`  
+**Immediate next phase:** **P7b** — Pluggable LLM provider contracts and explanation governance
 
 > **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17**.
 
@@ -20,6 +20,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P5 workflow-specific readiness reports (I7–I8) | ✓ |
 | P5b general advisory / cold-start planning (I8b) | ✓ |
 | P6 CalibrationSignal intake mapping (I9) | ✓ |
+| P7 local deterministic Streamlit workflow shell (I10) | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -101,7 +102,7 @@ P1 session/path
 | **P5** | **Workflow-specific** readiness report contracts (I7–I8) | Builds on P4c workbench | ✓ implemented |
 | **P5b** | **General advisory** and cold-start planning contracts (I8b) | Routes users not ready for formal measurement | ✓ implemented |
 | **P6** | I9 CalibrationSignal mapping | Fixture validation | ✓ implemented |
-| **P7** | I10 local Streamlit/Gradio workflow shell | Display only; deterministic mode default | Planned |
+| **P7** | I10 local Streamlit/Gradio workflow shell | Display only; deterministic mode default | ✓ implemented |
 | **P7b** | Pluggable LLM provider contracts + explanation governance | Provider modes; no canned explanations | Planned |
 | **P8** | I4 demo fixtures + local/demo profiling | Sandbox CSV only | Planned |
 | **P9** | Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces) | Demo-safe; no platform LLM key by default | Planned |
@@ -350,7 +351,9 @@ No web search integration · no file parsing · no data profiling computation ·
 
 ## P7–P11 — Product surface, LLM providers, and public demo hosting
 
-**Status:** Planned (docs-only in this patch). Phase 5D Streamlit shell and `MockLLMProvider` exist for early deterministic workflow demos; P7/P7b replace that path with governed product surface contracts, explicit provider modes, and honest deterministic vs LLM-backed behavior.
+**P7 status:** ✓ implemented — `app/streamlit_app.py` local deterministic Streamlit shell. Exposes cold-start advisory, workflow readiness, CalibrationSignal mapping, and intake overview via sample fixtures and MIP core helpers. No LLMs, MMM, GeoX, external APIs, or public hosting.
+
+**Remaining (P7b–P11):** Planned.
 
 ### Architecture layers
 
@@ -410,18 +413,7 @@ Public hosting is **not** the same as production readiness. Public demo mode can
 
 ### P7 — Local Streamlit/Gradio workflow shell
 
-**Purpose:** Establish the product UX spine locally before public hosting.
-
-**Future behavior:** Uses MIP core package directly; deterministic mode default; workflow cards for advisory, readiness, and calibration/intake paths; displays evidence labels, claim labels, warnings, allowed next steps, and blocked next steps; does **not** require LLM configuration.
-
-**Acceptance criteria (P7):**
-
-- Runs locally
-- Uses MIP core package directly
-- Supports deterministic mode
-- Shows workflow cards for advisory, readiness, and calibration/intake paths as available
-- Displays evidence labels, claim labels, warnings, allowed next steps, and blocked next steps
-- Does not require LLM configuration
+**Status:** ✓ implemented — `app/streamlit_app.py`, `app/demo_fixtures.py`, `app/ui_renderers.py`. Deterministic mode default; sample fixtures for advisory, readiness, and calibration mapping; evidence/claim labels and blocked-claim guardrails visible. No LLM, upload parsing, MMM, or GeoX execution.
 
 ### P7b — Pluggable LLM provider contracts and explanation governance
 

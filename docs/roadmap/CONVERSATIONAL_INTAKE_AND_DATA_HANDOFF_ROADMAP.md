@@ -410,7 +410,9 @@ Allowed inputs (later): source/medium · channel group · landing page · geogra
 
 **Why:** Define the product UX spine from conversation to handoff, then public demo hosting.
 
-**Phase mapping:** **P7** local Streamlit/Gradio shell · **P7b** pluggable LLM providers · **P8** demo profiling · **P9** public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+**Phase mapping:** **P7** local Streamlit shell ✓ implemented (`app/streamlit_app.py`) · **P7b** pluggable LLM providers · **P8** demo profiling · **P9** public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+
+**P7 implemented:** Local deterministic workflow shell exposes cold-start advisory, workflow readiness, CalibrationSignal mapping, and intake overview using sample fixtures and MIP core helpers. No LLMs, MMM, GeoX, external APIs, or public hosting.
 
 **Future steps:**
 
