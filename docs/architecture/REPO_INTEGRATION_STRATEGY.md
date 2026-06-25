@@ -52,6 +52,27 @@ MIP does **not** own geo matching, SCM/TBR/DID inference, MMM fitting, or portfo
 
 See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P4c, P5b and [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) I6c, I8b.
 
+### Product surface architecture layers (P7–P11)
+
+| Layer | Role |
+|-------|------|
+| **Core MIP package** | Contracts, gates, readiness reports, advisory plans, CalibrationSignal mapping, `TrustReport`, deterministic validators |
+| **UI layer** | Streamlit/Gradio: chat, forms, uploads, workflow selection, report cards, warnings, evidence labels |
+| **FastAPI layer** | HTTP boundary for programmatic access, auth, rate limits, frontend/backend separation (P10) |
+| **Docker layer** | Portable deployment across local, Hugging Face Spaces, Render, Railway (P10) |
+
+```text
+First demo path:     User → UI → MIP core package
+Later production:    User → UI → FastAPI → MIP core package
+Docker wraps UI/API/package for portable deployment.
+```
+
+FastAPI is not required for the first UI demo. Docker is not the app—it packages the app for consistent deployment. P10 must not duplicate MIP business logic.
+
+**UI access:** Local (`localhost`) for dev/private demos; public URL (Streamlit Community Cloud, Hugging Face Spaces) for portfolio/stakeholder demos. Public demo must work without platform-paid LLM dependency.
+
+See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P7–P11.
+
 ### `panel_exp` / GeoX
 
 Experimentation engine repository:

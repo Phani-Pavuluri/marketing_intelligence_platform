@@ -85,7 +85,19 @@ P4b–P4c  Experiment design intake + Common Data Intake Workbench (documented; 
 
 P5b  General advisory and cold-start planning contracts (after P5)
 
-P17  LangGraph / stateful workflow orchestration skeleton (after P4b–P8 stabilize)
+P7   Local Streamlit/Gradio workflow shell (deterministic mode default)
+
+P7b  Pluggable LLM provider contracts + explanation governance (no canned explanations)
+
+P8   Demo fixtures and local/demo profiling
+
+P9   Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+
+P10  FastAPI/Docker service wrapper
+
+P11  Hosted API hardening (auth, rate limits, privacy, cost controls)
+
+P17  LangGraph / stateful workflow orchestration skeleton (after P7–P8 stabilize)
 ```
 
 ## Common Data Intake Workbench (P4c — planned)
@@ -126,7 +138,7 @@ panel_exp / GeoX  = design diagnostics, power, MDE, readout
 
 **Boundaries:** LangGraph may choose the next governed module; must not let LLM write arbitrary analysis code; must not expose raw files to LLM; must not bypass `TrustReport`, readiness gates, or human approval; must not produce causal/budget/design-validity claims without engine outputs.
 
-**Timing:** Do not implement LangGraph runtime before P4b, P4c, P5, P5b, and P8 contracts stabilize. Integer phase **P9** remains production table-reference design; orchestration is **P17**.
+**Timing:** Do not implement LangGraph runtime before P4b, P4c, P5, P5b, P7, and P8 contracts stabilize. Integer phase **P12** is production table-reference design; orchestration is **P17**. Product surface (P7–P9) precedes LangGraph so user flow and LLM provider boundaries exist first.
 
 See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md).
 

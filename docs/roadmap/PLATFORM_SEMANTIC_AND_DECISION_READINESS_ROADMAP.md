@@ -448,6 +448,12 @@ Deterministic objective→KPI-family rules for GeoX/experiment design intake: aw
 
 **Cross-reference:** Claim-level governance (G14) must align with `AdvisoryClaimType` and `AdvisoryEvidenceMode`. See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P5b and [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](./LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md) §3.3.
 
+## 5.6 Product surface and LLM provider modes (P7–P7b)
+
+**Why:** Semantic and decision-readiness contracts must surface through an honest product UI before public demo hosting.
+
+**Cross-reference:** P7 local UI · P7b pluggable `LLMProviderMode` · P9 public demo. The LLM explains governed MIP outputs; it does not create measurement authority. Canned/sample explanations are excluded. Deterministic mode is default. See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P7–P11 and [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](./LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md) §8.
+
 ## 6. Related documents
 
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)

@@ -47,6 +47,7 @@ This addendum is **documentation only**. No model execution, optimizer execution
 4. **Readiness may not be silently upgraded** by adapters, UI, LLM, or downstream workflow steps.
 5. **Live engine execution remains blocked** until golden scenarios and safety evaluations exist.
 6. **Optimizer-backed recommendations remain blocked** until decision-surface certification and optimizer governance are implemented.
+7. **Product surface must be honestly deterministic or explicitly LLM-backed.** Canned/sample explanation modes (`canned_demo`, `sample_explanation`, `template_llm_explanation`) are excluded. Public demo must work without platform-paid LLM dependency (P7b, P9).
 
 ## 3. Critical invariant and golden-scenario tracks
 

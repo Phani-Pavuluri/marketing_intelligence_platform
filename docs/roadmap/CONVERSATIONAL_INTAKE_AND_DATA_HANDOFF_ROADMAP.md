@@ -406,9 +406,11 @@ Allowed inputs (later): source/medium · channel group · landing page · geogra
 
 ---
 
-### Track I10 — Streamlit / Local Product Workflow
+### Track I10 — Streamlit / Local Product Workflow (P7–P9)
 
-**Why:** Define the product UX spine from conversation to handoff.
+**Why:** Define the product UX spine from conversation to handoff, then public demo hosting.
+
+**Phase mapping:** **P7** local Streamlit/Gradio shell · **P7b** pluggable LLM providers · **P8** demo profiling · **P9** public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
 
 **Future steps:**
 
@@ -425,13 +427,26 @@ Allowed inputs (later): source/medium · channel group · landing page · geogra
 
 **Future panels:** Business Question · Recommended Workflow · Required Data Checklist · Upload/Connect Data · Column Mapping · Compatibility Findings · Readiness Tier · Missing Data Remediation · Next Safe Action
 
+**UI access modes:**
+
+| Mode | Access | Best for |
+|------|--------|----------|
+| **Local UI** | `localhost` via `streamlit run` | Development, private demos, debugging, recordings |
+| **Public hosted UI** | Public URL (Streamlit Community Cloud, Hugging Face Spaces) | Public demos, portfolio, stakeholder review, lightweight validation |
+
+The first public demo should be demo-safe without paid infrastructure. Public hosting ≠ production readiness.
+
+**LLM provider modes (P7b):** `disabled` (default) · `local_ollama` (local dev) · `hosted_open_source` (experimental, public) · `bring_your_own_key` · `platform_managed_key_later` (gated). **Excluded:** `canned_demo`, `sample_explanation`, `template_llm_explanation`.
+
 **Rules:**
 
-- LLM explains panels and guides user.
-- UI owns upload/connect/confirm actions.
-- MIP owns validation and readiness status.
+- LLM explains panels and guides user when an explicit provider mode is active
+- In deterministic mode, UI shows structured reports—not fake chat reasoning
+- UI owns upload/connect/confirm actions
+- MIP owns validation and readiness status
+- Public demo: no platform-owned LLM key; deterministic mode must work without paid LLM dependency
 
-**Ownership:** **MIP** owns workflow orchestration; extends Phase 5D Streamlit shell.
+**Ownership:** **MIP** owns workflow orchestration; P7 extends Phase 5D Streamlit shell with governed product surface contracts.
 
 ---
 

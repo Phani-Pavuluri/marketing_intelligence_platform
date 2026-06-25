@@ -63,4 +63,10 @@ MIP’s controlled autonomy phase (roadmap phase 10) applies only after safe API
 | Conflicting evidence | Present conflict; do not reconcile in LLM |
 | Out-of-registry citation request | Refuse; point to evidence registry |
 
+## Product surface and LLM provider boundaries (P7b)
+
+The UI and orchestration layers must respect explicit `LLMProviderMode` contracts. Deterministic mode is default; canned/sample explanation modes are excluded. The LLM explains governed MIP outputs—it does not create measurement authority. If LLM narrative conflicts with MIP contracts, readiness reports, or `TrustReport` status, the deterministic MIP result wins.
+
+See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P7–P11 and [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](../roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md) §8.
+
 See [TRUST_ARCHITECTURE.md](./TRUST_ARCHITECTURE.md) and [../operating_model/RELEASE_GATES.md](../operating_model/RELEASE_GATES.md).

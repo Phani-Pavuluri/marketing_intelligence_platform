@@ -410,7 +410,69 @@ SiblingFixtureExport envelope (8F)
 
 MIP consumers continue to validate the envelope first; richer sections unlock deeper LLM behavior only when present and governed.
 
-## 7. Related documents
+## 8. P7b — Pluggable LLM provider modes and explanation governance
+
+**Timing:** P7b follows P7 local UI and **precedes P9** public hosted demo so provider and explanation-mode boundaries exist before public deployment.
+
+### 8.1 Product decision: no canned explanations
+
+The platform should be either **honestly deterministic** or **actually LLM-backed** through an explicit provider. **Canned/sample explanations are excluded** because they blur that boundary and weaken trust.
+
+**Excluded modes:** `canned_demo` · `sample_explanation` · `template_llm_explanation`
+
+The public product surface should work without paid LLM infrastructure. Deterministic mode is the default. Optional LLM-backed explanations may use hosted open-source models, local Ollama for local use, or bring-your-own-key providers.
+
+**The LLM explains governed MIP outputs; it does not create measurement authority.**
+
+### 8.2 `LLMProviderMode` (future contract)
+
+| Mode | Definition |
+|------|------------|
+| `disabled` | No LLM call. Deterministic MIP contracts, readiness reports, advisory plans, warnings, evidence/claim labels, allowed/blocked next steps. |
+| `local_ollama` | Local Mac/dev. Open-source model via Ollama or compatible runtime. Local/private demos only. |
+| `hosted_open_source` | Public-hosted experimental mode when latency, memory, and cost are acceptable. Clearly labeled experimental. |
+| `bring_your_own_key` | User supplies API key (OpenAI, Anthropic, Gemini, Mistral, Groq, etc.). User pays provider usage. |
+| `platform_managed_key_later` | Future gated mode. Not allowed in public demo until auth, rate limits, monitoring, abuse prevention, key management, privacy policy, and cost controls exist. |
+
+### 8.3 `LLMUseCase` (future contract)
+
+`intake_question_generation` · `missing_data_question_generation` · `readiness_explanation` · `advisory_plan_explanation` · `calibration_mapping_explanation` · `blocked_claim_explanation` · `trust_report_explanation` · `report_summarization` · `chat_response`
+
+Use cases are explanation/routing/intake surfaces. They do **not** authorize causal or decision-supporting claims.
+
+### 8.4 Authority boundary
+
+The LLM is **not** the authority. MIP contracts, readiness reports, advisory claim guards, CalibrationSignal mapping reports, `TrustReport`s, and deterministic validators remain authoritative.
+
+**May:** ask follow-up questions · ask for missing data · explain governed outputs · summarize readiness reports · explain blocked claims · translate structured findings · produce advisory-only hypotheses when evidence mode allows
+
+**Must not:** override readiness reports · override `TrustReport` · override advisory claim guards · override CalibrationSignal mapping · invent causal effects, ROI, lift, power/MDE, matched markets, or budget optimization · promote advisory hypotheses to decision recommendations · hide evidence/claim labels
+
+If LLM output conflicts with MIP constraints, the **deterministic MIP result wins**.
+
+### 8.5 Input boundary
+
+LLM input = **governed summaries and report payloads**, not raw rows by default.
+
+**Allowed:** `CommonIntakeWorkbench` summaries · `WorkflowReadinessReport` · `ColdStartAdvisoryPlan` · `CalibrationMappingReport` · `TrustReport` summary · `allowed_next_steps` · `blocked_next_steps` · claim/evidence labels · warnings · blocking reasons
+
+**Blocked by default:** raw uploaded rows · secrets · unbounded file contents · unvalidated source data · credentials · API keys · PII-heavy exports
+
+### 8.6 Public vs local explanation modes
+
+**Public hosted demo (P9):** `disabled` (default) · `hosted_open_source` (experimental) · `bring_your_own_key` (optional). No platform-owned LLM key. Core workflow must work without LLM.
+
+**Local Mac/dev:** `disabled` · `local_ollama` · `bring_your_own_key`. Same MIP claim boundaries as hosted mode.
+
+### 8.7 UI requirements
+
+Display active mode: Deterministic · Local Ollama · Hosted Open Source (experimental) · Bring Your Own Key · Platform Managed Key (later only). Deterministic mode must not pretend to be model reasoning. LLM-backed modes must preserve evidence labels, claim labels, warnings, blocked claims, and allowed next steps.
+
+### 8.8 P7b acceptance criteria
+
+See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P7b section.
+
+## 9. Related documents
 
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)
 - [LLM_DECISION_LAYER_VISION.md](../architecture/LLM_DECISION_LAYER_VISION.md)

@@ -2,8 +2,10 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `d89bc6d`  
-**Immediate next phase:** **P7** — Streamlit/local workflow shell
+**Current main:** `44c88a1`  
+**Immediate next phase:** **P7** — Local Streamlit/Gradio workflow shell
+
+> **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17**.
 
 ## What is already implemented
 
@@ -51,15 +53,17 @@ The LLM must answer data-grounded questions only from governed profile summaries
 | T6 Workflow-specific readiness | I7–I8 | **P5** |
 | T6b General advisory / cold-start | I8b | **P5b** |
 | T7 CalibrationSignal | I9 | P6 |
-| T8 Product UI | I10, I15 | P7 |
+| T8 Product UI + public demo | I10, I15, P7–P9 | **P7–P9** |
+| T8b Pluggable LLM providers | P7b, 8G–8H | **P7b** |
 | T9 Demo profiling impl | I4, I7 | P8 |
+| T9b Service/deployment | P10–P11 | P10–P11 |
 | T10 LangGraph orchestration | Agentic governance | **P17** |
-| T11 Lifecycle / current-state | P1, G11, G16 | P11 |
-| T12 LLM answer governance | 8G–8N, G12–G20 | P12 |
-| T13 Refresh governance | I12, P1 | P10 |
-| T14 Golden scenarios | G1–G3, 8N | P13 |
-| T15 Production hardening | I11, I13–I14 | P9 (table-ref design) |
-| T16 Live execution / optimizer | Phase 8+, P14–P15 | P15–P16 deferred |
+| T11 Lifecycle / current-state | P1, G11, G16 | P14 |
+| T12 LLM answer governance | 8G–8N, G12–G20 | P15 |
+| T13 Refresh governance | I12, P1 | P13 |
+| T14 Golden scenarios | G1–G3, 8N | P16 |
+| T15 Production hardening | I11, I13–I14 | P12 (table-ref design) |
+| T16 Live execution / optimizer | Phase 8+, P18–P19 | P19–P20 deferred |
 
 ## Dependency chain (summary)
 
@@ -73,13 +77,17 @@ P1 session/path
   → P5 workflow-specific readiness reports (MMM / GeoX / CalibrationSignal / decision-review)
   → P5b general advisory and cold-start planning contracts
   → P6 CalibrationSignal intake mapping
-  → P7 Streamlit/local workflow shell
-  → P8 local/demo profiling implementation
-  → P17 LangGraph/stateful orchestration skeleton (after contracts stabilize)
+  → P7 local Streamlit/Gradio workflow shell
+  → P7b pluggable LLM provider contracts and explanation governance
+  → P8 demo fixtures and local/demo profiling
+  → P9 public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+  → P10 FastAPI/Docker service wrapper
+  → P11 hosted API hardening (auth, rate limits, privacy, cost controls)
+  → P17 LangGraph/stateful orchestration skeleton (after P7–P8 contracts stabilize)
   → later panel_exp/MMM diagnostic execution / export handoff (gated)
 ```
 
-## Implementation phases (P0–P17)
+## Implementation phases (P0–P20)
 
 | Phase | Goal | Runtime allowed |
 |-------|------|-----------------|
@@ -93,19 +101,25 @@ P1 session/path
 | **P5** | **Workflow-specific** readiness report contracts (I7–I8) | Builds on P4c workbench | ✓ implemented |
 | **P5b** | **General advisory** and cold-start planning contracts (I8b) | Routes users not ready for formal measurement | ✓ implemented |
 | **P6** | I9 CalibrationSignal mapping | Fixture validation | ✓ implemented |
-| **P7** | I10 Streamlit/local workflow shell | Display only |
-| **P8** | I4 demo upload + profiling implementation | Sandbox CSV only |
-| **P9** | I11 production table-ref design | Design only |
-| **P10** | I12 refresh governance | No model execution |
-| **P11** | P1/G11/G16 lifecycle selection | Registry metadata |
-| **P12** | 8G–8H LLM answer governance | MockLLM only |
-| **P13** | G1–G3 golden harness | Fixture tests |
-| **P14** | S6/G9 decision packet | Assembly only |
-| **P15** | P6–P7 optimizer governance | **No optimizer execution** |
-| **P16** | Live execution gate review | **Deferred** |
-| **P17** | LangGraph / stateful workflow orchestration skeleton | Governed tool routing only |
+| **P7** | I10 local Streamlit/Gradio workflow shell | Display only; deterministic mode default | Planned |
+| **P7b** | Pluggable LLM provider contracts + explanation governance | Provider modes; no canned explanations | Planned |
+| **P8** | I4 demo fixtures + local/demo profiling | Sandbox CSV only | Planned |
+| **P9** | Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces) | Demo-safe; no platform LLM key by default | Planned |
+| **P10** | FastAPI/Docker service wrapper | HTTP boundary; no duplicated MIP logic | Planned |
+| **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
+| **P12** | I11 production table-ref design | Design only | Planned |
+| **P13** | I12 refresh governance | No model execution | Planned |
+| **P14** | P1/G11/G16 lifecycle selection | Registry metadata | Planned |
+| **P15** | 8G–8H LLM answer governance | MockLLM + provider contracts | Planned |
+| **P16** | G1–G3 golden harness | Fixture tests | Planned |
+| **P17** | LangGraph / stateful workflow orchestration skeleton | Governed tool routing only | Planned |
+| **P18** | S6/G9 decision packet | Assembly only | Planned |
+| **P19** | Optimizer governance | **No optimizer execution** | Deferred |
+| **P20** | Live execution gate review | **Deferred** | Deferred |
 
-> **Note:** Integer **P9** remains production table-reference design. LangGraph orchestration is **P17**.
+> **Rationale:** P7 before P9 establishes local user flow before public hosting. P7b before P9 sets explicit LLM provider and explanation-mode boundaries. P10/P11 follow UI/demo because FastAPI/Docker are service/deployment layers—not prerequisites for proving product flow.
+
+> **Product decision:** The platform should be either **honestly deterministic** or **actually LLM-backed** through an explicit provider. **Canned/sample explanations are excluded** (`canned_demo`, `sample_explanation`, `template_llm_explanation`) because they blur that boundary and weaken trust.
 
 ## Common Data Intake Workbench (P4c)
 
@@ -334,6 +348,238 @@ No web search integration · no file parsing · no data profiling computation ·
 - Blocks stale/non-causal evidence when requirements disallow them
 - Maps valid evidence to `CalibrationSignal` with `DIAGNOSTIC_ONLY` tier and blocked decision/refresh usage
 
+## P7–P11 — Product surface, LLM providers, and public demo hosting
+
+**Status:** Planned (docs-only in this patch). Phase 5D Streamlit shell and `MockLLMProvider` exist for early deterministic workflow demos; P7/P7b replace that path with governed product surface contracts, explicit provider modes, and honest deterministic vs LLM-backed behavior.
+
+### Architecture layers
+
+| Layer | Role |
+|-------|------|
+| **Core MIP package** | Contracts, gates, readiness reports, advisory plans, CalibrationSignal mapping, `TrustReport` logic, deterministic validators |
+| **UI layer** | Human-facing Streamlit/Gradio interface: chat, forms, uploads, workflow selection, report cards, warnings, evidence labels, next steps |
+| **FastAPI layer** | HTTP service boundary for programmatic access, external apps, future auth, rate limits, clean frontend/backend separation |
+| **Docker layer** | Portable deployment package for consistent runs across local machines, Hugging Face Spaces, Render, Railway, or other cloud hosts |
+
+**Hierarchy (first demo path):**
+
+```text
+User → UI → MIP core package
+```
+
+**Later production path:**
+
+```text
+User → UI → FastAPI → MIP core package
+Docker wraps the UI/API/package for portable deployment.
+```
+
+FastAPI is **not** required for the first UI demo. FastAPI becomes useful when MIP needs external programmatic access, multiple frontends, auth/rate limits, integration with other apps, or a hosted service boundary. Docker is **not** the app—it is the portable runtime package that makes the app/API run consistently across hosting environments. P10 should wrap the core package and optionally the UI/API for portable deployment without duplicating MIP logic.
+
+### UI access modes
+
+**Local UI**
+
+- User runs the app locally (e.g. `streamlit run`).
+- Access through `localhost`.
+- Best for development, private demos, debugging, and demo recordings.
+
+**Public hosted UI**
+
+- App deployed to Streamlit Community Cloud, Hugging Face Spaces, or similar.
+- User accesses a public URL.
+- Best for public demos, portfolio demos, stakeholder review, and lightweight product validation.
+
+The **first public demo should be demo-safe** and should **not require paid infrastructure**.
+
+Public hosting is **not** the same as production readiness. Public demo mode can be free or low-cost, but production use later requires auth, rate limits, privacy controls, monitoring, storage policy, abuse prevention, and cost controls.
+
+### Public hosting strategy
+
+**Public demo hosting targets:**
+
+- **Streamlit Community Cloud** — simple Streamlit app
+- **Hugging Face Spaces** — Streamlit/Gradio/Docker ML-style app
+
+**Optional later:**
+
+- **Render** — FastAPI/web service deployment
+- **Railway / Fly / other cloud** — only after cost controls are clear
+
+**Product stance:** P9 public demo should work **without platform-paid LLM dependency**. The public demo must **not** expose a platform-owned LLM API key unless auth, rate limits, monitoring, abuse controls, and cost controls exist.
+
+### P7 — Local Streamlit/Gradio workflow shell
+
+**Purpose:** Establish the product UX spine locally before public hosting.
+
+**Future behavior:** Uses MIP core package directly; deterministic mode default; workflow cards for advisory, readiness, and calibration/intake paths; displays evidence labels, claim labels, warnings, allowed next steps, and blocked next steps; does **not** require LLM configuration.
+
+**Acceptance criteria (P7):**
+
+- Runs locally
+- Uses MIP core package directly
+- Supports deterministic mode
+- Shows workflow cards for advisory, readiness, and calibration/intake paths as available
+- Displays evidence labels, claim labels, warnings, allowed next steps, and blocked next steps
+- Does not require LLM configuration
+
+### P7b — Pluggable LLM provider contracts and explanation governance
+
+**Purpose:** Define explicit provider modes and explanation boundaries before public demo.
+
+**Future concept — `LLMProviderMode`:**
+
+| Mode | Definition |
+|------|------------|
+| `disabled` | No LLM call. UI shows deterministic MIP contracts, readiness reports, advisory plans, warnings, evidence labels, claim labels, allowed next steps, and blocked next steps. |
+| `local_ollama` | Local Mac/dev mode. User runs an open-source model locally through Ollama or compatible runtime. For local/private demos; not required for public hosting. |
+| `hosted_open_source` | Public-hosted experimental mode. Hosted app uses an open-source model if latency, memory, and cost are acceptable. Must be clearly labeled experimental. |
+| `bring_your_own_key` | User supplies API key for a supported provider (OpenAI, Anthropic, Gemini, Mistral, Groq, etc.). User responsible for provider usage and cost. |
+| `platform_managed_key_later` | Future paid/controlled mode. **Not allowed** in public demo until auth, rate limits, monitoring, abuse prevention, key management, privacy policy, and cost controls exist. |
+
+**Explicitly excluded:** `canned_demo` · `sample_explanation` · `template_llm_explanation`
+
+**Product decision:** The platform should be either **honestly deterministic** or **actually LLM-backed** through an explicit provider. Canned/sample explanations blur that boundary and weaken trust.
+
+The public product surface should work without paid LLM infrastructure. Deterministic mode is the default. Optional LLM-backed explanations may use hosted open-source models, local Ollama for local use, or bring-your-own-key providers. Canned/sample explanations are excluded because the platform should be either honestly deterministic or actually LLM-backed through an explicit provider.
+
+**The LLM explains governed MIP outputs; it does not create measurement authority.**
+
+**Future concept — `LLMUseCase`:**
+
+`intake_question_generation` · `missing_data_question_generation` · `readiness_explanation` · `advisory_plan_explanation` · `calibration_mapping_explanation` · `blocked_claim_explanation` · `trust_report_explanation` · `report_summarization` · `chat_response`
+
+LLM use cases are explanation/routing/intake surfaces. They do **not** authorize causal or decision-supporting claims.
+
+**LLM authority boundary**
+
+The LLM is **not** the authority. MIP contracts, readiness reports, advisory claim guards, CalibrationSignal mapping reports, `TrustReport`s, and deterministic validators remain authoritative.
+
+**The LLM may:** ask follow-up questions · ask for missing data · explain governed outputs · summarize readiness reports · explain blocked claims · translate structured findings into user-facing language · produce advisory-only hypotheses when evidence mode allows
+
+**The LLM must not:** override readiness reports · override `TrustReport` status · override advisory claim guards · override CalibrationSignal mapping status · invent causal effects · invent ROI · invent lift · invent power/MDE · invent matched markets · invent budget optimization · promote advisory hypotheses to decision recommendations · hide evidence/claim labels
+
+**LLM input boundary**
+
+LLM input should be **governed summaries and report payloads**, not raw rows by default.
+
+**Allowed examples:** `CommonIntakeWorkbench` summaries · `WorkflowReadinessReport` · `ColdStartAdvisoryPlan` · `CalibrationMappingReport` · `TrustReport` summary · `allowed_next_steps` · `blocked_next_steps` · claim type labels · evidence level labels · warnings · blocking reasons
+
+**Blocked by default:** raw uploaded rows · private customer secrets · unbounded file contents · unvalidated source data · credentials · API keys · PII-heavy exports
+
+If raw data access is ever introduced, it must be a separate governed capability with explicit user consent, row/size limits, privacy policy, retention policy, and redaction controls.
+
+**Public-hosted LLM strategy (P9 prerequisite)**
+
+For public Streamlit/Hugging Face demos, supported explanation modes:
+
+1. `disabled` / deterministic mode — **default**
+2. `hosted_open_source` — experimental if performance acceptable
+3. `bring_your_own_key` — optional
+
+Canned/sample explanation mode is **not** supported. The hosted public demo must remain useful in deterministic mode even when no LLM provider is configured. Hosted open-source mode is optional and experimental because open-source model weights may be free, but public inference still requires compute. The system must **not** depend on hosted open-source inference for core functionality.
+
+**Local Mac/dev LLM strategy**
+
+For local Mac/dev usage, supported explanation modes:
+
+1. `disabled` / deterministic mode
+2. `local_ollama`
+3. `bring_your_own_key`
+
+Local Ollama mode avoids platform-paid LLM calls and keeps inference local. Local mode must still obey the same MIP claim boundaries as hosted mode.
+
+**Future UI behavior**
+
+The UI must display active mode: **Deterministic** · **Local Ollama** · **Hosted Open Source (experimental)** · **Bring Your Own Key** · **Platform Managed Key (later only)**
+
+In deterministic mode, the UI shows structured reports and deterministic text derived directly from contract fields—it does **not** pretend to be chat/model reasoning. In LLM-backed modes, the UI displays provider mode and preserves evidence labels, claim labels, warnings, blocked claims, and allowed next steps. If LLM output conflicts with MIP contract/report constraints, the **deterministic MIP result wins**.
+
+**Acceptance criteria (P7b):**
+
+- Defines provider mode contracts
+- Excludes canned/sample explanation mode
+- Supports disabled/deterministic mode as default
+- Supports `local_ollama` for local dev
+- Supports `hosted_open_source` as experimental
+- Supports `bring_your_own_key`
+- Defines `platform_managed_key_later` as gated future mode only
+- Prevents LLM from overriding MIP contracts/reports/`TrustReport`s
+- Ensures LLM receives governed summaries, not raw rows by default
+- Requires UI to show active explanation/provider mode
+- Requires public hosted demo to work without paid LLM dependency
+- Blocks platform-managed public LLM keys until auth, rate limits, monitoring, and abuse controls exist
+
+### P8 — Demo fixtures and local/demo profiling
+
+**Purpose:** Sandbox CSV profiling for local and demo paths (unchanged scope from prior P8; now follows P7/P7b).
+
+### P9 — Public hosted demo
+
+**Purpose:** Deploy demo-safe public URL on Streamlit Community Cloud or Hugging Face Spaces.
+
+**Privacy/cost controls (public demo safe by default):**
+
+- No persistent storage by default
+- No platform-owned LLM key by default
+- Optional BYOK only
+- Uploaded data cleared after session or explicitly documented
+- Sample/demo data available
+- File size limits before upload support
+- No raw rows sent to LLM by default
+- Active provider mode visible
+- Advisory/measurement/decision-support labels visible
+
+Platform-managed LLM keys deferred until: authentication · rate limits · spend limits · abuse monitoring · secure provider secrets · privacy and retention policy · explicit user consent
+
+**Acceptance criteria (P9):**
+
+- Deploys to Streamlit Community Cloud or Hugging Face Spaces
+- Works in deterministic mode without paid LLM dependency
+- Optionally supports `hosted_open_source` if performance is acceptable
+- Optionally supports `bring_your_own_key`
+- Does not expose platform-owned LLM API keys
+- Uses sample/demo data by default
+- Clearly labels non-production/demo status
+- Shows active provider mode
+- Shows evidence/claim labels and blocked claims
+
+### P10 — FastAPI/Docker service wrapper
+
+**Purpose:** HTTP boundary for programmatic access; portable deployment.
+
+**Acceptance criteria (P10):**
+
+- Exposes core MIP workflows through API endpoints
+- Keeps MIP package as source of truth
+- Does not duplicate business logic in API layer
+- Includes health check
+- Includes Dockerfile or deployment container
+- Keeps secrets out of repo
+- Prepares for auth/rate limits later
+
+### P11 — Hosted API hardening
+
+**Purpose:** Auth, rate limits, privacy, cost controls for hosted service path.
+
+### Example flows
+
+**Example 1 — Public demo, no LLM**
+
+User opens hosted Streamlit/Hugging Face app. Provider mode is `disabled`/deterministic. User enters cold-start business profile. MIP returns `ColdStartAdvisoryPlan` with `evidence_mode=business_profile_only` and `claim_type=hypothesis_to_test`. UI displays deterministic report cards and does **not** pretend an LLM generated the answer.
+
+**Example 2 — Public demo, BYOK**
+
+User selects `bring_your_own_key` and enters provider key. MIP builds governed report payload. LLM explains the report but must preserve evidence labels, claim labels, warnings, allowed next steps, and blocked next steps. User pays their own provider usage.
+
+**Example 3 — Local Mac, Ollama**
+
+Developer runs app locally. Provider mode is `local_ollama`. The local model explains MIP reports using governed summaries only. MIP validators remain authoritative.
+
+**Example 4 — Hosted open-source model**
+
+Hosted demo enables `hosted_open_source` as experimental. If latency or memory is unacceptable, the app falls back to deterministic mode. Core workflow functionality must not depend on hosted model availability.
+
 ## P4b — Experiment design objective and data requirement contracts
 
 **Entry paths:** MMM-driven (uncertainty, calibration gap, evidence conflict) · standalone GeoX design.
@@ -390,9 +636,9 @@ No web search integration · no file parsing · no data profiling computation ·
 | General advisory / cold-start | P5b contracts + evidence/claim labeling |
 | CalibrationSignal intake mapping | P6 contracts + fixture validation |
 | Experiment design diagnostics | P4b + P4c + P5 + panel_exp gated handoff |
-| LLM current-performance answers | P11 + P12 + S1–S3 + TrustReport + G11–G20 |
-| LangGraph runtime | P4b, P4c, P5, P5b, P8 contracts stable |
-| Live engine execution | P13, P12, 8G–8N, G3, explicit signoff |
+| LLM current-performance answers | P14 + P15 + S1–S3 + TrustReport + G11–G20 |
+| LangGraph runtime | P4b, P4c, P5, P5b, P7, P8 contracts stable |
+| Live engine execution | P16, P15, 8G–8N, G3, explicit signoff |
 
 ## Do not build yet
 
@@ -405,6 +651,8 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 | Common intake workbench | This doc P4c; Conversational intake I6c |
 | Workflow-specific readiness | Conversational intake I7–I8; P5 |
 | General advisory / cold-start | Conversational intake I8b; P5b |
+| Product surface + public demo | P7–P9; Conversational intake I10 |
+| Pluggable LLM providers | P7b; LLM reasoning roadmap §8 |
 | Experiment design intake | Conversational intake I6b; P4b |
 | LangGraph orchestration | Agentic workflow governance P17 |
 

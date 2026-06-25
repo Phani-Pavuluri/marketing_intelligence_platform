@@ -131,25 +131,38 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 8G+ — LLM explanation payload, usage policy | **Next implementation** (G11–G20 as design constraints) |
 | Live engine adapters | **Planned** (blocked until golden scenarios + 8G–8H) |
 
-Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
+Provider order for **product surface (P7b):** **`disabled`/deterministic first** (default; no LLM required), then `local_ollama` for local dev, then `bring_your_own_key`, then optional `hosted_open_source` (experimental), then `platform_managed_key_later` (gated). **Canned/sample explanation modes are excluded** (`canned_demo`, `sample_explanation`, `template_llm_explanation`)—the platform should be either honestly deterministic or actually LLM-backed through an explicit provider.
+
+Phase 5C `MockLLMProvider` remains for early deterministic workflow tests; P7b product surface does **not** use canned explanations for user-facing demos.
+
+The public product surface should work without paid LLM infrastructure. Deterministic mode is the default. Optional LLM-backed explanations may use hosted open-source models, local Ollama for local use, or bring-your-own-key providers.
+
+**The LLM explains governed MIP outputs; it does not create measurement authority.**
 
 See [docs/architecture/LLM_DECISION_LAYER_VISION.md](docs/architecture/LLM_DECISION_LAYER_VISION.md), [docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md), [docs/roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](docs/roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md), [docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md), [docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md), and [docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) for delivery phases, semantic readiness, artifact selection policies (G11–G20), intake/data handoff (I1–I15), and design constraints for 8G/8H.
 
-## Local-first workbench
+## Local-first workbench and UI access
 
-Initial product direction is **local-first**:
+Initial product direction is **local-first**, with a planned **public hosted demo** path (P9).
+
+### UI access modes
+
+**Local UI** — user runs the app locally (e.g. `streamlit run`); access through `localhost`; best for development, private demos, debugging, and demo recordings.
+
+**Public hosted UI** — app deployed to Streamlit Community Cloud or Hugging Face Spaces; user accesses a public URL; best for public demos, portfolio demos, stakeholder review, and lightweight product validation. The first public demo should be demo-safe and should not require paid infrastructure. Public hosting is not production readiness.
 
 ```text
 poetry install
   → mip demo / mip app   (planned CLI entry points)
-  → localhost UI opens
-  → user provides local data
+  → localhost UI opens (P7)
+  → optional public URL (P9)
+  → user provides local or demo data
   → diagnostics, workflows, dashboards, reports run locally
-  → follow-up Q&A over run artifacts
+  → follow-up Q&A over governed report payloads (deterministic or explicit LLM provider)
 ```
 
-- **Streamlit** is planned first for demo speed and iteration
-- **FastAPI / hosted mode** is a later optional extension
+- **Streamlit/Gradio** is planned first for demo speed and iteration (P7 local UI, P9 public demo)
+- **FastAPI / Docker** is a later service/deployment layer (P10–P11), not required for the first UI demo
 - Marketing data stays on the user's machine in early releases
 - Reports export to local run folders (HTML first, Markdown second, PDF later)
 
@@ -184,9 +197,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5D deterministic workflow layers are implemented with passing tests.
 
-**Product surface: CLI + mock explanation + Streamlit shell + MMM fixture governance demo.** Governed placeholder artifacts only; no engines wired.
+**Product surface:** Phase 5D Streamlit shell + `MockLLMProvider` exist for early workflow demos. **P7** local UI and **P7b** pluggable LLM provider contracts are the next product surface work—deterministic mode default, no canned explanations.
 
-**Near-term focus:** Implement I1–I3 intake session contracts (`MMMIntakeSession`, `IntakePlan`, `RequiredDataAsset`), specify semantic contracts S1–S3, then Phase 8G (LLM explanation payload) and 8H (usage policy + diagnostic taxonomy) with G11–G20 artifact-selection policies as design constraints—not upload UI or live engine execution yet.
+**Near-term focus:** **P7** local Streamlit/Gradio workflow shell, then **P7b** pluggable LLM provider contracts. P6 CalibrationSignal intake mapping is complete.
 
 ## Roadmap
 
@@ -200,7 +213,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 | [Critical invariants and golden scenarios](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) | G1–G20: product proof, artifact selection, ambiguity policies |
 | [Conversational intake and data handoff](docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) | I1–I15: LLM conversation → upload/connect → readiness → export handoff |
 | [Platform completion gaps](docs/roadmap/PLATFORM_COMPLETION_GAPS_ROADMAP.md) | P1–P13: lifecycle, audit, certification |
-| [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md) | Consolidated P0–P16 implementation phases |
+| [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md) | Consolidated P0–P20 implementation phases |
 | [Roadmap execution audit](docs/audits/ROADMAP_EXECUTION_AUDIT_001.md) | Theme grouping, blockers, canonical ownership |
 | [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md) | `mip demo` / `mip app`, Streamlit, providers, local artifacts |
 | [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md) | Three-repo boundaries and adapter contracts |
@@ -223,11 +236,15 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P6 implemented:** CalibrationSignal intake mapping contracts (`CalibrationEvidenceInput`, `CalibrationMappingRequirement`, `CalibrationMappingReport`, `map_evidence_to_calibration_signal`). MIP can now validate governed experiment evidence for CalibrationSignal compatibility, preserve source lineage, and map structurally valid evidence into `CalibrationSignal` contracts. This does not execute MMM calibration, estimate effects, certify causality, or approve decisions.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P7** — Streamlit/local workflow shell.
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P7** — Local Streamlit/Gradio workflow shell.
 
-1. **P7** — Streamlit/local workflow shell
-2. **P8** — Local/demo profiling implementation
-3. **P17** — LangGraph orchestration skeleton (after P7–P8 stabilize)
+1. **P7** — Local Streamlit/Gradio workflow shell (deterministic mode default)
+2. **P7b** — Pluggable LLM provider contracts and explanation governance
+3. **P8** — Demo fixtures and local/demo profiling
+4. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+5. **P10** — FastAPI/Docker service wrapper
+6. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
+7. **P17** — LangGraph orchestration skeleton (after P7–P8 stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
