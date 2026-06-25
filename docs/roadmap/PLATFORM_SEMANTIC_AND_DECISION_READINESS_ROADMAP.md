@@ -426,6 +426,16 @@ Semantic registries (S1–S3) and scope metadata are **prerequisites** for [conv
 
 Intake sessions (I1) should capture `metric_id` and `estimand_id` before data upload/connect.
 
+## 5.3 Common Data Intake Workbench (P4c)
+
+**Common intake first, workflow-specific readiness second.** MIP will provide one shared workbench for MMM, GeoX, CalibrationSignal, and decision-review workflows. Users upload/connect data once; MIP derives `WorkflowSupportAssessment` and branches readiness by workflow.
+
+Future contracts include `CommonIntakeWorkbench`, `WorkflowSupportAssessment`, and `WorkflowReadinessRoute`. See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md).
+
+## 5.4 Experiment design objective-to-KPI mapping (P4b)
+
+Deterministic objective→KPI-family rules for GeoX/experiment design intake: awareness · demand creation · conversion · retention/usage · MMM calibration. LLM may explain; platform rules decide valid mappings.
+
 ## 6. Related documents
 
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)

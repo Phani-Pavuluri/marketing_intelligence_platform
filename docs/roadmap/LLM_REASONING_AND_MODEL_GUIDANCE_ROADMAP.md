@@ -64,7 +64,17 @@ Live engine execution on the MIP side remains blocked until a later explicitly g
 
 **Governance-valid ≠ answer-valid** also applies at intake: the LLM may draft intake plans and mapping proposals, but **MIP validation** (readiness report, manifest) is the source of truth—see [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md).
 
-### 3.1 Artifact selection and ambiguity design constraints
+### 3.1 Common Data Intake Workbench and LLM grounding
+
+**Common intake first, workflow-specific readiness second.** The LLM helps users interact with the common intake workbench—it must not answer from raw files.
+
+Allowed sources: intake session · plan · manifest · semantic mapping report · `WorkflowSupportAssessment` · preliminary analysis · workflow-specific readiness reports · diagnostic reports · `TrustReport`.
+
+**May explain:** national-only data is insufficient for DMA GeoX; visits may proxy awareness but BSV is absent; data may be structurally ready for GeoX design diagnostics while panel_exp must still assess MDE.
+
+**Must not claim:** powered test · week recommendations · matched markets · design validity · budget moves.
+
+### 3.2 Artifact selection and ambiguity design constraints
 
 Phases 8G–8H and 8I must incorporate [G11–G20 policies](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md):
 

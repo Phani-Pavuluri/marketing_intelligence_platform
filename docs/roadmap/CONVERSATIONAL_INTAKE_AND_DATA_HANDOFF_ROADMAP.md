@@ -234,9 +234,53 @@ This addendum is **documentation only**. No runtime code, Streamlit changes, con
 
 ---
 
+### Track I6b — Experiment Design Objective and Data Requirement Intake (P4b)
+
+**Why:** Generic intake (P1–P4) does not encode domain-tailored GeoX objectives, KPI families, or MMM→GeoX bridges.
+
+**Entry paths:** MMM-driven (uncertainty, calibration gap) · standalone GeoX design (e.g. DMA-level Meta awareness test for Acrobat).
+
+**Future objects:** `ExperimentDesignObjective` · `ExperimentDesignIntake` · `MMMToGeoXDesignBridge` · `StandaloneGeoXDesignRequest` · `ExperimentDiagnosticRequest` · `ExperimentValidationNeed` · `CalibrationGapReason`
+
+**Rules:** Deterministic objective→KPI-family rules; LLM explains but does not certify KPI; may produce `ExperimentDiagnosticRequest` without executing panel_exp.
+
+**Ownership:** **MIP** owns contracts; **MMM** supplies recommendation context; **panel_exp/GeoX** owns design diagnostics (later, gated).
+
+---
+
+### Track I6c — Common Data Intake Workbench (P4c)
+
+**Why:** Users must not upload data separately for MMM vs GeoX. **Common intake first, workflow-specific readiness second.**
+
+MIP provides **one Common Data Intake Workbench** shared by MMM, GeoX/experiment design, CalibrationSignal intake, and decision-review workflows. Data is uploaded, connected, or declared once; MIP profiles, maps, snapshots, and routes it into workflow-specific readiness.
+
+**Explicitly rejected:** separate MMM upload flow · separate GeoX upload flow · duplicated mapping/profiling · LLM answers from raw files
+
+**Shared workbench responsibilities (future):**
+
+Source registration · upload/connect/declaration · data source refs · manifests · column mapping · semantic confirmation · snapshot metadata · time/geo coverage · metric/media/control availability · missingness · grain/scope detection · LLM-safe summary reports · **WorkflowSupportAssessment**
+
+**Future objects:** `CommonIntakeWorkbench` · `CommonDataIntakeSession` · `DataSnapshot` · `SourceIngestionRecord` · `IngestionMode` · `IngestedAssetRecord` · `CommonDataProfileSummary` · `WorkflowSupportAssessment` · `WorkflowReadinessRoute` · `LLMAnswerGroundingContext`
+
+**WorkflowSupportAssessment** answers which workflows declared/profiled data supports, what is blocked, what grain/KPI/source is missing, and which branch-specific diagnostic should run next.
+
+Example statuses: `supports_national_mmm` · `supports_geo_level_mmm` · `supports_geox_design_diagnostics` · `supports_calibration_signal_intake` · `blocked_needs_geo_level_outcome` · `blocked_needs_geo_level_media`
+
+**Same-data examples:**
+
+| Data shape | Platform explanation (future) |
+|------------|-------------------------------|
+| National weekly: `week, country, channel, spend, conversions` | May support national MMM; **not** DMA-level GeoX (geo-level outcome/media missing) |
+| DMA-week: `week, dma, platform, spend, visits, conversions` | May support GeoX design diagnostics; may support geo-level MMM; awareness may use visits but BSV absent |
+| Experiment readout: `effect_estimate, standard_error, metric_id, geo_scope` | May support CalibrationSignal intake; **not** MMM modeling or new GeoX design alone |
+
+**Ownership:** **MIP** owns workbench contracts and workflow support assessment; engines own downstream diagnostics.
+
+---
+
 ### Track I7 — Data Profiling + Compatibility Validation
 
-**Why:** Compatibility is path-specific and contract-driven—not LLM judgment.
+**Why:** Compatibility is path-specific and contract-driven—not LLM judgment. Builds on **P4c Common Data Intake Workbench** summaries.
 
 **Future objects:** `UploadedFileProfile` · `DataCompatibilityReport` · `DataQualityFinding` · `DataGrainValidationReport` · `ScopeValidationReport` · `FreshnessValidationReport`
 
@@ -256,15 +300,21 @@ This addendum is **documentation only**. No runtime code, Streamlit changes, con
 
 ---
 
-### Track I8 — MMM Data Readiness Report
+### Track I8 — Workflow-Specific Data Readiness Reports (P5)
 
-**Why:** Readiness is tied to intended use—not a single global flag.
+**Why:** Readiness is tied to intended use—not a single global flag. After common intake (P4c), readiness **branches by workflow**.
 
-**Future object:** `MMMDataReadinessReport`
+**Future objects:** `MMMDataReadinessReport` · `GeoXDesignReadinessReport` · `CalibrationSignalReadinessReport` · `DecisionReviewReadinessReport`
 
-**Fields:** `report_id` · `manifest_id` · `session_id` · `candidate_path` · `readiness_tier` · `compatible_assets` · `missing_assets` · `warnings` · `blocking_reasons` · `metric_status` · `estimand_status` · `scope_status` · `grain_status` · `freshness_status` · `calibration_signal_status` · `recommended_next_action` · `allowed_next_steps` · `blocked_next_steps`
+**MMM branch decides:** time grain · historical coverage · media channels over time · outcome/media scope alignment · controls/promos/seasonality · calibration evidence · national vs geo-level vs calibrated vs refresh vs decision-surface path
 
-**Readiness tiers:**
+**GeoX / experiment-design branch decides:** geo/DMA/market grain · outcome/media at geo-time level · pre-period data for design diagnostics · geo coverage · KPI vs objective alignment · whether panel_exp should run design diagnostics next
+
+**CalibrationSignal branch decides:** effect estimate + uncertainty · metric/estimand/channel/geo/time mapping · structured enough for `CalibrationSignal` · governed vs stale vs blocked
+
+**Decision-review branch decides:** `TrustReport` present · evidence alignment · metric/estimand/scope/freshness · human approval · blocked vs diagnostic vs decision-supporting
+
+**Readiness tiers (MMM example):**
 
 `not_ready` · `ready_for_data_profiling_only` · `ready_for_diagnostic_mmm` · `ready_for_calibrated_mmm_candidate` · `ready_for_decision_surface_candidate` · `ready_for_refresh_request` · `blocked`
 
@@ -441,8 +491,10 @@ user selects governed table connection
 | I4 | Data source mode selection |
 | I5 | DataSourceRef + intake manifest |
 | I6 | Column mapping + semantic confirmation |
+| I6b | Experiment design objective + KPI/data requirements (P4b) |
+| I6c | **Common Data Intake Workbench** + preliminary profiling (P4c) |
 | I7 | Data profiling + compatibility validation |
-| I8 | MMM data readiness report |
+| I8 | **Workflow-specific** readiness reports (P5) |
 | I9 | CalibrationSignal intake mapping |
 | I10 | Streamlit / local product workflow |
 | I11 | Production data connection workflow |
@@ -460,16 +512,44 @@ user selects governed table connection
 | Phase 4 `mip.workflows.configs` | I12 config draft |
 | Phase 5D Streamlit shell | I10 product workflow panels |
 | Phase 8F sibling exports | I4 sibling export mode, I12 handoff |
-| S1–S3 semantic registries | I6 mapping, I7/I8 validation |
+| S1–S3 semantic registries | I6 mapping, I7/I8 validation, P4b KPI rules |
 | G11–G20 artifact selection | I2 path gating, I8 tier semantics |
+
+## 6.1 Common intake architecture principle
+
+**Common intake first, workflow-specific readiness second.**
+
+The user should not choose a separate MMM upload flow or GeoX upload flow. MIP provides a common data intake workbench, then derives workflow-specific readiness and diagnostic routes from the same governed source, mapping, snapshot, and profile objects.
+
+## 6.2 LLM role in common intake
+
+The LLM helps the user communicate with the common intake workbench. It may ask clarifying questions, explain why a workflow needs more granular data, explain KPI/objective alignment, and summarize governed profile/readiness outputs.
+
+**May say:** national-only data is insufficient for DMA-level GeoX; visits may proxy awareness but BSV is absent.
+
+**Must not say:** this test is powered · use 8 weeks · matched markets · design is valid · move budget.
+
+The LLM must not answer from raw files—only from governed reports.
+
+## 6.3 Diagnostic ownership split
+
+| Owner | Role |
+|-------|------|
+| **Common MIP intake/profiling** | Upload/connect; snapshots; mapping; structural profiling; workflow support assessment; LLM-safe summaries |
+| **MMM** | MMM sufficiency; media time-series; calibration; refresh/decision-surface diagnostics |
+| **GeoX / panel_exp** | Power/MDE; matchability; design feasibility; readout |
+| **LLM** | Clarification and explanation of governed outputs only |
 
 ## 7. Next implementation phase
 
-**P1 complete (I1–I2). P2 complete (I3). P3 complete (I5). P4 complete (I6).** Next:
+**P1–P4 complete.** Next:
 
-1. Data profiling + readiness reports (P5 / I7–I8)
+1. **P4b** — Experiment design objective and data requirement contracts
+2. **P4c** — **Common Data Intake Workbench** + preliminary profiling contracts
+3. **P5** — Workflow-specific readiness reports
+4. **P17** — LangGraph orchestration skeleton (after P4b–P8 stabilize)
 
-Keep upload/connect UI **separate** until contracts are validated. Then I5 manifest, I6 mapping, I7–I8 validation.
+Sequence: understand experiment objective → provide data once through common workbench → workflow-specific readiness → diagnostics.
 
 ## 8. Related documents
 

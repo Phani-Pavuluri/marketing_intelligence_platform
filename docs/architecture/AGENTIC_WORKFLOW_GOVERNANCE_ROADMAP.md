@@ -80,7 +80,27 @@ G1–G10  Critical invariants and golden scenarios (documented addendum)
 Next  Phase 8G/8H implementation (explanation payload + usage policy)
 
 I1–I15  Conversational intake + data handoff (documented product workflow)
+
+P4b–P4c  Experiment design intake + Common Data Intake Workbench (documented; next implementation)
+
+P17  LangGraph / stateful workflow orchestration skeleton (after P4b–P8 stabilize)
 ```
+
+## Common Data Intake Workbench (P4c — planned)
+
+**Principle:** Common intake first, workflow-specific readiness second. One workbench for MMM, GeoX, CalibrationSignal, and decision-review—no separate upload flows.
+
+The workbench owns source registration, manifests, mapping, snapshots, structural profiling, `WorkflowSupportAssessment`, and LLM-safe summaries. Readiness then branches by workflow (P5).
+
+## P17 — LangGraph / stateful workflow orchestration (planned)
+
+LangGraph routes users through governed intake → workbench profiling → workflow-specific readiness → diagnostic requests. It is a **workflow controller**, not the measurement brain. Graph state holds governed contracts only—not raw dataframes.
+
+**Future nodes include:** `PreliminaryProfilingNode` · `ExperimentDesignRequirementNode` · `ReadinessReportNode` · `LLMAnswerGroundingNode` · `HumanApprovalNode`
+
+**Timing:** After P4b, P4c, P5, and P8 contracts stabilize. Integer **P9** remains production table-reference design.
+
+See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md).
 
 ## Phase 8A artifacts
 

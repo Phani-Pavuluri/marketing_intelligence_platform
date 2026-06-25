@@ -36,6 +36,19 @@ Control plane and governance layer:
 
 MIP does **not** own geo matching, SCM/TBR/DID inference, MMM fitting, or portfolio optimization math.
 
+### Common Data Intake Workbench
+
+**Common intake first, workflow-specific readiness second.** MIP owns one shared intake workbench (source registration, manifests, mapping, snapshots, structural profiling, `WorkflowSupportAssessment`). Users do not maintain separate MMM and GeoX upload flows. After common intake, readiness branches: MMM-specific · GeoX/experiment-design · CalibrationSignal · decision-review.
+
+| Layer | Owns | Does not own |
+|-------|------|--------------|
+| **MIP common intake** | Workbench, snapshots, mapping, profiling summaries, workflow support assessment, LLM grounding context | Power, MDE, matching, model fitting |
+| **MMM** | MMM sufficiency, media time-series, calibration, refresh diagnostics | Geo design execution |
+| **panel_exp / GeoX** | Power/MDE, matchability, design feasibility, readout | Intake workbench, readiness tier certification |
+| **LLM** | Clarification, explanation of governed reports | Raw-file analysis, feasibility certification |
+
+See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P4c and [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) I6c.
+
 ### `panel_exp` / GeoX
 
 Experimentation engine repository:
