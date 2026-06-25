@@ -200,18 +200,20 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 | [Critical invariants and golden scenarios](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) | G1–G20: product proof, artifact selection, ambiguity policies |
 | [Conversational intake and data handoff](docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) | I1–I15: LLM conversation → upload/connect → readiness → export handoff |
 | [Platform completion gaps](docs/roadmap/PLATFORM_COMPLETION_GAPS_ROADMAP.md) | P1–P13: lifecycle, audit, certification |
+| [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md) | Consolidated P0–P16 implementation phases |
+| [Roadmap execution audit](docs/audits/ROADMAP_EXECUTION_AUDIT_001.md) | Theme grouping, blockers, canonical ownership |
 | [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md) | `mip demo` / `mip app`, Streamlit, providers, local artifacts |
 | [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md) | Three-repo boundaries and adapter contracts |
 
-**Next (implementation):**
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P1** — intake session and path recommendation contracts (I1–I2).
 
-1. **I1–I3** — `MMMIntakeSession`, `IntakePlan`, `RequiredDataAsset` contracts + fixtures
-2. Semantic contracts S1–S3 (metric/KPI registry, estimand registry, scope alignment)
-3. Phase 8G — LLM explanation payload contract (temporal, scope, freshness fields per G11/G16)
-4. Phase 8H — Usage policy + diagnostic taxonomy (claim-level rules per G14, ambiguity per G12)
+1. **P1 / I1–I2** — `MMMIntakeSession`, path recommendation contracts + fixtures
+2. **P2 / I3** — `IntakePlan`, `RequiredDataAsset` catalog
+3. **P4 / S1–S3** — Metric/estimand/scope semantic registry stubs
+4. **P12 / 8G–8H** — LLM explanation payload + usage policy (G11–G20 constraints)
 5. Sibling producer writers per 8F specs with `metric_id`, `estimand_id`, scope metadata
-6. Upload/connect UI (I4–I7) after intake contracts validated
-7. Golden scenario fixtures (G1/G2) once 8G–8H contracts exist
+6. **P3–P5 / I4–I8** — Manifest, mapping, readiness (after P1–P2)
+7. **P13 / G1–G2** — Golden scenario fixtures once 8G–8H contracts exist
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -225,6 +227,7 @@ marketing_intelligence_platform/
     vision/           # Vision and principles
     architecture/     # Layers, boundaries, trust, LLM, local-first
     roadmap/          # Phased delivery
+    audits/           # Roadmap execution audits
     adr/              # Architecture decision records
     glossary/         # Estimands and measurement terms
     operating_model/  # Intake, evaluation, release gates
@@ -264,6 +267,8 @@ marketing_intelligence_platform/
 - [Critical invariants and golden scenarios](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
 - [Conversational intake and data handoff](docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
 - [Platform completion gaps](docs/roadmap/PLATFORM_COMPLETION_GAPS_ROADMAP.md)
+- [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md)
+- [Roadmap execution audit](docs/audits/ROADMAP_EXECUTION_AUDIT_001.md)
 - ADRs: [001 Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md) · [002 Experiments](docs/adr/ADR-002-experiments-as-calibration-evidence.md) · [003 LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md)
 
 ## Development setup
