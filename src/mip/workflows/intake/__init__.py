@@ -24,6 +24,20 @@ from mip.contracts.intake_assets import (
     SampleRow,
     SampleSchemaExpectation,
 )
+from mip.contracts.intake_sources import (
+    DataSourceMode,
+    DataSourceRef,
+    DataSourceStatus,
+    DataSourceType,
+    DropzoneSourceRef,
+    FileSourceRef,
+    GeoXIntakeManifest,
+    IntakeManifestStatus,
+    MMMIntakeManifest,
+    SiblingExportSourceRef,
+    TableSourceRef,
+    UploadedFileSourceRef,
+)
 from mip.workflows.intake.assets import build_intake_plan
 from mip.workflows.intake.availability import DataAvailabilityProfile, has_field_or_alias
 from mip.workflows.intake.feasibility import (
@@ -32,6 +46,7 @@ from mip.workflows.intake.feasibility import (
     evaluate_objective_feasibility,
     recommended_next_questions,
 )
+from mip.workflows.intake.manifest import build_intake_manifest
 from mip.workflows.intake.objectives import (
     BusinessObjective,
     BusinessObjectiveType,
@@ -57,6 +72,18 @@ __all__ = [
     "DataAssetPurpose",
     "DataAssetRequirementLevel",
     "DataAssetType",
+    "DataSourceMode",
+    "DataSourceRef",
+    "DataSourceStatus",
+    "DataSourceType",
+    "DropzoneSourceRef",
+    "FileSourceRef",
+    "GeoXIntakeManifest",
+    "IntakeManifestStatus",
+    "MMMIntakeManifest",
+    "SiblingExportSourceRef",
+    "TableSourceRef",
+    "UploadedFileSourceRef",
     "DataGrain",
     "DecisionHorizon",
     "DecisionScope",
@@ -81,6 +108,7 @@ __all__ = [
     "SampleRow",
     "SampleSchemaExpectation",
     "WorkflowType",
+    "build_intake_manifest",
     "build_intake_plan",
     "evaluate_objective_feasibility",
     "has_field_or_alias",

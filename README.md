@@ -207,15 +207,17 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P1 implemented:** deterministic intake session and path recommendation contracts (`MMMIntakeSession`, `GeoXIntakeSession`, `IntakePathRecommendation`, `recommend_intake_path`).
 
-**P2 implemented:** required data asset and sample schema expectation contracts (`IntakePlan`, `RequiredDataAsset`, `build_intake_plan`). After a path recommendation, MIP can show the expected data shape before upload/connect. Uploads, manifests, profiling, readiness, and execution remain deferred.
+**P2 implemented:** required data asset and sample schema expectation contracts (`IntakePlan`, `RequiredDataAsset`, `build_intake_plan`). After a path recommendation, MIP can show the expected data shape before upload/connect.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P3** — `DataSourceRef` and intake manifest contracts (I5).
+**P3 implemented:** `DataSourceRef` and intake manifest contracts (`MMMIntakeManifest`, `GeoXIntakeManifest`, `build_intake_manifest`). MIP can represent user-selected data source modes and tie them to session/recommendation/plan. Actual uploads, file reading, table connectors, profiling, compatibility validation, and readiness reports remain deferred.
 
-1. **P3 / I5** — `DataSourceRef`, `IntakeManifest`
-2. **P4 / S1–S3** — Metric/estimand/scope semantic registry stubs
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P4** — column mapping and semantic confirmation stubs (I6 / S1–S3).
+
+1. **P4 / I6 + S1–S3** — Column mapping + semantic registry stubs
+2. **P5 / I7–I8** — Data profiling + readiness reports
 3. **P12 / 8G–8H** — LLM explanation payload + usage policy (G11–G20 constraints)
 4. Sibling producer writers per 8F specs with `metric_id`, `estimand_id`, scope metadata
-5. **P3–P5 / I4–I8** — Manifest, mapping, readiness (after P3)
+5. **P8 / I4** — Demo upload profiling (after P4–P5 foundations)
 6. **P13 / G1–G2** — Golden scenario fixtures once 8G–8H contracts exist
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.

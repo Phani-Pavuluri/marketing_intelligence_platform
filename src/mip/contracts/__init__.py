@@ -43,6 +43,20 @@ from mip.contracts.intake_assets import (
     SampleRow,
     SampleSchemaExpectation,
 )
+from mip.contracts.intake_sources import (
+    DataSourceMode,
+    DataSourceRef,
+    DataSourceStatus,
+    DataSourceType,
+    DropzoneSourceRef,
+    FileSourceRef,
+    GeoXIntakeManifest,
+    IntakeManifestStatus,
+    MMMIntakeManifest,
+    SiblingExportSourceRef,
+    TableSourceRef,
+    UploadedFileSourceRef,
+)
 from mip.contracts.recommendation import RecommendationContract
 from mip.contracts.trust import TrustReport
 
@@ -64,6 +78,18 @@ __all__ = [
     "DataAssetRequirementLevel",
     "DataAssetType",
     "DataGrain",
+    "DataSourceMode",
+    "DataSourceRef",
+    "DataSourceStatus",
+    "DataSourceType",
+    "DropzoneSourceRef",
+    "FileSourceRef",
+    "GeoXIntakeManifest",
+    "IntakeManifestStatus",
+    "MMMIntakeManifest",
+    "SiblingExportSourceRef",
+    "TableSourceRef",
+    "UploadedFileSourceRef",
     "GeoGrain",
     "GeoXIntakeSession",
     "IntakeCandidatePath",
