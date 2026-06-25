@@ -404,10 +404,23 @@ S12 Package release gates              ← adoption readiness for MIP itself
 
 Together these layers move MIP from **technically governed** to **semantically correct and decision-useful**.
 
+## 5.1 Prerequisites for artifact selection policies (G11–G20)
+
+The semantic registry tracks **S1–S12 are prerequisites** for [G11–G20 artifact selection and ambiguity policies](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). Temporal, scope, metric, estimand, and claim-level selection policies rely on:
+
+- Canonical **metric IDs** (S1) and **estimand IDs** (S2)
+- **Scope metadata** (S3)
+- **Business action ontology** (S4) and **role/decision rights** (S5)
+- **Failure-mode catalog** (S11)
+- **Package release gates** (S12)
+
+Without S1–S3 populated in sibling exports, G11–G20 policies cannot be enforced at answer time.
+
 ## 6. Related documents
 
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)
 - [PLATFORM_COMPLETION_GAPS_ROADMAP.md](./PLATFORM_COMPLETION_GAPS_ROADMAP.md)
 - [REPO_INTEGRATION_STRATEGY.md](../architecture/REPO_INTEGRATION_STRATEGY.md)
 - [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
+- [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](./PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
 - [MIP_SIBLING_EXPORT_PRODUCER_SPEC.md](../integrations/MIP_SIBLING_EXPORT_PRODUCER_SPEC.md)
