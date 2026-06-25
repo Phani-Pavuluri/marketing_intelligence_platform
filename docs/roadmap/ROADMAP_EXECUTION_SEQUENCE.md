@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `1cdff8f`  
-**Immediate next phase:** **P9 prep** — Streamlit entrypoint cleanup, then **P9** public hosted demo
+**Current main:** `3e2ecf3`  
+**Immediate next phase:** **P9** — public hosted demo
 
 > **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, **agent role contracts**, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17** and must use P8b agent contracts.
 
@@ -24,6 +24,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P7b pluggable LLM provider + explanation governance contracts | ✓ |
 | P8 local/demo profiling contracts + helpers | ✓ |
 | P8b agent role registry + failure/recovery contracts | ✓ |
+| P8c canonical Streamlit entrypoint cleanup | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -86,6 +87,7 @@ P1 session/path
   → P7b pluggable LLM provider contracts and explanation governance
   → P8 demo fixtures and local/demo profiling
   → P8b agent role registry, run manifest, failure packet, and resolution plan contracts
+  → P8c canonical Streamlit entrypoint cleanup (app/streamlit_app.py)
   → P9 public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
   → P10 FastAPI/Docker service wrapper
   → P11 hosted API hardening (auth, rate limits, privacy, cost controls)
@@ -111,6 +113,7 @@ P1 session/path
 | **P7b** | Pluggable LLM provider contracts + explanation governance | Provider modes; no canned explanations | ✓ implemented |
 | **P8** | I4 demo fixtures + local/demo profiling | Sandbox in-memory only; no production ingestion | ✓ implemented |
 | **P8b** | Agent role registry + run manifest + failure/recovery contracts | Contracts/helpers only; no LangGraph runtime | ✓ implemented |
+| **P8c** | Canonical Streamlit entrypoint cleanup | Docs/tests only; no hosting | ✓ implemented |
 | **P9** | Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces) | Demo-safe; no platform LLM key by default | Planned |
 | **P10** | FastAPI/Docker service wrapper | HTTP boundary; no duplicated MIP logic | Planned |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
@@ -580,6 +583,24 @@ User request
 - Documents safe retry and blocked retry concepts
 
 See [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md) for role details, examples, and failure-recovery flows.
+
+### P8c — Canonical Streamlit entrypoint cleanup
+
+**Purpose:** Make the local/public demo Streamlit entrypoint unambiguous before P9 public hosting.
+
+**P8c status:** ✓ implemented — `app/streamlit_app.py` is the canonical local/public deterministic demo app.
+
+**P8c implemented:** P8c clarified the canonical Streamlit entrypoint before public hosting. `app/streamlit_app.py` is the public/local demo app; any legacy Streamlit shell (`src/mip/app/streamlit_app.py`, `mip-app`) is compatibility/deprecated only.
+
+**Canonical command:**
+
+```bash
+poetry run streamlit run app/streamlit_app.py
+```
+
+The app runs in deterministic mode by default. It does not require LLM providers, API keys, FastAPI, Docker, or external services.
+
+**Legacy compatibility:** `poetry run mip-app` launches the Phase 5D JSON workflow shell (`run_local_workflow()` + `MockLLMProvider`) for backward compatibility. It is not the canonical P7/P8 demo surface.
 
 ### P9 — Public hosted demo
 

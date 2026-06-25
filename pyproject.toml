@@ -15,6 +15,7 @@ streamlit = "^1.40"
 
 [tool.poetry.scripts]
 mip-demo = "mip.cli.demo:main"
+# Legacy Phase 5D JSON workflow shell; canonical demo: streamlit run app/streamlit_app.py
 mip-app = "mip.app.streamlit_app:main"
 
 [tool.poetry.group.dev.dependencies]

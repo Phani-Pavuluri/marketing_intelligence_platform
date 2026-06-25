@@ -29,7 +29,7 @@ The following is **implemented and tested** in this repository today:
 | **Local workflow orchestrator (Phase 5A)** | `run_local_workflow()` wires intake → readiness → config draft into `WorkflowRunSummary`—**no UI or engine execution** |
 | **Local CLI demo runner (Phase 5B)** | `mip-demo` reads JSON input and prints/saves a governed `WorkflowRunSummary`—**no Streamlit, LLM, or engine execution** |
 | **Mock LLM explanation (Phase 5C)** | `MockLLMProvider` explains `WorkflowRunSummary` conversationally and deterministically—**no real LLM APIs or engine execution** |
-| **Streamlit demo shell (Phase 5D)** | `mip-app` provides a thin UI over `run_local_workflow()` and `MockLLMProvider`—**no new workflow logic or engine execution** |
+| **Streamlit demo shell (Phase 5D, legacy)** | `mip-app` runs the legacy JSON + MockLLM shell in `mip.app.streamlit_app`—**canonical local/public demo is `app/streamlit_app.py`** |
 | **Adapter interface contracts (Phase 6A)** | `mip.adapters` defines governed MMM/GeoX input/output bundle shapes—**no engine imports or model results** |
 | **Adapter governance wiring (Phase 6B)** | Placeholder adapter outputs map to `ExperimentEvidence` / `DecisionSurface` fixtures, gates, and `TrustReport`—**no engine execution** |
 | **MMM fixture dashboard/report (Phase 6C)** | `mip.reports.mmm_fixture` + Streamlit section show governed MMM placeholder flow—**no model execution** |
@@ -111,7 +111,7 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 5A — Local workflow orchestrator | **Done** (`mip.workflows.orchestrator`) |
 | Phase 5B — Local CLI demo runner | **Done** (`mip.cli.demo`, `mip-demo`) |
 | Phase 5C — MockLLM explanation provider | **Done** (`mip.llm.providers`, `mip.llm.explanations`) |
-| Phase 5D — Streamlit demo shell | **Done** (`mip.app.streamlit_app`, `mip-app`) |
+| Phase 5D — Streamlit demo shell (legacy) | **Done** (`mip.app.streamlit_app`, `mip-app`; canonical demo: `app/streamlit_app.py`) |
 | Phase 6A — Adapter interface contracts | **Done** (`mip.adapters`) |
 | Phase 6B — Adapter fixture governance wiring | **Done** (`mip.adapters.governance`) |
 | Phase 6C — MMM fixture dashboard/report demo | **Done** (`mip.reports.mmm_fixture`) |
@@ -242,17 +242,16 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P8 implemented:** Local/demo profiling for small synthetic tabular datasets (`mip.contracts.demo_profile`, `mip.workflows.intake.demo_profiling`). Demo profiles summarize website traffic, national media/outcome, DMA-week media/outcome, and experiment readout-like data into governed summaries used by advisory, readiness, and CalibrationSignal mapping workflows. Demo-only: no production ingestion, external connectors, raw-row LLM access, MMM/GeoX execution, or persistent storage.
 
-**P8b (roadmap):** Governed agent role registry and future agentic workflow architecture documented in [Agentic workflow governance](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md). Defines first-wave specialist agents, deferred optional agents, and typed handoff contracts before LangGraph runtime. **No runtime agents yet.**
-
 **P8b implemented:** Governed agent role, run manifest, failure packet, resolution plan, validation report, retry policy, escalation policy, and handoff packet contracts (`mip.contracts.agentic_workflow`, `mip.workflows.intake.agentic_recovery`). Prepares future agentic orchestration without LangGraph, runtime agents, LLM calls, autonomous retries, MMM execution, or GeoX execution. Agents remain reasoning/recovery surfaces, not measurement authorities.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P9 prep** — reconcile Streamlit entrypoints, then **P9** public hosted demo.
+**P8c implemented:** Canonical Streamlit entrypoint clarified before public hosting. `app/streamlit_app.py` is the local/public deterministic demo app. Legacy `mip.app.streamlit_app` / `mip-app` remain for Phase 5D JSON workflow compatibility only.
 
-1. **P9 prep** — Make `app/streamlit_app.py` canonical; reconcile legacy `src/mip/app/streamlit_app.py`
-2. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
-3. **P10** — FastAPI/Docker service wrapper
-4. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
-5. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P9** public hosted demo.
+
+1. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+2. **P10** — FastAPI/Docker service wrapper
+3. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
+4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -270,6 +269,7 @@ marketing_intelligence_platform/
     adr/              # Architecture decision records
     glossary/         # Estimands and measurement terms
     operating_model/  # Intake, evaluation, release gates
+  app/                # Canonical local/public Streamlit demo (P7/P8)
   src/mip/
     contracts/        # Governed Pydantic contracts
     evidence/         # Registry, calibration audit, readiness
@@ -282,7 +282,7 @@ marketing_intelligence_platform/
       configs/        # MMM and GeoX config drafts
       orchestrator/   # Local workflow runner and summary
     orchestration/    # Workflow manifest, planner router, approvals, fixture engines (Phase 7A–8A)
-    app/              # Planned: local CLI and Streamlit entry
+    app/              # Legacy Phase 5D Streamlit shell (`mip-app`); canonical demo is `app/`
     dashboard/        # Planned: tier-aware views
     reports/          # Planned: governed report export
   tests/              # Pytest suites
@@ -310,25 +310,25 @@ marketing_intelligence_platform/
 - [Roadmap execution audit](docs/audits/ROADMAP_EXECUTION_AUDIT_001.md)
 - ADRs: [001 Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md) · [002 Experiments](docs/adr/ADR-002-experiments-as-calibration-evidence.md) · [003 LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md)
 
-## Run local UI (P7)
+## Run local UI (canonical)
+
+**Canonical local demo app:**
 
 ```bash
 poetry run streamlit run app/streamlit_app.py
 ```
 
-The P7 UI runs in **deterministic mode**. No LLM provider is required. No external services are called. The UI demonstrates advisory, readiness, calibration mapping, and **demo profiling** workflows using sample fixtures.
+`app/streamlit_app.py` is the local/public deterministic demo entrypoint for P7/P8 workflows (advisory, readiness, calibration mapping, demo profiling, intake overview).
 
-## Demo profiling (P8)
+The app runs in **deterministic mode by default**. It does not require LLM providers, API keys, FastAPI, Docker, or external services.
 
-P8 adds safe local/demo profiling over small synthetic datasets. It summarizes columns, semantic roles, coverage flags, and workflow suitability without storing raw rows or running MMM/GeoX/LLM providers.
-
-Use the **Demo profiling** tab in the local UI, or call `mip.workflows.intake.demo_profiling` helpers directly in tests and notebooks.
+**Legacy Phase 5D workflow shell** (JSON input + MockLLM over `run_local_workflow()`): retained for backward compatibility only.
 
 ```bash
-poetry run streamlit run app/streamlit_app.py
+poetry run mip-app
 ```
 
-Legacy Phase 5D workflow shell (JSON input + MockLLM): `poetry run mip-app`
+This launches `src/mip/app/streamlit_app.py`—a separate shell from the canonical demo above.
 
 ## Development setup
 

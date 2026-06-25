@@ -1,4 +1,14 @@
-"""Thin Streamlit shell over the deterministic local workflow stack."""
+"""Legacy Phase 5D Streamlit workflow demo (JSON input + MockLLM).
+
+Canonical local/public demo app entrypoint::
+
+    poetry run streamlit run app/streamlit_app.py
+
+This module (``mip.app.streamlit_app``) is retained for backward compatibility
+with the Phase 5D ``mip-app`` console script. It provides a separate JSON
+workflow shell over ``run_local_workflow()`` and ``MockLLMProvider``—not the
+P7/P8 deterministic demo tabs in ``app/streamlit_app.py``.
+"""
 
 from __future__ import annotations
 
@@ -45,6 +55,8 @@ from mip.reports.mmm_fixture import build_mmm_fixture_report, mmm_fixture_report
 from mip.workflows.configs.geox import GeoXConfigDraft
 from mip.workflows.configs.mmm import MMMConfigDraft
 from mip.workflows.orchestrator import WorkflowRunSummary, run_local_workflow
+
+CANONICAL_STREAMLIT_ENTRYPOINT = "app/streamlit_app.py"
 
 _FORBIDDEN_OUTPUT_PHRASES = (
     "estimated lift",

@@ -1,4 +1,12 @@
-"""P7 local deterministic workflow UI shell (Streamlit)."""
+"""Canonical local/public deterministic Streamlit demo app (P7/P8).
+
+Run::
+
+    poetry run streamlit run app/streamlit_app.py
+
+The app runs in deterministic mode by default. It does not require LLM providers,
+API keys, FastAPI, Docker, or external services.
+"""
 
 from __future__ import annotations
 
