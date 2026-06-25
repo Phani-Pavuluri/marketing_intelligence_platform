@@ -42,7 +42,7 @@ The following is **implemented and tested** in this repository today:
 | **Sibling repo compatibility registry (Phase 8D)** | `mip.adapters.sibling_compatibility` validates configured export paths and schema contracts before discovery—**read-only** |
 | **Local sibling export path wiring (Phase 8E)** | `mip.adapters.local_sibling_paths` wires default local `mmm`/`panel_exp` export directories through compatibility checks—**read-only JSON only** |
 | **Sibling export producer specs (Phase 8F)** | `docs/integrations/*_PRODUCER_SPEC.md` and `mip.adapters.sibling_producer_specs` define the sibling-side JSON writer contract—**no sibling code execution** |
-| **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, semantic/decision-readiness, critical invariants, conversational intake, and agentic workflow governance roadmaps |
+| **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, semantic/decision-readiness, critical invariants, conversational intake, and **governed agent role registry** (P8b) / agentic workflow governance roadmaps |
 
 **Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
 
@@ -199,7 +199,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos.
 
-**Near-term focus:** **P8** demo profiling implementation, then public demo path planning.
+**Near-term focus:** **P8b** agent role contract implementation, then **P9** public hosted demo.
 
 ## Roadmap
 
@@ -242,13 +242,15 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P8 implemented:** Local/demo profiling for small synthetic tabular datasets (`mip.contracts.demo_profile`, `mip.workflows.intake.demo_profiling`). Demo profiles summarize website traffic, national media/outcome, DMA-week media/outcome, and experiment readout-like data into governed summaries used by advisory, readiness, and CalibrationSignal mapping workflows. Demo-only: no production ingestion, external connectors, raw-row LLM access, MMM/GeoX execution, or persistent storage.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P9** — Public hosted demo (after optional Streamlit entrypoint cleanup).
+**P8b (roadmap):** Governed agent role registry and future agentic workflow architecture documented in [Agentic workflow governance](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md). Defines first-wave specialist agents, deferred optional agents, and typed handoff contracts before LangGraph runtime. **No runtime agents yet.**
 
-1. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P8b** — Agent role/run manifest/failure recovery **contracts** (then P9 public hosted demo).
+
+1. **P8b** — Agent role registry, run manifest, failure packet, and resolution plan contracts
 2. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
 3. **P10** — FastAPI/Docker service wrapper
 4. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
-5. **P17** — LangGraph orchestration skeleton (after P7–P8 stabilize)
+5. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 

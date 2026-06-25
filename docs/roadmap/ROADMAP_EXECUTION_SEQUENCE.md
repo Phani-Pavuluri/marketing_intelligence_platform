@@ -2,10 +2,10 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `de6bef3`  
-**Immediate next phase:** **P9** — Public hosted demo (optional Streamlit entrypoint cleanup first)
+**Current main:** `1cdff8f`  
+**Immediate next phase:** **P8b** — Agent role registry, run manifest, failure packet, and resolution plan contracts (docs: ✓ captured; implementation: planned)
 
-> **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17**.
+> **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, **agent role contracts**, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17** and must use P8b agent contracts.
 
 ## What is already implemented
 
@@ -22,6 +22,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P6 CalibrationSignal intake mapping (I9) | ✓ |
 | P7 local deterministic Streamlit workflow shell (I10) | ✓ |
 | P7b pluggable LLM provider + explanation governance contracts | ✓ |
+| P8 local/demo profiling contracts + helpers | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -58,7 +59,8 @@ The LLM must answer data-grounded questions only from governed profile summaries
 | T8 Product UI + public demo | I10, I15, P7–P9 | **P7–P9** |
 | T8b Pluggable LLM providers | P7b, 8G–8H | **P7b** |
 | T9 Demo profiling impl | I4, I7 | P8 ✓ |
-| T9b Service/deployment | P10–P11 | P10–P11 |
+| T9b Governed agent role registry + handoff contracts | Agentic governance | **P8b** |
+| T9c Service/deployment | P10–P11 | P10–P11 |
 | T10 LangGraph orchestration | Agentic governance | **P17** |
 | T11 Lifecycle / current-state | P1, G11, G16 | P14 |
 | T12 LLM answer governance | 8G–8N, G12–G20 | P15 |
@@ -82,10 +84,11 @@ P1 session/path
   → P7 local Streamlit/Gradio workflow shell
   → P7b pluggable LLM provider contracts and explanation governance
   → P8 demo fixtures and local/demo profiling
+  → P8b agent role registry, run manifest, failure packet, and resolution plan contracts
   → P9 public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
   → P10 FastAPI/Docker service wrapper
   → P11 hosted API hardening (auth, rate limits, privacy, cost controls)
-  → P17 LangGraph/stateful orchestration skeleton (after P7–P8 contracts stabilize)
+  → P17 LangGraph/stateful orchestration skeleton (after P8b contracts stabilize)
   → later panel_exp/MMM diagnostic execution / export handoff (gated)
 ```
 
@@ -105,7 +108,8 @@ P1 session/path
 | **P6** | I9 CalibrationSignal mapping | Fixture validation | ✓ implemented |
 | **P7** | I10 local Streamlit/Gradio workflow shell | Display only; deterministic mode default | ✓ implemented |
 | **P7b** | Pluggable LLM provider contracts + explanation governance | Provider modes; no canned explanations | ✓ implemented |
-| **P8** | I4 demo fixtures + local/demo profiling | Sandbox CSV only | ✓ implemented |
+| **P8** | I4 demo fixtures + local/demo profiling | Sandbox in-memory only; no production ingestion | ✓ implemented |
+| **P8b** | Agent role registry + run manifest + failure/recovery contracts | Contracts/helpers only; no LangGraph runtime | Planned (roadmap ✓) |
 | **P9** | Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces) | Demo-safe; no platform LLM key by default | Planned |
 | **P10** | FastAPI/Docker service wrapper | HTTP boundary; no duplicated MIP logic | Planned |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
@@ -119,7 +123,7 @@ P1 session/path
 | **P19** | Optimizer governance | **No optimizer execution** | Deferred |
 | **P20** | Live execution gate review | **Deferred** | Deferred |
 
-> **Rationale:** P7 before P9 establishes local user flow before public hosting. P7b before P9 sets explicit LLM provider and explanation-mode boundaries. P10/P11 follow UI/demo because FastAPI/Docker are service/deployment layers—not prerequisites for proving product flow.
+> **Rationale:** P7 before P9 establishes local user flow before public hosting. P7b before P9 sets explicit LLM provider and explanation-mode boundaries. **P8b before P17** defines governed agent contracts before any stateful agent runtime—avoiding free-form autonomous agents. P10/P11 follow UI/demo because FastAPI/Docker are service/deployment layers—not prerequisites for proving product flow.
 
 > **Product decision:** The platform should be either **honestly deterministic** or **actually LLM-backed** through an explicit provider. **Canned/sample explanations are excluded** (`canned_demo`, `sample_explanation`, `template_llm_explanation`) because they blur that boundary and weaken trust.
 
@@ -356,7 +360,7 @@ No web search integration · no file parsing · no data profiling computation ·
 
 **P7b status:** ✓ implemented — `src/mip/contracts/llm_provider.py` and `src/mip/workflows/intake/llm_explanation.py`. Provider modes, governed input boundaries, explanation plans, and blocked canned/sample explanation modes. No LLM provider calls.
 
-**Remaining (P9–P11):** Planned.
+**Remaining (P8b implementation, P9–P11):** Planned.
 
 ### Architecture layers
 
@@ -511,6 +515,69 @@ In deterministic mode, the UI shows structured reports and deterministic text de
 
 **P8 status:** ✓ implemented — `src/mip/contracts/demo_profile.py` and `src/mip/workflows/intake/demo_profiling.py`. P8 implemented local/demo profiling for small synthetic tabular datasets. Demo profiles can summarize website traffic, national media/outcome, DMA-week media/outcome, and experiment readout-like data into governed summaries used by advisory, readiness, and CalibrationSignal mapping workflows. P8 is demo-only and does not add production ingestion, external connectors, raw-row LLM access, MMM/GeoX execution, or persistent storage.
 
+### P8b — Agent role registry, run manifest, failure packet, and resolution plan contracts
+
+**Purpose:** Define governed specialist agent roles, permission boundaries, and typed handoff contracts **before** LangGraph or any stateful agent runtime is introduced.
+
+**Roadmap status:** ✓ documented in [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md). **Implementation:** planned (contracts/helpers only; no runtime agents).
+
+**Rationale:** P8b defines the governed agent contracts before any stateful agent runtime is introduced. P17 can later implement LangGraph/stateful orchestration using those contracts. This avoids free-form autonomous agents and keeps MMM/GeoX/calibration workflows governed.
+
+**Core principle:** Agents are specialized reasoning and recovery surfaces, not measurement authorities. Agentic workflows are recovery-aware and explainable, not autonomous measurement authorities.
+
+The platform will use governed specialist agents only where they add distinct expertise, tool access, or failure-handling value. The goal is not many agents; the goal is controlled specialization with typed handoffs, explicit permission boundaries, and validation gates.
+
+**Hierarchy:**
+
+```text
+User request
+  → Intake/Routing Agent
+  → Specialist Agent or deterministic workflow
+  → MIP contracts / gates / validators
+  → Evaluator & Validator Agent
+  → user-facing explanation or safe retry plan
+```
+
+**First-wave agent roles (planned):** Intake & Routing · Data Profiling / Data Readiness · Cold-Start Advisory · MMM Specialist · GeoX / Experiment Specialist · CalibrationSignal Specialist · Failure Recovery / Debugging · Evaluator & Validator
+
+**Future optional agents (deferred):** Feature Store Explorer · ML Engineering / MLOps Specialist · Research Scout · Data Connector / Integration · Privacy / Security Review · Product / UX Guide — each with explicit trigger conditions.
+
+**Future contract names (P8b implementation):**
+
+| Contract | Purpose |
+|----------|---------|
+| `AgentRoleDefinition` | Role identity, responsibilities, allowed/blocked actions |
+| `AgentCapability` | Typed capability surface for a role |
+| `AgentPermissionBoundary` | Explicit allow/deny boundaries |
+| `AgentTask` | Unit of work with input references |
+| `AgentRunManifest` | Workflow, step, input/artifact refs, package/version metadata, status, timestamps, warnings, blocking reasons |
+| `AgentObservation` | Governed observation from a step (no raw rows by default) |
+| `AgentFailurePacket` | Workflow, step, error type/message, stack trace, typed validation failures, safe context, allowed/blocked retry actions, affected artifacts |
+| `AgentResolutionPlan` | Diagnosis, recommended user questions, safe/blocked next steps, retry eligibility, human approval requirement, expected downstream impact |
+| `AgentValidationReport` | Claim compliance, forbidden-claim findings, missing evidence labels, TrustReport requirement status, readiness/calibration consistency, final approval/block status |
+| `AgentHandoffPacket` | Typed handoff between agents with governed references |
+| `AgentRetryPolicy` | Safe retry rules and caps |
+| `AgentEscalationPolicy` | When to escalate to human review |
+
+**Execution ownership boundaries:**
+
+- The **MMM package** owns MMM modeling and execution. MIP agents explain, route, validate, recover, and govern.
+- **panel_exp / GeoX** owns experiment design, diagnostics, and inference execution. MIP agents explain, route, validate, recover, and govern.
+
+**Acceptance criteria (P8b):**
+
+- Defines first-wave agent roles and boundaries
+- Defines future/deferred agent roles and trigger conditions
+- Defines typed handoff contracts for agent tasks, manifests, failures, resolution plans, validation reports, and retry policies
+- Separates agent reasoning from measurement authority
+- Ensures MMM package and panel_exp/GeoX retain execution ownership
+- Ensures agents cannot override TrustReport/readiness/calibration/advisory gates
+- Requires Evaluator & Validator Agent before decision-supporting user-facing explanations
+- Captures stack trace/failure recovery pattern without adding runtime execution
+- Documents safe retry and blocked retry concepts
+
+See [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md) for role details, examples, and failure-recovery flows.
+
 ### P9 — Public hosted demo
 
 **Purpose:** Deploy demo-safe public URL on Streamlit Community Cloud or Hugging Face Spaces.
@@ -634,7 +701,7 @@ Hosted demo enables `hosted_open_source` as experimental. If latency or memory i
 | CalibrationSignal intake mapping | P6 contracts + fixture validation |
 | Experiment design diagnostics | P4b + P4c + P5 + panel_exp gated handoff |
 | LLM current-performance answers | P14 + P15 + S1–S3 + TrustReport + G11–G20 |
-| LangGraph runtime | P4b, P4c, P5, P5b, P7, P8 contracts stable |
+| LangGraph runtime | P4b, P4c, P5, P5b, P7, P8, **P8b** agent contracts stable |
 | Live engine execution | P16, P15, 8G–8N, G3, explicit signoff |
 
 ## Do not build yet
@@ -651,7 +718,7 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 | Product surface + public demo | P7–P9; Conversational intake I10 |
 | Pluggable LLM providers | P7b; LLM reasoning roadmap §8 |
 | Experiment design intake | Conversational intake I6b; P4b |
-| LangGraph orchestration | Agentic workflow governance P17 |
+| LangGraph orchestration | Agentic workflow governance **P8b**, **P17** |
 
 ## Related documents
 

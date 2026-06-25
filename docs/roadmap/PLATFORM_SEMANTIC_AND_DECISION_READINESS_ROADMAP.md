@@ -452,7 +452,15 @@ Deterministic objective→KPI-family rules for GeoX/experiment design intake: aw
 
 **Why:** Semantic and decision-readiness contracts must surface through an honest product UI before public demo hosting.
 
-**Cross-reference:** P7 local UI · P7b pluggable `LLMProviderMode` · P9 public demo. The LLM explains governed MIP outputs; it does not create measurement authority. Canned/sample explanations are excluded. Deterministic mode is default. See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P7–P11 and [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](./LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md) §8.
+**Cross-reference:** P7 local UI · P7b pluggable `LLMProviderMode` · P8b governed agent roles · P9 public demo. The LLM explains governed MIP outputs; it does not create measurement authority. Canned/sample explanations are excluded. Deterministic mode is default. See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P7–P11 and [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](./LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md) §8–§9.
+
+## 5.7 Governed agent roles and validation (P8b)
+
+**Why:** Semantic completeness and decision-readiness must survive agentic routing, failure recovery, and LLM explanations—not only deterministic helpers.
+
+**Principle:** Agents are specialized reasoning and recovery surfaces, not measurement authorities. The Evaluator & Validator Agent checks claim compliance, TrustReport requirements, and readiness/calibration consistency before decision-supporting user-facing explanations.
+
+**Cross-reference:** [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md) P8b · [ORCHESTRATION_BOUNDARIES.md](../architecture/ORCHESTRATION_BOUNDARIES.md).
 
 ## 6. Related documents
 

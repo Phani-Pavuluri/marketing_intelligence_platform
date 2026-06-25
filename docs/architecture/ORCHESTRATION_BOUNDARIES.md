@@ -70,3 +70,30 @@ The UI and orchestration layers must respect explicit `LLMProviderMode` contract
 See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P7–P11 and [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](../roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md) §8.
 
 See [TRUST_ARCHITECTURE.md](./TRUST_ARCHITECTURE.md) and [../operating_model/RELEASE_GATES.md](../operating_model/RELEASE_GATES.md).
+
+## Governed agent authority boundaries (P8b)
+
+**Principle:** Agents are specialized reasoning and recovery surfaces, not measurement authorities. Agentic workflows are recovery-aware and explainable, not autonomous measurement authorities.
+
+The platform may become agentic, but agents are **not** autonomous authorities. Agents diagnose, route, explain, recover, and propose next steps. MIP contracts, readiness reports, CalibrationSignal mapping reports, TrustReports, validators, and human approval gates remain authoritative.
+
+```text
+User request
+  → Intake/Routing Agent
+  → Specialist Agent or deterministic workflow
+  → MIP contracts / gates / validators
+  → Evaluator & Validator Agent
+  → user-facing explanation or safe retry plan
+```
+
+| Agents may | Agents must not |
+|------------|-----------------|
+| Inspect governed summaries, run manifests, failure packets, typed errors, stack traces, allowed/blocked next steps | Override MIP contracts, readiness reports, CalibrationSignal mapping status, TrustReport status, advisory claim guards, or human approval gates |
+| Propose safe resolutions and user questions | Estimate effects, declare design feasibility, approve decisions, recommend optimized budgets without governed outputs |
+| Summarize failures and safe retry plans | Retry risky jobs indefinitely, bypass gates, silently change assumptions, patch data without user confirmation |
+
+**Execution ownership:** The MMM package owns MMM modeling and execution; panel_exp/GeoX owns experiment design, diagnostics, and inference. MIP agents explain, route, validate, recover, and govern.
+
+**Evaluator gate:** The Evaluator & Validator Agent runs after specialist output and before user-facing decision-supporting explanations.
+
+See [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](./AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md) (P8b) and [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P8b.

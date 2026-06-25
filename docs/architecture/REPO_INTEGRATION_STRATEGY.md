@@ -73,6 +73,20 @@ FastAPI is not required for the first UI demo. Docker is not the app—it packag
 
 See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P7–P11.
 
+### Governed agent roles vs engine execution (P8b)
+
+MIP may add **governed specialist agents** (intake routing, data readiness, advisory, MMM/GeoX/calibration specialists, failure recovery, evaluator/validator) as reasoning and recovery surfaces. Agents use typed handoff contracts (`AgentRunManifest`, `AgentFailurePacket`, `AgentResolutionPlan`, `AgentValidationReport`, etc.) documented in P8b.
+
+| Layer | Owns execution | MIP agent role |
+|-------|----------------|----------------|
+| **MMM** | Model fitting, diagnostics, refresh, calibration math | Explain readiness, blocked paths, failures; propose safe remediation |
+| **panel_exp / GeoX** | Power/MDE, matchability, design feasibility, readout inference | Explain structural support/blocks; route to diagnostics when readiness allows |
+| **MIP contracts** | Readiness, advisory claim guards, CalibrationSignal mapping, TrustReport, gates | Authoritative status; agents may not override |
+
+Agents are **not** measurement authorities. LangGraph/stateful orchestration (P17) implements routing using P8b contracts—it does not replace engine execution or gate logic.
+
+See [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](./AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md).
+
 ### `panel_exp` / GeoX
 
 Experimentation engine repository:

@@ -48,6 +48,7 @@ This addendum is **documentation only**. No model execution, optimizer execution
 5. **Live engine execution remains blocked** until golden scenarios and safety evaluations exist.
 6. **Optimizer-backed recommendations remain blocked** until decision-surface certification and optimizer governance are implemented.
 7. **Product surface must be honestly deterministic or explicitly LLM-backed.** Canned/sample explanation modes (`canned_demo`, `sample_explanation`, `template_llm_explanation`) are excluded. Public demo must work without platform-paid LLM dependency (P7b, P9).
+8. **Agents are not measurement authorities (P8b).** Specialist agents may diagnose, route, explain, and propose safe retries using governed manifests and failure packets. They may not override readiness reports, CalibrationSignal mapping status, TrustReport status, advisory claim guards, or human approval gates. Evaluator & Validator Agent runs before decision-supporting user-facing explanations. See [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md).
 
 ## 3. Critical invariant and golden-scenario tracks
 

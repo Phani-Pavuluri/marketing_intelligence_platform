@@ -410,7 +410,7 @@ Allowed inputs (later): source/medium · channel group · landing page · geogra
 
 **Why:** Define the product UX spine from conversation to handoff, then public demo hosting.
 
-**Phase mapping:** **P7** local Streamlit shell ✓ implemented (`app/streamlit_app.py`) · **P7b** pluggable LLM providers ✓ implemented · **P8** demo profiling ✓ implemented · **P9** public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+**Phase mapping:** **P7** local Streamlit shell ✓ · **P7b** pluggable LLM providers ✓ · **P8** demo profiling ✓ · **P8b** governed agent role registry (roadmap ✓) · **P9** public hosted demo · **P17** LangGraph (after P8b contracts)
 
 **P7 implemented:** Local deterministic workflow shell exposes cold-start advisory, workflow readiness, CalibrationSignal mapping, and intake overview using sample fixtures and MIP core helpers. No LLMs, MMM, GeoX, external APIs, or public hosting.
 
@@ -622,8 +622,9 @@ The LLM must not answer from raw files—only from governed reports.
 **P1–P6 complete.** Next:
 
 1. **P7** — Streamlit/local workflow shell
-2. **P9** — Public hosted demo (consider Streamlit entrypoint cleanup first)
-3. **P17** — LangGraph orchestration skeleton (after P7–P9 stabilize)
+2. **P8b** — Agent role registry, run manifest, failure packet, and resolution plan contracts
+3. **P9** — Public hosted demo (consider Streamlit entrypoint cleanup first)
+4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Sequence: understand experiment objective → provide data once through common workbench → workflow-specific readiness → diagnostics.
 

@@ -472,7 +472,25 @@ Display active mode: Deterministic · Local Ollama · Hosted Open Source (experi
 
 See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P7b section.
 
-## 9. Related documents
+## 9. P8b — Governed agent role registry and future agentic workflow
+
+**Status:** Roadmap documented. **Implementation:** planned (contracts/helpers only; no LangGraph runtime, no agent classes).
+
+**Placement:** After P8 local/demo profiling; before P9 public demo and P17 LangGraph.
+
+**Principle:** Agents are specialized reasoning and recovery surfaces, not measurement authorities. The LLM and future agents explain, route, validate, and recover—they do not create measurement authority. MIP contracts, readiness reports, CalibrationSignal mapping reports, TrustReports, validators, and human approval gates remain authoritative.
+
+The platform will use governed specialist agents only where they add distinct expertise, tool access, or failure-handling value. The goal is not many agents; the goal is controlled specialization with typed handoffs, explicit permission boundaries, and validation gates.
+
+**First-wave roles:** Intake & Routing · Data Profiling / Data Readiness · Cold-Start Advisory · MMM Specialist · GeoX / Experiment Specialist · CalibrationSignal Specialist · Failure Recovery / Debugging · Evaluator & Validator (required before decision-supporting user-facing explanations).
+
+**Future deferred roles:** Feature Store Explorer · ML Engineering / MLOps Specialist · Research Scout · Data Connector / Integration · Privacy / Security Review · Product / UX Guide — each with explicit trigger conditions.
+
+**Typed contracts (P8b implementation):** `AgentRoleDefinition` · `AgentCapability` · `AgentPermissionBoundary` · `AgentTask` · `AgentRunManifest` · `AgentObservation` · `AgentFailurePacket` · `AgentResolutionPlan` · `AgentValidationReport` · `AgentHandoffPacket` · `AgentRetryPolicy` · `AgentEscalationPolicy`
+
+**P8b acceptance criteria:** See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P8b and [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md).
+
+## 10. Related documents
 
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)
 - [LLM_DECISION_LAYER_VISION.md](../architecture/LLM_DECISION_LAYER_VISION.md)
