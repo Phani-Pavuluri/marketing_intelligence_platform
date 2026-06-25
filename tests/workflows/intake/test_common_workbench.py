@@ -224,6 +224,16 @@ def _dma_week_profiles() -> list[CommonDataProfileSummary]:
     ]
 
 
+def _assert_routes_disjoint(assessment: Any) -> None:
+    supported = {_slug_route(route) for route in assessment.supported_routes}
+    blocked = {_slug_route(route) for route in assessment.blocked_routes}
+    assert supported.isdisjoint(blocked)
+
+
+def _slug_route(route: WorkflowSupportRoute | str) -> str:
+    return route.value if isinstance(route, WorkflowSupportRoute) else str(route)
+
+
 def _assert_no_forbidden_claims(*objects: Any) -> None:
     combined = " ".join(str(obj.model_dump()) for obj in objects).lower()
     for fragment in _FORBIDDEN_FRAGMENTS:
@@ -240,7 +250,10 @@ def test_national_weekly_supports_national_mmm_blocks_geox() -> None:
     assessment = build_workflow_support_assessment(session, rec, plan, manifest, profiles)
     assert WorkflowSupportRoute.NATIONAL_MMM in assessment.supported_routes
     assert "supports_national_mmm" in assessment.route_reasons
+    assert WorkflowSupportRoute.GEO_LEVEL_MMM in assessment.blocked_routes
     assert WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS in assessment.blocked_routes
+    assert WorkflowSupportRoute.NATIONAL_MMM not in assessment.blocked_routes
+    _assert_routes_disjoint(assessment)
     assert "blocked_needs_geo_level_outcome" in assessment.route_reasons
     _assert_no_forbidden_claims(assessment)
 
@@ -255,6 +268,7 @@ def test_dma_week_supports_geox_design_and_geo_level_mmm() -> None:
     assessment_mmm = build_workflow_support_assessment(session, rec_mmm, plan, manifest, profiles)
     assert WorkflowSupportRoute.GEO_LEVEL_MMM in assessment_mmm.supported_routes
     assert "supports_geo_level_mmm" in assessment_mmm.route_reasons
+    _assert_routes_disjoint(assessment_mmm)
 
     rec_geox = _recommendation(
         _session(workflow_kind=MeasurementWorkflowKind.GEOX),
@@ -266,6 +280,8 @@ def test_dma_week_supports_geox_design_and_geo_level_mmm() -> None:
     )
     assert WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS in assessment_geox.supported_routes
     assert "supports_geox_design_diagnostics" in assessment_geox.route_reasons
+    assert WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS not in assessment_geox.blocked_routes
+    _assert_routes_disjoint(assessment_geox)
 
 
 def test_geox_design_blocks_missing_geo_level_outcome() -> None:
@@ -310,7 +326,32 @@ def test_geox_design_blocks_missing_geo_level_media() -> None:
     ]
     assessment = build_workflow_support_assessment(session, rec, plan, manifest, profiles)
     assert WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS in assessment.blocked_routes
+    assert WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS not in assessment.supported_routes
     assert "blocked_needs_geo_level_media" in assessment.route_reasons
+    _assert_routes_disjoint(assessment)
+
+
+def test_geox_missing_media_not_in_supported_routes() -> None:
+    session = _session(workflow_kind=MeasurementWorkflowKind.GEOX)
+    rec = _recommendation(session, IntakeCandidatePath.GEO_EXPERIMENT_DESIGN)
+    plan = _plan(session, rec)
+    manifest = _geox_manifest(session, rec, plan)
+    profiles = [
+        _profile(
+            profile_id="prof-outcome-dma-only-2",
+            asset_type=DataAssetType.OUTCOME_KPI_DATA,
+            geo_grain=GeoGrain.DMA,
+        ),
+        _profile(
+            profile_id="prof-geo-map-3",
+            asset_type=DataAssetType.GEO_MAPPING,
+            geo_grain=GeoGrain.DMA,
+        ),
+    ]
+    assessment = build_workflow_support_assessment(session, rec, plan, manifest, profiles)
+    assert WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS not in assessment.supported_routes
+    assert WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS in assessment.blocked_routes
+    _assert_routes_disjoint(assessment)
 
 
 def test_calibrated_mmm_needs_calibration_uncertainty() -> None:
@@ -322,10 +363,11 @@ def test_calibrated_mmm_needs_calibration_uncertainty() -> None:
 
     assessment = build_workflow_support_assessment(session, rec, plan, manifest, profiles)
     assert "blocked_needs_calibration_uncertainty" in assessment.route_reasons
-    assert WorkflowSupportStatus.NEEDS_MORE_DATA in {
-        assessment.support_status,
-        WorkflowSupportStatus.SUPPORTED_WITH_WARNINGS,
-    }
+    assert WorkflowSupportRoute.CALIBRATED_MMM in assessment.blocked_routes
+    assert WorkflowSupportRoute.CALIBRATED_MMM not in assessment.supported_routes
+    assert WorkflowSupportRoute.CALIBRATION_SIGNAL_INTAKE in assessment.blocked_routes
+    _assert_routes_disjoint(assessment)
+    assert assessment.support_status == WorkflowSupportStatus.NEEDS_MORE_DATA
 
     profiles_with_cal = profiles + [
         _profile(
@@ -339,6 +381,22 @@ def test_calibrated_mmm_needs_calibration_uncertainty() -> None:
         session, rec, plan, manifest, profiles_with_cal
     )
     assert "supports_calibration_signal_intake" in assessment_ok.route_reasons
+    assert WorkflowSupportRoute.CALIBRATED_MMM in assessment_ok.supported_routes
+    assert WorkflowSupportRoute.CALIBRATED_MMM not in assessment_ok.blocked_routes
+    _assert_routes_disjoint(assessment_ok)
+
+
+def test_llm_grounding_context_uses_disjoint_route_assessment() -> None:
+    session = _session()
+    rec = _recommendation(session, IntakeCandidatePath.NATIONAL_DIAGNOSTIC_MMM)
+    plan = _plan(session, rec)
+    manifest = _mmm_manifest(session, rec, plan)
+    profiles = _national_weekly_profiles()
+    assessment = build_workflow_support_assessment(session, rec, plan, manifest, profiles)
+    _assert_routes_disjoint(assessment)
+    context = build_llm_answer_grounding_context(session, profiles, assessment)
+    assert context.workflow_support_assessment == assessment.assessment_id
+    _assert_routes_disjoint(assessment)
 
 
 def test_llm_grounding_allows_coverage_blocks_lift_roi_budget() -> None:

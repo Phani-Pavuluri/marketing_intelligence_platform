@@ -160,6 +160,31 @@ def _manifest_blocked(manifest: MMMIntakeManifest | GeoXIntakeManifest) -> bool:
     return _slug(manifest.status) == _slug(IntakeManifestStatus.BLOCKED)
 
 
+def normalize_disjoint_workflow_routes(
+    supported: list[WorkflowSupportRoute],
+    blocked: list[WorkflowSupportRoute],
+) -> tuple[list[WorkflowSupportRoute], list[WorkflowSupportRoute]]:
+    """Return route lists where blocked state wins over supported for the same route."""
+    blocked_normalized: list[WorkflowSupportRoute] = []
+    blocked_slugs: set[str] = set()
+    for route in blocked:
+        slug = _slug(route)
+        if slug not in blocked_slugs:
+            blocked_slugs.add(slug)
+            blocked_normalized.append(route)
+
+    supported_normalized: list[WorkflowSupportRoute] = []
+    supported_slugs: set[str] = set()
+    for route in supported:
+        slug = _slug(route)
+        if slug in blocked_slugs or slug in supported_slugs:
+            continue
+        supported_slugs.add(slug)
+        supported_normalized.append(route)
+
+    return supported_normalized, blocked_normalized
+
+
 def build_workflow_support_assessment(
     session: MeasurementIntakeSession,
     recommendation: IntakePathRecommendation,
@@ -325,6 +350,8 @@ def build_workflow_support_assessment(
     if supported:
         allowed_next.append("review_workflow_support_assessment")
         allowed_next.append("prepare_workflow_specific_readiness")
+
+    supported, blocked = normalize_disjoint_workflow_routes(supported, blocked)
 
     return WorkflowSupportAssessment(
         assessment_id=f"{session.session_id}-wsa",

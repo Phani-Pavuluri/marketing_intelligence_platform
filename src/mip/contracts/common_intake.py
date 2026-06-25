@@ -104,6 +104,12 @@ def _assert_no_forbidden_claims(*text_fields: str) -> None:
             raise ValueError(msg)
 
 
+def _enum_slug(value: object) -> str:
+    if isinstance(value, StrEnum):
+        return value.value
+    return str(value)
+
+
 class SourceIngestionRecord(ContractBaseModel):
     """Declared ingestion metadata (no actual file I/O)."""
 
@@ -359,6 +365,15 @@ class WorkflowSupportAssessment(ContractBaseModel):
 
     @model_validator(mode="after")
     def assessment_rules(self) -> "WorkflowSupportAssessment":
+        supported_slugs = {_enum_slug(route) for route in self.supported_routes}
+        blocked_slugs = {_enum_slug(route) for route in self.blocked_routes}
+        overlap = supported_slugs.intersection(blocked_slugs)
+        if overlap:
+            msg = (
+                "supported_routes and blocked_routes must be disjoint; "
+                f"overlap: {sorted(overlap)}"
+            )
+            raise ValueError(msg)
         if self.support_status == WorkflowSupportStatus.BLOCKED and not self.blocking_reasons:
             msg = "blocked workflow support assessment requires blocking_reasons"
             raise ValueError(msg)

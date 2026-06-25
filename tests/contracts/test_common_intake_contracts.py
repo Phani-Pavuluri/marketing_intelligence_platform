@@ -18,6 +18,7 @@ from mip.contracts.common_intake import (
     MetricAvailabilitySummary,
     SourceIngestionRecord,
     WorkflowSupportAssessment,
+    WorkflowSupportRoute,
     WorkflowSupportStatus,
 )
 from mip.contracts.intake import DataGrain, GeoGrain
@@ -111,6 +112,34 @@ def test_workflow_support_assessment_blocked_requires_reasons() -> None:
             support_status=WorkflowSupportStatus.BLOCKED,
             created_at=_NOW,
         )
+
+
+def test_workflow_support_assessment_rejects_overlapping_routes() -> None:
+    with pytest.raises(ValidationError, match="must be disjoint"):
+        WorkflowSupportAssessment(
+            assessment_id="wsa-overlap",
+            session_id="sess-001",
+            recommendation_id="rec-001",
+            plan_id="plan-001",
+            manifest_id="man-001",
+            supported_routes=[WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS],
+            blocked_routes=[WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS],
+            created_at=_NOW,
+        )
+
+
+def test_normalize_disjoint_workflow_routes_prefers_blocked() -> None:
+    from mip.workflows.intake.common_workbench import normalize_disjoint_workflow_routes
+
+    supported, blocked = normalize_disjoint_workflow_routes(
+        [
+            WorkflowSupportRoute.NATIONAL_MMM,
+            WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS,
+        ],
+        [WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS],
+    )
+    assert supported == [WorkflowSupportRoute.NATIONAL_MMM]
+    assert blocked == [WorkflowSupportRoute.GEOX_DESIGN_DIAGNOSTICS]
 
 
 def test_llm_grounding_context_blocks_forbidden_topics_by_default() -> None:
