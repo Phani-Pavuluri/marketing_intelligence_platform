@@ -9,10 +9,13 @@ def test_public_imports() -> None:
         DataFieldRequirement,
         DataFieldRole,
         DataGrain,
+        DataSourceMode,
+        DataSourceRef,
         DecisionHorizon,
         DecisionScope,
         FeasibilityStatus,
         GeoGrain,
+        GeoXIntakeManifest,
         GeoXIntakeSession,
         IntakeCandidatePath,
         IntakeIntendedUse,
@@ -22,11 +25,13 @@ def test_public_imports() -> None:
         IntakeSessionStatus,
         MeasurementIntakeSession,
         MeasurementWorkflowKind,
+        MMMIntakeManifest,
         MMMIntakeSession,
         ObjectiveDataRequirement,
         ObjectiveFeasibilityReport,
         RiskTolerance,
         WorkflowType,
+        build_intake_manifest,
         build_intake_plan,
         evaluate_objective_feasibility,
         has_field_or_alias,
@@ -44,7 +49,12 @@ def test_public_imports() -> None:
     assert IntakeIntendedUse.DIAGNOSTIC_ONLY.value == "diagnostic_only"
     assert callable(recommend_intake_path)
     assert callable(build_intake_plan)
+    assert callable(build_intake_manifest)
     assert IntakePlan is not None
+    assert MMMIntakeManifest is not None
+    assert GeoXIntakeManifest is not None
+    assert DataSourceRef is not None
+    assert DataSourceMode.STREAMLIT_FILE_UPLOAD.value == "streamlit_file_upload"
     assert MeasurementIntakeSession is not None
     assert MMMIntakeSession is not None
     assert GeoXIntakeSession is not None
