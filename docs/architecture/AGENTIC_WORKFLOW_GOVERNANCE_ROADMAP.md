@@ -71,7 +71,10 @@ Agentic behavior is **advisory and routing**, not statistical computation or pro
 8F  Sibling export producer specifications (this phase)
       docs/integrations/*_PRODUCER_SPEC.md, sibling_producer_specs helpers
 
-G1–G10  Critical invariants and golden scenarios (documented addendum; final roadmap layer)
+S1–S12  Semantic and decision-readiness tracks (documented addendum; not implemented)
+      metrics, estimands, scope, actions, decision packets, completeness scoring
+
+G1–G10  Critical invariants and golden scenarios (documented addendum)
       golden scenarios, conformance suite, no-silent-upgrade, dependency graph
 
 Next  Phase 8G/8H implementation (explanation payload + usage policy)—not live engine execution
@@ -128,9 +131,15 @@ Local sibling export path wiring configures default absolute paths for sibling `
 
 Producer specifications document the JSON contract for `integrations/mip/exports/`. Read-only consumer bridge (8B–8E) is complete. Live engine execution remains blocked.
 
+## Semantic and decision-readiness tracks (S1–S12)
+
+Documented in [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](../roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md). MIP owns metric/estimand registries, scope alignment, business action ontology, decision review packets, explanation templates, and completeness scoring. Sibling repos tag exports with semantic metadata—they do not authorize business actions.
+
+Structurally valid exports are not sufficient for decision guidance; semantic completeness is required before decision-support workflows.
+
 ## Critical invariants and golden scenarios (G1–G10)
 
-Documented in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). Final roadmap addendum: golden scenarios prove end-to-end product behavior; G6 enforces no silent readiness upgrade; G3 defines sibling conformance suite. **Stop adding roadmap layers**—implement 8G/8H next.
+Documented in [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md). Golden scenarios prove end-to-end product behavior; G6 enforces no silent readiness upgrade; G3 defines sibling conformance suite.
 
 ## Phase 7C artifacts
 
@@ -191,5 +200,6 @@ The manifest records lineage; it does not replace `WorkflowRunSummary`, `TrustRe
 - [ORCHESTRATION_BOUNDARIES.md](./ORCHESTRATION_BOUNDARIES.md)
 - [LLM_DECISION_LAYER_VISION.md](./LLM_DECISION_LAYER_VISION.md)
 - [LLM_DECISION_LAYER_ROADMAP.md](../roadmap/LLM_DECISION_LAYER_ROADMAP.md)
+- [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](../roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)
 - [PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](../roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
 - [REPO_INTEGRATION_STRATEGY.md](./REPO_INTEGRATION_STRATEGY.md)

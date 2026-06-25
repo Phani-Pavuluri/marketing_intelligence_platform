@@ -42,7 +42,7 @@ The following is **implemented and tested** in this repository today:
 | **Sibling repo compatibility registry (Phase 8D)** | `mip.adapters.sibling_compatibility` validates configured export paths and schema contracts before discovery—**read-only** |
 | **Local sibling export path wiring (Phase 8E)** | `mip.adapters.local_sibling_paths` wires default local `mmm`/`panel_exp` export directories through compatibility checks—**read-only JSON only** |
 | **Sibling export producer specs (Phase 8F)** | `docs/integrations/*_PRODUCER_SPEC.md` and `mip.adapters.sibling_producer_specs` define the sibling-side JSON writer contract—**no sibling code execution** |
-| **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, critical invariants and golden scenarios roadmap |
+| **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, semantic/decision-readiness and critical invariants roadmaps |
 
 **Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
 
@@ -124,13 +124,14 @@ Production-facing results must pass evaluation gates and be labeled by **confide
 | Phase 8D — Sibling repo compatibility registry | **Done** (`mip.adapters.sibling_compatibility`) |
 | Phase 8E — Local sibling export path wiring | **Done** (`mip.adapters.local_sibling_paths`) |
 | Phase 8F — Sibling export producer specs | **Done** (`docs/integrations/`, `mip.adapters.sibling_producer_specs`) |
-| Critical invariants + golden scenarios G1–G10 | **Documented** ([addendum](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)); final roadmap layer |
-| Phase 8G+ — LLM explanation payload, usage policy | **Next implementation** (not more roadmap docs) |
+| Semantic/decision-readiness tracks S1–S12 | **Documented** ([addendum](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)); not implemented |
+| Critical invariants + golden scenarios G1–G10 | **Documented** ([addendum](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)) |
+| Phase 8G+ — LLM explanation payload, usage policy | **Next implementation** |
 | Live engine adapters | **Planned** (blocked until golden scenarios + 8G–8H) |
 
 Provider order: **`MockLLMProvider` first** (deterministic tests and demos), then local Ollama (or equivalent), then optional cloud providers.
 
-See [docs/architecture/LLM_DECISION_LAYER_VISION.md](docs/architecture/LLM_DECISION_LAYER_VISION.md), [docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md), and [docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) for delivery phases, critical invariants, and golden scenarios. **Roadmap documentation is complete**—next work is Phase 8G/8H implementation.
+See [docs/architecture/LLM_DECISION_LAYER_VISION.md](docs/architecture/LLM_DECISION_LAYER_VISION.md), [docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md), [docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md), and [docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) for delivery phases, semantic readiness, and critical invariants.
 
 ## Local-first workbench
 
@@ -183,7 +184,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface: CLI + mock explanation + Streamlit shell + MMM fixture governance demo.** Governed placeholder artifacts only; no engines wired.
 
-**Near-term focus:** Implement Phase 8G (LLM explanation payload) and 8H (usage policy + diagnostic taxonomy)—not more roadmap docs or live engine execution.
+**Near-term focus:** Specify semantic contracts (S1–S3), then implement Phase 8G/8H—not more roadmap docs or live engine execution.
 
 ## Roadmap
 
@@ -192,15 +193,17 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 | [Platform roadmap](docs/roadmap/ROADMAP.md) | Phased delivery across contracts, engines, trust, APIs, orchestration |
 | [LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md) | Product vision, responsibilities, and hard boundaries |
 | [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md) | Phased LLM and workbench delivery |
-| [Critical invariants and golden scenarios](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) | G1–G10: product proof, conformance, invariants (final roadmap addendum) |
+| [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md) | Phased LLM and workbench delivery |
+| [Semantic and decision-readiness roadmap](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md) | S1–S12: metrics, estimands, scope, actions, decision packets |
+| [Critical invariants and golden scenarios](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) | G1–G10: product proof, conformance, invariants |
 | [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md) | `mip demo` / `mip app`, Streamlit, providers, local artifacts |
 | [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md) | Three-repo boundaries and adapter contracts |
 
-**Next (implementation — roadmap docs complete):**
+**Next (implementation):**
 
-1. Phase 8G — LLM explanation payload contract
-2. Phase 8H — Usage policy + diagnostic taxonomy
-3. Sibling producer writers per 8F specs (with explanation-ready fields)
+1. Semantic contracts S1–S3 (metric/KPI registry, estimand registry, scope alignment)
+2. Phase 8G — LLM explanation payload contract
+3. Phase 8H — Usage policy + diagnostic taxonomy
 4. Golden scenario fixtures (G1/G2) once 8G–8H contracts exist
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
@@ -249,6 +252,7 @@ marketing_intelligence_platform/
 - [Agentic workflow governance roadmap](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
 - [Roadmap](docs/roadmap/ROADMAP.md)
 - [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md)
+- [Semantic and decision-readiness roadmap](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)
 - [Critical invariants and golden scenarios](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
 - ADRs: [001 Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md) · [002 Experiments](docs/adr/ADR-002-experiments-as-calibration-evidence.md) · [003 LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md)
 
