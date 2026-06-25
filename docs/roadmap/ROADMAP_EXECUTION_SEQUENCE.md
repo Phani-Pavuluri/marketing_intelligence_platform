@@ -3,7 +3,7 @@
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
 **Current main:** `1cdff8f`  
-**Immediate next phase:** **P8b** — Agent role registry, run manifest, failure packet, and resolution plan contracts (docs: ✓ captured; implementation: planned)
+**Immediate next phase:** **P9 prep** — Streamlit entrypoint cleanup, then **P9** public hosted demo
 
 > **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, **agent role contracts**, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17** and must use P8b agent contracts.
 
@@ -23,6 +23,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P7 local deterministic Streamlit workflow shell (I10) | ✓ |
 | P7b pluggable LLM provider + explanation governance contracts | ✓ |
 | P8 local/demo profiling contracts + helpers | ✓ |
+| P8b agent role registry + failure/recovery contracts | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -59,7 +60,7 @@ The LLM must answer data-grounded questions only from governed profile summaries
 | T8 Product UI + public demo | I10, I15, P7–P9 | **P7–P9** |
 | T8b Pluggable LLM providers | P7b, 8G–8H | **P7b** |
 | T9 Demo profiling impl | I4, I7 | P8 ✓ |
-| T9b Governed agent role registry + handoff contracts | Agentic governance | **P8b** |
+| T9b Governed agent role registry + handoff contracts | Agentic governance | **P8b** ✓ |
 | T9c Service/deployment | P10–P11 | P10–P11 |
 | T10 LangGraph orchestration | Agentic governance | **P17** |
 | T11 Lifecycle / current-state | P1, G11, G16 | P14 |
@@ -109,7 +110,7 @@ P1 session/path
 | **P7** | I10 local Streamlit/Gradio workflow shell | Display only; deterministic mode default | ✓ implemented |
 | **P7b** | Pluggable LLM provider contracts + explanation governance | Provider modes; no canned explanations | ✓ implemented |
 | **P8** | I4 demo fixtures + local/demo profiling | Sandbox in-memory only; no production ingestion | ✓ implemented |
-| **P8b** | Agent role registry + run manifest + failure/recovery contracts | Contracts/helpers only; no LangGraph runtime | Planned (roadmap ✓) |
+| **P8b** | Agent role registry + run manifest + failure/recovery contracts | Contracts/helpers only; no LangGraph runtime | ✓ implemented |
 | **P9** | Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces) | Demo-safe; no platform LLM key by default | Planned |
 | **P10** | FastAPI/Docker service wrapper | HTTP boundary; no duplicated MIP logic | Planned |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
@@ -360,7 +361,7 @@ No web search integration · no file parsing · no data profiling computation ·
 
 **P7b status:** ✓ implemented — `src/mip/contracts/llm_provider.py` and `src/mip/workflows/intake/llm_explanation.py`. Provider modes, governed input boundaries, explanation plans, and blocked canned/sample explanation modes. No LLM provider calls.
 
-**Remaining (P8b implementation, P9–P11):** Planned.
+**Remaining (P9–P11):** Planned.
 
 ### Architecture layers
 
@@ -519,7 +520,9 @@ In deterministic mode, the UI shows structured reports and deterministic text de
 
 **Purpose:** Define governed specialist agent roles, permission boundaries, and typed handoff contracts **before** LangGraph or any stateful agent runtime is introduced.
 
-**Roadmap status:** ✓ documented in [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md). **Implementation:** planned (contracts/helpers only; no runtime agents).
+**Roadmap status:** ✓ documented and **implemented** — `src/mip/contracts/agentic_workflow.py`, `src/mip/workflows/intake/agentic_recovery.py`.
+
+**P8b implemented:** Governed agent role, run manifest, failure packet, resolution plan, validation report, retry policy, escalation policy, and handoff packet contracts. These contracts prepare future agentic orchestration without introducing LangGraph, runtime agents, LLM calls, autonomous retries, MMM execution, or GeoX execution. Agents remain reasoning/recovery surfaces, not measurement authorities.
 
 **Rationale:** P8b defines the governed agent contracts before any stateful agent runtime is introduced. P17 can later implement LangGraph/stateful orchestration using those contracts. This avoids free-form autonomous agents and keeps MMM/GeoX/calibration workflows governed.
 

@@ -179,7 +179,7 @@ def _sample_for_column(profile: DemoDatasetProfile, column_name: str) -> str | N
 def _float_value(value: object | None) -> float | None:
     if value is None:
         return None
-    if isinstance(value, (int, float)):
+    if isinstance(value, int | float):
         return float(value)
     try:
         return float(str(value))

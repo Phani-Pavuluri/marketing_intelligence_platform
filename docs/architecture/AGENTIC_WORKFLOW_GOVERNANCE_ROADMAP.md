@@ -59,7 +59,7 @@ User request
 
 ## P8b — Governed agent role registry (planned)
 
-**Status:** Roadmap documented (this file). **Implementation:** planned — contracts and deterministic helpers only; no LangGraph runtime, no agent classes, no tool execution.
+**Status:** ✓ implemented — `src/mip/contracts/agentic_workflow.py`, `src/mip/workflows/intake/agentic_recovery.py`. Contracts and deterministic helpers only; no LangGraph runtime, no agent classes, no tool execution.
 
 **Placement:** After P8 local/demo profiling; before P9 public hosted demo and **before** P17 LangGraph/stateful orchestration.
 
@@ -272,7 +272,7 @@ P7b  Pluggable LLM provider contracts + explanation governance (no canned explan
 
 P8   Demo fixtures and local/demo profiling ✓
 
-P8b Agent role registry, run manifest, failure packet, resolution plan contracts (planned)
+P8b Agent role registry, run manifest, failure packet, resolution plan contracts (implemented)
 
 P9   Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
 

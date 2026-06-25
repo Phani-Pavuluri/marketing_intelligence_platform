@@ -131,3 +131,42 @@ def test_demo_profile_to_display_dict() -> None:
     assert display["flags"]["has_media_data"] is True
     assert "national_mmm" in display["supported_routes"]
     assert "rows" not in display
+
+
+def test_agent_role_definition_display_helpers() -> None:
+    from app.ui_renderers import (
+        format_agent_failure_packet,
+        format_agent_resolution_plan,
+        format_agent_role_definition,
+        format_agent_validation_report,
+    )
+    from mip.contracts.agentic_workflow import AgentRole, AgentWorkflowType
+    from mip.workflows.intake.agentic_recovery import (
+        build_agent_failure_packet,
+        build_agent_resolution_plan,
+        build_agent_run_manifest,
+        build_agent_task,
+        build_agent_validation_report,
+        build_first_wave_agent_role_definitions,
+    )
+
+    role = build_first_wave_agent_role_definitions()[0]
+    role_display = format_agent_role_definition(role)
+    assert role_display["role_id"] == role.role_id
+    assert role_display["owns_execution"] is False
+
+    task = build_agent_task(
+        AgentRole.FAILURE_RECOVERY, AgentWorkflowType.FAILURE_RECOVERY, "Diagnose"
+    )
+    manifest = build_agent_run_manifest(task)
+    packet = build_agent_failure_packet(
+        manifest, manifest.steps[0].step_id, "missing_geo", "No geo"
+    )
+    plan = build_agent_resolution_plan(packet)
+    report = build_agent_validation_report(
+        task, proposed_output_summary="Readiness summary with evidence labels."
+    )
+
+    assert format_agent_failure_packet(packet)["error_type"] == "missing_geo"
+    assert format_agent_resolution_plan(plan)["diagnosis"]
+    assert format_agent_validation_report(report)["validation_status"]

@@ -8,6 +8,12 @@ from typing import Any
 from pydantic import BaseModel
 
 from mip.contracts.advisory import ColdStartAdvisoryPlan
+from mip.contracts.agentic_workflow import (
+    AgentFailurePacket,
+    AgentResolutionPlan,
+    AgentRoleDefinition,
+    AgentValidationReport,
+)
 from mip.contracts.calibration_intake import CalibrationMappingReport
 from mip.contracts.demo_profile import DemoDatasetProfile, DemoProfileToWorkflowSummary
 from mip.contracts.llm_provider import LLMExplanationPlan, LLMProviderConfig
@@ -317,4 +323,68 @@ def demo_profile_to_display_dict(
         "workflow_blocking_reasons": summarize_blocking_reasons(
             workflow_summary.blocking_reasons
         ),
+    }
+
+
+def format_agent_role_definition(definition: AgentRoleDefinition) -> dict[str, Any]:
+    """Format an agent role definition for display."""
+    boundary = definition.permission_boundary
+    return {
+        "role_id": definition.role_id,
+        "role": _enum_value(definition.role),
+        "display_name": definition.display_name,
+        "status": _enum_value(definition.status),
+        "status_badge": format_status_badge(definition.status),
+        "purpose": definition.purpose,
+        "authority_level": _enum_value(boundary.authority_level),
+        "forbidden_claim_topics": list(boundary.forbidden_claim_topics),
+        "owns_execution": definition.owns_execution,
+        "authoritative_for_measurement": definition.authoritative_for_measurement,
+        "deferred_trigger_conditions": list(definition.deferred_trigger_conditions) or ["None"],
+        "warnings": summarize_warnings(definition.warnings),
+    }
+
+
+def format_agent_failure_packet(packet: AgentFailurePacket) -> dict[str, Any]:
+    """Format an agent failure packet for display."""
+    return {
+        "failure_id": packet.failure_id,
+        "run_id": packet.run_id,
+        "error_type": packet.error_type,
+        "severity": _enum_value(packet.severity),
+        "error_message": packet.error_message,
+        "has_stack_trace": packet.stack_trace is not None,
+        "typed_validation_failures": list(packet.typed_validation_failures) or ["None"],
+        "allowed_retry_actions": [_enum_value(a) for a in packet.allowed_retry_actions],
+        "blocked_retry_actions": [_enum_value(a) for a in packet.blocked_retry_actions],
+        "safe_context": packet.safe_context or "None",
+    }
+
+
+def format_agent_resolution_plan(plan: AgentResolutionPlan) -> dict[str, Any]:
+    """Format an agent resolution plan for display."""
+    return {
+        "resolution_plan_id": plan.resolution_plan_id,
+        "diagnosis": plan.diagnosis,
+        "recommended_user_questions": list(plan.recommended_user_questions) or ["None"],
+        "safe_next_steps": list(plan.safe_next_steps) or ["None"],
+        "blocked_next_steps": list(plan.blocked_next_steps) or ["None"],
+        "retry_eligibility": _enum_value(plan.retry_eligibility),
+        "requires_human_approval": plan.requires_human_approval,
+        "expected_downstream_impact": plan.expected_downstream_impact or "None",
+        "warnings": summarize_warnings(plan.warnings),
+    }
+
+
+def format_agent_validation_report(report: AgentValidationReport) -> dict[str, Any]:
+    """Format an agent validation report for display."""
+    return {
+        "validation_report_id": report.validation_report_id,
+        "validation_status": _enum_value(report.validation_status),
+        "status_badge": format_status_badge(report.validation_status),
+        "forbidden_claim_findings": list(report.forbidden_claim_findings) or ["None"],
+        "missing_evidence_labels": list(report.missing_evidence_labels) or ["None"],
+        "final_allowed_outputs": list(report.final_allowed_outputs) or ["None"],
+        "final_blocked_outputs": list(report.final_blocked_outputs) or ["None"],
+        "warnings": summarize_warnings(report.warnings),
     }

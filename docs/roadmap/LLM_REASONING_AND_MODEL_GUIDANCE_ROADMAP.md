@@ -474,7 +474,9 @@ See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P7b section
 
 ## 9. P8b — Governed agent role registry and future agentic workflow
 
-**Status:** Roadmap documented. **Implementation:** planned (contracts/helpers only; no LangGraph runtime, no agent classes).
+**Status:** ✓ implemented — `src/mip/contracts/agentic_workflow.py`, `src/mip/workflows/intake/agentic_recovery.py`. Contract/helper-only: no LangGraph runtime, no agent classes, no LLM calls.
+
+**P8b implemented:** Governed agent role, run manifest, failure packet, resolution plan, validation report, retry policy, escalation policy, and handoff packet contracts. Agents remain reasoning/recovery surfaces, not measurement authorities.
 
 **Placement:** After P8 local/demo profiling; before P9 public demo and P17 LangGraph.
 

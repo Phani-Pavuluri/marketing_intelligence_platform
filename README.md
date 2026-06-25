@@ -199,7 +199,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos.
 
-**Near-term focus:** **P8b** agent role contract implementation, then **P9** public hosted demo.
+**Near-term focus:** **P9 prep** Streamlit entrypoint cleanup, then **P9** public hosted demo.
 
 ## Roadmap
 
@@ -244,9 +244,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P8b (roadmap):** Governed agent role registry and future agentic workflow architecture documented in [Agentic workflow governance](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md). Defines first-wave specialist agents, deferred optional agents, and typed handoff contracts before LangGraph runtime. **No runtime agents yet.**
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P8b** — Agent role/run manifest/failure recovery **contracts** (then P9 public hosted demo).
+**P8b implemented:** Governed agent role, run manifest, failure packet, resolution plan, validation report, retry policy, escalation policy, and handoff packet contracts (`mip.contracts.agentic_workflow`, `mip.workflows.intake.agentic_recovery`). Prepares future agentic orchestration without LangGraph, runtime agents, LLM calls, autonomous retries, MMM execution, or GeoX execution. Agents remain reasoning/recovery surfaces, not measurement authorities.
 
-1. **P8b** — Agent role registry, run manifest, failure packet, and resolution plan contracts
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P9 prep** — reconcile Streamlit entrypoints, then **P9** public hosted demo.
+
+1. **P9 prep** — Make `app/streamlit_app.py` canonical; reconcile legacy `src/mip/app/streamlit_app.py`
 2. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
 3. **P10** — FastAPI/Docker service wrapper
 4. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)

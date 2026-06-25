@@ -5,6 +5,8 @@ def test_public_imports() -> None:
     from mip.workflows.intake import (
         AdvisoryClaimType,
         AdvisoryEvidenceMode,
+        AgentRole,
+        AgentRoleDefinition,
         BaseWorkflowReadinessReport,
         BusinessObjective,
         BusinessObjectiveType,
@@ -72,6 +74,11 @@ def test_public_imports() -> None:
         WorkflowSupportRoute,
         WorkflowSupportStatus,
         WorkflowType,
+        build_agent_failure_packet,
+        build_agent_resolution_plan,
+        build_agent_run_manifest,
+        build_agent_task,
+        build_agent_validation_report,
         build_bring_your_own_key_provider_config,
         build_calibration_mapping_report,
         build_calibration_signal_readiness_report,
@@ -81,10 +88,12 @@ def test_public_imports() -> None:
         build_common_profile_summary_from_demo_profile,
         build_decision_review_readiness_report,
         build_default_llm_provider_config,
+        build_deferred_agent_role_definitions,
         build_demo_dataset_profile,
         build_demo_profile_to_workflow_summary,
         build_experiment_design_intake,
         build_experiment_diagnostic_request,
+        build_first_wave_agent_role_definitions,
         build_geox_design_readiness_report,
         build_governed_input_reference,
         build_hosted_open_source_provider_config,
@@ -156,6 +165,15 @@ def test_public_imports() -> None:
     assert DemoDatasetKind.WEBSITE_TRAFFIC.value == "website_traffic"
     assert callable(build_common_profile_summary_from_demo_profile)
     assert callable(build_demo_profile_to_workflow_summary)
+    assert callable(build_first_wave_agent_role_definitions)
+    assert callable(build_deferred_agent_role_definitions)
+    assert callable(build_agent_task)
+    assert callable(build_agent_run_manifest)
+    assert callable(build_agent_failure_packet)
+    assert callable(build_agent_resolution_plan)
+    assert callable(build_agent_validation_report)
+    assert AgentRoleDefinition is not None
+    assert AgentRole.INTAKE_ROUTING.value == "intake_routing"
     assert callable(build_common_intake_workbench)
     assert callable(build_llm_answer_grounding_context)
     assert CommonIntakeWorkbench is not None

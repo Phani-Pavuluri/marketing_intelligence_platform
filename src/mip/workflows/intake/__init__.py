@@ -20,6 +20,15 @@ from mip.contracts.advisory import (
     TrafficSourceSignal,
     WebsiteTrafficSourceProfile,
 )
+from mip.contracts.agentic_workflow import (
+    AgentFailurePacket,
+    AgentResolutionPlan,
+    AgentRole,
+    AgentRoleDefinition,
+    AgentRunManifest,
+    AgentTask,
+    AgentValidationReport,
+)
 from mip.contracts.calibration_intake import (
     CalibrationEvidenceInput,
     CalibrationIntakeBlockingReason,
@@ -155,6 +164,18 @@ from mip.workflows.intake.advisory import (
     infer_advisory_evidence_mode,
     suggest_channel_candidates,
 )
+from mip.workflows.intake.agentic_recovery import (
+    build_agent_failure_packet,
+    build_agent_handoff_packet,
+    build_agent_resolution_plan,
+    build_agent_run_manifest,
+    build_agent_task,
+    build_agent_validation_report,
+    build_default_agent_escalation_policy,
+    build_default_agent_retry_policy,
+    build_deferred_agent_role_definitions,
+    build_first_wave_agent_role_definitions,
+)
 from mip.workflows.intake.assets import build_intake_plan
 from mip.workflows.intake.availability import DataAvailabilityProfile, has_field_or_alias
 from mip.workflows.intake.calibration_mapping import (
@@ -235,6 +256,13 @@ from mip.workflows.intake.requirements import (
 __all__ = [
     "AdvisoryClaimType",
     "AdvisoryEvidenceMode",
+    "AgentFailurePacket",
+    "AgentResolutionPlan",
+    "AgentRole",
+    "AgentRoleDefinition",
+    "AgentRunManifest",
+    "AgentTask",
+    "AgentValidationReport",
     "BaseWorkflowReadinessReport",
     "BusinessObjective",
     "BusinessObjectiveType",
@@ -379,6 +407,12 @@ __all__ = [
     "build_cold_start_advisory_plan",
     "build_cold_start_business_profile",
     "build_common_intake_workbench",
+    "build_agent_failure_packet",
+    "build_agent_handoff_packet",
+    "build_agent_resolution_plan",
+    "build_agent_run_manifest",
+    "build_agent_task",
+    "build_agent_validation_report",
     "build_calibration_evidence_input_from_demo_profile",
     "build_common_profile_summary_from_demo_profile",
     "build_website_traffic_profile_from_demo_profile",
@@ -386,12 +420,16 @@ __all__ = [
     "demo_rows_for_key",
     "infer_demo_column_role",
     "build_decision_review_readiness_report",
+    "build_default_agent_escalation_policy",
+    "build_default_agent_retry_policy",
+    "build_deferred_agent_role_definitions",
     "build_demo_dataset_profile",
     "build_demo_dataset_profile_for_key",
     "build_demo_profile_to_workflow_summary",
     "build_experiment_design_data_requirements",
     "build_experiment_design_intake",
     "build_experiment_diagnostic_request",
+    "build_first_wave_agent_role_definitions",
     "build_geox_design_readiness_report",
     "build_intake_manifest",
     "build_intake_plan",
