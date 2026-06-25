@@ -2,7 +2,7 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `6cc48bc`  
+**Current main:** `2aa4073`  
 **Immediate next phase:** **P4b** — Experiment design objective and data requirement contracts
 
 ## What is already implemented
