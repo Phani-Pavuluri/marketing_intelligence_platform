@@ -83,12 +83,58 @@ Phases 8G–8H and 8I must incorporate [G11–G20 policies](./PLATFORM_CRITICAL_
 | Temporal selection | G11, G16 | Explanation payload must include time windows, freshness decomposition, `is_current`, supersession |
 | Ambiguity resolution | G12 | Question router must not infer scope/metric/estimand when multiple artifacts match |
 | Comparability | G13 | Evidence comparison (8L) must gate on alignment dimensions before comparing |
-| Claim-level governance | G14 | Usage policy (8H) must declare `allowed_claims` / `blocked_claims` per artifact |
+| Claim-level governance | G14 | Usage policy (8H) must declare `allowed_claims` / `blocked_claims` per artifact; align with `AdvisoryClaimType` (P5b) |
 | Counterfactual eligibility | G15 | Usage policy must block forecast/budget/curve questions without certification |
 | Answer lineage | G19 | Grounding map (8J) must cite artifact IDs, versions, and freshness |
 | Missing vs zero effect | G20 | Explanation templates and router must distinguish no result, inconclusive, blocked, stale, and zero effect |
 
 **Governance-valid ≠ answer-valid.** Registry availability alone must never drive artifact selection.
+
+### 3.3 General advisory and cold-start planning (P5b)
+
+**Purpose:** Pre-measurement advisory layer for users not ready for formal MMM, GeoX, CalibrationSignal, or decision-review workflows. P5 readiness reports provide the fork; P5b provides safe, labeled guidance on the advisory path.
+
+**Architecture statement:** The platform supports advisory reasoning before formal measurement exists. LLM general knowledge may be used to ask better questions and produce clearly labeled advisory hypotheses. When governed customer data summaries exist, data analysis modules may make the answer data-informed. MMM, GeoX, CalibrationSignal, and `TrustReport` remain required for measured, causal, or decision-supporting claims.
+
+**Evidence hierarchy:**
+
+```text
+General knowledge → business profile → customer data summaries → measured diagnostics → TrustReport-authorized decision support
+```
+
+#### Advisory evidence modes (`AdvisoryEvidenceMode`)
+
+| Mode | When |
+|------|------|
+| `general_knowledge_only` | Broad marketing knowledge + customer-provided details; no customer data |
+| `business_profile_only` | Structured profile: product, audience, geography, budget, margin, sales cycle, objective |
+| `data_informed_advisory` | Governed summaries: traffic source profile, CRM, sales, common intake profile—not causal |
+| `measured_diagnostic` | Governed MMM, GeoX, calibration, or readiness diagnostic outputs |
+| `causal_decision_support` | `TrustReport`-authorized decision-supporting outputs only |
+
+#### Claim types (`AdvisoryClaimType`)
+
+| Claim type | Allowed source |
+|------------|----------------|
+| `general_marketing_guidance` | General advisory |
+| `hypothesis_to_test` | General advisory |
+| `data_informed_hypothesis` | Data-informed advisory |
+| `measured_observation` | Measured diagnostic |
+| `diagnostic_explanation` | Measured diagnostic |
+| `causal_claim` | `TrustReport`-authorized only |
+| `decision_recommendation` | `TrustReport`-authorized only |
+
+#### LLM behavior for broad advisory questions
+
+**May:** ask for specific business details · ask for data that would improve the answer · use general marketing knowledge when no data exists · use governed data-analysis summaries when available · recommend channels as hypotheses to test · suggest starter tracking setup · suggest a learning agenda · explain what would be needed before MMM or GeoX
+
+**Must not:** claim optimal media mix · claim channel ROI · claim causal effect · claim expected lift · claim final budget allocation · claim MMM/GeoX readiness without P5 readiness reports · claim design feasibility without panel_exp diagnostics · claim decision authorization without `TrustReport`
+
+**Documentation language:** Referral traffic, organic search, direct traffic, email traffic, CRM data, and sales summaries may inform cold-start hypotheses, but they do not authorize causal or ROI claims. Advisory outputs must be labeled as hypotheses to test unless supported by measured diagnostics and `TrustReport` governance. The LLM is allowed to use general marketing knowledge when no customer data exists, but the answer must say that it is advisory-only and should identify what data or tracking would increase confidence.
+
+**Website traffic guardrail:** Organic/referral/social traffic can suggest where to test first; it cannot prove paid channel ROI or optimal media mix.
+
+**Aligns with:** G14 claim-level governance · 8H usage policy · 8I question router · P5 readiness fork · [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P5b
 
 ## 4. Proposed phases
 

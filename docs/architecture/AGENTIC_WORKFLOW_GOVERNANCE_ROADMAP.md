@@ -83,6 +83,8 @@ I1–I15  Conversational intake + data handoff (documented product workflow)
 
 P4b–P4c  Experiment design intake + Common Data Intake Workbench (documented; next implementation)
 
+P5b  General advisory and cold-start planning contracts (after P5)
+
 P17  LangGraph / stateful workflow orchestration skeleton (after P4b–P8 stabilize)
 ```
 
@@ -90,7 +92,19 @@ P17  LangGraph / stateful workflow orchestration skeleton (after P4b–P8 stabil
 
 **Principle:** Common intake first, workflow-specific readiness second. One workbench for MMM, GeoX, CalibrationSignal, and decision-review—no separate upload flows.
 
-The workbench owns source registration, manifests, mapping, snapshots, structural profiling, `WorkflowSupportAssessment`, and LLM-safe summaries. Readiness then branches by workflow (P5).
+The workbench owns source registration, manifests, mapping, snapshots, structural profiling, `WorkflowSupportAssessment`, and LLM-safe summaries. Readiness then branches by workflow (P5). Users not ready for formal measurement route to **general advisory / cold-start planning** (P5b).
+
+## P5b — General advisory and cold-start planning (planned)
+
+**Purpose:** Pre-measurement advisory lane. P5 readiness reports fork **measurement-ready** vs **advisory-only**. P5b provides labeled channel hypotheses, tracking checklists, learning agendas, and business-profile-driven guidance.
+
+**Key invariant:** Every answer labeled by `AdvisoryEvidenceMode`, `AdvisoryClaimType`, and `EvidenceLevel`. LLM general knowledge allowed for advisory; `TrustReport` required for causal/decision claims.
+
+**Future graph nodes (P17):** `ColdStartProfileNode` · `AdvisoryChannelHypothesisNode` · `TrafficSourceAdvisoryNode` · `TrackingReadinessNode` · `LearningAgendaNode` · `AdvisoryToMeasurementRoutingNode` (routes to P5/P6 when ready)
+
+**Boundaries:** No channel ROI model · no budget optimizer · no web search · no causal certification without governed measurement
+
+See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P5b.
 
 ## P17 — LangGraph / stateful workflow orchestration (planned)
 
@@ -106,13 +120,13 @@ panel_exp / GeoX  = design diagnostics, power, MDE, readout
 
 **Graph state holds governed objects only** — `MeasurementIntakeSession`, `IntakePathRecommendation`, `IntakePlan`, manifests, `SemanticMappingReport`, `ExperimentDesignIntake`, `PreliminaryAnalysisReport`, `WorkflowSupportAssessment`, `ReadinessReport`, `TrustReport`. Not raw dataframes.
 
-**Future nodes:** `IntentClassifierNode` · `ClarificationNode` · `IntakeSessionNode` · `PathRecommendationNode` · `RequiredDataPlanNode` · `DataSourceManifestNode` · `ColumnMappingNode` · `ExperimentDesignRequirementNode` · `PreliminaryProfilingNode` · `ReadinessReportNode` · `PanelExpDiagnosticRequestNode` · `MMMRefreshRequestNode` · `LLMAnswerGroundingNode` · `HumanApprovalNode`
+**Future nodes:** `IntentClassifierNode` · `ClarificationNode` · `IntakeSessionNode` · `PathRecommendationNode` · `RequiredDataPlanNode` · `DataSourceManifestNode` · `ColumnMappingNode` · `ExperimentDesignRequirementNode` · `PreliminaryProfilingNode` · `ReadinessReportNode` · `ColdStartAdvisoryNode` · `PanelExpDiagnosticRequestNode` · `MMMRefreshRequestNode` · `LLMAnswerGroundingNode` · `HumanApprovalNode`
 
 **Approved typed tools (future):** `recommend_intake_path()` · `build_intake_plan()` · `build_intake_manifest()` · `build_semantic_mapping_report()` · `build_experiment_design_requirements()` · `run_common_profile_summary()` · `build_readiness_report()` · `build_panel_exp_diagnostic_request()` · gated engine diagnostic calls
 
 **Boundaries:** LangGraph may choose the next governed module; must not let LLM write arbitrary analysis code; must not expose raw files to LLM; must not bypass `TrustReport`, readiness gates, or human approval; must not produce causal/budget/design-validity claims without engine outputs.
 
-**Timing:** Do not implement LangGraph runtime before P4b, P4c, P5, and P8 contracts stabilize. Integer phase **P9** remains production table-reference design; orchestration is **P17**.
+**Timing:** Do not implement LangGraph runtime before P4b, P4c, P5, P5b, and P8 contracts stabilize. Integer phase **P9** remains production table-reference design; orchestration is **P17**.
 
 See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md).
 

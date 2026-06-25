@@ -409,6 +409,7 @@ Sibling export producer specs (8F)
 
 - LLM may answer supported diagnostic claims while blocking unsupported decision claims from the same artifact.
 - No downstream layer may upgrade a blocked claim without explicit gate evidence plus approval.
+- **P5b alignment:** `AdvisoryClaimType` and `AdvisoryEvidenceMode` (see [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P5b) extend claim governance to pre-measurement advisory answers. `hypothesis_to_test` and `data_informed_hypothesis` are allowed without measured evidence; `causal_claim` and `decision_recommendation` require `TrustReport` authorization.
 
 **Ownership:** **MIP** owns claim-level policy.
 

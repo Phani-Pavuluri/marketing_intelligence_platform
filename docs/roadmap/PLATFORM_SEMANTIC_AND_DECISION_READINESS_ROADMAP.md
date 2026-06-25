@@ -436,6 +436,18 @@ Future contracts include `CommonIntakeWorkbench`, `WorkflowSupportAssessment`, a
 
 Deterministic objective→KPI-family rules for GeoX/experiment design intake: awareness · demand creation · conversion · retention/usage · MMM calibration. LLM may explain; platform rules decide valid mappings.
 
+## 5.5 General advisory and cold-start planning (P5b)
+
+**Why after P5:** P5 readiness reports fork users into **formal measurement-ready** vs **not ready**. P5b makes the advisory side useful and safe for users who are not yet ready for MMM, GeoX, CalibrationSignal, or decision-surface workflows.
+
+**Core invariant:** Every LLM answer must be labeled by **evidence level** (`EvidenceLevel`) and **claim type** (`AdvisoryClaimType`). LLM general knowledge is allowed for advisory guidance; customer data summaries strengthen answers when available; measurement engines and `TrustReport` are required for measured, causal, or decision-supporting claims.
+
+**Future contracts:** `ColdStartBusinessProfile` · `ColdStartMediaObjective` · `ChannelSuitabilityAssessment` · `ColdStartChannelHypothesis` · `WebsiteTrafficSourceProfile` · `TrackingReadinessChecklist` · `LearningAgenda` · `ReassessmentPlan`
+
+**Channel suitability ontology:** Search, social, video, email, affiliate, creator, and retargeting channels differ by intent and funnel stage. Channel hypotheses are advisory unless backed by measured diagnostics.
+
+**Cross-reference:** Claim-level governance (G14) must align with `AdvisoryClaimType` and `AdvisoryEvidenceMode`. See [ROADMAP_EXECUTION_SEQUENCE.md](./ROADMAP_EXECUTION_SEQUENCE.md) P5b and [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](./LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md) §3.3.
+
 ## 6. Related documents
 
 - [LLM_DECISION_LAYER_ROADMAP.md](./LLM_DECISION_LAYER_ROADMAP.md)

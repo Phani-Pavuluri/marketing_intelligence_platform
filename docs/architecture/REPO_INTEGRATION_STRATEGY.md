@@ -38,16 +38,19 @@ MIP does **not** own geo matching, SCM/TBR/DID inference, MMM fitting, or portfo
 
 ### Common Data Intake Workbench
 
-**Common intake first, workflow-specific readiness second.** MIP owns one shared intake workbench (source registration, manifests, mapping, snapshots, structural profiling, `WorkflowSupportAssessment`). Users do not maintain separate MMM and GeoX upload flows. After common intake, readiness branches: MMM-specific · GeoX/experiment-design · CalibrationSignal · decision-review.
+**Common intake first, workflow-specific readiness second.** MIP owns one shared intake workbench (source registration, manifests, mapping, snapshots, structural profiling, `WorkflowSupportAssessment`). Users do not maintain separate MMM and GeoX upload flows. After common intake, readiness branches: MMM-specific · GeoX/experiment-design · CalibrationSignal · decision-review. Users **not** ready for formal measurement route to **general advisory / cold-start planning** (P5b).
 
 | Layer | Owns | Does not own |
 |-------|------|--------------|
 | **MIP common intake** | Workbench, snapshots, mapping, profiling summaries, workflow support assessment, LLM grounding context | Power, MDE, matching, model fitting |
+| **MIP advisory / cold-start (P5b)** | Business profile capture, channel hypotheses, traffic-source advisory, tracking checklists, learning agendas, evidence/claim labeling | Channel ROI models, budget optimization, causal certification |
 | **MMM** | MMM sufficiency, media time-series, calibration, refresh diagnostics | Geo design execution |
 | **panel_exp / GeoX** | Power/MDE, matchability, design feasibility, readout | Intake workbench, readiness tier certification |
-| **LLM** | Clarification, explanation of governed reports | Raw-file analysis, feasibility certification |
+| **LLM** | Clarification, labeled advisory hypotheses, explanation of governed reports | Raw-file analysis, feasibility certification, ROI/optimal-mix claims without evidence |
 
-See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P4c and [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) I6c.
+**Advisory evidence hierarchy:** general knowledge → business profile → customer data summaries → measured diagnostics → `TrustReport`-authorized decision support. Referral, organic, social, email, CRM, and sales summaries may inform cold-start hypotheses but do not authorize causal or ROI claims.
+
+See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P4c, P5b and [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](../roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) I6c, I8b.
 
 ### `panel_exp` / GeoX
 

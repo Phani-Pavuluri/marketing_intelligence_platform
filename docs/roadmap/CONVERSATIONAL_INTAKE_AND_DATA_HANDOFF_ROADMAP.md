@@ -329,6 +329,62 @@ Example statuses: `supports_national_mmm` · `supports_geo_level_mmm` · `suppor
 
 ---
 
+### Track I8b — General Advisory and Cold-Start Planning (P5b)
+
+**Status:** planned — product-critical. Many users will not be ready for MMM or GeoX but still need safe, useful guidance.
+
+**Why:** P5 workflow-specific readiness reports determine whether the user is structurally ready for formal measurement workflows. If the user is **not** ready but still needs guidance—no paid media history, business profile only, or website traffic without causal readout—MIP should route to **advisory/cold-start planning** rather than forcing MMM or GeoX.
+
+**Scope:** Broader advisory lane—not only SMB paid media. Covers no-data channel guidance, business-profile-driven planning, traffic-source-informed hypotheses, tracking setup checklists, learning agendas, channel suitability ontology, and budget maturity handling ($500/month vs $50K/month).
+
+**Architecture:** The platform supports advisory reasoning before formal measurement exists. LLM general knowledge may ask better questions and produce labeled advisory hypotheses. Governed customer data summaries strengthen answers when available. MMM, GeoX, CalibrationSignal, and `TrustReport` remain required for measured, causal, or decision-supporting claims.
+
+**Evidence hierarchy:**
+
+```text
+General knowledge → business profile → customer data summaries → measured diagnostics → TrustReport-authorized decision support
+```
+
+**Future enums:**
+
+- `AdvisoryEvidenceMode` — `general_knowledge_only` · `business_profile_only` · `data_informed_advisory` · `measured_diagnostic` · `causal_decision_support`
+- `AdvisoryClaimType` — `general_marketing_guidance` · `hypothesis_to_test` · `data_informed_hypothesis` · `measured_observation` · `diagnostic_explanation` · `causal_claim` · `decision_recommendation`
+- `EvidenceLevel` — `no_customer_data` · `business_profile_signal` · `organic_interest_signal` · `organic_conversion_signal` · `search_intent_signal` · `referral_interest_signal` · `crm_signal` · `sales_signal` · `paid_test_signal` · `experiment_signal` · `mmm_signal` · `trust_report_authorized`
+- `ColdStartAdvisoryStatus` — `needs_business_details` · `needs_tracking_setup` · `advisory_plan_ready` · `ready_for_basic_tracking` · `ready_for_starter_test` · `not_ready_for_mmm` · `not_ready_for_geox` · `ready_for_data_collection` · `ready_for_reassessment`
+
+**Future contracts:**
+
+`ColdStartBusinessProfile` · `ColdStartMediaObjective` · `ChannelCandidate` · `ChannelSuitabilityAssessment` · `ColdStartChannelHypothesis` · `StarterMediaMixHypothesis` · `WebsiteTrafficSourceProfile` · `TrafficSourceSignal` · `OrganicDemandSignal` · `ReferralInterestSignal` · `SearchIntentSignal` · `TrafficConversionSignal` · `TrackingReadinessChecklist` · `StarterMeasurementPlan` · `LearningAgenda` · `ReassessmentPlan`
+
+**Website traffic source advisory** (Organic Demand Signal Assessment):
+
+Allowed inputs (later): source/medium · channel group · landing page · geography · device · sessions · conversions · organic queries · referral domains · UTM coverage
+
+**Guardrail:** Referral, organic, social, and email traffic may suggest where to test first—they do **not** prove paid channel ROI or optimal media mix.
+
+**Allowed:** *Instagram referral traffic shows organic audience interest, so Meta/Instagram may be a reasonable small paid test candidate. Paid performance is unproven and should be validated with tracking and a limited test.*
+
+**Disallowed:** *Instagram referral traffic proves Meta is your best paid channel.*
+
+**Claim rules:**
+
+- General advisory → `general_marketing_guidance`, `hypothesis_to_test`
+- Data-informed advisory → `data_informed_hypothesis`
+- Measured diagnostic → `measured_observation`, `diagnostic_explanation`
+- Only `TrustReport`-authorized workflows → `causal_claim`, `decision_recommendation`
+
+**Readiness-to-measure ladder:** advisory → tracking setup → starter test → paid readout → experiment/MMM later
+
+**LLM may:** ask for business details · ask for data that would improve the answer · use general marketing knowledge when no data exists · use governed summaries when available · recommend channels as hypotheses · suggest tracking setup and learning agenda · explain prerequisites for MMM/GeoX
+
+**LLM must not:** claim optimal media mix · channel ROI · causal effect · expected lift · final budget allocation · MMM/GeoX readiness without P5 reports · design feasibility without panel_exp · decision authorization without `TrustReport`
+
+**Documentation language:** Referral traffic, organic search, direct traffic, email traffic, CRM data, and sales summaries may inform cold-start hypotheses, but they do not authorize causal or ROI claims. Advisory outputs must be labeled as hypotheses to test unless supported by measured diagnostics and `TrustReport` governance. The LLM is allowed to use general marketing knowledge when no customer data exists, but the answer must say that it is advisory-only and should identify what data or tracking would increase confidence.
+
+**Ownership:** **MIP** owns advisory contracts, evidence/claim labeling, and routing from P5 not-ready states.
+
+---
+
 ### Track I9 — CalibrationSignal Intake Mapping
 
 **Why:** Experiment evidence must not enter MMM as loose text.
@@ -497,6 +553,7 @@ user selects governed table connection
 | I6c | **Common Data Intake Workbench** + preliminary profiling (P4c) |
 | I7 | Data profiling + compatibility validation |
 | I8 | **Workflow-specific** readiness reports (P5) |
+| I8b | **General advisory** and cold-start planning (P5b) |
 | I9 | CalibrationSignal intake mapping |
 | I10 | Streamlit / local product workflow |
 | I11 | Production data connection workflow |
@@ -546,9 +603,10 @@ The LLM must not answer from raw files—only from governed reports.
 
 **P1–P5 complete.** Next:
 
-1. **P6** — CalibrationSignal intake mapping
-2. **P7–P8** — Streamlit shell · demo profiling implementation
-3. **P17** — LangGraph orchestration skeleton (after P6–P8 stabilize)
+1. **P5b** — General advisory and cold-start planning contracts
+2. **P6** — CalibrationSignal intake mapping
+3. **P7–P8** — Streamlit shell · demo profiling implementation
+4. **P17** — LangGraph orchestration skeleton (after P5b–P8 stabilize)
 
 Sequence: understand experiment objective → provide data once through common workbench → workflow-specific readiness → diagnostics.
 
