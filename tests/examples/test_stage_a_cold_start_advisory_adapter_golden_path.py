@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 from datetime import UTC, datetime
+from pathlib import Path
 
 import pytest
 
@@ -21,9 +22,10 @@ from mip.examples.stage_a_adapters import (
     list_supported_advisory_fixture_ids,
     run_cold_start_advisory_for_stage_a_fixture,
 )
-from mip.examples.stage_a_fixtures import load_stage_a_fixture
+from mip.examples.stage_a_fixtures import list_stage_a_fixtures, load_stage_a_fixture
 
 _NOW = datetime(2026, 5, 28, 12, 0, tzinfo=UTC)
+_ADAPTER_SOURCE = Path("src/mip/examples/stage_a_adapters.py")
 
 _FORBIDDEN_OUTPUT_CLAIMS = re.compile(
     r"\b("
@@ -50,19 +52,38 @@ def _advisory_output_text(report: DeterministicReportEnvelope) -> str:
     return " ".join(parts).lower()
 
 
+def test_supported_ids_discovered_from_manifest_workflow_area() -> None:
+    manifest_ids = {
+        str(entry["fixture_id"])
+        for entry in list_stage_a_fixtures(workflow_area="cold_start_advisory")
+    }
+    assert set(list_supported_advisory_fixture_ids()) == manifest_ids
+    assert "local_fitness_studio" in manifest_ids
+
+
+def test_adapter_module_avoids_fixture_name_branching() -> None:
+    source = _ADAPTER_SOURCE.read_text(encoding="utf-8")
+    assert "fixture_id ==" not in source
+    assert "_FIXTURE_PROFILE_DEFAULTS" not in source
+    assert "_ADVISORY_FIXTURE_IDS" not in source
+
+
 def test_local_fitness_studio_loads_via_stage_a_loader() -> None:
     payload = load_stage_a_fixture("local_fitness_studio")
     assert payload["fixture_id"] == "local_fitness_studio"
     assert payload["workflow_area"] == "cold_start_advisory"
 
 
-def test_adapter_builds_cold_start_workflow_input() -> None:
+def test_adapter_builds_cold_start_workflow_input_from_schema() -> None:
     adapter_input = build_cold_start_input_from_stage_a_fixture("local_fitness_studio")
     profile = adapter_input["business_profile"]
+    assert adapter_input["fixture_category"] == "cold_start_advisory"
     assert adapter_input["synthetic"] is True
+    assert "domain" in adapter_input["required_fields"]
     assert profile.profile_id == "stage-a-local_fitness_studio"
     assert profile.geography == "Austin, TX"
     assert profile.monthly_budget == "$1500"
+    assert profile.business_type == "local service"
 
 
 def test_local_fitness_studio_golden_path_envelope() -> None:
@@ -83,27 +104,43 @@ def test_local_fitness_studio_golden_path_envelope() -> None:
 
 
 def test_non_business_profile_fixture_fails_closed() -> None:
-    with pytest.raises(StageAAdapterError, match="not a supported advisory fixture"):
+    with pytest.raises(StageAAdapterError, match="business-profile fixture"):
         build_cold_start_input_from_stage_a_fixture("experiment_readout_valid")
 
 
-def test_unsupported_fixture_id_fails_closed() -> None:
-    with pytest.raises(StageAAdapterError, match="not a supported advisory fixture"):
+def test_readiness_fixture_fails_closed() -> None:
+    with pytest.raises(StageAAdapterError, match="business-profile fixture"):
         build_cold_start_input_from_stage_a_fixture("national_weekly_channel_summary")
 
 
-def test_local_fitness_studio_excludes_unsupported_output_claims() -> None:
+@pytest.mark.parametrize("fixture_id", list_supported_advisory_fixture_ids())
+def test_manifest_business_profiles_use_same_adapter_path(fixture_id: str) -> None:
+    adapter_input = build_cold_start_input_from_stage_a_fixture(fixture_id)
+    assert adapter_input["fixture_category"] == "cold_start_advisory"
     report = run_cold_start_advisory_for_stage_a_fixture(
-        "local_fitness_studio",
+        fixture_id,
+        generated_at=_NOW,
+        report_id=f"det-report-adv-{fixture_id}",
+    )
+    assert report.governance_status == GovernanceStatus.ADVISORY_ONLY
+    assert report.report_type == ReportType.COLD_START_ADVISORY
+    assert report.source_input_ref.source_fixture_id_or_payload_ref == fixture_id
+    assert report.artifact_refs[0].source_fixture_id_or_payload_ref == fixture_id
+
+
+@pytest.mark.parametrize("fixture_id", list_supported_advisory_fixture_ids())
+def test_business_profile_reports_exclude_unsupported_output_claims(fixture_id: str) -> None:
+    report = run_cold_start_advisory_for_stage_a_fixture(
+        fixture_id,
         generated_at=_NOW,
     )
     text = _advisory_output_text(report)
     match = _FORBIDDEN_OUTPUT_CLAIMS.search(text)
-    assert match is None, f"forbidden claim in local_fitness_studio: {match}"
+    assert match is None, f"forbidden claim in {fixture_id}: {match}"
     assert "causal_lift" in report.blocked_claims
 
 
-def test_forbidden_downstream_uses_preserved() -> None:
+def test_local_fitness_studio_forbidden_downstream_uses_preserved() -> None:
     report = run_cold_start_advisory_for_stage_a_fixture(
         "local_fitness_studio",
         generated_at=_NOW,
@@ -112,14 +149,3 @@ def test_forbidden_downstream_uses_preserved() -> None:
     assert "roi_proof" in forbidden
     assert "budget_optimization" in forbidden
     assert "mmm_model_output" in forbidden
-
-
-@pytest.mark.parametrize("fixture_id", list_supported_advisory_fixture_ids())
-def test_supported_business_profiles_remain_advisory_only(fixture_id: str) -> None:
-    report = run_cold_start_advisory_for_stage_a_fixture(
-        fixture_id,
-        generated_at=_NOW,
-        report_id=f"det-report-adv-{fixture_id}",
-    )
-    assert report.governance_status == GovernanceStatus.ADVISORY_ONLY
-    assert report.report_type == ReportType.COLD_START_ADVISORY

@@ -67,10 +67,11 @@ Without explicit input/output rules, Cursor agents and future implementers will 
 
 - **Module:** `mip.examples.stage_a_adapters`
 - **Report helpers:** `mip.reports.advisory_reports`
-- **Supported fixture IDs:** `local_fitness_studio`, `dtc_skincare_brand`, `b2b_saas_hr_platform`
+- **Discovery:** Manifest `workflow_area=cold_start_advisory` + shared business-profile schema (not fixture-name branching)
+- **Required schema fields:** `domain`, `objective`, `geography`, `monthly_budget_usd`
 - **Workflow:** `build_cold_start_advisory_plan`
 - **Helpers:** `build_cold_start_input_from_stage_a_fixture`, `run_cold_start_advisory_for_stage_a_fixture`, `build_cold_start_advisory_report_from_stage_a_fixture`, `export_cold_start_advisory_report_from_stage_a_fixture`
-- **Golden path #1:** `local_fitness_studio` → `cold_start_advisory` / `advisory_only`
+- **Golden path #1:** `local_fitness_studio` (test fixture only; adapter is category/schema-based)
 
 ### Calibration report builder/export helpers (implemented)
 

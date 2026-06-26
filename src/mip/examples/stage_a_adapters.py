@@ -28,6 +28,7 @@ from mip.contracts.deterministic_report import (
     default_package_version_label,
 )
 from mip.examples.stage_a_fixtures import (
+    list_stage_a_fixtures,
     load_stage_a_fixture,
 )
 from mip.workflows.intake.advisory import (
@@ -36,13 +37,7 @@ from mip.workflows.intake.advisory import (
 )
 from mip.workflows.intake.calibration_mapping import map_evidence_to_calibration_signal
 
-_ADVISORY_FIXTURE_IDS = frozenset(
-    {
-        "local_fitness_studio",
-        "dtc_skincare_brand",
-        "b2b_saas_hr_platform",
-    }
-)
+_ADVISORY_WORKFLOW_AREA = "cold_start_advisory"
 
 _ADVISORY_WORKFLOW = "build_cold_start_advisory_plan"
 
@@ -51,6 +46,15 @@ _ADVISORY_REQUIRED_FIXTURE_FIELDS = (
     "objective",
     "geography",
     "monthly_budget_usd",
+)
+
+_ADVISORY_OPTIONAL_PROFILE_FIELDS = (
+    "product_or_service",
+    "target_audience",
+    "business_model",
+    "tracking_state",
+    "current_channels",
+    "known_constraints",
 )
 
 _ADVISORY_ALLOWED_DOWNSTREAM = (
@@ -117,27 +121,6 @@ _TRACKING_STATE_TO_WEBSITE_AND_TRACKING: dict[str, tuple[bool, bool]] = {
     "no_website": (False, False),
 }
 
-_FIXTURE_PROFILE_DEFAULTS: dict[str, dict[str, str]] = {
-    "local_fitness_studio": {
-        "business_type": "local service",
-        "product_or_service": "local fitness studio memberships",
-        "target_audience": "Adults within 10 miles of studio",
-        "b2b_or_b2c": "b2c",
-    },
-    "dtc_skincare_brand": {
-        "business_type": "ecommerce retail",
-        "product_or_service": "DTC handmade skincare ecommerce",
-        "target_audience": "Women 25-45 interested in clean beauty",
-        "b2b_or_b2c": "b2c",
-    },
-    "b2b_saas_hr_platform": {
-        "business_type": "b2b saas",
-        "product_or_service": "B2B HR platform subscription",
-        "target_audience": "HR leaders at mid-market companies",
-        "b2b_or_b2c": "b2b",
-    },
-}
-
 _CALIBRATION_FIXTURE_IDS = frozenset(
     {
         "experiment_readout_valid",
@@ -184,8 +167,12 @@ def list_supported_calibration_fixture_ids() -> list[str]:
 
 
 def list_supported_advisory_fixture_ids() -> list[str]:
-    """Return business-profile fixture IDs supported by Stage A.3 advisory adapters."""
-    return sorted(_ADVISORY_FIXTURE_IDS)
+    """Return business-profile fixture IDs discovered from Stage A manifest metadata."""
+    return sorted(
+        str(entry["fixture_id"])
+        for entry in list_stage_a_fixtures(workflow_area=_ADVISORY_WORKFLOW_AREA)
+        if isinstance(entry.get("fixture_id"), str) and entry["fixture_id"].strip()
+    )
 
 
 def _assert_calibration_fixture_id(fixture_id: str) -> None:
@@ -384,13 +371,48 @@ def run_calibration_mapping_for_stage_a_fixture(
     )
 
 
-def _assert_advisory_fixture_id(fixture_id: str) -> None:
-    if fixture_id not in _ADVISORY_FIXTURE_IDS:
+def _validate_business_profile_fixture_schema(
+    fixture_id: str,
+    payload: dict[str, Any],
+) -> None:
+    """Fail closed unless payload matches cold-start business-profile fixture schema."""
+    if payload.get("workflow_area") != _ADVISORY_WORKFLOW_AREA:
         msg = (
-            f"fixture_id {fixture_id!r} is not a supported advisory fixture; "
-            f"supported: {sorted(_ADVISORY_FIXTURE_IDS)}"
+            f"fixture {fixture_id!r} is not a {_ADVISORY_WORKFLOW_AREA!r} "
+            "business-profile fixture"
         )
         raise StageAAdapterError(msg)
+    if payload.get("synthetic") is not True:
+        msg = f"fixture {fixture_id!r} must set synthetic=true"
+        raise StageAAdapterError(msg)
+    if payload.get("requires_mmm_or_geox_engine") is not False:
+        msg = f"fixture {fixture_id!r} must set requires_mmm_or_geox_engine=false"
+        raise StageAAdapterError(msg)
+    for field_name in _ADVISORY_REQUIRED_FIXTURE_FIELDS:
+        if field_name not in payload:
+            msg = (
+                f"fixture {fixture_id!r} is missing required business-profile field "
+                f"{field_name!r}"
+            )
+            raise StageAAdapterError(msg)
+
+
+def _load_business_profile_fixture(fixture_id: str) -> dict[str, Any]:
+    """Load and validate a Stage A cold-start business-profile fixture."""
+    payload = load_stage_a_fixture(fixture_id)
+    _validate_business_profile_fixture_schema(fixture_id, payload)
+    return payload
+
+
+def _domain_to_business_type(domain: str) -> str:
+    return _DOMAIN_TO_BUSINESS_TYPE.get(domain, domain.replace("_", " "))
+
+
+def _optional_profile_string(payload: dict[str, Any], field_name: str) -> str | None:
+    value = payload.get(field_name)
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    return None
 
 
 def _map_objective(objective: str) -> ColdStartMediaObjective:
@@ -413,16 +435,12 @@ def _business_profile_from_fixture_payload(
     *,
     created_at: datetime | None = None,
 ) -> ColdStartBusinessProfile:
-    defaults = _FIXTURE_PROFILE_DEFAULTS.get(fixture_id, {})
     domain = str(payload["domain"])
-    business_type = defaults.get("business_type") or _DOMAIN_TO_BUSINESS_TYPE.get(
-        domain,
-        domain.replace("_", " "),
-    )
+    business_type = _domain_to_business_type(domain)
+    b2b_or_b2c: str | None = None
     business_model = payload.get("business_model")
-    b2b_or_b2c = defaults.get("b2b_or_b2c")
     if isinstance(business_model, str):
-        b2b_or_b2c = _BUSINESS_MODEL_TO_B2B_OR_B2C.get(business_model, b2b_or_b2c)
+        b2b_or_b2c = _BUSINESS_MODEL_TO_B2B_OR_B2C.get(business_model.strip())
 
     monthly_budget_usd = payload["monthly_budget_usd"]
     if not isinstance(monthly_budget_usd, int | float):
@@ -433,7 +451,7 @@ def _business_profile_from_fixture_payload(
         payload.get("tracking_state") if isinstance(payload.get("tracking_state"), str) else None
     )
     constraints = payload.get("known_constraints")
-    constraint_list = list(constraints) if isinstance(constraints, list) else []
+    constraint_list = [str(item) for item in constraints] if isinstance(constraints, list) else []
     channels = payload.get("current_channels")
     organic_channels = [str(channel) for channel in channels] if isinstance(channels, list) else []
 
@@ -441,9 +459,9 @@ def _business_profile_from_fixture_payload(
         profile_id=f"stage-a-{fixture_id}",
         created_at=created_at,
         business_type=business_type,
-        product_or_service=defaults.get("product_or_service"),
+        product_or_service=_optional_profile_string(payload, "product_or_service"),
         b2b_or_b2c=b2b_or_b2c,
-        target_audience=defaults.get("target_audience"),
+        target_audience=_optional_profile_string(payload, "target_audience"),
         monthly_budget=f"${int(monthly_budget_usd)}",
         primary_objective=_map_objective(str(payload["objective"])),
         geography=str(payload["geography"]),
@@ -456,24 +474,18 @@ def _business_profile_from_fixture_payload(
 
 def build_cold_start_input_from_stage_a_fixture(fixture_id: str) -> dict[str, Any]:
     """Load a Stage A business-profile fixture and return advisory workflow input metadata."""
-    _assert_advisory_fixture_id(fixture_id)
-    payload = load_stage_a_fixture(fixture_id)
-    if payload.get("workflow_area") != "cold_start_advisory":
-        msg = f"fixture {fixture_id!r} is not a cold_start_advisory fixture"
-        raise StageAAdapterError(msg)
-    for field_name in _ADVISORY_REQUIRED_FIXTURE_FIELDS:
-        if field_name not in payload:
-            msg = f"fixture {fixture_id!r} is missing required field {field_name!r}"
-            raise StageAAdapterError(msg)
-
+    payload = _load_business_profile_fixture(fixture_id)
     profile = _business_profile_from_fixture_payload(fixture_id, payload)
     return {
         "fixture_id": fixture_id,
+        "fixture_category": _ADVISORY_WORKFLOW_AREA,
         "synthetic": payload.get("synthetic") is True,
         "workflow_area": payload.get("workflow_area"),
         "demo_journey": payload.get("demo_journey"),
         "evidence_mode": payload.get("evidence_mode"),
         "requires_mmm_or_geox_engine": payload.get("requires_mmm_or_geox_engine") is False,
+        "required_fields": list(_ADVISORY_REQUIRED_FIXTURE_FIELDS),
+        "optional_profile_fields": list(_ADVISORY_OPTIONAL_PROFILE_FIELDS),
         "business_profile": profile,
     }
 
@@ -553,7 +565,7 @@ def build_cold_start_advisory_report_envelope(
     report_id: str | None = None,
 ) -> DeterministicReportEnvelope:
     """Build a deterministic report envelope from a cold-start advisory plan."""
-    _assert_advisory_fixture_id(fixture_id)
+    _load_business_profile_fixture(fixture_id)
     created_at = generated_at or plan.created_at
     if created_at.tzinfo is None:
         created_at = created_at.replace(tzinfo=UTC)

@@ -120,7 +120,7 @@ print(report.governance_status)
 print(report.summary)
 ```
 
-Supported `fixture_id` values: `local_fitness_studio`, `dtc_skincare_brand`, `b2b_saas_hr_platform`. Output is **advisory-only** — not causal measurement.
+Supported fixtures are discovered from manifest `workflow_area=cold_start_advisory` when they satisfy the shared business-profile schema. Golden path #1 uses `local_fitness_studio` as the required test case only.
 
 ### 4.1 Cold-start advisory
 
