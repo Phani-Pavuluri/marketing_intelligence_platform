@@ -1,0 +1,37 @@
+{
+  "case_id": "tool_unavailable_fallback",
+  "description": "Deterministic advisory tool unavailable uses safe fallback.",
+  "user_question": "Run cold start advisory workflow.",
+  "tags": ["cold_start_advisory", "tool_unavailable"],
+  "forbidden_answerable_states": [
+    "answerable_from_registered_artifact",
+    "answerable_from_deterministic_tool_output"
+  ],
+  "requires_fallback_message": true,
+  "requires_report": false,
+  "requires_tool": true,
+  "requires_missing_inputs": false,
+  "request": {
+    "requested_claim_type": "cold_start_advisory",
+    "user_intent": "documentation: advisory tool unavailable",
+    "available_reports": [],
+    "available_tools": [
+      {
+        "tool_name": "run_cold_start_advisory_for_stage_a_fixture",
+        "tool_type": "deterministic_workflow",
+        "available": false,
+        "supports_claim_types": ["cold_start_advisory", "general_marketing_advice"],
+        "unsupported_claim_types": ["roi", "causal_lift"],
+        "failure_mode": "unavailable",
+        "fallback_answer_mode": "tool_unavailable_fallback"
+      }
+    ],
+    "missing_inputs": [],
+    "assert_claim_authorized_by_available_artifacts": false
+  },
+  "expected_state": "needs_user_input_or_data",
+  "expected_answer_mode": "tool_unavailable_fallback",
+  "expected_evidence_level": "business_profile_only",
+  "expected_blocked_claims": [],
+  "forbidden_phrases": []
+}

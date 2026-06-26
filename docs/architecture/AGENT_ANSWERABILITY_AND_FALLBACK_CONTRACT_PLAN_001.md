@@ -379,6 +379,7 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 | 3 | Claim taxonomy and evidence-level enums (shared with advisory/report contracts) | Code ✓ |
 | 4 | Deterministic answerability evaluator (`evaluate_agent_answerability(...)`) | Code ✓ |
 | 5 | `AgentCapabilityEvalCase` harness + required scenarios | Tests ✓ |
+| 5b | File-backed agent capability eval fixtures (`examples/fixtures/agent_capability_eval`) | Fixtures ✓ |
 | 6 | LLM explanation request/response contracts | Docs + code |
 | 7 | LLM explanation implementation **over deterministic reports only** | Code |
 | 8 | Agent runtime / tool registry (P17) | Code — later |
@@ -400,7 +401,8 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 - [x] Docs/contract planning (this document)
 - [x] Typed `AgentAnswerabilityState` + `AgentAnswerabilityDecision` contracts
 - [x] Deterministic answerability evaluator (no LLM)
-- [x] Eval harness with required scenarios (structured inputs)
+- [x] Eval harness with required scenarios
+- [x] File-backed agent capability eval fixtures (`agent_capability_eval_v1`) (structured inputs)
 
 ### Needs more detail before implementation
 
@@ -421,6 +423,8 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 ## 16. Deterministic evaluator implementation rules
 
 **Implemented:** `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability` (flat kwargs), `mip.workflows.agent.answerability` (request object).
+
+**Eval fixtures:** `examples/fixtures/agent_capability_eval/` with loader `mip.evaluation.agent_capability_fixtures`. Evals are deterministic, structured-input driven, and test answerability state — not LLM output quality. Required before any LLM-facing agent/chat layer.
 
 ### Structured inputs only
 

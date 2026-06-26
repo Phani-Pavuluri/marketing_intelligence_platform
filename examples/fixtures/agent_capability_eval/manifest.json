@@ -1,0 +1,180 @@
+{
+  "schema_version": "agent_capability_eval_v1",
+  "description": "Deterministic agent answerability eval fixtures for five-state routing regression.",
+  "cases": [
+    {
+      "case_id": "roi_advisory_only",
+      "description": "ROI with advisory report only routes to core ML, not answerable.",
+      "case_file": "cases/roi_advisory_only.json",
+      "requested_claim_type": "roi",
+      "expected_state": "needs_core_diagnostic_or_ml",
+      "expected_evidence_level": "core_mmm_required",
+      "expected_answer_mode": "route_to_mmm",
+      "requires_report": true,
+      "requires_tool": false,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": [],
+      "forbidden_answerable_states": [
+        "answerable_from_registered_artifact",
+        "answerable_from_deterministic_tool_output"
+      ],
+      "tags": ["roi", "advisory_only", "core_ml_routing"]
+    },
+    {
+      "case_id": "roi_prove_from_advisory_blocked",
+      "description": "Asserting ROI proof from advisory report is blocked by governance.",
+      "case_file": "cases/roi_prove_from_advisory_blocked.json",
+      "requested_claim_type": "roi",
+      "expected_state": "blocked_by_claim_boundary",
+      "expected_evidence_level": "core_mmm_required",
+      "expected_answer_mode": "blocked_unsupported_claim",
+      "requires_report": true,
+      "requires_tool": false,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": ["roi_proof"],
+      "forbidden_answerable_states": [
+        "answerable_from_registered_artifact",
+        "answerable_from_deterministic_tool_output"
+      ],
+      "tags": ["roi", "governance", "blocked"]
+    },
+    {
+      "case_id": "cold_start_tool_available",
+      "description": "Business profile next steps with advisory tool available.",
+      "case_file": "cases/cold_start_tool_available.json",
+      "requested_claim_type": "cold_start_advisory",
+      "expected_state": "answerable_from_deterministic_tool_output",
+      "expected_evidence_level": "business_profile_only",
+      "expected_answer_mode": "advisory_only_guidance",
+      "requires_report": false,
+      "requires_tool": true,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": [],
+      "forbidden_answerable_states": [],
+      "tags": ["cold_start_advisory", "deterministic_tool"]
+    },
+    {
+      "case_id": "explain_calibration_report",
+      "description": "Explain existing valid calibration mapping report.",
+      "case_file": "cases/explain_calibration_report.json",
+      "requested_claim_type": "experiment_calibration",
+      "expected_state": "answerable_from_registered_artifact",
+      "expected_evidence_level": "deterministic_workflow_report",
+      "expected_answer_mode": "direct_report_explanation",
+      "requires_report": true,
+      "requires_tool": false,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": [],
+      "forbidden_answerable_states": [],
+      "tags": ["experiment_calibration", "registered_artifact"]
+    },
+    {
+      "case_id": "calibration_missing_se",
+      "description": "Missing standard error blocks calibration evidence use.",
+      "case_file": "cases/calibration_missing_se.json",
+      "requested_claim_type": "experiment_calibration",
+      "expected_state": "needs_user_input_or_data",
+      "expected_evidence_level": "calibration_candidate",
+      "expected_answer_mode": "missing_data_request",
+      "requires_report": false,
+      "requires_tool": true,
+      "requires_missing_inputs": true,
+      "expected_blocked_claims": [],
+      "forbidden_answerable_states": [
+        "answerable_from_registered_artifact",
+        "answerable_from_deterministic_tool_output"
+      ],
+      "tags": ["experiment_calibration", "missing_data"]
+    },
+    {
+      "case_id": "matched_markets_readiness_only",
+      "description": "Matched market design from readiness report only routes to GeoX.",
+      "case_file": "cases/matched_markets_readiness_only.json",
+      "requested_claim_type": "matched_market_design",
+      "expected_state": "needs_core_diagnostic_or_ml",
+      "expected_evidence_level": "core_geox_required",
+      "expected_answer_mode": "route_to_geox",
+      "requires_report": true,
+      "requires_tool": false,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": [],
+      "forbidden_answerable_states": [
+        "answerable_from_registered_artifact",
+        "answerable_from_deterministic_tool_output"
+      ],
+      "tags": ["matched_market_design", "core_ml_routing"]
+    },
+    {
+      "case_id": "ambiguous_increase_spend",
+      "description": "Ambiguous budget optimization without inputs is not directly answerable.",
+      "case_file": "cases/ambiguous_increase_spend.json",
+      "requested_claim_type": "budget_optimization",
+      "expected_state": "needs_core_diagnostic_or_ml",
+      "expected_evidence_level": "certified_decision_surface_required",
+      "expected_answer_mode": "route_to_decision_surface",
+      "requires_report": false,
+      "requires_tool": false,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": [],
+      "forbidden_answerable_states": [
+        "answerable_from_registered_artifact",
+        "answerable_from_deterministic_tool_output"
+      ],
+      "tags": ["budget_optimization", "ambiguous"]
+    },
+    {
+      "case_id": "causal_proof_advisory_blocked",
+      "description": "Unsupported causal proof asserted from synthetic advisory fixture.",
+      "case_file": "cases/causal_proof_advisory_blocked.json",
+      "requested_claim_type": "causal_lift",
+      "expected_state": "blocked_by_claim_boundary",
+      "expected_evidence_level": "core_geox_required",
+      "expected_answer_mode": "blocked_unsupported_claim",
+      "requires_report": true,
+      "requires_tool": false,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": ["causal_lift"],
+      "forbidden_answerable_states": [
+        "answerable_from_registered_artifact",
+        "answerable_from_deterministic_tool_output"
+      ],
+      "tags": ["causal_lift", "governance", "blocked"]
+    },
+    {
+      "case_id": "tool_unavailable_fallback",
+      "description": "Deterministic advisory tool unavailable uses safe fallback.",
+      "case_file": "cases/tool_unavailable_fallback.json",
+      "requested_claim_type": "cold_start_advisory",
+      "expected_state": "needs_user_input_or_data",
+      "expected_evidence_level": "business_profile_only",
+      "expected_answer_mode": "tool_unavailable_fallback",
+      "requires_report": false,
+      "requires_tool": true,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": [],
+      "forbidden_answerable_states": [
+        "answerable_from_registered_artifact",
+        "answerable_from_deterministic_tool_output"
+      ],
+      "tags": ["cold_start_advisory", "tool_unavailable"]
+    },
+    {
+      "case_id": "report_forbids_downstream_use",
+      "description": "Calibration report forbids budget optimization downstream use.",
+      "case_file": "cases/report_forbids_downstream_use.json",
+      "requested_claim_type": "budget_optimization",
+      "expected_state": "blocked_by_claim_boundary",
+      "expected_evidence_level": "certified_decision_surface_required",
+      "expected_answer_mode": "blocked_unsupported_claim",
+      "requires_report": true,
+      "requires_tool": false,
+      "requires_missing_inputs": false,
+      "expected_blocked_claims": ["budget_optimization"],
+      "forbidden_answerable_states": [
+        "answerable_from_registered_artifact",
+        "answerable_from_deterministic_tool_output"
+      ],
+      "tags": ["budget_optimization", "governance", "forbidden_downstream"]
+    }
+  ]
+}

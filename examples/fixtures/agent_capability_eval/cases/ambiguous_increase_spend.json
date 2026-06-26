@@ -1,0 +1,31 @@
+{
+  "case_id": "ambiguous_increase_spend",
+  "description": "Ambiguous budget optimization without inputs is not directly answerable.",
+  "user_question": "Should I increase spend?",
+  "tags": ["budget_optimization", "ambiguous"],
+  "forbidden_answerable_states": [
+    "answerable_from_registered_artifact",
+    "answerable_from_deterministic_tool_output"
+  ],
+  "requires_fallback_message": true,
+  "requires_report": false,
+  "requires_tool": false,
+  "requires_missing_inputs": false,
+  "allowed_expected_states": [
+    "needs_user_input_or_data",
+    "needs_core_diagnostic_or_ml"
+  ],
+  "request": {
+    "requested_claim_type": "budget_optimization",
+    "user_intent": "documentation: ambiguous increase spend",
+    "available_reports": [],
+    "available_tools": [],
+    "missing_inputs": [],
+    "assert_claim_authorized_by_available_artifacts": false
+  },
+  "expected_state": "needs_core_diagnostic_or_ml",
+  "expected_answer_mode": "route_to_decision_surface",
+  "expected_evidence_level": "certified_decision_surface_required",
+  "expected_blocked_claims": [],
+  "forbidden_phrases": ["optimized_budget_allocation"]
+}

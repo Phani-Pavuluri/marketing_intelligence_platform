@@ -1,0 +1,35 @@
+{
+  "case_id": "explain_calibration_report",
+  "description": "Explain existing valid calibration mapping report.",
+  "user_question": "Explain the calibration mapping report.",
+  "tags": ["experiment_calibration", "registered_artifact"],
+  "forbidden_answerable_states": [],
+  "requires_fallback_message": false,
+  "requires_report": true,
+  "requires_tool": false,
+  "requires_missing_inputs": false,
+  "request": {
+    "requested_claim_type": "experiment_calibration",
+    "user_intent": "documentation: explain calibration report",
+    "available_reports": [
+      {
+        "report_id": "det-report-cal-valid",
+        "report_type": "calibration_mapping",
+        "governance_status": "candidate",
+        "evidence_mode": "diagnostic_candidate",
+        "source_artifact_id": "stage-a-fixture:experiment_readout_valid",
+        "blocked_claims": ["causal_lift", "roi_proof"],
+        "allowed_downstream_uses": ["diagnostic_review", "education"],
+        "forbidden_downstream_uses": ["decision_recommendation", "budget_optimization"]
+      }
+    ],
+    "available_tools": [],
+    "missing_inputs": [],
+    "assert_claim_authorized_by_available_artifacts": false
+  },
+  "expected_state": "answerable_from_registered_artifact",
+  "expected_answer_mode": "direct_report_explanation",
+  "expected_evidence_level": "deterministic_workflow_report",
+  "expected_blocked_claims": [],
+  "forbidden_phrases": []
+}

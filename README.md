@@ -298,7 +298,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Agent answerability and fallback contract plan (001):** [AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) — five-state answerability machine.
 
-**Agent answerability contracts + deterministic evaluator:** **merged** — `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability`. Five-state machine is executable; structured-input only.
+**Agent answerability contracts + deterministic evaluator:** **merged** — `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability`.
+
+**Agent capability eval fixtures (001):** **in progress** — `examples/fixtures/agent_capability_eval`, `mip.evaluation.agent_capability_fixtures`.
 
 **Next:** LLM explanation contracts over deterministic reports only; readiness adapter remains `needs_contract_update`.
 
