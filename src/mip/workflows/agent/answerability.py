@@ -249,6 +249,13 @@ def evaluate_agent_answerability(
         AnswerabilityEvidenceLevel.UNSUPPORTED,
     )
     report_ids = [report.report_id for report in request.available_reports]
+    source_artifact_ids = list(
+        dict.fromkeys(
+            artifact_id
+            for report in request.available_reports
+            if (artifact_id := report.source_artifact_id)
+        )
+    )
     blocked_claims: list[str] = []
     forbidden_scope: list[str] = []
     allowed_scope: list[str] = []
@@ -292,6 +299,13 @@ def evaluate_agent_answerability(
                     token
                     for report in explainable_reports
                     for token in report.blocked_claims
+                )
+            )
+            source_artifact_ids = list(
+                dict.fromkeys(
+                    artifact_id
+                    for report in explainable_reports
+                    if (artifact_id := report.source_artifact_id)
                 )
             )
         else:
@@ -342,6 +356,7 @@ def evaluate_agent_answerability(
         requested_claim_type=claim,
         answer_mode=answer_mode,
         evidence_level=evidence_level,
+        source_artifact_ids=source_artifact_ids,
         available_report_ids=report_ids,
         required_tool=required_tool,
         required_core_engine=required_core_engine,
