@@ -57,6 +57,9 @@ class AnswerabilityEvidenceLevel(StrEnum):
     UNSUPPORTED = "unsupported"
 
 
+AgentEvidenceLevel = AnswerabilityEvidenceLevel
+
+
 class RequestedClaimType(StrEnum):
     """Governed claim categories for answerability evaluation."""
 
@@ -74,6 +77,9 @@ class RequestedClaimType(StrEnum):
     POWER_MDE = "power_mde"
     TREATMENT_ASSIGNMENT = "treatment_assignment"
     PRODUCTION_RECOMMENDATION = "production_recommendation"
+
+
+AgentClaimType = RequestedClaimType
 
 
 class RoutingConfidence(StrEnum):
@@ -112,6 +118,7 @@ class AvailableReportSummary(ContractBaseModel):
     report_type: str
     governance_status: str
     evidence_mode: str
+    source_artifact_id: str | None = None
     blocked_claims: list[str] = Field(default_factory=list)
     allowed_downstream_uses: list[str] = Field(default_factory=list)
     forbidden_downstream_uses: list[str] = Field(default_factory=list)
@@ -214,6 +221,7 @@ def available_report_from_envelope(
         report_type=str(envelope.report_type),
         governance_status=str(envelope.governance_status),
         evidence_mode=str(envelope.evidence_mode),
+        source_artifact_id=envelope.source_input_ref.artifact_id,
         blocked_claims=list(envelope.blocked_claims),
         allowed_downstream_uses=list(envelope.allowed_downstream_uses),
         forbidden_downstream_uses=list(envelope.forbidden_downstream_uses),
@@ -227,6 +235,8 @@ __all__ = [
     "AgentAnswerabilityState",
     "AgentAnswerMode",
     "AgentCapabilityEvalCase",
+    "AgentClaimType",
+    "AgentEvidenceLevel",
     "AnswerabilityEvidenceLevel",
     "AvailableReportSummary",
     "RequestedClaimType",

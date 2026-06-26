@@ -45,7 +45,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | Stage A.3 advisory/readiness/intake adapter plan 001 | ✓ documented — [STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md](../architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) |
 | Stage A.3 cold-start advisory adapter | ✓ implemented — golden path #1 (`local_fitness_studio`) |
 | Agent answerability and fallback contract plan 001 | ✓ documented — [AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md](../architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) |
-| Agent answerability contracts + deterministic evaluator | ✓ implemented — `mip.contracts.agent_answerability`, `mip.workflows.agent.answerability` |
+| Agent answerability contracts + deterministic evaluator | ✓ implemented — `mip.contracts.agent_answerability`, `mip.agents.answerability`, `mip.workflows.agent.answerability` |
 
 ## Platform principles
 

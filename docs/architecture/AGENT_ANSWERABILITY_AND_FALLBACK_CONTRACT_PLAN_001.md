@@ -420,7 +420,7 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 
 ## 16. Deterministic evaluator implementation rules
 
-**Implemented:** `mip.contracts.agent_answerability`, `mip.workflows.agent.answerability.evaluate_agent_answerability`.
+**Implemented:** `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability` (flat kwargs), `mip.workflows.agent.answerability` (request object).
 
 ### Structured inputs only
 
