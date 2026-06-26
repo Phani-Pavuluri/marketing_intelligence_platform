@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Title** | MIP Report, Adapter, and Agent Contract Plan 001 |
-| **Status** | Accepted contract planning direction; **partial implementation** — `deterministic_report_v1` envelopes, Stage A.3 calibration adapter, and calibration report builder/export helpers |
+| **Status** | Accepted contract planning direction; **partial implementation** — `deterministic_report_v1` envelopes, Stage A.3 calibration adapter, calibration report builder/export helpers; advisory/readiness/intake mapping in [Stage A.3 Adapter Plan 001](STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) |
 | **Type** | Report contracts / fixture adapters / agent tooling / LLM boundary plan |
 | **Base commit** | `f094986` — Agent tooling audit merged (PR #35) |
 | **Date** | 2026-05-28 |
@@ -64,9 +64,11 @@ Without these contracts, Cursor agents, notebooks, and guided demos will **inven
 
 Map Stage A `fixture_id` values into **current deterministic workflow inputs** using Stage A.2 loaders (`mip.examples.stage_a_fixtures`). Adapters must not require docs, notebooks, UI, or agents to understand raw fixture JSON schemas.
 
-### Future module (not implemented in this plan)
+### Future module
 
-Recommended location: `src/mip/examples/stage_a_adapters.py` (or `src/mip/workflows/intake/stage_a_adapters.py` after review — **do not create until implementation phase**).
+**Calibration:** `src/mip/examples/stage_a_adapters.py` — **implemented**.
+
+**Advisory / readiness / intake:** Detailed mapping tables, golden paths #1–#2, and readiness verdicts are in [Stage A.3 Advisory Readiness Intake Adapter Plan 001](STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md). **Not implemented** — docs/planning only.
 
 ### Required adapter capabilities
 
