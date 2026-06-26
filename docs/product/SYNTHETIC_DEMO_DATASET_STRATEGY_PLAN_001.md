@@ -212,13 +212,13 @@ Recommended sequence (engineering and product):
 | 2 | **P11** — API hardening / service packaging plan |
 | 3 | **P12** — SDK / API / package usage examples |
 | 4 | **SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001** — this plan (docs ✓) |
-| 5 | **Stage A** — synthetic deterministic fixture files + loaders | ✓ fixtures implemented; loaders optional in Stage A.2 |
+| 5 | **Stage A** — synthetic deterministic fixture files + loaders | ✓ fixtures implemented; **Stage A.2 loaders** in `mip.examples.stage_a_fixtures` |
 | 6 | Deterministic notebook flows |
 | 7 | Landing-page guided demo integration using **implemented deterministic outputs** |
 | 8 | Later real MMM/GeoX engine-backed demo outputs (Stage B) |
 | 9 | Advanced dashboard visuals **after** certified outputs exist |
 
-Stage A fixture **implementation** is complete. Stage A.2 may add shared loader helpers; Stage B engine-backed visuals remain deferred.
+Stage A fixture files and **Stage A.2 loader helpers** (`mip.examples.stage_a_fixtures`) are implemented. Helpers are deterministic, local, and do not run MMM/GeoX engines. Stage B engine-backed visuals remain deferred.
 
 ## 11. Acceptance criteria
 
