@@ -228,7 +228,7 @@ P12 should **not** precede P11 contract/error/OpenAPI stability work—examples 
 |------|-----------|
 | ✓ | P10a–P10c — service shell, routes, boundary cleanup, Docker smoke |
 | ✓ | P11 plan — this document |
-| → | P11 implementation — contract tests, OpenAPI stability, error/docs polish |
+| ✓ | P11 implementation — contract/OpenAPI/error tests, route metadata (branch) |
 | → | P12 — SDK / API usage examples |
 | → | Stage A synthetic deterministic fixtures |
 | → | Landing-page guided demos (deterministic outputs only) |
@@ -247,6 +247,23 @@ This **planning** task is complete when:
 - [x] Relationship to P12 is documented
 - [x] Roadmap updated
 - [x] No runtime behavior changed
+
+## 11. Implementation status (P11 hardening)
+
+**Status:** ✓ implemented on branch `hardening/p11-api-contracts-openapi`
+
+| Deliverable | Status |
+|-------------|--------|
+| OpenAPI contract inspection tests (`tests/service/test_openapi_contract.py`) | ✓ |
+| Response contract tests (`tests/service/test_response_contracts.py`) | ✓ |
+| Error / validation behavior tests (`tests/service/test_error_behavior.py`) | ✓ |
+| Route summaries and descriptions on all six endpoints | ✓ |
+| Service boundary tests preserved/strengthened | ✓ |
+| Custom unified error envelope | Deferred — FastAPI 422/400 behavior documented |
+| New public routes or workflow capabilities | None |
+| Runtime `api_phase` | Remains `P10b.1` (hardening only) |
+
+**Unblocks:** P12 SDK/API usage examples after merge to `main`.
 
 ## Related documents
 

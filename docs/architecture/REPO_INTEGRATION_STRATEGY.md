@@ -73,7 +73,7 @@ Docker wraps UI/API/package for portable deployment.
 
 **Public demo deployment (P9b):** Deterministic public demo verified on Streamlit Community Cloud (commit `96cf98c`). **Hosted URL:** https://marketingintelligenceplatform.streamlit.app/ — record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). Non-production demo shell over synthetic fixtures—not a measurement engine or production service.
 
-**Service wrapper (P10–P11):** [P10_FASTAPI_DOCKER_WRAPPER_PLAN.md](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md) and [P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md](../service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md) define the FastAPI/Docker boundary and next API hardening direction. **P10a–P10c** implemented (`GET /health`, `GET /version`, workflow `POST` routes, service boundary cleanup, local Docker smoke). **P11** plan accepted—contract/OpenAPI/error stability before SDK examples. Hosted auth/rate limits remain deferred. Streamlit remains the canonical public demo.
+**Service wrapper (P10–P11):** [P10_FASTAPI_DOCKER_WRAPPER_PLAN.md](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md) and [P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md](../service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md) define the FastAPI/Docker boundary and API hardening direction. **P10a–P10c** implemented. **P11** adds OpenAPI/response/error contract tests and route metadata (implementation branch). Hosted auth/rate limits remain deferred. Streamlit remains the canonical public demo.
 
 FastAPI is not required for the first UI demo. Docker is not the app—it packages the app for consistent deployment. P10 must not duplicate MIP business logic.
 
