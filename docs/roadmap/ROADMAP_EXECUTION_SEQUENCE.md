@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `1082d08`  
-**Immediate next phase:** **Stage A.2** fixture loader helpers on branch; deterministic notebook planning optional next
+**Current main:** `1eef281`  
+**Immediate next phase:** Agent tooling audit complete; Stage A.3 adapter plan + deterministic report contract plan recommended next
 
 > **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) — accepted strategy for MIP-owned synthetic demo fixtures, industry reference schemas, deterministic demo datasets (Stage A), and later real MMM/GeoX-backed visuals (Stage B). Docs-only; does not change current Streamlit runtime.
 
@@ -38,6 +38,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | Synthetic demo dataset strategy plan 001 | ✓ documented; **Stage A fixtures + Stage A.2 loaders** (`mip.examples.stage_a_fixtures`) |
 | P11 API hardening / service packaging | ✓ implemented (PR #31) |
 | P12 SDK / API usage examples 001 | ✓ implemented (PR #32) |
+| Agent tooling / roadmap detail audit 001 | ✓ documented — [MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md) |
 
 ## Platform principles
 
@@ -718,9 +719,11 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 
 **P12 status:** ✓ merged — [P12_SDK_API_USAGE_EXAMPLES_001.md](../examples/P12_SDK_API_USAGE_EXAMPLES_001.md). Notebooks deferred.
 
-**Stage A status:** ✓ implemented — synthetic deterministic fixtures at `examples/fixtures/stage_a/` with manifest, README, and validation tests. **Stage A.2** adds `mip.examples.stage_a_fixtures` loader helpers. No MMM/GeoX execution outputs. Stage B engine-backed visuals remain deferred.
+**Stage A status:** ✓ implemented — synthetic deterministic fixtures at `examples/fixtures/stage_a/` with manifest, README, and validation tests. **Stage A.2** adds `mip.examples.stage_a_fixtures` loader helpers (PR #34). No MMM/GeoX execution outputs. Stage B engine-backed visuals remain deferred.
 
-**After Stage A.2:** deterministic notebooks; landing-page guided demo integration using implemented deterministic outputs.
+**Agent tooling audit (001):** ✓ documented — executability gaps, Cursor checklist, stop/go criteria. Verdict: mostly ready for deterministic Cursor work; needs detail before LLM/agent runtime. See [audit](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md).
+
+**After audit:** Stage A.3 fixture→workflow adapter plan; deterministic report output contract plan; deterministic notebook plan; landing-page guided demo binding spec.
 
 ### P11 — Hosted API hardening (later)
 
