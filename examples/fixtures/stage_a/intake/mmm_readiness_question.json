@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "fixture_id": "mmm_readiness_question",
+  "workflow_area": "intake_routing",
+  "demo_journey": "weekly_spend_sales_readiness",
+  "user_maturity": "intermediate",
+  "user_question": "I have weekly spend and sales by channel. Can I run national MMM?",
+  "objective": "measure_channel_effectiveness",
+  "available_data": ["weekly_channel_spend", "weekly_outcome_revenue"],
+  "expected_safe_route": "national_mmm_diagnostic_readiness",
+  "blocked_claims": ["fitted_mmm_outputs", "channel_roi_ranking", "response_curves"],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Readiness/routing only — does not execute MMM."
+}

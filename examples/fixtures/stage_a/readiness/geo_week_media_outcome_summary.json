@@ -1,0 +1,22 @@
+{
+  "synthetic": true,
+  "fixture_id": "geo_week_media_outcome_summary",
+  "workflow_area": "readiness_assessment",
+  "demo_journey": "dma_week_structural_readiness",
+  "evidence_level": "readiness_only",
+  "summary_type": "dma_week_media_outcome",
+  "time_grain": "week",
+  "geo_grain": "dma",
+  "dma_count": 50,
+  "history_weeks": 78,
+  "channels_present": ["search", "social", "display"],
+  "outcome_metrics": ["visits", "conversions"],
+  "structural_support": {
+    "geo_level_mmm_readiness": "structurally_plausible",
+    "geox_design_readiness": "structurally_plausible_pending_sparsity_review",
+    "national_only_mmm": "not_applicable"
+  },
+  "missing_for_calibration": ["experiment_readout_with_uncertainty"],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Summary for geo-week structural checks. No GeoX design/inference execution."
+}

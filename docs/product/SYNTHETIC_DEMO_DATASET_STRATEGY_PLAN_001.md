@@ -81,22 +81,28 @@ MIP may keep reference mappings to familiar industry patterns:
 
 ### Stage A — near-term deterministic demo datasets
 
-**When:** Safe to implement after P10c and SDK/API usage examples (see §10).
+**Status:** ✓ implemented — canonical fixtures under `examples/fixtures/stage_a/` with `manifest.json`, README, and validation tests (`tests/examples/test_stage_a_synthetic_fixtures.py`).
+
+**When:** Implemented after P12 SDK/API usage examples (see §10).
 
 **Purpose:** Exercise **implemented** MIP deterministic workflows without MMM/GeoX execution.
 
-**Candidate fixture files (future, not created in this plan):**
+**Implemented fixture files:**
 
 | Fixture | Role |
 |---------|------|
-| `local_service_business_profile.json` | Beginner / local business advisory |
-| `dtc_ecommerce_business_profile.json` | DTC cold-start journey |
-| `b2b_saas_business_profile.json` | B2B lead-gen advisory |
-| `weekly_channel_spend_outcome_summary.csv` | National weekly readiness (MMM path) |
-| `geo_week_media_outcome_summary.csv` | DMA-week geo readiness |
-| `experiment_readout_valid.json` | Successful calibration mapping |
-| `experiment_readout_missing_se.json` | Blocked — missing uncertainty |
-| `experiment_readout_metric_mismatch.json` | Blocked — incompatible metric |
+| `business_profiles/local_fitness_studio.json` | Beginner / local business advisory |
+| `business_profiles/dtc_skincare_brand.json` | DTC cold-start journey |
+| `business_profiles/b2b_saas_hr_platform.json` | B2B lead-gen advisory |
+| `readiness/national_weekly_channel_summary.json` | National weekly readiness (MMM path) |
+| `readiness/geo_week_media_outcome_summary.json` | DMA-week geo readiness |
+| `readiness/incomplete_missing_geo.json` | GeoX blocked — missing geo |
+| `readiness/incomplete_missing_outcome.json` | Measurement blocked — missing outcome |
+| `calibration/experiment_readout_valid.json` | Successful calibration mapping |
+| `calibration/experiment_readout_missing_se.json` | Blocked — missing uncertainty |
+| `calibration/experiment_readout_metric_mismatch.json` | Blocked — incompatible metric |
+| `intake/*.json` | Intake/routing request examples |
+| `governance/unsupported_claim_examples.json` | Educational blocked-claim examples |
 
 **Supported outputs (deterministic, no engine execution):**
 
@@ -206,13 +212,13 @@ Recommended sequence (engineering and product):
 | 2 | **P11** — API hardening / service packaging plan |
 | 3 | **P12** — SDK / API / package usage examples |
 | 4 | **SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001** — this plan (docs ✓) |
-| 5 | **Stage A** — synthetic deterministic fixture files + loaders |
+| 5 | **Stage A** — synthetic deterministic fixture files + loaders | ✓ fixtures implemented; loaders optional in Stage A.2 |
 | 6 | Deterministic notebook flows |
 | 7 | Landing-page guided demo integration using **implemented deterministic outputs** |
 | 8 | Later real MMM/GeoX engine-backed demo outputs (Stage B) |
 | 9 | Advanced dashboard visuals **after** certified outputs exist |
 
-Dataset **implementation** should wait until after P10c and SDK/API usage examples. This document establishes direction only.
+Stage A fixture **implementation** is complete. Stage A.2 may add shared loader helpers; Stage B engine-backed visuals remain deferred.
 
 ## 11. Acceptance criteria
 

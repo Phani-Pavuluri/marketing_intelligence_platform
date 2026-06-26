@@ -1,0 +1,20 @@
+{
+  "synthetic": true,
+  "fixture_id": "b2b_saas_hr_platform",
+  "workflow_area": "cold_start_advisory",
+  "demo_journey": "b2b_lead_gen_planning",
+  "evidence_mode": "business_profile_only",
+  "domain": "b2b_saas",
+  "business_model": "b2b_subscription",
+  "objective": "lead_generation",
+  "primary_conversion": "qualified_demo_request",
+  "geo_scope": "national",
+  "geography": "United States",
+  "budget_stage": "scale",
+  "monthly_budget_usd": 25000,
+  "tracking_state": "crm_and_utm_partial",
+  "current_channels": ["linkedin_organic", "content_marketing"],
+  "known_constraints": ["long_sales_cycle", "limited_geo_experiment_history"],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Artificial B2B SaaS profile for advisory-only planning examples."
+}

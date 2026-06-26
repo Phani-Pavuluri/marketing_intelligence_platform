@@ -110,6 +110,8 @@ for report in reports:
 
 Valid readiness `sample_key` values: `national_mmm_ready_geox_blocked`, `dma_week_structurally_ready`.
 
+**Stage A fixtures:** JSON summaries and calibration payloads live under `examples/fixtures/stage_a/`. See [Stage A fixture README](../../examples/fixtures/stage_a/README.md) and `manifest.json` for the canonical index.
+
 ### 4.3 Calibration mapping
 
 ```python
@@ -127,6 +129,8 @@ if signal is not None:
 ```
 
 Other calibration demo keys: `missing_uncertainty`, `metric_mismatch`.
+
+**Stage A fixtures:** Load `evidence` and `requirement` from `examples/fixtures/stage_a/calibration/*.json` into the same contracts (see [fixture README](../../examples/fixtures/stage_a/README.md)).
 
 ### 4.4 Intake path overview
 
@@ -303,7 +307,7 @@ API `governance` fields (`causal_decision_support`, `roi_claims_allowed`, `measu
 | Plan | How P12 connects |
 |------|------------------|
 | [Product entrypoint plan](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) | Guided demo journeys map to the same workflows shown here |
-| [Synthetic demo dataset strategy](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) | **Stage A** fixture files come **after** P12; they will reuse these patterns |
+| [Synthetic demo dataset strategy](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) | **Stage A** fixtures at `examples/fixtures/stage_a/` reuse these workflow patterns |
 
 P12 is the **developer-facing** usage path. Landing-page and notebook work build on these examples later.
 

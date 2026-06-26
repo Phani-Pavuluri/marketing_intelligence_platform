@@ -1,0 +1,20 @@
+{
+  "synthetic": true,
+  "fixture_id": "local_fitness_studio",
+  "workflow_area": "cold_start_advisory",
+  "demo_journey": "small_business_starting_from_zero",
+  "evidence_mode": "business_profile_only",
+  "domain": "local_service",
+  "business_model": "b2c_subscription",
+  "objective": "lead_generation",
+  "primary_conversion": "membership_inquiry",
+  "geo_scope": "single_city",
+  "geography": "Austin, TX",
+  "budget_stage": "starter",
+  "monthly_budget_usd": 1500,
+  "tracking_state": "website_only_partial_utm",
+  "current_channels": ["organic_social", "word_of_mouth"],
+  "known_constraints": ["limited_creative_assets", "no_paid_history"],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Artificial profile for cold-start advisory demos only. Not a real business."
+}

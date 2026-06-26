@@ -1,0 +1,22 @@
+{
+  "synthetic": true,
+  "fixture_id": "national_weekly_channel_summary",
+  "workflow_area": "readiness_assessment",
+  "demo_journey": "weekly_spend_sales_readiness",
+  "evidence_level": "readiness_only",
+  "summary_type": "national_weekly_media_outcome",
+  "time_grain": "week",
+  "geo_grain": "national",
+  "history_weeks": 104,
+  "channels_present": ["search", "social", "display", "video"],
+  "outcome_metrics": ["revenue", "orders"],
+  "controls_available": ["seasonality_index", "promo_flag"],
+  "structural_support": {
+    "national_mmm_readiness": "structurally_plausible",
+    "geo_level_mmm_readiness": "blocked_missing_dma_outcome",
+    "geox_design_readiness": "blocked_missing_geo_grain"
+  },
+  "missing_for_geox": ["dma_level_outcome", "dma_level_media", "geo_treatment_history"],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Governed summary only — not raw rows. Does not run MMM fitting."
+}

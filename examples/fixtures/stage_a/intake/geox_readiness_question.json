@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "fixture_id": "geox_readiness_question",
+  "workflow_area": "intake_routing",
+  "demo_journey": "dma_week_structural_readiness",
+  "user_maturity": "intermediate",
+  "user_question": "Can I run a geo experiment with my DMA-week media and outcome data?",
+  "objective": "geo_experiment_design",
+  "available_data": ["dma_week_media", "dma_week_outcome"],
+  "expected_safe_route": "geox_design_readiness_check",
+  "blocked_claims": ["matched_markets", "power_mde", "treatment_assignment", "design_validity_certification"],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Structural GeoX readiness only — no panel_exp execution."
+}
