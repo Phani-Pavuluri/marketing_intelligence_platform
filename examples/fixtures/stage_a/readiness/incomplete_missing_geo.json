@@ -1,0 +1,25 @@
+{
+  "synthetic": true,
+  "fixture_id": "incomplete_missing_geo",
+  "workflow_area": "readiness_assessment",
+  "demo_journey": "geox_blocked_missing_geo",
+  "evidence_level": "readiness_only",
+  "summary_type": "national_weekly_only",
+  "time_grain": "week",
+  "geo_grain": "national",
+  "history_weeks": 52,
+  "channels_present": ["search", "social"],
+  "outcome_metrics": ["revenue"],
+  "structural_support": {
+    "national_mmm_readiness": "structurally_plausible",
+    "geox_design_readiness": "blocked",
+    "geo_level_mmm_readiness": "blocked"
+  },
+  "blocking_reasons": [
+    "geo_grain_is_national_not_dma",
+    "missing_dma_level_outcome",
+    "missing_dma_level_media"
+  ],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Educational missing-geo example. GeoX path blocked at readiness layer."
+}

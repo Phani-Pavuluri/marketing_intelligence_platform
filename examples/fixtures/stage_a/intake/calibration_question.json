@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "fixture_id": "calibration_question",
+  "workflow_area": "intake_routing",
+  "demo_journey": "experiment_readout_review",
+  "user_maturity": "sophisticated",
+  "user_question": "Can this experiment readout calibrate our MMM?",
+  "objective": "calibration_signal_intake",
+  "available_data": ["experiment_readout_summary"],
+  "expected_safe_route": "calibration_mapping",
+  "blocked_claims": ["mmm_calibration_executed", "causal_certification", "decision_authorization"],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Routes to calibration mapping governance — not MMM fitting."
+}

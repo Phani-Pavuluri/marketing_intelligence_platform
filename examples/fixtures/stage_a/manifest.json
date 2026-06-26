@@ -1,0 +1,172 @@
+{
+  "schema_version": "stage_a_v1",
+  "synthetic": true,
+  "description": "Canonical MIP-owned Stage A synthetic deterministic fixtures for advisory, readiness, calibration, intake, and governance demos.",
+  "fixtures": [
+    {
+      "fixture_id": "local_fitness_studio",
+      "path": "examples/fixtures/stage_a/business_profiles/local_fitness_studio.json",
+      "domain": "local_service",
+      "workflow_area": "cold_start_advisory",
+      "demo_journey": "small_business_starting_from_zero",
+      "evidence_level": "business_profile_only",
+      "expected_status": "advisory_hypothesis",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Beginner cold-start advisory example."
+    },
+    {
+      "fixture_id": "dtc_skincare_brand",
+      "path": "examples/fixtures/stage_a/business_profiles/dtc_skincare_brand.json",
+      "domain": "dtc_ecommerce",
+      "workflow_area": "cold_start_advisory",
+      "demo_journey": "dtc_cold_start",
+      "evidence_level": "business_profile_only",
+      "expected_status": "advisory_hypothesis",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "DTC ecommerce cold-start advisory example."
+    },
+    {
+      "fixture_id": "b2b_saas_hr_platform",
+      "path": "examples/fixtures/stage_a/business_profiles/b2b_saas_hr_platform.json",
+      "domain": "b2b_saas",
+      "workflow_area": "cold_start_advisory",
+      "demo_journey": "b2b_lead_gen_advisory",
+      "evidence_level": "business_profile_only",
+      "expected_status": "advisory_hypothesis",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "B2B SaaS lead-gen advisory example."
+    },
+    {
+      "fixture_id": "national_weekly_channel_summary",
+      "path": "examples/fixtures/stage_a/readiness/national_weekly_channel_summary.json",
+      "domain": "national_mmm",
+      "workflow_area": "readiness_assessment",
+      "demo_journey": "weekly_spend_sales_readiness",
+      "evidence_level": "readiness_only",
+      "expected_status": "structurally_plausible_national_mmm",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "National weekly summary — does not run MMM fitting."
+    },
+    {
+      "fixture_id": "geo_week_media_outcome_summary",
+      "path": "examples/fixtures/stage_a/readiness/geo_week_media_outcome_summary.json",
+      "domain": "geo_experiment",
+      "workflow_area": "readiness_assessment",
+      "demo_journey": "dma_week_structural_readiness",
+      "evidence_level": "readiness_only",
+      "expected_status": "structurally_plausible_geox_design",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "DMA-week summary — structural GeoX readiness only."
+    },
+    {
+      "fixture_id": "incomplete_missing_geo",
+      "path": "examples/fixtures/stage_a/readiness/incomplete_missing_geo.json",
+      "domain": "geo_experiment",
+      "workflow_area": "readiness_assessment",
+      "demo_journey": "missing_data_education",
+      "evidence_level": "readiness_only",
+      "expected_status": "blocked_missing_geo",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Missing geo grain blocks GeoX design readiness."
+    },
+    {
+      "fixture_id": "incomplete_missing_outcome",
+      "path": "examples/fixtures/stage_a/readiness/incomplete_missing_outcome.json",
+      "domain": "measurement",
+      "workflow_area": "readiness_assessment",
+      "demo_journey": "missing_data_education",
+      "evidence_level": "readiness_only",
+      "expected_status": "blocked_missing_outcome",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Missing outcome blocks measurement workflows."
+    },
+    {
+      "fixture_id": "experiment_readout_valid",
+      "path": "examples/fixtures/stage_a/calibration/experiment_readout_valid.json",
+      "domain": "calibration",
+      "workflow_area": "calibration_mapping",
+      "demo_journey": "experiment_readout_review",
+      "evidence_level": "diagnostic_candidate",
+      "expected_status": "mapped",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Valid readout with effect estimate and standard error."
+    },
+    {
+      "fixture_id": "experiment_readout_missing_se",
+      "path": "examples/fixtures/stage_a/calibration/experiment_readout_missing_se.json",
+      "domain": "calibration",
+      "workflow_area": "calibration_mapping",
+      "demo_journey": "experiment_readout_review",
+      "evidence_level": "diagnostic_candidate",
+      "expected_status": "needs_more_data_missing_uncertainty",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Missing standard error blocks calibration mapping."
+    },
+    {
+      "fixture_id": "experiment_readout_metric_mismatch",
+      "path": "examples/fixtures/stage_a/calibration/experiment_readout_metric_mismatch.json",
+      "domain": "calibration",
+      "workflow_area": "calibration_mapping",
+      "demo_journey": "experiment_readout_review",
+      "evidence_level": "diagnostic_candidate",
+      "expected_status": "incompatible_metric",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Metric mismatch between evidence and requirement."
+    },
+    {
+      "fixture_id": "beginner_sales_growth_question",
+      "path": "examples/fixtures/stage_a/intake/beginner_sales_growth_question.json",
+      "domain": "intake",
+      "workflow_area": "intake_routing",
+      "demo_journey": "small_business_starting_from_zero",
+      "evidence_level": "routing_only",
+      "expected_status": "route_cold_start_advisory",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Beginner question routes to advisory-only planning."
+    },
+    {
+      "fixture_id": "mmm_readiness_question",
+      "path": "examples/fixtures/stage_a/intake/mmm_readiness_question.json",
+      "domain": "intake",
+      "workflow_area": "intake_routing",
+      "demo_journey": "weekly_spend_sales_readiness",
+      "evidence_level": "routing_only",
+      "expected_status": "route_national_mmm_readiness",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Weekly spend/sales question routes to MMM readiness check."
+    },
+    {
+      "fixture_id": "geox_readiness_question",
+      "path": "examples/fixtures/stage_a/intake/geox_readiness_question.json",
+      "domain": "intake",
+      "workflow_area": "intake_routing",
+      "demo_journey": "dma_week_structural_readiness",
+      "evidence_level": "routing_only",
+      "expected_status": "route_geox_design_readiness",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Geo experiment question routes to GeoX design readiness."
+    },
+    {
+      "fixture_id": "calibration_question",
+      "path": "examples/fixtures/stage_a/intake/calibration_question.json",
+      "domain": "intake",
+      "workflow_area": "intake_routing",
+      "demo_journey": "experiment_readout_review",
+      "evidence_level": "routing_only",
+      "expected_status": "route_calibration_mapping",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Calibration question routes to mapping governance."
+    },
+    {
+      "fixture_id": "unsupported_claim_examples",
+      "path": "examples/fixtures/stage_a/governance/unsupported_claim_examples.json",
+      "domain": "governance",
+      "workflow_area": "governance_education",
+      "demo_journey": "governance_boundaries",
+      "evidence_level": "educational_only",
+      "expected_status": "blocked_claims_reference",
+      "requires_mmm_or_geox_engine": false,
+      "notes": "Educational examples of claims MIP should block or caveat."
+    }
+  ]
+}

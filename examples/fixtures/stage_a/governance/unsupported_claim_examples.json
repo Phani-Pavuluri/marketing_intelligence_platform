@@ -1,0 +1,35 @@
+{
+  "synthetic": true,
+  "fixture_id": "unsupported_claim_examples",
+  "workflow_area": "governance_education",
+  "demo_journey": "governance_boundaries",
+  "requires_mmm_or_geox_engine": false,
+  "examples": [
+    {
+      "user_request": "Prove Meta ROI from my business description only",
+      "why_blocked": "Advisory and business-profile inputs cannot authorize ROI proof without certified model evidence.",
+      "safe_alternative": "cold_start_advisory_hypothesis"
+    },
+    {
+      "user_request": "Optimize my budget for next quarter",
+      "why_blocked": "Budget optimization requires a governed DecisionSurface and certified evidence — not available in Stage A.",
+      "safe_alternative": "readiness_and_missing_data_checklist"
+    },
+    {
+      "user_request": "Select matched markets for my geo test",
+      "why_blocked": "Matched-market selection is owned by GeoX/panel_exp engines, not MIP control-plane readiness.",
+      "safe_alternative": "geox_design_readiness_check"
+    },
+    {
+      "user_request": "Calculate lift from this advisory-only profile",
+      "why_blocked": "Cold-start advisory outputs are hypotheses to test, not causal lift estimates.",
+      "safe_alternative": "tracking_setup_and_learning_agenda"
+    },
+    {
+      "user_request": "Use this experiment readout without uncertainty as calibration evidence",
+      "why_blocked": "Calibration mapping requires governed uncertainty fields such as standard_error.",
+      "safe_alternative": "blocked_calibration_mapping_report"
+    }
+  ],
+  "notes": "Educational governance examples only. Does not change runtime behavior."
+}

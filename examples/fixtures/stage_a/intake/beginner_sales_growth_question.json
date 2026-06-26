@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "fixture_id": "beginner_sales_growth_question",
+  "workflow_area": "intake_routing",
+  "demo_journey": "small_business_starting_from_zero",
+  "user_maturity": "beginner",
+  "user_question": "I want to increase sales through marketing. Where should I start?",
+  "objective": "sales_growth",
+  "available_data": ["business_description_only"],
+  "expected_safe_route": "cold_start_advisory",
+  "blocked_claims": ["causal_lift", "roi_proof", "budget_optimization"],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Routes to advisory-only planning, not measurement."
+}

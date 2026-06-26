@@ -1,0 +1,24 @@
+{
+  "synthetic": true,
+  "fixture_id": "incomplete_missing_outcome",
+  "workflow_area": "readiness_assessment",
+  "demo_journey": "measurement_blocked_missing_outcome",
+  "evidence_level": "readiness_only",
+  "summary_type": "media_spend_only",
+  "time_grain": "week",
+  "geo_grain": "national",
+  "history_weeks": 40,
+  "channels_present": ["search", "display", "video"],
+  "outcome_metrics": [],
+  "structural_support": {
+    "national_mmm_readiness": "blocked",
+    "geox_design_readiness": "blocked",
+    "calibration_mapping": "not_applicable"
+  },
+  "blocking_reasons": [
+    "missing_outcome_metric_time_series",
+    "cannot_assess_media_effect_without_outcome"
+  ],
+  "requires_mmm_or_geox_engine": false,
+  "notes": "Spend-only summary cannot support measurement workflows."
+}

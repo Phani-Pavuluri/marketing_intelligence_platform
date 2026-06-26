@@ -217,7 +217,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. See [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) for the planned single-page, chat-first product direction. See [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) for canonical MIP-owned demo fixtures, industry reference schemas, and when to introduce engine-backed MMM/GeoX visuals.
 
-**Near-term focus:** **P11** API hardening merged; **P12** SDK/API examples on branch. Public demo: https://marketingintelligenceplatform.streamlit.app/
+**Near-term focus:** **P12** SDK/API examples merged; **Stage A** synthetic deterministic fixtures on branch. Public demo: https://marketingintelligenceplatform.streamlit.app/
 
 ## Roadmap
 
@@ -278,11 +278,13 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P11 implemented:** API hardening — OpenAPI inspection, response/error contract tests, route metadata. See [P11 API hardening plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md).
 
-**P12 (branch):** SDK/API usage examples. See [P12 SDK and API usage examples](docs/examples/P12_SDK_API_USAGE_EXAMPLES_001.md) for deterministic Python SDK, FastAPI, and Docker usage examples.
+**P12 implemented:** SDK/API usage examples. See [P12 SDK and API usage examples](docs/examples/P12_SDK_API_USAGE_EXAMPLES_001.md) for deterministic Python SDK, FastAPI, and Docker usage examples.
 
-**Next (implementation):** Merge P12, then **Stage A** synthetic deterministic fixture implementation.
+**Stage A (branch):** Synthetic deterministic fixtures at [examples/fixtures/stage_a/](examples/fixtures/stage_a/). Artificial, non-production inputs for advisory, readiness, calibration, intake, and governance demos — no MMM/GeoX execution outputs.
 
-1. **Stage A** — Synthetic deterministic fixture files (after P12 merge)
+**Next (implementation):** Review and merge **Stage A** synthetic deterministic fixtures; then optional Stage A.2 loader helpers or deterministic notebook planning.
+
+1. **Stage A** — Synthetic deterministic fixture files (`examples/fixtures/stage_a/`) — **implemented on branch**
 2. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
@@ -338,6 +340,7 @@ marketing_intelligence_platform/
 - [P10c Docker service smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md)
 - [P11 API hardening and service packaging plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md)
 - [P12 SDK and API usage examples](docs/examples/P12_SDK_API_USAGE_EXAMPLES_001.md)
+- [Stage A synthetic fixtures](examples/fixtures/stage_a/README.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
 - [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
 - [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)
