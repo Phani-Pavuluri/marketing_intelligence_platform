@@ -10,6 +10,7 @@ from mip.contracts.advisory import (
     AdvisoryClaimType,
     AdvisoryEvidenceMode,
     ColdStartAdvisoryPlan,
+    ColdStartBusinessProfile,
     ColdStartMediaObjective,
     WebsiteTrafficSourceProfile,
 )
@@ -22,6 +23,7 @@ from mip.contracts.calibration_intake import (
 )
 from mip.contracts.common_intake import (
     CommonDataProfileSummary,
+    CommonIntakeWorkbench,
     GeoCoverageSummary,
     MediaCoverageSummary,
     MetricAvailabilitySummary,
@@ -109,81 +111,221 @@ class IntakeOverviewExample:
     recommendation: IntakePathRecommendation
 
 
+@dataclass(frozen=True)
+class AdvisoryDemoInputs:
+    """Demo/sample inputs for cold-start advisory workflows (inputs only)."""
+
+    business_profile: ColdStartBusinessProfile
+    traffic_profile: WebsiteTrafficSourceProfile | None = None
+
+
+@dataclass(frozen=True)
+class ReadinessDemoContext:
+    """Demo/sample workbench context for readiness workflows (inputs only)."""
+
+    sample_key: str
+    primary_workbench: CommonIntakeWorkbench
+    geo_level_mmm_workbench: CommonIntakeWorkbench | None = None
+    geox_workbench: CommonIntakeWorkbench | None = None
+
+
+@dataclass(frozen=True)
+class CalibrationDemoInputs:
+    """Demo/sample inputs for calibration mapping workflows (inputs only)."""
+
+    evidence: CalibrationEvidenceInput
+    requirement: CalibrationMappingRequirement
+
+
+@dataclass(frozen=True)
+class IntakeDemoInputs:
+    """Demo/sample intake session for path recommendation (inputs only)."""
+
+    label: str
+    session: MeasurementIntakeSession
+
+
+def resolve_advisory_demo_inputs(sample_key: str) -> AdvisoryDemoInputs:
+    """Resolve deterministic advisory demo inputs by sample key."""
+    if sample_key == ADVISORY_SAMPLE_DTC_SKINCARE:
+        profile = build_cold_start_business_profile(
+            profile_id="fixture-dtc-skincare",
+            created_at=_NOW,
+            business_type="ecommerce retail",
+            product_or_service="DTC handmade skincare ecommerce",
+            b2b_or_b2c="b2c",
+            target_audience="Women 25-45 interested in clean beauty",
+            monthly_budget="$2000",
+            primary_objective=ColdStartMediaObjective.SALES,
+            existing_website=True,
+            existing_tracking=False,
+            creative_assets_available=True,
+            geography="United States",
+        )
+        return AdvisoryDemoInputs(business_profile=profile)
+    if sample_key == ADVISORY_SAMPLE_LOCAL_FITNESS:
+        profile = build_cold_start_business_profile(
+            profile_id="fixture-local-fitness",
+            created_at=_NOW,
+            business_type="local service",
+            product_or_service="local fitness studio memberships",
+            b2b_or_b2c="b2c",
+            target_audience="Adults within 10 miles of studio",
+            monthly_budget="$1500",
+            primary_objective=ColdStartMediaObjective.LEAD_GENERATION,
+            geography="Austin, TX",
+            existing_website=True,
+            existing_tracking=False,
+        )
+        return AdvisoryDemoInputs(business_profile=profile)
+    if sample_key == ADVISORY_SAMPLE_TRAFFIC_INFORMED:
+        profile = build_cold_start_business_profile(
+            profile_id="fixture-traffic-informed",
+            created_at=_NOW,
+            product_or_service="Handmade skincare ecommerce",
+            target_audience="Women 25-45",
+            monthly_budget="$2000",
+            primary_objective=ColdStartMediaObjective.SALES,
+            existing_website=True,
+            existing_tracking=False,
+        )
+        traffic = WebsiteTrafficSourceProfile(
+            traffic_profile_id="fixture-traffic-001",
+            source_summary=(
+                "organic search converts well; instagram referral has traffic but weak conversion; "
+                "direct traffic attribution unclear"
+            ),
+            channel_group_summary="email traffic converts well",
+            conversion_summary="organic search converts well on product pages",
+            utm_coverage_summary="partial UTM coverage on paid links",
+            created_at=_NOW,
+        )
+        return AdvisoryDemoInputs(business_profile=profile, traffic_profile=traffic)
+    msg = f"unknown advisory sample: {sample_key}"
+    raise ValueError(msg)
+
+
+def resolve_readiness_demo_context(sample_key: str) -> ReadinessDemoContext:
+    """Resolve deterministic readiness demo workbench context by sample key."""
+    if sample_key == READINESS_SAMPLE_NATIONAL_BLOCKED:
+        national = _national_profiles()
+        return ReadinessDemoContext(
+            sample_key=sample_key,
+            primary_workbench=_workbench(IntakeCandidatePath.NATIONAL_DIAGNOSTIC_MMM, national),
+            geo_level_mmm_workbench=_workbench(IntakeCandidatePath.GEO_LEVEL_MMM, national),
+            geox_workbench=_workbench(
+                IntakeCandidatePath.GEO_EXPERIMENT_DESIGN,
+                national,
+                workflow_kind=MeasurementWorkflowKind.GEOX,
+            ),
+        )
+    if sample_key == READINESS_SAMPLE_DMA_READY:
+        session = _session(geo_grain=GeoGrain.DMA)
+        rec = _recommendation(session, IntakeCandidatePath.GEO_LEVEL_MMM)
+        plan = _plan(session, rec)
+        manifest = MMMIntakeManifest(
+            manifest_id="man-dma-fixture-001",
+            session_id=session.session_id,
+            recommendation_id=rec.recommendation_id,
+            plan_id=plan.plan_id,
+            business_question=session.business_question,
+            intended_use=session.intended_use,
+            recommended_path=rec.recommended_path,
+            created_at=_NOW,
+        )
+        workbench = build_common_intake_workbench(
+            session, rec, plan, manifest, [], [], _dma_profiles()
+        )
+        return ReadinessDemoContext(sample_key=sample_key, primary_workbench=workbench)
+    msg = f"unknown readiness sample: {sample_key}"
+    raise ValueError(msg)
+
+
+def resolve_calibration_demo_inputs(sample_key: str) -> CalibrationDemoInputs:
+    """Resolve deterministic calibration demo inputs by sample key."""
+    if sample_key == CALIBRATION_SAMPLE_VALID:
+        return CalibrationDemoInputs(
+            evidence=_calibration_evidence(),
+            requirement=_calibration_requirement(),
+        )
+    if sample_key == CALIBRATION_SAMPLE_MISSING_UNCERTAINTY:
+        return CalibrationDemoInputs(
+            evidence=_calibration_evidence(
+                standard_error=None,
+                confidence_interval_low=None,
+                confidence_interval_high=None,
+            ),
+            requirement=_calibration_requirement(),
+        )
+    if sample_key == CALIBRATION_SAMPLE_METRIC_MISMATCH:
+        return CalibrationDemoInputs(
+            evidence=_calibration_evidence(metric_id="visits"),
+            requirement=_calibration_requirement(),
+        )
+    msg = f"unknown calibration sample: {sample_key}"
+    raise ValueError(msg)
+
+
+_INTAKE_DEMO_EXAMPLE_KEYS = {
+    "national_mmm_diagnostic": "National MMM diagnostic intake",
+    "geox_experiment_design": "GeoX experiment design intake",
+}
+
+
+def resolve_intake_demo_inputs(example_key: str) -> IntakeDemoInputs:
+    """Resolve deterministic intake demo session inputs by example key."""
+    label = _INTAKE_DEMO_EXAMPLE_KEYS.get(example_key)
+    if label is None:
+        msg = f"unknown intake example: {example_key}"
+        raise ValueError(msg)
+    if example_key == "national_mmm_diagnostic":
+        session = _session(
+            session_id="sess-overview-national",
+            business_question="Can we run national MMM on weekly channel spend?",
+            workflow_kind=MeasurementWorkflowKind.MMM,
+            geo_grain=GeoGrain.NATIONAL,
+        )
+        return IntakeDemoInputs(label=label, session=session)
+    session = _session(
+        session_id="sess-overview-geox",
+        business_question="We need DMA-level GeoX design diagnostics.",
+        workflow_kind=MeasurementWorkflowKind.GEOX,
+        geo_grain=GeoGrain.DMA,
+    )
+    return IntakeDemoInputs(label=label, session=session)
+
+
 def build_dtc_skincare_advisory_plan() -> ColdStartAdvisoryPlan:
     """DTC skincare ecommerce with partial tracking and no paid history."""
-    profile = build_cold_start_business_profile(
-        profile_id="fixture-dtc-skincare",
-        created_at=_NOW,
-        business_type="ecommerce retail",
-        product_or_service="DTC handmade skincare ecommerce",
-        b2b_or_b2c="b2c",
-        target_audience="Women 25-45 interested in clean beauty",
-        monthly_budget="$2000",
-        primary_objective=ColdStartMediaObjective.SALES,
-        existing_website=True,
-        existing_tracking=False,
-        creative_assets_available=True,
-        geography="United States",
+    inputs = resolve_advisory_demo_inputs(ADVISORY_SAMPLE_DTC_SKINCARE)
+    return build_cold_start_advisory_plan(
+        inputs.business_profile,
+        inputs.traffic_profile,
     )
-    return build_cold_start_advisory_plan(profile)
 
 
 def build_local_fitness_advisory_plan() -> ColdStartAdvisoryPlan:
     """Local fitness studio with lead-generation objective."""
-    profile = build_cold_start_business_profile(
-        profile_id="fixture-local-fitness",
-        created_at=_NOW,
-        business_type="local service",
-        product_or_service="local fitness studio memberships",
-        b2b_or_b2c="b2c",
-        target_audience="Adults within 10 miles of studio",
-        monthly_budget="$1500",
-        primary_objective=ColdStartMediaObjective.LEAD_GENERATION,
-        geography="Austin, TX",
-        existing_website=True,
-        existing_tracking=False,
+    inputs = resolve_advisory_demo_inputs(ADVISORY_SAMPLE_LOCAL_FITNESS)
+    return build_cold_start_advisory_plan(
+        inputs.business_profile,
+        inputs.traffic_profile,
     )
-    return build_cold_start_advisory_plan(profile)
 
 
 def build_traffic_informed_advisory_plan() -> ColdStartAdvisoryPlan:
     """Advisory plan informed by governed website traffic summaries."""
-    profile = build_cold_start_business_profile(
-        profile_id="fixture-traffic-informed",
-        created_at=_NOW,
-        product_or_service="Handmade skincare ecommerce",
-        target_audience="Women 25-45",
-        monthly_budget="$2000",
-        primary_objective=ColdStartMediaObjective.SALES,
-        existing_website=True,
-        existing_tracking=False,
+    inputs = resolve_advisory_demo_inputs(ADVISORY_SAMPLE_TRAFFIC_INFORMED)
+    return build_cold_start_advisory_plan(
+        inputs.business_profile,
+        inputs.traffic_profile,
     )
-    traffic = WebsiteTrafficSourceProfile(
-        traffic_profile_id="fixture-traffic-001",
-        source_summary=(
-            "organic search converts well; instagram referral has traffic but weak conversion; "
-            "direct traffic attribution unclear"
-        ),
-        channel_group_summary="email traffic converts well",
-        conversion_summary="organic search converts well on product pages",
-        utm_coverage_summary="partial UTM coverage on paid links",
-        created_at=_NOW,
-    )
-    return build_cold_start_advisory_plan(profile, traffic)
 
 
 def build_advisory_plan(sample_key: str) -> ColdStartAdvisoryPlan:
     """Resolve an advisory fixture by sample key."""
-    builders = {
-        ADVISORY_SAMPLE_DTC_SKINCARE: build_dtc_skincare_advisory_plan,
-        ADVISORY_SAMPLE_LOCAL_FITNESS: build_local_fitness_advisory_plan,
-        ADVISORY_SAMPLE_TRAFFIC_INFORMED: build_traffic_informed_advisory_plan,
-    }
-    builder = builders.get(sample_key)
-    if builder is None:
-        msg = f"unknown advisory sample: {sample_key}"
-        raise ValueError(msg)
-    return builder()
+    inputs = resolve_advisory_demo_inputs(sample_key)
+    return build_cold_start_advisory_plan(inputs.business_profile, inputs.traffic_profile)
 
 
 def _profile(
@@ -367,19 +509,12 @@ def _workbench(
 
 def build_national_blocked_readiness_reports() -> list[BaseWorkflowReadinessReport]:
     """National weekly data: MMM ready; GeoX and geo-level MMM blocked or need more data."""
-    national = _national_profiles()
-    mmm_workbench = _workbench(IntakeCandidatePath.NATIONAL_DIAGNOSTIC_MMM, national)
-    reports = list(build_workflow_readiness_reports(mmm_workbench))
-    geo_level_mmm = build_mmm_data_readiness_report(
-        _workbench(IntakeCandidatePath.GEO_LEVEL_MMM, national)
-    )
-    geox = build_geox_design_readiness_report(
-        _workbench(
-            IntakeCandidatePath.GEO_EXPERIMENT_DESIGN,
-            national,
-            workflow_kind=MeasurementWorkflowKind.GEOX,
-        )
-    )
+    context = resolve_readiness_demo_context(READINESS_SAMPLE_NATIONAL_BLOCKED)
+    reports = list(build_workflow_readiness_reports(context.primary_workbench))
+    assert context.geo_level_mmm_workbench is not None
+    assert context.geox_workbench is not None
+    geo_level_mmm = build_mmm_data_readiness_report(context.geo_level_mmm_workbench)
+    geox = build_geox_design_readiness_report(context.geox_workbench)
     existing_types = {report.report_type for report in reports}
     if geo_level_mmm.report_type not in existing_types:
         reports.append(geo_level_mmm)
@@ -390,23 +525,8 @@ def build_national_blocked_readiness_reports() -> list[BaseWorkflowReadinessRepo
 
 def build_dma_readiness_reports() -> list[BaseWorkflowReadinessReport]:
     """DMA-week profiles structurally ready for geo workflows."""
-    session = _session(geo_grain=GeoGrain.DMA)
-    rec = _recommendation(session, IntakeCandidatePath.GEO_LEVEL_MMM)
-    plan = _plan(session, rec)
-    manifest = MMMIntakeManifest(
-        manifest_id="man-dma-fixture-001",
-        session_id=session.session_id,
-        recommendation_id=rec.recommendation_id,
-        plan_id=plan.plan_id,
-        business_question=session.business_question,
-        intended_use=session.intended_use,
-        recommended_path=rec.recommended_path,
-        created_at=_NOW,
-    )
-    workbench = build_common_intake_workbench(
-        session, rec, plan, manifest, [], [], _dma_profiles()
-    )
-    return build_workflow_readiness_reports(workbench)
+    context = resolve_readiness_demo_context(READINESS_SAMPLE_DMA_READY)
+    return build_workflow_readiness_reports(context.primary_workbench)
 
 
 def build_readiness_reports(sample_key: str) -> list[BaseWorkflowReadinessReport]:
@@ -465,12 +585,14 @@ def _calibration_requirement(**overrides: Any) -> CalibrationMappingRequirement:
 
 def build_valid_calibration_fixture() -> CalibrationFixtureResult:
     """Valid governed evidence maps to CalibrationSignal."""
-    evidence = _calibration_evidence()
-    requirement = _calibration_requirement()
-    signal, report = map_evidence_to_calibration_signal(evidence, requirement)
+    inputs = resolve_calibration_demo_inputs(CALIBRATION_SAMPLE_VALID)
+    signal, report = map_evidence_to_calibration_signal(
+        inputs.evidence,
+        inputs.requirement,
+    )
     return CalibrationFixtureResult(
-        evidence=evidence,
-        requirement=requirement,
+        evidence=inputs.evidence,
+        requirement=inputs.requirement,
         signal=signal,
         report=report,
     )
@@ -478,16 +600,14 @@ def build_valid_calibration_fixture() -> CalibrationFixtureResult:
 
 def build_missing_uncertainty_calibration_fixture() -> CalibrationFixtureResult:
     """Evidence without uncertainty does not map to CalibrationSignal."""
-    evidence = _calibration_evidence(
-        standard_error=None,
-        confidence_interval_low=None,
-        confidence_interval_high=None,
+    inputs = resolve_calibration_demo_inputs(CALIBRATION_SAMPLE_MISSING_UNCERTAINTY)
+    signal, report = map_evidence_to_calibration_signal(
+        inputs.evidence,
+        inputs.requirement,
     )
-    requirement = _calibration_requirement()
-    signal, report = map_evidence_to_calibration_signal(evidence, requirement)
     return CalibrationFixtureResult(
-        evidence=evidence,
-        requirement=requirement,
+        evidence=inputs.evidence,
+        requirement=inputs.requirement,
         signal=signal,
         report=report,
     )
@@ -495,12 +615,14 @@ def build_missing_uncertainty_calibration_fixture() -> CalibrationFixtureResult:
 
 def build_metric_mismatch_calibration_fixture() -> CalibrationFixtureResult:
     """Metric mismatch yields incompatible mapping report."""
-    evidence = _calibration_evidence(metric_id="visits")
-    requirement = _calibration_requirement()
-    signal, report = map_evidence_to_calibration_signal(evidence, requirement)
+    inputs = resolve_calibration_demo_inputs(CALIBRATION_SAMPLE_METRIC_MISMATCH)
+    signal, report = map_evidence_to_calibration_signal(
+        inputs.evidence,
+        inputs.requirement,
+    )
     return CalibrationFixtureResult(
-        evidence=evidence,
-        requirement=requirement,
+        evidence=inputs.evidence,
+        requirement=inputs.requirement,
         signal=signal,
         report=report,
     )
@@ -522,30 +644,17 @@ def build_calibration_fixture(sample_key: str) -> CalibrationFixtureResult:
 
 def build_intake_overview_examples() -> list[IntakeOverviewExample]:
     """Simple intake path recommendation examples for optional overview tab."""
-    national_session = _session(
-        session_id="sess-overview-national",
-        business_question="Can we run national MMM on weekly channel spend?",
-        workflow_kind=MeasurementWorkflowKind.MMM,
-        geo_grain=GeoGrain.NATIONAL,
-    )
-    geox_session = _session(
-        session_id="sess-overview-geox",
-        business_question="We need DMA-level GeoX design diagnostics.",
-        workflow_kind=MeasurementWorkflowKind.GEOX,
-        geo_grain=GeoGrain.DMA,
-    )
-    return [
-        IntakeOverviewExample(
-            label="National MMM diagnostic intake",
-            session=national_session,
-            recommendation=recommend_intake_path(national_session),
-        ),
-        IntakeOverviewExample(
-            label="GeoX experiment design intake",
-            session=geox_session,
-            recommendation=recommend_intake_path(geox_session),
-        ),
-    ]
+    examples: list[IntakeOverviewExample] = []
+    for example_key in _INTAKE_DEMO_EXAMPLE_KEYS:
+        demo_inputs = resolve_intake_demo_inputs(example_key)
+        examples.append(
+            IntakeOverviewExample(
+                label=demo_inputs.label,
+                session=demo_inputs.session,
+                recommendation=recommend_intake_path(demo_inputs.session),
+            )
+        )
+    return examples
 
 
 @dataclass(frozen=True)
