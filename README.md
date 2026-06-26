@@ -217,7 +217,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos.
 
-**Near-term focus:** **P10** FastAPI/Docker wrapper after the deterministic public demo remains stable.
+**Near-term focus:** **P10** FastAPI/Docker service wrapper planning complete; **P10a** implementation next. Public demo: https://marketingintelligenceplatform.streamlit.app/
 
 ## Roadmap
 
@@ -268,11 +268,13 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P9b implemented:** Deterministic public demo deployed and smoke-tested on Streamlit Community Cloud. Deployment record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). This is a **non-production** deterministic demo using synthetic fixtures—not a production app or measurement service.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next step: **P10** FastAPI/Docker wrapper only after the public demo remains stable.
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P10 planning:** [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md) (design only; not implemented). Next implementation slice: **P10a** health/version API skeleton.
 
-1. **P10** — FastAPI/Docker service wrapper
-2. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
-3. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+1. **P10a** — FastAPI contract skeleton and health/version routes (after accepting P10 plan)
+2. **P10b** — Deterministic workflow API routes
+3. **P10c** — Dockerfile and local container smoke test
+4. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
+5. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -323,6 +325,7 @@ marketing_intelligence_platform/
 - [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
 - [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md)
 - [Public demo deployment record (P9b)](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
+- [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md)
 - [Agentic workflow governance roadmap](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
 - [Roadmap](docs/roadmap/ROADMAP.md)
 - [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md)

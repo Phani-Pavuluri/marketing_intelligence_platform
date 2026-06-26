@@ -73,6 +73,8 @@ Docker wraps UI/API/package for portable deployment.
 
 **Public demo deployment (P9b):** Deterministic public demo verified on Streamlit Community Cloud (commit `96cf98c`). **Hosted URL:** https://marketingintelligenceplatform.streamlit.app/ — record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). Non-production demo shell over synthetic fixtures—not a measurement engine or production service.
 
+**Service wrapper planning (P10):** [P10_FASTAPI_DOCKER_WRAPPER_PLAN.md](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md) defines a future thin FastAPI/Docker boundary over deterministic MIP helpers. Planning only—no FastAPI, Dockerfile, or API routes yet. Streamlit remains the canonical public demo; P10a–P10c split documented; P11 required before hosted production-like API.
+
 FastAPI is not required for the first UI demo. Docker is not the app—it packages the app for consistent deployment. P10 must not duplicate MIP business logic.
 
 **UI access:** Local (`localhost`) for dev/private demos; public URL (Streamlit Community Cloud, Hugging Face Spaces) for portfolio/stakeholder demos. Public demo must work without platform-paid LLM dependency.

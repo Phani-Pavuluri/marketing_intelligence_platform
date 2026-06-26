@@ -3,7 +3,7 @@
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
 **Current main:** `96cf98c`  
-**Immediate next phase:** **P10** FastAPI/Docker wrapper (after public demo stability)
+**Immediate next phase:** **P10a** — FastAPI contract skeleton (after accepting [P10 plan](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md))
 
 > **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, **agent role contracts**, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17** and must use P8b agent contracts.
 
@@ -120,7 +120,10 @@ P1 session/path
 | **P9** | Deterministic public demo preparation | Deployment metadata + safety copy; no secrets/LLM | ✓ implemented |
 | **P9 deploy** | Streamlit Community Cloud deterministic public demo | Smoke-tested; no secrets/LLM | ✓ verified |
 | **P9b** | Public demo deployment record | Docs-only verification record | ✓ implemented |
-| **P10** | FastAPI/Docker service wrapper | HTTP boundary; no duplicated MIP logic | Planned |
+| **P10** | FastAPI/Docker service wrapper plan | Design doc only; implementation split P10a–P10c | Planned |
+| **P10a** | FastAPI skeleton + health/version routes | No workflow routes yet | Planned |
+| **P10b** | Deterministic workflow API routes | Fixture-key inputs first | Planned |
+| **P10c** | Dockerfile + local container smoke test | No public API hosting | Planned |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
 | **P12** | I11 production table-ref design | Design only | Planned |
 | **P13** | I12 refresh governance | No model execution | Planned |
@@ -672,7 +675,19 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 
 **Purpose:** HTTP boundary for programmatic access; portable deployment.
 
-**Acceptance criteria (P10):**
+**P10 planning status:** ✓ documented — [P10_FASTAPI_DOCKER_WRAPPER_PLAN.md](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md). Design only; no FastAPI package, Dockerfile, or routes in repo yet.
+
+**P10 plan summary:** Thin wrapper over existing deterministic MIP helpers (advisory, readiness, calibration, intake). Streamlit public demo remains canonical. Docker deferred to P10c. Auth/secrets/rate limits deferred to P11.
+
+**Implementation split:**
+
+| Sub-phase | Scope |
+|-----------|-------|
+| **P10a** | FastAPI skeleton; `GET /health`, `GET /version`, `GET /demo/metadata` |
+| **P10b** | `POST` workflow routes (fixture-key inputs first) |
+| **P10c** | Dockerfile + local container smoke test |
+
+**Acceptance criteria (P10 implementation, future):**
 
 - Exposes core MIP workflows through API endpoints
 - Keeps MIP package as source of truth
