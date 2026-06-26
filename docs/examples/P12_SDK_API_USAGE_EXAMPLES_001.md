@@ -63,6 +63,21 @@ readout = load_stage_a_fixture("experiment_readout_valid")
 
 Helpers are deterministic and local — JSON read/validate only. They do not run MMM/GeoX engines or imply production data ingestion. See [Stage A fixture README](../../examples/fixtures/stage_a/README.md).
 
+### 4.0.1 Stage A.3 calibration adapter and report envelopes
+
+`deterministic_report_v1` envelopes wrap governed workflow outputs. The calibration-only Stage A.3 adapter loads fixtures, runs existing calibration mapping, and returns a report envelope:
+
+```python
+from mip.examples.stage_a_adapters import run_calibration_mapping_for_stage_a_fixture
+
+report = run_calibration_mapping_for_stage_a_fixture("experiment_readout_valid")
+print(report.report_type)
+print(report.governance_status)
+print(report.summary)
+```
+
+Advisory, readiness, and intake adapters remain future work. See [Report/adapter/agent contract plan](../architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md).
+
 ### 4.1 Cold-start advisory
 
 Uses demo fixture input resolution + workflow helper (same boundary as the FastAPI service):
