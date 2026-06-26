@@ -45,6 +45,24 @@ poetry install
 poetry run python
 ```
 
+### 4.0 Stage A fixture loaders
+
+Stage A synthetic fixtures live under `examples/fixtures/stage_a/`. Use `mip.examples.stage_a_fixtures` to discover and load them without hardcoding paths:
+
+```python
+from mip.examples.stage_a_fixtures import (
+    list_stage_a_fixtures,
+    load_stage_a_fixture,
+    load_stage_a_manifest,
+)
+
+manifest_entries = load_stage_a_manifest()
+calibration_entries = list_stage_a_fixtures(workflow_area="calibration_mapping")
+readout = load_stage_a_fixture("experiment_readout_valid")
+```
+
+Helpers are deterministic and local — JSON read/validate only. They do not run MMM/GeoX engines or imply production data ingestion. See [Stage A fixture README](../../examples/fixtures/stage_a/README.md).
+
 ### 4.1 Cold-start advisory
 
 Uses demo fixture input resolution + workflow helper (same boundary as the FastAPI service):

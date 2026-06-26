@@ -29,21 +29,33 @@ All fixtures set `"synthetic": true` and `"requires_mmm_or_geox_engine": false`.
 
 Fixtures are **schema-aligned examples** for deterministic MIP workflows. They align with patterns in `app/demo_fixtures.py` and [P12 SDK/API usage examples](../../../docs/examples/P12_SDK_API_USAGE_EXAMPLES_001.md).
 
+**Stage A.2 loader helpers** (`mip.examples.stage_a_fixtures`) discover and load fixtures without hardcoding paths:
+
+```python
+from mip.examples.stage_a_fixtures import (
+    list_stage_a_fixtures,
+    load_stage_a_fixture,
+    load_stage_a_manifest,
+)
+
+manifest_entries = load_stage_a_manifest()
+calibration_entries = list_stage_a_fixtures(workflow_area="calibration_mapping")
+readout = load_stage_a_fixture("experiment_readout_valid")
+```
+
+Helpers are deterministic and local — they read JSON only, validate `synthetic=true`, and do not run MMM/GeoX engines or imply production data ingestion.
+
 **Calibration fixtures** wrap `evidence` and `requirement` objects compatible with `CalibrationEvidenceInput` and `CalibrationMappingRequirement`:
 
 ```python
-import json
-from pathlib import Path
-
 from mip.contracts.calibration_intake import (
     CalibrationEvidenceInput,
     CalibrationMappingRequirement,
 )
+from mip.examples.stage_a_fixtures import load_stage_a_fixture
 from mip.workflows.intake.calibration_mapping import map_evidence_to_calibration_signal
 
-payload = json.loads(
-    Path("examples/fixtures/stage_a/calibration/experiment_readout_valid.json").read_text()
-)
+payload = load_stage_a_fixture("experiment_readout_valid")
 evidence = CalibrationEvidenceInput(**payload["evidence"])
 requirement = CalibrationMappingRequirement(**payload["requirement"])
 signal, report = map_evidence_to_calibration_signal(evidence, requirement)
@@ -53,7 +65,7 @@ signal, report = map_evidence_to_calibration_signal(evidence, requirement)
 
 **Business profile fixtures** supply structured fields for cold-start advisory demos (`domain`, `objective`, `tracking_state`, `evidence_mode`, etc.).
 
-Stage A.2 may add shared loader helpers after review; this directory is fixture infrastructure, not product visuals.
+Stage A.2 loader helpers are implemented in `mip.examples.stage_a_fixtures`. This directory remains fixture infrastructure, not product visuals.
 
 ## Related docs
 
