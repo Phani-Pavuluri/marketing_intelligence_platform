@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Title** | MIP Report, Adapter, and Agent Contract Plan 001 |
-| **Status** | Accepted contract planning direction; **partial implementation** — `deterministic_report_v1` envelopes, Stage A.3 calibration adapter, calibration report builder/export helpers; advisory/readiness/intake mapping in [Stage A.3 Adapter Plan 001](STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) |
+| **Status** | Accepted contract planning direction; **partial implementation** — `deterministic_report_v1` envelopes, Stage A.3 calibration adapter, calibration report builder/export helpers, **cold-start advisory adapter**; readiness/intake mapping in [Stage A.3 Adapter Plan 001](STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) |
 | **Type** | Report contracts / fixture adapters / agent tooling / LLM boundary plan |
 | **Base commit** | `f094986` — Agent tooling audit merged (PR #35) |
 | **Date** | 2026-05-28 |
@@ -68,7 +68,9 @@ Map Stage A `fixture_id` values into **current deterministic workflow inputs** u
 
 **Calibration:** `src/mip/examples/stage_a_adapters.py` — **implemented**.
 
-**Advisory / readiness / intake:** Detailed mapping tables, golden paths #1–#2, and readiness verdicts are in [Stage A.3 Advisory Readiness Intake Adapter Plan 001](STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md). **Not implemented** — docs/planning only.
+**Cold-start advisory:** `src/mip/examples/stage_a_adapters.py` + `src/mip/reports/advisory_reports.py` — **implemented** (golden path #1).
+
+**Readiness / intake:** Detailed mapping tables in [Stage A.3 Advisory Readiness Intake Adapter Plan 001](STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md). **Not implemented**.
 
 ### Required adapter capabilities
 

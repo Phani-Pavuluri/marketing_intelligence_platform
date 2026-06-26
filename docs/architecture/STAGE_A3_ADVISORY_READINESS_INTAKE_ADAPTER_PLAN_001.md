@@ -5,11 +5,11 @@
 | Field | Value |
 |-------|-------|
 | **Title** | Stage A.3 Advisory Readiness Intake Adapter Plan 001 |
-| **Status** | Accepted adapter planning direction |
+| **Status** | Accepted adapter planning direction; **partial implementation** — cold-start advisory adapter and golden path #1 |
 | **Type** | Fixture adapter / deterministic workflow mapping plan |
 | **Base commit** | `4cf58c2` — calibration report builder/export helpers merged (PR #38) |
 | **Date** | 2026-05-28 |
-| **Scope** | Docs/planning only — **no advisory, readiness, intake, or governance adapter implementation in this phase** |
+| **Scope** | Planning doc + **cold-start advisory adapter implemented**; readiness/intake/governance adapters remain future |
 
 **Hard boundaries (unchanged):** No MMM/GeoX execution, no LLM providers, no production ingestion, no new FastAPI routes, no Streamlit behavior changes, no unsupported causal/ROI/power/MDE/matched-market claims. MIP remains the **control plane**, not the statistical engine.
 
@@ -63,6 +63,15 @@ Without explicit input/output rules, Cursor agents and future implementers will 
 - **Helpers:** `build_calibration_input_from_stage_a_fixture`, `run_calibration_mapping_for_stage_a_fixture`
 - **Golden paths #3–#5:** valid → `candidate`; missing SE → `needs_more_data`; metric mismatch → `incompatible`
 
+### Stage A.3 cold-start advisory adapter (implemented)
+
+- **Module:** `mip.examples.stage_a_adapters`
+- **Report helpers:** `mip.reports.advisory_reports`
+- **Supported fixture IDs:** `local_fitness_studio`, `dtc_skincare_brand`, `b2b_saas_hr_platform`
+- **Workflow:** `build_cold_start_advisory_plan`
+- **Helpers:** `build_cold_start_input_from_stage_a_fixture`, `run_cold_start_advisory_for_stage_a_fixture`, `build_cold_start_advisory_report_from_stage_a_fixture`, `export_cold_start_advisory_report_from_stage_a_fixture`
+- **Golden path #1:** `local_fitness_studio` → `cold_start_advisory` / `advisory_only`
+
 ### Calibration report builder/export helpers (implemented)
 
 - **Modules:** `mip.reports.calibration_reports`, `mip.reports.deterministic_reports`
@@ -77,9 +86,9 @@ Without explicit input/output rules, Cursor agents and future implementers will 
 
 | fixture_id | Path | Intended workflow | Loader | Adapter | Missing mapping details |
 |------------|------|-------------------|--------|---------|-------------------------|
-| `local_fitness_studio` | `business_profiles/local_fitness_studio.json` | `build_cold_start_advisory_plan` | ✓ | ✗ | `domain` → `business_type`; `objective` → `ColdStartMediaObjective`; `monthly_budget_usd` → `monthly_budget` string; `tracking_state` → `existing_tracking` bool |
-| `dtc_skincare_brand` | `business_profiles/dtc_skincare_brand.json` | same | ✓ | ✗ | `business_model` → `b2b_or_b2c`; `current_channels` → `organic_channels_available`; no traffic profile in fixture |
-| `b2b_saas_hr_platform` | `business_profiles/b2b_saas_hr_platform.json` | same | ✓ | ✗ | B2B `objective` → enum; `sales_cycle_length` not in fixture (optional field) |
+| `local_fitness_studio` | `business_profiles/local_fitness_studio.json` | `build_cold_start_advisory_plan` | ✓ | ✓ | — |
+| `dtc_skincare_brand` | `business_profiles/dtc_skincare_brand.json` | same | ✓ | ✓ | — |
+| `b2b_saas_hr_platform` | `business_profiles/b2b_saas_hr_platform.json` | same | ✓ | ✓ | — |
 
 **Reference implementation pattern:** `app/demo_fixtures.resolve_advisory_demo_inputs` manually maps `ADVISORY_SAMPLE_LOCAL_FITNESS` and `ADVISORY_SAMPLE_DTC_SKINCARE` to `build_cold_start_business_profile` — adapters should follow the same field semantics, keyed by `fixture_id` not `sample_key`.
 
@@ -485,7 +494,7 @@ Align with `_DEFAULT_FORBIDDEN_DOWNSTREAM` and `_DEFAULT_BLOCKED_CLAIMS` in `sta
 | Adapter | Verdict | Rationale |
 |---------|---------|-----------|
 | **Calibration** | `ready_to_implement` (done) | Fixture embeds workflow inputs; adapter merged |
-| **Cold-start advisory** | `ready_to_implement` | Field mapping table defined; `app/demo_fixtures` proves pattern; enum mapping needs minor source inspection |
+| **Cold-start advisory** | `ready_to_implement` (done) | Adapter merged; golden path #1 implemented |
 | **Readiness** | `needs_contract_update` | Fixture summaries ≠ workbench; interim `demo_profiling` bridge documented but provenance dual-source must be specified in code |
 | **Intake/routing** | `needs_source_inspection` | Session enum mapping from narrative fixtures requires inspection of `IntakeIntendedUse`, `MeasurementWorkflowKind`, `recommend_intake_path` branches |
 | **Governance unsupported-claim** | `blocked` (for adapter) | No deterministic workflow; keep test/guidance only |
@@ -524,10 +533,10 @@ Recommended sequence after this plan merges:
 | Order | Item | Type |
 |-------|------|------|
 | 1 | **This adapter plan** (Stage A.3 advisory/readiness/intake) | Docs ✓ |
-| 2 | Cold-start advisory adapter implementation | Code (if mapping confirmed) |
+| 2 | Cold-start advisory adapter implementation | Code ✓ |
 | 3 | Readiness adapter implementation | Code (after workbench bridge decision) |
 | 4 | Intake adapter implementation | Code (routing-first acceptable) |
-| 5 | Golden paths #1–#2 acceptance tests | Tests |
+| 5 | Golden paths #1–#2 acceptance tests | Tests (path #1 ✓; path #2 future) |
 | 6 | Deterministic notebook plan | Docs |
 | 7 | Notebook implementation | Code |
 | 8 | Landing-page guided demo binding plan | Docs |
