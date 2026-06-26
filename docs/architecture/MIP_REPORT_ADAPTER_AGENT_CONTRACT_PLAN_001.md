@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Title** | MIP Report, Adapter, and Agent Contract Plan 001 |
-| **Status** | Accepted contract planning direction |
+| **Status** | Accepted contract planning direction; **partial implementation** — `deterministic_report_v1` envelopes + Stage A.3 calibration adapter (PR pending) |
 | **Type** | Report contracts / fixture adapters / agent tooling / LLM boundary plan |
 | **Base commit** | `f094986` — Agent tooling audit merged (PR #35) |
 | **Date** | 2026-05-28 |

@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `f094986`  
-**Immediate next phase:** Report/adapter/agent contract plan merged; Stage A.3 calibration adapter + report envelope contracts recommended next
+**Current main:** `dfd2de5`  
+**Immediate next phase:** Deterministic report contracts + Stage A.3 calibration adapter on branch; golden paths #1–#2 remain future
 
 > **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) — accepted strategy for MIP-owned synthetic demo fixtures, industry reference schemas, deterministic demo datasets (Stage A), and later real MMM/GeoX-backed visuals (Stage B). Docs-only; does not change current Streamlit runtime.
 
@@ -39,7 +39,8 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P11 API hardening / service packaging | ✓ implemented (PR #31) |
 | P12 SDK / API usage examples 001 | ✓ implemented (PR #32) |
 | Agent tooling / roadmap detail audit 001 | ✓ documented — [MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md) |
-| Report / adapter / agent contract plan 001 | On branch — [MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md](../architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md) |
+| Report / adapter / agent contract plan 001 | ✓ documented — [MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md](../architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md) |
+| Deterministic report contracts + Stage A.3 calibration adapter | On branch — `deterministic_report_v1`, golden paths #3–#5 |
 
 ## Platform principles
 
@@ -724,9 +725,11 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 
 **Agent tooling audit (001):** ✓ documented — executability gaps, Cursor checklist, stop/go criteria. Verdict: mostly ready for deterministic Cursor work; needs detail before LLM/agent runtime. See [audit](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md).
 
-**Report / adapter / agent contract plan (001):** Defines Stage A.3 adapters, deterministic report envelopes, artifact provenance, agent/LLM boundaries, and golden-path tests **before** notebooks, guided demos, or LLM runtime. See [contract plan](../architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md).
+**Report / adapter / agent contract plan (001):** ✓ merged — defines adapters, report envelopes, provenance, agent/LLM boundaries, golden paths. See [contract plan](../architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md).
 
-**After contract plan:** Report envelope Pydantic models; Stage A.3 calibration adapter; golden-path tests #3–#5.
+**Deterministic report contracts + Stage A.3 calibration adapter:** `mip.contracts.deterministic_report` (`deterministic_report_v1`) and `mip.examples.stage_a_adapters` for calibration fixtures only. Golden paths #3–#5 implemented. Advisory/readiness/intake adapters, broader report generators, notebooks, and LLM runtime remain future.
+
+**After merge:** Golden paths #1–#2 when advisory/readiness adapters are specified; deterministic notebook plan.
 
 ### P11 — Hosted API hardening (later)
 

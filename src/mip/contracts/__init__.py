@@ -90,6 +90,17 @@ from mip.contracts.demo_profile import (
     DemoProfileStatus,
     DemoProfileToWorkflowSummary,
 )
+from mip.contracts.deterministic_report import (
+    DETERMINISTIC_REPORT_SCHEMA_VERSION,
+    ArtifactReference,
+    DeterministicReportEnvelope,
+    EvidenceMode,
+    FindingSeverity,
+    GovernanceStatus,
+    ReportFinding,
+    ReportType,
+    default_package_version_label,
+)
 from mip.contracts.enums import (
     ArtifactStatus,
     CausalQuantity,
@@ -197,6 +208,7 @@ from mip.contracts.workflow_readiness import (
 )
 
 __all__ = [
+    "ArtifactReference",
     "ArtifactStatus",
     "AdvisoryClaimType",
     "AdvisoryEvidenceMode",
@@ -259,9 +271,11 @@ __all__ = [
     "DemoProfileToWorkflowSummary",
     "Estimand",
     "EvidenceLevel",
+    "FindingSeverity",
     "FORBIDDEN_ADVISORY_RESULT_FIELD_NAMES",
     "FORBIDDEN_CALIBRATION_INTAKE_RESULT_FIELD_NAMES",
     "EvidenceRole",
+    "EvidenceMode",
     "ExperimentDesignDataRequirement",
     "ExperimentDesignEntryPath",
     "ExperimentDesignIntake",
@@ -274,6 +288,7 @@ __all__ = [
     "ExperimentKpiFamily",
     "ExperimentObjectiveCategory",
     "ExperimentType",
+    "DETERMINISTIC_REPORT_SCHEMA_VERSION",
     "DataAssetPurpose",
     "DataAssetRequirementLevel",
     "DataAssetType",
@@ -284,6 +299,7 @@ __all__ = [
     "DataSourceRef",
     "DataSourceStatus",
     "DataSourceType",
+    "DeterministicReportEnvelope",
     "DropzoneSourceRef",
     "FileSourceRef",
     "GeoXDesignReadinessReport",
@@ -307,6 +323,7 @@ __all__ = [
     "SemanticMappingDimension",
     "SemanticMappingReport",
     "GeoGrain",
+    "GovernanceStatus",
     "GeoCoverageSummary",
     "GeoXIntakeSession",
     "IngestionMode",
@@ -332,6 +349,7 @@ __all__ = [
     "BLOCKED_LLM_OUTPUT_CLAIM_TYPES",
     "EXCLUDED_PROVIDER_MODE_NAMES",
     "FORBIDDEN_LLM_PROVIDER_RESULT_FIELD_NAMES",
+    "default_package_version_label",
     "default_forbidden_claim_topics",
     "MediaCoverageSummary",
     "MetricAvailabilitySummary",
@@ -339,6 +357,8 @@ __all__ = [
     "MeasurementIntakeSession",
     "MeasurementWorkflowKind",
     "ProfileFindingSeverity",
+    "ReportFinding",
+    "ReportType",
     "RequiredDataAsset",
     "SourceIngestionRecord",
     "SampleColumnRole",
