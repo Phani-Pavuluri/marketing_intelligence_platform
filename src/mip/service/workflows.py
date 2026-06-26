@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from mip.contracts.advisory import ColdStartAdvisoryPlan
-from mip.contracts.calibration_intake import CalibrationMappingReport
+from mip.contracts.calibration_intake import CalibrationEvidenceInput, CalibrationMappingReport
 from mip.contracts.workflow_readiness import BaseWorkflowReadinessReport
 from mip.service.contracts import (
     ADVISORY_GOVERNANCE,
@@ -21,11 +21,14 @@ from mip.service.contracts import (
     ReadinessReportSummary,
     TrackingChecklistSummary,
 )
-
-_INTAKE_EXAMPLE_KEYS = {
-    "national_mmm_diagnostic": "National MMM diagnostic intake",
-    "geox_experiment_design": "GeoX experiment design intake",
-}
+from mip.workflows.intake.advisory import build_cold_start_advisory_plan
+from mip.workflows.intake.calibration_mapping import map_evidence_to_calibration_signal
+from mip.workflows.intake.readiness import (
+    build_geox_design_readiness_report,
+    build_mmm_data_readiness_report,
+    build_workflow_readiness_reports,
+)
+from mip.workflows.intake.recommendation import recommend_intake_path
 
 
 def _enum_value(value: object) -> str:
@@ -51,10 +54,11 @@ def _intake_governance() -> Any:
 
 
 def run_cold_start_advisory(sample_key: str) -> ColdStartAdvisoryResponse:
-    """Build advisory API response from demo fixture helper."""
-    from app.demo_fixtures import build_advisory_plan
+    """Build advisory API response from demo inputs and workflow helper."""
+    from app.demo_fixtures import resolve_advisory_demo_inputs
 
-    plan = build_advisory_plan(sample_key)
+    inputs = resolve_advisory_demo_inputs(sample_key)
+    plan = build_cold_start_advisory_plan(inputs.business_profile, inputs.traffic_profile)
     return _advisory_response_from_plan(plan)
 
 
@@ -99,10 +103,11 @@ def _advisory_response_from_plan(plan: ColdStartAdvisoryPlan) -> ColdStartAdviso
 
 
 def run_readiness_assess(sample_key: str) -> ReadinessAssessResponse:
-    """Build readiness API response from demo fixture helper."""
-    from app.demo_fixtures import build_readiness_reports
+    """Build readiness API response from demo context and workflow helpers."""
+    from app.demo_fixtures import resolve_readiness_demo_context
 
-    reports = build_readiness_reports(sample_key)
+    context = resolve_readiness_demo_context(sample_key)
+    reports = _build_readiness_reports_from_context(context)
     summaries = [_readiness_summary(report) for report in reports]
     warnings: list[str] = []
     blocking: list[str] = []
@@ -116,6 +121,20 @@ def run_readiness_assess(sample_key: str) -> ReadinessAssessResponse:
         blocking_reasons=blocking,
         governance=_readiness_governance(),
     )
+
+
+def _build_readiness_reports_from_context(context: Any) -> list[BaseWorkflowReadinessReport]:
+    reports = list(build_workflow_readiness_reports(context.primary_workbench))
+    if context.geo_level_mmm_workbench is None or context.geox_workbench is None:
+        return reports
+    geo_level_mmm = build_mmm_data_readiness_report(context.geo_level_mmm_workbench)
+    geox = build_geox_design_readiness_report(context.geox_workbench)
+    existing_types = {report.report_type for report in reports}
+    if geo_level_mmm.report_type not in existing_types:
+        reports.append(geo_level_mmm)
+    if geox.report_type not in existing_types:
+        reports.append(geox)
+    return reports
 
 
 def _readiness_summary(report: BaseWorkflowReadinessReport) -> ReadinessReportSummary:
@@ -133,19 +152,20 @@ def _readiness_summary(report: BaseWorkflowReadinessReport) -> ReadinessReportSu
 
 
 def run_calibration_map(sample_key: str) -> CalibrationMapResponse:
-    """Build calibration mapping API response from demo fixture helper."""
-    from app.demo_fixtures import build_calibration_fixture
+    """Build calibration mapping API response from demo inputs and workflow helper."""
+    from app.demo_fixtures import resolve_calibration_demo_inputs
 
-    fixture = build_calibration_fixture(sample_key)
-    return _calibration_response_from_fixture(fixture)
+    inputs = resolve_calibration_demo_inputs(sample_key)
+    signal, report = map_evidence_to_calibration_signal(inputs.evidence, inputs.requirement)
+    return _calibration_response(inputs.evidence, report, signal)
 
 
-def _calibration_response_from_fixture(fixture: Any) -> CalibrationMapResponse:
-    report: CalibrationMappingReport = fixture.report
-    evidence = fixture.evidence
-    mapped_signal_id = (
-        fixture.signal.calibration_id if fixture.signal is not None else report.mapped_signal_id
-    )
+def _calibration_response(
+    evidence: CalibrationEvidenceInput,
+    report: CalibrationMappingReport,
+    signal: Any,
+) -> CalibrationMapResponse:
+    mapped_signal_id = signal.calibration_id if signal is not None else report.mapped_signal_id
     lineage = {
         "input_id": report.input_id,
         "requirement_id": report.requirement_id or "",
@@ -168,22 +188,16 @@ def _calibration_response_from_fixture(fixture: Any) -> CalibrationMapResponse:
 
 
 def run_intake_overview(example_key: str) -> IntakeOverviewResponse:
-    """Build intake overview API response from demo fixture helper."""
-    from app.demo_fixtures import build_intake_overview_examples
+    """Build intake overview API response from demo session and workflow helper."""
+    from app.demo_fixtures import resolve_intake_demo_inputs
 
-    label = _INTAKE_EXAMPLE_KEYS.get(example_key)
-    if label is None:
-        msg = f"unknown intake example: {example_key}"
-        raise ValueError(msg)
-    for example in build_intake_overview_examples():
-        if example.label == label:
-            return _intake_response_from_example(
-                example.label,
-                example.recommendation,
-                example.session,
-            )
-    msg = f"intake example not found: {example_key}"
-    raise ValueError(msg)
+    demo_inputs = resolve_intake_demo_inputs(example_key)
+    recommendation = recommend_intake_path(demo_inputs.session)
+    return _intake_response_from_example(
+        demo_inputs.label,
+        recommendation,
+        demo_inputs.session,
+    )
 
 
 def _intake_response_from_example(

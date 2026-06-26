@@ -42,7 +42,7 @@ def test_health_and_version_remain_deterministic() -> None:
     assert health["llm_enabled"] is False
     assert health["external_services_enabled"] is False
     assert health["persistence_enabled"] is False
-    assert version["api_phase"] == "P10b"
+    assert version["api_phase"] == "P10b.1"
     assert version["llm_enabled"] is False
 
 
