@@ -268,13 +268,14 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P9b implemented:** Deterministic public demo deployed and smoke-tested on Streamlit Community Cloud. Deployment record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). This is a **non-production** deterministic demo using synthetic fixtures—not a production app or measurement service.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P10 planning:** [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md) (design only; not implemented). Next implementation slice: **P10a** health/version API skeleton.
+**P10a implemented (feature branch):** FastAPI service shell at `mip.service` with `GET /health` and `GET /version` only. Workflow routes deferred to P10b; Docker deferred to P10c. Streamlit remains the canonical public demo.
 
-1. **P10a** — FastAPI contract skeleton and health/version routes (after accepting P10 plan)
-2. **P10b** — Deterministic workflow API routes
-3. **P10c** — Dockerfile and local container smoke test
-4. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
-5. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P10 planning:** [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md). Next slice after P10a merge: **P10b** deterministic workflow API routes.
+
+1. **P10b** — Deterministic workflow API routes
+2. **P10c** — Dockerfile and local container smoke test
+3. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
+4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -387,7 +388,21 @@ The public demo is **deterministic-only** and requires **no secrets**, API keys,
 - Deterministic mode and Public Demo Safety copy visible in the app
 - No LLM provider selector or API-key fields exposed in the canonical app
 
-**Optional secondary host:** [Hugging Face Spaces](https://huggingface.co/docs/hub/spaces) can host a Streamlit demo later. Prefer the simple Streamlit Community Cloud path first. Docker-based Spaces belong to the later FastAPI/Docker phase (P10) unless needed sooner.
+**Optional secondary host:** [Hugging Face Spaces](https://huggingface.co/docs/hub/spaces) can host a Streamlit demo later. Prefer the simple Streamlit Community Cloud path first. Docker-based Spaces belong to the later FastAPI/Docker phase (P10c) unless needed sooner.
+
+## Local API shell (P10a)
+
+Streamlit remains the **canonical public demo**. The FastAPI shell (`mip.service`) is a local service-wrapper work in progress.
+
+P10a exposes **metadata routes only** — `GET /health` and `GET /version`. Workflow routes are deferred to P10b; Docker to P10c.
+
+```bash
+poetry run uvicorn mip.service.app:app --reload --host 127.0.0.1 --port 8000
+curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/version
+```
+
+Deterministic mode only — no LLM, secrets, external services, persistence, or measurement engine execution.
 
 ## Development setup
 
