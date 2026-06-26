@@ -78,6 +78,31 @@ print(report.summary)
 
 Advisory, readiness, and intake adapters remain future work. See [Report/adapter/agent contract plan](../architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md).
 
+### 4.0.2 Calibration report builder and export helpers
+
+Build and export local JSON artifacts from Stage A calibration fixtures:
+
+```python
+from pathlib import Path
+
+from mip.reports.calibration_reports import (
+    build_calibration_report_from_stage_a_fixture,
+    export_calibration_report_from_stage_a_fixture,
+)
+
+report = build_calibration_report_from_stage_a_fixture("experiment_readout_valid")
+output_path = export_calibration_report_from_stage_a_fixture(
+    "experiment_readout_valid",
+    Path("tmp/calibration_report.json"),
+    overwrite=True,
+)
+print(report.schema_version)
+print(report.governance_status)
+print(output_path)
+```
+
+Helpers are local and deterministic — not production persistence. Advisory/readiness/intake report helpers remain future.
+
 ### 4.1 Cold-start advisory
 
 Uses demo fixture input resolution + workflow helper (same boundary as the FastAPI service):

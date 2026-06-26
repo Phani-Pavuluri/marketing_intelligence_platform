@@ -65,7 +65,7 @@ signal, report = map_evidence_to_calibration_signal(evidence, requirement)
 
 **Business profile fixtures** supply structured fields for cold-start advisory demos (`domain`, `objective`, `tracking_state`, `evidence_mode`, etc.).
 
-Stage A.2 loader helpers are implemented in `mip.examples.stage_a_fixtures`. **Stage A.3** calibration adapter (`mip.examples.stage_a_adapters`) and `deterministic_report_v1` envelopes are implemented for calibration golden paths only. Advisory/readiness/intake adapters remain future.
+Stage A.2 loader helpers are implemented in `mip.examples.stage_a_fixtures`. **Stage A.3** calibration adapter (`mip.examples.stage_a_adapters`) and **calibration report export helpers** (`mip.reports.calibration_reports`) support `deterministic_report_v1` envelopes and local JSON export. Advisory/readiness/intake adapters remain future.
 
 ## Related docs
 
