@@ -276,11 +276,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P10c implemented:** Dockerfile for local deterministic FastAPI smoke testing. See [P10c Docker smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md).
 
-**P11 (plan):** API hardening and service packaging direction. See [P11 API hardening plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md).
+**P11 (plan + implementation branch):** API hardening via OpenAPI inspection, response/error contract tests, and route metadata. See [P11 API hardening plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md).
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P11** implementation (contract/OpenAPI stability), then **P12** SDK/API usage examples.
+**Next (implementation):** Merge P11 hardening, then **P12** SDK/API usage examples.
 
-1. **P11** — API hardening implementation (contracts, OpenAPI, errors)
+1. **P11** — Merge API hardening implementation (OpenAPI/contract tests)
 2. **P12** — SDK / API usage examples
 3. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 

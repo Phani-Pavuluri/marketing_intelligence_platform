@@ -31,11 +31,29 @@ def create_app() -> FastAPI:
         version="0.1.0",
     )
 
-    @application.get("/health", response_model=HealthResponse, tags=["service"])
+    @application.get(
+        "/health",
+        response_model=HealthResponse,
+        tags=["service"],
+        summary="Deterministic service health check",
+        description=(
+            "Returns deterministic service health metadata. No LLM, persistence, "
+            "external services, or measurement engine execution."
+        ),
+    )
     def health() -> HealthResponse:
         return build_health_response()
 
-    @application.get("/version", response_model=VersionResponse, tags=["service"])
+    @application.get(
+        "/version",
+        response_model=VersionResponse,
+        tags=["service"],
+        summary="Service version and phase metadata",
+        description=(
+            "Returns package version, internal API phase, and governance flags for "
+            "the deterministic MIP service wrapper."
+        ),
+    )
     def version() -> VersionResponse:
         return build_version_response()
 

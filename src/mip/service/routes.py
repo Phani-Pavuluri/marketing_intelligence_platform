@@ -27,6 +27,11 @@ workflow_router = APIRouter(prefix="", tags=["workflows"])
 @workflow_router.post(
     "/advisory/cold-start",
     response_model=ColdStartAdvisoryResponse,
+    summary="Deterministic cold-start advisory workflow",
+    description=(
+        "Build a cold-start advisory plan from a deterministic demo fixture key. "
+        "Advisory-only — not causal proof or ROI."
+    ),
 )
 def advisory_cold_start(request: ColdStartAdvisoryRequest) -> ColdStartAdvisoryResponse:
     try:
@@ -38,6 +43,11 @@ def advisory_cold_start(request: ColdStartAdvisoryRequest) -> ColdStartAdvisoryR
 @workflow_router.post(
     "/readiness/assess",
     response_model=ReadinessAssessResponse,
+    summary="Deterministic readiness assessment workflow",
+    description=(
+        "Assess workflow readiness from a deterministic demo fixture key. "
+        "Structural readiness only — no MMM/GeoX execution."
+    ),
 )
 def readiness_assess(request: ReadinessAssessRequest) -> ReadinessAssessResponse:
     try:
@@ -49,6 +59,11 @@ def readiness_assess(request: ReadinessAssessRequest) -> ReadinessAssessResponse
 @workflow_router.post(
     "/calibration/map",
     response_model=CalibrationMapResponse,
+    summary="Deterministic calibration mapping workflow",
+    description=(
+        "Map governed experiment evidence to a calibration signal using a demo "
+        "fixture key. Diagnostic-tier output only."
+    ),
 )
 def calibration_map(request: CalibrationMapRequest) -> CalibrationMapResponse:
     try:
@@ -60,6 +75,11 @@ def calibration_map(request: CalibrationMapRequest) -> CalibrationMapResponse:
 @workflow_router.post(
     "/intake/overview",
     response_model=IntakeOverviewResponse,
+    summary="Deterministic intake routing overview workflow",
+    description=(
+        "Return intake path recommendation summary from a deterministic demo "
+        "example key. Routing guidance only — not measurement conclusions."
+    ),
 )
 def intake_overview(request: IntakeOverviewRequest) -> IntakeOverviewResponse:
     try:

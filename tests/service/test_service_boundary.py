@@ -20,6 +20,9 @@ _ALLOWED_DEMO_FIXTURE_IMPORTS = {
 _FORBIDDEN_IMPORT_PREFIXES = (
     "app.ui_renderers",
     "streamlit",
+    "openai",
+    "anthropic",
+    "mip.llm",
 )
 
 
