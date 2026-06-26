@@ -1,0 +1,66 @@
+{
+  "plan_id": "AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001",
+  "status": "accepted_contract_planning_direction",
+  "base_commit": "4acffe7",
+  "date": "2026-05-28",
+  "parent_plans": [
+    "MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001",
+    "MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001"
+  ],
+  "top_level_contract": "AgentAnswerabilityState",
+  "answerability_states": [
+    "ANSWERABLE_FROM_REGISTERED_ARTIFACT",
+    "ANSWERABLE_FROM_DETERMINISTIC_TOOL_OUTPUT",
+    "NEEDS_CORE_DIAGNOSTIC_OR_ML",
+    "NEEDS_USER_INPUT_OR_DATA",
+    "BLOCKED_BY_CLAIM_BOUNDARY"
+  ],
+  "future_contracts": [
+    "AgentAnswerabilityDecision",
+    "ToolAvailabilityStatus",
+    "AgentCapabilityEvalCase"
+  ],
+  "secondary_answer_modes": [
+    "direct_report_explanation",
+    "deterministic_tool_report",
+    "advisory_only_guidance",
+    "missing_data_request",
+    "route_to_mmm",
+    "route_to_geox",
+    "route_to_calibration",
+    "route_to_readiness",
+    "route_to_decision_surface",
+    "blocked_unsupported_claim",
+    "tool_unavailable_fallback",
+    "out_of_scope"
+  ],
+  "evidence_levels": [
+    "general_knowledge",
+    "business_profile_only",
+    "synthetic_fixture",
+    "deterministic_workflow_report",
+    "calibration_candidate",
+    "diagnostic_only",
+    "core_mmm_required",
+    "core_geox_required",
+    "certified_decision_surface_required",
+    "unsupported"
+  ],
+  "anti_hardcoding_principle": "classify_via_claim_taxonomy_evidence_tool_availability_and_report_governance_not_per_question_rules",
+  "recommended_implementation_sequence": [
+    "this_contract_plan",
+    "agent_answerability_state_and_decision_contracts",
+    "claim_taxonomy_and_evidence_enums",
+    "deterministic_answerability_evaluator",
+    "agent_capability_eval_harness",
+    "llm_explanation_request_response_contracts",
+    "llm_explanation_over_deterministic_reports_only",
+    "agent_runtime_tool_registry_later"
+  ],
+  "explicit_blocks": [
+    "llm_runtime_before_answerability_evaluator",
+    "free_form_agent_answers_without_source_reports",
+    "causal_roi_optimizer_claims_without_core_ml"
+  ],
+  "required_eval_scenarios": 8
+}
