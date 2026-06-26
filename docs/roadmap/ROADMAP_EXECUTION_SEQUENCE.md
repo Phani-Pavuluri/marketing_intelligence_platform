@@ -3,7 +3,7 @@
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
 **Current main:** `841cca0`  
-**Immediate next phase:** **P10b.1** — service workflow boundary cleanup, then **P10c** Docker (see [P10 plan](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md))
+**Immediate next phase:** **P10c** — Dockerfile + local container smoke test (after P10b.1 service boundary cleanup on this branch; see [P10 plan](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md))
 
 > **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. Docs-only; does not change current Streamlit runtime.
 
@@ -123,9 +123,10 @@ P1 session/path
 | **P9** | Deterministic public demo preparation | Deployment metadata + safety copy; no secrets/LLM | ✓ implemented |
 | **P9 deploy** | Streamlit Community Cloud deterministic public demo | Smoke-tested; no secrets/LLM | ✓ verified |
 | **P9b** | Public demo deployment record | Docs-only verification record | ✓ implemented |
-| **P10** | FastAPI/Docker service wrapper plan | Design doc only; implementation split P10a–P10c | Planned |
+| **P10** | FastAPI/Docker service wrapper plan | Design doc; implementation split P10a–P10c | ✓ planned |
 | **P10a** | FastAPI skeleton + health/version routes | `GET /health`, `GET /version` only | ✓ implemented |
-| **P10b** | Deterministic workflow API routes | Demo fixture keys; no raw rows | ✓ implemented (feature branch) |
+| **P10b** | Deterministic workflow API routes | Demo fixture keys; no raw rows | ✓ implemented |
+| **P10b.1** | Service boundary cleanup + usage modes doc | Routes call `mip.workflows.*`; fixtures inputs-only | ✓ implemented |
 | **P10c** | Dockerfile + local container smoke test | No public API hosting | Planned |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
 | **P12** | I11 production table-ref design | Design only | Planned |
@@ -687,7 +688,8 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 | Sub-phase | Scope | Status |
 |-----------|-------|--------|
 | **P10a** | FastAPI skeleton; `GET /health`, `GET /version` | ✓ implemented |
-| **P10b** | `POST` workflow routes (demo fixture keys) | ✓ implemented (feature branch) |
+| **P10b** | `POST` workflow routes (demo fixture keys) | ✓ implemented |
+| **P10b.1** | Service boundary cleanup; `docs/service/DETERMINISTIC_USAGE_MODES.md` | ✓ implemented |
 | **P10c** | Dockerfile + local container smoke test | Planned |
 
 **Acceptance criteria (P10 implementation, future):**

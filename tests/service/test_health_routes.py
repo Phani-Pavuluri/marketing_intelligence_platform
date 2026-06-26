@@ -44,8 +44,8 @@ def test_version_returns_200_with_p10a_metadata() -> None:
     payload = response.json()
     assert payload["service"] == "mip-api"
     assert payload["project"] == "Marketing Intelligence Platform"
-    assert payload["api_phase"] == "P10b"
-    assert payload["baseline_commit"] == "3af1d45"
+    assert payload["api_phase"] == "P10b.1"
+    assert payload["baseline_commit"] == "841cca0"
     assert payload["public_demo_url"] == PUBLIC_DEMO_URL
     assert payload["streamlit_entrypoint"] == "app/streamlit_app.py"
     assert payload["mode"] == "deterministic"

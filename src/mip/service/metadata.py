@@ -8,8 +8,8 @@ from mip.contracts.base import ContractBaseModel
 
 SERVICE_NAME = "mip-api"
 PROJECT_NAME = "Marketing Intelligence Platform"
-API_PHASE = "P10b"
-SERVICE_BASELINE_COMMIT = "3af1d45"
+API_PHASE = "P10b.1"
+SERVICE_BASELINE_COMMIT = "841cca0"
 PUBLIC_DEMO_URL = "https://marketingintelligenceplatform.streamlit.app/"
 STREAMLIT_ENTRYPOINT = "app/streamlit_app.py"
 SERVICE_MODE = "deterministic"

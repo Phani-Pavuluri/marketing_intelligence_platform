@@ -217,7 +217,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. See [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) for the planned single-page, chat-first product direction.
 
-**Near-term focus:** **P10** FastAPI/Docker service wrapper planning complete; **P10a** implementation next. Public demo: https://marketingintelligenceplatform.streamlit.app/
+**Near-term focus:** **P10b.1** service boundary cleanup complete; **P10c** Dockerfile next. Public demo: https://marketingintelligenceplatform.streamlit.app/
 
 ## Roadmap
 
@@ -268,12 +268,15 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P9b implemented:** Deterministic public demo deployed and smoke-tested on Streamlit Community Cloud. Deployment record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). This is a **non-production** deterministic demo using synthetic fixtures—not a production app or measurement service.
 
-**P10a implemented (feature branch):** FastAPI service shell at `mip.service` with `GET /health` and `GET /version` only. Workflow routes deferred to P10b; Docker deferred to P10c. Streamlit remains the canonical public demo.
+**P10a implemented:** FastAPI service shell at `mip.service` with `GET /health` and `GET /version`.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P10 planning:** [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md). Next slice after P10a merge: **P10b** deterministic workflow API routes.
+**P10b implemented:** Deterministic workflow API routes (`POST /advisory/cold-start`, `/readiness/assess`, `/calibration/map`, `/intake/overview`) using demo fixture keys.
 
-1. **P10b** — Deterministic workflow API routes
-2. **P10c** — Dockerfile and local container smoke test
+**P10b.1 implemented:** Service boundary cleanup—routes call `mip.workflows.*` directly; `app.demo_fixtures` limited to sample input resolution. See [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md).
+
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P10c** — Dockerfile and local container smoke test.
+
+1. **P10c** — Dockerfile and local container smoke test
 3. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
 4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
@@ -328,6 +331,7 @@ marketing_intelligence_platform/
 - [Public demo deployment record (P9b)](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
 - [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
+- [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)
 - [Agentic workflow governance roadmap](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
 - [Roadmap](docs/roadmap/ROADMAP.md)
 - [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md)
