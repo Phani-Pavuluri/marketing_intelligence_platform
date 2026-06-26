@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `d6e3059`  
-**Immediate next phase:** **P11** — hosted API hardening (after P10c Docker smoke; see [P10 plan](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md))
+**Current main:** `b592fd3`  
+**Immediate next phase:** **P11** — API hardening implementation (plan: [P11](../service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md)); then **P12** SDK/API examples; Stage A synthetic fixtures after P12
 
 > **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) — accepted strategy for MIP-owned synthetic demo fixtures, industry reference schemas, deterministic demo datasets (Stage A), and later real MMM/GeoX-backed visuals (Stage B). Docs-only; does not change current Streamlit runtime.
 
@@ -35,7 +35,8 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
 | Roadmap docs: 8G–8N, P1–P13, S1–S12, G1–G20, I1–I15 | ✓ documented |
 | Product entrypoint / demo experience plan 001 | ✓ documented (accepted direction; implementation deferred) |
-| Synthetic demo dataset strategy plan 001 | ✓ documented (Stage A/B strategy; fixtures deferred) |
+| Synthetic demo dataset strategy plan 001 | ✓ documented (Stage A/B strategy; fixtures deferred until after P12) |
+| P11 API hardening / service packaging plan 001 | ✓ documented (accepted plan; implementation next) |
 
 ## Platform principles
 
@@ -129,8 +130,9 @@ P1 session/path
 | **P10b** | Deterministic workflow API routes | Demo fixture keys; no raw rows | ✓ implemented |
 | **P10b.1** | Service boundary cleanup + usage modes doc | Routes call `mip.workflows.*`; fixtures inputs-only | ✓ implemented |
 | **P10c** | Dockerfile + local container smoke test | No public API hosting | ✓ implemented |
-| **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
-| **P12** | I11 production table-ref design | Design only | Planned |
+| **P11** | API hardening + service packaging plan | Contract/OpenAPI/error stability; hosted auth/rate limits deferred | Plan ✓; implementation next |
+| **P12** | SDK / API / package usage examples | curl, Python, notebooks; no production ingestion | Planned (after P11) |
+| **P12 (platform)** | I11 production table-ref design | Design only | Planned |
 | **P13** | I12 refresh governance | No model execution | Planned |
 | **P14** | P1/G11/G16 lifecycle selection | Registry metadata | Planned |
 | **P15** | 8G–8H LLM answer governance | MockLLM + provider contracts | Planned |
@@ -692,6 +694,8 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 | **P10b** | `POST` workflow routes (demo fixture keys) | ✓ implemented |
 | **P10b.1** | Service boundary cleanup; `docs/service/DETERMINISTIC_USAGE_MODES.md` | ✓ implemented |
 | **P10c** | Dockerfile + local container smoke test | ✓ implemented |
+| **P11** | API hardening / service packaging plan | Plan ✓; implementation next |
+| **P12** | SDK / API usage examples | Planned (after P11) |
 
 **Acceptance criteria (P10 implementation, future):**
 
@@ -703,9 +707,19 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 - Keeps secrets out of repo
 - Prepares for auth/rate limits later
 
-### P11 — Hosted API hardening
+### P11 — API hardening and service packaging
 
-**Purpose:** Auth, rate limits, privacy, cost controls for hosted service path.
+**Purpose:** Make the deterministic FastAPI service predictable, testable, documented, and safe as a service surface before SDK examples, synthetic fixtures, uploads, or hosted deployment.
+
+**P11 plan status:** ✓ documented — [P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md](../service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md)
+
+**Near-term scope:** Request/response contract stability, error semantics, OpenAPI inspection, determinism tests, service docs—not auth, secrets, rate limits, or production hosting (deferred).
+
+**After P11:** **P12** SDK/API usage examples; Stage A synthetic fixtures per [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md).
+
+### P11 — Hosted API hardening (later)
+
+**Purpose (deferred):** Auth, rate limits, privacy, cost controls for **hosted** public API path.
 
 ### Example flows
 

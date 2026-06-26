@@ -217,7 +217,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. See [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) for the planned single-page, chat-first product direction. See [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) for canonical MIP-owned demo fixtures, industry reference schemas, and when to introduce engine-backed MMM/GeoX visuals.
 
-**Near-term focus:** **P10c** Docker local smoke complete on feature branch; **P11** API hardening next. Public demo: https://marketingintelligenceplatform.streamlit.app/
+**Near-term focus:** **P10c** Docker smoke merged; **P11** API hardening plan next. Public demo: https://marketingintelligenceplatform.streamlit.app/
 
 ## Roadmap
 
@@ -274,12 +274,15 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P10b.1 implemented:** Service boundary cleanup—routes call `mip.workflows.*` directly; `app.demo_fixtures` limited to sample input resolution. See [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md).
 
-**P10c (feature branch):** Dockerfile for local deterministic FastAPI smoke testing. See [P10c Docker smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md).
+**P10c implemented:** Dockerfile for local deterministic FastAPI smoke testing. See [P10c Docker smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md).
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P11** — hosted API hardening after P10c merge.
+**P11 (plan):** API hardening and service packaging direction. See [P11 API hardening plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md).
 
-1. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
-2. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P11** implementation (contract/OpenAPI stability), then **P12** SDK/API usage examples.
+
+1. **P11** — API hardening implementation (contracts, OpenAPI, errors)
+2. **P12** — SDK / API usage examples
+3. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -332,6 +335,7 @@ marketing_intelligence_platform/
 - [Public demo deployment record (P9b)](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
 - [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md)
 - [P10c Docker service smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md)
+- [P11 API hardening and service packaging plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
 - [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
 - [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)
@@ -425,7 +429,7 @@ curl http://127.0.0.1:8000/version
 
 If port 8000 is busy, map another host port: `docker run --rm -p 8001:8000 mip-service:p10c`.
 
-See [P10c Docker service smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md).
+See [P10c Docker service smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md). See [P11 API hardening plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md) for the planned API hardening and service packaging direction after P10c.
 
 ## Development setup
 
