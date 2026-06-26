@@ -294,9 +294,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Stage A.3 advisory/readiness/intake adapter plan (001):** [STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) — fixture→workflow mapping; governance examples test-only.
 
-**Stage A.3 cold-start advisory adapter:** **merged on branch** — `mip.reports.advisory_reports`, golden path #1 (`local_fitness_studio`). Advisory output is advisory-only, not causal measurement.
+**Stage A.3 cold-start advisory adapter:** **merged** — `mip.reports.advisory_reports`, golden path #1. Advisory output is advisory-only, not causal measurement.
 
-**Next (implementation):** Readiness adapter (needs workbench bridge contract); intake adapter third.
+**Agent answerability and fallback contract plan (001):** [AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) — five-state answerability machine; blocks LLM runtime until evaluator exists. Docs/planning only.
+
+**Next (implementation):** `AgentAnswerabilityState` + `AgentAnswerabilityDecision` contracts; deterministic answerability evaluator; readiness adapter remains `needs_contract_update`.
 
 1. **Stage A** — Synthetic deterministic fixture files — **merged**
 2. **Stage A.2** — Fixture loader helpers — **merged**
@@ -305,8 +307,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 5. **Deterministic report contracts + calibration adapter** — **merged**
 6. **Calibration report builder/export helpers** — **merged**
 7. **Stage A.3 advisory/readiness/intake adapter plan** — **merged**
-8. **Stage A.3 cold-start advisory adapter** — **on branch** (golden path #1)
-9. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+8. **Stage A.3 cold-start advisory adapter** — **merged**
+9. **Agent answerability/fallback contract plan** — **documented** (implementation next)
+10. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -365,6 +368,7 @@ marketing_intelligence_platform/
 - [Agent tooling and roadmap detail audit 001](docs/audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md)
 - [Report, adapter, and agent contract plan 001](docs/architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md)
 - [Stage A.3 advisory/readiness/intake adapter plan 001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md)
+- [Agent answerability and fallback contract plan 001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
 - [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
 - [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)
