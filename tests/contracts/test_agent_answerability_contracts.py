@@ -31,6 +31,43 @@ def test_required_claim_types_exist() -> None:
     assert AgentClaimType.ROI.value == "roi"
 
 
+def test_decision_model_validates_required_fields() -> None:
+    decision = AgentAnswerabilityDecision(
+        decision_id="dec-required",
+        state=AgentAnswerabilityState.NEEDS_USER_INPUT_OR_DATA,
+        user_intent="",
+        requested_claim_type=AgentClaimType.COLD_START_ADVISORY,
+        evidence_level=AgentEvidenceLevel.BUSINESS_PROFILE_ONLY,
+        allowed_response_scope=["advisory_hypothesis"],
+        forbidden_response_scope=[],
+        missing_inputs=["business_profile"],
+        blocked_claims=["business_profile"],
+    )
+    assert decision.decision_id == "dec-required"
+
+
+def test_blocked_claims_are_preserved() -> None:
+    decision = AgentAnswerabilityDecision(
+        decision_id="dec-blocked",
+        state=AgentAnswerabilityState.BLOCKED_BY_CLAIM_BOUNDARY,
+        user_intent="",
+        requested_claim_type=AgentClaimType.ROI,
+        evidence_level=AgentEvidenceLevel.CORE_MMM_REQUIRED,
+        blocked_claims=["roi_proof", "channel_roi"],
+        allowed_response_scope=[],
+        forbidden_response_scope=["roi_proof"],
+    )
+    assert decision.blocked_claims == ["roi_proof", "channel_roi"]
+
+
+def test_missing_inputs_are_preserved() -> None:
+    request = AgentAnswerabilityRequest(
+        requested_claim_type=AgentClaimType.EXPERIMENT_CALIBRATION,
+        missing_inputs=["standard_error", "effect_size"],
+    )
+    assert request.missing_inputs == ["standard_error", "effect_size"]
+
+
 def test_answerability_request_accepts_structured_fields_only() -> None:
     request = AgentAnswerabilityRequest(
         requested_claim_type=AgentClaimType.COLD_START_ADVISORY,

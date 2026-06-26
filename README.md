@@ -298,9 +298,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Agent answerability and fallback contract plan (001):** [AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) — five-state answerability machine.
 
-**Agent answerability contracts + deterministic evaluator:** `mip.contracts.agent_answerability`, `evaluate_agent_answerability` — **merged on branch**.
+**Agent answerability contracts + deterministic evaluator:** **merged** — `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability`. Five-state machine is executable; structured-input only.
 
-**Next (implementation):** LLM explanation contracts over deterministic reports only; readiness adapter remains `needs_contract_update`.
+**Next:** LLM explanation contracts over deterministic reports only; readiness adapter remains `needs_contract_update`.
 
 1. **Stage A** — Synthetic deterministic fixture files — **merged**
 2. **Stage A.2** — Fixture loader helpers — **merged**
@@ -311,7 +311,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 7. **Stage A.3 advisory/readiness/intake adapter plan** — **merged**
 8. **Stage A.3 cold-start advisory adapter** — **merged**
 9. **Agent answerability/fallback contract plan** — **merged**
-10. **Agent answerability contracts + evaluator** — **on branch**
+10. **Agent answerability contracts + evaluator** — **merged**
 11. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
