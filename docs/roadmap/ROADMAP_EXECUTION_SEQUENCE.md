@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `391f46b`  
-**Immediate next phase:** **Manual Streamlit Community Cloud deploy** or **P10** FastAPI/Docker wrapper
+**Current main:** `96cf98c`  
+**Immediate next phase:** **P10** FastAPI/Docker wrapper (after public demo stability)
 
 > **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, **agent role contracts**, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17** and must use P8b agent contracts.
 
@@ -26,6 +26,8 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P8b agent role registry + failure/recovery contracts | ✓ |
 | P8c canonical Streamlit entrypoint cleanup | ✓ |
 | P9 deterministic public demo preparation | ✓ |
+| P9 deploy — Streamlit Community Cloud (deterministic) | ✓ |
+| P9b public demo deployment record | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -116,7 +118,8 @@ P1 session/path
 | **P8b** | Agent role registry + run manifest + failure/recovery contracts | Contracts/helpers only; no LangGraph runtime | ✓ implemented |
 | **P8c** | Canonical Streamlit entrypoint cleanup | Docs/tests only; no hosting | ✓ implemented |
 | **P9** | Deterministic public demo preparation | Deployment metadata + safety copy; no secrets/LLM | ✓ implemented |
-| **P9 deploy** | Manual Streamlit Community Cloud / Hugging Face deploy | Demo-safe; deterministic-only first | Planned |
+| **P9 deploy** | Streamlit Community Cloud deterministic public demo | Smoke-tested; no secrets/LLM | ✓ verified |
+| **P9b** | Public demo deployment record | Docs-only verification record | ✓ implemented |
 | **P10** | FastAPI/Docker service wrapper | HTTP boundary; no duplicated MIP logic | Planned |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
 | **P12** | I11 production table-ref design | Design only | Planned |
@@ -627,9 +630,17 @@ The app runs in deterministic mode by default. It does not require LLM providers
 
 **Deferred beyond first deploy:** `hosted_open_source`, `bring_your_own_key`, platform-managed keys (require P11 controls).
 
-### P9 deploy — Manual public URL (planned)
+### P9 deploy — Streamlit Community Cloud (verified)
 
-**Purpose:** Deploy demo-safe public URL on Streamlit Community Cloud or Hugging Face Spaces.
+**Purpose:** Deploy demo-safe public URL on Streamlit Community Cloud.
+
+**P9 deploy status:** ✓ verified — deterministic public demo smoke-tested on Streamlit Community Cloud at commit `96cf98c`. See [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md).
+
+### P9b — Public demo deployment record
+
+**Purpose:** Record deployed state, smoke-test results, safety boundaries, and next-step guidance in repo history.
+
+**P9b status:** ✓ implemented — `docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md`.
 
 **Privacy/cost controls (public demo safe by default):**
 

@@ -199,7 +199,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos.
 
-**Near-term focus:** **P9 prep** Streamlit entrypoint cleanup, then **P9** public hosted demo.
+**Near-term focus:** **P10** FastAPI/Docker wrapper after the deterministic public demo remains stable.
 
 ## Roadmap
 
@@ -248,12 +248,13 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P9 implemented:** Deterministic public demo preparation. `requirements.txt`, `runtime.txt`, and `.streamlit/config.toml` support Streamlit Community Cloud hosting of `app/streamlit_app.py` without LLM providers, secrets, FastAPI, Docker, or external services.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next step: **manual deploy** to Streamlit Community Cloud, or **P10** FastAPI/Docker wrapper.
+**P9b implemented:** Deterministic public demo deployed and smoke-tested on Streamlit Community Cloud. Deployment record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). This is a **non-production** deterministic demo using synthetic fixtures—not a production app or measurement service.
 
-1. **Manual deploy** — Streamlit Community Cloud using `app/streamlit_app.py` and `requirements.txt`
-2. **P10** — FastAPI/Docker service wrapper
-3. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
-4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next step: **P10** FastAPI/Docker wrapper only after the public demo remains stable.
+
+1. **P10** — FastAPI/Docker service wrapper
+2. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
+3. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -303,6 +304,7 @@ marketing_intelligence_platform/
 - [LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md)
 - [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
 - [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md)
+- [Public demo deployment record (P9b)](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
 - [Agentic workflow governance roadmap](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
 - [Roadmap](docs/roadmap/ROADMAP.md)
 - [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md)
@@ -347,7 +349,9 @@ poetry run streamlit run app/streamlit_app.py
 
 **Primary hosting target:** [Streamlit Community Cloud](https://streamlit.io/cloud). In the app settings, set the main file path to `app/streamlit_app.py` and Python version to 3.11 (see `runtime.txt`). The platform installs dependencies from `requirements.txt`.
 
-The public demo is **deterministic-only** and requires **no secrets**, API keys, LLM providers, FastAPI, Docker, databases, or external services.
+The public demo is **deterministic-only** and requires **no secrets**, API keys, LLM providers, FastAPI, Docker, databases, or external services. It is **not production-ready**—a governed workflow shell over synthetic demo fixtures.
+
+**Deployment record:** [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md) (P9b verified deploy on Streamlit Community Cloud, commit `96cf98c`).
 
 **Before public deploy:**
 
