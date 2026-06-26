@@ -296,9 +296,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Stage A.3 cold-start advisory adapter:** **merged** — `mip.reports.advisory_reports`, golden path #1. Advisory output is advisory-only, not causal measurement.
 
-**Agent answerability and fallback contract plan (001):** [AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) — five-state answerability machine; blocks LLM runtime until evaluator exists. Docs/planning only.
+**Agent answerability and fallback contract plan (001):** [AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) — five-state answerability machine.
 
-**Next (implementation):** `AgentAnswerabilityState` + `AgentAnswerabilityDecision` contracts; deterministic answerability evaluator; readiness adapter remains `needs_contract_update`.
+**Agent answerability contracts + deterministic evaluator:** `mip.contracts.agent_answerability`, `evaluate_agent_answerability` — **merged on branch**.
+
+**Next (implementation):** LLM explanation contracts over deterministic reports only; readiness adapter remains `needs_contract_update`.
 
 1. **Stage A** — Synthetic deterministic fixture files — **merged**
 2. **Stage A.2** — Fixture loader helpers — **merged**
@@ -308,8 +310,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 6. **Calibration report builder/export helpers** — **merged**
 7. **Stage A.3 advisory/readiness/intake adapter plan** — **merged**
 8. **Stage A.3 cold-start advisory adapter** — **merged**
-9. **Agent answerability/fallback contract plan** — **documented** (implementation next)
-10. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+9. **Agent answerability/fallback contract plan** — **merged**
+10. **Agent answerability contracts + evaluator** — **on branch**
+11. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 

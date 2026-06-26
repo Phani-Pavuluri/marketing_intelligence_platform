@@ -5,11 +5,11 @@
 | Field | Value |
 |-------|-------|
 | **Title** | Agent Answerability and Fallback Contract Plan 001 |
-| **Status** | Accepted contract planning direction |
+| **Status** | Accepted contract planning direction; **partial implementation** — contracts + deterministic evaluator |
 | **Type** | Agent governance / answerability / fallback / UX resilience plan |
-| **Base commit** | `4acffe7` — Stage A.3 cold-start advisory adapter merged (PR #40) |
+| **Base commit** | `d47f913` — agent answerability plan merged (PR #41) |
 | **Date** | 2026-05-28 |
-| **Scope** | Docs/contract planning only — **no agent runtime, LLM calls, or answerability evaluator implementation in this phase** |
+| **Scope** | Plan + `AgentAnswerabilityState`/`AgentAnswerabilityDecision` contracts + `evaluate_agent_answerability` (no LLM runtime) |
 
 **Hard boundaries (unchanged):** No MMM/GeoX execution, no LLM providers, no production ingestion, no notebooks, no new FastAPI routes, no Streamlit behavior changes, no unsupported causal/ROI/optimizer claims. MIP remains the **control plane**, not the statistical engine.
 
@@ -137,7 +137,7 @@ This is **not** about making the LLM smarter. It is about making agents **contra
 
 ### Future contract: `AgentAnswerabilityDecision`
 
-**Module (future):** `src/mip/contracts/agent_answerability.py` — **not implemented in this plan**.
+**Module:** `src/mip/contracts/agent_answerability.py` — **implemented**.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -356,7 +356,8 @@ MIP control-plane outputs (advisory, readiness, calibration mapping, intake rout
 
 | # | Scenario | Expected state |
 |---|----------|----------------|
-| 1 | User asks for ROI with only advisory report | `BLOCKED_BY_CLAIM_BOUNDARY` or `NEEDS_CORE_DIAGNOSTIC_OR_ML` |
+| 1 | User asks for ROI with only advisory report (default routing) | `NEEDS_CORE_DIAGNOSTIC_OR_ML` |
+| 1b | User asserts ROI proof from advisory-only artifacts | `BLOCKED_BY_CLAIM_BOUNDARY` |
 | 2 | User asks what to do next with business profile; advisory tool available | `ANSWERABLE_FROM_DETERMINISTIC_TOOL_OUTPUT` |
 | 3 | User asks to explain existing calibration report | `ANSWERABLE_FROM_REGISTERED_ARTIFACT` |
 | 4 | User asks to use missing-SE experiment as calibration evidence | `NEEDS_USER_INPUT_OR_DATA` |
@@ -374,10 +375,10 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 | Order | Item | Type |
 |-------|------|------|
 | 1 | **This contract plan** | Docs ✓ |
-| 2 | `AgentAnswerabilityState` + `AgentAnswerabilityDecision` Pydantic contracts | Code |
-| 3 | Claim taxonomy and evidence-level enums (shared with advisory/report contracts) | Code |
-| 4 | Deterministic answerability evaluator (`evaluate_agent_answerability(...)`) | Code |
-| 5 | `AgentCapabilityEvalCase` harness + required scenarios | Tests |
+| 2 | `AgentAnswerabilityState` + `AgentAnswerabilityDecision` Pydantic contracts | Code ✓ |
+| 3 | Claim taxonomy and evidence-level enums (shared with advisory/report contracts) | Code ✓ |
+| 4 | Deterministic answerability evaluator (`evaluate_agent_answerability(...)`) | Code ✓ |
+| 5 | `AgentCapabilityEvalCase` harness + required scenarios | Tests ✓ |
 | 6 | LLM explanation request/response contracts | Docs + code |
 | 7 | LLM explanation implementation **over deterministic reports only** | Code |
 | 8 | Agent runtime / tool registry (P17) | Code — later |
@@ -397,9 +398,9 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 ### Safe now
 
 - [x] Docs/contract planning (this document)
-- [ ] Typed `AgentAnswerabilityState` + `AgentAnswerabilityDecision` contracts
-- [ ] Deterministic answerability evaluator (no LLM)
-- [ ] Eval harness with required scenarios
+- [x] Typed `AgentAnswerabilityState` + `AgentAnswerabilityDecision` contracts
+- [x] Deterministic answerability evaluator (no LLM)
+- [x] Eval harness with required scenarios (structured inputs)
 
 ### Needs more detail before implementation
 
@@ -414,6 +415,31 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 - Direct LLM access to raw tools without answerability gate
 - ROI, optimizer, causal lift, power/MDE, matched markets, treatment assignment claims without core ML outputs
 - LLM overriding `governance_status` or `blocked_claims` on reports
+
+---
+
+## 16. Deterministic evaluator implementation rules
+
+**Implemented:** `mip.contracts.agent_answerability`, `mip.workflows.agent.answerability.evaluate_agent_answerability`.
+
+### Structured inputs only
+
+The evaluator uses `AgentAnswerabilityRequest` — not natural-language question matching. `user_intent` is metadata on the decision record only.
+
+### Decision priority
+
+1. `BLOCKED_BY_CLAIM_BOUNDARY`
+2. `NEEDS_USER_INPUT_OR_DATA`
+3. `ANSWERABLE_FROM_REGISTERED_ARTIFACT`
+4. `ANSWERABLE_FROM_DETERMINISTIC_TOOL_OUTPUT`
+5. `NEEDS_CORE_DIAGNOSTIC_OR_ML`
+
+Governance on available reports **overrides** tool availability.
+
+### ROI nuance
+
+- Default ROI with advisory-only report → `NEEDS_CORE_DIAGNOSTIC_OR_ML`
+- ROI asserted from advisory artifacts (`assert_claim_authorized_by_available_artifacts=True`) → `BLOCKED_BY_CLAIM_BOUNDARY`
 
 ---
 
