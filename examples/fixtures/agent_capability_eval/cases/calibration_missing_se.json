@@ -1,0 +1,34 @@
+{
+  "case_id": "calibration_missing_se",
+  "description": "Missing standard error blocks calibration evidence use.",
+  "user_question": "Use experiment readout without standard error as calibration evidence.",
+  "tags": ["experiment_calibration", "missing_data"],
+  "forbidden_answerable_states": [
+    "answerable_from_registered_artifact",
+    "answerable_from_deterministic_tool_output"
+  ],
+  "requires_fallback_message": true,
+  "requires_report": false,
+  "requires_tool": true,
+  "requires_missing_inputs": true,
+  "request": {
+    "requested_claim_type": "experiment_calibration",
+    "user_intent": "documentation: missing SE calibration evidence",
+    "available_reports": [],
+    "available_tools": [
+      {
+        "tool_name": "run_calibration_mapping_for_stage_a_fixture",
+        "tool_type": "deterministic_workflow",
+        "available": true,
+        "supports_claim_types": ["experiment_calibration"]
+      }
+    ],
+    "missing_inputs": ["standard_error"],
+    "assert_claim_authorized_by_available_artifacts": false
+  },
+  "expected_state": "needs_user_input_or_data",
+  "expected_answer_mode": "missing_data_request",
+  "expected_evidence_level": "calibration_candidate",
+  "expected_blocked_claims": [],
+  "forbidden_phrases": []
+}

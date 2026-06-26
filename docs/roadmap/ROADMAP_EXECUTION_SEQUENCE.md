@@ -3,7 +3,7 @@
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
 **Current main:** `d47f913`  
-**Immediate next phase:** Agent answerability contracts + deterministic evaluator (in progress); LLM explanation contracts after eval harness
+**Immediate next phase:** LLM explanation contracts over deterministic reports (no LLM runtime yet)
 
 > **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) — accepted strategy for MIP-owned synthetic demo fixtures, industry reference schemas, deterministic demo datasets (Stage A), and later real MMM/GeoX-backed visuals (Stage B). Docs-only; does not change current Streamlit runtime.
 
@@ -46,6 +46,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | Stage A.3 cold-start advisory adapter | ✓ implemented — golden path #1 (`local_fitness_studio`) |
 | Agent answerability and fallback contract plan 001 | ✓ documented — [AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md](../architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) |
 | Agent answerability contracts + deterministic evaluator | ✓ implemented — `mip.contracts.agent_answerability`, `mip.agents.answerability`, `mip.workflows.agent.answerability` |
+| Agent capability eval fixtures 001 | ✓ implemented — `examples/fixtures/agent_capability_eval`, `mip.evaluation.agent_capability_fixtures` |
 
 ## Platform principles
 
@@ -740,7 +741,9 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 
 **Stage A.3 cold-start advisory adapter:** ✓ implemented — `mip.examples.stage_a_adapters`, `mip.reports.advisory_reports`, golden path #1.
 
-**Agent answerability and fallback contract plan (001):** ✓ documented — five-state machine. **Contracts + evaluator:** ✓ implemented.
+**Agent answerability contracts + evaluator:** ✓ implemented. **Agent capability eval fixtures:** ✓ implemented — 10 file-backed cases, deterministic regression harness.
+
+**Next:** LLM explanation request/response contracts over `DeterministicReportEnvelope` and `AgentAnswerabilityDecision`; readiness adapter remains `needs_contract_update`.
 
 **After merge:** LLM explanation request/response contracts; readiness adapter remains `needs_contract_update`.
 

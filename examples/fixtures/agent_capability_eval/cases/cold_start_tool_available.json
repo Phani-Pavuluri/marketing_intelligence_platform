@@ -1,0 +1,32 @@
+{
+  "case_id": "cold_start_tool_available",
+  "description": "Business profile next steps with advisory tool available.",
+  "user_question": "What should we do next with this business profile?",
+  "tags": ["cold_start_advisory", "deterministic_tool"],
+  "forbidden_answerable_states": [],
+  "requires_fallback_message": false,
+  "requires_report": false,
+  "requires_tool": true,
+  "requires_missing_inputs": false,
+  "request": {
+    "requested_claim_type": "cold_start_advisory",
+    "user_intent": "documentation: next steps from business profile",
+    "available_reports": [],
+    "available_tools": [
+      {
+        "tool_name": "run_cold_start_advisory_for_stage_a_fixture",
+        "tool_type": "deterministic_workflow",
+        "available": true,
+        "supports_claim_types": ["cold_start_advisory", "general_marketing_advice"],
+        "unsupported_claim_types": ["roi", "causal_lift", "budget_optimization"]
+      }
+    ],
+    "missing_inputs": [],
+    "assert_claim_authorized_by_available_artifacts": false
+  },
+  "expected_state": "answerable_from_deterministic_tool_output",
+  "expected_answer_mode": "advisory_only_guidance",
+  "expected_evidence_level": "business_profile_only",
+  "expected_blocked_claims": [],
+  "forbidden_phrases": []
+}

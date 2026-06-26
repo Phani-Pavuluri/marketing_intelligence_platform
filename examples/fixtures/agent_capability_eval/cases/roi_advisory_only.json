@@ -1,0 +1,38 @@
+{
+  "case_id": "roi_advisory_only",
+  "description": "ROI with advisory report only routes to core ML, not answerable.",
+  "user_question": "What is channel ROI from our advisory profile?",
+  "tags": ["roi", "advisory_only", "core_ml_routing"],
+  "forbidden_answerable_states": [
+    "answerable_from_registered_artifact",
+    "answerable_from_deterministic_tool_output"
+  ],
+  "requires_fallback_message": true,
+  "requires_report": true,
+  "requires_tool": false,
+  "requires_missing_inputs": false,
+  "request": {
+    "requested_claim_type": "roi",
+    "user_intent": "documentation: ROI from advisory only",
+    "available_reports": [
+      {
+        "report_id": "det-report-adv-local_fitness_studio",
+        "report_type": "cold_start_advisory",
+        "governance_status": "advisory_only",
+        "evidence_mode": "business_profile_only",
+        "source_artifact_id": "stage-a-fixture:local_fitness_studio",
+        "blocked_claims": ["causal_lift", "roi_proof", "budget_optimization"],
+        "allowed_downstream_uses": ["explain_advisory_recommendation", "identify_missing_data"],
+        "forbidden_downstream_uses": ["roi_proof", "budget_optimization", "mmm_model_output"]
+      }
+    ],
+    "available_tools": [],
+    "missing_inputs": [],
+    "assert_claim_authorized_by_available_artifacts": false
+  },
+  "expected_state": "needs_core_diagnostic_or_ml",
+  "expected_answer_mode": "route_to_mmm",
+  "expected_evidence_level": "core_mmm_required",
+  "expected_blocked_claims": [],
+  "forbidden_phrases": ["channel_roi_value", "roi_is"]
+}

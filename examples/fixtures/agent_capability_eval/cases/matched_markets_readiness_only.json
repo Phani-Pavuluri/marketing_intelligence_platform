@@ -1,0 +1,38 @@
+{
+  "case_id": "matched_markets_readiness_only",
+  "description": "Matched market design from readiness report only routes to GeoX.",
+  "user_question": "Design matched markets from readiness summary.",
+  "tags": ["matched_market_design", "core_ml_routing"],
+  "forbidden_answerable_states": [
+    "answerable_from_registered_artifact",
+    "answerable_from_deterministic_tool_output"
+  ],
+  "requires_fallback_message": true,
+  "requires_report": true,
+  "requires_tool": false,
+  "requires_missing_inputs": false,
+  "request": {
+    "requested_claim_type": "matched_market_design",
+    "user_intent": "documentation: matched markets from readiness",
+    "available_reports": [
+      {
+        "report_id": "det-report-readiness-national",
+        "report_type": "readiness_assessment",
+        "governance_status": "diagnostic_only",
+        "evidence_mode": "readiness_only",
+        "source_artifact_id": "stage-a-fixture:national_weekly_channel_summary",
+        "blocked_claims": ["fitted_mmm_outputs", "power_mde_results"],
+        "allowed_downstream_uses": ["readiness_reassessment", "data_collection"],
+        "forbidden_downstream_uses": ["geox_inference", "matched_market_selection"]
+      }
+    ],
+    "available_tools": [],
+    "missing_inputs": [],
+    "assert_claim_authorized_by_available_artifacts": false
+  },
+  "expected_state": "needs_core_diagnostic_or_ml",
+  "expected_answer_mode": "route_to_geox",
+  "expected_evidence_level": "core_geox_required",
+  "expected_blocked_claims": [],
+  "forbidden_phrases": ["matched_market_pair"]
+}

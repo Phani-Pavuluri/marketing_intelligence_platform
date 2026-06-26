@@ -1,0 +1,38 @@
+{
+  "case_id": "causal_proof_advisory_blocked",
+  "description": "Unsupported causal proof asserted from synthetic advisory fixture.",
+  "user_question": "Prove causal lift from advisory fixture.",
+  "tags": ["causal_lift", "governance", "blocked"],
+  "forbidden_answerable_states": [
+    "answerable_from_registered_artifact",
+    "answerable_from_deterministic_tool_output"
+  ],
+  "requires_fallback_message": true,
+  "requires_report": true,
+  "requires_tool": false,
+  "requires_missing_inputs": false,
+  "request": {
+    "requested_claim_type": "causal_lift",
+    "user_intent": "documentation: causal proof from advisory",
+    "available_reports": [
+      {
+        "report_id": "det-report-adv-local_fitness_studio",
+        "report_type": "cold_start_advisory",
+        "governance_status": "advisory_only",
+        "evidence_mode": "business_profile_only",
+        "source_artifact_id": "stage-a-fixture:local_fitness_studio",
+        "blocked_claims": ["causal_lift", "roi_proof", "budget_optimization"],
+        "allowed_downstream_uses": ["explain_advisory_recommendation"],
+        "forbidden_downstream_uses": ["causal_lift", "roi_proof"]
+      }
+    ],
+    "available_tools": [],
+    "missing_inputs": [],
+    "assert_claim_authorized_by_available_artifacts": true
+  },
+  "expected_state": "blocked_by_claim_boundary",
+  "expected_answer_mode": "blocked_unsupported_claim",
+  "expected_evidence_level": "core_geox_required",
+  "expected_blocked_claims": ["causal_lift"],
+  "forbidden_phrases": ["incremental_lift_percent"]
+}
