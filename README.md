@@ -217,7 +217,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. See [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) for the planned single-page, chat-first product direction. See [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) for canonical MIP-owned demo fixtures, industry reference schemas, and when to introduce engine-backed MMM/GeoX visuals.
 
-**Near-term focus:** **Stage A / Stage A.2** merged; agent tooling audit complete. Public demo: https://marketingintelligenceplatform.streamlit.app/
+**Near-term focus:** Agent tooling audit merged; report/adapter/agent contract plan on branch. Public demo: https://marketingintelligenceplatform.streamlit.app/
 
 ## Roadmap
 
@@ -286,12 +286,15 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Agent tooling audit (001):** [MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001](docs/audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md) — executability gaps, Cursor checklist, stop/go criteria.
 
-**Next (implementation):** Stage A.3 fixture→workflow adapter plan and deterministic report output contract plan (docs); then notebook or guided-demo planning.
+**Report / adapter / agent contract plan (001):** [MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001](docs/architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md) — Stage A.3 adapters, report envelopes, provenance, agent/LLM boundaries, golden paths (docs-only; on branch).
+
+**Next (implementation):** Report envelope contracts + Stage A.3 calibration adapter per contract plan.
 
 1. **Stage A** — Synthetic deterministic fixture files — **merged**
 2. **Stage A.2** — Fixture loader helpers — **merged**
-3. **Agent tooling audit 001** — **on branch**
-4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+3. **Agent tooling audit 001** — **merged**
+4. **Report/adapter/agent contract plan 001** — **on branch**
+5. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -348,6 +351,7 @@ marketing_intelligence_platform/
 - [P12 SDK and API usage examples](docs/examples/P12_SDK_API_USAGE_EXAMPLES_001.md)
 - [Stage A synthetic fixtures](examples/fixtures/stage_a/README.md)
 - [Agent tooling and roadmap detail audit 001](docs/audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md)
+- [Report, adapter, and agent contract plan 001](docs/architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
 - [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
 - [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)

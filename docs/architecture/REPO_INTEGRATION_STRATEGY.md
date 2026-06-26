@@ -73,7 +73,7 @@ Docker wraps UI/API/package for portable deployment.
 
 **Public demo deployment (P9b):** Deterministic public demo verified on Streamlit Community Cloud (commit `96cf98c`). **Hosted URL:** https://marketingintelligenceplatform.streamlit.app/ — record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). Non-production demo shell over synthetic fixtures—not a measurement engine or production service.
 
-**Service wrapper (P10–P12):** FastAPI/Docker service through **P10c**; **P11** API contract hardening merged; **P12** deterministic SDK/API usage examples merged. **Stage A** synthetic fixtures plus **Stage A.2** loader helpers (`mip.examples.stage_a_fixtures`) provide canonical demo inputs without MMM/GeoX execution outputs. [Agent tooling audit 001](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md) records executability gaps and Cursor stop/go criteria before LLM/agent runtime work.
+**Service wrapper (P10–P12):** FastAPI/Docker service through **P10c**; **P11** API contract hardening merged; **P12** deterministic SDK/API usage examples merged. **Stage A** synthetic fixtures plus **Stage A.2** loader helpers (`mip.examples.stage_a_fixtures`) provide canonical demo inputs without MMM/GeoX execution outputs. [Agent tooling audit 001](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md) records executability gaps; [Report/adapter/agent contract plan 001](MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md) defines adapters, report envelopes, provenance, and golden paths before notebooks/LLM runtime.
 
 FastAPI is not required for the first UI demo. Docker is not the app—it packages the app for consistent deployment. P10 must not duplicate MIP business logic.
 

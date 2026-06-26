@@ -1,0 +1,43 @@
+{
+  "plan_id": "MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001",
+  "status": "accepted_contract_planning_direction",
+  "base_commit": "f094986",
+  "date": "2026-05-28",
+  "source_audit": "MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001",
+  "sections": [
+    "stage_a_3_fixture_workflow_adapter_plan",
+    "deterministic_report_output_contract_plan",
+    "artifact_registry_provenance_plan",
+    "future_agent_packet_contract_plan",
+    "llm_explanation_boundary_contract_plan",
+    "golden_path_deterministic_acceptance_test_plan",
+    "notebook_guided_demo_prerequisites",
+    "roadmap_sequencing",
+    "cursor_agent_checklist",
+    "stop_go_criteria"
+  ],
+  "recommended_implementation_sequence": [
+    "report_envelope_pydantic_models",
+    "stage_a_3_calibration_adapter",
+    "golden_path_tests_3_to_5",
+    "stage_a_3_advisory_readiness_adapters",
+    "golden_path_tests_1_to_2",
+    "report_generator_helpers",
+    "artifact_reference_helper",
+    "deterministic_notebook_plan",
+    "llm_explanation_response_contract"
+  ],
+  "parallel_allowed": [
+    "report_envelope_schemas_with_calibration_adapter"
+  ],
+  "explicit_blocks": [
+    "report_generators_before_report_contracts",
+    "notebooks_before_golden_paths",
+    "llm_runtime_before_explanation_response_contract",
+    "stage_b_engine_visuals_before_certified_outputs"
+  ],
+  "namespace_mismatch": {
+    "sample_key": "app.demo_fixtures and FastAPI service",
+    "fixture_id": "Stage A manifest and mip.examples.stage_a_fixtures"
+  }
+}
