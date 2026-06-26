@@ -290,17 +290,20 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Deterministic report contracts + Stage A.3 calibration adapter:** **merged** — `mip.contracts.deterministic_report`, `mip.examples.stage_a_adapters`.
 
-**Calibration report builder/export helpers (branch):** `mip.reports.calibration_reports` and `mip.reports.deterministic_reports` for local JSON export.
+**Calibration report builder/export helpers:** **merged** — `mip.reports.calibration_reports` and `mip.reports.deterministic_reports` for local JSON export.
 
-**Next (implementation):** Review and merge calibration report builder/export helpers; then advisory/readiness adapters or notebook plan.
+**Stage A.3 advisory/readiness/intake adapter plan (001):** [STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) — fixture→workflow mapping for cold-start advisory, readiness, intake/routing; governance examples test-only. Docs/planning only.
+
+**Next (implementation):** Cold-start advisory adapter (golden path #1); then readiness adapter (golden path #2); then intake adapter.
 
 1. **Stage A** — Synthetic deterministic fixture files — **merged**
 2. **Stage A.2** — Fixture loader helpers — **merged**
 3. **Agent tooling audit 001** — **merged**
 4. **Report/adapter/agent contract plan 001** — **merged**
 5. **Deterministic report contracts + calibration adapter** — **merged**
-6. **Calibration report builder/export helpers** — **on branch**
-7. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+6. **Calibration report builder/export helpers** — **merged**
+7. **Stage A.3 advisory/readiness/intake adapter plan** — **documented** (implementation next)
+8. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -358,6 +361,7 @@ marketing_intelligence_platform/
 - [Stage A synthetic fixtures](examples/fixtures/stage_a/README.md)
 - [Agent tooling and roadmap detail audit 001](docs/audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md)
 - [Report, adapter, and agent contract plan 001](docs/architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md)
+- [Stage A.3 advisory/readiness/intake adapter plan 001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
 - [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
 - [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)

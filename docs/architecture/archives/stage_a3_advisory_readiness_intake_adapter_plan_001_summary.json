@@ -1,0 +1,99 @@
+{
+  "plan_id": "STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001",
+  "status": "accepted_adapter_planning_direction",
+  "base_commit": "4cf58c2",
+  "date": "2026-05-28",
+  "parent_plan": "MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001",
+  "sections": [
+    "why_this_plan_exists",
+    "existing_implemented_baseline",
+    "fixture_inventory_by_workflow_area",
+    "cold_start_advisory_adapter_plan",
+    "readiness_adapter_plan",
+    "intake_routing_adapter_plan",
+    "governance_unsupported_claim_stance",
+    "report_envelope_mapping",
+    "golden_paths_1_and_2",
+    "implementation_readiness_verdict",
+    "acceptance_criteria_future_implementation",
+    "roadmap_sequencing"
+  ],
+  "implemented_baseline": {
+    "stage_a_fixtures": "examples/fixtures/stage_a/",
+    "stage_a_2_loaders": "mip.examples.stage_a_fixtures",
+    "deterministic_report_contracts": "mip.contracts.deterministic_report",
+    "calibration_adapter": "mip.examples.stage_a_adapters",
+    "calibration_report_helpers": "mip.reports.calibration_reports"
+  },
+  "fixture_categories": {
+    "business_profiles": ["local_fitness_studio", "dtc_skincare_brand", "b2b_saas_hr_platform"],
+    "readiness": [
+      "national_weekly_channel_summary",
+      "geo_week_media_outcome_summary",
+      "incomplete_missing_geo",
+      "incomplete_missing_outcome"
+    ],
+    "calibration": [
+      "experiment_readout_valid",
+      "experiment_readout_missing_se",
+      "experiment_readout_metric_mismatch"
+    ],
+    "intake": [
+      "beginner_sales_growth_question",
+      "mmm_readiness_question",
+      "geox_readiness_question",
+      "calibration_question"
+    ],
+    "governance": ["unsupported_claim_examples"]
+  },
+  "future_helpers": {
+    "advisory": [
+      "build_cold_start_input_from_stage_a_fixture",
+      "run_cold_start_advisory_for_stage_a_fixture"
+    ],
+    "readiness": [
+      "build_readiness_input_from_stage_a_fixture",
+      "run_readiness_assessment_for_stage_a_fixture"
+    ],
+    "intake": [
+      "build_intake_input_from_stage_a_fixture",
+      "run_intake_routing_for_stage_a_fixture"
+    ]
+  },
+  "implementation_readiness_verdict": {
+    "calibration": "ready_to_implement",
+    "cold_start_advisory": "ready_to_implement",
+    "readiness": "needs_contract_update",
+    "intake_routing": "needs_source_inspection",
+    "governance_unsupported_claim": "blocked"
+  },
+  "golden_paths": {
+    "1": {
+      "fixture_id": "local_fitness_studio",
+      "report_type": "cold_start_advisory",
+      "governance_status": "advisory_only"
+    },
+    "2": {
+      "fixture_id": "national_weekly_channel_summary",
+      "report_type": "readiness_assessment",
+      "governance_status": "candidate_or_diagnostic_only"
+    }
+  },
+  "governance_stance": "unsupported_claim_examples_test_and_guidance_only_not_runtime_adapter_input",
+  "recommended_implementation_sequence": [
+    "this_adapter_plan",
+    "cold_start_advisory_adapter",
+    "readiness_adapter",
+    "intake_adapter",
+    "golden_paths_1_and_2_tests",
+    "deterministic_notebook_plan",
+    "notebook_implementation",
+    "landing_page_guided_demo_binding_plan",
+    "llm_explanation_contracts"
+  ],
+  "explicit_blocks": [
+    "governance_adapter_without_deterministic_validator",
+    "readiness_adapter_without_workbench_bridge_decision",
+    "notebooks_before_golden_paths_1_2"
+  ]
+}

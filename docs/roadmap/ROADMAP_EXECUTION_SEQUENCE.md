@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `44ff641`  
-**Immediate next phase:** Calibration report builder/export helpers on branch; golden paths #1–#2 or notebook plan remain future
+**Current main:** `4cf58c2`  
+**Immediate next phase:** Stage A.3 advisory/readiness/intake adapter plan 001 (docs); then cold-start advisory adapter if mapping confirmed
 
 > **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) — accepted strategy for MIP-owned synthetic demo fixtures, industry reference schemas, deterministic demo datasets (Stage A), and later real MMM/GeoX-backed visuals (Stage B). Docs-only; does not change current Streamlit runtime.
 
@@ -41,7 +41,8 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | Agent tooling / roadmap detail audit 001 | ✓ documented — [MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md) |
 | Report / adapter / agent contract plan 001 | ✓ documented — [MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md](../architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md) |
 | Deterministic report contracts + Stage A.3 calibration adapter | ✓ implemented — `deterministic_report_v1`, golden paths #3–#5 |
-| Calibration report builder/export helpers | On branch — `mip.reports.calibration_reports` |
+| Calibration report builder/export helpers | ✓ implemented — `mip.reports.calibration_reports` |
+| Stage A.3 advisory/readiness/intake adapter plan 001 | ✓ documented — [STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md](../architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) |
 
 ## Platform principles
 
@@ -730,9 +731,11 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 
 **Deterministic report contracts + Stage A.3 calibration adapter:** ✓ merged — `mip.contracts.deterministic_report`, `mip.examples.stage_a_adapters`, golden paths #3–#5.
 
-**Calibration report builder/export helpers:** `mip.reports.deterministic_reports` and `mip.reports.calibration_reports` for local JSON export (calibration path only). Notebooks, guided demos, and LLM runtime remain future.
+**Calibration report builder/export helpers:** ✓ merged — `mip.reports.deterministic_reports` and `mip.reports.calibration_reports` for local JSON export (calibration path only).
 
-**After merge:** Golden paths #1–#2 when advisory/readiness adapters are specified; deterministic notebook plan.
+**Stage A.3 advisory/readiness/intake adapter plan (001):** ✓ documented — fixture→workflow mapping for cold-start advisory, readiness, intake/routing, and governance stance. See [plan](../architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md). Implementation deferred until plan merges.
+
+**After plan merge:** Cold-start advisory adapter first (golden path #1); readiness adapter second (golden path #2); intake adapter third; deterministic notebook plan.
 
 ### P11 — Hosted API hardening (later)
 
