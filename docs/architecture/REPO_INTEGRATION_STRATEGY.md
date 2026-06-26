@@ -73,7 +73,7 @@ Docker wraps UI/API/package for portable deployment.
 
 **Public demo deployment (P9b):** Deterministic public demo verified on Streamlit Community Cloud (commit `96cf98c`). **Hosted URL:** https://marketingintelligenceplatform.streamlit.app/ — record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). Non-production demo shell over synthetic fixtures—not a measurement engine or production service.
 
-**Service wrapper (P10–P12):** FastAPI/Docker service through **P10c**; **P11** API contract hardening merged; **P12** deterministic SDK/API usage examples merged. **Stage A** synthetic fixtures plus **Stage A.2** loader helpers and **Stage A.3** calibration adapter (`mip.examples.stage_a_adapters`) with `deterministic_report_v1` envelopes provide canonical demo inputs without MMM/GeoX execution outputs.
+**Service wrapper (P10–P12):** FastAPI/Docker service through **P10c**; **P11** API contract hardening merged; **P12** deterministic SDK/API usage examples merged. **Stage A** fixtures, **Stage A.2** loaders, **Stage A.3** calibration adapter, and **calibration report export helpers** provide canonical deterministic demo inputs without MMM/GeoX execution outputs.
 
 FastAPI is not required for the first UI demo. Docker is not the app—it packages the app for consistent deployment. P10 must not duplicate MIP business logic.
 
