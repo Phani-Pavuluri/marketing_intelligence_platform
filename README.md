@@ -217,7 +217,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. See [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) for the planned single-page, chat-first product direction.
 
-**Near-term focus:** **P10b.1** service boundary cleanup complete; **P10c** Dockerfile next. Public demo: https://marketingintelligenceplatform.streamlit.app/
+**Near-term focus:** **P10c** Docker local smoke complete on feature branch; **P11** API hardening next. Public demo: https://marketingintelligenceplatform.streamlit.app/
 
 ## Roadmap
 
@@ -274,11 +274,12 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P10b.1 implemented:** Service boundary cleanup—routes call `mip.workflows.*` directly; `app.demo_fixtures` limited to sample input resolution. See [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md).
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P10c** — Dockerfile and local container smoke test.
+**P10c (feature branch):** Dockerfile for local deterministic FastAPI smoke testing. See [P10c Docker smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md).
 
-1. **P10c** — Dockerfile and local container smoke test
-3. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
-4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). **P11** — hosted API hardening after P10c merge.
+
+1. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
+2. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -330,6 +331,7 @@ marketing_intelligence_platform/
 - [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md)
 - [Public demo deployment record (P9b)](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
 - [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md)
+- [P10c Docker service smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
 - [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)
 - [Agentic workflow governance roadmap](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
@@ -395,11 +397,9 @@ The public demo is **deterministic-only** and requires **no secrets**, API keys,
 
 **Optional secondary host:** [Hugging Face Spaces](https://huggingface.co/docs/hub/spaces) can host a Streamlit demo later. Prefer the simple Streamlit Community Cloud path first. Docker-based Spaces belong to the later FastAPI/Docker phase (P10c) unless needed sooner.
 
-## Local API shell (P10a)
+## Local API shell (P10a–P10b.1)
 
-Streamlit remains the **canonical public demo**. The FastAPI shell (`mip.service`) is a local service-wrapper work in progress.
-
-P10a exposes **metadata routes only** — `GET /health` and `GET /version`. **P10b** adds deterministic workflow routes (`POST /advisory/cold-start`, `/readiness/assess`, `/calibration/map`, `/intake/overview`) using demo fixture keys. Docker deferred to P10c.
+Streamlit remains the **canonical public demo**. The FastAPI shell (`mip.service`) exposes deterministic workflow routes.
 
 ```bash
 poetry run uvicorn mip.service.app:app --reload --host 127.0.0.1 --port 8000
@@ -409,6 +409,22 @@ curl -X POST http://127.0.0.1:8000/advisory/cold-start -H 'Content-Type: applica
 ```
 
 Deterministic mode only — no LLM, secrets, external services, persistence, or measurement engine execution.
+
+## Local Docker smoke (P10c)
+
+Packages the **FastAPI service only** for local smoke testing. Does not run Streamlit, enable LLM mode, or imply production deployment.
+
+```bash
+docker build -t mip-service:p10c .
+docker run --rm -p 8000:8000 mip-service:p10c
+# another shell:
+curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/version
+```
+
+If port 8000 is busy, map another host port: `docker run --rm -p 8001:8000 mip-service:p10c`.
+
+See [P10c Docker service smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md).
 
 ## Development setup
 

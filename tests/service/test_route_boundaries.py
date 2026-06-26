@@ -88,5 +88,5 @@ def test_intake_route_returns_requirements_not_measurement_conclusions() -> None
     assert payload["governance"]["causal_decision_support"] is False
 
 
-def test_no_dockerfile_exists() -> None:
-    assert not Path("Dockerfile").exists()
+def test_dockerfile_exists_for_p10c() -> None:
+    assert Path("Dockerfile").is_file()

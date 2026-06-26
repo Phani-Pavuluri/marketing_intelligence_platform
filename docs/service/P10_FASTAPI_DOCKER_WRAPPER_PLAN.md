@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Title** | P10 FastAPI/Docker Wrapper Plan |
-| **Status** | P10a–P10b.1 implemented; P10c planned |
+| **Status** | P10a–P10c implemented; P11 planned |
 | **Type** | Service wrapper (P10a–P10c implementation) |
 | **Current baseline commit** | `841cca0` |
 | **Public demo URL** | https://marketingintelligenceplatform.streamlit.app/ |
@@ -221,7 +221,7 @@ When P10a/P10b/P10c are implemented, require:
 | **P10a** | FastAPI contract skeleton; `GET /health`, `GET /version`, `GET /demo/metadata`; no workflow routes yet |
 | **P10b** | Deterministic workflow routes: advisory, readiness, calibration, intake overview; fixture-key inputs first | ✓ |
 | **P10b.1** | Service boundary cleanup; routes call `mip.workflows.*`; fixtures inputs-only; usage modes doc | ✓ |
-| **P10c** | `Dockerfile` + local container smoke test; no public API hosting | Planned |
+| **P10c** | `Dockerfile` + local container smoke test; no public API hosting | ✓ |
 | **P11** | Hosted API hardening: auth, rate limits, privacy controls, cost controls, observability, secrets management |
 
 Optional later: **P9c** governed Streamlit LLM mode selector (disabled default, BYOK only)—separate from P10 service wrapper.
