@@ -217,7 +217,7 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. See [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) for the planned single-page, chat-first product direction. See [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) for canonical MIP-owned demo fixtures, industry reference schemas, and when to introduce engine-backed MMM/GeoX visuals.
 
-**Near-term focus:** **Stage A** synthetic fixtures merged; **Stage A.2** fixture loader helpers on branch. Public demo: https://marketingintelligenceplatform.streamlit.app/
+**Near-term focus:** **Stage A / Stage A.2** merged; agent tooling audit complete. Public demo: https://marketingintelligenceplatform.streamlit.app/
 
 ## Roadmap
 
@@ -282,13 +282,16 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Stage A implemented:** Synthetic deterministic fixtures at [examples/fixtures/stage_a/](examples/fixtures/stage_a/). Artificial, non-production inputs for advisory, readiness, calibration, intake, and governance demos — no MMM/GeoX execution outputs.
 
-**Stage A.2 (branch):** Fixture loader helpers in `mip.examples.stage_a_fixtures` for docs, tests, and future notebooks/guided demos.
+**Stage A.2 implemented:** Fixture loader helpers in `mip.examples.stage_a_fixtures` for docs, tests, and future notebooks/guided demos.
 
-**Next (implementation):** Review and merge **Stage A.2** fixture loader helpers; then deterministic notebook planning or landing-page guided demo planning.
+**Agent tooling audit (001):** [MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001](docs/audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md) — executability gaps, Cursor checklist, stop/go criteria.
 
-1. **Stage A** — Synthetic deterministic fixture files (`examples/fixtures/stage_a/`) — **merged**
-2. **Stage A.2** — Fixture loader helpers (`mip.examples.stage_a_fixtures`) — **on branch**
-3. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+**Next (implementation):** Stage A.3 fixture→workflow adapter plan and deterministic report output contract plan (docs); then notebook or guided-demo planning.
+
+1. **Stage A** — Synthetic deterministic fixture files — **merged**
+2. **Stage A.2** — Fixture loader helpers — **merged**
+3. **Agent tooling audit 001** — **on branch**
+4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -344,6 +347,7 @@ marketing_intelligence_platform/
 - [P11 API hardening and service packaging plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md)
 - [P12 SDK and API usage examples](docs/examples/P12_SDK_API_USAGE_EXAMPLES_001.md)
 - [Stage A synthetic fixtures](examples/fixtures/stage_a/README.md)
+- [Agent tooling and roadmap detail audit 001](docs/audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
 - [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
 - [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)
