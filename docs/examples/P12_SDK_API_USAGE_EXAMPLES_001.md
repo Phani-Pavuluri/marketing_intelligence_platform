@@ -101,7 +101,26 @@ print(report.governance_status)
 print(output_path)
 ```
 
-Helpers are local and deterministic — not production persistence. Advisory/readiness/intake report helpers remain future.
+Helpers are local and deterministic — not production persistence. Readiness/intake report helpers remain future.
+
+### 4.0.3 Cold-start advisory report builder and export helpers
+
+Build advisory deterministic reports from Stage A business-profile fixtures (golden path #1):
+
+```python
+from mip.reports.advisory_reports import (
+    build_cold_start_advisory_report_from_stage_a_fixture,
+)
+
+report = build_cold_start_advisory_report_from_stage_a_fixture(
+    "local_fitness_studio"
+)
+print(report.report_type)
+print(report.governance_status)
+print(report.summary)
+```
+
+Supported `fixture_id` values: `local_fitness_studio`, `dtc_skincare_brand`, `b2b_saas_hr_platform`. Output is **advisory-only** — not causal measurement.
 
 ### 4.1 Cold-start advisory
 

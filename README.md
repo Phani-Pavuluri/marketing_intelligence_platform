@@ -292,9 +292,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Calibration report builder/export helpers:** **merged** — `mip.reports.calibration_reports` and `mip.reports.deterministic_reports` for local JSON export.
 
-**Stage A.3 advisory/readiness/intake adapter plan (001):** [STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) — fixture→workflow mapping for cold-start advisory, readiness, intake/routing; governance examples test-only. Docs/planning only.
+**Stage A.3 advisory/readiness/intake adapter plan (001):** [STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) — fixture→workflow mapping; governance examples test-only.
 
-**Next (implementation):** Cold-start advisory adapter (golden path #1); then readiness adapter (golden path #2); then intake adapter.
+**Stage A.3 cold-start advisory adapter:** **merged on branch** — `mip.reports.advisory_reports`, golden path #1 (`local_fitness_studio`). Advisory output is advisory-only, not causal measurement.
+
+**Next (implementation):** Readiness adapter (needs workbench bridge contract); intake adapter third.
 
 1. **Stage A** — Synthetic deterministic fixture files — **merged**
 2. **Stage A.2** — Fixture loader helpers — **merged**
@@ -302,8 +304,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 4. **Report/adapter/agent contract plan 001** — **merged**
 5. **Deterministic report contracts + calibration adapter** — **merged**
 6. **Calibration report builder/export helpers** — **merged**
-7. **Stage A.3 advisory/readiness/intake adapter plan** — **documented** (implementation next)
-8. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+7. **Stage A.3 advisory/readiness/intake adapter plan** — **merged**
+8. **Stage A.3 cold-start advisory adapter** — **on branch** (golden path #1)
+9. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
