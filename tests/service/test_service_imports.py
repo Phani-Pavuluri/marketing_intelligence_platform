@@ -12,7 +12,7 @@ from mip.service.app import create_app
 def test_service_package_imports() -> None:
     service = importlib.import_module("mip.service")
     assert callable(service.create_app)
-    assert service.API_PHASE == "P10a"
+    assert service.API_PHASE == "P10b"
 
 
 def test_create_app_returns_fastapi_instance() -> None:

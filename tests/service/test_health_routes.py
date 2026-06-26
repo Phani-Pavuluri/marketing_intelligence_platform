@@ -4,20 +4,22 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
-from mip.service.app import create_app
+from mip.service.app import WORKFLOW_ROUTE_PATHS, create_app
 from mip.service.metadata import PUBLIC_DEMO_URL
 
-_DEFERRED_WORKFLOW_ROUTES = (
-    "/advisory/cold-start",
-    "/readiness/assess",
-    "/calibration/map",
-    "/intake/overview",
-)
+_WORKFLOW_ROUTES = WORKFLOW_ROUTE_PATHS
 
 
 def _route_paths(application: object) -> set[str]:
+    openapi = getattr(application, "openapi", None)
+    if callable(openapi):
+        return set(openapi()["paths"].keys())
+    paths: set[str] = set()
     routes = getattr(application, "routes", [])
-    return {route.path for route in routes if hasattr(route, "path")}
+    for route in routes:
+        if hasattr(route, "path") and route.path:
+            paths.add(route.path)
+    return paths
 
 
 def test_health_returns_200_with_deterministic_flags() -> None:
@@ -42,8 +44,8 @@ def test_version_returns_200_with_p10a_metadata() -> None:
     payload = response.json()
     assert payload["service"] == "mip-api"
     assert payload["project"] == "Marketing Intelligence Platform"
-    assert payload["api_phase"] == "P10a"
-    assert payload["baseline_commit"] == "b54d2d0"
+    assert payload["api_phase"] == "P10b"
+    assert payload["baseline_commit"] == "3af1d45"
     assert payload["public_demo_url"] == PUBLIC_DEMO_URL
     assert payload["streamlit_entrypoint"] == "app/streamlit_app.py"
     assert payload["mode"] == "deterministic"
@@ -54,10 +56,10 @@ def test_version_returns_200_with_p10a_metadata() -> None:
     assert payload["measurement_engine_execution_enabled"] is False
 
 
-def test_deferred_workflow_routes_are_absent() -> None:
+def test_workflow_routes_are_registered() -> None:
     application = create_app()
     paths = _route_paths(application)
-    for route in _DEFERRED_WORKFLOW_ROUTES:
-        assert route not in paths
+    for route in _WORKFLOW_ROUTES:
+        assert route in paths
     assert "/health" in paths
     assert "/version" in paths
