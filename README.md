@@ -300,9 +300,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **Agent answerability contracts + deterministic evaluator:** **merged** — `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability`.
 
-**Agent capability eval fixtures (001):** **in progress** — `examples/fixtures/agent_capability_eval`, `mip.evaluation.agent_capability_fixtures`.
+**Agent capability eval fixtures (001):** **merged** — `examples/fixtures/agent_capability_eval`, `mip.evaluation.agent_capability_fixtures` (10 cases).
 
-**Next:** LLM explanation contracts over deterministic reports only; readiness adapter remains `needs_contract_update`.
+**LLM explanation contract plan (001):** [LLM_EXPLANATION_CONTRACT_PLAN_001](docs/architecture/LLM_EXPLANATION_CONTRACT_PLAN_001.md) — LLM explains; deterministic contracts decide. Docs/planning only; blocks LLM runtime.
+
+**Next (implementation):** Typed `LLMExplanationRequest` / `LLMExplanationResponse` contracts and deterministic response validator; readiness adapter remains `needs_contract_update`.
 
 1. **Stage A** — Synthetic deterministic fixture files — **merged**
 2. **Stage A.2** — Fixture loader helpers — **merged**
@@ -314,7 +316,9 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 8. **Stage A.3 cold-start advisory adapter** — **merged**
 9. **Agent answerability/fallback contract plan** — **merged**
 10. **Agent answerability contracts + evaluator** — **merged**
-11. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
+11. **Agent capability eval fixtures** — **merged**
+12. **LLM explanation contract plan** — **documented** (implementation next)
+13. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
 
 Live engine execution remains blocked until golden scenarios and safety evaluations exist.
 
@@ -374,6 +378,7 @@ marketing_intelligence_platform/
 - [Report, adapter, and agent contract plan 001](docs/architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md)
 - [Stage A.3 advisory/readiness/intake adapter plan 001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md)
 - [Agent answerability and fallback contract plan 001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md)
+- [LLM explanation contract plan 001](docs/architecture/LLM_EXPLANATION_CONTRACT_PLAN_001.md)
 - [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
 - [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
 - [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)

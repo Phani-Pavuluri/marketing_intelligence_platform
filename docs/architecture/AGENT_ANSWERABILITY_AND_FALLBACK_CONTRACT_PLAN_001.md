@@ -380,10 +380,11 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 | 4 | Deterministic answerability evaluator (`evaluate_agent_answerability(...)`) | Code ✓ |
 | 5 | `AgentCapabilityEvalCase` harness + required scenarios | Tests ✓ |
 | 5b | File-backed agent capability eval fixtures (`examples/fixtures/agent_capability_eval`) | Fixtures ✓ |
-| 6 | LLM explanation request/response contracts | Docs + code |
-| 7 | LLM explanation implementation **over deterministic reports only** | Code |
-| 8 | Agent runtime / tool registry (P17) | Code — later |
-| 9 | BYOK / provider integration | Code — later |
+| 6 | [LLM Explanation Contract Plan 001](LLM_EXPLANATION_CONTRACT_PLAN_001.md) | Docs (planning) |
+| 7 | LLM explanation request/response typed contracts + validator | Code |
+| 8 | LLM explanation implementation **over deterministic reports only** | Code |
+| 9 | Agent runtime / tool registry (P17) | Code — later |
+| 10 | BYOK / provider integration | Code — later |
 
 **Explicit blocks:**
 
@@ -449,6 +450,7 @@ Governance on available reports **overrides** tool availability.
 
 ## References
 
+- [LLM Explanation Contract Plan 001](LLM_EXPLANATION_CONTRACT_PLAN_001.md) — report-explanation v1 request/response, validation, citation requirements
 - [MIP Report, Adapter, and Agent Contract Plan 001](MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md) — §7 agent packets, §8 LLM boundaries
 - [MIP Agent Tooling and Roadmap Implementation Detail Audit 001](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md)
 - [Stage A.3 Advisory Readiness Intake Adapter Plan 001](STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md)

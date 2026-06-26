@@ -312,7 +312,9 @@ Agents **may not**:
 
 ## 8. LLM explanation boundary contract plan
 
-> **Prerequisite:** [Agent Answerability and Fallback Contract Plan 001](AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) defines the five-state `AgentAnswerabilityState` machine and `AgentAnswerabilityDecision` gate that must classify every user request **before** LLM explanation or agent runtime. **Implemented:** `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability`. LLM consumes deterministic reports — it does not replace answerability evaluation.
+> **Prerequisite:** [Agent Answerability and Fallback Contract Plan 001](AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) defines the five-state `AgentAnswerabilityState` machine and `AgentAnswerabilityDecision` gate. **Implemented:** `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability`. **Eval fixtures:** `examples/fixtures/agent_capability_eval/`.
+>
+> **Detailed plan:** [LLM Explanation Contract Plan 001](LLM_EXPLANATION_CONTRACT_PLAN_001.md) — report-explanation v1 request/response contracts, validation, citation requirements, and separation from answerability evals.
 
 **Do not implement providers in this phase.**
 

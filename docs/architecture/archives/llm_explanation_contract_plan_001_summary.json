@@ -1,0 +1,59 @@
+{
+  "plan_id": "LLM_EXPLANATION_CONTRACT_PLAN_001",
+  "status": "accepted_contract_planning_direction",
+  "base_commit": "000273a",
+  "date": "2026-05-28",
+  "parent_plans": [
+    "AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001",
+    "MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001"
+  ],
+  "core_principle": "llm_explains_deterministic_contracts_decide",
+  "future_contracts": [
+    "LLMExplanationRequest",
+    "LLMExplanationResponse"
+  ],
+  "preservation_requirements": [
+    "preserved_answerability_state",
+    "preserved_governance_status",
+    "blocked_claims",
+    "forbidden_downstream_uses",
+    "citations_to_report_fields",
+    "citations_to_artifact_ids"
+  ],
+  "explanation_modes_by_state": {
+    "ANSWERABLE_FROM_REGISTERED_ARTIFACT": "explain_registered_report",
+    "ANSWERABLE_FROM_DETERMINISTIC_TOOL_OUTPUT": "explain_deterministic_tool_output",
+    "NEEDS_CORE_DIAGNOSTIC_OR_ML": "explain_core_ml_requirement",
+    "NEEDS_USER_INPUT_OR_DATA": "explain_missing_data",
+    "BLOCKED_BY_CLAIM_BOUNDARY": "explain_governance_boundary"
+  },
+  "blocked_llm_behaviors": [
+    "create_causal_lift",
+    "create_roi",
+    "create_budget_recommendation",
+    "create_optimizer_scenario_output",
+    "create_response_curve",
+    "choose_matched_markets",
+    "assign_treatment_control",
+    "calculate_power_mde",
+    "override_governance_status",
+    "decide_answerability",
+    "invent_missing_uncertainty"
+  ],
+  "validation_function": "validate_llm_explanation_response",
+  "relationship_to_answerability_evals": "separate_harnesses_answerability_state_vs_explanation_quality",
+  "recommended_implementation_sequence": [
+    "this_contract_plan",
+    "llm_explanation_request_response_contracts",
+    "deterministic_response_validator",
+    "canned_response_explanation_tests",
+    "provider_byok_runtime_planning",
+    "llm_implementation_over_deterministic_reports"
+  ],
+  "explicit_blocks": [
+    "llm_runtime_before_explanation_contracts",
+    "provider_calls_before_validator",
+    "free_form_explanations_without_answerability_decision",
+    "llm_deciding_answerability"
+  ]
+}
