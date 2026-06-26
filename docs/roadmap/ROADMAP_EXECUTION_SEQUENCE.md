@@ -5,7 +5,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 **Current main:** `841cca0`  
 **Immediate next phase:** **P10c** — Dockerfile + local container smoke test (after P10b.1 service boundary cleanup on this branch; see [P10 plan](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md))
 
-> **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. Docs-only; does not change current Streamlit runtime.
+> **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) — accepted strategy for MIP-owned synthetic demo fixtures, industry reference schemas, deterministic demo datasets (Stage A), and later real MMM/GeoX-backed visuals (Stage B). Docs-only; does not change current Streamlit runtime.
 
 > **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, **agent role contracts**, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17** and must use P8b agent contracts.
 
@@ -35,6 +35,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
 | Roadmap docs: 8G–8N, P1–P13, S1–S12, G1–G20, I1–I15 | ✓ documented |
 | Product entrypoint / demo experience plan 001 | ✓ documented (accepted direction; implementation deferred) |
+| Synthetic demo dataset strategy plan 001 | ✓ documented (Stage A/B strategy; fixtures deferred) |
 
 ## Platform principles
 

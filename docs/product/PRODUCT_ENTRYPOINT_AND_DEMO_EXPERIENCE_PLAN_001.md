@@ -9,7 +9,7 @@
 | **Type** | Product UX / demo experience roadmap |
 | **Baseline** | Current public demo is deterministic and Streamlit-based at `app/streamlit_app.py`. Future product direction is chat-first and LLM-assisted, but governed by deterministic MIP contracts and workflows. |
 | **Hosted public demo** | https://marketingintelligenceplatform.streamlit.app/ |
-| **Related docs** | [Deterministic usage modes](../service/DETERMINISTIC_USAGE_MODES.md) (when present), [Roadmap execution sequence](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md), [Repo integration strategy](../architecture/REPO_INTEGRATION_STRATEGY.md) |
+| **Related docs** | [Deterministic usage modes](../service/DETERMINISTIC_USAGE_MODES.md), [Roadmap execution sequence](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md), [Repo integration strategy](../architecture/REPO_INTEGRATION_STRATEGY.md), [Synthetic demo dataset strategy](SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) |
 
 This document records **intended user experience** for MIP. It does **not** authorize implementation in this phase. Runtime behavior of the current public demo is unchanged.
 
@@ -285,6 +285,7 @@ Single-page landing + anchor links + chat-first interaction
 | 2 | Finish **P10c** Docker / local container smoke test | Engineering |
 | 3 | Add product entrypoint roadmap references (this document) | Docs ✓ |
 | 4 | Minimal Streamlit landing page update: hero, Ask MIP placeholder, guided demo links, output preview placeholders, data-needed-by-decision section, governance boundaries | Product UI |
+| 4b | Stage A synthetic deterministic fixtures per [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) | Data / demo |
 | 5 | Sample SDK / API docs | Docs |
 | 6 | Sample notebooks | Docs / examples |
 | 7 | Plan LLM workbench mode: disabled default, governed extraction, tool routing, explanation validation, no free-form measurement claims | Design + engineering |
@@ -307,6 +308,7 @@ This product direction is documented when:
 
 ## Related documents
 
+- [Synthetic demo dataset strategy](SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
 - [Roadmap execution sequence](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md)
 - [Repo integration strategy](../architecture/REPO_INTEGRATION_STRATEGY.md)
 - [P10 FastAPI/Docker wrapper plan](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md)
