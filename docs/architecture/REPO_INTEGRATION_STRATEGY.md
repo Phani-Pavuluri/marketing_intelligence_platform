@@ -71,7 +71,7 @@ Docker wraps UI/API/package for portable deployment.
 
 **Public demo preparation (P9):** `requirements.txt`, `runtime.txt` (Python 3.11), and `.streamlit/config.toml` prepare Streamlit Community Cloud hosting of the canonical deterministic app. The first public hosted demo is deterministic-only—no LLM providers, BYOK, secrets, FastAPI, Docker, databases, persistent storage, or external connectors. Hugging Face Spaces is documented as an optional secondary host; Docker-based Spaces belong to P10.
 
-**Public demo deployment (P9b):** Deterministic public demo verified on Streamlit Community Cloud (commit `96cf98c`). Record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). Non-production demo shell over synthetic fixtures—not a measurement engine or production service.
+**Public demo deployment (P9b):** Deterministic public demo verified on Streamlit Community Cloud (commit `96cf98c`). **Hosted URL:** https://marketingintelligenceplatform.streamlit.app/ — record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). Non-production demo shell over synthetic fixtures—not a measurement engine or production service.
 
 FastAPI is not required for the first UI demo. Docker is not the app—it packages the app for consistent deployment. P10 must not duplicate MIP business logic.
 

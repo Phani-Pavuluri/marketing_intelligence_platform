@@ -9,15 +9,16 @@
 | **Deployment target** | Streamlit Community Cloud |
 | **App entrypoint** | `app/streamlit_app.py` |
 | **Deployed commit** | `96cf98c` |
+| **Hosted URL** | https://marketingintelligenceplatform.streamlit.app/ |
 | **Mode** | Deterministic |
 | **Secrets** | None |
 | **LLM** | Disabled |
 
 ## Hosted URL
 
-Hosted URL: `<fill in deployed Streamlit URL>`
+**Hosted URL:** https://marketingintelligenceplatform.streamlit.app/
 
-> Do not treat this placeholder as a live link until the URL is filled in after deploy verification.
+Live deterministic public demo on Streamlit Community Cloud. No login, secrets, or LLM provider required.
 
 ## Deployment configuration
 

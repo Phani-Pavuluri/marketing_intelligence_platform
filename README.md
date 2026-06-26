@@ -2,6 +2,24 @@
 
 Causal marketing intelligence **control plane** for governed experimentation, MMM calibration, budget planning, explainable recommendations, and—eventually—a conversational workbench over certified analytical engines.
 
+## Public Demo
+
+**Hosted demo:** [https://marketingintelligenceplatform.streamlit.app/](https://marketingintelligenceplatform.streamlit.app/)
+
+| | |
+|---|---|
+| **Mode** | Deterministic — no LLM provider configured or required |
+| **Data** | Synthetic/local demo fixtures only |
+| **Secrets / external services** | None |
+
+**Workflows shown:** cold-start advisory · demo profiling / readiness · calibration mapping · intake overview
+
+**What it is:** A governed **control-plane / workflow shell** that demonstrates MIP contracts, evidence labels, blocked-claim guardrails, and readiness-style reports over built-in fixtures.
+
+**What it is not:** A production app, API service, or measurement engine. It does **not** run MMM or GeoX engines, call LLM providers, persist uploads, or claim causal lift, ROI, power/MDE, matched markets, treatment assignment, or optimized budgets.
+
+**Deployment record:** [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
+
 ## What this is
 
 MIP is the **control-plane layer** for causal marketing intelligence. It owns contracts, evidence, release gates, `TrustReport` assembly, orchestration boundaries, and the planned LLM Decision Layer. Statistical engines compute estimands, run inference, and emit artifacts; MIP governs what may be trusted, promoted, or explained.
@@ -143,13 +161,13 @@ See [docs/architecture/LLM_DECISION_LAYER_VISION.md](docs/architecture/LLM_DECIS
 
 ## Local-first workbench and UI access
 
-Initial product direction is **local-first**, with a planned **public hosted demo** path (P9).
+Initial product direction is **local-first**, with a **verified public hosted demo** on Streamlit Community Cloud.
 
 ### UI access modes
 
 **Local UI** — user runs the app locally (e.g. `streamlit run`); access through `localhost`; best for development, private demos, debugging, and demo recordings.
 
-**Public hosted UI** — app deployed to Streamlit Community Cloud or Hugging Face Spaces; user accesses a public URL; best for public demos, portfolio demos, stakeholder review, and lightweight product validation. The first public demo should be demo-safe and should not require paid infrastructure. Public hosting is not production readiness.
+**Public hosted UI** — [deterministic public demo](https://marketingintelligenceplatform.streamlit.app/) on Streamlit Community Cloud; best for portfolio demos, stakeholder review, and lightweight product validation. Demo-safe, no paid infrastructure required. **Not production readiness.**
 
 ```text
 poetry install
@@ -339,6 +357,8 @@ This launches `src/mip/app/streamlit_app.py`—a separate shell from the canonic
 
 ## Public demo deployment
 
+**Hosted demo:** [https://marketingintelligenceplatform.streamlit.app/](https://marketingintelligenceplatform.streamlit.app/)
+
 **Canonical app entrypoint:** `app/streamlit_app.py`
 
 **Local command:**
@@ -347,13 +367,13 @@ This launches `src/mip/app/streamlit_app.py`—a separate shell from the canonic
 poetry run streamlit run app/streamlit_app.py
 ```
 
-**Primary hosting target:** [Streamlit Community Cloud](https://streamlit.io/cloud). In the app settings, set the main file path to `app/streamlit_app.py` and Python version to 3.11 (see `runtime.txt`). The platform installs dependencies from `requirements.txt`.
+**Hosting:** Streamlit Community Cloud — main file `app/streamlit_app.py`, Python 3.11 (`runtime.txt`), dependencies from `requirements.txt`.
 
 The public demo is **deterministic-only** and requires **no secrets**, API keys, LLM providers, FastAPI, Docker, databases, or external services. It is **not production-ready**—a governed workflow shell over synthetic demo fixtures.
 
-**Deployment record:** [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md) (P9b verified deploy on Streamlit Community Cloud, commit `96cf98c`).
+**Deployment record:** [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md) (P9b verified; commit `96cf98c`).
 
-**Before public deploy:**
+**Re-deploy checklist:**
 
 - `poetry run pytest` passes
 - `poetry run ruff check .` passes

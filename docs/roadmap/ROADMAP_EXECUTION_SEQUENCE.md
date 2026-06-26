@@ -626,7 +626,7 @@ The app runs in deterministic mode by default. It does not require LLM providers
 - Synthetic demo fixtures only; no file upload persistence
 - Public Demo Safety copy visible on landing
 
-**Manual deploy (next step):** Connect the repository to Streamlit Community Cloud, set app path to `app/streamlit_app.py`, confirm Python 3.11, deploy without secrets.
+**Manual deploy:** Complete — see hosted URL above.
 
 **Deferred beyond first deploy:** `hosted_open_source`, `bring_your_own_key`, platform-managed keys (require P11 controls).
 
@@ -634,13 +634,13 @@ The app runs in deterministic mode by default. It does not require LLM providers
 
 **Purpose:** Deploy demo-safe public URL on Streamlit Community Cloud.
 
-**P9 deploy status:** ✓ verified — deterministic public demo smoke-tested on Streamlit Community Cloud at commit `96cf98c`. See [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md).
+**P9 deploy status:** ✓ verified — deterministic public demo smoke-tested at commit `96cf98c`. **Hosted URL:** https://marketingintelligenceplatform.streamlit.app/
 
 ### P9b — Public demo deployment record
 
 **Purpose:** Record deployed state, smoke-test results, safety boundaries, and next-step guidance in repo history.
 
-**P9b status:** ✓ implemented — `docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md`.
+**P9b status:** ✓ complete — [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](../demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md) (hosted URL recorded).
 
 **Privacy/cost controls (public demo safe by default):**
 
