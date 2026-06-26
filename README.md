@@ -394,12 +394,13 @@ The public demo is **deterministic-only** and requires **no secrets**, API keys,
 
 Streamlit remains the **canonical public demo**. The FastAPI shell (`mip.service`) is a local service-wrapper work in progress.
 
-P10a exposes **metadata routes only** — `GET /health` and `GET /version`. Workflow routes are deferred to P10b; Docker to P10c.
+P10a exposes **metadata routes only** — `GET /health` and `GET /version`. **P10b** adds deterministic workflow routes (`POST /advisory/cold-start`, `/readiness/assess`, `/calibration/map`, `/intake/overview`) using demo fixture keys. Docker deferred to P10c.
 
 ```bash
 poetry run uvicorn mip.service.app:app --reload --host 127.0.0.1 --port 8000
 curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/version
+curl -X POST http://127.0.0.1:8000/advisory/cold-start -H 'Content-Type: application/json' -d '{"sample_key":"dtc_skincare_ecommerce"}'
 ```
 
 Deterministic mode only — no LLM, secrets, external services, persistence, or measurement engine execution.

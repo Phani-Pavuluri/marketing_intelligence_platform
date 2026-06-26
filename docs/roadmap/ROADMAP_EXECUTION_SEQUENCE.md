@@ -121,8 +121,8 @@ P1 session/path
 | **P9 deploy** | Streamlit Community Cloud deterministic public demo | Smoke-tested; no secrets/LLM | ✓ verified |
 | **P9b** | Public demo deployment record | Docs-only verification record | ✓ implemented |
 | **P10** | FastAPI/Docker service wrapper plan | Design doc only; implementation split P10a–P10c | Planned |
-| **P10a** | FastAPI skeleton + health/version routes | `GET /health`, `GET /version` only | ✓ implemented (feature branch) |
-| **P10b** | Deterministic workflow API routes | Fixture-key inputs first | Planned |
+| **P10a** | FastAPI skeleton + health/version routes | `GET /health`, `GET /version` only | ✓ implemented |
+| **P10b** | Deterministic workflow API routes | Demo fixture keys; no raw rows | ✓ implemented (feature branch) |
 | **P10c** | Dockerfile + local container smoke test | No public API hosting | Planned |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
 | **P12** | I11 production table-ref design | Design only | Planned |
@@ -683,8 +683,8 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 
 | Sub-phase | Scope | Status |
 |-----------|-------|--------|
-| **P10a** | FastAPI skeleton; `GET /health`, `GET /version` | ✓ implemented (feature branch) |
-| **P10b** | `POST` workflow routes (fixture-key inputs first) | Planned |
+| **P10a** | FastAPI skeleton; `GET /health`, `GET /version` | ✓ implemented |
+| **P10b** | `POST` workflow routes (demo fixture keys) | ✓ implemented (feature branch) |
 | **P10c** | Dockerfile + local container smoke test | Planned |
 
 **Acceptance criteria (P10 implementation, future):**
