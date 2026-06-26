@@ -77,6 +77,8 @@ Docker wraps UI/API/package for portable deployment.
 
 FastAPI is not required for the first UI demo. Docker is not the app—it packages the app for consistent deployment. P10 must not duplicate MIP business logic.
 
+**Product entrypoint direction (docs):** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) records the accepted future UX: single-page landing, chat-first Ask MIP, guided demo journeys, output previews, and data-needed-by-decision education. The current Streamlit app remains a deterministic governance console and will evolve toward that layout in later phases—not in this docs-only step.
+
 **UI access:** Local (`localhost`) for dev/private demos; public URL (Streamlit Community Cloud, Hugging Face Spaces) for portfolio/stakeholder demos. Public demo must work without platform-paid LLM dependency.
 
 See [ROADMAP_EXECUTION_SEQUENCE.md](../roadmap/ROADMAP_EXECUTION_SEQUENCE.md) P7–P11.
