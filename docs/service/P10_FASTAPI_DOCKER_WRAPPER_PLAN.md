@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Title** | P10 FastAPI/Docker Wrapper Plan |
-| **Status** | Planned |
+| **Status** | Planned (P10a implemented on feature branch) |
 | **Type** | Service wrapper planning (docs/design only) |
 | **Current baseline commit** | `f123510` |
 | **Public demo URL** | https://marketingintelligenceplatform.streamlit.app/ |
