@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `3e2ecf3`  
-**Immediate next phase:** **P9** — public hosted demo
+**Current main:** `391f46b`  
+**Immediate next phase:** **Manual Streamlit Community Cloud deploy** or **P10** FastAPI/Docker wrapper
 
 > **Phase note:** P7–P11 cover product surface (local UI, LLM providers, demo profiling, **agent role contracts**, public demo, FastAPI/Docker, API hardening). Former P9–P16 integer phases shift to **P12–P20** (table-ref, refresh, lifecycle, LLM governance, golden harness, LangGraph, decision packet, optimizer, live gate). LangGraph remains **P17** and must use P8b agent contracts.
 
@@ -25,6 +25,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | P8 local/demo profiling contracts + helpers | ✓ |
 | P8b agent role registry + failure/recovery contracts | ✓ |
 | P8c canonical Streamlit entrypoint cleanup | ✓ |
+| P9 deterministic public demo preparation | ✓ |
 | Contracts, gates, TrustReport, evidence registry | ✓ |
 | LLM Phase 1–5D (safety, intake, readiness, configs, orchestrator, CLI, MockLLM, Streamlit shell) | ✓ |
 | Adapters 6A–6C, orchestration 7A–7C, static sibling bridge 8A–8F | ✓ |
@@ -114,7 +115,8 @@ P1 session/path
 | **P8** | I4 demo fixtures + local/demo profiling | Sandbox in-memory only; no production ingestion | ✓ implemented |
 | **P8b** | Agent role registry + run manifest + failure/recovery contracts | Contracts/helpers only; no LangGraph runtime | ✓ implemented |
 | **P8c** | Canonical Streamlit entrypoint cleanup | Docs/tests only; no hosting | ✓ implemented |
-| **P9** | Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces) | Demo-safe; no platform LLM key by default | Planned |
+| **P9** | Deterministic public demo preparation | Deployment metadata + safety copy; no secrets/LLM | ✓ implemented |
+| **P9 deploy** | Manual Streamlit Community Cloud / Hugging Face deploy | Demo-safe; deterministic-only first | Planned |
 | **P10** | FastAPI/Docker service wrapper | HTTP boundary; no duplicated MIP logic | Planned |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
 | **P12** | I11 production table-ref design | Design only | Planned |
@@ -602,7 +604,30 @@ The app runs in deterministic mode by default. It does not require LLM providers
 
 **Legacy compatibility:** `poetry run mip-app` launches the Phase 5D JSON workflow shell (`run_local_workflow()` + `MockLLMProvider`) for backward compatibility. It is not the canonical P7/P8 demo surface.
 
-### P9 — Public hosted demo
+### P9 — Deterministic public demo preparation
+
+**Purpose:** Prepare the repository for a first public hosted demo on Streamlit Community Cloud (primary) or Hugging Face Spaces (secondary), using the canonical deterministic app.
+
+**P9 status:** ✓ implemented — `requirements.txt`, `runtime.txt`, `.streamlit/config.toml`, public demo safety copy in `app/streamlit_app.py`, deployment README, and readiness tests.
+
+**P9 implemented:** P9 prepares the deterministic Streamlit demo for public hosting. The public demo uses `app/streamlit_app.py` as the canonical app entrypoint, includes deployment dependency metadata, preserves deterministic/no-LLM mode, and documents Streamlit Community Cloud as the first hosting path. It does not introduce LLM providers, BYOK, FastAPI, Docker, external APIs, production connectors, persistent storage, or public secrets.
+
+**Primary hosting path:** Streamlit Community Cloud — main file `app/streamlit_app.py`, dependencies from `requirements.txt`, Python 3.11 via `runtime.txt`.
+
+**Secondary documented option:** Hugging Face Spaces (simple Streamlit path first; Docker Spaces deferred to P10).
+
+**First hosted demo scope (deterministic-only):**
+
+- No LLM provider, API key, BYOK, or Ollama integration in the public app
+- No FastAPI, Docker, database, or persistent storage
+- Synthetic demo fixtures only; no file upload persistence
+- Public Demo Safety copy visible on landing
+
+**Manual deploy (next step):** Connect the repository to Streamlit Community Cloud, set app path to `app/streamlit_app.py`, confirm Python 3.11, deploy without secrets.
+
+**Deferred beyond first deploy:** `hosted_open_source`, `bring_your_own_key`, platform-managed keys (require P11 controls).
+
+### P9 deploy — Manual public URL (planned)
 
 **Purpose:** Deploy demo-safe public URL on Streamlit Community Cloud or Hugging Face Spaces.
 

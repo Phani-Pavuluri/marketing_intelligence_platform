@@ -246,9 +246,11 @@ See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTE
 
 **P8c implemented:** Canonical Streamlit entrypoint clarified before public hosting. `app/streamlit_app.py` is the local/public deterministic demo app. Legacy `mip.app.streamlit_app` / `mip-app` remain for Phase 5D JSON workflow compatibility only.
 
-**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next phase: **P9** public hosted demo.
+**P9 implemented:** Deterministic public demo preparation. `requirements.txt`, `runtime.txt`, and `.streamlit/config.toml` support Streamlit Community Cloud hosting of `app/streamlit_app.py` without LLM providers, secrets, FastAPI, Docker, or external services.
 
-1. **P9** — Public hosted demo (Streamlit Community Cloud / Hugging Face Spaces)
+**Next (implementation):** See [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md). Immediate next step: **manual deploy** to Streamlit Community Cloud, or **P10** FastAPI/Docker wrapper.
+
+1. **Manual deploy** — Streamlit Community Cloud using `app/streamlit_app.py` and `requirements.txt`
 2. **P10** — FastAPI/Docker service wrapper
 3. **P11** — Hosted API hardening (auth, rate limits, privacy, cost controls)
 4. **P17** — LangGraph orchestration skeleton (after P8b contracts stabilize)
@@ -261,6 +263,10 @@ Live engine execution remains blocked until golden scenarios and safety evaluati
 marketing_intelligence_platform/
   README.md
   pyproject.toml
+  requirements.txt   # P9 Streamlit Community Cloud runtime dependencies
+  runtime.txt        # Python 3.11 for hosted demo
+  .streamlit/        # Headless demo UI config (no secrets)
+  app/               # Canonical local/public Streamlit demo (P7/P8/P9)
   docs/
     vision/           # Vision and principles
     architecture/     # Layers, boundaries, trust, LLM, local-first
@@ -269,7 +275,6 @@ marketing_intelligence_platform/
     adr/              # Architecture decision records
     glossary/         # Estimands and measurement terms
     operating_model/  # Intake, evaluation, release gates
-  app/                # Canonical local/public Streamlit demo (P7/P8)
   src/mip/
     contracts/        # Governed Pydantic contracts
     evidence/         # Registry, calibration audit, readiness
@@ -329,6 +334,33 @@ poetry run mip-app
 ```
 
 This launches `src/mip/app/streamlit_app.py`—a separate shell from the canonical demo above.
+
+## Public demo deployment
+
+**Canonical app entrypoint:** `app/streamlit_app.py`
+
+**Local command:**
+
+```bash
+poetry run streamlit run app/streamlit_app.py
+```
+
+**Primary hosting target:** [Streamlit Community Cloud](https://streamlit.io/cloud). In the app settings, set the main file path to `app/streamlit_app.py` and Python version to 3.11 (see `runtime.txt`). The platform installs dependencies from `requirements.txt`.
+
+The public demo is **deterministic-only** and requires **no secrets**, API keys, LLM providers, FastAPI, Docker, databases, or external services.
+
+**Before public deploy:**
+
+- `poetry run pytest` passes
+- `poetry run ruff check .` passes
+- `poetry run mypy src tests app` passes
+- No secrets committed (no `.env`, `secrets.toml`, or tokens in repo)
+- `requirements.txt` present at repository root
+- Canonical app path confirmed: `app/streamlit_app.py`
+- Deterministic mode and Public Demo Safety copy visible in the app
+- No LLM provider selector or API-key fields exposed in the canonical app
+
+**Optional secondary host:** [Hugging Face Spaces](https://huggingface.co/docs/hub/spaces) can host a Streamlit demo later. Prefer the simple Streamlit Community Cloud path first. Docker-based Spaces belong to the later FastAPI/Docker phase (P10) unless needed sooner.
 
 ## Development setup
 

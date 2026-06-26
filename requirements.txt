@@ -1,0 +1,7 @@
+# P9 deterministic public demo runtime dependencies (Streamlit Community Cloud).
+# Install the local package plus explicit hosted-app requirements.
+.
+streamlit>=1.40,<2.0
+pydantic>=2.0,<3.0
+pandas>=2.0,<3.0
+numpy>=2.0,<3.0

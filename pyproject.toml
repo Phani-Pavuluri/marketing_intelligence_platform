@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Causal marketing intelligence operating system"
 authors = []
 readme = "README.md"
-packages = [{ include = "mip", from = "src" }]
+packages = [{ include = "mip", from = "src" }, { include = "app" }]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<4.0"

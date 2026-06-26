@@ -41,21 +41,47 @@ from app.ui_renderers import (
 
 def _render_mode_banner() -> None:
     banner = mode_banner()
-    st.info(f"**Mode:** {banner['mode']}\n\n{banner['description']}")
+    st.info(
+        f"**Mode:** {banner['mode']}\n\n"
+        f"{banner['description']}\n\n"
+        "No LLM provider is configured or required. No external services are called."
+    )
+
+
+def _render_public_demo_safety() -> None:
+    st.subheader("Public Demo Safety")
+    st.markdown(
+        """
+This hosted demo is **deterministic-only**.
+
+- It does **not** call LLM providers.
+- It does **not** run MMM or GeoX engines.
+- It does **not** estimate causal lift, ROI, power/MDE, matched markets,
+  treatment/control assignment, or optimized budgets.
+- It uses **synthetic demo fixtures** and governed summaries only.
+- **No uploaded data is persisted.** This demo does not accept file uploads.
+- Outputs are advisory, readiness, and mapping demonstrations—not production
+  measurement decisions.
+        """
+    )
 
 
 def _render_landing() -> None:
-    st.title("Marketing Intelligence Platform — Local Demo Shell")
+    st.title("Marketing Intelligence Platform — Public Demo")
     st.markdown(
         """
-This local app demonstrates governed intake, advisory planning, readiness, and
-calibration mapping workflows.
+This app demonstrates governed intake, advisory planning, readiness, and
+calibration mapping workflows using local synthetic demo fixtures.
 
+- **Mode:** Deterministic — no LLM provider is configured or required.
+- **No external services** are called.
+- **No uploaded data** is persisted.
 - It does **not** run MMM, GeoX, or LLM inference.
 - It does **not** estimate lift, ROI, MDE, power, or optimized budgets.
 - Outputs are deterministic MIP contracts and governed report objects.
         """
     )
+    _render_public_demo_safety()
 
 
 def _render_list(title: str, items: list[str]) -> None:

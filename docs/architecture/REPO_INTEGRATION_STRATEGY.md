@@ -69,6 +69,8 @@ Docker wraps UI/API/package for portable deployment.
 
 **Canonical Streamlit entrypoint (P8c):** `app/streamlit_app.py` — run with `poetry run streamlit run app/streamlit_app.py`. Deterministic mode by default; no LLM providers, API keys, FastAPI, Docker, or external services required. Legacy Phase 5D shell (`src/mip/app/streamlit_app.py`, `mip-app`) retained for JSON workflow + MockLLM compatibility only.
 
+**Public demo preparation (P9):** `requirements.txt`, `runtime.txt` (Python 3.11), and `.streamlit/config.toml` prepare Streamlit Community Cloud hosting of the canonical deterministic app. The first public hosted demo is deterministic-only—no LLM providers, BYOK, secrets, FastAPI, Docker, databases, persistent storage, or external connectors. Hugging Face Spaces is documented as an optional secondary host; Docker-based Spaces belong to P10.
+
 FastAPI is not required for the first UI demo. Docker is not the app—it packages the app for consistent deployment. P10 must not duplicate MIP business logic.
 
 **UI access:** Local (`localhost`) for dev/private demos; public URL (Streamlit Community Cloud, Hugging Face Spaces) for portfolio/stakeholder demos. Public demo must work without platform-paid LLM dependency.
