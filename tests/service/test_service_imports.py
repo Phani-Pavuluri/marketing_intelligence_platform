@@ -26,8 +26,8 @@ def test_module_level_app_is_created() -> None:
     assert service_app.title == "MIP API"
 
 
-def test_no_dockerfile_at_repo_root() -> None:
-    assert not Path("Dockerfile").exists()
+def test_dockerfile_exists_for_p10c() -> None:
+    assert Path("Dockerfile").is_file()
 
 
 def test_streamlit_app_import_still_works() -> None:

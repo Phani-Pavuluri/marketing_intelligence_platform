@@ -2,8 +2,8 @@
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `841cca0`  
-**Immediate next phase:** **P10c** — Dockerfile + local container smoke test (after P10b.1 service boundary cleanup on this branch; see [P10 plan](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md))
+**Current main:** `d6e3059`  
+**Immediate next phase:** **P11** — hosted API hardening (after P10c Docker smoke; see [P10 plan](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md))
 
 > **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) — accepted strategy for MIP-owned synthetic demo fixtures, industry reference schemas, deterministic demo datasets (Stage A), and later real MMM/GeoX-backed visuals (Stage B). Docs-only; does not change current Streamlit runtime.
 
@@ -128,7 +128,7 @@ P1 session/path
 | **P10a** | FastAPI skeleton + health/version routes | `GET /health`, `GET /version` only | ✓ implemented |
 | **P10b** | Deterministic workflow API routes | Demo fixture keys; no raw rows | ✓ implemented |
 | **P10b.1** | Service boundary cleanup + usage modes doc | Routes call `mip.workflows.*`; fixtures inputs-only | ✓ implemented |
-| **P10c** | Dockerfile + local container smoke test | No public API hosting | Planned |
+| **P10c** | Dockerfile + local container smoke test | No public API hosting | ✓ implemented |
 | **P11** | Hosted API hardening | Auth, rate limits, privacy, cost controls | Planned |
 | **P12** | I11 production table-ref design | Design only | Planned |
 | **P13** | I12 refresh governance | No model execution | Planned |
@@ -682,7 +682,7 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 
 **P10 planning status:** ✓ documented — [P10_FASTAPI_DOCKER_WRAPPER_PLAN.md](../service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md). Design only; no FastAPI package, Dockerfile, or routes in repo yet.
 
-**P10 plan summary:** Thin wrapper over existing deterministic MIP helpers (advisory, readiness, calibration, intake). Streamlit public demo remains canonical. Docker deferred to P10c. Auth/secrets/rate limits deferred to P11.
+**P10 plan summary:** Thin wrapper over existing deterministic MIP helpers (advisory, readiness, calibration, intake). Streamlit public demo remains canonical. **P10c** adds local Docker smoke for FastAPI only. Auth/secrets/rate limits deferred to **P11**.
 
 **Implementation split:**
 
@@ -691,7 +691,7 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 | **P10a** | FastAPI skeleton; `GET /health`, `GET /version` | ✓ implemented |
 | **P10b** | `POST` workflow routes (demo fixture keys) | ✓ implemented |
 | **P10b.1** | Service boundary cleanup; `docs/service/DETERMINISTIC_USAGE_MODES.md` | ✓ implemented |
-| **P10c** | Dockerfile + local container smoke test | Planned |
+| **P10c** | Dockerfile + local container smoke test | ✓ implemented |
 
 **Acceptance criteria (P10 implementation, future):**
 
