@@ -3,7 +3,7 @@
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
 **Current main:** `000273a`
-**Immediate next phase:** MIP tool registry + LLM explanation contracts (no LLM runtime yet)
+**Immediate next phase:** LLM explanation typed contracts + deterministic validator (no LLM runtime yet)
 
 > **Product direction:** [PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001](../product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) — accepted product direction for single-page landing + chat-first UX, guided demos, output previews, and data-needed-by-decision education. [SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001](../product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) — accepted strategy for MIP-owned synthetic demo fixtures, industry reference schemas, deterministic demo datasets (Stage A), and later real MMM/GeoX-backed visuals (Stage B). Docs-only; does not change current Streamlit runtime.
 
@@ -48,6 +48,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | Agent answerability contracts + deterministic evaluator | ✓ implemented — `mip.contracts.agent_answerability`, `mip.agents.answerability`, `mip.workflows.agent.answerability` |
 | Agent capability eval fixtures 001 | ✓ implemented — `examples/fixtures/agent_capability_eval`, `mip.evaluation.agent_capability_fixtures` |
 | MIP LLM control plane architecture 001 | ✓ documented — [MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md](../architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md) |
+| MIP LLM control plane evaluation strategy 001 | ✓ documented — [MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001.md](../evaluation/MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001.md) |
 
 ## Platform principles
 
@@ -746,7 +747,9 @@ Platform-managed LLM keys deferred until: authentication · rate limits · spend
 
 **MIP LLM control plane architecture (001):** documented — [MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md](../architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md). LLM-first interface, deterministic-core; shared control plane + package adapters.
 
-**Next:** `MIP_TOOL_REGISTRY_AND_CAPABILITY_METADATA_CONTRACT_001`; LLM explanation contracts; readiness adapter remains `needs_contract_update`.
+**MIP LLM control plane evaluation strategy (001):** documented — [MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001.md](../evaluation/MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001.md). Fixture families, canned-response eval schema, CI-safe mock strategy, red-team plan, G1–G8 gates. Runtime LLM blocked until G3–G8.
+
+**Next:** `LLMExplanationRequest`/`LLMExplanationResponse` contracts + `validate_llm_explanation_response()`; then `MIP_TOOL_REGISTRY_AND_CAPABILITY_METADATA_CONTRACT_001`; readiness adapter remains `needs_contract_update`.
 
 ### P11 — Hosted API hardening (later)
 

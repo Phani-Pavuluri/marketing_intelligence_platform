@@ -1,0 +1,58 @@
+{
+  "artifact_id": "MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001",
+  "artifact_type": "mip_llm_control_plane_evaluation_strategy",
+  "status": "completed",
+  "scope": "docs_eval_planning_only",
+  "base_architecture": "MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001",
+  "llm_control_plane_eval_strategy_defined": true,
+  "runtime_llm_provider_eval_implemented": false,
+  "ci_safe_mock_eval_required": true,
+  "human_review_red_team_eval_required": true,
+  "required_llm_eval_dimensions": [
+    "intent_classification",
+    "answerability_state_classification",
+    "tool_routing_correctness",
+    "deterministic_registry_validation_compliance",
+    "missing_input_question_quality",
+    "claim_boundary_preservation",
+    "grounded_explanation_faithfulness",
+    "report_invocation_correctness",
+    "session_state_assumption_correctness",
+    "failure_recovery_behavior",
+    "advisory_mode_safety",
+    "cross_package_routing",
+    "unsupported_claim_refusal",
+    "rule_sprawl_resistance"
+  ],
+  "eval_layers": [
+    "answerability_routing_evals",
+    "deterministic_report_output_evals",
+    "canned_llm_explanation_response_evals",
+    "mock_provider_ci_evals",
+    "human_red_team_runtime_provider_evals"
+  ],
+  "fixture_families": [
+    "agent_capability_eval",
+    "llm_explanation_canned_eval",
+    "llm_explanation_mock_provider_eval",
+    "llm_red_team_eval",
+    "llm_cross_package_boundary_eval",
+    "llm_tool_unavailable_eval"
+  ],
+  "proposed_schemas": [
+    "LLMExplanationEvalCase",
+    "LLMExplanationValidationResult"
+  ],
+  "runtime_gates": {
+    "G1_deterministic_reports_exist": "partial",
+    "G2_answerability_eval_fixtures": "partial",
+    "G3_explanation_contracts_and_validator": "not_met",
+    "G4_canned_explanation_eval_ci": "not_met",
+    "G5_mock_provider_eval_path": "not_met",
+    "G6_claim_boundary_advisory_safety_evals": "not_met",
+    "G7_human_red_team_review": "not_met",
+    "G8_provider_guardrails_and_trace": "not_met"
+  },
+  "spend_contrast_eval_substitutes_llm_control_plane_eval": false,
+  "final_verdict": "mip_llm_control_plane_evaluation_strategy_defined_no_runtime_llm_eval_implementation"
+}

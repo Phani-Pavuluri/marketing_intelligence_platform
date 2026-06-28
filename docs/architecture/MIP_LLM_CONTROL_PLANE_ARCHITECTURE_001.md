@@ -542,16 +542,240 @@ This artifact does **not**:
 
 ---
 
-## 30. Final verdict
+## 30. LLM control-plane eval strategy
+
+LLM-first interface without a defined eval strategy is **incomplete architecture**. This artifact defines the **MIP-level LLM eval strategy** required to validate the control plane before any runtime LLM/provider layer is trusted.
+
+**Scope of this section:** strategy and acceptance criteria only. **No** live LLM/provider eval implementation in this artifact.
+
+### Why eval strategy belongs in MIP (not panel_exp)
+
+| Eval class | Owner |
+|------------|-------|
+| MIP control-plane routing, answerability, claim boundaries, explanation faithfulness | **MIP** |
+| GeoX spend-contrast feasibility tooling correctness | **panel_exp** (package execution) |
+| MMM model/diagnostic/report builder correctness | **MMM** (package execution) |
+
+`SPEND_CONTRAST_FEASIBILITY_TOOLING_CONTRACT_001` and other package contracts validate **deterministic tool outputs**. They do **not** substitute for MIP-level LLM control-plane evals.
+
+### Eval layers (must remain distinct)
+
+| Layer | Purpose | Status |
+|-------|---------|--------|
+| **Architecture eval requirements** | Define dimensions, acceptance criteria, gates | This artifact |
+| **Deterministic eval fixtures** | Typed inputs → expected answerability/routing/claim decisions (no LLM) | Partial — `agent_capability_eval` (answerability only) |
+| **LLM/provider eval harnesses** | Canned or live responses validated against contracts | Future — blocked until explanation contracts exist |
+| **CI-safe mock evals** | Deterministic fixtures + mocked LLM responses; no provider keys | Future — required before CI enables LLM paths |
+| **Human review / red-team evals** | Adversarial NL, policy drift, cross-package ambiguity | Future — required before production enablement |
+
+**Principle:** answerability eval fixtures test **state routing**, not LLM prose. LLM explanation evals are a **separate harness** that validates generated text against typed requests, claim boundaries, and source artifacts.
+
+---
+
+## 31. Required eval dimensions
+
+The following **14 dimensions** are required before the LLM control plane can be trusted at runtime. Each dimension has deterministic acceptance criteria; implementation is deferred to future contracts and harnesses.
+
+### 1. Intent classification
+
+Detect whether user intent is:
+
+- GeoX planning
+- GeoX readout
+- MMM modeling
+- MMM planning
+- MMM calibration
+- reporting
+- advisory
+- data intake
+- unsupported request
+
+Evals must be **capability-driven** (structured claim type + package scope), not exact natural-language prompt matching.
+
+### 2. Answerability state classification
+
+Classify whether the request is:
+
+- answerable from registered artifact
+- answerable from deterministic tool output
+- needs core diagnostic/ML
+- needs user input/data
+- needs report invocation
+- blocked by claim boundary
+
+Maps to `evaluate_agent_answerability()` and `AgentAnswerabilityState`. Partial coverage exists via `examples/fixtures/agent_capability_eval/`.
+
+### 3. Tool routing correctness
+
+- Verify the LLM proposes the correct package/tool route for MMM vs GeoX requests.
+- Verify **deterministic registry validation is required** before execution.
+- Verify registry rejects out-of-scope, unavailable, or precondition-failing tools.
+
+### 4. Deterministic registry validation compliance
+
+- Verify no tool executes without registry validation.
+- Verify `low_risk_auto_run` tools still pass preconditions and answerability.
+- Verify high-stakes tools require explicit authorization path.
+
+### 5. Missing-input question quality
+
+- Verify the LLM asks the **smallest necessary** follow-up question.
+- Verify it does **not** ask broad questionnaire-style follow-ups when a typed missing field is known.
+- Verify missing-input prompts align with `missing_required_inputs` from answerability decisions.
+
+### 6. Claim-boundary preservation
+
+Verify the LLM does **not** claim lift, ROI, power, MDE, p-values, confidence intervals, design feasibility, calibration acceptance, budget optimization, or production readiness unless a deterministic artifact/report explicitly authorizes that claim.
+
+### 7. Grounded explanation faithfulness
+
+- Verify explanations are grounded in typed reports/artifacts.
+- Verify explanations do not add unsupported causal/statistical conclusions.
+- Verify citations reference `DeterministicReportEnvelope`, `ArtifactReference`, and `AgentAnswerabilityDecision`.
+
+Future contract: `MIP_LLM_REPORT_GROUNDING_AND_CLAIM_BOUNDARY_CONTRACT_001` + `validate_llm_explanation_response()`.
+
+### 8. Report invocation correctness
+
+- Verify the LLM invokes deterministic report builders for official reports.
+- Verify the LLM does **not** generate source-of-truth reports itself.
+- Verify explanation-only role after builder invocation.
+
+### 9. Session-state assumption correctness
+
+- Verify explicit user-provided assumptions are stored as structured session state.
+- Verify inferred assumptions are **not** stored as facts.
+- Verify user-editable, auditable distinction between conversation assumptions and tool-derived facts.
+
+### 10. Failure recovery behavior
+
+- Verify typed tool failures lead to bounded recovery actions.
+- Verify the LLM does **not** debug by inventing data or relaxing validation.
+- Verify `blocked_claims` and `forbidden_response_scope` are preserved on failure.
+
+### 11. Advisory-mode safety
+
+- Verify advisory responses explain package capabilities and data requirements.
+- Verify advisory responses do **not** claim feasibility, lift, ROI, power, or production readiness.
+- Verify advisory labeling when `governance_status` is advisory/diagnostic only.
+
+### 12. Cross-package routing
+
+- Verify MMM questions route to MMM adapters.
+- Verify GeoX questions route to GeoX/panel_exp adapters.
+- Verify ambiguous requests ask clarification or present safe alternatives.
+
+### 13. Unsupported causal/statistical claim refusal
+
+- Verify refusal when evidence tier does not support causal or inferential claims.
+- Verify no promotion of advisory/diagnostic evidence to decision-grade prose.
+- Overlaps with claim-boundary preservation; evals must cover both structured routing and NL surface forms.
+
+### 14. Rule-sprawl resistance
+
+- Verify eval cases are **capability-driven** and **typed-contract-driven**.
+- Verify evals are **not** hardcoded to fixture IDs or exact natural-language prompts.
+- Verify new scenarios extend fixture schema, not branching `if question contains ...` logic.
+
+---
+
+## 32. Eval fixture strategy
+
+### Current state (deterministic, partial)
+
+| Fixture set | Dimensions covered | Location |
+|-------------|-------------------|----------|
+| `agent_capability_eval` (10 cases) | Answerability state classification (dim 2); partial claim-boundary (dim 6) | `examples/fixtures/agent_capability_eval/` |
+
+### Required future fixture families (MIP-level)
+
+| Fixture family | Primary dimensions | Notes |
+|----------------|-------------------|-------|
+| `agent_capability_eval` (extend) | 2, 6, 10, 11 | Structured inputs only; no LLM runtime |
+| `llm_intent_routing_eval` | 1, 3, 12 | Typed intent envelopes + expected route |
+| `llm_missing_input_eval` | 5 | Known missing field → minimal question contract |
+| `llm_explanation_eval` | 6, 7, 13 | Canned `LLMExplanationResponse` + validator |
+| `llm_report_invocation_eval` | 8 | Builder invocation records, not NL reports |
+| `llm_session_state_eval` | 9 | Explicit vs inferred assumption cases |
+| `llm_failure_recovery_eval` | 10 | Typed failure packets → bounded recovery |
+| `llm_advisory_safety_eval` | 11 | Advisory-only governance labels |
+| `llm_cross_package_routing_eval` | 12 | MMM vs GeoX ambiguity and clarification |
+
+**Future implementation contract:** [MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001](../evaluation/MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001.md) defines fixture schemas, loaders, harness sequence, and CI-safe strategy. This architecture artifact defines **what** must be tested; the evaluation strategy artifact defines **how** to test it.
+
+### Fixture design rules
+
+1. Cases are JSON/YAML typed contracts, not prompt transcripts alone.
+2. `user_question` fields are documentation metadata; evaluators branch on structured fields only.
+3. Forbidden phrases check deterministic scopes, not LLM text, unless running explanation eval harness.
+4. Package-specific execution fixtures stay in MMM/panel_exp repos; MIP fixtures test control-plane behavior only.
+
+---
+
+## 33. CI-safe deterministic/mock eval strategy
+
+Before any provider key or live LLM call enters CI:
+
+| Requirement | Rationale |
+|-------------|-----------|
+| All answerability/routing evals run **without** LLM | Deterministic regression on every PR |
+| Explanation evals use **canned responses** | Validate `validate_llm_explanation_response()` without provider |
+| Mock LLM adapter returns fixture responses | Test orchestration wiring without network |
+| No API keys in CI for control-plane evals | Keys reserved for optional nightly/manual tiers |
+| Eval failures block merge on governance dimensions | Same bar as contract/schema tests |
+
+**Acceptance:** CI-safe mock eval suite passes with zero external LLM dependencies. Live provider evals are **optional** and **non-blocking** for default PR CI until explicitly gated.
+
+---
+
+## 34. Human review / red-team eval strategy
+
+Deterministic fixtures cannot cover all natural-language adversarial surfaces. Before production LLM enablement:
+
+| Review type | Focus |
+|-------------|-------|
+| **Policy red-team** | Claim-boundary bypass, advisory→decision promotion, unsupported causal language |
+| **Cross-package ambiguity** | MMM vs GeoX routing under vague prompts |
+| **Failure-mode probing** | Tool unavailable, partial data, contradictory session state |
+| **Explanation drift** | Grounded explanation faithfulness under paraphrase |
+| **Regression sampling** | Periodic human review of production traces (when runtime exists) |
+
+Human review is **required** for production enablement but **not** a substitute for deterministic CI evals. Both gates must pass.
+
+---
+
+## 35. Eval gates before runtime LLM enablement
+
+Runtime LLM/provider calls remain **blocked** until:
+
+| Gate | Requirement |
+|------|-------------|
+| G1 | `MIP_TOOL_REGISTRY_AND_CAPABILITY_METADATA_CONTRACT_001` defined |
+| G2 | Answerability eval fixtures pass (existing + extended) |
+| G3 | `LLMExplanationRequest` / `LLMExplanationResponse` contracts + `validate_llm_explanation_response()` |
+| G4 | Canned-response explanation eval harness passes in CI |
+| G5 | Intent/routing eval fixtures pass (mock LLM, no provider) |
+| G6 | Claim-boundary + advisory-safety explanation evals pass |
+| G7 | Human review / red-team sign-off on sampled adversarial cases |
+| G8 | `AgentRunManifest` trace coverage for control-plane interactions |
+
+**Explicit non-gate:** package-level spend-contrast or GeoX feasibility tooling evals do **not** satisfy G3–G6. Those validate execution tools, not LLM control-plane behavior.
+
+**Status:** G2 partial (answerability only). G1, G3–G8 not met. `runtime_llm_provider_eval_implemented` remains `false`.
+
+---
+
+## 36. Final verdict
 
 **`mip_llm_control_plane_architecture_defined_no_runtime_agents_or_production_authorization`**
 
-MIP adopts **LLM-first interface, deterministic-core execution** through a **shared LLM control plane** with **package-specific tool adapters**. The LLM proposes routes; the deterministic registry and answerability gate validate. Low-risk diagnostics may auto-run when goals are clear. High-stakes actions require authorization. Final reports come from deterministic builders. Advisory mode is bounded. Session assumptions are explicit structured facts only. Redundant package-side agents and standalone ballpark contract are deferred. Completed GeoX profiler/feasibility/golden-path work and MMM deterministic contracts are preserved and aligned — not rolled back.
+MIP adopts **LLM-first interface, deterministic-core execution** through a **shared LLM control plane** with **package-specific tool adapters**. The LLM proposes routes; the deterministic registry and answerability gate validate. Low-risk diagnostics may auto-run when goals are clear. High-stakes actions require authorization. Final reports come from deterministic builders. Advisory mode is bounded. Session assumptions are explicit structured facts only. **A 14-dimension MIP-level LLM eval strategy** (§30–35) defines acceptance criteria before runtime LLM enablement; implementation of eval fixtures and harnesses is deferred. Redundant package-side agents and standalone ballpark contract are deferred. Completed GeoX profiler/feasibility/golden-path work and MMM deterministic contracts are preserved and aligned — not rolled back.
 
 ---
 
 ## References
 
+- [MIP LLM Control Plane Evaluation Strategy 001](../evaluation/MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001.md)
 - [Agent Answerability and Fallback Contract Plan 001](AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md)
 - [MIP Report, Adapter, and Agent Contract Plan 001](MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md)
 - [ORCHESTRATION_BOUNDARIES.md](ORCHESTRATION_BOUNDARIES.md)

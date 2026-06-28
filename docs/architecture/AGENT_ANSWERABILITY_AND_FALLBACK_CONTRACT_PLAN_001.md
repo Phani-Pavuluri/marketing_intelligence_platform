@@ -426,6 +426,8 @@ Eval harness is **deterministic** — no LLM in v1 evaluator.
 
 **Eval fixtures:** `examples/fixtures/agent_capability_eval/` with loader `mip.evaluation.agent_capability_fixtures`. Evals are deterministic, structured-input driven, and test answerability state — not LLM output quality. Required before any LLM-facing agent/chat layer.
 
+**LLM control-plane eval strategy:** [MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001](../evaluation/MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001.md) defines fixture families (`llm_explanation_canned_eval`, mock provider, red-team), proposed `LLMExplanationEvalCase` / `LLMExplanationValidationResult` schemas, CI-safe mock strategy, and G1–G8 gates before runtime LLM enablement. `SPEND_CONTRAST_FEASIBILITY_TOOLING_CONTRACT_001` does not substitute for MIP LLM control-plane evals.
+
 ### Structured inputs only
 
 The evaluator uses `AgentAnswerabilityRequest` — not natural-language question matching. `user_intent` is metadata on the decision record only.
