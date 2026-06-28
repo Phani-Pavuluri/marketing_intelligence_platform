@@ -103,7 +103,7 @@ Synthetic benchmarks, replay validation, regression suites, and orchestration ev
 | Trust | `mip.trust` | Implemented |
 | Engine adapters | `mip.adapters.geox`, `mip.adapters.mmm` | Planned |
 | Orchestration | `mip.orchestration` | Placeholder |
-| LLM control plane | `mip.llm` | Planned |
+| LLM control plane | `mip.llm` | Planned — see [MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md](./MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md) |
 | Workflows | `mip.workflows.*` | Planned |
 | App / dashboard / reports | `mip.app`, `mip.dashboard`, `mip.reports` | Planned |
 
@@ -111,6 +111,7 @@ Statistical engines live in `panel_exp` and `mmm` repos—not as copied trees in
 
 ## Related Documents
 
+- [MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md](./MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md)
 - [LLM_DECISION_LAYER_VISION.md](./LLM_DECISION_LAYER_VISION.md)
 - [LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md](./LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
 - [REPO_INTEGRATION_STRATEGY.md](./REPO_INTEGRATION_STRATEGY.md)

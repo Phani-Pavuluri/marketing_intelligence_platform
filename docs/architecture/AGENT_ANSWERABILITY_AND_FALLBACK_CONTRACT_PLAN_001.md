@@ -449,6 +449,7 @@ Governance on available reports **overrides** tool availability.
 
 ## References
 
+- [MIP LLM Control Plane Architecture 001](MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md) — shared control plane, package adapters, routing policies
 - [MIP Report, Adapter, and Agent Contract Plan 001](MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md) — §7 agent packets, §8 LLM boundaries
 - [MIP Agent Tooling and Roadmap Implementation Detail Audit 001](../audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md)
 - [Stage A.3 Advisory Readiness Intake Adapter Plan 001](STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md)
