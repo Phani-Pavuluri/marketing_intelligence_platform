@@ -12,20 +12,29 @@ _SUMMARY = Path(
     "MIP_GEOX_READOUT_INPUT_REQUIREMENTS_AND_HANDOFF_CONTRACT_001_summary.json"
 )
 
+_OPTIMIZED_THREE_STAGE_LANE = (
+    "MIP_GEOX_READOUT_INPUT_REQUIREMENTS_AND_HANDOFF_CONTRACT_001",
+    "MIP_GEOX_READOUT_INPUT_RESOLUTION_RUNTIME_001",
+    "MIP_GEOX_READOUT_PANEL_EXP_INTEGRATION_001",
+)
+
 _REQUIRED_SECTIONS = (
     "## 2. Why this contract exists",
-    "## 3. Package / MIP ownership split",
-    "## 4. MIP readout intent detection",
-    "## 5. Required MIP inputs for any GeoX readout",
-    "## 6. Conditional MIP inputs for spend-derived metrics",
-    "## 7. Conditional MIP inputs for value/margin mapping",
-    "## 8. MIP missing-input prompts",
-    "## 9. Typed handoff object",
-    "## 10. MIP resolution statuses",
-    "## 11. MIP-to-panel_exp rules",
-    "## 12. Trust / claim boundary",
-    "## 13. Runtime follow-up plan",
-    "## 14. Non-goals",
+    "## 3. Optimized 3-stage GeoX handoff lane",
+    "## 4. Package / MIP ownership split",
+    "## 5. MIP readout intent detection",
+    "## 6. Dataset / source inventory and semantic classification expectations",
+    "## 7. Column mapping inference and confirmation expectations",
+    "## 8. Required MIP inputs for any GeoX readout",
+    "## 9. Conditional MIP inputs for spend-derived metrics",
+    "## 10. Conditional MIP inputs for value/margin mapping",
+    "## 11. MIP missing-input prompts",
+    "## 12. Typed handoff object",
+    "## 13. MIP resolution statuses",
+    "## 14. MIP-to-panel_exp rules",
+    "## 15. Trust / claim boundary",
+    "## 16. Runtime follow-up plan",
+    "## 17. Non-goals",
 )
 
 _READOUT_INTENTS = (
@@ -36,6 +45,26 @@ _READOUT_INTENTS = (
     "READOUT_WITH_PROFIT_ROI",
     "READOUT_WITH_DECISION_RECOMMENDATION_REQUEST",
     "READOUT_UNCLEAR_METRIC_REQUEST",
+)
+
+_SEMANTIC_DATASET_TYPES = (
+    "KPI_PANEL",
+    "SPEND_PANEL",
+    "ASSIGNMENT_TABLE",
+    "EXPERIMENT_METADATA",
+    "VALUE_MAPPING",
+    "MARGIN_MAPPING",
+    "DESIGN_ARTIFACT",
+    "UNKNOWN_DATASET",
+)
+
+_MAPPING_STATUSES = (
+    "INFERRED_HIGH_CONFIDENCE",
+    "INFERRED_LOW_CONFIDENCE",
+    "USER_CONFIRMED",
+    "USER_REJECTED",
+    "MISSING",
+    "AMBIGUOUS",
 )
 
 _FORBIDDEN_FLAGS = (
@@ -50,6 +79,8 @@ _FORBIDDEN_FLAGS = (
     "recommendation_contract_bypassed",
     "business_recommendation_authorized",
     "production_decisioning_authorized",
+    "llm_control_plane_modified",
+    "provider_runtime_modified",
 )
 
 _FORBIDDEN_RUNTIME_PATTERNS = tuple(
@@ -69,6 +100,15 @@ def test_required_sections_present() -> None:
     content = _DOC.read_text(encoding="utf-8")
     for section in _REQUIRED_SECTIONS:
         assert section in content, f"missing section: {section}"
+
+
+def test_optimized_three_stage_lane_defined() -> None:
+    content = _DOC.read_text(encoding="utf-8")
+    assert "Optimized 3-stage GeoX handoff lane" in content
+    for stage in _OPTIMIZED_THREE_STAGE_LANE:
+        assert stage in content, f"missing stage: {stage}"
+    assert "Anti-sprawl rule" in content
+    assert "not separate roadmap lanes" in content.lower()
 
 
 def test_kpi_requirements_defined() -> None:
@@ -92,6 +132,24 @@ def test_value_margin_requirements_defined() -> None:
     assert "BLOCKED_MISSING_VALUE_MAPPING_FOR_ROAS" in content
 
 
+def test_dataset_classification_expectations_defined() -> None:
+    content = _DOC.read_text(encoding="utf-8")
+    assert "semantic classification" in content.lower()
+    assert "uploaded_csv" in content
+    assert "warehouse_table" in content
+    for dataset_type in _SEMANTIC_DATASET_TYPES:
+        assert dataset_type in content, f"missing dataset type: {dataset_type}"
+
+
+def test_column_mapping_confirmation_expectations_defined() -> None:
+    content = _DOC.read_text(encoding="utf-8")
+    assert "column mapping inference" in content.lower()
+    assert "BLOCKED_MAPPING_CONFIRMATION_REQUIRED" in content
+    assert "Mapping confirmation needed" in content
+    for status in _MAPPING_STATUSES:
+        assert status in content, f"missing mapping status: {status}"
+
+
 def test_typed_handoff_object_defined() -> None:
     content = _DOC.read_text(encoding="utf-8")
     assert "GeoXReadoutInputHandoff" in content
@@ -103,14 +161,13 @@ def test_mip_panel_exp_ownership_split_defined() -> None:
     content = _DOC.read_text(encoding="utf-8")
     assert "MIP owner?" in content
     assert "panel_exp owner?" in content
-    assert "User request interpretation" in content
-    assert "Compute spend_delta readiness" in content
+    assert "Classify provided datasets" in content
+    assert "Infer column mappings" in content
 
 
 def test_panel_exp_owns_spend_delta_derivation() -> None:
     content = _DOC.read_text(encoding="utf-8")
-    assert "panel_exp" in content
-    assert "spend_delta" in content
+    assert "Compute spend_delta readiness" in content
     assert "GEOX_POST_TEST_SPEND_READINESS_ADAPTER_RUNTIME_001" in content
 
 
@@ -123,12 +180,16 @@ def test_mip_does_not_compute_spend_delta() -> None:
 def test_claim_authorization_delegated() -> None:
     content = _DOC.read_text(encoding="utf-8")
     assert "CLAIM_AUTHORIZATION_RUNTIME_001" in content
-    assert "claim authorization" in content.lower()
 
 
 def test_runtime_followup_artifact() -> None:
     content = _DOC.read_text(encoding="utf-8")
     assert "MIP_GEOX_READOUT_INPUT_RESOLUTION_RUNTIME_001" in content
+
+
+def test_panel_exp_integration_followup_artifact() -> None:
+    content = _DOC.read_text(encoding="utf-8")
+    assert "MIP_GEOX_READOUT_PANEL_EXP_INTEGRATION_001" in content
 
 
 def test_readout_intents_defined() -> None:
@@ -140,11 +201,18 @@ def test_readout_intents_defined() -> None:
 def test_summary_json_validates() -> None:
     summary = json.loads(_SUMMARY.read_text(encoding="utf-8"))
     assert summary["artifact_id"] == "MIP_GEOX_READOUT_INPUT_REQUIREMENTS_AND_HANDOFF_CONTRACT_001"
-    assert summary["mip_geox_readout_handoff_contract_completed"] is True
-    assert summary["panel_exp_spend_delta_delegated"] is True
-    assert summary["claim_authorization_delegated"] is True
+    assert summary["optimized_three_stage_lane_defined"] is True
+    assert summary["optimized_three_stage_lane"] == list(_OPTIMIZED_THREE_STAGE_LANE)
+    assert summary["dataset_classification_expectations_defined"] is True
+    assert summary["column_mapping_confirmation_expectations_defined"] is True
+    assert summary["panel_exp_integration_followup_defined"] is True
+    assert summary["llm_control_plane_modified"] is False
+    assert summary["provider_runtime_modified"] is False
     assert summary["recommended_next_mip_artifact"] == (
         "MIP_GEOX_READOUT_INPUT_RESOLUTION_RUNTIME_001"
+    )
+    assert summary["recommended_panel_exp_integration_artifact"] == (
+        "MIP_GEOX_READOUT_PANEL_EXP_INTEGRATION_001"
     )
     assert summary["required_panel_exp_runtime"] == (
         "GEOX_POST_TEST_SPEND_READINESS_ADAPTER_RUNTIME_001"
@@ -160,7 +228,6 @@ def test_summary_json_forbidden_flags_not_true() -> None:
 
 
 def test_no_llm_control_plane_docs_modified_in_this_lane() -> None:
-    """This lane must not depend on LLM control-plane evaluation strategy files."""
     llm_eval_doc = Path(
         "docs/evaluation/MIP_LLM_CONTROL_PLANE_EVALUATION_STRATEGY_001.md"
     )
