@@ -55,6 +55,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP GeoX readout panel_exp integration 001A | ✓ implemented — `mip.contracts.geox_panel_exp_integration`, `mip.workflows.geox_panel_exp_integration` (adapter boundary / materialization plan; no panel_exp call) |
 | MIP GeoX readout fixture materialization adapter 001 | ✓ implemented — `mip.contracts.geox_fixture_materialization`, `mip.workflows.geox_fixture_materialization` (controlled local CSV fixtures; no panel_exp) |
 | MIP GeoX readout panel_exp runtime call 001B | ✓ implemented — `mip.contracts.geox_panel_exp_runtime_call`, `mip.workflows.geox_panel_exp_runtime_call` (fixture-only panel_exp runtime call; optional `panel_exp` sibling dependency; no production loader) |
+| MIP GeoX readout result ingestion and explanation 001 | ✓ implemented — `mip.contracts.geox_readout_result_ingestion`, `mip.workflows.geox_readout_result_ingestion` (MIP-facing package artifact explanation; no panel_exp; no metric recomputation) |
 
 ## Platform principles
 

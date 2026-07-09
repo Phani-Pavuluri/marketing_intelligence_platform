@@ -100,6 +100,8 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Fixture materialization (implemented):** `MIP_GEOX_READOUT_FIXTURE_MATERIALIZATION_ADAPTER_001` — narrow local CSV fixture materialization via `materialize_geox_readout_fixtures()` for controlled test paths. Not a production materialized input provider.
 
+**Result ingestion and explanation (implemented):** `MIP_GEOX_READOUT_RESULT_INGESTION_AND_EXPLANATION_001` — ingests Stage 3B `GeoXPostTestSpendEvidenceArtifact` and `GeoXTrustedReadoutSpendHandoffArtifact` via `ingest_geox_readout_result_for_explanation()` and returns a MIP-facing `GeoXReadoutResultEnvelope`. Explains package readiness, blockers, warnings, and claim boundaries without `panel_exp` import, metric recomputation, or claim authorization.
+
 | Component | Responsibility |
 |-----------|----------------|
 | Handoff adapter | Pass `GeoXReadoutInputHandoff` to panel_exp |

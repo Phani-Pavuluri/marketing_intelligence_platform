@@ -213,6 +213,17 @@ from mip.contracts.geox_readout_input_resolution_pipeline import (
     RECOMMENDED_NEXT_STAGE_3_ARTIFACT,
     GeoXReadoutInputResolutionPipelineResult,
 )
+from mip.contracts.geox_readout_result_ingestion import (
+    RECOMMENDED_NEXT_TRUST_ROUTING_ARTIFACT,
+    GeoXReadoutClaimReadiness,
+    GeoXReadoutExplanationAudience,
+    GeoXReadoutResultEnvelope,
+    GeoXReadoutResultExplanation,
+    GeoXReadoutResultIngestionRequest,
+    GeoXReadoutResultIngestionResult,
+    GeoXReadoutResultIssueCode,
+    GeoXReadoutResultStatus,
+)
 from mip.contracts.geox_readout_source_inspection import (
     RECOMMENDED_NEXT_STAGE_2C_ARTIFACT,
     ColumnInspectionHint,
@@ -424,6 +435,15 @@ __all__ = [
     "GeoXReadoutIntent",
     "GeoXReadoutResolutionStatus",
     "GeoXReadoutInputResolutionPipelineResult",
+    "RECOMMENDED_NEXT_TRUST_ROUTING_ARTIFACT",
+    "GeoXReadoutClaimReadiness",
+    "GeoXReadoutExplanationAudience",
+    "GeoXReadoutResultEnvelope",
+    "GeoXReadoutResultExplanation",
+    "GeoXReadoutResultIngestionRequest",
+    "GeoXReadoutResultIngestionResult",
+    "GeoXReadoutResultIssueCode",
+    "GeoXReadoutResultStatus",
     "RECOMMENDED_NEXT_STAGE_3_ARTIFACT",
     "GeoXReadoutSourceInspectionRequest",
     "GeoXReadoutSourceInspectionResult",
