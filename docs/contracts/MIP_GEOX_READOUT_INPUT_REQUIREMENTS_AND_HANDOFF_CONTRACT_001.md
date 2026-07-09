@@ -94,7 +94,7 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Stage 3A (implemented):** Adapter boundary in `mip.contracts.geox_panel_exp_integration` and `mip.workflows.geox_panel_exp_integration`. Maps `GeoXReadoutInputHandoff` to `GeoXPostTestSpendAdapterInputPlan` and materialization blockers. Records GeoX runtime API handoff (`9fe4b92` / `b400912` / `9039fda`). No `panel_exp` import/call; no `PostTestSpendInput` instantiation.
 
-**Stage 3B (future):** Runtime call slice (`MIP_GEOX_READOUT_PANEL_EXP_RUNTIME_CALL_001B`) — only after safe materialized dataframe/provider path exists.
+**Stage 3B (implemented):** Runtime call slice (`MIP_GEOX_READOUT_PANEL_EXP_RUNTIME_CALL_001B`) — fixture-materialized inputs only via `call_geox_post_test_spend_runtime_for_fixture()`. Lazy `panel_exp` import; builds `PostTestSpendInput`, calls `build_post_test_spend_evidence` and `build_trusted_readout_spend_handoff`; returns MIP readiness artifacts with package-computed `spend_delta` labeled under `package_computed_spend_delta`. No production loader; claim authorization delegated to `CLAIM_AUTHORIZATION_RUNTIME_001`.
 
 **Fixture materialization (implemented):** `MIP_GEOX_READOUT_FIXTURE_MATERIALIZATION_ADAPTER_001` — narrow local CSV fixture materialization via `materialize_geox_readout_fixtures()` for controlled test paths. Not a production materialized input provider.
 
