@@ -96,6 +96,8 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Stage 3B (future):** Runtime call slice (`MIP_GEOX_READOUT_PANEL_EXP_RUNTIME_CALL_001B`) — only after safe materialized dataframe/provider path exists.
 
+**Fixture materialization (implemented):** `MIP_GEOX_READOUT_FIXTURE_MATERIALIZATION_ADAPTER_001` — narrow local CSV fixture materialization via `materialize_geox_readout_fixtures()` for controlled test paths. Not a production materialized input provider.
+
 | Component | Responsibility |
 |-----------|----------------|
 | Handoff adapter | Pass `GeoXReadoutInputHandoff` to panel_exp |

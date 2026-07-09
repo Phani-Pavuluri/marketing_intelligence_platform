@@ -1,0 +1,20 @@
+{
+  "artifact_id": "MIP_GEOX_READOUT_FIXTURE_MATERIALIZATION_ADAPTER_001",
+  "fixture_purpose": "controlled_local_geox_readout_materialization",
+  "synthetic_data": true,
+  "no_real_customer_data": true,
+  "datasets": [
+    {
+      "dataset_ref_id": "geox-fixture-spend-panel",
+      "role": "spend",
+      "file_path": "examples/fixtures/geox_readout_materialization/spend_panel.csv",
+      "required_columns": ["date", "dma", "spend", "currency"]
+    },
+    {
+      "dataset_ref_id": "geox-fixture-assignment-table",
+      "role": "assignment",
+      "file_path": "examples/fixtures/geox_readout_materialization/assignment_table.csv",
+      "required_columns": ["dma", "cell", "treatment"]
+    }
+  ]
+}

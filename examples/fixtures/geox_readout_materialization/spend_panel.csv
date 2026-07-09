@@ -1,0 +1,7 @@
+date,dma,spend,currency,cell,channel,campaign
+2026-01-06,501,1200.50,USD,treatment,search,spring_push
+2026-01-06,502,980.25,USD,control,search,spring_push
+2026-01-13,501,1305.00,USD,treatment,search,spring_push
+2026-01-13,502,1010.75,USD,control,search,spring_push
+2026-01-20,503,875.00,USD,treatment,social,spring_push
+2026-01-20,504,640.50,USD,control,social,spring_push
