@@ -48,6 +48,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | Agent answerability contracts + deterministic evaluator | ✓ implemented — `mip.contracts.agent_answerability`, `mip.agents.answerability`, `mip.workflows.agent.answerability` |
 | Agent capability eval fixtures 001 | ✓ implemented — `examples/fixtures/agent_capability_eval`, `mip.evaluation.agent_capability_fixtures` |
 | MIP LLM control plane architecture 001 | ✓ documented — [MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md](../architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md) |
+| MIP GeoX readout input handoff contract 001 | ✓ documented — [MIP_GEOX_READOUT_INPUT_REQUIREMENTS_AND_HANDOFF_CONTRACT_001.md](../contracts/MIP_GEOX_READOUT_INPUT_REQUIREMENTS_AND_HANDOFF_CONTRACT_001.md) |
 
 ## Platform principles
 
