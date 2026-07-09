@@ -163,6 +163,17 @@ from mip.contracts.geox_readout_input_resolution import (
     SpendColumnMapping,
     ValueMapping,
 )
+from mip.contracts.geox_readout_source_inspection import (
+    RECOMMENDED_NEXT_STAGE_2C_ARTIFACT,
+    ColumnInspectionHint,
+    ColumnSemanticHint,
+    DatasetSemanticInspectionHint,
+    DatasetSourceInspectionResult,
+    GeoXReadoutSourceInspectionRequest,
+    GeoXReadoutSourceInspectionResult,
+    SourceInspectionIssueCode,
+    SourceInspectionStatus,
+)
 from mip.contracts.intake import (
     DataGrain,
     GeoGrain,
@@ -362,6 +373,15 @@ __all__ = [
     "GeoXReadoutInputResolutionResult",
     "GeoXReadoutIntent",
     "GeoXReadoutResolutionStatus",
+    "GeoXReadoutSourceInspectionRequest",
+    "GeoXReadoutSourceInspectionResult",
+    "ColumnInspectionHint",
+    "ColumnSemanticHint",
+    "DatasetSemanticInspectionHint",
+    "DatasetSourceInspectionResult",
+    "RECOMMENDED_NEXT_STAGE_2C_ARTIFACT",
+    "SourceInspectionIssueCode",
+    "SourceInspectionStatus",
     "KPIColumnMapping",
     "MappingConfirmationStatus",
     "MappingInferenceStatus",
