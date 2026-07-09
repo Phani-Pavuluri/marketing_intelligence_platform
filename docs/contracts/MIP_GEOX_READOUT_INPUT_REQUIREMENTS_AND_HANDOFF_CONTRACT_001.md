@@ -92,6 +92,10 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Purpose:** panel_exp integration once package runtime exists.
 
+**Stage 3A (implemented):** Adapter boundary in `mip.contracts.geox_panel_exp_integration` and `mip.workflows.geox_panel_exp_integration`. Maps `GeoXReadoutInputHandoff` to `GeoXPostTestSpendAdapterInputPlan` and materialization blockers. Records GeoX runtime API handoff (`9fe4b92` / `b400912` / `9039fda`). No `panel_exp` import/call; no `PostTestSpendInput` instantiation.
+
+**Stage 3B (future):** Runtime call slice (`MIP_GEOX_READOUT_PANEL_EXP_RUNTIME_CALL_001B`) — only after safe materialized dataframe/provider path exists.
+
 | Component | Responsibility |
 |-----------|----------------|
 | Handoff adapter | Pass `GeoXReadoutInputHandoff` to panel_exp |
