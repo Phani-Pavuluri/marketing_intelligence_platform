@@ -316,6 +316,22 @@ from mip.contracts.llm_provider import (
 )
 from mip.contracts.recommendation import RecommendationContract
 from mip.contracts.trust import TrustReport
+from mip.contracts.uploaded_csv_materialization import (
+    ALLOWED_FILE_EXTENSIONS,
+    DEFAULT_MAX_UPLOAD_FILE_SIZE_BYTES,
+    DEFAULT_MAX_UPLOAD_ROWS,
+    RECOMMENDED_NEXT_GEOX_UPLOADED_CSV_ADAPTER_ARTIFACT,
+    RECOMMENDED_NEXT_PLANNING_UPLOADED_CSV_ADAPTER_ARTIFACT,
+    MaterializedTabularDataset,
+    UploadedCSVInspection,
+    UploadedCSVIssueCode,
+    UploadedCSVMaterializationRequest,
+    UploadedCSVMaterializationResult,
+    UploadedCSVMaterializationStatus,
+    UploadedCSVPolicy,
+    UploadedCSVSource,
+    UploadedCSVSourceType,
+)
 from mip.contracts.workflow_readiness import (
     BaseWorkflowReadinessReport,
     CalibrationSignalReadinessReport,
@@ -603,6 +619,20 @@ __all__ = [
     "TrafficSourceSignal",
     "ToolAvailabilityStatus",
     "TrustReport",
+    "ALLOWED_FILE_EXTENSIONS",
+    "DEFAULT_MAX_UPLOAD_FILE_SIZE_BYTES",
+    "DEFAULT_MAX_UPLOAD_ROWS",
+    "RECOMMENDED_NEXT_GEOX_UPLOADED_CSV_ADAPTER_ARTIFACT",
+    "RECOMMENDED_NEXT_PLANNING_UPLOADED_CSV_ADAPTER_ARTIFACT",
+    "MaterializedTabularDataset",
+    "UploadedCSVInspection",
+    "UploadedCSVIssueCode",
+    "UploadedCSVMaterializationRequest",
+    "UploadedCSVMaterializationResult",
+    "UploadedCSVMaterializationStatus",
+    "UploadedCSVPolicy",
+    "UploadedCSVSource",
+    "UploadedCSVSourceType",
     "WebsiteTrafficSourceProfile",
     "WorkflowReadinessFinding",
     "WorkflowReadinessReportType",

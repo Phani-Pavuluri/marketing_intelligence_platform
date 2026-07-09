@@ -314,3 +314,22 @@ Shared uploaded data/materialization core
 Do **not** merge GeoX-only uploaded CSV materialization as the long-term architecture. If short-term GeoX upload proof is needed, implement it as a thin wrapper over the shared core in a follow-on artifact (`MIP_GEOX_READOUT_UPLOADED_CSV_RUNTIME_BRIDGE_001` or similar), not as a standalone parser.
 
 The repository already has sufficient **declared-reference** abstractions (`DatasetReference`, `DataSourceRef`, intake manifests, column mapping). The gap is a **single shared materialization layer** between user-provided files and lane-specific resolvers — not additional per-lane CSV parsers.
+
+---
+
+## 14. Implementation status (2026-07-09)
+
+**`MIP_SHARED_UPLOADED_CSV_MATERIALIZATION_CORE_001` — implemented on main (pending merge from feature branch).**
+
+| Component | Location |
+|-----------|----------|
+| Shared contracts | `mip.contracts.uploaded_csv_materialization` |
+| Shared workflow | `mip.workflows.uploaded_csv_materialization` |
+| Generic fixtures | `examples/fixtures/uploaded_csv_materialization/` |
+
+**Deferred follow-ons:**
+
+- `MIP_GEOX_READOUT_UPLOADED_CSV_ADAPTER_001` — map `MaterializedTabularDataset` → GeoX roles / `DatasetReference`
+- `MIP_PLANNING_MMM_UPLOADED_CSV_ADAPTER_001` — map shared outputs → planning/MMM intake refs
+
+**Reference branch (not merged):** `feature/mip-geox-uploaded-csv-materialization-001` (`8931a29`) — generic concepts extracted into shared core; GeoX role enums intentionally excluded.
