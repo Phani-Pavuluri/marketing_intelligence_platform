@@ -1,4 +1,9 @@
-"""Tests for GeoX panel_exp runtime-call workflow (Stage 3B)."""
+"""Tests for GeoX panel_exp runtime-call workflow (Stage 3B).
+
+`panel_exp` is optional: not in MIP pyproject.toml. This module uses
+`pytest.importorskip("panel_exp")` — runtime-success tests skip when the sibling
+GeoX package is not installed. Blocking-path tests run without panel_exp.
+"""
 
 from __future__ import annotations
 

@@ -96,6 +96,8 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Stage 3B (implemented):** Runtime call slice (`MIP_GEOX_READOUT_PANEL_EXP_RUNTIME_CALL_001B`) — fixture-materialized inputs only via `call_geox_post_test_spend_runtime_for_fixture()`. Lazy `panel_exp` import; builds `PostTestSpendInput`, calls `build_post_test_spend_evidence` and `build_trusted_readout_spend_handoff`; returns MIP readiness artifacts with package-computed `spend_delta` labeled under `package_computed_spend_delta`. No production loader; claim authorization delegated to `CLAIM_AUTHORIZATION_RUNTIME_001`.
 
+**Optional `panel_exp` dependency:** `panel_exp` is **not** listed in MIP `pyproject.toml`. Stage 3B is an optional fixture/runtime integration path: the runtime-call workflow lazy-imports `panel_exp` only when `allow_runtime_call=True` and fixture materialization checks pass. Workflow tests use `pytest.importorskip("panel_exp")` — they skip when the sibling GeoX package is not installed. To exercise the full fixture runtime path locally, install the sibling repo editable (e.g. `poetry run pip install -e /path/to/panel_exp`). MIP core installs and CI without `panel_exp` remain valid; blocking-path tests do not require the package.
+
 **Fixture materialization (implemented):** `MIP_GEOX_READOUT_FIXTURE_MATERIALIZATION_ADAPTER_001` — narrow local CSV fixture materialization via `materialize_geox_readout_fixtures()` for controlled test paths. Not a production materialized input provider.
 
 | Component | Responsibility |

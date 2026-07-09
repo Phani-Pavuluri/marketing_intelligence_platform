@@ -1,4 +1,8 @@
-"""GeoX panel_exp runtime-call workflow (Stage 3B — fixture materialization path only)."""
+"""GeoX panel_exp runtime-call workflow (Stage 3B — fixture materialization path only).
+
+`panel_exp` is an optional fixture/runtime integration dependency — not listed in MIP
+`pyproject.toml`. This module lazy-imports panel_exp only after fixture checks pass.
+"""
 
 from __future__ import annotations
 

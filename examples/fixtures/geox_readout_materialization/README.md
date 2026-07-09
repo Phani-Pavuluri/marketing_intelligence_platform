@@ -4,7 +4,11 @@ Synthetic CSV fixtures for **controlled local materialization** in the MIP GeoX 
 
 ## Purpose
 
-Support `MIP_GEOX_READOUT_FIXTURE_MATERIALIZATION_ADAPTER_001` and future Stage 3B runtime-call tests without production upload ingestion, warehouse queries, or live API calls.
+Support `MIP_GEOX_READOUT_FIXTURE_MATERIALIZATION_ADAPTER_001` and Stage 3B runtime-call tests without production upload ingestion, warehouse queries, or live API calls.
+
+## Optional `panel_exp` runtime dependency (Stage 3B)
+
+Stage 3B (`call_geox_post_test_spend_runtime_for_fixture`) lazy-imports the sibling **panel_exp** package to call `build_post_test_spend_evidence` and `build_trusted_readout_spend_handoff`. **`panel_exp` is not a required MIP dependency** — it is not in `pyproject.toml`. Workflow tests use `pytest.importorskip("panel_exp")` and skip when the package is absent. For local full-path validation, install the sibling GeoX repo editable into the MIP virtualenv.
 
 ## Files
 
