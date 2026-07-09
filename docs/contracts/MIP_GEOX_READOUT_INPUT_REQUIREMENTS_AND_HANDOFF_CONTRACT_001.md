@@ -46,6 +46,8 @@ Without this MIP-side handoff contract, GeoX can only validate and extract spend
 
 **This artifact is docs/tests-only.** No runtime orchestration, no panel_exp calls, no spend ingestion system.
 
+**Stage 2A (implemented):** Typed contracts in `mip.contracts.geox_readout_input_resolution` and deterministic resolver skeleton `resolve_geox_readout_inputs()` in `mip.workflows.geox_readout_input_resolution`. Operates on **declared** dataset references only — no real file parsing, no warehouse/API calls, no panel_exp invocation, no MIP metric computation. Future **Stage 2B** adds file/table/API inspection adapters for declared sources.
+
 ---
 
 ## 3. Optimized 3-stage GeoX handoff lane
@@ -61,6 +63,10 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 ### Stage 2 — `MIP_GEOX_READOUT_INPUT_RESOLUTION_RUNTIME_001`
 
 **Purpose:** One MIP input intelligence runtime.
+
+**Stage 2A (implemented on main):** Typed contracts + deterministic `resolve_geox_readout_inputs()` skeleton. Declared dataset refs only; no file parsing; no panel_exp calls.
+
+**Stage 2B (future):** File/table/API-reference inspection adapters for declared sources.
 
 | Component | Responsibility |
 |-----------|----------------|

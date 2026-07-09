@@ -1,0 +1,21 @@
+{
+  "artifact_id": "MIP_GEOX_READOUT_INPUT_RESOLUTION_RUNTIME_001A",
+  "artifact_type": "mip_geox_readout_input_resolution_runtime_slice",
+  "status": "completed",
+  "scope": "stage_2a_typed_contracts_and_deterministic_resolver_skeleton",
+  "parent_lane": "MIP_GEOX_READOUT_INPUT_REQUIREMENTS_AND_HANDOFF_CONTRACT_001",
+  "stage_2a_input_resolution_contracts_implemented": true,
+  "deterministic_resolver_skeleton_implemented": true,
+  "dataset_reference_types_implemented": true,
+  "semantic_dataset_types_implemented": true,
+  "column_mapping_contracts_implemented": true,
+  "handoff_builder_implemented": true,
+  "real_file_parsing_implemented": false,
+  "warehouse_api_resolution_implemented": false,
+  "panel_exp_runtime_call_implemented": false,
+  "spend_delta_computed_in_mip": false,
+  "roi_roas_computed_in_mip": false,
+  "claim_authorization_duplicated": false,
+  "recommended_next_mip_artifact": "MIP_GEOX_READOUT_INPUT_RESOLUTION_RUNTIME_001B",
+  "final_verdict": "stage_2a_geox_readout_input_resolution_contracts_and_resolver_skeleton_implemented"
+}
