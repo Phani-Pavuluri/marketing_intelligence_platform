@@ -154,6 +154,17 @@ from mip.contracts.geox_fixture_materialization import (
     GeoXMaterializedDataset,
     GeoXMaterializedDatasetRole,
 )
+from mip.contracts.geox_governed_decision_surface_handoff import (
+    RECOMMENDED_NEXT_RECOMMENDATION_BLOCKER_ARTIFACT,
+    GeoXDecisionSurfaceEvidenceReference,
+    GeoXDecisionSurfaceHandoffIssueCode,
+    GeoXDecisionSurfaceHandoffStatus,
+    GeoXDecisionSurfaceHandoffTarget,
+    GeoXDecisionSurfaceReviewReadiness,
+    GeoXGovernedDecisionSurfaceHandoff,
+    GeoXGovernedDecisionSurfaceHandoffRequest,
+    GeoXGovernedDecisionSurfaceHandoffResult,
+)
 from mip.contracts.geox_panel_exp_integration import (
     GEOX_HANDOFF_HELPER_CALLABLE,
     GEOX_INPUT_MODEL,
@@ -459,6 +470,15 @@ __all__ = [
     "GeoXReadoutResultIssueCode",
     "GeoXReadoutResultStatus",
     "RECOMMENDED_NEXT_DECISION_SURFACE_HANDOFF_ARTIFACT",
+    "RECOMMENDED_NEXT_RECOMMENDATION_BLOCKER_ARTIFACT",
+    "GeoXDecisionSurfaceEvidenceReference",
+    "GeoXDecisionSurfaceHandoffIssueCode",
+    "GeoXDecisionSurfaceHandoffStatus",
+    "GeoXDecisionSurfaceHandoffTarget",
+    "GeoXDecisionSurfaceReviewReadiness",
+    "GeoXGovernedDecisionSurfaceHandoff",
+    "GeoXGovernedDecisionSurfaceHandoffRequest",
+    "GeoXGovernedDecisionSurfaceHandoffResult",
     "DECISION_SURFACE_CONTRACT_NAME",
     "RECOMMENDATION_CONTRACT_NAME",
     "TRUST_REPORT_CONTRACT_NAME",

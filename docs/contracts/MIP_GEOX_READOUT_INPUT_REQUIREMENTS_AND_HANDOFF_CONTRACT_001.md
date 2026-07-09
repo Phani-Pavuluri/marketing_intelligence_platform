@@ -104,6 +104,8 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Trust routing (implemented):** `MIP_GEOX_READOUT_TRUST_ROUTING_001` — routes `GeoXReadoutResultEnvelope` via `route_geox_readout_result_to_trust_boundaries()` into TrustReport / DecisionSurface / RecommendationContract readiness metadata. No metric recomputation, no claim authorization, no business recommendations.
 
+**Governed DecisionSurface handoff (implemented):** `MIP_GEOX_READOUT_GOVERNED_DECISION_SURFACE_HANDOFF_001` — consumes `GeoXReadoutTrustRoutingEnvelope` via `build_geox_governed_decision_surface_handoff()` and prepares evidence for governed DecisionSurface review (ready / pending TrustReport / blocked states). No DecisionSurface execution, no recommendations, no claim authorization.
+
 | Component | Responsibility |
 |-----------|----------------|
 | Handoff adapter | Pass `GeoXReadoutInputHandoff` to panel_exp |
