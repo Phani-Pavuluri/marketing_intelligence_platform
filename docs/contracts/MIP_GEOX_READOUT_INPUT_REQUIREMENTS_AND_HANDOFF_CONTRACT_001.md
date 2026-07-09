@@ -104,6 +104,8 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Trust routing (implemented):** `MIP_GEOX_READOUT_TRUST_ROUTING_001` — routes `GeoXReadoutResultEnvelope` via `route_geox_readout_result_to_trust_boundaries()` into TrustReport / DecisionSurface / RecommendationContract readiness metadata. No metric recomputation, no claim authorization, no business recommendations.
 
+**Uploaded CSV materialization (implemented):** `MIP_GEOX_READOUT_UPLOADED_CSV_MATERIALIZATION_001` — materializes user-uploaded KPI/spend/assignment/metadata CSVs via `materialize_geox_uploaded_csvs()` with strict policy limits. Uploaded CSV only; no warehouse/API/artifact-registry ingestion.
+
 | Component | Responsibility |
 |-----------|----------------|
 | Handoff adapter | Pass `GeoXReadoutInputHandoff` to panel_exp |
