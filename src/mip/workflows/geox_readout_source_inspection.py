@@ -150,7 +150,8 @@ _SEMANTIC_SCORERS: dict[DatasetSemanticType, tuple[frozenset[ColumnSemanticHint]
         frozenset({ColumnSemanticHint.MARGIN_OR_PROFIT}),
     ),
     DatasetSemanticType.EXPERIMENT_METADATA: (
-        frozenset({ColumnSemanticHint.EXPERIMENT_ID, ColumnSemanticHint.DATE_OR_WEEK}),
+        frozenset({ColumnSemanticHint.EXPERIMENT_ID}),
+        frozenset({ColumnSemanticHint.DATE_OR_WEEK}),
     ),
 }
 

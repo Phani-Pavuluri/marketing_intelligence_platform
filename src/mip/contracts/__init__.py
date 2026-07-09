@@ -163,6 +163,10 @@ from mip.contracts.geox_readout_input_resolution import (
     SpendColumnMapping,
     ValueMapping,
 )
+from mip.contracts.geox_readout_input_resolution_pipeline import (
+    GeoXReadoutInputResolutionPipelineResult,
+    RECOMMENDED_NEXT_STAGE_3_ARTIFACT,
+)
 from mip.contracts.geox_readout_source_inspection import (
     RECOMMENDED_NEXT_STAGE_2C_ARTIFACT,
     ColumnInspectionHint,
@@ -373,6 +377,8 @@ __all__ = [
     "GeoXReadoutInputResolutionResult",
     "GeoXReadoutIntent",
     "GeoXReadoutResolutionStatus",
+    "GeoXReadoutInputResolutionPipelineResult",
+    "RECOMMENDED_NEXT_STAGE_3_ARTIFACT",
     "GeoXReadoutSourceInspectionRequest",
     "GeoXReadoutSourceInspectionResult",
     "ColumnInspectionHint",

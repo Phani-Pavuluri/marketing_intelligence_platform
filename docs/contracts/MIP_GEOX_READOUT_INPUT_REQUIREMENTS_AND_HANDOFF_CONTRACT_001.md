@@ -48,7 +48,9 @@ Without this MIP-side handoff contract, GeoX can only validate and extract spend
 
 **Stage 2A (implemented):** Typed contracts in `mip.contracts.geox_readout_input_resolution` and deterministic resolver skeleton `resolve_geox_readout_inputs()` in `mip.workflows.geox_readout_input_resolution`. Operates on **declared** dataset references only — no real file parsing, no warehouse/API calls, no panel_exp invocation, no MIP metric computation.
 
-**Stage 2B (implemented):** Lightweight source inspection adapters in `mip.contracts.geox_readout_source_inspection` and `mip.workflows.geox_readout_source_inspection`. Inspects declared `DatasetReference` objects and emits metadata, semantic hints, and column mapping candidates — still no deep file parsing, no warehouse/API live calls, no panel_exp invocation, and no automatic wiring into `resolve_geox_readout_inputs()` (that is **Stage 2C**).
+**Stage 2B (implemented):** Lightweight source inspection adapters in `mip.contracts.geox_readout_source_inspection` and `mip.workflows.geox_readout_source_inspection`. Inspects declared `DatasetReference` objects and emits metadata, semantic hints, and column mapping candidates — still no deep file parsing, no warehouse/API live calls, no panel_exp invocation.
+
+**Stage 2C (implemented):** Inspection-to-resolution pipeline in `mip.contracts.geox_readout_input_resolution_pipeline` and `mip.workflows.geox_readout_input_resolution_pipeline`. Runs `inspect_geox_readout_sources()`, enriches resolver-ready `DatasetReference` objects and column mappings, then calls `resolve_geox_readout_inputs()` — still without panel_exp calls or GeoX metric computation.
 
 ---
 
@@ -68,9 +70,9 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Stage 2A (implemented on main):** Typed contracts + deterministic `resolve_geox_readout_inputs()` skeleton. Declared dataset refs only; no file parsing; no panel_exp calls.
 
-**Stage 2B (implemented on main):** `inspect_geox_readout_sources()` / `inspect_dataset_reference()` — deterministic metadata inspection of declared refs, semantic hints, and mapping candidates. No deep file parsing; no warehouse/API live calls; resolver left intact.
+**Stage 2B (implemented on main):** `inspect_geox_readout_sources()` / `inspect_dataset_reference()` — deterministic metadata inspection of declared refs, semantic hints, and mapping candidates. No deep file parsing; no warehouse/API live calls.
 
-**Stage 2C (next):** Wire Stage 2B inspection output into `resolve_geox_readout_inputs()` end-to-end — still without panel_exp calls or GeoX metric computation.
+**Stage 2C (implemented on main):** `resolve_geox_readout_inputs_with_source_inspection()` — enriches refs/mappings from inspection output, then calls `resolve_geox_readout_inputs()`. Stage 2A resolver brain unchanged when called directly.
 
 | Component | Responsibility |
 |-----------|----------------|
@@ -455,7 +457,7 @@ Required when user asks for ROAS/profit ROI and KPI is not already revenue/profi
 
 **Stage 2B:** source inspection adapters (`inspect_geox_readout_sources`).
 
-**Stage 2C (next):** connect inspection output to resolver end-to-end.
+**Stage 2C:** inspection-to-resolution pipeline (`resolve_geox_readout_inputs_with_source_inspection`).
 
 ### Stage 3 — `MIP_GEOX_READOUT_PANEL_EXP_INTEGRATION_001` (after panel_exp runtime)
 

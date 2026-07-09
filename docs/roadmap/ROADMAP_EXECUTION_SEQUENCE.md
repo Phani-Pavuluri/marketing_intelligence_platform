@@ -51,6 +51,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP GeoX readout input handoff contract 001 | ✓ documented — [MIP_GEOX_READOUT_INPUT_REQUIREMENTS_AND_HANDOFF_CONTRACT_001.md](../contracts/MIP_GEOX_READOUT_INPUT_REQUIREMENTS_AND_HANDOFF_CONTRACT_001.md) (3-stage lane: boundary → input resolution → panel_exp integration) |
 | MIP GeoX readout input resolution runtime 001A | ✓ implemented — `mip.contracts.geox_readout_input_resolution`, `mip.workflows.geox_readout_input_resolution` (declared refs only; no file parsing; no panel_exp) |
 | MIP GeoX readout source inspection adapters 001B | ✓ implemented — `mip.contracts.geox_readout_source_inspection`, `mip.workflows.geox_readout_source_inspection` (metadata inspection; no resolver auto-integration; no panel_exp) |
+| MIP GeoX readout input resolution runtime 001C | ✓ implemented — `mip.contracts.geox_readout_input_resolution_pipeline`, `mip.workflows.geox_readout_input_resolution_pipeline` (inspection → enrich → resolve; no panel_exp) |
 
 ## Platform principles
 
