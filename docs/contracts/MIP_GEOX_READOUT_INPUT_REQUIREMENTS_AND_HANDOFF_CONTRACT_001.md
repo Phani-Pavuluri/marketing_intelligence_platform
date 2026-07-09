@@ -102,6 +102,8 @@ The GeoX readout handoff lane is **three stages**, not 5–8 fragmented artifact
 
 **Result ingestion and explanation (implemented):** `MIP_GEOX_READOUT_RESULT_INGESTION_AND_EXPLANATION_001` — ingests Stage 3B `GeoXPostTestSpendEvidenceArtifact` and `GeoXTrustedReadoutSpendHandoffArtifact` via `ingest_geox_readout_result_for_explanation()` and returns a MIP-facing `GeoXReadoutResultEnvelope`. Explains package readiness, blockers, warnings, and claim boundaries without `panel_exp` import, metric recomputation, or claim authorization.
 
+**Trust routing (implemented):** `MIP_GEOX_READOUT_TRUST_ROUTING_001` — routes `GeoXReadoutResultEnvelope` via `route_geox_readout_result_to_trust_boundaries()` into TrustReport / DecisionSurface / RecommendationContract readiness metadata. No metric recomputation, no claim authorization, no business recommendations.
+
 | Component | Responsibility |
 |-----------|----------------|
 | Handoff adapter | Pass `GeoXReadoutInputHandoff` to panel_exp |
