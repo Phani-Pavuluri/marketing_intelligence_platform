@@ -97,6 +97,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM planning response rendering audit 001 | ✓ implemented — `docs/audits/MIP_MMM_PLANNING_RESPONSE_RENDERING_AUDIT_001.md` (audit: envelope exists; no deterministic planning-response renderer; thin renderer recommended) |
 | MIP MMM planning response renderer 001 | ✓ implemented — `mip.reports.mmm_planning_response_renderer` (deterministic envelope → safe response sections; no LLM/math/DecisionSurface/Recommendation) |
 | MIP MMM planning response renderer checkpoint audit 001 | ✓ implemented — `docs/audits/MIP_MMM_PLANNING_RESPONSE_RENDERER_CHECKPOINT_AUDIT_001.md` (audit: renderer checkpoint passed; next: LLM response boundary audit) |
+| MIP MMM LLM response boundary audit 001 | ✓ implemented — `docs/audits/MIP_MMM_LLM_RESPONSE_BOUNDARY_AUDIT_001.md` (audit: renderer + adjacent llm.safety exist; no boundary consumes rendered planning sections; thin MMM LLM boundary recommended) |
 
 ## Platform principles
 
