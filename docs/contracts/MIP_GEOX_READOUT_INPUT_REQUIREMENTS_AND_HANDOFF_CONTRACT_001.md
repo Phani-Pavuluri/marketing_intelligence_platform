@@ -52,6 +52,8 @@ Without this MIP-side handoff contract, GeoX can only validate and extract spend
 
 **Stage 2C (implemented):** Inspection-to-resolution pipeline in `mip.contracts.geox_readout_input_resolution_pipeline` and `mip.workflows.geox_readout_input_resolution_pipeline`. Runs `inspect_geox_readout_sources()`, enriches resolver-ready `DatasetReference` objects and column mappings, then calls `resolve_geox_readout_inputs()` — still without panel_exp calls or GeoX metric computation.
 
+**Uploaded CSV adapter (implemented):** `MIP_GEOX_READOUT_UPLOADED_CSV_ADAPTER_001` — thin GeoX adapter in `mip.contracts.geox_uploaded_csv_adapter` and `mip.workflows.geox_uploaded_csv_adapter`. Consumes shared `UploadedCSVMaterializationResult` (`MaterializedTabularDataset` + `UploadedCSVInspection`) and maps to GeoX roles, `DatasetReference`, and source inspection / input-resolution compatibility metadata. Does not re-read CSVs, does not invoke panel_exp, and does not build runtime bridge inputs. Runtime bridge deferred to `MIP_GEOX_READOUT_UPLOADED_CSV_RUNTIME_BRIDGE_001`.
+
 ---
 
 ## 3. Optimized 3-stage GeoX handoff lane

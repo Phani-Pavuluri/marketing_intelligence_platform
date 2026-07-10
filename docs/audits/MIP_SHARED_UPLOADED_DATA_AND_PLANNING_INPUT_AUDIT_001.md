@@ -319,7 +319,7 @@ The repository already has sufficient **declared-reference** abstractions (`Data
 
 ## 14. Implementation status (2026-07-09)
 
-**`MIP_SHARED_UPLOADED_CSV_MATERIALIZATION_CORE_001` — implemented on main (pending merge from feature branch).**
+**`MIP_SHARED_UPLOADED_CSV_MATERIALIZATION_CORE_001` — implemented on main.**
 
 | Component | Location |
 |-----------|----------|
@@ -327,9 +327,19 @@ The repository already has sufficient **declared-reference** abstractions (`Data
 | Shared workflow | `mip.workflows.uploaded_csv_materialization` |
 | Generic fixtures | `examples/fixtures/uploaded_csv_materialization/` |
 
+**`MIP_GEOX_READOUT_UPLOADED_CSV_ADAPTER_001` — implemented on feature branch `feature/mip-geox-readout-uploaded-csv-adapter-001`.**
+
+| Component | Location |
+|-----------|----------|
+| GeoX adapter contracts | `mip.contracts.geox_uploaded_csv_adapter` |
+| GeoX adapter workflow | `mip.workflows.geox_uploaded_csv_adapter` |
+| Adapter fixtures | `examples/fixtures/geox_uploaded_csv_adapter/` |
+
+Maps shared `MaterializedTabularDataset` + `UploadedCSVInspection` outputs to GeoX roles, `DatasetReference`, and source inspection / input-resolution compatibility metadata. Does not re-read CSVs or invoke panel_exp.
+
 **Deferred follow-ons:**
 
-- `MIP_GEOX_READOUT_UPLOADED_CSV_ADAPTER_001` — map `MaterializedTabularDataset` → GeoX roles / `DatasetReference`
+- `MIP_GEOX_READOUT_UPLOADED_CSV_RUNTIME_BRIDGE_001` — bridge adapter outputs into existing GeoX package runtime call path
 - `MIP_PLANNING_MMM_UPLOADED_CSV_ADAPTER_001` — map shared outputs → planning/MMM intake refs
 
 **Reference branch (not merged):** `feature/mip-geox-uploaded-csv-materialization-001` (`8931a29`) — generic concepts extracted into shared core; GeoX role enums intentionally excluded.

@@ -249,6 +249,17 @@ from mip.contracts.geox_readout_trust_routing import (
     GeoXReadoutTrustRoutingResult,
     GeoXReadoutTrustRoutingStatus,
 )
+from mip.contracts.geox_uploaded_csv_adapter import (
+    RECOMMENDED_NEXT_GEOX_UPLOADED_CSV_RUNTIME_BRIDGE_ARTIFACT,
+    GeoXUploadedCSVAdapterAvailability,
+    GeoXUploadedCSVAdapterIssueCode,
+    GeoXUploadedCSVAdapterRequest,
+    GeoXUploadedCSVAdapterResult,
+    GeoXUploadedCSVAdapterStatus,
+    GeoXUploadedCSVRole,
+    GeoXUploadedCSVRoleMapping,
+    GeoXUploadedCSVRoleSource,
+)
 from mip.contracts.intake import (
     DataGrain,
     GeoGrain,
@@ -633,6 +644,15 @@ __all__ = [
     "UploadedCSVPolicy",
     "UploadedCSVSource",
     "UploadedCSVSourceType",
+    "RECOMMENDED_NEXT_GEOX_UPLOADED_CSV_RUNTIME_BRIDGE_ARTIFACT",
+    "GeoXUploadedCSVAdapterAvailability",
+    "GeoXUploadedCSVAdapterIssueCode",
+    "GeoXUploadedCSVAdapterRequest",
+    "GeoXUploadedCSVAdapterResult",
+    "GeoXUploadedCSVAdapterStatus",
+    "GeoXUploadedCSVRole",
+    "GeoXUploadedCSVRoleMapping",
+    "GeoXUploadedCSVRoleSource",
     "WebsiteTrafficSourceProfile",
     "WorkflowReadinessFinding",
     "WorkflowReadinessReportType",
