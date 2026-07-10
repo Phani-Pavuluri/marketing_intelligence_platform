@@ -364,6 +364,12 @@ from mip.contracts.method_promotion_handoff_routing_answerability import (
     evaluate_method_promotion_handoff_answerability,
     serialize_method_promotion_handoff_answerability_output,
 )
+from mip.contracts.method_promotion_handoff_answerability_application import (
+    MethodPromotionHandoffAnswerabilityApplicationInput,
+    MethodPromotionHandoffAnswerabilityApplicationOutput,
+    apply_method_promotion_handoff_answerability_guard,
+    serialize_method_promotion_handoff_answerability_application_output,
+)
 from mip.contracts.mmm_existing_model_availability import (
     DEFAULT_MAX_MODEL_AGE_DAYS,
     FORBIDDEN_MMM_EXISTING_MODEL_AVAILABILITY_RESULT_FIELD_NAMES,
@@ -803,6 +809,10 @@ __all__ = [
     "MIPMethodPromotionHandoffRoutingStatus",
     "evaluate_method_promotion_handoff_answerability",
     "serialize_method_promotion_handoff_answerability_output",
+    "MethodPromotionHandoffAnswerabilityApplicationInput",
+    "MethodPromotionHandoffAnswerabilityApplicationOutput",
+    "apply_method_promotion_handoff_answerability_guard",
+    "serialize_method_promotion_handoff_answerability_application_output",
     "MMMDataReadinessReport",
     "MMMExistingModelAvailabilityIssueCode",
     "MMMExistingModelAvailabilityRequest",
