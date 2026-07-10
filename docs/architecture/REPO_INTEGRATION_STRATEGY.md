@@ -255,6 +255,7 @@ MIP must not import `mmm.modeling.*` or `panel_exp.inference.*` directly—only 
 | Direction | Mapping |
 |-----------|---------|
 | GeoX output → MIP | `ExperimentEvidence` via `adapters/geox/` |
+| GeoX method-promotion governance → MIP | `MethodPromotionGenericAdapterMIPHandoff` via consumer contract [`MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_CONTRACT_001`](../contracts/MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_CONTRACT_001.md) — **governance context only**; not DecisionSurface, TrustReport bypass, RecommendationContract, or spend/ROI authorization |
 | MMM output → MIP | `DecisionSurface` (full-panel Δμ for production) via `adapters/mmm/` |
 | MIP governance → MMM | `CalibrationSignal` via compatibility and readiness gates—not raw `ExperimentEvidence` |
 
