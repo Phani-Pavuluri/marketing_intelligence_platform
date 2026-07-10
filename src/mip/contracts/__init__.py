@@ -363,6 +363,22 @@ from mip.contracts.planning_mmm_uploaded_csv_workflow_readiness import (
     PlanningMMMUploadedCSVWorkflowReadinessTier,
 )
 from mip.contracts.recommendation import RecommendationContract
+from mip.contracts.tabular_source_reference import (
+    RECOMMENDED_NEXT_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_ARTIFACT,
+    RECOMMENDED_NEXT_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_ARTIFACT,
+    TabularSourceAccessMode,
+    TabularSourceAvailability,
+    TabularSourceColumn,
+    TabularSourceInspection,
+    TabularSourceInspectionResult,
+    TabularSourceInspectionStatus,
+    TabularSourceIssueCode,
+    TabularSourceLineage,
+    TabularSourceMaterializationMode,
+    TabularSourceReference,
+    TabularSourceSchema,
+    TabularSourceType,
+)
 from mip.contracts.trust import TrustReport
 from mip.contracts.uploaded_csv_materialization import (
     ALLOWED_FILE_EXTENSIONS,
@@ -659,6 +675,20 @@ __all__ = [
     "StandaloneGeoXDesignRequest",
     "ReadinessBlockingReason",
     "ReadinessWarningCode",
+    "RECOMMENDED_NEXT_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_ARTIFACT",
+    "RECOMMENDED_NEXT_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_ARTIFACT",
+    "TabularSourceAccessMode",
+    "TabularSourceAvailability",
+    "TabularSourceColumn",
+    "TabularSourceInspection",
+    "TabularSourceInspectionResult",
+    "TabularSourceInspectionStatus",
+    "TabularSourceIssueCode",
+    "TabularSourceLineage",
+    "TabularSourceMaterializationMode",
+    "TabularSourceReference",
+    "TabularSourceSchema",
+    "TabularSourceType",
     "RecommendationContract",
     "RecommendationType",
     "TimeWindow",

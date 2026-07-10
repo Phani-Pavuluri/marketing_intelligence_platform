@@ -360,3 +360,20 @@ This artifact did **not** add:
 - live connector runtime, credentials, network calls, Spark, SQL, JDBC/ODBC, or vendor SDK dependencies
 - CSV core rewrite, GeoX lane rewrite, or Planning/MMM lane rewrite
 - model fitting, optimizer, simulator, recommendation generation, DecisionSurface execution, or claim authorization
+
+---
+
+## Implementation update: `MIP_TABULAR_SOURCE_REFERENCE_AND_INSPECTION_001`
+
+**Status:** implemented on main (feature branch `feature/tabular-source-reference-inspection-001` until merged).
+
+| Component | Location |
+|-----------|----------|
+| Generic tabular source contracts | `mip.contracts.tabular_source_reference` |
+| Tabular source inspection helpers | `mip.workflows.tabular_source_inspection` |
+
+Adds generic `TabularSourceReference`, `TabularSourceInspection`, schema, lineage, and availability contracts plus `build_tabular_source_inspection_from_uploaded_csv_materialization()` compatibility view. Does not modify GeoX or Planning/MMM lane adapters. Uploaded CSV lanes remain canonical.
+
+**Default next artifact (lane continuation):** `MIP_PLANNING_MMM_READINESS_REPORT_ADAPTER_001`
+
+**Source-compatibility follow-up:** `MIP_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001`
