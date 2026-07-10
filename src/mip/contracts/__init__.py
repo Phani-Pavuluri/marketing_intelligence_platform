@@ -332,6 +332,17 @@ from mip.contracts.llm_provider import (
     LLMUseCase,
     default_forbidden_claim_topics,
 )
+from mip.contracts.planning_mmm_uploaded_csv_adapter import (
+    RECOMMENDED_NEXT_PLANNING_MMM_UPLOADED_CSV_INPUT_PLAN_ARTIFACT,
+    PlanningMMMUploadedCSVAdapterIssueCode,
+    PlanningMMMUploadedCSVAdapterRequest,
+    PlanningMMMUploadedCSVAdapterResult,
+    PlanningMMMUploadedCSVAdapterStatus,
+    PlanningMMMUploadedCSVInputAvailability,
+    PlanningMMMUploadedCSVRole,
+    PlanningMMMUploadedCSVRoleMapping,
+    PlanningMMMUploadedCSVRoleSource,
+)
 from mip.contracts.recommendation import RecommendationContract
 from mip.contracts.trust import TrustReport
 from mip.contracts.uploaded_csv_materialization import (
@@ -665,6 +676,15 @@ __all__ = [
     "GeoXUploadedCSVRuntimeBridgeResult",
     "GeoXUploadedCSVRuntimeBridgeStatus",
     "GeoXUploadedCSVRuntimeColumnMapping",
+    "RECOMMENDED_NEXT_PLANNING_MMM_UPLOADED_CSV_INPUT_PLAN_ARTIFACT",
+    "PlanningMMMUploadedCSVAdapterIssueCode",
+    "PlanningMMMUploadedCSVAdapterRequest",
+    "PlanningMMMUploadedCSVAdapterResult",
+    "PlanningMMMUploadedCSVAdapterStatus",
+    "PlanningMMMUploadedCSVInputAvailability",
+    "PlanningMMMUploadedCSVRole",
+    "PlanningMMMUploadedCSVRoleMapping",
+    "PlanningMMMUploadedCSVRoleSource",
     "WebsiteTrafficSourceProfile",
     "WorkflowReadinessFinding",
     "WorkflowReadinessReportType",

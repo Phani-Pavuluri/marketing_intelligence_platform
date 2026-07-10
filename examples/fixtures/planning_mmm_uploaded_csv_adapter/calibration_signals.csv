@@ -1,0 +1,3 @@
+channel,prior_lift,prior_uncertainty
+search,0.05,0.02
+social,0.03,0.015

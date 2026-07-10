@@ -60,6 +60,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP shared uploaded CSV materialization core 001 | ✓ implemented — `mip.contracts.uploaded_csv_materialization`, `mip.workflows.uploaded_csv_materialization` (lane-neutral CSV materialization; GeoX/Planning adapters deferred) |
 | MIP GeoX readout uploaded CSV adapter 001 | ✓ implemented — `mip.contracts.geox_uploaded_csv_adapter`, `mip.workflows.geox_uploaded_csv_adapter` (maps shared materialization → GeoX roles / DatasetReference; no CSV re-read) |
 | MIP GeoX readout uploaded CSV runtime bridge 001 | ✓ implemented — `mip.contracts.geox_uploaded_csv_runtime_bridge`, `mip.workflows.geox_uploaded_csv_runtime_bridge` (bridges uploaded CSV materialization → package runtime; no CSV re-read; no production loader) |
+| MIP Planning/MMM uploaded CSV adapter 001 | ✓ implemented — `mip.contracts.planning_mmm_uploaded_csv_adapter`, `mip.workflows.planning_mmm_uploaded_csv_adapter` (maps shared materialization → Planning/MMM roles / DataSourceRef; no CSV re-read; no model fitting) |
 
 ## Platform principles
 
