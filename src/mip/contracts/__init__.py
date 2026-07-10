@@ -343,6 +343,12 @@ from mip.contracts.llm_provider import (
     LLMUseCase,
     default_forbidden_claim_topics,
 )
+from mip.contracts.method_promotion_handoff_answerability_application import (
+    MethodPromotionHandoffAnswerabilityApplicationInput,
+    MethodPromotionHandoffAnswerabilityApplicationOutput,
+    apply_method_promotion_handoff_answerability_guard,
+    serialize_method_promotion_handoff_answerability_application_output,
+)
 from mip.contracts.method_promotion_handoff_consumer import (
     MIPMethodPromotionHandoffAuthorizationStatus,
     MIPMethodPromotionHandoffBypassStatus,
@@ -364,15 +370,22 @@ from mip.contracts.method_promotion_handoff_routing_answerability import (
     evaluate_method_promotion_handoff_answerability,
     serialize_method_promotion_handoff_answerability_output,
 )
-from mip.contracts.method_promotion_handoff_answerability_application import (
-    MethodPromotionHandoffAnswerabilityApplicationInput,
-    MethodPromotionHandoffAnswerabilityApplicationOutput,
-    apply_method_promotion_handoff_answerability_guard,
-    serialize_method_promotion_handoff_answerability_application_output,
+from mip.contracts.mmm_artifact_governance_use_readiness import (
+    FORBIDDEN_MMM_ARTIFACT_GOVERNANCE_USE_READINESS_RESULT_FIELD_NAMES,
+    RECOMMENDED_NEXT_MMM_RUNTIME_ORCHESTRATION_LANE_COMPLETION_AUDIT_ARTIFACT,
+    MMMArtifactGovernanceRoute,
+    MMMArtifactGovernanceRouteDecision,
+    MMMArtifactGovernanceUseReadinessIssueCode,
+    MMMArtifactGovernanceUseReadinessRequest,
+    MMMArtifactGovernanceUseReadinessResult,
+    MMMArtifactGovernanceUseReadinessStatus,
+    MMMArtifactUseReadiness,
 )
 from mip.contracts.mmm_existing_model_availability import (
     DEFAULT_MAX_MODEL_AGE_DAYS,
     FORBIDDEN_MMM_EXISTING_MODEL_AVAILABILITY_RESULT_FIELD_NAMES,
+    RECOMMENDED_NEXT_PLANNING_MMM_CALIBRATION_SIGNAL_MAPPING_AND_READINESS_ARTIFACT,
+    RECOMMENDED_NEXT_PLANNING_MMM_TRUSTED_INPUT_AND_MODEL_RUN_ELIGIBILITY_ARTIFACT,
     MMMExistingModelAvailabilityIssueCode,
     MMMExistingModelAvailabilityRequest,
     MMMExistingModelAvailabilityResult,
@@ -384,13 +397,47 @@ from mip.contracts.mmm_existing_model_availability import (
     MMMModelArtifactStatus,
     MMMModelDiagnosticStatus,
     MMMModelPromotionStatus,
-    RECOMMENDED_NEXT_PLANNING_MMM_CALIBRATION_SIGNAL_MAPPING_AND_READINESS_ARTIFACT,
-    RECOMMENDED_NEXT_PLANNING_MMM_TRUSTED_INPUT_AND_MODEL_RUN_ELIGIBILITY_ARTIFACT,
+)
+from mip.contracts.mmm_llm_response_boundary import (
+    FORBIDDEN_MMM_LLM_RESPONSE_BOUNDARY_FIELD_NAMES,
+    RECOMMENDED_NEXT_MMM_LLM_RESPONSE_BOUNDARY_CHECKPOINT_AUDIT_ARTIFACT,
+    MMMLLMForbiddenAdditionType,
+    MMMLLMRefusalPolicy,
+    MMMLLMResponseBoundary,
+    MMMLLMResponseBoundaryIssueCode,
+    MMMLLMResponseBoundaryRequest,
+    MMMLLMResponseBoundaryStatus,
+    MMMLLMSectionPolicy,
+    MMMLLMSectionUsePolicy,
+)
+from mip.contracts.mmm_planning_answer_eligibility import (
+    FORBIDDEN_MMM_PLANNING_ANSWER_ELIGIBILITY_RESULT_FIELD_NAMES,
+    RECOMMENDED_NEXT_MMM_PLANNING_ANSWER_ELIGIBILITY_GATE_CHECKPOINT_AUDIT_ARTIFACT,
+    MMMPlanningAnswerEligibilityIssueCode,
+    MMMPlanningAnswerEligibilityRequest,
+    MMMPlanningAnswerEligibilityResult,
+    MMMPlanningAnswerEligibilityStatus,
+    MMMPlanningAnswerGateReference,
+    MMMPlanningAnswerMode,
+    MMMPlanningQuestionClass,
+)
+from mip.contracts.mmm_planning_answer_envelope import (
+    FORBIDDEN_MMM_PLANNING_ANSWER_ENVELOPE_FIELD_NAMES,
+    RECOMMENDED_NEXT_MMM_PLANNING_ANSWER_ENVELOPE_CHECKPOINT_AUDIT_ARTIFACT,
+    MMMPlanningAnswerClaimBoundary,
+    MMMPlanningAnswerClaimStatement,
+    MMMPlanningAnswerEnvelope,
+    MMMPlanningAnswerEnvelopeIssueCode,
+    MMMPlanningAnswerEnvelopeRequest,
+    MMMPlanningAnswerEnvelopeStatus,
+    MMMPlanningAnswerEvidenceReference,
+    MMMPlanningAnswerEvidenceType,
 )
 from mip.contracts.mmm_runtime_adapter import (
     DEFAULT_ADAPTER_PLACEHOLDER_REFERENCE,
     DEFAULT_GOVERNANCE_ADAPTER_REFERENCE,
     FORBIDDEN_MMM_RUNTIME_CALL_RESULT_FIELD_NAMES,
+    RECOMMENDED_NEXT_MMM_RUNTIME_RESULT_INGESTION_AND_DIAGNOSTICS_AUDIT_ARTIFACT,
     MMMRuntimeArtifactHandoff,
     MMMRuntimeCallDecision,
     MMMRuntimeCallIssueCode,
@@ -400,10 +447,10 @@ from mip.contracts.mmm_runtime_adapter import (
     MMMRuntimeEngineKind,
     MMMRuntimeFailurePacket,
     MMMRuntimeReference,
-    RECOMMENDED_NEXT_MMM_RUNTIME_RESULT_INGESTION_AND_DIAGNOSTICS_AUDIT_ARTIFACT,
 )
 from mip.contracts.mmm_runtime_result_ingestion import (
     FORBIDDEN_MMM_RUNTIME_RESULT_INGESTION_RESULT_FIELD_NAMES,
+    RECOMMENDED_NEXT_MMM_ARTIFACT_GOVERNANCE_ROUTING_GATE_AUDIT_ARTIFACT,
     MMMRuntimeDiagnosticsMetadata,
     MMMRuntimeDiagnosticsMetadataStatus,
     MMMRuntimeGovernanceRoutingReference,
@@ -412,78 +459,11 @@ from mip.contracts.mmm_runtime_result_ingestion import (
     MMMRuntimeResultIngestionRequest,
     MMMRuntimeResultIngestionResult,
     MMMRuntimeResultIngestionStatus,
-    RECOMMENDED_NEXT_MMM_ARTIFACT_GOVERNANCE_ROUTING_GATE_AUDIT_ARTIFACT,
-)
-from mip.contracts.mmm_artifact_governance_use_readiness import (
-    FORBIDDEN_MMM_ARTIFACT_GOVERNANCE_USE_READINESS_RESULT_FIELD_NAMES,
-    MMMArtifactGovernanceRoute,
-    MMMArtifactGovernanceRouteDecision,
-    MMMArtifactGovernanceUseReadinessIssueCode,
-    MMMArtifactGovernanceUseReadinessRequest,
-    MMMArtifactGovernanceUseReadinessResult,
-    MMMArtifactGovernanceUseReadinessStatus,
-    MMMArtifactUseReadiness,
-    RECOMMENDED_NEXT_MMM_RUNTIME_ORCHESTRATION_LANE_COMPLETION_AUDIT_ARTIFACT,
-)
-from mip.contracts.mmm_planning_answer_eligibility import (
-    FORBIDDEN_MMM_PLANNING_ANSWER_ELIGIBILITY_RESULT_FIELD_NAMES,
-    MMMPlanningAnswerEligibilityIssueCode,
-    MMMPlanningAnswerEligibilityRequest,
-    MMMPlanningAnswerEligibilityResult,
-    MMMPlanningAnswerEligibilityStatus,
-    MMMPlanningAnswerGateReference,
-    MMMPlanningAnswerMode,
-    MMMPlanningQuestionClass,
-    RECOMMENDED_NEXT_MMM_PLANNING_ANSWER_ELIGIBILITY_GATE_CHECKPOINT_AUDIT_ARTIFACT,
-)
-from mip.contracts.mmm_planning_answer_envelope import (
-    FORBIDDEN_MMM_PLANNING_ANSWER_ENVELOPE_FIELD_NAMES,
-    MMMPlanningAnswerClaimBoundary,
-    MMMPlanningAnswerClaimStatement,
-    MMMPlanningAnswerEnvelope,
-    MMMPlanningAnswerEnvelopeIssueCode,
-    MMMPlanningAnswerEnvelopeRequest,
-    MMMPlanningAnswerEnvelopeStatus,
-    MMMPlanningAnswerEvidenceReference,
-    MMMPlanningAnswerEvidenceType,
-    RECOMMENDED_NEXT_MMM_PLANNING_ANSWER_ENVELOPE_CHECKPOINT_AUDIT_ARTIFACT,
-)
-from mip.contracts.planning_mmm_uploaded_csv_adapter import (
-    RECOMMENDED_NEXT_PLANNING_MMM_UPLOADED_CSV_INPUT_PLAN_ARTIFACT,
-    PlanningMMMUploadedCSVAdapterIssueCode,
-    PlanningMMMUploadedCSVAdapterRequest,
-    PlanningMMMUploadedCSVAdapterResult,
-    PlanningMMMUploadedCSVAdapterStatus,
-    PlanningMMMUploadedCSVInputAvailability,
-    PlanningMMMUploadedCSVRole,
-    PlanningMMMUploadedCSVRoleMapping,
-    PlanningMMMUploadedCSVRoleSource,
-)
-from mip.contracts.planning_mmm_uploaded_csv_input_plan import (
-    RECOMMENDED_NEXT_PLANNING_MMM_WORKFLOW_READINESS_ARTIFACT,
-    PlanningMMMUploadedCSVInputPlan,
-    PlanningMMMUploadedCSVInputPlanIssueCode,
-    PlanningMMMUploadedCSVInputPlanReadinessTier,
-    PlanningMMMUploadedCSVInputPlanRequest,
-    PlanningMMMUploadedCSVInputPlanResult,
-    PlanningMMMUploadedCSVInputPlanStatus,
-    PlanningMMMUploadedCSVInputRequirement,
-)
-from mip.contracts.planning_mmm_trusted_input_model_run_eligibility import (
-    FORBIDDEN_PLANNING_MMM_MODEL_RUN_ELIGIBILITY_RESULT_FIELD_NAMES,
-    RECOMMENDED_NEXT_MMM_RUNTIME_ADAPTER_CONTRACT_ARTIFACT,
-    PlanningMMMModelRunEligibilityDecision,
-    PlanningMMMModelRunEligibilityIssueCode,
-    PlanningMMMModelRunEligibilityRequest,
-    PlanningMMMModelRunEligibilityResult,
-    PlanningMMMModelRunEligibilityStatus,
-    PlanningMMMTrustedInputComponentStatus,
-    PlanningMMMTrustedInputPackage,
-    PlanningMMMTrustedInputStatus,
 )
 from mip.contracts.planning_mmm_calibration_signal_mapping_readiness import (
     DEFAULT_MAX_SIGNAL_AGE_DAYS,
     FORBIDDEN_PLANNING_MMM_CALIBRATION_SIGNAL_MAPPING_READINESS_RESULT_FIELD_NAMES,
+    RECOMMENDED_NEXT_PLANNING_MMM_TRUSTED_INPUT_AND_MODEL_RUN_ELIGIBILITY_ARTIFACT,
     PlanningMMMCalibrationSignalMappedRecord,
     PlanningMMMCalibrationSignalMappingIssueCode,
     PlanningMMMCalibrationSignalMappingReadinessRequest,
@@ -494,7 +474,6 @@ from mip.contracts.planning_mmm_calibration_signal_mapping_readiness import (
     PlanningMMMCalibrationSignalReadinessStatus,
     PlanningMMMCalibrationSignalRecordMetadata,
     PlanningMMMCalibrationSignalUsability,
-    RECOMMENDED_NEXT_PLANNING_MMM_TRUSTED_INPUT_AND_MODEL_RUN_ELIGIBILITY_ARTIFACT,
 )
 from mip.contracts.planning_mmm_calibration_signal_tabular_intake import (
     RECOMMENDED_NEXT_PLANNING_MMM_CALIBRATION_SIGNAL_MAPPING_AUDIT_ARTIFACT,
@@ -528,6 +507,39 @@ from mip.contracts.planning_mmm_tabular_source_adapter import (
     PlanningMMMTabularSourceInputAvailability,
     PlanningMMMTabularSourceRoleMapping,
     PlanningMMMTabularSourceRoleSource,
+)
+from mip.contracts.planning_mmm_trusted_input_model_run_eligibility import (
+    FORBIDDEN_PLANNING_MMM_MODEL_RUN_ELIGIBILITY_RESULT_FIELD_NAMES,
+    RECOMMENDED_NEXT_MMM_RUNTIME_ADAPTER_CONTRACT_ARTIFACT,
+    PlanningMMMModelRunEligibilityDecision,
+    PlanningMMMModelRunEligibilityIssueCode,
+    PlanningMMMModelRunEligibilityRequest,
+    PlanningMMMModelRunEligibilityResult,
+    PlanningMMMModelRunEligibilityStatus,
+    PlanningMMMTrustedInputComponentStatus,
+    PlanningMMMTrustedInputPackage,
+    PlanningMMMTrustedInputStatus,
+)
+from mip.contracts.planning_mmm_uploaded_csv_adapter import (
+    RECOMMENDED_NEXT_PLANNING_MMM_UPLOADED_CSV_INPUT_PLAN_ARTIFACT,
+    PlanningMMMUploadedCSVAdapterIssueCode,
+    PlanningMMMUploadedCSVAdapterRequest,
+    PlanningMMMUploadedCSVAdapterResult,
+    PlanningMMMUploadedCSVAdapterStatus,
+    PlanningMMMUploadedCSVInputAvailability,
+    PlanningMMMUploadedCSVRole,
+    PlanningMMMUploadedCSVRoleMapping,
+    PlanningMMMUploadedCSVRoleSource,
+)
+from mip.contracts.planning_mmm_uploaded_csv_input_plan import (
+    RECOMMENDED_NEXT_PLANNING_MMM_WORKFLOW_READINESS_ARTIFACT,
+    PlanningMMMUploadedCSVInputPlan,
+    PlanningMMMUploadedCSVInputPlanIssueCode,
+    PlanningMMMUploadedCSVInputPlanReadinessTier,
+    PlanningMMMUploadedCSVInputPlanRequest,
+    PlanningMMMUploadedCSVInputPlanResult,
+    PlanningMMMUploadedCSVInputPlanStatus,
+    PlanningMMMUploadedCSVInputRequirement,
 )
 from mip.contracts.planning_mmm_uploaded_csv_workflow_readiness import (
     RECOMMENDED_NEXT_PLANNING_MMM_READINESS_REPORT_ADAPTER_ARTIFACT,
@@ -877,6 +889,16 @@ __all__ = [
     "MMMPlanningAnswerEvidenceReference",
     "MMMPlanningAnswerEvidenceType",
     "RECOMMENDED_NEXT_MMM_PLANNING_ANSWER_ENVELOPE_CHECKPOINT_AUDIT_ARTIFACT",
+    "FORBIDDEN_MMM_LLM_RESPONSE_BOUNDARY_FIELD_NAMES",
+    "MMMLLMForbiddenAdditionType",
+    "MMMLLMRefusalPolicy",
+    "MMMLLMResponseBoundary",
+    "MMMLLMResponseBoundaryIssueCode",
+    "MMMLLMResponseBoundaryRequest",
+    "MMMLLMResponseBoundaryStatus",
+    "MMMLLMSectionPolicy",
+    "MMMLLMSectionUsePolicy",
+    "RECOMMENDED_NEXT_MMM_LLM_RESPONSE_BOUNDARY_CHECKPOINT_AUDIT_ARTIFACT",
     "MMMToGeoXDesignBridge",
     "SiblingExportSourceRef",
     "TableSourceRef",
