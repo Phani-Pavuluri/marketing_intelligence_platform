@@ -62,6 +62,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP GeoX readout uploaded CSV runtime bridge 001 | ✓ implemented — `mip.contracts.geox_uploaded_csv_runtime_bridge`, `mip.workflows.geox_uploaded_csv_runtime_bridge` (bridges uploaded CSV materialization → package runtime; no CSV re-read; no production loader) |
 | MIP Planning/MMM uploaded CSV adapter 001 | ✓ implemented — `mip.contracts.planning_mmm_uploaded_csv_adapter`, `mip.workflows.planning_mmm_uploaded_csv_adapter` (maps shared materialization → Planning/MMM roles / DataSourceRef; no CSV re-read; no model fitting) |
 | MIP Planning/MMM uploaded CSV input plan 001 | ✓ implemented — `mip.contracts.planning_mmm_uploaded_csv_input_plan`, `mip.workflows.planning_mmm_uploaded_csv_input_plan` (governed input plan + readiness metadata; no model execution) |
+| MIP Planning/MMM workflow readiness from uploaded CSV 001 | ✓ implemented — `mip.contracts.planning_mmm_uploaded_csv_workflow_readiness`, `mip.workflows.planning_mmm_uploaded_csv_workflow_readiness` (evaluates input plan against MMM workflow-readiness gates; no model execution) |
 
 ## Platform principles
 
