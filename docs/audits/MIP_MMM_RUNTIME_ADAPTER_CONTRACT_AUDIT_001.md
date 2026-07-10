@@ -205,3 +205,14 @@ This audit did not add or modify production code under `src/mip/`. No MMM execut
 | Recommended approach | Thin runtime adapter contract on top of existing layers |
 | Verdict | `PARTIALLY_COVERED_NEEDS_THIN_ADAPTER` |
 | Next artifact | `MIP_MMM_RUNTIME_ADAPTER_CONTRACT_001` |
+
+---
+
+## 7. Follow-up implementation
+
+**`MIP_MMM_RUNTIME_ADAPTER_CONTRACT_001`** was implemented on main after this audit:
+
+- `src/mip/contracts/mmm_runtime_adapter.py` — `MMMRuntimeCallRequest`, `MMMRuntimeCallResult`, `MMMRuntimeReference`, failure packet, artifact handoff
+- `src/mip/workflows/mmm_runtime_adapter.py` — `prepare_mmm_runtime_call()` bridges `PlanningMMMModelRunEligibilityResult` to metadata-only external runtime handoff
+
+**Recommended next artifact:** `MIP_MMM_RUNTIME_RESULT_INGESTION_AND_DIAGNOSTICS_AUDIT_001` — audit existing fixture/governance/report paths before adding runtime result ingestion contracts.
