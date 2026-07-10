@@ -92,6 +92,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM planning answer envelope audit 001 | ✓ implemented — `docs/audits/MIP_MMM_PLANNING_ANSWER_ENVELOPE_AUDIT_001.md` (audit: eligibility + generic report/agent envelopes exist; MMM planning-answer envelope missing; thin envelope recommended) |
 | MIP MMM planning answer envelope 001 | ✓ implemented — `mip.contracts.mmm_planning_answer_envelope`, `mip.workflows.mmm_planning_answer_envelope` (metadata-only can-say/cannot-say package from eligibility; no DecisionSurface/Recommendation construction) |
 | MIP MMM planning answer envelope checkpoint audit 001 | ✓ implemented — `docs/audits/MIP_MMM_PLANNING_ANSWER_ENVELOPE_CHECKPOINT_AUDIT_001.md` (audit: envelope checkpoint passed; next: planning response rendering audit) |
+| MIP MMM planning response rendering audit 001 | ✓ implemented — `docs/audits/MIP_MMM_PLANNING_RESPONSE_RENDERING_AUDIT_001.md` (audit: envelope exists; no deterministic planning-response renderer; thin renderer recommended) |
 
 ## Platform principles
 
