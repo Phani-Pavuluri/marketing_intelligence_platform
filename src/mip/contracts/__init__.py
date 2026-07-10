@@ -353,6 +353,17 @@ from mip.contracts.planning_mmm_uploaded_csv_input_plan import (
     PlanningMMMUploadedCSVInputPlanStatus,
     PlanningMMMUploadedCSVInputRequirement,
 )
+from mip.contracts.planning_mmm_readiness_report_adapter import (
+    RECOMMENDED_NEXT_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_ARTIFACT,
+    RECOMMENDED_NEXT_PLANNING_MMM_CALIBRATION_SIGNAL_INTAKE_ARTIFACT,
+    PlanningMMMReadinessReportAdapterEnvelope,
+    PlanningMMMReadinessReportAdapterIssueCode,
+    PlanningMMMReadinessReportAdapterRequest,
+    PlanningMMMReadinessReportAdapterResult,
+    PlanningMMMReadinessReportAdapterStatus,
+    PlanningMMMReadinessReportCompatibility,
+    PlanningMMMReadinessReportCompatibilityMode,
+)
 from mip.contracts.planning_mmm_tabular_source_adapter import (
     PlanningMMMTabularSourceAdapterIssueCode,
     PlanningMMMTabularSourceAdapterRequest,
@@ -765,6 +776,14 @@ __all__ = [
     "PlanningMMMTabularSourceInputAvailability",
     "PlanningMMMTabularSourceRoleMapping",
     "PlanningMMMTabularSourceRoleSource",
+    "RECOMMENDED_NEXT_PLANNING_MMM_CALIBRATION_SIGNAL_INTAKE_ARTIFACT",
+    "PlanningMMMReadinessReportAdapterEnvelope",
+    "PlanningMMMReadinessReportAdapterIssueCode",
+    "PlanningMMMReadinessReportAdapterRequest",
+    "PlanningMMMReadinessReportAdapterResult",
+    "PlanningMMMReadinessReportAdapterStatus",
+    "PlanningMMMReadinessReportCompatibility",
+    "PlanningMMMReadinessReportCompatibilityMode",
     "WebsiteTrafficSourceProfile",
     "WorkflowReadinessFinding",
     "WorkflowReadinessReportType",

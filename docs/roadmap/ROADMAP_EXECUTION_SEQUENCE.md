@@ -66,6 +66,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP tabular source reuse contract audit 001 | ✓ implemented — `docs/audits/MIP_TABULAR_SOURCE_REUSE_CONTRACT_AUDIT_001.md` (reuse contract + non-divergence checkpoint; no connector implementation) |
 | MIP tabular source reference and inspection 001 | ✓ implemented — `mip.contracts.tabular_source_reference`, `mip.workflows.tabular_source_inspection` (generic tabular source boundary + uploaded CSV compatibility view; no connector implementation) |
 | MIP Planning/MMM tabular source adapter compatibility 001 | ✓ implemented — `mip.contracts.planning_mmm_tabular_source_adapter`, `mip.workflows.planning_mmm_tabular_source_adapter` (generic tabular source → Planning/MMM adapter; uploaded CSV path preserved) |
+| MIP Planning/MMM readiness report adapter 001 | ✓ implemented — `mip.contracts.planning_mmm_readiness_report_adapter`, `mip.workflows.planning_mmm_readiness_report_adapter` (workflow readiness → MMMDataReadiness metadata bridge; no model execution) |
 
 ## Platform principles
 
