@@ -86,6 +86,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM DecisionSurface planning-answer eligibility audit 001 | ✓ implemented — `docs/audits/MIP_MMM_DECISION_SURFACE_PLANNING_ANSWER_ELIGIBILITY_AUDIT_001.md` (audit: DecisionSurface/Trust/Recommendation gates exist; question-level planning-answer eligibility missing; thin eligibility gate recommended) |
 | MIP MMM planning answer eligibility gate 001 | ✓ implemented — `mip.contracts.mmm_planning_answer_eligibility`, `mip.workflows.mmm_planning_answer_eligibility` (question-level answer modes from use-readiness + gate refs; no DecisionSurface/Recommendation construction) |
 | MIP MMM planning answer eligibility gate checkpoint audit 001 | ✓ implemented — `docs/audits/MIP_MMM_PLANNING_ANSWER_ELIGIBILITY_GATE_CHECKPOINT_AUDIT_001.md` (audit: eligibility checkpoint passed; next: planning-answer envelope audit) |
+| MIP MMM planning answer envelope audit 001 | ✓ implemented — `docs/audits/MIP_MMM_PLANNING_ANSWER_ENVELOPE_AUDIT_001.md` (audit: eligibility + generic report/agent envelopes exist; MMM planning-answer envelope missing; thin envelope recommended) |
 
 ## Platform principles
 
