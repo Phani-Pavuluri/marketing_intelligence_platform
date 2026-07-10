@@ -390,3 +390,24 @@ Adds `adapt_tabular_sources_for_planning_mmm()` consuming `TabularSourceInspecti
 **Default next artifact (lane continuation):** `MIP_PLANNING_MMM_READINESS_REPORT_ADAPTER_001`
 
 **GeoX source-compatibility follow-up:** `MIP_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001`
+
+---
+
+## Completion checkpoint: `MIP_TABULAR_SOURCE_REUSE_COMPLETION_AUDIT_001`
+
+**Status:** implemented on main at checkpoint `234b638`.
+
+| Milestone item | Status |
+|----------------|--------|
+| Planning/MMM generic tabular-source path | complete for current milestone |
+| GeoX generic tabular-source path | complete for current milestone |
+| Uploaded CSV paths | preserved unchanged |
+| External connector adapters | deferred |
+
+Future source adapters must emit `TabularSourceInspectionResult` and must not reimplement downstream Planning/MMM or GeoX logic.
+
+**Recommended next:** `MIP_PLANNING_MMM_CALIBRATION_SIGNAL_INTAKE_FROM_TABULAR_SOURCE_001`
+
+**Alternative:** `MIP_GEOX_READOUT_RESULT_ROUTING_FROM_TABULAR_SOURCE_001`
+
+See `docs/audits/MIP_TABULAR_SOURCE_REUSE_COMPLETION_AUDIT_001.md` for full verdict and guardrails.
