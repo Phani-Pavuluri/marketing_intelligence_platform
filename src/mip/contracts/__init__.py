@@ -343,6 +343,16 @@ from mip.contracts.planning_mmm_uploaded_csv_adapter import (
     PlanningMMMUploadedCSVRoleMapping,
     PlanningMMMUploadedCSVRoleSource,
 )
+from mip.contracts.planning_mmm_uploaded_csv_input_plan import (
+    RECOMMENDED_NEXT_PLANNING_MMM_WORKFLOW_READINESS_ARTIFACT,
+    PlanningMMMUploadedCSVInputPlan,
+    PlanningMMMUploadedCSVInputPlanIssueCode,
+    PlanningMMMUploadedCSVInputPlanReadinessTier,
+    PlanningMMMUploadedCSVInputPlanRequest,
+    PlanningMMMUploadedCSVInputPlanResult,
+    PlanningMMMUploadedCSVInputPlanStatus,
+    PlanningMMMUploadedCSVInputRequirement,
+)
 from mip.contracts.recommendation import RecommendationContract
 from mip.contracts.trust import TrustReport
 from mip.contracts.uploaded_csv_materialization import (
@@ -685,6 +695,14 @@ __all__ = [
     "PlanningMMMUploadedCSVRole",
     "PlanningMMMUploadedCSVRoleMapping",
     "PlanningMMMUploadedCSVRoleSource",
+    "RECOMMENDED_NEXT_PLANNING_MMM_WORKFLOW_READINESS_ARTIFACT",
+    "PlanningMMMUploadedCSVInputPlan",
+    "PlanningMMMUploadedCSVInputPlanIssueCode",
+    "PlanningMMMUploadedCSVInputPlanReadinessTier",
+    "PlanningMMMUploadedCSVInputPlanRequest",
+    "PlanningMMMUploadedCSVInputPlanResult",
+    "PlanningMMMUploadedCSVInputPlanStatus",
+    "PlanningMMMUploadedCSVInputRequirement",
     "WebsiteTrafficSourceProfile",
     "WorkflowReadinessFinding",
     "WorkflowReadinessReportType",

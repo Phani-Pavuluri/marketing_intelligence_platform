@@ -356,8 +356,17 @@ Bridges uploaded CSV adapter outputs into the existing package post-test spend r
 
 Maps shared `MaterializedTabularDataset` + `UploadedCSVInspection` outputs to Planning/MMM roles, `DataSourceRef`, and input availability metadata. IntakeManifest / MMMConfigDraft / model readiness compatibility are metadata-only (full construction deferred). Does not re-read CSVs, fit models, optimize budgets, or invoke GeoX runtime.
 
+**`MIP_PLANNING_MMM_UPLOADED_CSV_INPUT_PLAN_001` — implemented on feature branch `feature/mip-planning-mmm-uploaded-csv-input-plan-001`.**
+
+| Component | Location |
+|-----------|----------|
+| Input plan contracts | `mip.contracts.planning_mmm_uploaded_csv_input_plan` |
+| Input plan workflow | `mip.workflows.planning_mmm_uploaded_csv_input_plan` |
+
+Converts `PlanningMMMUploadedCSVAdapterResult` into a governed `PlanningMMMUploadedCSVInputPlan` with readiness metadata, blockers, warnings, and deferred object records. No model fitting, optimizer, simulator, DecisionSurface execution, or recommendations.
+
 **Deferred follow-ons:**
 
-- `MIP_PLANNING_MMM_UPLOADED_CSV_INPUT_PLAN_001` — convert adapter availability into governed planning/MMM input plan
+- `MIP_PLANNING_MMM_WORKFLOW_READINESS_FROM_UPLOADED_CSV_001` — evaluate input plan against existing MMM workflow readiness gates
 
 **Reference branch (not merged):** `feature/mip-geox-uploaded-csv-materialization-001` (`8931a29`) — generic concepts extracted into shared core; GeoX role enums intentionally excluded.
