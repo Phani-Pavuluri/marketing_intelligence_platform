@@ -337,9 +337,17 @@ The repository already has sufficient **declared-reference** abstractions (`Data
 
 Maps shared `MaterializedTabularDataset` + `UploadedCSVInspection` outputs to GeoX roles, `DatasetReference`, and source inspection / input-resolution compatibility metadata. Does not re-read CSVs or invoke panel_exp.
 
+**`MIP_GEOX_READOUT_UPLOADED_CSV_RUNTIME_BRIDGE_001` — implemented on main.**
+
+| Component | Location |
+|-----------|----------|
+| Runtime bridge contracts | `mip.contracts.geox_uploaded_csv_runtime_bridge` |
+| Runtime bridge workflow | `mip.workflows.geox_uploaded_csv_runtime_bridge` |
+
+Bridges uploaded CSV adapter outputs into the existing package post-test spend runtime path via `call_geox_post_test_spend_runtime_for_uploaded_csvs()`. Reuses materialized DataFrames; no CSV re-read; local/dev/test only.
+
 **Deferred follow-ons:**
 
-- `MIP_GEOX_READOUT_UPLOADED_CSV_RUNTIME_BRIDGE_001` — bridge adapter outputs into existing GeoX package runtime call path
 - `MIP_PLANNING_MMM_UPLOADED_CSV_ADAPTER_001` — map shared outputs → planning/MMM intake refs
 
 **Reference branch (not merged):** `feature/mip-geox-uploaded-csv-materialization-001` (`8931a29`) — generic concepts extracted into shared core; GeoX role enums intentionally excluded.

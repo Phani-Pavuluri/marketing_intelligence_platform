@@ -58,7 +58,8 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP GeoX readout result ingestion and explanation 001 | ✓ implemented — `mip.contracts.geox_readout_result_ingestion`, `mip.workflows.geox_readout_result_ingestion` (MIP-facing package artifact explanation; no panel_exp; no metric recomputation) |
 | MIP GeoX readout trust routing 001 | ✓ implemented — `mip.contracts.geox_readout_trust_routing`, `mip.workflows.geox_readout_trust_routing` (governance routing metadata; no TrustReport/DecisionSurface/RecommendationContract bypass) |
 | MIP shared uploaded CSV materialization core 001 | ✓ implemented — `mip.contracts.uploaded_csv_materialization`, `mip.workflows.uploaded_csv_materialization` (lane-neutral CSV materialization; GeoX/Planning adapters deferred) |
-| MIP GeoX readout uploaded CSV adapter 001 | ✓ implemented — `mip.contracts.geox_uploaded_csv_adapter`, `mip.workflows.geox_uploaded_csv_adapter` (maps shared materialization → GeoX roles / DatasetReference; no CSV re-read; runtime bridge deferred) |
+| MIP GeoX readout uploaded CSV adapter 001 | ✓ implemented — `mip.contracts.geox_uploaded_csv_adapter`, `mip.workflows.geox_uploaded_csv_adapter` (maps shared materialization → GeoX roles / DatasetReference; no CSV re-read) |
+| MIP GeoX readout uploaded CSV runtime bridge 001 | ✓ implemented — `mip.contracts.geox_uploaded_csv_runtime_bridge`, `mip.workflows.geox_uploaded_csv_runtime_bridge` (bridges uploaded CSV materialization → package runtime; no CSV re-read; no production loader) |
 
 ## Platform principles
 

@@ -260,6 +260,13 @@ from mip.contracts.geox_uploaded_csv_adapter import (
     GeoXUploadedCSVRoleMapping,
     GeoXUploadedCSVRoleSource,
 )
+from mip.contracts.geox_uploaded_csv_runtime_bridge import (
+    GeoXUploadedCSVRuntimeBridgeIssueCode,
+    GeoXUploadedCSVRuntimeBridgeRequest,
+    GeoXUploadedCSVRuntimeBridgeResult,
+    GeoXUploadedCSVRuntimeBridgeStatus,
+    GeoXUploadedCSVRuntimeColumnMapping,
+)
 from mip.contracts.intake import (
     DataGrain,
     GeoGrain,
@@ -653,6 +660,11 @@ __all__ = [
     "GeoXUploadedCSVRole",
     "GeoXUploadedCSVRoleMapping",
     "GeoXUploadedCSVRoleSource",
+    "GeoXUploadedCSVRuntimeBridgeIssueCode",
+    "GeoXUploadedCSVRuntimeBridgeRequest",
+    "GeoXUploadedCSVRuntimeBridgeResult",
+    "GeoXUploadedCSVRuntimeBridgeStatus",
+    "GeoXUploadedCSVRuntimeColumnMapping",
     "WebsiteTrafficSourceProfile",
     "WorkflowReadinessFinding",
     "WorkflowReadinessReportType",
