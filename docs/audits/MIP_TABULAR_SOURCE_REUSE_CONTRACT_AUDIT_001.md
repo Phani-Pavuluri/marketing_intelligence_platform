@@ -244,7 +244,7 @@ Search scope: `src/mip`, `tests`, `docs` for `UploadedCSV`, `uploaded_csv`, `Mat
 | Lane adapters accept `UploadedCSVMaterializationResult` directly | New source types cannot plug in without CSV materialization | `MIP_UPLOADED_CSV_TO_TABULAR_SOURCE_COMPATIBILITY_001` |
 | `MaterializedTabularDataset.source_type` is `UploadedCSVSourceType` | Type leakage into runtime bridge | Generic `TabularSourceKind` + compatibility view |
 | `planning_mmm_uploaded_csv_*` module names | Semantically source-generic readiness/plan logic | `MIP_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001` |
-| `geox_uploaded_csv_*` adapter contracts | Semantically source-generic role mapping | `MIP_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001` |
+| `geox_uploaded_csv_*` adapter contracts | Semantically source-generic role mapping | ✓ `MIP_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001` |
 | `declared_role_hint` on CSV source/inspection | Reasonable generic hint; name is CSV-coupled | Map to `TabularSourceInspection.declared_role_hint` |
 | `build_data_source_ref_from_uploaded_csv_inspection` helper naming | Planning adapter helper is CSV-named | Rename/wrap behind generic inspection bridge |
 
@@ -272,13 +272,11 @@ Define generic tabular source reference/inspection contracts (`TabularSourceRefe
 
 Add compatibility view from existing `UploadedCSVInspection` / `MaterializedTabularDataset` / `UploadedCSVMaterializationResult` to generic tabular source inspection. Uploaded CSV path remains canonical; no CSV core rewrite.
 
-### Step 3: `MIP_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001`
+### Step 3: `MIP_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001` ✓ implemented
 
-Let GeoX lane adapter consume generic tabular source inspection while preserving uploaded CSV adapter as a thin wrapper.
+Let GeoX lane adapter consume generic tabular source inspection while preserving uploaded CSV adapter as a thin wrapper. See `mip.contracts.geox_tabular_source_adapter`, `mip.workflows.geox_tabular_source_adapter`.
 
-### Step 4: `MIP_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001`
-
-Let Planning/MMM lane adapter consume generic tabular source inspection while preserving uploaded CSV adapter as a thin wrapper.
+### Step 4: `MIP_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001` ✓ implemented
 
 ### Step 5: Source-specific adapters (later, separate artifacts)
 
@@ -336,13 +334,11 @@ The uploaded CSV lanes documented in Section 2 remain **canonical** and must kee
 
 ## 10. Recommended next step
 
-**Default (lane continuation):** `MIP_PLANNING_MMM_READINESS_REPORT_ADAPTER_001`
+**Recommended next (source reuse parity):** `MIP_TABULAR_SOURCE_REUSE_COMPLETION_AUDIT_001`
 
-Bridge uploaded CSV workflow-readiness output into existing `MMMDataReadinessReport` contracts where safe. Completes the Planning/MMM uploaded CSV readiness integration without opening connector scope.
+Confirm both Planning/MMM and GeoX generic tabular paths are complete before opening connector adapters.
 
-**Source-reuse foundation (when prioritized):** `MIP_TABULAR_SOURCE_REFERENCE_AND_INSPECTION_001`
-
-Define generic tabular source contracts so Databricks/warehouse/API adapters have a governed target without diverging from current lanes.
+**GeoX lane continuation (alternative):** `MIP_GEOX_READOUT_RESULT_ROUTING_FROM_TABULAR_SOURCE_001`
 
 ---
 

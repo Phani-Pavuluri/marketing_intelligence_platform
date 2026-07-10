@@ -249,6 +249,17 @@ from mip.contracts.geox_readout_trust_routing import (
     GeoXReadoutTrustRoutingResult,
     GeoXReadoutTrustRoutingStatus,
 )
+from mip.contracts.geox_tabular_source_adapter import (
+    RECOMMENDED_NEXT_GEOX_READOUT_RESULT_ROUTING_FROM_TABULAR_SOURCE_ARTIFACT,
+    RECOMMENDED_NEXT_TABULAR_SOURCE_REUSE_COMPLETION_AUDIT_ARTIFACT,
+    GeoXTabularSourceAdapterIssueCode,
+    GeoXTabularSourceAdapterRequest,
+    GeoXTabularSourceAdapterResult,
+    GeoXTabularSourceAdapterStatus,
+    GeoXTabularSourceInputAvailability,
+    GeoXTabularSourceRoleMapping,
+    GeoXTabularSourceRoleSource,
+)
 from mip.contracts.geox_uploaded_csv_adapter import (
     RECOMMENDED_NEXT_GEOX_UPLOADED_CSV_RUNTIME_BRIDGE_ARTIFACT,
     GeoXUploadedCSVAdapterAvailability,
@@ -740,6 +751,15 @@ __all__ = [
     "GeoXUploadedCSVRole",
     "GeoXUploadedCSVRoleMapping",
     "GeoXUploadedCSVRoleSource",
+    "RECOMMENDED_NEXT_GEOX_READOUT_RESULT_ROUTING_FROM_TABULAR_SOURCE_ARTIFACT",
+    "RECOMMENDED_NEXT_TABULAR_SOURCE_REUSE_COMPLETION_AUDIT_ARTIFACT",
+    "GeoXTabularSourceAdapterIssueCode",
+    "GeoXTabularSourceAdapterRequest",
+    "GeoXTabularSourceAdapterResult",
+    "GeoXTabularSourceAdapterStatus",
+    "GeoXTabularSourceInputAvailability",
+    "GeoXTabularSourceRoleMapping",
+    "GeoXTabularSourceRoleSource",
     "GeoXUploadedCSVRuntimeBridgeIssueCode",
     "GeoXUploadedCSVRuntimeBridgeRequest",
     "GeoXUploadedCSVRuntimeBridgeResult",
