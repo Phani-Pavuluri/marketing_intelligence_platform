@@ -12,6 +12,7 @@ from mip.contracts.mmm_artifact_governance_use_readiness import (
 from mip.contracts.mmm_planning_answer_eligibility import (
     MMMPlanningAnswerEligibilityIssueCode,
     MMMPlanningAnswerEligibilityRequest,
+    MMMPlanningAnswerEligibilityResult,
     MMMPlanningAnswerEligibilityStatus,
     MMMPlanningAnswerGateReference,
     MMMPlanningAnswerMode,
@@ -83,8 +84,12 @@ def _evaluate(
     decision_surface_gate: MMMPlanningAnswerGateReference | None = None,
     trust_report_gate: MMMPlanningAnswerGateReference | None = None,
     recommendation_gate: MMMPlanningAnswerGateReference | None = None,
-    **kwargs: object,
-) -> object:
+    require_trust_review_for_planning: bool = True,
+    require_decision_surface_for_scenario: bool = True,
+    require_recommendation_gate_for_recommendation: bool = True,
+    allow_descriptive_without_decision_surface: bool = True,
+    allow_diagnostic_without_decision_surface: bool = True,
+) -> MMMPlanningAnswerEligibilityResult:
     return evaluate_mmm_planning_answer_eligibility(
         MMMPlanningAnswerEligibilityRequest(
             request_id="pae-1",
@@ -94,8 +99,14 @@ def _evaluate(
             decision_surface_gate=decision_surface_gate,
             trust_report_gate=trust_report_gate,
             recommendation_gate=recommendation_gate,
+            require_trust_review_for_planning=require_trust_review_for_planning,
+            require_decision_surface_for_scenario=require_decision_surface_for_scenario,
+            require_recommendation_gate_for_recommendation=(
+                require_recommendation_gate_for_recommendation
+            ),
+            allow_descriptive_without_decision_surface=allow_descriptive_without_decision_surface,
+            allow_diagnostic_without_decision_surface=allow_diagnostic_without_decision_surface,
             lineage={"caller": "test"},
-            **kwargs,  # type: ignore[arg-type]
         )
     )
 
