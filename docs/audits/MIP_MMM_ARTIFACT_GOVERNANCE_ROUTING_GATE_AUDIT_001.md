@@ -244,3 +244,14 @@ This audit did not add or modify production code under `src/mip/`. No governance
 | Recommended approach | Thin combined governance + use-readiness gate |
 | Verdict | `PARTIALLY_COVERED_NEEDS_THIN_GOVERNANCE_AND_USE_READINESS_GATE` |
 | Next artifact | `MIP_MMM_ARTIFACT_GOVERNANCE_AND_USE_READINESS_GATE_001` |
+
+---
+
+## 8. Follow-up implementation
+
+**`MIP_MMM_ARTIFACT_GOVERNANCE_AND_USE_READINESS_GATE_001`** was implemented on main after this audit:
+
+- `mip.contracts.mmm_artifact_governance_use_readiness` — governance route decisions + use readiness
+- `mip.workflows.mmm_artifact_governance_use_readiness` — `evaluate_mmm_artifact_governance_and_use_readiness()`
+
+**Recommended next artifact:** `MIP_MMM_RUNTIME_ORCHESTRATION_LANE_COMPLETION_AUDIT_001` — audit whether the MMM runtime/control-plane lane can close.
