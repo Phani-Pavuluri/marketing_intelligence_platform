@@ -74,6 +74,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM existing model availability gate 001 | ✓ implemented — `mip.contracts.mmm_existing_model_availability`, `mip.workflows.mmm_existing_model_availability` (metadata-only gate: reuse vs refresh vs new model run; no model execution) |
 | MIP Planning/MMM calibration signal mapping and readiness 001 | ✓ implemented — `mip.contracts.planning_mmm_calibration_signal_mapping_readiness`, `mip.workflows.planning_mmm_calibration_signal_mapping_readiness` (map tabular intake to calibration readiness metadata; no calibration math) |
 | MIP Planning/MMM trusted input and model run eligibility 001 | ✓ implemented — `mip.contracts.planning_mmm_trusted_input_model_run_eligibility`, `mip.workflows.planning_mmm_trusted_input_model_run_eligibility` (combine data/calibration/model availability into model-run eligibility gate; no model execution) |
+| MIP MMM runtime adapter contract audit 001 | ✓ implemented — `docs/audits/MIP_MMM_RUNTIME_ADAPTER_CONTRACT_AUDIT_001.md` (audit: adapter placeholders + eligibility exist; MMM runtime request/response contracts missing; thin runtime adapter contract recommended) |
 
 ## Platform principles
 
