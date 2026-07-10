@@ -101,6 +101,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM planning response renderer checkpoint audit 001 | ✓ implemented — `docs/audits/MIP_MMM_PLANNING_RESPONSE_RENDERER_CHECKPOINT_AUDIT_001.md` (audit: renderer checkpoint passed; next: LLM response boundary audit) |
 | MIP MMM LLM response boundary audit 001 | ✓ implemented — `docs/audits/MIP_MMM_LLM_RESPONSE_BOUNDARY_AUDIT_001.md` (audit: renderer + adjacent llm.safety exist; no boundary consumes rendered planning sections; thin MMM LLM boundary recommended) |
 | MIP MMM LLM response boundary 001 | ✓ implemented — `mip.contracts.mmm_llm_response_boundary`, `mip.workflows.mmm_llm_response_boundary` (metadata-only section policies/refusals over rendered sections; no provider/prompt/orchestration) |
+| MIP MMM LLM response boundary checkpoint audit 001 | ✓ implemented — `docs/audits/MIP_MMM_LLM_RESPONSE_BOUNDARY_CHECKPOINT_AUDIT_001.md` (audit: boundary checkpoint passed; next: LLM response template audit) |
 
 ## Platform principles
 
