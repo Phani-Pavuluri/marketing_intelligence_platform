@@ -155,24 +155,21 @@ Planning/MMM uploaded CSV, tabular source adapters, workflow readiness, readines
 
 ## 6. Final audit verdict
 
-**MISSING_NEEDS_NEW_EXISTING_MODEL_AVAILABILITY_GATE**
+**MISSING_NEEDS_NEW_EXISTING_MODEL_AVAILABILITY_GATE** *(at audit time; addressed by `MIP_MMM_EXISTING_MODEL_AVAILABILITY_GATE_001`)*
 
-MIP has strong **per-artifact governance** (evidence registry, calibration readiness, decision-surface gates, trust reports) and **data-readiness** bridges for Planning/MMM inputs. It does **not** have a searchable MMM model artifact catalog or a gate that selects an existing model vs requires a new model run for a user planning question.
+MIP had strong **per-artifact governance** (evidence registry, calibration readiness, decision-surface gates, trust reports) and **data-readiness** bridges for Planning/MMM inputs. It did **not** have a searchable MMM model artifact catalog or a gate that selects an existing model vs requires a new model run for a user planning question.
+
+**Follow-up (implemented):** `mip.contracts.mmm_existing_model_availability` and `mip.workflows.mmm_existing_model_availability` add a metadata-only existing-model availability gate with `MMMModelArtifact`, `MMMModelArtifactQuery`, and structured statuses (`USABLE_EXISTING_MODEL`, `REQUIRES_MODEL_REFRESH`, `REQUIRES_NEW_MODEL_RUN`, etc.). No model execution, artifact loading, or TrustReport/DecisionSurface construction.
 
 ---
 
 ## 7. Recommended next artifact
 
-**`MIP_MMM_EXISTING_MODEL_AVAILABILITY_GATE_001`**
+**`MIP_PLANNING_MMM_CALIBRATION_SIGNAL_MAPPING_AND_READINESS_001`**
 
-Add a metadata-only existing-model availability gate and contracts that:
+Map calibration intake into readiness metadata and align signals with model/use requirements before model-run eligibility.
 
-- register/query MMM model artifact metadata (without model fitting in MIP)
-- match scope, metric, channels, freshness, promotion, diagnostics, allowed use
-- return structured statuses including `requires_new_model_run`
-- integrate with TrustReport / DecisionSurface paths without bypassing governance
-
-**Alternative (after gate):** `MIP_PLANNING_MMM_CALIBRATION_SIGNAL_MAPPING_AUDIT_FROM_TABULAR_INTAKE_001` — links calibration intake to `ModelCalibrationReadiness` before model use.
+**Alternative:** `MIP_PLANNING_MMM_TRUSTED_INPUT_AND_MODEL_RUN_ELIGIBILITY_001`
 
 Do **not** recommend Databricks/warehouse/API connectors for this gap.
 

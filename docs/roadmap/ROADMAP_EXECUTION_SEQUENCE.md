@@ -71,6 +71,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP tabular source reuse completion audit 001 | ✓ implemented — `docs/audits/MIP_TABULAR_SOURCE_REUSE_COMPLETION_AUDIT_001.md` (milestone checkpoint: reusable tabular framework complete; connector adapters deferred) |
 | MIP Planning/MMM calibration signal tabular intake 001 | ✓ implemented — `mip.contracts.planning_mmm_calibration_signal_tabular_intake`, `mip.workflows.planning_mmm_calibration_signal_tabular_intake` (metadata-safe calibration intake from generic tabular source; no model execution) |
 | MIP MMM model artifact and existing model availability audit 001 | ✓ implemented — `docs/audits/MIP_MMM_MODEL_ARTIFACT_AND_EXISTING_MODEL_AVAILABILITY_AUDIT_001.md` (audit: existing MMM model reuse gate missing; EvidenceRegistry/gates partial only) |
+| MIP MMM existing model availability gate 001 | ✓ implemented — `mip.contracts.mmm_existing_model_availability`, `mip.workflows.mmm_existing_model_availability` (metadata-only gate: reuse vs refresh vs new model run; no model execution) |
 
 ## Platform principles
 
