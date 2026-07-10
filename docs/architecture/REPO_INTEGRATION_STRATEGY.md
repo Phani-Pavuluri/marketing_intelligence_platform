@@ -255,7 +255,7 @@ MIP must not import `mmm.modeling.*` or `panel_exp.inference.*` directly—only 
 | Direction | Mapping |
 |-----------|---------|
 | GeoX output → MIP | `ExperimentEvidence` via `adapters/geox/` |
-| GeoX method-promotion governance → MIP | `MethodPromotionGenericAdapterMIPHandoff` via consumer contract [`MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_CONTRACT_001`](../contracts/MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_CONTRACT_001.md) and runtime contract [`MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_RUNTIME_CONTRACT_001`](../contracts/MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_RUNTIME_CONTRACT_001.md) — **governance context only**; runtime implementation deferred; not DecisionSurface, TrustReport bypass, RecommendationContract, planning answer eligibility, or spend/ROI authorization |
+| GeoX method-promotion governance → MIP | `MethodPromotionGenericAdapterMIPHandoff` via consumer contract [`MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_CONTRACT_001`](../contracts/MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_CONTRACT_001.md), runtime contract [`MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_RUNTIME_CONTRACT_001`](../contracts/MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_RUNTIME_CONTRACT_001.md), and runtime [`MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_RUNTIME_001`](../contracts/MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_RUNTIME_001.md) (`mip.contracts.method_promotion_handoff_consumer`) — **governance context only**; not DecisionSurface, TrustReport bypass, RecommendationContract, planning answer eligibility, or spend/ROI authorization |
 | MMM output → MIP | `DecisionSurface` (full-panel Δμ for production) via `adapters/mmm/` |
 | MIP governance → MMM | `CalibrationSignal` via compatibility and readiness gates—not raw `ExperimentEvidence` |
 
