@@ -77,6 +77,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM runtime adapter contract audit 001 | ✓ implemented — `docs/audits/MIP_MMM_RUNTIME_ADAPTER_CONTRACT_AUDIT_001.md` (audit: adapter placeholders + eligibility exist; MMM runtime request/response contracts missing; thin runtime adapter contract recommended) |
 | MIP MMM runtime adapter contract 001 | ✓ implemented — `mip.contracts.mmm_runtime_adapter`, `mip.workflows.mmm_runtime_adapter` (metadata-only runtime handoff from eligibility; no external execution) |
 | MIP MMM runtime result ingestion and diagnostics audit 001 | ✓ implemented — `docs/audits/MIP_MMM_RUNTIME_RESULT_INGESTION_AND_DIAGNOSTICS_AUDIT_001.md` (audit: handoff URIs exist; dedicated ingestion/diagnostics contracts missing; thin ingestion adapter recommended) |
+| MIP MMM runtime result ingestion and diagnostics contract 001 | ✓ implemented — `mip.contracts.mmm_runtime_result_ingestion`, `mip.workflows.mmm_runtime_result_ingestion` (metadata-only runtime result ingestion; no artifact loading) |
 
 ## Platform principles
 

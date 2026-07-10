@@ -213,3 +213,14 @@ This audit did not add or modify production code under `src/mip/`. No runtime re
 | Recommended approach | Thin ingestion adapter on top of runtime handoff + fixture/governance paths |
 | Verdict | `PARTIALLY_COVERED_NEEDS_THIN_INGESTION_ADAPTER` |
 | Next artifact | `MIP_MMM_RUNTIME_RESULT_INGESTION_AND_DIAGNOSTICS_CONTRACT_001` |
+
+---
+
+## 8. Follow-up implementation
+
+**`MIP_MMM_RUNTIME_RESULT_INGESTION_AND_DIAGNOSTICS_CONTRACT_001`** was implemented on main after this audit:
+
+- `mip.contracts.mmm_runtime_result_ingestion` — ingestion request/result, diagnostics metadata, governance routing reference
+- `mip.workflows.mmm_runtime_result_ingestion` — `ingest_mmm_runtime_result_metadata()` consumes `MMMRuntimeCallResult` / `MMMRuntimeArtifactHandoff`
+
+**Recommended next artifact:** `MIP_MMM_ARTIFACT_GOVERNANCE_ROUTING_GATE_AUDIT_001` — audit existing governance adapter, TrustReport, DecisionSurface, artifact routing, and release gates before adding a dedicated MMM artifact governance routing gate.
