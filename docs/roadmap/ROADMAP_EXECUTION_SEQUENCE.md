@@ -82,6 +82,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM artifact governance and use readiness gate 001 | ✓ implemented — `mip.contracts.mmm_artifact_governance_use_readiness`, `mip.workflows.mmm_artifact_governance_use_readiness` (thin metadata-only governance routes + planning/diagnostic use readiness; no TrustReport/DecisionSurface construction) |
 | MIP MMM runtime orchestration lane completion audit 001 | ✓ implemented — `docs/audits/MIP_MMM_RUNTIME_ORCHESTRATION_LANE_COMPLETION_AUDIT_001.md` (audit: runtime/control-plane lane closed with deferred nonblocking gaps; next: DecisionSurface/planning-answer eligibility) |
 | MIP MMM DecisionSurface planning-answer eligibility audit 001 | ✓ implemented — `docs/audits/MIP_MMM_DECISION_SURFACE_PLANNING_ANSWER_ELIGIBILITY_AUDIT_001.md` (audit: DecisionSurface/Trust/Recommendation gates exist; question-level planning-answer eligibility missing; thin eligibility gate recommended) |
+| MIP MMM planning answer eligibility gate 001 | ✓ implemented — `mip.contracts.mmm_planning_answer_eligibility`, `mip.workflows.mmm_planning_answer_eligibility` (question-level answer modes from use-readiness + gate refs; no DecisionSurface/Recommendation construction) |
 
 ## Platform principles
 
