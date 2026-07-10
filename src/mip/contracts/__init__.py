@@ -353,6 +353,15 @@ from mip.contracts.planning_mmm_uploaded_csv_input_plan import (
     PlanningMMMUploadedCSVInputPlanStatus,
     PlanningMMMUploadedCSVInputRequirement,
 )
+from mip.contracts.planning_mmm_tabular_source_adapter import (
+    PlanningMMMTabularSourceAdapterIssueCode,
+    PlanningMMMTabularSourceAdapterRequest,
+    PlanningMMMTabularSourceAdapterResult,
+    PlanningMMMTabularSourceAdapterStatus,
+    PlanningMMMTabularSourceInputAvailability,
+    PlanningMMMTabularSourceRoleMapping,
+    PlanningMMMTabularSourceRoleSource,
+)
 from mip.contracts.planning_mmm_uploaded_csv_workflow_readiness import (
     RECOMMENDED_NEXT_PLANNING_MMM_READINESS_REPORT_ADAPTER_ARTIFACT,
     PlanningMMMUploadedCSVWorkflowReadinessIssueCode,
@@ -749,6 +758,13 @@ __all__ = [
     "PlanningMMMUploadedCSVWorkflowReadinessResult",
     "PlanningMMMUploadedCSVWorkflowReadinessStatus",
     "PlanningMMMUploadedCSVWorkflowReadinessTier",
+    "PlanningMMMTabularSourceAdapterIssueCode",
+    "PlanningMMMTabularSourceAdapterRequest",
+    "PlanningMMMTabularSourceAdapterResult",
+    "PlanningMMMTabularSourceAdapterStatus",
+    "PlanningMMMTabularSourceInputAvailability",
+    "PlanningMMMTabularSourceRoleMapping",
+    "PlanningMMMTabularSourceRoleSource",
     "WebsiteTrafficSourceProfile",
     "WorkflowReadinessFinding",
     "WorkflowReadinessReportType",

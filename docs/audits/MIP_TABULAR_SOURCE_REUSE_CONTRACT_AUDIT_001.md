@@ -377,3 +377,20 @@ Adds generic `TabularSourceReference`, `TabularSourceInspection`, schema, lineag
 **Default next artifact (lane continuation):** `MIP_PLANNING_MMM_READINESS_REPORT_ADAPTER_001`
 
 **Source-compatibility follow-up:** `MIP_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001`
+
+---
+
+## Implementation update: `MIP_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001`
+
+**Status:** implemented on feature branch `feature/planning-mmm-tabular-source-adapter-compatibility-001` until merged.
+
+| Component | Location |
+|-----------|----------|
+| Planning/MMM tabular source adapter contracts | `mip.contracts.planning_mmm_tabular_source_adapter` |
+| Planning/MMM tabular source adapter workflow | `mip.workflows.planning_mmm_tabular_source_adapter` |
+
+Adds `adapt_tabular_sources_for_planning_mmm()` consuming `TabularSourceInspectionResult` with input-plan compatibility helpers. Uploaded CSV adapter path unchanged.
+
+**Default next artifact (lane continuation):** `MIP_PLANNING_MMM_READINESS_REPORT_ADAPTER_001`
+
+**GeoX source-compatibility follow-up:** `MIP_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_001`
