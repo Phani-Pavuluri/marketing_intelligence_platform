@@ -111,6 +111,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM LLM response template from application package 001 | ✓ implemented — `mip.llm.mmm_response_template` (metadata-only instruction slots from `MMMResponseBoundaryApplicationOutput`; refusal/defer-only when not ready; no prompt execution/provider/orchestration) |
 | MIP MMM LLM response template checkpoint audit 001 | ✓ implemented — `docs/audits/MIP_MMM_LLM_RESPONSE_TEMPLATE_CHECKPOINT_AUDIT_001.md` (checkpoint passed; next: `MIP_DOMAIN_DATASET_FIXTURE_STRATEGY_001` for demo fixtures before verifier/prompt-execution) |
 | MIP domain dataset fixture strategy 001 | ✓ implemented — `docs/design/MIP_DOMAIN_DATASET_FIXTURE_STRATEGY_001.md` (Tier 1–2 MIP / Tier 3 packages; five domains; expected can_say/cannot_say outcomes; next: `MIP_DOMAIN_DATASET_SCHEMA_CONTRACT_001`) |
+| MIP domain dataset schema contract 001 | ✓ implemented — `mip.contracts.domain_dataset_fixtures` (typed manifests/expectations only; no dataset generation; next: `MIP_DOMAIN_DATASET_SCHEMA_CONTRACT_CHECKPOINT_AUDIT_001`) |
 
 ## Platform principles
 
