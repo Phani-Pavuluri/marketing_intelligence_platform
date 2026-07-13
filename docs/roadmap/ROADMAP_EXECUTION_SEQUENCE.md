@@ -109,6 +109,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM LLM response template rescoping 001 | ✓ implemented — `docs/design/MIP_MMM_LLM_RESPONSE_TEMPLATE_RESCOPING_001.md` (rescope: template consumes `MMMResponseBoundaryApplicationOutput`; refusal-only when `ready_for_llm_prompt_assembly=false`; next: `MIP_MMM_LLM_RESPONSE_TEMPLATE_FROM_APPLICATION_PACKAGE_001`) |
 | MIP method-promotion and application package mypy cleanup 001 | ✓ implemented — typing-only fix for 5 known global mypy errors (method-promotion handoff consumer + MMM response boundary application); no semantic changes; next: `MIP_MMM_LLM_RESPONSE_TEMPLATE_FROM_APPLICATION_PACKAGE_001` |
 | MIP MMM LLM response template from application package 001 | ✓ implemented — `mip.llm.mmm_response_template` (metadata-only instruction slots from `MMMResponseBoundaryApplicationOutput`; refusal/defer-only when not ready; no prompt execution/provider/orchestration) |
+| MIP MMM LLM response template checkpoint audit 001 | ✓ implemented — `docs/audits/MIP_MMM_LLM_RESPONSE_TEMPLATE_CHECKPOINT_AUDIT_001.md` (checkpoint passed; next: `MIP_DOMAIN_DATASET_FIXTURE_STRATEGY_001` for demo fixtures before verifier/prompt-execution) |
 
 ## Platform principles
 
