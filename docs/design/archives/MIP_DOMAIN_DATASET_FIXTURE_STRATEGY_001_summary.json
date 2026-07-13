@@ -1,0 +1,68 @@
+{
+  "artifact_id": "MIP_DOMAIN_DATASET_FIXTURE_STRATEGY_001",
+  "artifact_type": "domain_dataset_fixture_strategy",
+  "status": "completed",
+  "scope": "strategy_docs_tests_only_no_dataset_generation",
+  "repo_checkpoint": "17be95a",
+  "depends_on": [
+    "MIP_MMM_LLM_RESPONSE_TEMPLATE_CHECKPOINT_AUDIT_001"
+  ],
+  "strategy_completed": true,
+  "verdict": "DOMAIN_FIXTURE_STRATEGY_READY_FOR_SCHEMA_CONTRACT",
+  "mip_owns_tier_1_tiny_fixtures": true,
+  "mip_owns_tier_2_realistic_synthetic_panels": true,
+  "packages_own_tier_3_method_simulation_generation": true,
+  "saas_domain_included": true,
+  "ecommerce_domain_included": true,
+  "mobile_app_domain_included": true,
+  "b2b_pipeline_domain_included": true,
+  "geo_local_experiment_domain_included": true,
+  "mmm_spend_kpi_panels_included": true,
+  "geox_calibration_signal_fixtures_included": true,
+  "control_signal_catalog_included": true,
+  "experiment_metadata_fixtures_included": true,
+  "data_sufficiency_readiness_fixtures_included": true,
+  "llm_demo_eval_scenario_fixtures_included": true,
+  "expected_allowed_blocked_behaviors_required": true,
+  "can_say_cannot_say_expectations_required": true,
+  "human_review_expectations_required": true,
+  "forbidden_recommendation_expectations_required": true,
+  "existing_stage_a_fixtures_acknowledged": true,
+  "dataset_generation_implemented": false,
+  "mmm_fitting_implemented": false,
+  "geox_estimator_logic_implemented": false,
+  "production_connector_implemented": false,
+  "decision_surface_implemented": false,
+  "recommendation_contract_implemented": false,
+  "optimizer_simulator_implemented": false,
+  "llm_provider_integration_implemented": false,
+  "prompt_execution_implemented": false,
+  "verifier_implemented": false,
+  "blocking_gaps": [],
+  "deferred_nonblocking_gaps": [
+    "domain_dataset_schema_contract_not_yet_implemented",
+    "domain_demo_datasets_not_yet_generated",
+    "tier_3_package_snapshot_catalog_expansion_deferred",
+    "verifier_prompt_execution_provider_ui_demos_deferred",
+    "full_repo_ruff_unrelated_preexisting_issues"
+  ],
+  "known_validation_limitations": [
+    "full_repo_ruff_may_fail_on_unrelated_preexisting_UP035_UP038_E501_F811_issues"
+  ],
+  "recommended_next_artifact": "MIP_DOMAIN_DATASET_SCHEMA_CONTRACT_001",
+  "recommended_sequence_after_strategy": [
+    "MIP_DOMAIN_DATASET_SCHEMA_CONTRACT_001",
+    "MIP_DEMO_DOMAIN_DATASETS_001",
+    "MIP_MMM_LLM_RESPONSE_VERIFIER_AUDIT_001",
+    "prompt_provider_demo_path"
+  ],
+  "production_code_changed": false,
+  "evidence_paths": [
+    "docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md",
+    "examples/fixtures/stage_a",
+    "docs/audits/MIP_MMM_LLM_RESPONSE_TEMPLATE_CHECKPOINT_AUDIT_001.md",
+    "docs/design/MIP_MMM_LLM_RESPONSE_TEMPLATE_RESCOPING_001.md",
+    "mip.llm.mmm_response_template",
+    "mip.llm.mmm_response_boundary_application"
+  ]
+}
