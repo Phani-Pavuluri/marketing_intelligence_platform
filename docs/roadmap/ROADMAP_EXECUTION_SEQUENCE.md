@@ -105,6 +105,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM LLM response template audit 001 | ✓ implemented — `docs/audits/MIP_MMM_LLM_RESPONSE_TEMPLATE_AUDIT_001.md` (audit: boundary exists; no template consumes it; thin MMM LLM response template recommended) |
 | MIP MMM LLM response boundary application readiness audit 001 | ✓ documented — [MIP_MMM_LLM_RESPONSE_BOUNDARY_APPLICATION_READINESS_AUDIT_001.md](MIP_MMM_LLM_RESPONSE_BOUNDARY_APPLICATION_READINESS_AUDIT_001.md) (boundary ready for narrow application packaging; not full orchestration; not hardening) |
 | MIP MMM LLM response boundary application 001 | ✓ implemented — `mip.llm.mmm_response_boundary_application` ([MIP_MMM_LLM_RESPONSE_BOUNDARY_APPLICATION_001.md](../contracts/MIP_MMM_LLM_RESPONSE_BOUNDARY_APPLICATION_001.md); metadata-only packaging of rendered sections; no LLM/prompt/orchestration) |
+| MIP MMM GeoX LLM layering reconciliation audit 001 | ✓ implemented — `docs/audits/MIP_MMM_GEOX_LLM_LAYERING_RECONCILIATION_AUDIT_001.md` (audit: application package exists; template missing; rescope template to consume application package before implement; dataset strategy nonblocking) |
 
 ## Platform principles
 
