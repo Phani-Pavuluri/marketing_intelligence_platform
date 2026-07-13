@@ -108,6 +108,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP MMM GeoX LLM layering reconciliation audit 001 | ✓ implemented — `docs/audits/MIP_MMM_GEOX_LLM_LAYERING_RECONCILIATION_AUDIT_001.md` (audit: application package exists; template missing; rescope template to consume application package before implement; dataset strategy nonblocking) |
 | MIP MMM LLM response template rescoping 001 | ✓ implemented — `docs/design/MIP_MMM_LLM_RESPONSE_TEMPLATE_RESCOPING_001.md` (rescope: template consumes `MMMResponseBoundaryApplicationOutput`; refusal-only when `ready_for_llm_prompt_assembly=false`; next: `MIP_MMM_LLM_RESPONSE_TEMPLATE_FROM_APPLICATION_PACKAGE_001`) |
 | MIP method-promotion and application package mypy cleanup 001 | ✓ implemented — typing-only fix for 5 known global mypy errors (method-promotion handoff consumer + MMM response boundary application); no semantic changes; next: `MIP_MMM_LLM_RESPONSE_TEMPLATE_FROM_APPLICATION_PACKAGE_001` |
+| MIP MMM LLM response template from application package 001 | ✓ implemented — `mip.llm.mmm_response_template` (metadata-only instruction slots from `MMMResponseBoundaryApplicationOutput`; refusal/defer-only when not ready; no prompt execution/provider/orchestration) |
 
 ## Platform principles
 
