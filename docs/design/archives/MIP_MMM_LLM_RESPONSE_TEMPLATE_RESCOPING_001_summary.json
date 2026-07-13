@@ -1,0 +1,66 @@
+{
+  "artifact_id": "MIP_MMM_LLM_RESPONSE_TEMPLATE_RESCOPING_001",
+  "artifact_type": "mmm_llm_response_template_rescoping",
+  "status": "completed",
+  "scope": "design_rescoping_only_no_production_code_changes",
+  "repo_checkpoint": "3c2e9c2",
+  "depends_on": [
+    "MIP_MMM_GEOX_LLM_LAYERING_RECONCILIATION_AUDIT_001",
+    "MIP_MMM_LLM_RESPONSE_BOUNDARY_APPLICATION_001",
+    "MIP_MMM_LLM_RESPONSE_TEMPLATE_AUDIT_001"
+  ],
+  "rescoping_completed": true,
+  "decision": "RESCOPE_TEMPLATE_TO_CONSUME_APPLICATION_PACKAGE_WITH_REFUSAL_ONLY_WHEN_NOT_READY",
+  "template_should_consume_application_package": true,
+  "template_should_consume_raw_boundary": false,
+  "correct_template_input": "MMMResponseBoundaryApplicationOutput",
+  "raw_boundary_direct_input": "not_allowed",
+  "application_package_exists": true,
+  "application_package_fields_sufficient_for_template": true,
+  "ready_for_llm_prompt_assembly_false_handled": true,
+  "refusal_only_template_allowed_when_not_ready": true,
+  "normal_prompt_assembly_blocked_when_not_ready": true,
+  "can_say_preserved": true,
+  "cannot_say_prioritized": true,
+  "safe_response_guidance_preserved": true,
+  "unsupported_deferred_preserved": true,
+  "gates_preserved": true,
+  "provenance_lineage_required": true,
+  "loose_boundary_mapping_requires_provenance": true,
+  "llm_explanation_plan_parallel_path_blocked": true,
+  "template_direction": "mmm_specific",
+  "mypy_cleanup_required_before_template_implementation": false,
+  "blocking_gaps": [],
+  "redundancy_risks": [
+    "reintroducing_boundary_direct_template_consumer",
+    "llm_explanation_plan_as_parallel_mmm_prompt_path"
+  ],
+  "compatibility_risks": [
+    "loose_upstream_response_boundary_mapping_without_packaged_provenance",
+    "treating_ready_for_llm_prompt_assembly_false_as_normal_assembly_authorization"
+  ],
+  "known_validation_limitations": [
+    "global_mypy_may_fail_due_to_known_preexisting_method_promotion_handoff_consumer_typing_errors",
+    "global_mypy_may_fail_due_to_preexisting_mmm_response_boundary_application_typing_errors_from_30d81a0"
+  ],
+  "recommended_next_artifact": "MIP_MMM_LLM_RESPONSE_TEMPLATE_FROM_APPLICATION_PACKAGE_001",
+  "supersedes_next_artifact_name": "MIP_MMM_LLM_RESPONSE_TEMPLATE_001",
+  "production_code_changed": false,
+  "application_package_behavior_changed": false,
+  "method_promotion_handoff_consumer_modified": false,
+  "decision_surface_construction_implemented": false,
+  "recommendation_contract_generation_implemented": false,
+  "trust_report_bypass_implemented": false,
+  "optimizer_implemented": false,
+  "simulator_implemented": false,
+  "llm_provider_behavior_modified": false,
+  "evidence_paths": [
+    "mip.llm.mmm_response_boundary_application",
+    "mip.contracts.mmm_llm_response_boundary",
+    "mip.workflows.mmm_llm_response_boundary",
+    "mip.contracts.llm_provider",
+    "docs/audits/MIP_MMM_GEOX_LLM_LAYERING_RECONCILIATION_AUDIT_001.md",
+    "docs/audits/MIP_MMM_LLM_RESPONSE_TEMPLATE_AUDIT_001.md",
+    "docs/contracts/MIP_MMM_LLM_RESPONSE_BOUNDARY_APPLICATION_001.md"
+  ]
+}
