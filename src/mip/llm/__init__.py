@@ -8,6 +8,13 @@ from mip.llm.explanations import (
     explain_workflow_summary,
 )
 from mip.llm.intents import IntentClassification, IntentRiskLevel, WorkflowIntent
+from mip.llm.mmm_response_boundary_application import (
+    MMMResponseBoundaryApplicationInput,
+    MMMResponseBoundaryApplicationOutput,
+    MMMResponseBoundaryApplicationSection,
+    package_mmm_llm_response_boundary,
+    serialize_mmm_llm_response_boundary_application_output,
+)
 from mip.llm.providers import LLMProviderName, LLMProviderResponse, MockLLMProvider
 from mip.llm.safety import (
     allowed_actions_for_confidence_tier,
@@ -23,6 +30,9 @@ __all__ = [
     "LLMExplanationContext",
     "LLMProviderName",
     "LLMProviderResponse",
+    "MMMResponseBoundaryApplicationInput",
+    "MMMResponseBoundaryApplicationOutput",
+    "MMMResponseBoundaryApplicationSection",
     "MockLLMProvider",
     "WorkflowIntent",
     "allowed_actions_for_confidence_tier",
@@ -35,4 +45,6 @@ __all__ = [
     "explain_blockers",
     "explain_next_steps",
     "explain_workflow_summary",
+    "package_mmm_llm_response_boundary",
+    "serialize_mmm_llm_response_boundary_application_output",
 ]
