@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question_id": "mmm_readiness_1",
+      "category": "mmm_readiness",
+      "question": "Can this dataset support MMM readiness?"
+    },
+    {
+      "question_id": "mmm_readiness_2",
+      "category": "mmm_readiness",
+      "question": "What data is missing for MMM?"
+    },
+    {
+      "question_id": "geox_readiness_1",
+      "category": "geox_readiness",
+      "question": "Can I run a DMA-level GeoX experiment for Meta?"
+    },
+    {
+      "question_id": "grain_compatibility_1",
+      "category": "grain_compatibility",
+      "question": "Explain the grain difference between raw spend and KPI."
+    },
+    {
+      "question_id": "budget_planning_guardrail_1",
+      "category": "budget_planning_guardrail",
+      "question": "Can I use this to recommend a budget shift next quarter?"
+    },
+    {
+      "question_id": "calibration_context_1",
+      "category": "calibration_context",
+      "question": "What does the calibration signal let me say?"
+    },
+    {
+      "question_id": "data_missingness_1",
+      "category": "data_missingness",
+      "question": "What can you safely say from this data?"
+    },
+    {
+      "question_id": "data_missingness_2",
+      "category": "data_missingness",
+      "question": "What can you not say yet?"
+    }
+  ]
+}

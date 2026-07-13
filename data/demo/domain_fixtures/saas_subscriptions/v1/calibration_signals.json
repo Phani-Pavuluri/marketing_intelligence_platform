@@ -1,0 +1,35 @@
+{
+  "signals": [
+    {
+      "signal_id": "saas_v1_meta_dma_prior_demo_001",
+      "source_type": "synthetic_demo_prior",
+      "channel": "Meta",
+      "geo_scope": "DMA",
+      "time_window": {
+        "start": "2023-01-01",
+        "end": "2023-12-31"
+      },
+      "metric": "paid_conversions",
+      "effect_estimate": 0.04,
+      "standard_error": 0.02,
+      "freshness_status": "demo_stale_ok",
+      "compatibility_status": "fixture_context_only",
+      "demo_fixture_only": true,
+      "allowed_claims": [
+        "A demo calibration-style prior exists for Meta at DMA grain.",
+        "This signal can be discussed as context for future calibration intake readiness.",
+        "This signal does not authorize MMM fit, ROI, or budget recommendations."
+      ],
+      "forbidden_claims": [
+        "This signal calibrates a live MMM model.",
+        "This signal authorizes channel ROI or ROAS claims.",
+        "This signal authorizes recommendation readiness.",
+        "This signal proves incrementality for Meta."
+      ]
+    }
+  ],
+  "notes": [
+    "demo_fixture_only — not runtime CalibrationSignal ingestion",
+    "Not applied to any fitted MMM model in MIP"
+  ]
+}

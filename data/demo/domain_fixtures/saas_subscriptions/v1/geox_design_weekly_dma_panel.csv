@@ -1,0 +1,113 @@
+week_start,dma_code,dma_name,primary_kpi,meta_spend,total_spend,eligible,region,population,period
+2024-01-01,501,New York,215,727,2198,true,Northeast,7500000,pre
+2024-01-01,803,Los Angeles,207,795,2413,true,West,5800000,pre
+2024-01-01,602,Chicago,219,864,2629,true,Midwest,3500000,pre
+2024-01-01,504,Philadelphia,231,932,2844,true,Northeast,3000000,pre
+2024-01-01,511,Washington DC,263,1000,3060,true,Mid-Atlantic,2600000,pre
+2024-01-01,505,Detroit,255,1069,3276,true,Midwest,1900000,pre
+2024-01-01,506,Boston,267,1137,3491,true,Northeast,2500000,pre
+2024-01-01,623,Dallas-Ft. Worth,279,1206,3707,false,South,2800000,pre
+2024-01-08,501,New York,188,813,2470,true,Northeast,7500000,pre
+2024-01-08,803,Los Angeles,200,882,2687,true,West,5800000,pre
+2024-01-08,602,Chicago,212,951,2905,true,Midwest,3500000,pre
+2024-01-08,504,Philadelphia,244,1020,3123,true,Northeast,3000000,pre
+2024-01-08,511,Washington DC,236,1090,3342,true,Mid-Atlantic,2600000,pre
+2024-01-08,505,Detroit,248,1159,3560,true,Midwest,1900000,pre
+2024-01-08,506,Boston,260,1228,3777,true,Northeast,2500000,pre
+2024-01-08,623,Dallas-Ft. Worth,292,1297,3995,false,South,2800000,pre
+2024-01-15,501,New York,196,900,2743,true,Northeast,7500000,pre
+2024-01-15,803,Los Angeles,208,969,2962,true,West,5800000,pre
+2024-01-15,602,Chicago,240,1039,3182,true,Midwest,3500000,pre
+2024-01-15,504,Philadelphia,232,1109,3403,true,Northeast,3000000,pre
+2024-01-15,511,Washington DC,244,1179,3623,true,Mid-Atlantic,2600000,pre
+2024-01-15,505,Detroit,256,1249,3843,true,Midwest,1900000,pre
+2024-01-15,506,Boston,288,1319,4064,true,Northeast,2500000,pre
+2024-01-15,623,Dallas-Ft. Worth,280,1388,4283,false,South,2800000,pre
+2024-01-22,501,New York,194,986,3015,true,Northeast,7500000,pre
+2024-01-22,803,Los Angeles,236,1056,3236,true,West,5800000,pre
+2024-01-22,602,Chicago,218,1127,3459,true,Midwest,3500000,pre
+2024-01-22,504,Philadelphia,240,1198,3682,true,Northeast,3000000,pre
+2024-01-22,511,Washington DC,242,1268,3904,true,Mid-Atlantic,2600000,pre
+2024-01-22,505,Detroit,284,1339,4127,true,Midwest,1900000,pre
+2024-01-22,506,Boston,266,1409,4349,true,Northeast,2500000,pre
+2024-01-22,623,Dallas-Ft. Worth,288,1480,4572,false,South,2800000,pre
+2024-01-29,501,New York,232,1072,3287,true,Northeast,7500000,pre
+2024-01-29,803,Los Angeles,224,1144,3512,true,West,5800000,pre
+2024-01-29,602,Chicago,236,1215,3736,true,Midwest,3500000,pre
+2024-01-29,504,Philadelphia,248,1286,3961,true,Northeast,3000000,pre
+2024-01-29,511,Washington DC,280,1357,4185,true,Mid-Atlantic,2600000,pre
+2024-01-29,505,Detroit,272,1429,4411,true,Midwest,1900000,pre
+2024-01-29,506,Boston,284,1500,4635,true,Northeast,2500000,pre
+2024-01-29,623,Dallas-Ft. Worth,296,1571,4860,false,South,2800000,pre
+2024-02-05,501,New York,235,1159,3560,true,Northeast,7500000,pre
+2024-02-05,803,Los Angeles,247,1231,3787,true,West,5800000,pre
+2024-02-05,602,Chicago,259,1303,4014,true,Midwest,3500000,pre
+2024-02-05,504,Philadelphia,291,1375,4241,true,Northeast,3000000,pre
+2024-02-05,511,Washington DC,283,1447,4468,true,Mid-Atlantic,2600000,pre
+2024-02-05,505,Detroit,295,1519,4695,true,Midwest,1900000,pre
+2024-02-05,506,Boston,307,1591,4922,true,Northeast,2500000,pre
+2024-02-05,623,Dallas-Ft. Worth,339,1663,5149,false,South,2800000,pre
+2024-02-12,501,New York,228,1245,3832,true,Northeast,7500000,pre
+2024-02-12,803,Los Angeles,240,1318,4061,true,West,5800000,pre
+2024-02-12,602,Chicago,272,1391,4291,true,Midwest,3500000,pre
+2024-02-12,504,Philadelphia,264,1463,4519,true,Northeast,3000000,pre
+2024-02-12,511,Washington DC,276,1536,4749,true,Mid-Atlantic,2600000,pre
+2024-02-12,505,Detroit,288,1609,4978,true,Midwest,1900000,pre
+2024-02-12,506,Boston,320,1681,5207,true,Northeast,2500000,pre
+2024-02-12,623,Dallas-Ft. Worth,312,1754,5436,false,South,2800000,pre
+2024-02-19,501,New York,261,1332,4105,true,Northeast,7500000,pre
+2024-02-19,803,Los Angeles,293,1405,4336,true,West,5800000,pre
+2024-02-19,602,Chicago,285,1478,4567,true,Midwest,3500000,pre
+2024-02-19,504,Philadelphia,297,1552,4799,true,Northeast,3000000,pre
+2024-02-19,511,Washington DC,309,1625,5030,true,Mid-Atlantic,2600000,pre
+2024-02-19,505,Detroit,341,1699,5262,true,Midwest,1900000,pre
+2024-02-19,506,Boston,333,1772,5493,true,Northeast,2500000,pre
+2024-02-19,623,Dallas-Ft. Worth,345,1846,5725,false,South,2800000,pre
+2024-02-26,501,New York,264,1418,4377,true,Northeast,7500000,pre
+2024-02-26,803,Los Angeles,256,1492,4610,true,West,5800000,pre
+2024-02-26,602,Chicago,268,1566,4844,true,Midwest,3500000,pre
+2024-02-26,504,Philadelphia,280,1640,5077,true,Northeast,3000000,pre
+2024-02-26,511,Washington DC,312,1715,5312,true,Mid-Atlantic,2600000,pre
+2024-02-26,505,Detroit,304,1789,5546,true,Midwest,1900000,pre
+2024-02-26,506,Boston,316,1863,5779,true,Northeast,2500000,pre
+2024-02-26,623,Dallas-Ft. Worth,328,1937,6013,false,South,2800000,pre
+2024-03-04,501,New York,242,1504,4649,true,Northeast,7500000,pre
+2024-03-04,803,Los Angeles,264,1579,4885,true,West,5800000,pre
+2024-03-04,602,Chicago,266,1654,5121,true,Midwest,3500000,pre
+2024-03-04,504,Philadelphia,308,1729,5357,true,Northeast,3000000,pre
+2024-03-04,511,Washington DC,290,1804,5593,true,Mid-Atlantic,2600000,pre
+2024-03-04,505,Detroit,312,1879,5830,true,Midwest,1900000,pre
+2024-03-04,506,Boston,314,1954,6066,true,Northeast,2500000,pre
+2024-03-04,623,Dallas-Ft. Worth,356,1987,6172,false,South,2800000,pre
+2024-03-11,501,New York,260,1591,4922,true,Northeast,7500000,test_candidate
+2024-03-11,803,Los Angeles,272,1666,5159,true,West,5800000,test_candidate
+2024-03-11,602,Chicago,304,1742,5398,true,Midwest,3500000,test_candidate
+2024-03-11,504,Philadelphia,296,1818,5637,true,Northeast,3000000,test_candidate
+2024-03-11,511,Washington DC,308,1893,5875,true,Mid-Atlantic,2600000,test_candidate
+2024-03-11,505,Detroit,320,1969,6113,true,Midwest,1900000,test_candidate
+2024-03-11,506,Boston,352,2003,6222,true,Northeast,2500000,test_candidate
+2024-03-11,623,Dallas-Ft. Worth,344,2079,6460,false,South,2800000,test_candidate
+2024-03-18,501,New York,268,1677,5194,true,Northeast,7500000,test_candidate
+2024-03-18,803,Los Angeles,300,1753,5434,true,West,5800000,test_candidate
+2024-03-18,602,Chicago,292,1830,5675,true,Midwest,3500000,test_candidate
+2024-03-18,504,Philadelphia,304,1906,5915,true,Northeast,3000000,test_candidate
+2024-03-18,511,Washington DC,316,1982,6156,true,Mid-Atlantic,2600000,test_candidate
+2024-03-18,505,Detroit,348,2059,6397,true,Midwest,1900000,test_candidate
+2024-03-18,506,Boston,340,2094,6508,true,Northeast,2500000,test_candidate
+2024-03-18,623,Dallas-Ft. Worth,352,2170,6748,false,South,2800000,test_candidate
+2024-03-25,501,New York,311,1764,5467,true,Northeast,7500000,test_candidate
+2024-03-25,803,Los Angeles,303,1841,5709,true,West,5800000,test_candidate
+2024-03-25,602,Chicago,315,1918,5952,true,Midwest,3500000,test_candidate
+2024-03-25,504,Philadelphia,327,1995,6195,true,Northeast,3000000,test_candidate
+2024-03-25,511,Washington DC,359,2072,6438,true,Mid-Atlantic,2600000,test_candidate
+2024-03-25,505,Detroit,351,2108,6551,true,Midwest,1900000,test_candidate
+2024-03-25,506,Boston,363,2185,6794,true,Northeast,2500000,test_candidate
+2024-03-25,623,Dallas-Ft. Worth,375,2262,7037,false,South,2800000,test_candidate
+2024-04-01,501,New York,284,1850,5739,true,Northeast,7500000,test_candidate
+2024-04-01,803,Los Angeles,296,1928,5984,true,West,5800000,test_candidate
+2024-04-01,602,Chicago,308,2005,6228,true,Midwest,3500000,test_candidate
+2024-04-01,504,Philadelphia,340,2083,6474,true,Northeast,3000000,test_candidate
+2024-04-01,511,Washington DC,332,2161,6719,true,Mid-Atlantic,2600000,test_candidate
+2024-04-01,505,Detroit,344,2198,6835,true,Midwest,1900000,test_candidate
+2024-04-01,506,Boston,356,2275,7080,true,Northeast,2500000,test_candidate
+2024-04-01,623,Dallas-Ft. Worth,388,2353,7325,false,South,2800000,test_candidate

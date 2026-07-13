@@ -1,0 +1,202 @@
+{
+  "steps": [
+    {
+      "step_id": "1_select_demo_dataset",
+      "title": "Select demo dataset",
+      "user_question": "Load the SaaS subscriptions demo fixture.",
+      "input_files": [
+        "manifest.json",
+        "README.md"
+      ],
+      "status": "available_now",
+      "available_now": true,
+      "fixture_backed": true,
+      "blocked": false,
+      "allowed_summary": "Select saas_subscriptions/v1 as the active demo domain fixture.",
+      "blocked_claims": [],
+      "next_required_artifact": null
+    },
+    {
+      "step_id": "2_inspect_raw_grain",
+      "title": "Inspect raw spend and KPI grain",
+      "user_question": "Explain the grain difference between raw spend and KPI.",
+      "input_files": [
+        "raw_spend_week_dma_channel.csv",
+        "raw_kpi_week_dma.csv"
+      ],
+      "status": "available_now",
+      "available_now": true,
+      "fixture_backed": true,
+      "blocked": false,
+      "allowed_summary": "Raw spend is week×DMA×channel; KPI is week×DMA. Direct MMM use of long spend with repeated KPI is unsafe.",
+      "blocked_claims": [
+        "ROI",
+        "ROAS",
+        "lift"
+      ],
+      "next_required_artifact": null
+    },
+    {
+      "step_id": "3_canonical_mmm_panel",
+      "title": "Build/read canonical MMM-ready panel",
+      "user_question": "Show the normalized week×DMA MMM panel.",
+      "input_files": [
+        "mmm_weekly_dma_panel.csv"
+      ],
+      "status": "available_now",
+      "available_now": true,
+      "fixture_backed": true,
+      "blocked": false,
+      "allowed_summary": "Canonical panel has wide channel spend and KPI once per week-DMA. Demo readiness only — no model fit implied.",
+      "blocked_claims": [
+        "MMM model fit result",
+        "channel contribution"
+      ],
+      "next_required_artifact": null
+    },
+    {
+      "step_id": "4_evaluate_mmm_readiness",
+      "title": "Evaluate MMM readiness",
+      "user_question": "Can this dataset support MMM readiness?",
+      "input_files": [
+        "mmm_weekly_dma_panel.csv",
+        "controls_week_dma.csv",
+        "geo_metadata_dma.csv"
+      ],
+      "status": "available_now",
+      "available_now": true,
+      "fixture_backed": true,
+      "blocked": false,
+      "allowed_summary": "Readiness can be evaluated against panel schema, grain rules, and controls. Fitting remains out of scope.",
+      "blocked_claims": [
+        "MMM model fit result",
+        "ROI",
+        "ROAS"
+      ],
+      "next_required_artifact": "MMMExportBundle via MIP export adapter"
+    },
+    {
+      "step_id": "5_ask_channel_roi",
+      "title": "Ask for channel ROI",
+      "user_question": "What is Meta ROI from this panel?",
+      "input_files": [
+        "mmm_weekly_dma_panel.csv"
+      ],
+      "status": "blocked",
+      "available_now": false,
+      "fixture_backed": true,
+      "blocked": true,
+      "allowed_summary": "Refuse ROI. Explain panels support readiness only until governed MMM export artifacts exist.",
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "channel contribution"
+      ],
+      "next_required_artifact": "MMMExportBundle / ChannelROIArtifact (MMM-EXPORT-001/002/003)"
+    },
+    {
+      "step_id": "6_ask_budget_shift",
+      "title": "Ask for next-quarter budget shift",
+      "user_question": "Can I use this to recommend a budget shift next quarter?",
+      "input_files": [
+        "mmm_weekly_dma_panel.csv",
+        "expected_answer_behavior.json"
+      ],
+      "status": "blocked",
+      "available_now": false,
+      "fixture_backed": true,
+      "blocked": true,
+      "allowed_summary": "Refuse budget recommendations. Guardrail: need RecommendationContract from governed MMM export path.",
+      "blocked_claims": [
+        "budget shift recommendation",
+        "future spend recommendation",
+        "budget reallocation plan"
+      ],
+      "next_required_artifact": "MMMRecommendationContract / RecommendationContract"
+    },
+    {
+      "step_id": "7_evaluate_geox_readiness",
+      "title": "Evaluate GeoX readiness for Meta",
+      "user_question": "Can I run a DMA-level GeoX experiment for Meta?",
+      "input_files": [
+        "geox_design_weekly_dma_panel.csv",
+        "geo_metadata_dma.csv"
+      ],
+      "status": "available_as_readiness_only",
+      "available_now": true,
+      "fixture_backed": true,
+      "blocked": false,
+      "allowed_summary": "Design-intake readiness is fixture-backed (KPI, Meta spend, eligibility, pre/test_candidate). No assignment.",
+      "blocked_claims": [
+        "treatment/control assignment",
+        "GeoX lift",
+        "GeoX readout"
+      ],
+      "next_required_artifact": "Governed GeoX design artifact"
+    },
+    {
+      "step_id": "8_ask_geox_assignment",
+      "title": "Ask for GeoX market assignment",
+      "user_question": "Which DMAs should be treatment vs control for Meta?",
+      "input_files": [
+        "geox_design_weekly_dma_panel.csv"
+      ],
+      "status": "blocked",
+      "available_now": false,
+      "fixture_backed": true,
+      "blocked": true,
+      "allowed_summary": "Refuse market assignment. Design panel is readiness-only; no treatment/control columns.",
+      "blocked_claims": [
+        "treatment/control assignment",
+        "GeoX assignment",
+        "GeoX lift"
+      ],
+      "next_required_artifact": "Governed GeoX design / assignment artifact"
+    },
+    {
+      "step_id": "9_review_calibration_context",
+      "title": "Review calibration signal context",
+      "user_question": "What does the calibration signal let me say?",
+      "input_files": [
+        "calibration_signals.json"
+      ],
+      "status": "fixture_backed_context_only",
+      "available_now": true,
+      "fixture_backed": true,
+      "blocked": false,
+      "allowed_summary": "Demo prior exists for Meta as context only; does not calibrate a live model or authorize recommendations.",
+      "blocked_claims": [
+        "ROI",
+        "recommendation readiness",
+        "live model calibration"
+      ],
+      "next_required_artifact": "CalibrationSignal runtime intake"
+    },
+    {
+      "step_id": "10_explain_full_lifecycle",
+      "title": "Explain full MMM + GeoX lifecycle",
+      "user_question": "Walk me through the full MMM and GeoX lifecycle with this demo.",
+      "input_files": [
+        "manifest.json",
+        "lifecycle_walkthrough.json",
+        "sample_questions.json"
+      ],
+      "status": "explanatory_allowed_decision_claims_blocked",
+      "available_now": true,
+      "fixture_backed": true,
+      "blocked": false,
+      "allowed_summary": "Explain raw→canonical→readiness→blocked ROI/budget→GeoX readiness→future export/design path. Decision/ROI/lift claims stay blocked.",
+      "blocked_claims": [
+        "ROI",
+        "ROAS",
+        "lift",
+        "incrementality",
+        "budget recommendation",
+        "GeoX assignment",
+        "causal claim"
+      ],
+      "next_required_artifact": "MIP_MMM_LLM_RESPONSE_VERIFIER_AUDIT_001"
+    }
+  ]
+}

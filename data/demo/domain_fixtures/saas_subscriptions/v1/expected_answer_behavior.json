@@ -1,0 +1,208 @@
+{
+  "behaviors": [
+    {
+      "question_id": "mmm_readiness_1",
+      "question": "Can this dataset support MMM readiness?",
+      "allowed_answer_summary": "Yes for readiness inspection: a week×DMA canonical panel exists with wide channel spend, once-per-time-geo KPIs, and controls. MMM fitting and ROI remain unavailable.",
+      "required_evidence": [
+        "mmm_weekly_dma_panel.csv",
+        "manifest.json grain_compatibility_summary",
+        "DomainDatasetFixtureManifest / DomainDatasetGrainCompatibility"
+      ],
+      "cannot_say": [
+        "An MMM model has been fit.",
+        "Channel ROI or contribution estimates.",
+        "Budget recommendations."
+      ],
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "budget shift recommendation",
+        "future spend recommendation",
+        "MMM model fit result",
+        "GeoX lift",
+        "treatment/control assignment"
+      ],
+      "next_required_artifact": "MMMExportBundle / MMM-EXPORT-001..003 via MIP export adapter",
+      "human_review_required": false
+    },
+    {
+      "question_id": "mmm_readiness_2",
+      "question": "What data is missing for MMM?",
+      "allowed_answer_summary": "For readiness, canonical panel fields are present. Still missing for actioning MMM: fitted model export bundle, governed channel contribution artifacts, and calibration applied to a live run. Raw spend alone is not MMM-ready without pivot/normalization.",
+      "required_evidence": [
+        "raw_spend_week_dma_channel.csv",
+        "mmm_weekly_dma_panel.csv",
+        "intake policy + grain compatibility"
+      ],
+      "cannot_say": [
+        "Missing fields imply the model will underperform by a specific ROI amount."
+      ],
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "budget shift recommendation",
+        "future spend recommendation",
+        "MMM model fit result",
+        "GeoX lift",
+        "treatment/control assignment"
+      ],
+      "next_required_artifact": "MIP MMM export adapter consuming MMMExportBundle",
+      "human_review_required": false
+    },
+    {
+      "question_id": "geox_readiness_1",
+      "question": "Can I run a DMA-level GeoX experiment for Meta?",
+      "allowed_answer_summary": "GeoX design readiness can be inspected: week×DMA panel with primary KPI, Meta spend, total spend, eligibility, and pre/test_candidate periods exists. Assignment and lift readout are not available.",
+      "required_evidence": [
+        "geox_design_weekly_dma_panel.csv",
+        "geo_metadata_dma.csv"
+      ],
+      "cannot_say": [
+        "Which DMAs are treatment vs control.",
+        "Expected or realized lift for Meta.",
+        "Powered experiment guarantee."
+      ],
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "budget shift recommendation",
+        "future spend recommendation",
+        "MMM model fit result",
+        "GeoX lift",
+        "treatment/control assignment"
+      ],
+      "next_required_artifact": "Governed GeoX design / assignment artifact",
+      "human_review_required": true
+    },
+    {
+      "question_id": "grain_compatibility_1",
+      "question": "Explain the grain difference between raw spend and KPI.",
+      "allowed_answer_summary": "Raw spend is week×DMA×channel. KPI is week×DMA. Using KPI on the long channel panel without KEEP_KPI_ONCE_PER_TIME_GEO double-counts conversions. MMM-ready form pivots spend wide and keeps KPI once per week-DMA.",
+      "required_evidence": [
+        "raw_spend_week_dma_channel.csv",
+        "raw_kpi_week_dma.csv",
+        "mmm_weekly_dma_panel.csv",
+        "grain compatibility contract"
+      ],
+      "cannot_say": [
+        "Raw long panel is safe as direct MMM input."
+      ],
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "budget shift recommendation",
+        "future spend recommendation",
+        "MMM model fit result",
+        "GeoX lift",
+        "treatment/control assignment"
+      ],
+      "next_required_artifact": null,
+      "human_review_required": false
+    },
+    {
+      "question_id": "budget_planning_guardrail_1",
+      "question": "Can I use this to recommend a budget shift next quarter?",
+      "allowed_answer_summary": "No. Budget shift recommendations are blocked until a governed MMM export adapter provides ChannelROIArtifact / RecommendationContract outputs. Fixtures support readiness and refusal messaging only.",
+      "required_evidence": [
+        "expected_answer_behavior.json",
+        "lifecycle_walkthrough.json step 6",
+        "MMM-EXPORT dependency note"
+      ],
+      "cannot_say": [
+        "Increase Meta by X%.",
+        "Cut YouTube because ROI is lower.",
+        "Optimized next-quarter spend mix."
+      ],
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "budget shift recommendation",
+        "future spend recommendation",
+        "MMM model fit result",
+        "GeoX lift",
+        "treatment/control assignment"
+      ],
+      "next_required_artifact": "MMMRecommendationContract / RecommendationContract via MMM export adapter",
+      "human_review_required": true
+    },
+    {
+      "question_id": "calibration_context_1",
+      "question": "What does the calibration signal let me say?",
+      "allowed_answer_summary": "Only that a demo fixture-style prior exists for Meta as context. It does not calibrate a live model or authorize ROI, lift, or recommendation claims.",
+      "required_evidence": [
+        "calibration_signals.json"
+      ],
+      "cannot_say": [
+        "The live MMM is calibrated.",
+        "Meta incremental effect is 0.04."
+      ],
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "budget shift recommendation",
+        "future spend recommendation",
+        "MMM model fit result",
+        "GeoX lift",
+        "treatment/control assignment"
+      ],
+      "next_required_artifact": "CalibrationSignal runtime intake + mapped model run",
+      "human_review_required": false
+    },
+    {
+      "question_id": "data_missingness_1",
+      "question": "What can you safely say from this data?",
+      "allowed_answer_summary": "You can describe readiness, grain compatibility, normalization needs, missing method-export artifacts, GeoX design readiness (pre/test_candidate), and why ROI/budget claims are blocked.",
+      "required_evidence": [
+        "manifest.json allowed_claims",
+        "lifecycle_walkthrough.json"
+      ],
+      "cannot_say": [
+        "Any fitted causal ROI figure.",
+        "Any GeoX assignment or lift."
+      ],
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "budget shift recommendation",
+        "future spend recommendation",
+        "MMM model fit result",
+        "GeoX lift",
+        "treatment/control assignment"
+      ],
+      "next_required_artifact": "MIP_MMM_LLM_RESPONSE_VERIFIER_AUDIT_001",
+      "human_review_required": false
+    },
+    {
+      "question_id": "data_missingness_2",
+      "question": "What can you not say yet?",
+      "allowed_answer_summary": "Cannot say channel ROI/ROAS, incremental contribution, budget recommendations, MMM fit results, GeoX treatment/control assignment, or GeoX lift/readout until governed export/design artifacts exist.",
+      "required_evidence": [
+        "manifest.json forbidden_claims",
+        "expected_answer_behavior.json"
+      ],
+      "cannot_say": [
+        "Anything that invents ROI or assignment numbers."
+      ],
+      "blocked_claims": [
+        "channel ROI",
+        "ROAS",
+        "incremental contribution",
+        "budget shift recommendation",
+        "future spend recommendation",
+        "MMM model fit result",
+        "GeoX lift",
+        "treatment/control assignment"
+      ],
+      "next_required_artifact": "MMM-EXPORT-001/002/003 + MIP export adapter; governed GeoX design",
+      "human_review_required": false
+    }
+  ]
+}

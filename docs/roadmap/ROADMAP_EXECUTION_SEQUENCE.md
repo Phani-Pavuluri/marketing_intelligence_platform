@@ -115,6 +115,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP domain dataset schema contract checkpoint audit 001 | ✓ implemented — `docs/audits/MIP_DOMAIN_DATASET_SCHEMA_CONTRACT_CHECKPOINT_AUDIT_001.md` (checkpoint passed; ready for `MIP_DEMO_DOMAIN_DATASETS_001`) |
 | MIP domain dataset grain compatibility contract 001 | ✓ implemented — `mip.contracts.domain_dataset_grain_compatibility` (raw→convertible/blocked→MMM/GeoX/LLM metadata; KPI double-count blocked; next: `MIP_DEMO_DOMAIN_DATASETS_001`) |
 | MIP MMM GeoX industry data feed alignment and intake policy 001 | ✓ implemented — `docs/intake/MIP_MMM_GEOX_INDUSTRY_DATA_FEED_ALIGNMENT_AND_INTAKE_POLICY_001.md` (raw inspection vs canonical engine-ready; roll-up-only with mapping; next: `MIP_DEMO_DOMAIN_DATASETS_001`; deferred: `MIP_SOURCE_NORMALIZATION_FROM_RAW_MARKETING_DATA_001`) |
+| MIP demo domain datasets 001 | ✓ implemented — `data/demo/domain_fixtures/saas_subscriptions/v1/` (canonical MMM/GeoX panels + sample Qs/lifecycle; ROI/budget blocked pending MMM export; next: `MIP_MMM_LLM_RESPONSE_VERIFIER_AUDIT_001`) |
 
 ## Platform principles
 

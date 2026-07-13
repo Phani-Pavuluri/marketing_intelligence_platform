@@ -49,7 +49,10 @@ htmlcov/
 Thumbs.db
 
 # Project artifacts (future)
-data/
+# Ignore data/* contents but allow tracked demo fixtures under data/demo/
+data/*
+!data/demo/
+!data/demo/**
 models/
 artifacts/
 logs/

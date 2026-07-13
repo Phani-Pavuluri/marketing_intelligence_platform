@@ -1,0 +1,230 @@
+{
+  "fixture_id": "saas_subscriptions_demo_v1",
+  "version": "v1",
+  "tier": "TIER_1_TINY_DETERMINISTIC",
+  "business_domain": "SAAS_SUBSCRIPTIONS",
+  "dataset_family": "MMM_SPEND_KPI_PANEL",
+  "owner": "MIP",
+  "domain": "saas_subscriptions",
+  "fixture_version": "v1",
+  "geo_grain": "DMA",
+  "time_grain": "WEEK",
+  "primary_kpi": "paid_conversions",
+  "secondary_kpi": "arr",
+  "primary_kpis": ["paid_conversions"],
+  "secondary_kpis": ["arr"],
+  "channels": ["Search", "Meta", "YouTube"],
+  "spend_channels": ["Search", "Meta", "YouTube"],
+  "raw_sources": {
+    "spend": "raw_spend_week_dma_channel.csv",
+    "kpi": "raw_kpi_week_dma.csv",
+    "controls": "controls_week_dma.csv",
+    "geo_metadata": "geo_metadata_dma.csv"
+  },
+  "canonical_mmm_panel": "mmm_weekly_dma_panel.csv",
+  "canonical_geox_panel": "geox_design_weekly_dma_panel.csv",
+  "calibration_signals": "calibration_signals.json",
+  "sample_questions": "sample_questions.json",
+  "expected_answer_behavior": "expected_answer_behavior.json",
+  "lifecycle_walkthrough": "lifecycle_walkthrough.json",
+  "grain_compatibility_summary": {
+    "raw_spend_panel_grain": "TIME_GEO_CHANNEL",
+    "raw_kpi_grain": "TIME_GEO",
+    "kpi_repeated_across_channels_risk": true,
+    "mmm_status": "COMPATIBLE_AFTER_CONVERSION",
+    "mmm_required_conversions": [
+      "PIVOT_CHANNEL_SPEND_WIDE",
+      "KEEP_KPI_ONCE_PER_TIME_GEO"
+    ],
+    "geox_status": "COMPATIBLE_AFTER_CONVERSION",
+    "geox_required_conversions": [
+      "FILTER_TO_TEST_CHANNEL",
+      "AGGREGATE_CHANNEL_TO_TOTAL"
+    ],
+    "canonical_mmm_panel_grain": "TIME_GEO",
+    "canonical_geox_panel_grain": "TIME_GEO",
+    "llm_status": "METADATA_ONLY",
+    "notes": "Raw long spend is illustrative only; canonical panels are engine-ready-ish for readiness demos, not fitted models."
+  },
+  "column_expectations": [
+    {
+      "column_name": "week_start",
+      "semantic_role": "time",
+      "required": true,
+      "expected_dtype": "date",
+      "allowed_values": [],
+      "description": "ISO week start"
+    },
+    {
+      "column_name": "dma_code",
+      "semantic_role": "geo",
+      "required": true,
+      "expected_dtype": "string",
+      "allowed_values": [],
+      "description": "DMA code"
+    },
+    {
+      "column_name": "paid_conversions",
+      "semantic_role": "kpi",
+      "required": true,
+      "expected_dtype": "int",
+      "allowed_values": [],
+      "description": "Primary KPI once per week-DMA"
+    }
+  ],
+  "control_signal_expectations": [
+    {
+      "signal_type": "PROMOTION_CALENDAR",
+      "required": true,
+      "expected_columns": ["promo_flag"],
+      "description": "Promo control"
+    },
+    {
+      "signal_type": "HOLIDAY",
+      "required": true,
+      "expected_columns": ["holiday_flag"],
+      "description": "Holiday control"
+    },
+    {
+      "signal_type": "PRODUCT_LAUNCH",
+      "required": true,
+      "expected_columns": ["launch_flag"],
+      "description": "Launch control"
+    },
+    {
+      "signal_type": "COMPETITOR_ACTIVITY",
+      "required": true,
+      "expected_columns": ["competitor_event_flag"],
+      "description": "Competitor event control"
+    }
+  ],
+  "calibration_signal_expectation": {
+    "required": false,
+    "expected_channel": "Meta",
+    "expected_kpi": "paid_conversions",
+    "expected_estimand": "incremental_effect",
+    "requires_uncertainty": true,
+    "requires_time_window": true,
+    "requires_geo_scope": true,
+    "description": "Demo fixture calibration context only"
+  },
+  "readiness_expectation": {
+    "readiness_status": "PARTIALLY_READY",
+    "required_rows_min": 112,
+    "required_time_periods_min": 14,
+    "required_geo_count_min": 8,
+    "required_channel_count_min": 3,
+    "required_control_signals": [
+      "PROMOTION_CALENDAR",
+      "HOLIDAY",
+      "PRODUCT_LAUNCH",
+      "COMPETITOR_ACTIVITY"
+    ],
+    "description": "Panel supports readiness demos; model fit export absent"
+  },
+  "expected_behavior": {
+    "expected_decisions": [
+      "ALLOW_DESCRIPTIVE_ANSWER",
+      "ALLOW_DIAGNOSTIC_ANSWER",
+      "BLOCK_RECOMMENDATION",
+      "BLOCK_OPTIMIZATION",
+      "BLOCK_ROI_ROAS_LIFT_CLAIM",
+      "BLOCK_CAUSAL_CLAIM",
+      "DEFER_PENDING_MODEL"
+    ],
+    "can_say_expectations": [
+      "data readiness",
+      "grain compatibility",
+      "normalization requirement",
+      "missing controls or export artifacts",
+      "GeoX design readiness",
+      "why recommendation is blocked",
+      "what artifact is needed next"
+    ],
+    "cannot_say_expectations": [
+      "channel ROI",
+      "ROAS",
+      "incremental contribution",
+      "budget shift recommendation"
+    ],
+    "blocked_reason_expectations": [
+      "mmm_export_adapter_absent",
+      "roi_artifacts_absent",
+      "recommendation_contract_absent"
+    ],
+    "deferred_reason_expectations": [
+      "pending_mmm_export_bundle",
+      "pending_geox_design_artifact"
+    ],
+    "human_review_required": true,
+    "forbidden_recommendations": [
+      "increase_meta_spend",
+      "reallocate_budget_next_quarter"
+    ],
+    "description": "Readiness and refusal allowed; ROI/budget blocked"
+  },
+  "allowed_claims": [
+    "readiness",
+    "grain compatibility",
+    "missing data",
+    "normalization requirement",
+    "evidence availability",
+    "blocked reason",
+    "next required artifact"
+  ],
+  "forbidden_claims": [
+    "ROI",
+    "ROAS",
+    "lift",
+    "incrementality",
+    "channel contribution",
+    "budget recommendation",
+    "budget reallocation plan",
+    "GeoX assignment",
+    "GeoX readout",
+    "causal claim"
+  ],
+  "mmm_export_dependency": {
+    "upstream_mmm_repo_artifacts": [
+      "MMM-EXPORT-001",
+      "MMM-EXPORT-002",
+      "MMM-EXPORT-003"
+    ],
+    "mip_adapter_status": "not_implemented",
+    "blocked_until": [
+      "MMMExportBundle",
+      "ChannelROIArtifact",
+      "RecommendationContract"
+    ]
+  },
+  "lineage": {
+    "artifact_id": "MIP_DEMO_DOMAIN_DATASETS_001",
+    "depends_on": [
+      "MIP_DOMAIN_DATASET_SCHEMA_CONTRACT_001",
+      "MIP_DOMAIN_DATASET_GRAIN_COMPATIBILITY_CONTRACT_001",
+      "MIP_MMM_GEOX_INDUSTRY_DATA_FEED_ALIGNMENT_AND_INTAKE_POLICY_001"
+    ],
+    "dataset_generation_method": "deterministic_static_synthetic",
+    "mmm_fitting_implemented": false,
+    "geox_estimator_logic_implemented": false
+  },
+  "metadata": {
+    "demo_fixture_only": true,
+    "dma_count": 8,
+    "week_count": 14,
+    "channel_count": 3,
+    "schema_contract_aligned": true,
+    "grain_contract_aligned": true
+  },
+  "issues": [
+    "FIXTURE_MANIFEST_DEFINED",
+    "TIER_DEFINED",
+    "DOMAIN_DEFINED",
+    "NO_DATASET_GENERATION_RUNTIME",
+    "NO_MMM_FITTING",
+    "NO_GEOX_ESTIMATOR_LOGIC",
+    "NO_ROI_ROAS_LIFT_INCREMENTALITY_COMPUTATION",
+    "NO_RECOMMENDATION_CONTRACT_GENERATION",
+    "MMM_EXPORT_DEPENDENCY_RECORDED"
+  ]
+}

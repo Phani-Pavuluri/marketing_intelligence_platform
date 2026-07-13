@@ -1,0 +1,9 @@
+dma_code,dma_name,region,population,eligible
+501,New York,Northeast,7500000,true
+803,Los Angeles,West,5800000,true
+602,Chicago,Midwest,3500000,true
+504,Philadelphia,Northeast,3000000,true
+511,Washington DC,Mid-Atlantic,2600000,true
+505,Detroit,Midwest,1900000,true
+506,Boston,Northeast,2500000,true
+623,Dallas-Ft. Worth,South,2800000,false
