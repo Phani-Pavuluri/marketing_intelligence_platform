@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 from mip.llm.mmm_response_boundary_application import (
     MMMResponseBoundaryApplicationInput,
@@ -26,7 +27,7 @@ STRATEGY = ROOT / "docs/architecture/REPO_INTEGRATION_STRATEGY.md"
 ALLOWED_NEXT = "MIP_MMM_LLM_RESPONSE_BOUNDARY_APPLICATION_CHECKPOINT_001"
 
 
-def _valid_sections() -> list[dict]:
+def _valid_sections() -> list[dict[str, Any]]:
     return [
         {
             "section_id": "status",

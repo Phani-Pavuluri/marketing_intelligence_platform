@@ -151,7 +151,9 @@ def package_mmm_llm_response_boundary(
         )
 
     try:
-        sections = [_normalize_section(raw) for raw in raw_sections]
+        normalized_sections: list[MMMResponseBoundaryApplicationSection] = [
+            _normalize_section(raw) for raw in raw_sections
+        ]
     except (TypeError, ValueError, KeyError) as exc:
         return _blocked(
             status=MMMResponseBoundaryApplicationStatus.BLOCKED_INVALID_SECTION,
@@ -161,17 +163,21 @@ def package_mmm_llm_response_boundary(
             unsupported_or_deferred_reasons=(f"invalid_section:{exc}",),
         )
 
-    package_can_say = _collect_can_say(sections, application_input.response_boundary)
-    package_cannot_say = _collect_cannot_say(sections, application_input.response_boundary)
+    package_can_say = _collect_can_say(
+        normalized_sections, application_input.response_boundary
+    )
+    package_cannot_say = _collect_cannot_say(
+        normalized_sections, application_input.response_boundary
+    )
     package_can_say = _cannot_say_dominates(package_can_say, package_cannot_say)
 
-    sections = tuple(
+    sections: tuple[MMMResponseBoundaryApplicationSection, ...] = tuple(
         section.model_copy(
             update={
                 "can_say": _cannot_say_dominates(section.can_say, section.cannot_say),
             }
         )
-        for section in sections
+        for section in normalized_sections
     )
 
     if application_input.strict_boundary and not _has_boundary_metadata(

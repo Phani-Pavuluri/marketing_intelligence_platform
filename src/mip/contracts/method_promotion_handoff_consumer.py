@@ -978,6 +978,10 @@ def validate_and_normalize_method_promotion_handoff(
     # Never override package source-of-truth refs; preserve as provided.
     preserved_refs = dict(source_of_truth_refs)
 
+    raw_payload_lineage = payload_map.get("lineage")
+    payload_lineage: dict[str, Any] = (
+        dict(raw_payload_lineage) if isinstance(raw_payload_lineage, Mapping) else {}
+    )
     record_lineage = {
         **base_lineage,
         "handoff_id": handoff_id,
@@ -988,7 +992,7 @@ def validate_and_normalize_method_promotion_handoff(
         ),
         "accepted_for_governance_context_only": True,
         "rejected_for_decisioning": True,
-        **dict(payload_map.get("lineage") if isinstance(payload_map.get("lineage"), Mapping) else {}),
+        **payload_lineage,
     }
 
     record = MIPMethodPromotionHandoffConsumerRecord(

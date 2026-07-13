@@ -208,7 +208,10 @@ def _valid_payload(**overrides: Any) -> dict[str, Any]:
     return payload
 
 
-def _run(payload: dict[str, Any] | None, **input_kwargs: Any):
+def _run(
+    payload: dict[str, Any] | None,
+    **input_kwargs: Any,
+) -> MIPMethodPromotionHandoffConsumerRuntimeOutput:
     return validate_and_normalize_method_promotion_handoff(
         MIPMethodPromotionHandoffConsumerRuntimeInput(
             raw_handoff_payload=payload,

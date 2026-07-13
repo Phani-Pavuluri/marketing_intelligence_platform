@@ -1,0 +1,42 @@
+{
+  "artifact_id": "MIP_METHOD_PROMOTION_AND_APPLICATION_PACKAGE_MYPY_CLEANUP_001",
+  "artifact_type": "typing_cleanup",
+  "status": "completed",
+  "scope": "typing_only_no_semantic_behavior_changes",
+  "repo_checkpoint_before": "9d830ab",
+  "cleanup_completed": true,
+  "global_mypy_clean": true,
+  "pre_existing_method_promotion_errors_fixed": true,
+  "pre_existing_application_package_errors_fixed": true,
+  "errors_fixed": [
+    "src/mip/contracts/method_promotion_handoff_consumer.py:991 arg-type dict(lineage)",
+    "tests/contracts/test_mip_method_promotion_handoff_consumer_runtime_001.py:211 no-untyped-def _run",
+    "src/mip/llm/mmm_response_boundary_application.py:168 assignment list vs tuple sections",
+    "src/mip/llm/mmm_response_boundary_application.py:217 arg-type sections list vs tuple",
+    "tests/contracts/test_mip_mmm_llm_response_boundary_application_001.py:29 type-arg list[dict]"
+  ],
+  "method_promotion_errors_fixed_count": 2,
+  "application_package_errors_fixed_count": 3,
+  "method_promotion_semantics_changed": false,
+  "application_package_semantics_changed": false,
+  "readiness_flags_changed": false,
+  "can_say_cannot_say_behavior_changed": false,
+  "strict_mode_behavior_changed": false,
+  "llm_template_implemented": false,
+  "prompt_execution_implemented": false,
+  "provider_integration_implemented": false,
+  "orchestration_routing_implemented": false,
+  "dataset_generation_implemented": false,
+  "decision_surface_implemented": false,
+  "trust_report_bypass_implemented": false,
+  "recommendation_contract_generation_implemented": false,
+  "optimizer_simulator_implemented": false,
+  "budget_roi_lift_computation_implemented": false,
+  "recommended_next_artifact": "MIP_MMM_LLM_RESPONSE_TEMPLATE_FROM_APPLICATION_PACKAGE_001",
+  "files_changed": [
+    "src/mip/llm/mmm_response_boundary_application.py",
+    "src/mip/contracts/method_promotion_handoff_consumer.py",
+    "tests/contracts/test_mip_mmm_llm_response_boundary_application_001.py",
+    "tests/contracts/test_mip_method_promotion_handoff_consumer_runtime_001.py"
+  ]
+}
