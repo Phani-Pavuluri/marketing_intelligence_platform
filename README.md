@@ -2,7 +2,7 @@
 
 Causal marketing intelligence **control plane** for governed experimentation, MMM calibration, budget planning, explainable recommendations, and—eventually—a conversational workbench over certified analytical engines.
 
-## Public Demo
+## Demo
 
 **Hosted demo:** [https://marketingintelligenceplatform.streamlit.app/](https://marketingintelligenceplatform.streamlit.app/)
 
