@@ -1,0 +1,62 @@
+{
+  "artifact_id": "MIP_MMM_GEOX_INDUSTRY_DATA_FEED_ALIGNMENT_AND_INTAKE_POLICY_001",
+  "artifact_type": "mmm_geox_industry_data_feed_alignment_and_intake_policy",
+  "status": "completed",
+  "scope": "policy_docs_governance_only_no_production_code",
+  "repo_checkpoint": "fdb06f9",
+  "depends_on": [
+    "MIP_DOMAIN_DATASET_GRAIN_COMPATIBILITY_CONTRACT_001",
+    "MIP_DOMAIN_DATASET_SCHEMA_CONTRACT_CHECKPOINT_AUDIT_001"
+  ],
+  "industry_data_feed_alignment_completed": true,
+  "canonical_mmm_ready_intake_defined": true,
+  "canonical_geox_ready_intake_defined": true,
+  "raw_source_inspection_layer_defined": true,
+  "normalized_engine_ready_layer_defined": true,
+  "grain_comparability_policy_defined": true,
+  "same_grain_join_policy_defined": true,
+  "partial_overlap_warning_policy_defined": true,
+  "mapping_required_for_different_grains": true,
+  "roll_up_only_policy_defined": true,
+  "roll_down_blocked": true,
+  "user_confirmation_required_for_unclear_grain": true,
+  "user_provided_crosswalk_required": true,
+  "global_crosswalk_fetching_rejected": true,
+  "user_facing_data_requirement_messages_defined": true,
+  "recommended_next_artifact": "MIP_DEMO_DOMAIN_DATASETS_001",
+  "deferred_normalization_artifact": "MIP_SOURCE_NORMALIZATION_FROM_RAW_MARKETING_DATA_001",
+  "dataset_generation_implemented": false,
+  "raw_source_normalization_runtime_implemented": false,
+  "automatic_global_geo_dictionary_fetching_implemented": false,
+  "fuzzy_geo_resolution_as_source_of_truth_implemented": false,
+  "roll_down_allocation_implemented": false,
+  "production_connector_implemented": false,
+  "mmm_fitting_implemented": false,
+  "geox_estimator_logic_implemented": false,
+  "calibration_signal_runtime_changed": false,
+  "decision_surface_generation_implemented": false,
+  "trust_report_generation_implemented": false,
+  "recommendation_contract_generation_implemented": false,
+  "optimizer_simulator_implemented": false,
+  "roi_roas_lift_incrementality_computation_implemented": false,
+  "llm_provider_execution_implemented": false,
+  "prompt_execution_implemented": false,
+  "ui_demo_implemented": false,
+  "production_code_changed": false,
+  "known_validation_limitations": [
+    "full_repo_ruff_may_fail_on_unrelated_preexisting_UP035_UP038_E501_F811_I001_issues"
+  ],
+  "citations": [
+    "https://facebookexperimental.github.io/Robyn/docs/analysts-guide-to-MMM/",
+    "https://rdrr.io/cran/Robyn/man/robyn_inputs.html",
+    "https://developers.google.com/meridian/docs/pre-modeling/collect-data",
+    "https://developers.google.com/meridian/docs/advanced-modeling/input-data",
+    "https://facebookincubator.github.io/GeoLift/docs/GettingStarted/Walkthrough/",
+    "https://github.com/facebookincubator/GeoLift/blob/main/vignettes/GeoLift_Walkthrough.md"
+  ],
+  "evidence_paths": [
+    "docs/intake/MIP_MMM_GEOX_INDUSTRY_DATA_FEED_ALIGNMENT_AND_INTAKE_POLICY_001.md",
+    "src/mip/contracts/domain_dataset_grain_compatibility.py",
+    "docs/contracts/archives/MIP_DOMAIN_DATASET_GRAIN_COMPATIBILITY_CONTRACT_001_summary.json"
+  ]
+}
