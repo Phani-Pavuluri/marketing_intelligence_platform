@@ -1,4 +1,4 @@
-.PHONY: validate validate-docker validate-host clean-junk
+.PHONY: validate validate-docker validate-host validate-public-deployment clean-junk
 
 validate:
 	./scripts/validate_ci_local.sh --docker
@@ -8,6 +8,9 @@ validate-docker:
 
 validate-host:
 	./scripts/validate_ci_local.sh --host
+
+validate-public-deployment:
+	./scripts/validate_public_demo_requirements_install.sh
 
 clean-junk:
 	find . -type f \( -name '.DS_Store' -o -name 'Thumbs.db' -o -name '*.py[co]' \) -delete

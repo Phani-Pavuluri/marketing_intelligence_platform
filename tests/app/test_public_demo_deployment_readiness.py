@@ -12,6 +12,10 @@ README_PATH = REPO_ROOT / "README.md"
 CANONICAL_APP_PATH = REPO_ROOT / "app" / "streamlit_app.py"
 STREAMLIT_CONFIG_PATH = REPO_ROOT / ".streamlit" / "config.toml"
 SECRETS_PATH = REPO_ROOT / ".streamlit" / "secrets.toml"
+DEPLOYMENT_VALIDATION_SCRIPT = (
+    REPO_ROOT / "scripts" / "validate_public_demo_requirements_install.sh"
+)
+MAKEFILE_PATH = REPO_ROOT / "Makefile"
 
 DEV_ONLY_PACKAGES = ("pytest", "ruff", "mypy", "black", "pre-commit")
 FORBIDDEN_PROVIDER_PATTERNS = (
@@ -44,7 +48,16 @@ def test_requirements_txt_includes_local_package_marker() -> None:
         for line in REQUIREMENTS_PATH.read_text(encoding="utf-8").splitlines()
         if line.strip() and not line.strip().startswith("#")
     ]
-    assert lines[0] == "."
+    assert "-e ." in lines, "requirements.txt must install the local package editable"
+    assert "." not in lines, "bare '.' omits repository-level demo fixtures from the wheel"
+
+
+def test_public_deployment_validation_is_available() -> None:
+    assert DEPLOYMENT_VALIDATION_SCRIPT.is_file()
+    assert DEPLOYMENT_VALIDATION_SCRIPT.stat().st_mode & 0o111
+    makefile = MAKEFILE_PATH.read_text(encoding="utf-8")
+    assert "validate-public-deployment:" in makefile
+    assert "./scripts/validate_public_demo_requirements_install.sh" in makefile
 
 
 def test_requirements_txt_includes_streamlit() -> None:

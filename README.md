@@ -428,6 +428,23 @@ poetry run streamlit run app/streamlit_app.py
 
 **Hosting:** Streamlit Community Cloud — main file `app/streamlit_app.py`, Python 3.11 (`runtime.txt`), dependencies from `requirements.txt`.
 
+### Editable package-install contract
+
+Streamlit Cloud installs `requirements.txt` from the checked-out repository. The
+local package entry must remain `-e .`: it is a real editable package installation,
+not a `sys.path` workaround. The current chat-first fixture loader reads the
+repository-level `data/demo/domain_fixtures/saas_subscriptions/v1` assets. Those
+assets are not included in the current non-editable built wheel, so replacing
+`-e .` with `.` breaks clean requirements-only fixture loading. If package data is
+included in a future wheel, change this deployment contract only with a separate
+packaging implementation and validation update.
+
+Validate this path with:
+
+```bash
+make validate-public-deployment
+```
+
 The public demo is **deterministic-only** and requires **no secrets**, API keys, LLM providers, FastAPI, Docker, databases, or external services. It is **not production-ready**—a governed workflow shell over synthetic demo fixtures.
 
 **Deployment record:** [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md) (P9b verified; commit `96cf98c`).

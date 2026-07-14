@@ -1,0 +1,18 @@
+{
+  "artifact_id": "MIP_STREAMLIT_EDITABLE_INSTALL_DEPLOYMENT_CONTRACT_001",
+  "artifact_type": "deployment_contract",
+  "requirements_marker": "-e .",
+  "bare_dot_allowed": false,
+  "editable_install_required": true,
+  "repository_level_fixture_dependency_present": true,
+  "clean_python_3_11_requirements_install_verified": true,
+  "canonical_app_import_verified": true,
+  "saas_fixture_load_verified": true,
+  "docker_regression_added": true,
+  "host_fallback_used": false,
+  "requirements_txt_changed_in_this_task": false,
+  "verdict": "KEEP_EDITABLE_MARKER_AND_UPDATE_CONTRACT",
+  "ui_redesign_implemented": false,
+  "mmm_export_ingestion_implemented": false,
+  "recommended_next_artifact": "MIP_CHAT_FIRST_DEMO_UI_UX_ALIGNMENT_REMEDIATION_001"
+}
