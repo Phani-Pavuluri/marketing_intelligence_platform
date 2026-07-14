@@ -480,11 +480,14 @@ Requires Python ≥ 3.11. Uses Poetry-compatible `pyproject.toml`.
 
 ```bash
 cd marketing_intelligence_platform
-poetry install
-poetry run pytest
-poetry run ruff check src tests
-poetry run mypy src
+make validate
 ```
+
+`make validate` is the standard local validation command. It prefers the
+repository's Python 3.11 devcontainer image and falls back to host Poetry only
+when Docker is unavailable. Use `make validate-docker` to require Docker.
+See the [local validation workflow](docs/dev_validation_workflow.md) for the
+exact checks, CI-parity limitations, fallback behavior, and cleanup command.
 
 Minimal runtime dependencies: `pydantic`, `pandas`, `numpy`. Dev tools: `pytest`, `ruff`, `mypy`.
 
