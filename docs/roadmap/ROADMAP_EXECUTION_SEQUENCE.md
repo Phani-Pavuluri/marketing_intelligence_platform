@@ -127,6 +127,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP Streamlit editable install deployment contract 001 | ✓ documented — `requirements.txt` requires `-e .` because the current fixture loader needs repository-level demo assets; clean Python 3.11 Docker import/fixture regression added; next: `MIP_CHAT_FIRST_DEMO_UI_UX_ALIGNMENT_REMEDIATION_001` |
 | MIP chat-first demo UI UX alignment remediation 001 | ✓ implemented — canonical app now defaults to deterministic chat-first MMM + GeoX measurement-copilot interaction; legacy tools remain secondary; next: `MIP_CHAT_FIRST_DEMO_UI_MANUAL_REVIEW_RESULT_001` |
 | MIP chat-first demo UI manual review result 001 | ✓ recorded — local review failed because duplicate sample-prompt widget keys stopped rendering before chat input; first-time onboarding prompt relevance also failed; next: `MIP_CHAT_FIRST_DEMO_UI_WIDGET_KEY_HOTFIX_001` |
+| MIP chat-first demo UI widget-key hotfix 001 | ✓ implemented — deterministic, namespaced prompt keys remove the duplicate-widget runtime blocker and AppTest covers canonical render/rerun; manual review result 001 remains failed pending onboarding redesign; next: `MIP_CHAT_FIRST_DEMO_UI_ONBOARDING_CONVERSATION_REDESIGN_001` |
 
 ## Platform principles
 

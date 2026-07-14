@@ -331,6 +331,16 @@ def sample_prompt_labels(fixture: ChatFirstDemoFixture) -> tuple[tuple[str, str]
     )
 
 
+def build_prompt_widget_key(
+    *,
+    namespace: str,
+    question_id: str,
+    position: int,
+) -> str:
+    """Build a deterministic Streamlit widget key for a rendered prompt."""
+    return f"{namespace}_{position}_{question_id}"
+
+
 def follow_up_questions(
     fixture: ChatFirstDemoFixture,
     response: ChatResponseView,

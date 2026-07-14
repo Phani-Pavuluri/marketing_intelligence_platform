@@ -41,6 +41,7 @@ from mip.demo.chat_first_demo import (
     ChatFirstDemoFixture,
     ChatResponseView,
     build_chat_response_view,
+    build_prompt_widget_key,
     follow_up_questions,
     load_chat_first_demo_fixture,
     sample_prompt_labels,
@@ -195,11 +196,21 @@ def _render_chat_first_demo_tab() -> None:
 
     prompts = sample_prompt_labels(fixture)
     for index in range(0, len(prompts), 2):
-        for column, (label, question_id) in zip(st.columns(2), prompts[index : index + 2]):
+        for position, (column, (label, question_id)) in enumerate(
+            zip(st.columns(2), prompts[index : index + 2]),
+            start=index,
+        ):
             question = next(
                 item.question for item in fixture.questions if item.question_id == question_id
             )
-            if column.button(label, key=f"sample_prompt_{question_id}"):
+            if column.button(
+                label,
+                key=build_prompt_widget_key(
+                    namespace="guided_prompt",
+                    question_id=question_id,
+                    position=position,
+                ),
+            ):
                 _submit_chat_prompt(fixture, question)
                 st.rerun()
 
@@ -211,8 +222,12 @@ def _render_chat_first_demo_tab() -> None:
                 follow_ups = follow_up_questions(fixture, content)
                 if follow_ups:
                     st.caption("Suggested follow-ups")
-                    for item in follow_ups:
-                        key = f"follow_up_{message_index}_{item.question_id}"
+                    for follow_up_position, item in enumerate(follow_ups):
+                        key = build_prompt_widget_key(
+                            namespace="conversation_follow_up",
+                            question_id=item.question_id,
+                            position=(message_index * 100) + follow_up_position,
+                        )
                         if st.button(item.question, key=key):
                             _submit_chat_prompt(fixture, item.question)
                             st.rerun()
