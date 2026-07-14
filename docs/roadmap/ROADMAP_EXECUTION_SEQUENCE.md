@@ -932,6 +932,8 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 
 ## Related documents
 
+| MIP guided measurement workspace product design 001 | ✓ designed — persistent conversation, vertical SaaS journey, and readiness-only upload path; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_IMPLEMENTATION_PLAN_001` |
+
 - [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
 - [LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](./LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md)
 - [PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](./PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)
