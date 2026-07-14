@@ -130,6 +130,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP chat-first demo UI widget-key hotfix 001 | ✓ implemented — deterministic, namespaced prompt keys remove the duplicate-widget runtime blocker and AppTest covers canonical render/rerun; manual review result 001 remains failed pending onboarding redesign; next: `MIP_CHAT_FIRST_DEMO_UI_ONBOARDING_CONVERSATION_REDESIGN_001` |
 | MIP chat-first demo product flow and sample journey design 001 | ✓ designed — explicit no-dataset context, SaaS golden journey, fixture-gap plan, contextual progress, ownership, and acceptance criteria; next: `MIP_CHAT_FIRST_DEMO_SAMPLE_JOURNEY_FIXTURES_001` |
 | MIP chat-first demo sample journey fixtures 001 | ✓ implemented — deterministic SaaS golden journey fixtures, typed loader, integrity validation, contextual prompt eligibility, and blocked planning boundary; next: `MIP_CHAT_FIRST_DEMO_PRODUCT_FLOW_IMPLEMENTATION_001` |
+| MIP chat-first demo product flow implementation 001 | ✓ implemented — explicit dataset and journey context, stage-aware fixture replay, contextual progress/prompts, and no hidden readiness claims; next: `MIP_CHAT_FIRST_DEMO_UI_MANUAL_REVIEW_RESULT_002` |
 
 ## Platform principles
 

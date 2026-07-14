@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """Canonical local/public deterministic Streamlit demo app (P7/P8).
 
 Run::
@@ -40,11 +41,18 @@ from app.ui_renderers import (
 from mip.demo.chat_first_demo import (
     ChatFirstDemoFixture,
     ChatResponseView,
-    build_chat_response_view,
-    build_prompt_widget_key,
-    follow_up_questions,
-    load_chat_first_demo_fixture,
-    sample_prompt_labels,
+)
+from mip.demo.product_flow import (
+    initial_product_state,
+    product_answer,
+    select_dataset,
+    select_journey,
+)
+from mip.demo.sample_journey import (
+    JOURNEY_ID,
+    contextual_prompts,
+    load_sample_journey,
+    ordered_stages,
 )
 
 
@@ -141,117 +149,82 @@ def _render_chat_first_lifecycle(fixture: ChatFirstDemoFixture) -> None:
     st.dataframe(rows, hide_index=True, width="stretch")
 
 
-def _initialize_chat_state() -> None:
-    st.session_state.setdefault("chat_first_history", [])
-
-
-def _submit_chat_prompt(fixture: ChatFirstDemoFixture, prompt: str) -> None:
-    response = build_chat_response_view(fixture, prompt)
-    st.session_state["chat_first_history"].extend(
-        [{"role": "user", "content": prompt}, {"role": "assistant", "content": response}]
-    )
-
-
-def _render_readiness_cards(response: ChatResponseView) -> None:
-    cards = (
-        ("MMM", "Readiness available"),
-        ("GeoX", "Design reviewable"),
-        ("Data", "Compatibility checked"),
-        ("Calibration", "Context only"),
-        ("Recommendations", "Blocked"),
-        ("Evidence", "Fixture-backed"),
-    )
-    st.subheader("Measurement status")
-    for columns in (cards[:3], cards[3:]):
-        for column, (label, status) in zip(st.columns(3), columns):
-            column.caption(label)
-            column.write(status)
-    st.caption(f"Active answer: {response.readiness_label}")
-
-
 def _render_chat_first_demo_tab() -> None:
     st.title("Marketing Intelligence Platform")
     st.subheader("MMM + GeoX measurement copilot")
     st.write(
-        "Assess readiness, understand what the evidence supports, see what remains "
-        "blocked, and choose the next measurement step."
+        "Understand required marketing data, choose MMM or GeoX, inspect governed "
+        "evidence, connect experiments to MMM calibration, and see which planning "
+        "conclusions are trustworthy."
     )
     st.caption("Deterministic demo — no model, provider, or external service is called.")
-
     try:
-        fixture = load_chat_first_demo_fixture()
+        bundle = load_sample_journey("saas_subscriptions_demo_v1", JOURNEY_ID)
     except ValueError as exc:
-        st.error(f"The demo fixture could not be loaded safely: {exc}")
+        st.error(f"The sample journey could not be loaded safely: {exc}")
         return
 
-    _initialize_chat_state()
-    history: list[dict[str, object]] = st.session_state["chat_first_history"]
-    if st.button("Reset conversation", key="chat_first_reset"):
-        st.session_state["chat_first_history"] = []
+    st.session_state.setdefault("product_flow", initial_product_state())
+    state: dict[str, Any] = st.session_state["product_flow"]
+    if st.button("Reset conversation", key="product_flow_reset"):
+        st.session_state["product_flow"] = initial_product_state()
         st.rerun()
-    if not history:
+    if state["active_dataset_id"] is None:
         with st.chat_message("assistant"):
-            st.write("What would you like to understand about MMM, GeoX, or measurement readiness?")
-        st.caption("Try a guided question")
-
-    prompts = sample_prompt_labels(fixture)
-    for index in range(0, len(prompts), 2):
-        for position, (column, (label, question_id)) in enumerate(
-            zip(st.columns(2), prompts[index : index + 2]),
-            start=index,
-        ):
-            question = next(
-                item.question for item in fixture.questions if item.question_id == question_id
-            )
-            if column.button(
-                label,
-                key=build_prompt_widget_key(
-                    namespace="guided_prompt",
-                    question_id=question_id,
-                    position=position,
-                ),
-            ):
-                _submit_chat_prompt(fixture, question)
+            st.write("Welcome. I can explain MIP, what data you need, and a preloaded sample journey. Select a dataset before I make dataset-specific claims.")
+        for position, label in enumerate(("What can MIP help me do?", "What data do I need to get started?", "Should I use MMM, GeoX, or both?", "How does MIP decide what results I can trust?", "How do experiments improve MMM?", "Walk me through a sample use case.")):
+            if st.button(label, key=f"onboarding_prompt_{position}"):
+                answer = product_answer(state, bundle, label)
+                state["conversation_messages"].extend([{"role": "user", "content": label}, {"role": "assistant", "content": answer.text}])
                 st.rerun()
-
-    for message_index, entry in enumerate(history):
-        with st.chat_message(str(entry["role"])):
-            content = entry["content"]
-            if isinstance(content, ChatResponseView):
-                _render_chat_first_answer(content)
-                follow_ups = follow_up_questions(fixture, content)
-                if follow_ups:
-                    st.caption("Suggested follow-ups")
-                    for follow_up_position, item in enumerate(follow_ups):
-                        key = build_prompt_widget_key(
-                            namespace="conversation_follow_up",
-                            question_id=item.question_id,
-                            position=(message_index * 100) + follow_up_position,
-                        )
-                        if st.button(item.question, key=key):
-                            _submit_chat_prompt(fixture, item.question)
-                            st.rerun()
-            else:
-                st.write(str(content))
-
-    typed_prompt = st.chat_input("Ask about readiness, evidence, MMM, GeoX, or planning")
+        if state["conversation_messages"] and st.button(
+            "Select a sample dataset", key="conversation_follow_up_onboarding_dataset"
+        ):
+            select_dataset(state, bundle)
+            st.rerun()
+    typed_prompt = st.chat_input("Ask about MIP, data requirements, or an active sample journey")
     if typed_prompt:
-        _submit_chat_prompt(fixture, typed_prompt)
+        answer = product_answer(state, bundle, typed_prompt)
+        state["conversation_messages"].extend([{"role": "user", "content": typed_prompt}, {"role": "assistant", "content": answer.text}])
         st.rerun()
-
-    active_response = next(
-        (
-            entry["content"]
-            for entry in reversed(history)
-            if isinstance(entry["content"], ChatResponseView)
-        ),
-        build_chat_response_view(fixture, fixture.questions[0].question),
-    )
-    _render_readiness_cards(active_response)
-    _render_chat_first_lifecycle(fixture)
-    with st.expander("Fixture readiness and allowed claims"):
-        _render_list("Allowed claims", list(fixture.allowed_claims))
-        _render_list("Fixture-wide forbidden claims", list(fixture.forbidden_claims))
+    for entry in state["conversation_messages"]:
+        with st.chat_message(entry["role"]):
+            st.write(entry["content"])
+    st.subheader("Explore a sample measurement journey")
+    if state["active_dataset_id"] is None:
+        st.write("SaaS subscriptions · weekly DMA data · paid conversions · Search, Meta, and YouTube · controls included · preloaded demo")
+        if st.button("Select SaaS subscriptions", key="select_saas_dataset"):
+            select_dataset(state, bundle)
+            state["conversation_messages"].append({"role": "assistant", "content": "Active demo dataset: SaaS subscriptions. This is preloaded demo data, not an upload."})
+            st.rerun()
+        return
+    st.success("Active demo dataset: SaaS subscriptions")
+    if st.button("Clear dataset", key="clear_saas_dataset"):
+        st.session_state["product_flow"] = initial_product_state()
+        st.rerun()
+    st.subheader("Choose a sample journey stage")
+    for position, stage in enumerate(ordered_stages(bundle)):
+        if st.button(stage["display_name"], key=f"journey_stage_{position}_{stage['stage_id']}"):
+            select_journey(state, bundle, stage["stage_id"])
+            state["conversation_messages"].append({"role": "assistant", "content": f"Current stage: {stage['display_name']}. This is {stage['execution_mode'].replace('_', ' ')}."})
+            st.rerun()
+    if state["active_stage_id"]:
+        stage = next(item for item in ordered_stages(bundle) if item["stage_id"] == state["active_stage_id"])
+        st.subheader(f"Journey progress — {stage['display_name']}")
+        st.caption(f"Execution mode: {stage['execution_mode'].replace('_', ' ')}")
+        st.write("Artifact preview")
+        st.write("Preloaded demo data · Demo-only · Not live computation · Not production evidence")
+        prompts = contextual_prompts(bundle, stage["stage_id"], state["available_artifact_ids"])
+        for position, prompt in enumerate(prompts):
+            if st.button(prompt["label"], key=f"contextual_prompt_{stage['stage_id']}_{position}"):
+                answer = product_answer(state, bundle, prompt["question"])
+                state["conversation_messages"].extend([{"role": "user", "content": prompt["question"]}, {"role": "assistant", "content": answer.text}])
+                st.rerun()
+        with st.expander("Execution and lineage details"):
+            st.write("Fixture-backed deterministic journey. Live MMM, GeoX, calibration, simulation, and recommendations are not executed.")
+        with st.expander("Fixture readiness and allowed claims"):
+            st.write("Readiness and explanatory claims only; recommendations remain blocked.")
+            st.caption("Fixture-wide forbidden claims remain blocked.")
 
 
 def _render_advisory_tab() -> None:
