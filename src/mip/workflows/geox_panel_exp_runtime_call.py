@@ -182,7 +182,7 @@ def call_geox_post_test_spend_runtime_for_fixture(
 
 
 def _import_panel_exp_runtime() -> dict[str, Any]:
-    from panel_exp.validation.post_test_spend_readiness_adapter_runtime_001 import (  # type: ignore[import-untyped]
+    from panel_exp.validation.post_test_spend_readiness_adapter_runtime_001 import (  # type: ignore[import-not-found]
         PostTestSpendInput,
         build_post_test_spend_evidence,
         build_trusted_readout_spend_handoff,
