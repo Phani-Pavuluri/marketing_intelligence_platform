@@ -42,10 +42,12 @@ from mip.demo.chat_first_demo import (
     ChatFirstDemoFixture,
     ChatResponseView,
 )
+from mip.demo.guided_workspace_intents import answer_shell_question, classify_shell_intent
 from mip.demo.guided_workspace_shell import (
     CANONICAL_HERO,
     STARTER_PROMPTS,
-    preselection_answer,
+    UPLOAD_INFORMATION_COPY,
+    WELCOME_COPY,
     starter_answer,
 )
 from mip.demo.product_flow import (
@@ -194,34 +196,52 @@ def _render_chat_first_demo_tab() -> None:
         st.rerun()
     if state["active_dataset_id"] is None:
         with st.chat_message("assistant"):
-            st.write(
-                "Welcome. I can help clarify a marketing decision, explain required data, "
-                "determine whether MMM, GeoX, or both are appropriate, inspect readiness and evidence, "
-                "explain uncertainty, and identify the next measurement action. Explore the SaaS sample "
-                "use case, or review the planned readiness workflow for your own data."
-            )
-        st.subheader("Start with a question")
-        for position, label in enumerate(STARTER_PROMPTS):
-            if st.button(label, key=f"onboarding_prompt_{position}"):
-                answer = starter_answer(label)
-                if answer is not None:
-                    state["last_answer_category"] = answer.category
-                    rendered_answer = answer.render_text()
-                else:
-                    rendered_answer = preselection_answer(label).render_text()
-                state["conversation_messages"].extend([{"role": "user", "content": label}, {"role": "assistant", "content": rendered_answer}])
-                st.rerun()
-    typed_prompt = st.chat_input("Ask about MIP, data requirements, or an active sample journey")
+            st.write(WELCOME_COPY)
+        prompt_columns = st.columns(len(STARTER_PROMPTS))
+        for position, (column, label) in enumerate(zip(prompt_columns, STARTER_PROMPTS)):
+            with column:
+                if st.button(label, key=f"onboarding_prompt_{position}", width="stretch"):
+                    state["active_starter_prompt_id"] = (
+                        None if state["active_starter_prompt_id"] == label else label
+                    )
+                    state["last_answer_category"] = "onboarding"
+                    st.rerun()
+        active_starter_prompt = state["active_starter_prompt_id"]
+        if active_starter_prompt is not None:
+            active_answer = starter_answer(active_starter_prompt)
+            if active_answer is not None:
+                st.info(active_answer.render_text())
+    with st.container(height=420, border=True):
+        for entry in state["conversation_messages"]:
+            with st.chat_message(entry["role"]):
+                st.write(entry["content"])
+    typed_prompt = st.chat_input("Ask MIP about measurement, data, experiments, or planning")
     if typed_prompt:
-        if state["active_dataset_id"] is None:
-            answer_text = preselection_answer(typed_prompt).render_text()
+        intent = classify_shell_intent(
+            typed_prompt, has_active_dataset=state["active_dataset_id"] is not None
+        )
+        if state["active_dataset_id"] is None or intent != "dataset_specific_without_dataset":
+            shell_response = answer_shell_question(
+                typed_prompt, has_active_dataset=state["active_dataset_id"] is not None
+            )
+            answer_text = shell_response.answer.render_text()
+            answer_category = shell_response.intent
         else:
-            answer_text = product_answer(state, bundle, typed_prompt).text
-        state["conversation_messages"].extend([{"role": "user", "content": typed_prompt}, {"role": "assistant", "content": answer_text}])
+            product_response = product_answer(state, bundle, typed_prompt)
+            answer_text = product_response.text
+            answer_category = product_response.category
+        state["conversation_messages"].extend(
+            [
+                {"role": "user", "content": typed_prompt, "answer_category": "user"},
+                {
+                    "role": "assistant",
+                    "content": answer_text,
+                    "answer_category": answer_category,
+                },
+            ]
+        )
+        state["last_answer_category"] = answer_category
         st.rerun()
-    for entry in state["conversation_messages"]:
-        with st.chat_message(entry["role"]):
-            st.write(entry["content"])
     if state["active_dataset_id"] is None:
         st.subheader("Choose how to begin")
         sample_column, upload_column = st.columns(2)
@@ -245,7 +265,7 @@ def _render_chat_first_demo_tab() -> None:
                 state["conversation_messages"].append({"role": "assistant", "content": "Active demo dataset: SaaS subscriptions. This is preloaded deterministic demo data, not an upload."})
                 st.rerun()
         elif state["entry_mode"] == "upload_readiness_information":
-            st.info("The readiness workspace is planned, not implemented here. It will support CSV inventory, profiling, column mapping, grain checks, and MMM/GeoX readiness. It will not provide live fitting, ROI, optimization, or experiment execution.")
+            st.info(UPLOAD_INFORMATION_COPY)
         return
     st.success("Mode: Sample use case · Use case: SaaS growth planning · Active demo dataset: SaaS subscriptions")
     st.subheader("Current sample walkthrough")

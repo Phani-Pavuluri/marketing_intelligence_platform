@@ -5,6 +5,18 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 CANONICAL_HERO = "Turn marketing data into trustworthy spend decisions"
+WELCOME_COPY = (
+    "MIP helps you understand what is driving marketing performance, where the evidence is "
+    "uncertain, and what is safe to do next—whether you are measuring channels, planning "
+    "future spend, or deciding what to test.\n\n"
+    "Ask a question below, explore a sample measurement story, or review what data would be "
+    "needed for your own analysis."
+)
+UPLOAD_INFORMATION_COPY = (
+    "The readiness workspace is planned, not implemented here. It will support CSV inventory, "
+    "profiling, column mapping, grain checks, and MMM/GeoX readiness. It will not provide live "
+    "fitting, ROI, optimization, or experiment execution."
+)
 
 STARTER_PROMPTS: tuple[str, ...] = (
     "What can MIP help my marketing team do?",
@@ -28,57 +40,62 @@ class ShellAnswer:
     def render_text(self) -> str:
         return (
             f"{self.direct_answer}\n\n"
-            f"**Useful detail:** {self.useful_detail}\n\n"
+            f"{self.useful_detail}\n\n"
             f"**Important limitation:** {self.important_limitation}\n\n"
             f"**Next action:** {self.next_action}\n\n"
-            f"**You could also ask:** {', '.join(self.follow_ups)}"
+            f"You could also ask: {', '.join(self.follow_ups)}"
         )
 
 
 _STARTER_ANSWERS: dict[str, ShellAnswer] = {
     STARTER_PROMPTS[0]: ShellAnswer(
-        "MIP helps marketing teams turn evidence into safer spend decisions.",
-        "It can organize historical channel measurement, show uncertainty and evidence gaps, "
-        "prepare planning prerequisites, route governed GeoX requests, and explain how "
-        "compatible experiment evidence can improve future MMM understanding.",
-        "The public demo is deterministic. It does not claim that every capability is live, "
-        "and it does not authorize recommendations without governed evidence.",
-        "Explore the SaaS growth-planning example to see a concrete fixture-backed journey.",
+        "MIP helps a marketing team understand which channels appear to be driving results, "
+        "how confident the evidence is, and what should happen next.",
+        "It connects historical channel analysis, future-budget planning, and incrementality "
+        "experiments in one workflow. It can help answer which channels are contributing, "
+        "where results are uncertain, what to test, and whether it is safe to change next "
+        "quarter's budget.",
+        "MIP does not automatically turn weak evidence into a recommendation.",
+        "Explore a sample measurement story or ask what data is needed for your analysis.",
         (STARTER_PROMPTS[1], STARTER_PROMPTS[2]),
         "platform_capabilities",
     ),
     STARTER_PROMPTS[1]: ShellAnswer(
-        "Start with channel spend, a KPI outcome, and a reliable time field.",
-        "Useful inputs usually include geography or segment grain, controls, promotion or "
-        "calendar context, enough usable history and variation, and optional experiment "
-        "evidence. Those are general requirements, not a statement about the SaaS demo.",
-        "MIP cannot assess a specific dataset until you select the sample or use the future "
-        "readiness workflow.",
-        "Explore the sample to inspect its preloaded structure, or review what the planned "
-        "readiness workflow will accept.",
+        "At minimum, you need marketing spend by channel over time and a business outcome "
+        "such as conversions, revenue, or new customers.",
+        "Helpful supporting data includes dates, channel names, spend, the KPI outcome, and "
+        "a region or segment when available. Promotions, pricing changes, holidays, product "
+        "launches, other major non-marketing drivers, and optional experiment results add "
+        "useful context. More history and meaningful changes in spend usually make the "
+        "analysis more reliable.",
+        "These are general requirements; no specific dataset has been assessed yet.",
+        "Explore a sample measurement story or review the planned readiness workspace.",
         (STARTER_PROMPTS[2], STARTER_PROMPTS[3]),
         "data_requirements",
     ),
     STARTER_PROMPTS[2]: ShellAnswer(
-        "MMM and GeoX answer related but different measurement questions.",
-        "MMM helps assess cross-channel historical evidence and planning readiness. GeoX is "
-        "useful when an important incremental causal question remains uncertain. Together, "
-        "experiment evidence can inform a later calibration workflow.",
-        "MIP orchestrates the governed workflow; MMM does not design GeoX tests, and no LLM "
-        "chooses treatment markets or executes an experiment.",
-        "Start with the decision and evidence gap, then select the appropriate governed path.",
+        "Use MMM when you want to understand how several channels have performed together "
+        "over time. Use GeoX when you need a cleaner causal answer for a specific channel, "
+        "campaign, or region.",
+        "They are often most useful together: MMM can show where the evidence is weak, and "
+        "a GeoX experiment can provide stronger evidence for that specific question. MIP "
+        "coordinates the workflow.",
+        "MMM does not directly design the experiment, the assistant does not choose treatment "
+        "markets, and experiment feasibility and assignment belong to the experiment system.",
+        "Start with the business question and the uncertainty you need to resolve.",
         (STARTER_PROMPTS[0], STARTER_PROMPTS[3]),
         "method_choice",
     ),
     STARTER_PROMPTS[3]: ShellAnswer(
-        "Next-quarter planning starts with governed evidence, not an immediate budget "
-        "recommendation.",
-        "The required chain is governed MMM evidence, supported spend ranges, baseline or "
-        "candidate simulation, uncertainty and extrapolation checks, then recommendation "
-        "authorization.",
-        "This demo does not run live simulation or optimization and does not authorize budget "
-        "recommendations.",
-        "Explore the SaaS planning example to see the evidence and readiness boundary.",
+        "Planning next quarter requires more than knowing which channels performed well in "
+        "the past.",
+        "The platform first checks whether the model is reliable, whether proposed spend is "
+        "within a range the data can support, and how uncertain the expected outcome is. The "
+        "practical flow is: understand the current plan → compare possible spend changes → "
+        "estimate likely business impact → check uncertainty and risk → decide whether a "
+        "recommendation is justified.",
+        "The current demo does not run live optimization or authorize budget changes.",
+        "Explore a sample measurement story to see the planning readiness boundary.",
         (STARTER_PROMPTS[1], STARTER_PROMPTS[2]),
         "planning",
     ),
@@ -100,12 +117,12 @@ def preselection_answer(question: str) -> ShellAnswer:
     return ShellAnswer(
         "I can explain platform capabilities and measurement prerequisites before a dataset is "
         "selected.",
-        "For a concrete fixture-backed example, choose the SaaS growth-planning use case. "
-        "The Analyze my data path currently explains the planned readiness workflow only.",
+        "Choose a sample measurement story for a concrete example. The Analyze my data path "
+        "currently explains the planned readiness workflow only.",
         "I cannot make dataset-specific readiness, channel, GeoX, or planning claims without "
         "an explicit active context.",
-        "Select the SaaS growth-planning example to explore a concrete dataset, or choose "
-        "Analyze my data to review the planned readiness workflow.",
+        "Select a sample measurement story to explore a concrete dataset, or choose Analyze "
+        "my data to review the planned readiness workflow.",
         STARTER_PROMPTS[:2],
         "dataset_required",
     )

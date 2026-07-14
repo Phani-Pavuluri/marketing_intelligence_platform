@@ -29,6 +29,7 @@ def initial_product_state() -> dict[str, Any]:
         "active_journey_id": None,
         "active_stage_id": None,
         "conversation_messages": [],
+        "active_starter_prompt_id": None,
         "completed_stage_ids": [],
         "available_artifact_ids": set(),
         "last_answer_category": "onboarding",

@@ -932,6 +932,10 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 
 ## Related documents
 
+| MIP guided workspace chat foundation remediation 001 | ✓ implemented — bounded transcript, deterministic free-form routing, and plain-language onboarding; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001` |
+
+| MIP guided measurement workspace shell remediation 001 | ✓ implemented — concise welcome, compact starters, one selected answer, and no premature SaaS references; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001` |
+
 | MIP guided measurement workspace shell 001 | ✓ implemented — business-value entry, distinct deterministic starters, explicit sample/readiness modes, and active context; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001` |
 
 | MIP guided measurement workspace implementation plan 001 | ✓ planned — P1 shell, P2 vertical journey, P3 deterministic answers, browser checkpoint, P4 upload readiness, P5 review, P6 release audit; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_SHELL_001` |

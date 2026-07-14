@@ -70,7 +70,8 @@ def test_canonical_streamlit_page_renders_and_chat_interactions_rerun() -> None:
 
     app.button[1].click().run()
     assert not app.exception
-    assert len(app.chat_message) >= 2
+    assert len(app.chat_message) == 1
+    assert app.info
 
     app.chat_input[0].set_value("Can I estimate ROI?").run()
     assert not app.exception
