@@ -932,6 +932,8 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 
 ## Related documents
 
+| MIP guided measurement workspace implementation plan 001 | ✓ planned — P1 shell, P2 vertical journey, P3 deterministic answers, browser checkpoint, P4 upload readiness, P5 review, P6 release audit; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_SHELL_001` |
+
 | MIP guided measurement workspace product design 001 | ✓ designed — persistent conversation, vertical SaaS journey, and readiness-only upload path; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_IMPLEMENTATION_PLAN_001` |
 
 - [CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](./CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
