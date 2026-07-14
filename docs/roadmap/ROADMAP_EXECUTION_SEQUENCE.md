@@ -118,6 +118,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP demo domain datasets 001 | ✓ implemented — `data/demo/domain_fixtures/saas_subscriptions/v1/` (canonical MMM/GeoX panels + sample Qs/lifecycle; ROI/budget blocked pending MMM export; next: `MIP_MMM_LLM_RESPONSE_VERIFIER_AUDIT_001`) |
 | MIP MMM LLM response verifier audit 001 | ✓ implemented — `docs/audits/MIP_MMM_LLM_RESPONSE_VERIFIER_AUDIT_001.md` (checkpoint passed; demo-safe readiness/refusal behavior fits the response chain; next: `MIP_DEMO_ONBOARDING_AND_USE_CASE_GUIDE_001`) |
 | MIP demo onboarding and use case guide 001 | ✓ implemented — `docs/demo/MIP_DEMO_ONBOARDING_AND_USE_CASE_GUIDE_001.md` (new-user fixture journey, safe questions, blocked claims, and future artifact gates; next: `MIP_CHAT_FIRST_DEMO_UI_DESIGN_PLAN_001`) |
+| MIP chat-first demo UI design plan 001 | ✓ implemented — `docs/demo/MIP_CHAT_FIRST_DEMO_UI_DESIGN_PLAN_001.md` (chat-primary layout, auditable evidence/guardrail panels, and deferred integrations; no UI code; next: `MIP_CHAT_FIRST_DEMO_UI_IMPLEMENTATION_PLAN_001`) |
 
 ## Platform principles
 
