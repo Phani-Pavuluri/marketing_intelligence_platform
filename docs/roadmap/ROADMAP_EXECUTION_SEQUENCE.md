@@ -131,6 +131,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP chat-first demo product flow and sample journey design 001 | ✓ designed — explicit no-dataset context, SaaS golden journey, fixture-gap plan, contextual progress, ownership, and acceptance criteria; next: `MIP_CHAT_FIRST_DEMO_SAMPLE_JOURNEY_FIXTURES_001` |
 | MIP chat-first demo sample journey fixtures 001 | ✓ implemented — deterministic SaaS golden journey fixtures, typed loader, integrity validation, contextual prompt eligibility, and blocked planning boundary; next: `MIP_CHAT_FIRST_DEMO_PRODUCT_FLOW_IMPLEMENTATION_001` |
 | MIP chat-first demo product flow implementation 001 | ✓ implemented — explicit dataset and journey context, stage-aware fixture replay, contextual progress/prompts, and no hidden readiness claims; next: `MIP_CHAT_FIRST_DEMO_UI_MANUAL_REVIEW_RESULT_002` |
+| MIP chat-first demo UI manual review result 002 | ✓ recorded — runtime mechanics work but business-value positioning, answer quality, vertical journey, upload entry, and chat/journey integration require redesign; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_PRODUCT_DESIGN_001` |
 
 ## Platform principles
 
