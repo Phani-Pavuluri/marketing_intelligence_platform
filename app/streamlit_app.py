@@ -39,9 +39,11 @@ from app.ui_renderers import (
 )
 from mip.demo.chat_first_demo import (
     ChatFirstDemoFixture,
-    DeterministicDemoResponse,
-    build_deterministic_demo_response,
+    ChatResponseView,
+    build_chat_response_view,
+    follow_up_questions,
     load_chat_first_demo_fixture,
+    sample_prompt_labels,
 )
 
 
@@ -105,47 +107,75 @@ def _render_blocked_claims() -> None:
         st.write(f"- {topic}")
 
 
-def _render_chat_first_answer(response: DeterministicDemoResponse) -> None:
-    st.subheader("Deterministic answer")
-    st.caption(f"Category: {response.category} · Fixture-backed metadata only")
-    st.write(response.allowed_answer_summary)
-
-    left, right = st.columns(2)
-    with left:
-        _render_list("Evidence inspected", list(response.required_evidence))
-        st.subheader("Next required artifact")
-        st.write(response.next_required_artifact or "None for this explanation")
-    with right:
+def _render_chat_first_answer(response: ChatResponseView) -> None:
+    """Render concise user-facing copy before governance detail."""
+    st.caption("Deterministic answer")
+    st.write(response.primary_answer)
+    st.caption(response.readiness_label)
+    st.warning(f"Blocked: {response.blocked_summary}")
+    st.write(f"**Next step:** {response.next_step}")
+    with st.expander("Why this answer"):
+        st.write("This is a deterministic readiness explanation, not a model result.")
+    with st.expander("Evidence inspected"):
+        _render_list("Evidence inspected", list(response.evidence))
+    with st.expander("What cannot be concluded"):
         _render_list("Cannot say", list(response.cannot_say))
         _render_list("Blocked claims", list(response.blocked_claims))
-
-    review_label = "Required" if response.human_review_required else "Not required"
-    st.write(f"**Human review:** {review_label}")
+    with st.expander("Technical lineage"):
+        st.write("Fixture readiness and allowed claims")
+        st.write(f"Next required artifact: {response.technical_next_artifact or 'None'}")
 
 
 def _render_chat_first_lifecycle(fixture: ChatFirstDemoFixture) -> None:
-    with st.expander("Full MMM + GeoX lifecycle walkthrough"):
-        rows = [
-            {
-                "Step": step.title,
-                "Status": step.status,
-                "Available now": step.available_now,
-                "Fixture-backed": step.fixture_backed,
-                "Blocked": step.blocked,
-                "Next required artifact": step.next_required_artifact or "None",
-            }
-            for step in fixture.lifecycle_steps
-        ]
-        st.dataframe(rows, hide_index=True, width="stretch")
+    st.subheader("Full MMM + GeoX lifecycle walkthrough")
+    rows = [
+        {
+            "Stage": step.title,
+            "Now": "Available" if step.available_now else "Blocked / future",
+            "Status": step.status.replace("_", " "),
+            "Next": "Evidence needed" if step.next_required_artifact else "Current context",
+        }
+        for step in fixture.lifecycle_steps
+    ]
+    st.dataframe(rows, hide_index=True, width="stretch")
+
+
+def _initialize_chat_state() -> None:
+    st.session_state.setdefault("chat_first_history", [])
+
+
+def _submit_chat_prompt(fixture: ChatFirstDemoFixture, prompt: str) -> None:
+    response = build_chat_response_view(fixture, prompt)
+    st.session_state["chat_first_history"].extend(
+        [{"role": "user", "content": prompt}, {"role": "assistant", "content": response}]
+    )
+
+
+def _render_readiness_cards(response: ChatResponseView) -> None:
+    cards = (
+        ("MMM", "Readiness available"),
+        ("GeoX", "Design reviewable"),
+        ("Data", "Compatibility checked"),
+        ("Calibration", "Context only"),
+        ("Recommendations", "Blocked"),
+        ("Evidence", "Fixture-backed"),
+    )
+    st.subheader("Measurement status")
+    for columns in (cards[:3], cards[3:]):
+        for column, (label, status) in zip(st.columns(3), columns):
+            column.caption(label)
+            column.write(status)
+    st.caption(f"Active answer: {response.readiness_label}")
 
 
 def _render_chat_first_demo_tab() -> None:
-    st.header("Marketing Intelligence Platform")
-    st.subheader("MMM + GeoX readiness copilot")
-    st.caption(
-        "Start here: explore the deterministic SaaS subscriptions fixture. "
-        "Answers come from governed fixture metadata—no LLM or model execution."
+    st.title("Marketing Intelligence Platform")
+    st.subheader("MMM + GeoX measurement copilot")
+    st.write(
+        "Assess readiness, understand what the evidence supports, see what remains "
+        "blocked, and choose the next measurement step."
     )
+    st.caption("Deterministic demo — no model, provider, or external service is called.")
 
     try:
         fixture = load_chat_first_demo_fixture()
@@ -153,53 +183,60 @@ def _render_chat_first_demo_tab() -> None:
         st.error(f"The demo fixture could not be loaded safely: {exc}")
         return
 
-    st.write(f"**Selected fixture:** `{fixture.fixture_id}`")
-    st.code("data/demo/domain_fixtures/saas_subscriptions/v1/", language=None)
-    question_labels = {
-        item.question_id: f"{item.category.replace('_', ' ').title()} — {item.question}"
-        for item in fixture.questions
-    }
+    _initialize_chat_state()
+    history: list[dict[str, object]] = st.session_state["chat_first_history"]
+    if st.button("Reset conversation", key="chat_first_reset"):
+        st.session_state["chat_first_history"] = []
+        st.rerun()
+    if not history:
+        with st.chat_message("assistant"):
+            st.write("What would you like to understand about MMM, GeoX, or measurement readiness?")
+        st.caption("Try a guided question")
 
-    if st.button("Start with MMM readiness", key="chat_first_start_here"):
-        st.session_state["chat_first_question_id"] = "mmm_readiness_1"
-        st.session_state["chat_first_question_selector"] = "mmm_readiness_1"
+    prompts = sample_prompt_labels(fixture)
+    for index in range(0, len(prompts), 2):
+        for column, (label, question_id) in zip(st.columns(2), prompts[index : index + 2]):
+            question = next(
+                item.question for item in fixture.questions if item.question_id == question_id
+            )
+            if column.button(label, key=f"sample_prompt_{question_id}"):
+                _submit_chat_prompt(fixture, question)
+                st.rerun()
 
-    default_question_id = st.session_state.get(
-        "chat_first_question_id", fixture.questions[0].question_id
+    for message_index, entry in enumerate(history):
+        with st.chat_message(str(entry["role"])):
+            content = entry["content"]
+            if isinstance(content, ChatResponseView):
+                _render_chat_first_answer(content)
+                follow_ups = follow_up_questions(fixture, content)
+                if follow_ups:
+                    st.caption("Suggested follow-ups")
+                    for item in follow_ups:
+                        key = f"follow_up_{message_index}_{item.question_id}"
+                        if st.button(item.question, key=key):
+                            _submit_chat_prompt(fixture, item.question)
+                            st.rerun()
+            else:
+                st.write(str(content))
+
+    typed_prompt = st.chat_input("Ask about readiness, evidence, MMM, GeoX, or planning")
+    if typed_prompt:
+        _submit_chat_prompt(fixture, typed_prompt)
+        st.rerun()
+
+    active_response = next(
+        (
+            entry["content"]
+            for entry in reversed(history)
+            if isinstance(entry["content"], ChatResponseView)
+        ),
+        build_chat_response_view(fixture, fixture.questions[0].question),
     )
-    question_ids = list(question_labels)
-    default_index = (
-        question_ids.index(default_question_id)
-        if default_question_id in question_labels
-        else 0
-    )
-    question_id = st.selectbox(
-        "Sample question",
-        options=question_ids,
-        index=default_index,
-        format_func=lambda value: question_labels[value],
-        key="chat_first_question_selector",
-    )
-    st.session_state["chat_first_question_id"] = question_id
-    response = build_deterministic_demo_response(fixture, question_id)
-
-    with st.chat_message("user"):
-        st.write(response.question)
-    with st.chat_message("assistant"):
-        _render_chat_first_answer(response)
-
-    with st.expander("Fixture readiness and allowed claims"):
-        st.write("**Fixture files loaded:**")
-        for filename in fixture.inspected_files:
-            st.write(f"- `{filename}`")
-        st.write("**Allowed claim types:**")
-        for claim in fixture.allowed_claims:
-            st.write(f"- {claim}")
-        st.write("**Fixture-wide forbidden claims:**")
-        for claim in fixture.forbidden_claims:
-            st.write(f"- {claim}")
-
+    _render_readiness_cards(active_response)
     _render_chat_first_lifecycle(fixture)
+    with st.expander("Fixture readiness and allowed claims"):
+        _render_list("Allowed claims", list(fixture.allowed_claims))
+        _render_list("Fixture-wide forbidden claims", list(fixture.forbidden_claims))
 
 
 def _render_advisory_tab() -> None:
@@ -453,45 +490,46 @@ def _render_intake_overview_tab() -> None:
 
 
 def main() -> None:
-    """Streamlit entrypoint for the P7 local deterministic workflow shell."""
+    """Streamlit entrypoint for the deterministic measurement copilot demo."""
     st.set_page_config(
-        page_title="MIP Local Demo Shell",
+        page_title="MIP Measurement Copilot",
         layout="wide",
-        initial_sidebar_state="expanded",
+        initial_sidebar_state="collapsed",
     )
+    with st.sidebar:
+        st.header("MIP demo")
+        surface = st.radio(
+            "Workspace",
+            ("Measurement copilot", "Advanced tools"),
+            label_visibility="collapsed",
+        )
+        st.caption("Deterministic fixture-backed demo")
 
-    _render_mode_banner()
-    _render_landing()
+    if surface == "Measurement copilot":
+        _render_chat_first_demo_tab()
+        return
 
-    (
-        tab_chat,
-        tab_advisory,
-        tab_readiness,
-        tab_calibration,
-        tab_profiling,
-        tab_intake,
-    ) = st.tabs(
-        [
-            "Chat-first SaaS demo",
+    st.title("Advanced tools")
+    st.caption("Legacy deterministic tools remain available for detailed inspection.")
+    legacy_tool = st.selectbox(
+        "Choose a legacy tool",
+        (
             "Cold-start advisory",
             "Readiness reports",
             "Calibration mapping",
             "Demo profiling",
             "Intake overview",
-        ]
+        ),
     )
-
-    with tab_chat:
-        _render_chat_first_demo_tab()
-    with tab_advisory:
+    if legacy_tool == "Cold-start advisory":
         _render_advisory_tab()
-    with tab_readiness:
+    elif legacy_tool == "Readiness reports":
         _render_readiness_tab()
-    with tab_calibration:
+    elif legacy_tool == "Calibration mapping":
         _render_calibration_tab()
-    with tab_profiling:
+    elif legacy_tool == "Demo profiling":
         _render_demo_profiling_tab()
-    with tab_intake:
+    else:
         _render_intake_overview_tab()
 
 

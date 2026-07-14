@@ -125,6 +125,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP chat-first demo UI manual review checklist 001 | ✓ documented — human-visible launch, question, answer, claim-safety, panel, lifecycle, no-runtime, Docker, and verdict checklist; no UI/runtime changes; next: `MIP_CHAT_FIRST_DEMO_UI_RELEASE_READINESS_AUDIT_001` |
 | MIP chat-first demo UI release readiness audit 001 | ✓ audited — internal demo ready pending manual review; external release blocked pending recorded manual review and full Docker gate decision; production claims not authorized; next: `MIP_CHAT_FIRST_DEMO_UI_MANUAL_REVIEW_RESULT_001` |
 | MIP Streamlit editable install deployment contract 001 | ✓ documented — `requirements.txt` requires `-e .` because the current fixture loader needs repository-level demo assets; clean Python 3.11 Docker import/fixture regression added; next: `MIP_CHAT_FIRST_DEMO_UI_UX_ALIGNMENT_REMEDIATION_001` |
+| MIP chat-first demo UI UX alignment remediation 001 | ✓ implemented — canonical app now defaults to deterministic chat-first MMM + GeoX measurement-copilot interaction; legacy tools remain secondary; next: `MIP_CHAT_FIRST_DEMO_UI_MANUAL_REVIEW_RESULT_001` |
 
 ## Platform principles
 
