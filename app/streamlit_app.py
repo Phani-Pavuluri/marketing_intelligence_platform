@@ -37,6 +37,12 @@ from app.ui_renderers import (
     mode_banner,
     readiness_report_to_display_dict,
 )
+from mip.demo.chat_first_demo import (
+    ChatFirstDemoFixture,
+    DeterministicDemoResponse,
+    build_deterministic_demo_response,
+    load_chat_first_demo_fixture,
+)
 
 
 def _render_mode_banner() -> None:
@@ -97,6 +103,103 @@ def _render_blocked_claims() -> None:
     st.subheader("Blocked claim topics (deterministic guardrails)")
     for topic in BLOCKED_CLAIM_TOPICS:
         st.write(f"- {topic}")
+
+
+def _render_chat_first_answer(response: DeterministicDemoResponse) -> None:
+    st.subheader("Deterministic answer")
+    st.caption(f"Category: {response.category} · Fixture-backed metadata only")
+    st.write(response.allowed_answer_summary)
+
+    left, right = st.columns(2)
+    with left:
+        _render_list("Evidence inspected", list(response.required_evidence))
+        st.subheader("Next required artifact")
+        st.write(response.next_required_artifact or "None for this explanation")
+    with right:
+        _render_list("Cannot say", list(response.cannot_say))
+        _render_list("Blocked claims", list(response.blocked_claims))
+
+    review_label = "Required" if response.human_review_required else "Not required"
+    st.write(f"**Human review:** {review_label}")
+
+
+def _render_chat_first_lifecycle(fixture: ChatFirstDemoFixture) -> None:
+    with st.expander("Full MMM + GeoX lifecycle walkthrough"):
+        rows = [
+            {
+                "Step": step.title,
+                "Status": step.status,
+                "Available now": step.available_now,
+                "Fixture-backed": step.fixture_backed,
+                "Blocked": step.blocked,
+                "Next required artifact": step.next_required_artifact or "None",
+            }
+            for step in fixture.lifecycle_steps
+        ]
+        st.dataframe(rows, hide_index=True, width="stretch")
+
+
+def _render_chat_first_demo_tab() -> None:
+    st.header("Marketing Intelligence Platform")
+    st.subheader("MMM + GeoX readiness copilot")
+    st.caption(
+        "Start here: explore the deterministic SaaS subscriptions fixture. "
+        "Answers come from governed fixture metadata—no LLM or model execution."
+    )
+
+    try:
+        fixture = load_chat_first_demo_fixture()
+    except ValueError as exc:
+        st.error(f"The demo fixture could not be loaded safely: {exc}")
+        return
+
+    st.write(f"**Selected fixture:** `{fixture.fixture_id}`")
+    st.code("data/demo/domain_fixtures/saas_subscriptions/v1/", language=None)
+    question_labels = {
+        item.question_id: f"{item.category.replace('_', ' ').title()} — {item.question}"
+        for item in fixture.questions
+    }
+
+    if st.button("Start with MMM readiness", key="chat_first_start_here"):
+        st.session_state["chat_first_question_id"] = "mmm_readiness_1"
+        st.session_state["chat_first_question_selector"] = "mmm_readiness_1"
+
+    default_question_id = st.session_state.get(
+        "chat_first_question_id", fixture.questions[0].question_id
+    )
+    question_ids = list(question_labels)
+    default_index = (
+        question_ids.index(default_question_id)
+        if default_question_id in question_labels
+        else 0
+    )
+    question_id = st.selectbox(
+        "Sample question",
+        options=question_ids,
+        index=default_index,
+        format_func=lambda value: question_labels[value],
+        key="chat_first_question_selector",
+    )
+    st.session_state["chat_first_question_id"] = question_id
+    response = build_deterministic_demo_response(fixture, question_id)
+
+    with st.chat_message("user"):
+        st.write(response.question)
+    with st.chat_message("assistant"):
+        _render_chat_first_answer(response)
+
+    with st.expander("Fixture readiness and allowed claims"):
+        st.write("**Fixture files loaded:**")
+        for filename in fixture.inspected_files:
+            st.write(f"- `{filename}`")
+        st.write("**Allowed claim types:**")
+        for claim in fixture.allowed_claims:
+            st.write(f"- {claim}")
+        st.write("**Fixture-wide forbidden claims:**")
+        for claim in fixture.forbidden_claims:
+            st.write(f"- {claim}")
+
+    _render_chat_first_lifecycle(fixture)
 
 
 def _render_advisory_tab() -> None:
@@ -360,8 +463,16 @@ def main() -> None:
     _render_mode_banner()
     _render_landing()
 
-    tab_advisory, tab_readiness, tab_calibration, tab_profiling, tab_intake = st.tabs(
+    (
+        tab_chat,
+        tab_advisory,
+        tab_readiness,
+        tab_calibration,
+        tab_profiling,
+        tab_intake,
+    ) = st.tabs(
         [
+            "Chat-first SaaS demo",
             "Cold-start advisory",
             "Readiness reports",
             "Calibration mapping",
@@ -370,6 +481,8 @@ def main() -> None:
         ]
     )
 
+    with tab_chat:
+        _render_chat_first_demo_tab()
     with tab_advisory:
         _render_advisory_tab()
     with tab_readiness:

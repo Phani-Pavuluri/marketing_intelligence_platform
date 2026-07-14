@@ -120,6 +120,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP demo onboarding and use case guide 001 | ✓ implemented — `docs/demo/MIP_DEMO_ONBOARDING_AND_USE_CASE_GUIDE_001.md` (new-user fixture journey, safe questions, blocked claims, and future artifact gates; next: `MIP_CHAT_FIRST_DEMO_UI_DESIGN_PLAN_001`) |
 | MIP chat-first demo UI design plan 001 | ✓ implemented — `docs/demo/MIP_CHAT_FIRST_DEMO_UI_DESIGN_PLAN_001.md` (chat-primary layout, auditable evidence/guardrail panels, and deferred integrations; no UI code; next: `MIP_CHAT_FIRST_DEMO_UI_IMPLEMENTATION_PLAN_001`) |
 | MIP chat-first demo UI implementation plan 001 | ✓ implemented — `docs/demo/MIP_CHAT_FIRST_DEMO_UI_IMPLEMENTATION_PLAN_001.md` (staged deterministic UI work, candidate app paths, safety tests, and rollback controls; no app changes; next: `MIP_CHAT_FIRST_DEMO_UI_IMPLEMENTATION_001`) |
+| MIP chat-first demo UI implementation 001 | ✓ implemented — `mip.demo.chat_first_demo` + isolated canonical Streamlit tab (fixture-backed questions, deterministic answers, evidence/guardrail/lifecycle panels; no provider or model execution; next: `MIP_CHAT_FIRST_DEMO_UI_SMOKE_VALIDATION_001`) |
 
 ## Platform principles
 
