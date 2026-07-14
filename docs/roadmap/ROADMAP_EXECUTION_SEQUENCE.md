@@ -123,6 +123,7 @@ Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](
 | MIP chat-first demo UI implementation 001 | ✓ implemented — `mip.demo.chat_first_demo` + isolated canonical Streamlit tab (fixture-backed questions, deterministic answers, evidence/guardrail/lifecycle panels; no provider or model execution; next: `MIP_CHAT_FIRST_DEMO_UI_SMOKE_VALIDATION_001`) |
 | MIP chat-first demo UI smoke validation 001 | ✓ validated — deterministic fixture/answer/panel/lifecycle and app-import smoke coverage; Docker tests passed but full Docker validation did not pass because the strict Ruff gate found 21 known pre-existing findings; next: `MIP_CHAT_FIRST_DEMO_UI_MANUAL_REVIEW_CHECKLIST_001` |
 | MIP chat-first demo UI manual review checklist 001 | ✓ documented — human-visible launch, question, answer, claim-safety, panel, lifecycle, no-runtime, Docker, and verdict checklist; no UI/runtime changes; next: `MIP_CHAT_FIRST_DEMO_UI_RELEASE_READINESS_AUDIT_001` |
+| MIP chat-first demo UI release readiness audit 001 | ✓ audited — internal demo ready pending manual review; external release blocked pending recorded manual review and full Docker gate decision; production claims not authorized; next: `MIP_CHAT_FIRST_DEMO_UI_MANUAL_REVIEW_RESULT_001` |
 
 ## Platform principles
 
