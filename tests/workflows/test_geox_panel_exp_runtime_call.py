@@ -373,7 +373,10 @@ def test_no_roi_roas_claim_authorization_by_mip() -> None:
 
 def test_workflow_imports_panel_exp_only_in_runtime_module() -> None:
     source = _RUNTIME_SOURCE.read_text(encoding="utf-8")
-    assert "from panel_exp" in source
+    assert (
+        'import_module("panel_exp.validation.post_test_spend_readiness_adapter_runtime_001")'
+        in source
+    )
     assert "_import_panel_exp_runtime" in source
 
 

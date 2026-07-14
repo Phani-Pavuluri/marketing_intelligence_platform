@@ -39,6 +39,7 @@ from mip.workflows.geox_panel_exp_runtime_call import (
     _evidence_artifact_from_package,
     _handoff_artifact_from_package,
     _import_panel_exp_runtime,
+    _PanelExpRuntime,
 )
 
 _READY_MATERIALIZATION_STATUSES = {
@@ -218,7 +219,7 @@ def call_geox_post_test_spend_runtime_for_uploaded_csvs(
             lineage,
         )
 
-    evidence_artifact = _evidence_artifact_from_package(adapter_plan, evidence, runtime)
+    evidence_artifact = _evidence_artifact_from_package(adapter_plan, evidence)
     handoff_artifact = _handoff_artifact_from_package(adapter_plan, handoff)
     package_output_summary = dict(evidence_artifact.package_output_summary)
     issues.extend(
@@ -314,9 +315,9 @@ def _build_post_test_spend_input_from_uploaded_csv(
     request: GeoXUploadedCSVRuntimeBridgeRequest,
     spend_dataset: MaterializedTabularDataset,
     assignment_dataset: MaterializedTabularDataset,
-    runtime: dict[str, Any],
+    runtime: _PanelExpRuntime,
     lineage: dict[str, str],
-) -> Any:
+) -> object:
     spend_df = spend_dataset.dataframe
     assign_df = assignment_dataset.dataframe
     if spend_df is None or assign_df is None:

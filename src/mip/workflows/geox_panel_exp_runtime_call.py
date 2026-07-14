@@ -6,7 +6,9 @@
 
 from __future__ import annotations
 
-from typing import Any
+from collections.abc import Mapping, Sequence
+from importlib import import_module
+from typing import Any, Protocol, TypedDict, cast
 
 from mip.contracts.geox_fixture_materialization import GeoXFixtureMaterializationStatus
 from mip.contracts.geox_panel_exp_integration import (
@@ -24,6 +26,39 @@ from mip.contracts.geox_panel_exp_runtime_call import (
     GeoXPostTestSpendEvidenceArtifact,
     GeoXTrustedReadoutSpendHandoffArtifact,
 )
+
+
+class _PostTestSpendInputFactory(Protocol):
+    def __call__(self, **kwargs: object) -> object: ...
+
+
+class _PostTestSpendEvidence(Protocol):
+    source_dataset_ref: str | None
+    source_lineage: Mapping[str, object]
+    readiness_status: object
+    actual_treatment_spend: float | None
+    actual_control_or_baseline_spend: float | None
+    counterfactual_or_bau_spend: float | None
+    spend_delta: float | None
+    spend_delta_definition: str | None
+    spend_currency: str | None
+    spend_scope: str
+    blocking_reasons: Sequence[str]
+    warnings: Sequence[str]
+
+
+class _PostTestSpendEvidenceBuilder(Protocol):
+    def __call__(self, spend_input: object) -> _PostTestSpendEvidence: ...
+
+
+class _TrustedReadoutSpendHandoffBuilder(Protocol):
+    def __call__(self, evidence: _PostTestSpendEvidence) -> dict[str, Any]: ...
+
+
+class _PanelExpRuntime(TypedDict):
+    PostTestSpendInput: _PostTestSpendInputFactory
+    build_post_test_spend_evidence: _PostTestSpendEvidenceBuilder
+    build_trusted_readout_spend_handoff: _TrustedReadoutSpendHandoffBuilder
 
 
 def call_geox_post_test_spend_runtime_for_fixture(
@@ -154,7 +189,7 @@ def call_geox_post_test_spend_runtime_for_fixture(
             lineage,
         )
 
-    evidence_artifact = _evidence_artifact_from_package(plan, evidence, runtime)
+    evidence_artifact = _evidence_artifact_from_package(plan, evidence)
     handoff_artifact = _handoff_artifact_from_package(plan, handoff)
     issues.append(GeoXPanelExpRuntimeCallIssueCode.SPEND_DELTA_PACKAGE_COMPUTED)
     warnings.append(
@@ -181,17 +216,19 @@ def call_geox_post_test_spend_runtime_for_fixture(
     )
 
 
-def _import_panel_exp_runtime() -> dict[str, Any]:
-    from panel_exp.validation.post_test_spend_readiness_adapter_runtime_001 import (  # type: ignore[import-not-found]
-        PostTestSpendInput,
-        build_post_test_spend_evidence,
-        build_trusted_readout_spend_handoff,
-    )
+def _import_panel_exp_runtime() -> _PanelExpRuntime:
+    module = import_module("panel_exp.validation.post_test_spend_readiness_adapter_runtime_001")
 
     return {
-        "PostTestSpendInput": PostTestSpendInput,
-        "build_post_test_spend_evidence": build_post_test_spend_evidence,
-        "build_trusted_readout_spend_handoff": build_trusted_readout_spend_handoff,
+        "PostTestSpendInput": cast(_PostTestSpendInputFactory, module.PostTestSpendInput),
+        "build_post_test_spend_evidence": cast(
+            _PostTestSpendEvidenceBuilder,
+            module.build_post_test_spend_evidence,
+        ),
+        "build_trusted_readout_spend_handoff": cast(
+            _TrustedReadoutSpendHandoffBuilder,
+            module.build_trusted_readout_spend_handoff,
+        ),
     }
 
 
@@ -230,8 +267,8 @@ def _blocked_status_for_plan(
 def _build_post_test_spend_input(
     plan: GeoXPostTestSpendAdapterInputPlan,
     fixture_result: Any,
-    runtime: dict[str, Any],
-) -> Any:
+    runtime: _PanelExpRuntime,
+) -> object:
     spend_dataset = fixture_result.spend_dataset
     if spend_dataset is None:
         msg = "materialized spend dataset required"
@@ -310,12 +347,9 @@ def _build_post_test_spend_input(
 
 def _evidence_artifact_from_package(
     plan: GeoXPostTestSpendAdapterInputPlan,
-    evidence: Any,
-    runtime: dict[str, Any],
+    evidence: _PostTestSpendEvidence,
 ) -> GeoXPostTestSpendEvidenceArtifact:
-    readiness_status = evidence.readiness_status
-    if hasattr(readiness_status, "value"):
-        readiness_status = readiness_status.value
+    readiness_status = str(getattr(evidence.readiness_status, "value", evidence.readiness_status))
 
     package_summary: dict[str, str | float | int | bool | None] = {
         "readiness_status": str(readiness_status),
