@@ -65,21 +65,12 @@ def test_canonical_streamlit_page_renders_and_chat_interactions_rerun() -> None:
 
     assert not app.exception
     assert len(app.chat_input) == 1
-    assert len(app.button) == 8
+    assert len(app.button) == 7
     assert app.button[0].label == "Reset conversation"
 
     app.button[1].click().run()
     assert not app.exception
     assert len(app.chat_message) >= 2
-    assert any((button.key or "").startswith("conversation_follow_up_") for button in app.button)
-
-    follow_up = next(
-        button
-        for button in app.button
-        if (button.key or "").startswith("conversation_follow_up_")
-    )
-    follow_up.click().run()
-    assert not app.exception
 
     app.chat_input[0].set_value("Can I estimate ROI?").run()
     assert not app.exception

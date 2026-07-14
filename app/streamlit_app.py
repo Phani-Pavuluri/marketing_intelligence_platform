@@ -42,11 +42,19 @@ from mip.demo.chat_first_demo import (
     ChatFirstDemoFixture,
     ChatResponseView,
 )
+from mip.demo.guided_workspace_shell import (
+    CANONICAL_HERO,
+    STARTER_PROMPTS,
+    preselection_answer,
+    starter_answer,
+)
 from mip.demo.product_flow import (
     initial_product_state,
     product_answer,
     select_dataset,
     select_journey,
+    select_sample_mode,
+    select_upload_information,
 )
 from mip.demo.sample_journey import (
     JOURNEY_ID,
@@ -150,13 +158,28 @@ def _render_chat_first_lifecycle(fixture: ChatFirstDemoFixture) -> None:
 
 
 def _render_chat_first_demo_tab() -> None:
-    st.title("Marketing Intelligence Platform")
-    st.subheader("MMM + GeoX measurement copilot")
+    st.title(CANONICAL_HERO)
     st.write(
-        "Understand required marketing data, choose MMM or GeoX, inspect governed "
-        "evidence, connect experiments to MMM calibration, and see which planning "
-        "conclusions are trustworthy."
+        "Understand channel performance, plan future budgets, design incrementality tests, "
+        "and use experimental evidence to improve your marketing mix models."
     )
+    st.caption(
+        "MIP makes clear what evidence supports, what remains uncertain, what is blocked, and what should happen next."
+    )
+    columns = st.columns(4)
+    for column, title, description in zip(
+        columns,
+        ("Measure", "Plan", "Experiment", "Learn"),
+        (
+            "Understand historical channel performance, incremental evidence, uncertainty, and gaps.",
+            "Prepare future-quarter scenarios and the evidence needed before simulation or recommendation.",
+            "Use GeoX when an important incrementality question remains uncertain.",
+            "Use compatible experiment evidence to calibrate and refresh MMM understanding.",
+        ),
+    ):
+        with column:
+            st.markdown(f"**{title}**")
+            st.caption(description)
     st.caption("Deterministic demo — no model, provider, or external service is called.")
     try:
         bundle = load_sample_journey("saas_subscriptions_demo_v1", JOURNEY_ID)
@@ -171,38 +194,65 @@ def _render_chat_first_demo_tab() -> None:
         st.rerun()
     if state["active_dataset_id"] is None:
         with st.chat_message("assistant"):
-            st.write("Welcome. I can explain MIP, what data you need, and a preloaded sample journey. Select a dataset before I make dataset-specific claims.")
-        for position, label in enumerate(("What can MIP help me do?", "What data do I need to get started?", "Should I use MMM, GeoX, or both?", "How does MIP decide what results I can trust?", "How do experiments improve MMM?", "Walk me through a sample use case.")):
+            st.write(
+                "Welcome. I can help clarify a marketing decision, explain required data, "
+                "determine whether MMM, GeoX, or both are appropriate, inspect readiness and evidence, "
+                "explain uncertainty, and identify the next measurement action. Explore the SaaS sample "
+                "use case, or review the planned readiness workflow for your own data."
+            )
+        st.subheader("Start with a question")
+        for position, label in enumerate(STARTER_PROMPTS):
             if st.button(label, key=f"onboarding_prompt_{position}"):
-                answer = product_answer(state, bundle, label)
-                state["conversation_messages"].extend([{"role": "user", "content": label}, {"role": "assistant", "content": answer.text}])
+                answer = starter_answer(label)
+                if answer is not None:
+                    state["last_answer_category"] = answer.category
+                    rendered_answer = answer.render_text()
+                else:
+                    rendered_answer = preselection_answer(label).render_text()
+                state["conversation_messages"].extend([{"role": "user", "content": label}, {"role": "assistant", "content": rendered_answer}])
                 st.rerun()
-        if state["conversation_messages"] and st.button(
-            "Select a sample dataset", key="conversation_follow_up_onboarding_dataset"
-        ):
-            select_dataset(state, bundle)
-            st.rerun()
     typed_prompt = st.chat_input("Ask about MIP, data requirements, or an active sample journey")
     if typed_prompt:
-        answer = product_answer(state, bundle, typed_prompt)
-        state["conversation_messages"].extend([{"role": "user", "content": typed_prompt}, {"role": "assistant", "content": answer.text}])
+        if state["active_dataset_id"] is None:
+            answer_text = preselection_answer(typed_prompt).render_text()
+        else:
+            answer_text = product_answer(state, bundle, typed_prompt).text
+        state["conversation_messages"].extend([{"role": "user", "content": typed_prompt}, {"role": "assistant", "content": answer_text}])
         st.rerun()
     for entry in state["conversation_messages"]:
         with st.chat_message(entry["role"]):
             st.write(entry["content"])
-    st.subheader("Explore a sample measurement journey")
     if state["active_dataset_id"] is None:
-        st.write("SaaS subscriptions · weekly DMA data · paid conversions · Search, Meta, and YouTube · controls included · preloaded demo")
-        if st.button("Select SaaS subscriptions", key="select_saas_dataset"):
-            select_dataset(state, bundle)
-            state["conversation_messages"].append({"role": "assistant", "content": "Active demo dataset: SaaS subscriptions. This is preloaded demo data, not an upload."})
-            st.rerun()
+        st.subheader("Choose how to begin")
+        sample_column, upload_column = st.columns(2)
+        with sample_column:
+            st.markdown("**Explore a sample use case**")
+            st.write("SaaS growth planning: understand paid conversions across Search, Meta, and YouTube; identify Meta uncertainty; explore a GeoX evidence workflow; and assess future-quarter planning readiness.")
+            st.caption("KPI: paid conversions · Grain: weekly × DMA · Channels: Search, Meta, YouTube · Controls: four · History: 14 weeks · Mode: deterministic precomputed demo")
+            if st.button("Explore SaaS growth-planning example", key="select_sample_use_case"):
+                select_sample_mode(state)
+                st.rerun()
+        with upload_column:
+            st.markdown("**Analyze my data**")
+            st.write("Review the planned readiness workspace for channel-spend, KPI outcomes, controls, and optional experiment-evidence CSVs.")
+            if st.button("Review readiness workspace scope", key="show_upload_readiness_information"):
+                select_upload_information(state)
+                st.rerun()
+        if state["entry_mode"] == "sample_use_case":
+            st.info("Sample use case selected. Activate the preloaded SaaS dataset to begin the current walkthrough.")
+            if st.button("Activate SaaS growth-planning example", key="activate_saas_dataset"):
+                select_dataset(state, bundle)
+                state["conversation_messages"].append({"role": "assistant", "content": "Active demo dataset: SaaS subscriptions. This is preloaded deterministic demo data, not an upload."})
+                st.rerun()
+        elif state["entry_mode"] == "upload_readiness_information":
+            st.info("The readiness workspace is planned, not implemented here. It will support CSV inventory, profiling, column mapping, grain checks, and MMM/GeoX readiness. It will not provide live fitting, ROI, optimization, or experiment execution.")
         return
-    st.success("Active demo dataset: SaaS subscriptions")
-    if st.button("Clear dataset", key="clear_saas_dataset"):
+    st.success("Mode: Sample use case · Use case: SaaS growth planning · Active demo dataset: SaaS subscriptions")
+    st.subheader("Current sample walkthrough")
+    st.caption("P2 will replace these transitional controls with the guided vertical journey.")
+    if st.button("Clear sample use case", key="clear_saas_dataset"):
         st.session_state["product_flow"] = initial_product_state()
         st.rerun()
-    st.subheader("Choose a sample journey stage")
     for position, stage in enumerate(ordered_stages(bundle)):
         if st.button(stage["display_name"], key=f"journey_stage_{position}_{stage['stage_id']}"):
             select_journey(state, bundle, stage["stage_id"])
@@ -217,8 +267,8 @@ def _render_chat_first_demo_tab() -> None:
         prompts = contextual_prompts(bundle, stage["stage_id"], state["available_artifact_ids"])
         for position, prompt in enumerate(prompts):
             if st.button(prompt["label"], key=f"contextual_prompt_{stage['stage_id']}_{position}"):
-                answer = product_answer(state, bundle, prompt["question"])
-                state["conversation_messages"].extend([{"role": "user", "content": prompt["question"]}, {"role": "assistant", "content": answer.text}])
+                product_response = product_answer(state, bundle, prompt["question"])
+                state["conversation_messages"].extend([{"role": "user", "content": prompt["question"]}, {"role": "assistant", "content": product_response.text}])
                 st.rerun()
         with st.expander("Execution and lineage details"):
             st.write("Fixture-backed deterministic journey. Live MMM, GeoX, calibration, simulation, and recommendations are not executed.")

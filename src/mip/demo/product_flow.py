@@ -23,7 +23,9 @@ class ProductAnswer:
 def initial_product_state() -> dict[str, Any]:
     """Return a no-dataset state with no hidden fixture context."""
     return {
+        "entry_mode": None,
         "active_dataset_id": None,
+        "active_use_case_id": None,
         "active_journey_id": None,
         "active_stage_id": None,
         "conversation_messages": [],
@@ -35,10 +37,24 @@ def initial_product_state() -> dict[str, Any]:
     }
 
 
+def select_sample_mode(state: dict[str, Any]) -> None:
+    """Enter sample mode without activating a dataset."""
+    state.update(initial_product_state())
+    state["entry_mode"] = "sample_use_case"
+
+
+def select_upload_information(state: dict[str, Any]) -> None:
+    """Enter the non-upload informational readiness path."""
+    state.update(initial_product_state())
+    state["entry_mode"] = "upload_readiness_information"
+
+
 def select_dataset(state: dict[str, Any], bundle: SampleJourneyBundle) -> None:
     """Set explicit demo context and clear incompatible journey state."""
     state.update(initial_product_state())
+    state["entry_mode"] = "sample_use_case"
     state["active_dataset_id"] = bundle.dataset_id
+    state["active_use_case_id"] = "saas_growth_planning"
     state["available_artifact_ids"] = {"dataset_manifest", "mmm_panel"}
     state["demo_execution_mode"] = "fixture_backed_replay"
 
