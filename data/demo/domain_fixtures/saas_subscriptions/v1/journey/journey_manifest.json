@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "artifact_id": "saas_v1_journey_manifest",
+  "dataset_id": "saas_subscriptions_demo_v1",
+  "journey_id": "saas_subscriptions_measurement_journey_v1",
+  "display_name": "SaaS subscriptions measurement journey",
+  "business_domain": "SAAS_SUBSCRIPTIONS",
+  "business_question": "How can subscription acquisition evidence be inspected and strengthened without authorizing a budget decision?",
+  "kpi": "paid_conversions",
+  "time_grain": "WEEK",
+  "geo_grain": "DMA",
+  "channels": ["Search", "Meta", "YouTube"],
+  "execution_mode": "fixture_backed_replay",
+  "default_first_stage_id": "select_dataset",
+  "reused_artifact_references": ["../manifest.json", "../mmm_weekly_dma_panel.csv", "../geox_design_weekly_dma_panel.csv", "../calibration_signals.json"],
+  "artifact_files": ["upload_requirements.json", "sample_mmm_run_manifest.json", "sample_mmm_diagnostics.json", "sample_mmm_result.json", "evidence_gap.json", "geox_design_request.json", "geox_design_response.json", "geox_readout.json", "calibration_signal.json", "refreshed_mmm_result.json", "calibration_comparison.json", "planning_readiness.json", "prompt_catalog.json"],
+  "claims_allowed": ["fixture-backed readiness", "illustrative demo evidence", "blocked-claim explanation"],
+  "claims_blocked": ["ROI", "ROAS", "budget recommendation", "GeoX assignment", "production causal lift"],
+  "stages": [
+    {"stage_id":"select_dataset","display_name":"Select the sample dataset","user_goal":"Identify the preloaded SaaS demo","status":"available","execution_mode":"existing_fixture","artifact_ids":["dataset_manifest"],"required_previous_stage_ids":[],"claims_allowed":["dataset identity"],"claims_blocked":["readiness before selection"],"next_stage_ids":["upload_requirements"]},
+    {"stage_id":"upload_requirements","display_name":"Understand upload requirements","user_goal":"Learn what a real user would supply","status":"available","execution_mode":"fixture_backed_replay","artifact_ids":["upload_requirements"],"required_previous_stage_ids":["select_dataset"],"claims_allowed":["input requirements"],"claims_blocked":["live upload processing"],"next_stage_ids":["mmm_readiness"]},
+    {"stage_id":"mmm_readiness","display_name":"Assess MMM readiness","user_goal":"Inspect readiness evidence","status":"available","execution_mode":"existing_fixture","artifact_ids":["dataset_manifest","mmm_panel"],"required_previous_stage_ids":["upload_requirements"],"claims_allowed":["readiness only"],"claims_blocked":["live model fit"],"next_stage_ids":["mmm_run"]},
+    {"stage_id":"mmm_run","display_name":"Replay sample MMM run","user_goal":"Review a precomputed demo run","status":"available","execution_mode":"precomputed_demo_artifact","artifact_ids":["mmm_run","mmm_diagnostics","mmm_result"],"required_previous_stage_ids":["mmm_readiness"],"claims_allowed":["illustrative evidence"],"claims_blocked":["production result"],"next_stage_ids":["evidence_gap"]},
+    {"stage_id":"evidence_gap","display_name":"Identify evidence gap","user_goal":"Understand why additional evidence is useful","status":"available","execution_mode":"precomputed_demo_artifact","artifact_ids":["evidence_gap"],"required_previous_stage_ids":["mmm_run"],"claims_allowed":["diagnostic limitation"],"claims_blocked":["market assignment"],"next_stage_ids":["geox_request"]},
+    {"stage_id":"geox_request","display_name":"Create GeoX design request","user_goal":"Route a governed request to GeoX","status":"available","execution_mode":"fixture_backed_replay","artifact_ids":["geox_request","geox_response"],"required_previous_stage_ids":["evidence_gap"],"claims_allowed":["request and feasibility example"],"claims_blocked":["assignment"],"next_stage_ids":["geox_readout"]},
+    {"stage_id":"geox_readout","display_name":"Review sample GeoX evidence","user_goal":"Inspect precomputed experiment evidence","status":"available","execution_mode":"external_execution_example","artifact_ids":["geox_readout"],"required_previous_stage_ids":["geox_request"],"claims_allowed":["sample evidence explanation"],"claims_blocked":["production lift claim"],"next_stage_ids":["calibration"]},
+    {"stage_id":"calibration","display_name":"Map calibration evidence","user_goal":"Review compatible CalibrationSignal routing","status":"available","execution_mode":"precomputed_demo_artifact","artifact_ids":["calibration_signal"],"required_previous_stage_ids":["geox_readout"],"claims_allowed":["compatibility and treatment"],"claims_blocked":["live statistical calibration"],"next_stage_ids":["refreshed_mmm"]},
+    {"stage_id":"refreshed_mmm","display_name":"Compare refreshed MMM evidence","user_goal":"See what changed and what did not","status":"available","execution_mode":"precomputed_demo_artifact","artifact_ids":["refreshed_mmm_result","calibration_comparison"],"required_previous_stage_ids":["calibration"],"claims_allowed":["illustrative comparison"],"claims_blocked":["guaranteed improvement"],"next_stage_ids":["planning_readiness"]},
+    {"stage_id":"planning_readiness","display_name":"Assess planning readiness","user_goal":"Separate explanation from simulation and recommendation","status":"blocked","execution_mode":"blocked","artifact_ids":["planning_readiness"],"required_previous_stage_ids":["refreshed_mmm"],"claims_allowed":["blocked-planning explanation"],"claims_blocked":["budget recommendation"],"next_stage_ids":[]}
+  ]
+}
