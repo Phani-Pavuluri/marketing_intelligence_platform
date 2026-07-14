@@ -8,12 +8,12 @@ Run the repository validation suite from the repository root:
 make validate
 ```
 
-This is the standard local validation entrypoint. It prefers Docker so the
-checks run in the repository's configured Python 3.11 devcontainer image. If
-the Docker CLI or daemon is unavailable, it reports the fallback and runs the
-same sequence with host Poetry.
+This is the standard local validation entrypoint. It requires Docker and runs
+the checks in the repository's configured Python 3.11 devcontainer image. If
+the Docker CLI or daemon is unavailable, validation fails clearly; it never
+falls back to host Poetry.
 
-To require the container path and fail instead of falling back:
+The explicit Docker alias runs the same path:
 
 ```bash
 make validate-docker
@@ -21,7 +21,7 @@ make validate-docker
 
 ## Checks performed
 
-Both paths install the locked project dependencies and run the repository-wide
+The Docker path installs the locked project dependencies and runs the repository-wide
 release checklist in this order:
 
 ```bash
@@ -50,13 +50,16 @@ The container covers Python 3.11 only. If GitHub Actions is added later with
 additional Python versions or checks, Actions remains the final authority and
 this script should be updated to track its commands.
 
-## Explicit host fallback and cleanup
+## Explicit host validation and cleanup
 
-For troubleshooting, the host path can be selected explicitly:
+Host validation is available only as an explicit troubleshooting choice:
 
 ```bash
-./scripts/validate_ci_local.sh --host
+make validate-host
 ```
+
+This target delegates to `./scripts/validate_ci_local.sh --host`. Neither
+`make validate` nor `make validate-docker` will select host Poetry.
 
 Remove common ignored OS and Python tooling junk with:
 

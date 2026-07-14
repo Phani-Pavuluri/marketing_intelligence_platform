@@ -1,10 +1,13 @@
-.PHONY: validate validate-docker clean-junk
+.PHONY: validate validate-docker validate-host clean-junk
 
 validate:
-	./scripts/validate_ci_local.sh
+	./scripts/validate_ci_local.sh --docker
 
 validate-docker:
 	./scripts/validate_ci_local.sh --docker
+
+validate-host:
+	./scripts/validate_ci_local.sh --host
 
 clean-junk:
 	find . -type f \( -name '.DS_Store' -o -name 'Thumbs.db' -o -name '*.py[co]' \) -delete

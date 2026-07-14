@@ -9,9 +9,9 @@ usage() {
   cat <<'EOF'
 Usage: scripts/validate_ci_local.sh [--docker|--host|--inside-container]
 
-Without an option, Docker is preferred and host Poetry is used only when the
-Docker CLI or daemon is unavailable. Use --docker to require containerized
-validation or --host to explicitly use the local Poetry installation.
+Without an option, validation requires Docker and uses the repository's
+devcontainer image. Use --docker for the same explicit containerized path or
+--host to explicitly opt into the local Poetry installation.
 EOF
 }
 
@@ -22,11 +22,18 @@ run_checks() {
   poetry run mypy src tests app
 }
 
-docker_is_available() {
-  command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1
-}
-
 run_in_docker() {
+  if ! command -v docker >/dev/null 2>&1; then
+    echo "error: Docker is required for repository-standard validation, but the Docker CLI was not found." >&2
+    echo "Install/start Docker and run 'make validate' again. Use 'make validate-host' only for explicit host validation." >&2
+    return 1
+  fi
+  if ! docker info >/dev/null 2>&1; then
+    echo "error: Docker is required for repository-standard validation, but the Docker daemon is unavailable." >&2
+    echo "Start Docker and run 'make validate' again. Host Poetry fallback is disabled." >&2
+    return 1
+  fi
+
   echo "Running validation in the Python 3.11 devcontainer image: ${DEVCONTAINER_IMAGE}"
   docker run --rm \
     --volume "${REPO_ROOT}:/workspace" \
@@ -39,28 +46,17 @@ run_in_docker() {
 
 run_on_host() {
   if ! command -v poetry >/dev/null 2>&1; then
-    echo "error: Docker is unavailable and Poetry is not installed on the host." >&2
-    echo "Start Docker and run 'make validate', or install Poetry and retry." >&2
+    echo "error: explicit host validation requires Poetry, but Poetry was not found." >&2
+    echo "Install Poetry and run 'make validate-host' again, or use Docker with 'make validate'." >&2
     return 1
   fi
 
-  echo "Docker is unavailable; running the same validation sequence with host Poetry."
+  echo "Running explicitly requested host validation with Poetry."
   run_checks
 }
 
 case "${1:-}" in
-  "")
-    if docker_is_available; then
-      run_in_docker
-    else
-      run_on_host
-    fi
-    ;;
-  --docker)
-    if ! docker_is_available; then
-      echo "error: --docker requires a running Docker daemon." >&2
-      exit 1
-    fi
+  ""|--docker)
     run_in_docker
     ;;
   --host)
