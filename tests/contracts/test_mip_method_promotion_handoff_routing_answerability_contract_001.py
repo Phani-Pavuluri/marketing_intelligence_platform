@@ -148,7 +148,8 @@ def test_summary_json_validates() -> None:
     assert summary["status"] == "completed"
     assert (
         summary["scope"]
-        == "routing_answerability_contract_docs_tests_only_no_runtime_integration_no_answer_eligibility"
+        == "routing_answerability_contract_docs_tests_only_"
+        "no_runtime_integration_no_answer_eligibility"
     )
     assert summary["depends_on"] == [
         "MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_RUNTIME_APPLICATION_CHECKPOINT_001",

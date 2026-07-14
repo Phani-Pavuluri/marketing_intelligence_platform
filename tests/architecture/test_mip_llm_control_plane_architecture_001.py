@@ -51,7 +51,10 @@ def test_core_principle_documented() -> None:
 
 def test_shared_control_plane_and_adapters() -> None:
     content = _DOC.read_text(encoding="utf-8")
-    assert "package-specific adapters" in content.lower() or "package-specific tool adapters" in content
+    assert (
+        "package-specific adapters" in content.lower()
+        or "package-specific tool adapters" in content
+    )
     assert "MMM" in content
     assert "GeoX" in content or "panel_exp" in content
 

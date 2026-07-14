@@ -11,8 +11,9 @@ budget/spend/ROI, claim/catalog/production readiness, or method/instrument promo
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from enum import StrEnum
-from typing import Any, Mapping
+from typing import Any
 from uuid import uuid4
 
 from pydantic import Field
@@ -476,7 +477,7 @@ def _as_source_of_truth_refs(value: Any) -> dict[str, Any] | None:
     mapping = _as_mapping(value)
     if mapping:
         return mapping
-    if isinstance(value, (list, tuple)):
+    if isinstance(value, list | tuple):
         refs = [_as_str(item) for item in value if _as_str(item)]
         if refs:
             return {"refs": refs}
@@ -489,7 +490,7 @@ def _as_source_of_truth_refs(value: Any) -> dict[str, Any] | None:
 def _as_str_tuple(value: Any) -> tuple[str, ...]:
     if value is None:
         return ()
-    if isinstance(value, (list, tuple)):
+    if isinstance(value, list | tuple):
         return tuple(_as_str(item) for item in value if _as_str(item))
     if isinstance(value, str) and value.strip():
         return (value.strip(),)
@@ -513,7 +514,7 @@ def _merge_boundary_statuses(payload: Mapping[str, Any]) -> dict[str, Any]:
 def _is_truthy(value: Any) -> bool:
     if isinstance(value, bool):
         return value
-    if isinstance(value, (int, float)) and not isinstance(value, bool):
+    if isinstance(value, int | float) and not isinstance(value, bool):
         return value != 0
     if isinstance(value, str):
         return value.strip().lower() in {"1", "true", "yes", "authorized", "promoted"}
@@ -553,7 +554,11 @@ def _blocked_output(
 
 def _detect_attempt_block(
     payload: Mapping[str, Any],
-) -> tuple[MIPMethodPromotionHandoffConsumerStatus, MIPMethodPromotionHandoffRoutingHint, str] | None:
+) -> tuple[
+    MIPMethodPromotionHandoffConsumerStatus,
+    MIPMethodPromotionHandoffRoutingHint,
+    str,
+] | None:
     """Return the most specific attempt block if present."""
 
     routing = _as_str(payload.get("routing_hint") or payload.get("requested_routing_hint"))
@@ -656,7 +661,9 @@ def _detect_attempt_block(
                 if "budget" in key:
                     hint = MIPMethodPromotionHandoffRoutingHint.ROUTE_BLOCKED_BUDGET_OPTIMIZER
                 if "roi" in key or "roas" in key:
-                    hint = MIPMethodPromotionHandoffRoutingHint.ROUTE_BLOCKED_ROI_ROAS_RECOMMENDATION
+                    hint = (
+                        MIPMethodPromotionHandoffRoutingHint.ROUTE_BLOCKED_ROI_ROAS_RECOMMENDATION
+                    )
                 return (
                     MIPMethodPromotionHandoffConsumerStatus.CONSUMER_RUNTIME_BLOCKED_SPEND_ROI_AUTHORIZATION_ATTEMPT,
                     hint,
@@ -996,7 +1003,9 @@ def validate_and_normalize_method_promotion_handoff(
     }
 
     record = MIPMethodPromotionHandoffConsumerRecord(
-        consumer_record_id=_as_str(payload_map.get("consumer_record_id")) or f"mphc-{uuid4().hex[:12]}",
+        consumer_record_id=(
+            _as_str(payload_map.get("consumer_record_id")) or f"mphc-{uuid4().hex[:12]}"
+        ),
         received_handoff_id=handoff_id,
         source_package=source_package,
         source_artifact_id=_as_str(payload_map.get("source_artifact_id")),

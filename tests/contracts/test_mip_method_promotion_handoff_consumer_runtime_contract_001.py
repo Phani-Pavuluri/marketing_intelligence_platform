@@ -154,7 +154,8 @@ def test_summary_json_validates() -> None:
     assert summary["artifact_type"] == "mip_method_promotion_handoff_consumer_runtime_contract"
     assert (
         summary["scope"]
-        == "mip_side_runtime_contract_docs_tests_only_no_runtime_implementation_no_decision_authorization"
+        == "mip_side_runtime_contract_docs_tests_only_"
+        "no_runtime_implementation_no_decision_authorization"
     )
     assert summary["depends_on"] == ["MIP_METHOD_PROMOTION_HANDOFF_CONSUMER_CONTRACT_001"]
     assert (

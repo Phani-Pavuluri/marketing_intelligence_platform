@@ -505,7 +505,6 @@ from mip.contracts.mmm_runtime_result_ingestion import (
 from mip.contracts.planning_mmm_calibration_signal_mapping_readiness import (
     DEFAULT_MAX_SIGNAL_AGE_DAYS,
     FORBIDDEN_PLANNING_MMM_CALIBRATION_SIGNAL_MAPPING_READINESS_RESULT_FIELD_NAMES,
-    RECOMMENDED_NEXT_PLANNING_MMM_TRUSTED_INPUT_AND_MODEL_RUN_ELIGIBILITY_ARTIFACT,
     PlanningMMMCalibrationSignalMappedRecord,
     PlanningMMMCalibrationSignalMappingIssueCode,
     PlanningMMMCalibrationSignalMappingReadinessRequest,
@@ -594,7 +593,6 @@ from mip.contracts.planning_mmm_uploaded_csv_workflow_readiness import (
 )
 from mip.contracts.recommendation import RecommendationContract
 from mip.contracts.tabular_source_reference import (
-    RECOMMENDED_NEXT_GEOX_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_ARTIFACT,
     RECOMMENDED_NEXT_PLANNING_MMM_TABULAR_SOURCE_ADAPTER_COMPATIBILITY_ARTIFACT,
     TabularSourceAccessMode,
     TabularSourceAvailability,

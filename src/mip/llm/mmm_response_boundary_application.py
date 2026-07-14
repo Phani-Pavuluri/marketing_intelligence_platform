@@ -10,8 +10,9 @@ or authorize planning/spend/ROI/budget recommendations.
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from enum import StrEnum
-from typing import Any, Mapping, Sequence
+from typing import Any
 
 from pydantic import Field, field_validator
 
@@ -334,14 +335,14 @@ def _rendered_text_from_raw(raw: Mapping[str, Any]) -> str:
     if "rendered_text" in raw and raw["rendered_text"] is not None:
         return str(raw["rendered_text"])
     items = raw.get("items")
-    if isinstance(items, (list, tuple)):
+    if isinstance(items, list | tuple):
         return "\n".join(str(item) for item in items)
     return ""
 
 
 def _items_as_tuple(raw: Mapping[str, Any]) -> tuple[str, ...]:
     items = raw.get("items")
-    if isinstance(items, (list, tuple)):
+    if isinstance(items, list | tuple):
         return tuple(str(item) for item in items if str(item).strip())
     return ()
 
@@ -351,7 +352,7 @@ def _as_str_tuple(value: object) -> tuple[str, ...]:
         return ()
     if isinstance(value, str):
         return (value,) if value.strip() else ()
-    if isinstance(value, (list, tuple)):
+    if isinstance(value, list | tuple):
         return tuple(str(item) for item in value if str(item).strip())
     return (str(value),)
 

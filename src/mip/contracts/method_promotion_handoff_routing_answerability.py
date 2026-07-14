@@ -11,8 +11,9 @@ spend/ROI/claim/catalog/production/method promotion authorization.
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from enum import StrEnum
-from typing import Any, Mapping
+from typing import Any
 
 from pydantic import Field
 

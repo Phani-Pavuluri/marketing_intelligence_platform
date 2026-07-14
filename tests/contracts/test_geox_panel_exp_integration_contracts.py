@@ -65,7 +65,9 @@ _FORBIDDEN_DATAFRAME_FIELD_NAMES = (
 )
 
 
-def _handoff(**kwargs: str | GeoXReadoutIntent | GeoXReadoutResolutionStatus) -> GeoXReadoutInputHandoff:
+def _handoff(
+    **kwargs: str | GeoXReadoutIntent | GeoXReadoutResolutionStatus,
+) -> GeoXReadoutInputHandoff:
     defaults: dict[str, str | GeoXReadoutIntent | GeoXReadoutResolutionStatus] = {
         "request_id": "h-1",
         "readout_intent": GeoXReadoutIntent.READOUT_WITH_COST_PER,

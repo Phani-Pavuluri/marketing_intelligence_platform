@@ -19,12 +19,12 @@ from mip.contracts.method_promotion_handoff_consumer import (
     validate_and_normalize_method_promotion_handoff,
 )
 from mip.contracts.method_promotion_handoff_routing_answerability import (
+    SAFE_GUIDANCE_BASE,
     MIPMethodPromotionHandoffAnswerMode,
     MIPMethodPromotionHandoffReviewLane,
     MIPMethodPromotionHandoffRoutingAnswerabilityRuntimeInput,
     MIPMethodPromotionHandoffRoutingAnswerabilityRuntimeOutput,
     MIPMethodPromotionHandoffRoutingStatus,
-    SAFE_GUIDANCE_BASE,
     evaluate_method_promotion_handoff_answerability,
     serialize_method_promotion_handoff_answerability_output,
 )
