@@ -12,6 +12,13 @@ from mip.knowledge.catalog import (
     KNOWLEDGE_CORPUS_VERSION,
     ApprovedKnowledgeCorpus,
 )
+from mip.knowledge.retrieval import (
+    DEFAULT_APPROVED_KNOWLEDGE_RETRIEVER,
+    KNOWLEDGE_RETRIEVER_VERSION,
+    ApprovedKnowledgeRetriever,
+    KnowledgeRetrievalQuery,
+    KnowledgeRetrievalResult,
+)
 
 __all__ = [
     "ApprovedKnowledgeCorpus",
@@ -21,4 +28,9 @@ __all__ = [
     "PLATFORM_TRUTH_SCHEMA_VERSION",
     "PlatformTruthSnapshot",
     "build_platform_truth_snapshot",
+    "ApprovedKnowledgeRetriever",
+    "DEFAULT_APPROVED_KNOWLEDGE_RETRIEVER",
+    "KNOWLEDGE_RETRIEVER_VERSION",
+    "KnowledgeRetrievalQuery",
+    "KnowledgeRetrievalResult",
 ]
