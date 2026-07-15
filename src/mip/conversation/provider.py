@@ -46,6 +46,8 @@ class ConfiguredProvider:
     provider_id = "openai"
     def __init__(self, config: ProviderConfig): self.config = config
     def generate(self, request: LLMConversationRequest) -> LLMConversationResponse:
+        if request.config.provider_id == "groq":
+            return GroqResponsesProvider(request.config).generate(request)
         if request.config.provider_id != "openai":
             raise ProviderError("provider_not_configured")
         return OpenAIResponsesProvider(request.config).generate(request)
@@ -90,5 +92,31 @@ class OpenAIResponsesProvider:
     def _credential(self) -> str:
         import os
         key = os.getenv("OPENAI_API_KEY", "")
+        if not key: raise ProviderError("provider_not_configured")
+        return key
+
+GROQ_BASE_URL = "https://api.groq.com/openai/v1"
+GROQ_MODELS = frozenset({"openai/gpt-oss-20b", "openai/gpt-oss-120b"})
+
+class GroqResponsesProvider(OpenAIResponsesProvider):
+    provider_id = "groq"
+    def generate(self, request: LLMConversationRequest) -> LLMConversationResponse:
+        if request.config.model_id not in GROQ_MODELS:
+            raise ProviderError("unsupported_model")
+        try:
+            from openai import OpenAI
+            client = OpenAI(api_key=self._credential(), base_url=GROQ_BASE_URL, timeout=self.config.timeout_seconds, max_retries=self.config.max_retries)
+            response = client.responses.parse(model=self.config.model_id, instructions="Return only the strict structured output. Never execute tools or claim execution.", input=request.prompt, text_format=OpenAIConversationalTurnWireOutput, max_output_tokens=self.config.max_output_tokens)
+            parsed = getattr(response, "output_parsed", None)
+            if parsed is None: raise ProviderError("malformed_structured_output")
+            return LLMConversationResponse(output=parsed.model_dump(), disclosure=ProviderDisclosure(invocation_status="invoked", provider_id="groq", model_id=self.config.model_id, prompt_template_id=self.config.prompt_template_id, prompt_version=self.config.prompt_version, configuration_id=self.config.configuration_id))
+        except ProviderError: raise
+        except Exception as exc:
+            name = type(exc).__name__.lower()
+            category = "timeout" if "timeout" in name else "authentication_failure" if "auth" in name else "rate_limit" if "rate" in name else "unknown_provider_failure"
+            raise ProviderError(category) from None
+    def _credential(self) -> str:
+        import os
+        key = os.getenv("GROQ_API_KEY", "")
         if not key: raise ProviderError("provider_not_configured")
         return key

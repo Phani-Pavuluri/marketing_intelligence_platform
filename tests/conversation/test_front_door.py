@@ -1,7 +1,7 @@
 # ruff: noqa
 # mypy: ignore-errors
 from mip.conversation import ConversationalFrontDoor, FakeConversationalProvider, ProviderConfig
-from mip.conversation.provider import LLMConversationRequest, OpenAIResponsesProvider
+from mip.conversation.provider import GROQ_BASE_URL, GroqResponsesProvider, LLMConversationRequest, OpenAIResponsesProvider
 from mip.control_plane.workspace import InMemoryWorkspace
 
 
@@ -48,3 +48,31 @@ def test_openai_adapter_uses_lazy_structured_responses_parse(monkeypatch):
     assert response.output["answer"] == "MMM explanation"
     assert response.disclosure.provider_id == "openai"
     assert "redacted-test-key" not in repr(response.disclosure)
+
+
+def test_groq_adapter_uses_compatible_endpoint_without_store(monkeypatch):
+    class Parsed:
+        def model_dump(self):
+            return {"interaction_mode": "general_explanation", "topic": "mmm", "domain": "mmm", "user_goal": "explain", "answer": "MMM explanation"}
+    class Responses:
+        def parse(self, **kwargs):
+            assert kwargs["model"] == "openai/gpt-oss-20b"
+            assert "store" not in kwargs
+            assert "tools" not in kwargs
+            return type("Response", (), {"output_parsed": Parsed()})()
+    class Client:
+        def __init__(self, **kwargs):
+            assert kwargs["base_url"] == GROQ_BASE_URL
+            self.responses = Responses()
+    monkeypatch.setattr("openai.OpenAI", Client)
+    monkeypatch.setenv("GROQ_API_KEY", "redacted-test-key")
+    config = ProviderConfig(enabled=True, provider_id="groq", model_id="openai/gpt-oss-20b")
+    response = GroqResponsesProvider(config).generate(LLMConversationRequest(prompt="hello", config=config))
+    assert response.disclosure.provider_id == "groq"
+
+
+def test_groq_model_catalog_fails_closed(monkeypatch):
+    config = ProviderConfig(enabled=True, provider_id="groq", model_id="unsupported/model")
+    monkeypatch.setenv("GROQ_API_KEY", "redacted-test-key")
+    with __import__("pytest").raises(Exception):
+        GroqResponsesProvider(config).generate(LLMConversationRequest(prompt="hello", config=config))

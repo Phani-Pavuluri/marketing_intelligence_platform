@@ -26,17 +26,19 @@ class ProviderConfig(BaseModel):
         enabled = str(secrets.get("MIP_LLM_ENABLED", "")).lower() in {"1", "true", "yes"}
         provider = str(secrets.get("MIP_LLM_PROVIDER", "disabled"))
         model = str(secrets.get("MIP_LLM_MODEL", ""))
-        key = secrets.get("OPENAI_API_KEY")
-        if not enabled or provider != "openai" or not model or not key:
+        key_name = "GROQ_API_KEY" if provider == "groq" else "OPENAI_API_KEY"
+        key = secrets.get(key_name)
+        if not enabled or provider not in {"openai", "groq"} or not model or not key:
             return cls()
-        return cls(enabled=True, provider_id="openai", model_id=model, credential_reference="OPENAI_API_KEY", configuration_id="streamlit_secrets", max_retries=int(secrets.get("MIP_LLM_MAX_RETRIES", 0)), max_output_tokens=int(secrets.get("MIP_LLM_MAX_OUTPUT_TOKENS", 1200)), timeout_seconds=float(secrets.get("MIP_LLM_TIMEOUT_SECONDS", 20)))
+        return cls(enabled=True, provider_id=provider, model_id=model, credential_reference=key_name, configuration_id="streamlit_secrets", max_retries=int(secrets.get("MIP_LLM_MAX_RETRIES", 0)), max_output_tokens=int(secrets.get("MIP_LLM_MAX_OUTPUT_TOKENS", 1200)), timeout_seconds=float(secrets.get("MIP_LLM_TIMEOUT_SECONDS", 20)))
 
     @classmethod
     def from_environment(cls) -> "ProviderConfig":
         enabled = os.getenv("MIP_LLM_ENABLED", "").lower() in {"1", "true", "yes"}
         provider = os.getenv("MIP_LLM_PROVIDER", "disabled")
         model = os.getenv("MIP_LLM_MODEL", "")
-        credential = os.getenv("MIP_LLM_API_KEY")
-        if not enabled or not provider or not model or not credential:
+        key_name = "GROQ_API_KEY" if provider == "groq" else "OPENAI_API_KEY"
+        credential = os.getenv(key_name)
+        if not enabled or provider not in {"openai", "groq"} or not model or not credential:
             return cls()
-        return cls(enabled=True, provider_id=provider, model_id=model, credential_reference="OPENAI_API_KEY", configuration_id="environment", max_retries=int(os.getenv("MIP_LLM_MAX_RETRIES", "0")), max_output_tokens=int(os.getenv("MIP_LLM_MAX_OUTPUT_TOKENS", "1200")), timeout_seconds=float(os.getenv("MIP_LLM_TIMEOUT_SECONDS", "20")), project=os.getenv("OPENAI_PROJECT"))
+        return cls(enabled=True, provider_id=provider, model_id=model, credential_reference=key_name, configuration_id="environment", max_retries=int(os.getenv("MIP_LLM_MAX_RETRIES", "0")), max_output_tokens=int(os.getenv("MIP_LLM_MAX_OUTPUT_TOKENS", "1200")), timeout_seconds=float(os.getenv("MIP_LLM_TIMEOUT_SECONDS", "20")), project=os.getenv("OPENAI_PROJECT") if provider == "openai" else None)
