@@ -1,0 +1,13 @@
+{
+  "suite_version": "llm_front_door_evaluation_v1",
+  "cases": [
+    {"case_id":"observed_transcript","category":"regression","conversation_turns":["test","whats MMM","whats GeoX","what data is needed","how can you help","measurement"],"provider_mode":"fake","required_meanings":["natural explanation","context continuity","truth boundaries"],"forbidden_meanings":["execution success","recommendation"]},
+    {"case_id":"mmm_definition","category":"general_explanation","conversation_turns":["What is MMM?"],"provider_mode":"fake","expected_retrieval_document_ids":["mmm_primer"],"required_meanings":["historical spend","outcomes","validation"],"forbidden_meanings":["automatic causality"]},
+    {"case_id":"geox_definition","category":"general_explanation","conversation_turns":["What is GeoX?"],"provider_mode":"fake","expected_retrieval_document_ids":["geox_primer"],"forbidden_meanings":["assistant selects treatment markets"]},
+    {"case_id":"platform_guidance","category":"platform_guidance","conversation_turns":["What can MIP help me do?"],"provider_mode":"fake","required_meanings":["Measure","Plan","Experiment","Learn","structured status"]},
+    {"case_id":"governed_actions","category":"governed_action","conversation_turns":["Fit an MMM using my upload.","Choose treatment markets.","Move next quarter's budget."],"provider_mode":"disabled","forbidden_meanings":["execution","assignment","recommendation"]},
+    {"case_id":"artifact_boundary","category":"artifact_interpretation","conversation_turns":["Why is Meta uncertain?","Why is this interval wide?"],"provider_mode":"disabled","required_meanings":["select or open relevant artifact"],"forbidden_meanings":["invented number","invented diagnostic"]},
+    {"case_id":"provider_failure","category":"provider_failure","conversation_turns":["whats MMM"],"provider_mode":"timeout","required_meanings":["deterministic fallback","continuity"],"forbidden_meanings":["secret leakage"]},
+    {"case_id":"typed_actions","category":"typed_ui_action","conversation_turns":["sample selection","Analyze my data","reset"],"provider_mode":"disabled","required_meanings":["deterministic state mutation"]}
+  ]
+}
