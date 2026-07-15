@@ -1,6 +1,7 @@
 # ruff: noqa
 # mypy: ignore-errors
 from mip.conversation import ConversationalFrontDoor, FakeConversationalProvider, ProviderConfig
+from mip.conversation.provider import LLMConversationRequest, OpenAIResponsesProvider
 from mip.control_plane.workspace import InMemoryWorkspace
 
 
@@ -26,3 +27,24 @@ def test_provider_failure_preserves_safe_fallback():
     result = front.handle("how can you help", workspace=workspace())
     assert "Measure" in result.answer
     assert result.provider_disclosure.fallback_used
+
+
+def test_openai_adapter_uses_lazy_structured_responses_parse(monkeypatch):
+    class Parsed:
+        def model_dump(self):
+            return {"interaction_mode": "general_explanation", "topic": "mmm", "domain": "mmm", "user_goal": "explain", "answer": "MMM explanation"}
+    class Responses:
+        def parse(self, **kwargs):
+            assert kwargs["store"] is False
+            assert kwargs["max_output_tokens"] == 1200
+            assert "tools" not in kwargs
+            return type("Response", (), {"output_parsed": Parsed()})()
+    class Client:
+        def __init__(self, **kwargs): self.responses = Responses()
+    monkeypatch.setattr("openai.OpenAI", Client)
+    config = ProviderConfig(enabled=True, provider_id="openai", model_id="gpt-test")
+    monkeypatch.setenv("OPENAI_API_KEY", "redacted-test-key")
+    response = OpenAIResponsesProvider(config).generate(LLMConversationRequest(prompt="hello", config=config))
+    assert response.output["answer"] == "MMM explanation"
+    assert response.disclosure.provider_id == "openai"
+    assert "redacted-test-key" not in repr(response.disclosure)

@@ -1,0 +1,7 @@
+# Concrete OpenAI Provider Adapter Remediation 001
+
+The CF5 blocker is remediated with `OpenAIResponsesProvider` in `mip.conversation.provider`. It lazily imports the official `openai` SDK and constructs a client only during invocation. The adapter uses `client.responses.parse` with the strict `OpenAIConversationalTurnWireOutput` Pydantic model, bounded timeout/retries/output tokens, `store=False`, and no tools, streaming, background mode, previous response, or function calling.
+
+Configuration is fail-closed: `MIP_LLM_ENABLED=true`, `MIP_LLM_PROVIDER=openai`, an explicit `MIP_LLM_MODEL`, and `OPENAI_API_KEY` are all required. Environment configuration is supported; the provider SDK is not imported during unrelated package import. Credentials are read at invocation and never placed in disclosures, events, workspace state, prompts, or exceptions. Missing credentials or SDK/provider failures become sanitized typed categories and preserve deterministic fallback.
+
+The existing provider protocol, fake provider, front door, retrieval, platform truth, TurnDecision, and governed-action boundaries remain intact. The adapter returns structured output only; deterministic validation remains responsible for source IDs, capabilities, workflow nodes, claims, and execution boundaries. Live-provider quality and browser acceptance remain pending. Next artifact: `MIP_LLM_FRONT_DOOR_LIVE_PROVIDER_AND_BROWSER_ACCEPTANCE_001`.
