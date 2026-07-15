@@ -14,6 +14,7 @@ from mip.contracts.conversation import (
     InteractionEvent,
     WorkspaceContext,
 )
+from mip.control_plane.workflow_graph import DEFAULT_WORKFLOW_GRAPH, TransitionStatus
 
 
 class WorkspaceTransitionError(ValueError):
@@ -47,6 +48,9 @@ class InMemoryWorkspace:
             conversation_id=self.conversation_id,
             workspace_id=self.workspace_id,
             active_view="workspace_home",
+            active_workflow_node_id="define_decision",
+            available_workflow_node_ids=["define_decision"],
+            blocked_workflow_node_ids=["bring_data", "inspect_validate", "build_validate_mmm", "understand_channel_results", "plan_next_quarter", "identify_evidence_gap", "design_geox", "review_geox_evidence", "refresh_mmm", "decision_package"],
         )
         self._dialogue = DialogueState()
 
@@ -127,12 +131,14 @@ class InMemoryWorkspace:
                 active_view=payload.get("active_view", "sample_use_case"), execution_mode=ExecutionMode.FIXTURE,
                 available_artifact_ids=list(payload.get("available_artifact_ids", [])),
                 uploaded_file_inventory=[], session_artifact_ids=[], claim_state="demo_only",
+                active_workflow_node_id="bring_data", available_workflow_node_ids=["bring_data"], blocked_workflow_node_ids=[node.node_id for node in DEFAULT_WORKFLOW_GRAPH.list_nodes() if node.node_id != "bring_data"],
             )
         elif event.event_type == EventType.ANALYZE_MY_DATA_SELECTED:
             update.update(
                 entry_mode=EntryMode.UPLOAD, active_dataset_id=None, active_use_case_id=None,
                 active_view=payload.get("active_view", "upload_readiness"), execution_mode=ExecutionMode.UPLOADED_SESSION,
                 available_artifact_ids=[], session_artifact_ids=[], claim_state="unverified",
+                active_workflow_node_id="bring_data", available_workflow_node_ids=["bring_data"], blocked_workflow_node_ids=[node.node_id for node in DEFAULT_WORKFLOW_GRAPH.list_nodes() if node.node_id != "bring_data"],
             )
         elif event.event_type in {EventType.ARTIFACT_OPENED, EventType.REPORT_OPENED}:
             artifact_id = payload.get("artifact_id") or event.active_artifact_id
@@ -150,10 +156,27 @@ class InMemoryWorkspace:
         elif event.event_type == EventType.SYSTEM_RESULT and payload.get("action") == "routing_update":
             update["known_inputs"] = {**self._context.known_inputs, **payload.get("known_inputs", {})}
             update["missing_inputs"] = list(payload.get("missing_inputs", []))
+        elif event.event_type == EventType.WORKFLOW_ACTION_SELECTED:
+            target = payload.get("node_id")
+            if not target:
+                raise WorkspaceTransitionError("workflow action requires node_id")
+            assessment = DEFAULT_WORKFLOW_GRAPH.assess_transition(
+                from_node_id=self._context.active_workflow_node_id,
+                to_node_id=target,
+                workspace=self._context,
+            )
+            if assessment.status not in {TransitionStatus.ALLOWED, TransitionStatus.ALLOWED_WITH_WARNING}:
+                raise WorkspaceTransitionError("workflow transition is blocked: " + ",".join(assessment.reason_codes))
+            completed = list(self._context.completed_workflow_node_ids)
+            if payload.get("complete") and self._context.active_workflow_node_id:
+                completed.append(self._context.active_workflow_node_id)
+            update.update(active_workflow_node_id=target, completed_workflow_node_ids=list(dict.fromkeys(completed)), available_workflow_node_ids=[target], blocked_workflow_node_ids=[node.node_id for node in DEFAULT_WORKFLOW_GRAPH.list_nodes() if node.node_id != target], blocked_actions=assessment.blocked_actions)
         elif event.event_type == EventType.RESET_REQUESTED:
             self._visible_start = len(self._history)
             update = WorkspaceContext(
-                session_id=self.session_id, conversation_id=self.conversation_id, workspace_id=self.workspace_id, active_view="workspace_home"
+                session_id=self.session_id, conversation_id=self.conversation_id, workspace_id=self.workspace_id, active_view="workspace_home",
+                active_workflow_node_id="define_decision", available_workflow_node_ids=["define_decision"],
+                blocked_workflow_node_ids=[node.node_id for node in DEFAULT_WORKFLOW_GRAPH.list_nodes() if node.node_id != "define_decision"],
             ).model_dump()
             self._dialogue = DialogueState()
         if payload.get("dialogue_state") is not None:

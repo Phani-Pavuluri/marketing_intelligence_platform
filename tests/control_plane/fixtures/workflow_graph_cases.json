@@ -1,0 +1,8 @@
+[
+  {"entry_mode":"empty","from_node":"define_decision","to_node":"bring_data","status":"allowed","reason_codes":[]},
+  {"entry_mode":"sample","from_node":"bring_data","to_node":"plan_next_quarter","status":"blocked_invalid_edge","reason_codes":["edge_not_declared"]},
+  {"entry_mode":"upload","from_node":"bring_data","to_node":"understand_channel_results","status":"blocked_invalid_edge","reason_codes":["edge_not_declared"]},
+  {"entry_mode":"sample","from_node":"inspect_validate","to_node":"build_validate_mmm","status":"blocked_missing_inputs","reason_codes":["missing_inputs"]},
+  {"entry_mode":"sample","from_node":"design_geox","to_node":"review_geox_evidence","status":"blocked_missing_artifacts","reason_codes":["missing_artifacts"]},
+  {"entry_mode":"sample","from_node":"refresh_mmm","to_node":"understand_channel_results","status":"allowed","reason_codes":[]}
+]
