@@ -952,3 +952,5 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 - [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md)
 - Phase-definition completeness policy and audit (A–L registry): `docs/governance/MIP_PHASE_DEFINITION_COMPLETENESS_POLICY_001.md`, `docs/architecture/MIP_CONVERSATIONAL_CONTROL_PLANE_PHASE_COMPLETENESS_AUDIT_001.md`.
 - Next authorized artifact: `MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001`.
+- Implementation sequence: `docs/architecture/MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001.md` with twelve gated tasks from typed contracts through release gates.
+- `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001`, `MIP_GUIDED_MEASUREMENT_WORKSPACE_ANSWER_LAYER_001`, and `MIP_GUIDED_MEASUREMENT_WORKSPACE_UPLOAD_READINESS_001` remain retained but dependency-gated or superseded by the control-plane tasks; no disconnected implementation may proceed.

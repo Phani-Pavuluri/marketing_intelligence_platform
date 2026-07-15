@@ -1,0 +1,693 @@
+{
+  "plan_artifact_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001",
+  "schema_version": "implementation_task_v1",
+  "task_count": 12,
+  "critical_path": [
+    "task_a",
+    "task_b_or_c",
+    "task_d",
+    "task_e",
+    "task_f",
+    "task_h",
+    "task_g",
+    "task_i",
+    "task_j",
+    "task_k",
+    "task_l"
+  ],
+  "parallel_work": [
+    [
+      "task_b",
+      "task_c"
+    ]
+  ],
+  "required_joins": [
+    [
+      "task_b",
+      "task_c",
+      "task_d"
+    ],
+    [
+      "task_d",
+      "task_e"
+    ],
+    [
+      "task_e",
+      "task_f"
+    ],
+    [
+      "task_f",
+      "task_h"
+    ]
+  ],
+  "tasks": [
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_TYPED_CONTRACTS_001",
+      "architecture_phase": "Phase A",
+      "objective": "Implement typed contracts as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "external:architecture_and_policy"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_a contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_a focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement typed contracts",
+      "next_artifact": "task_b",
+      "capabilities_enabled": [
+        "Typed contracts"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_CAPABILITY_REGISTRY_001",
+      "architecture_phase": "Phase B",
+      "objective": "Implement capability registry as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_a"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_b contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_b focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement capability registry",
+      "next_artifact": "task_c",
+      "capabilities_enabled": [
+        "Capability registry"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_PERSISTENT_WORKSPACE_AND_EVENTS_001",
+      "architecture_phase": "Phase C",
+      "objective": "Implement persistent workspace and events as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_b"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_c contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_c focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement persistent workspace and events",
+      "next_artifact": "task_d",
+      "capabilities_enabled": [
+        "Persistent workspace and events"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_DIALOGUE_AWARE_DETERMINISTIC_ROUTER_001",
+      "architecture_phase": "Phase D",
+      "objective": "Implement dialogue-aware deterministic router as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_c"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_d contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_d focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement dialogue-aware deterministic router",
+      "next_artifact": "task_e",
+      "capabilities_enabled": [
+        "Dialogue-aware deterministic router"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_WORKFLOW_GRAPH_001",
+      "architecture_phase": "Phase E",
+      "objective": "Implement workflow graph as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_d"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_e contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_e focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement workflow graph",
+      "next_artifact": "task_f",
+      "capabilities_enabled": [
+        "Workflow graph"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_ARTIFACT_AND_REQUIREMENT_RESOLVER_001",
+      "architecture_phase": "Phase F",
+      "objective": "Implement artifact and requirement resolver as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_e"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_f contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_f focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement artifact and requirement resolver",
+      "next_artifact": "task_g",
+      "capabilities_enabled": [
+        "Artifact and requirement resolver"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_DETERMINISTIC_GROUNDED_RESPONSE_001",
+      "architecture_phase": "Phase G",
+      "objective": "Implement deterministic grounded response as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_f"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_g contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_g focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement deterministic grounded response",
+      "next_artifact": "task_h",
+      "capabilities_enabled": [
+        "Deterministic grounded response"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_READINESS_ONLY_UPLOADED_DATA_WORKFLOW_001",
+      "architecture_phase": "Phase H",
+      "objective": "Implement readiness-only uploaded-data workflow as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_g"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_h contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_h focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement readiness-only uploaded-data workflow",
+      "next_artifact": "task_i",
+      "capabilities_enabled": [
+        "Readiness-only uploaded-data workflow"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_GOVERNED_RETRIEVAL_001",
+      "architecture_phase": "Phase I",
+      "objective": "Implement governed retrieval as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_h"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_i contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_i focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement governed retrieval",
+      "next_artifact": "task_j",
+      "capabilities_enabled": [
+        "Governed retrieval"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_CONSTRAINED_LLM_001",
+      "architecture_phase": "Phase J",
+      "objective": "Implement constrained llm as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_i"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_j contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_j focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement constrained llm",
+      "next_artifact": "task_k",
+      "capabilities_enabled": [
+        "Constrained LLM"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_MULTI_VIEW_CONTINUITY_001",
+      "architecture_phase": "Phase K",
+      "objective": "Implement multi-view continuity as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_j"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_k contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_k focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement multi-view continuity",
+      "next_artifact": "task_l",
+      "capabilities_enabled": [
+        "Multi-view continuity"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    },
+    {
+      "task_id": "MIP_CONVERSATIONAL_CONTROL_PLANE_EVALUATION_AND_RELEASE_GATES_001",
+      "architecture_phase": "Phase L",
+      "objective": "Implement evaluation and release gates as one reviewable boundary.",
+      "user_or_platform_outcome": "A governed, traceable conversational control-plane capability.",
+      "prerequisites": [
+        "task_k"
+      ],
+      "contracts_consumed": [
+        "PhaseDefinition registry",
+        "typed control-plane contracts"
+      ],
+      "contracts_created_or_changed": [
+        "task_l contracts"
+      ],
+      "likely_files": [
+        "app/",
+        "src/mip/",
+        "tests/"
+      ],
+      "runtime_scope": "Only the scoped capability; preserve existing behavior during migration.",
+      "non_goals": [
+        "No unrelated product engines or deployment changes."
+      ],
+      "acceptance_criteria": [
+        "Explicit contracts and boundaries pass review.",
+        "Failure and stop conditions are tested."
+      ],
+      "focused_tests": [
+        "task_l focused contract tests"
+      ],
+      "integration_tests": [
+        "Control-plane integration suite"
+      ],
+      "evaluation_fixtures": [
+        "Phase-specific positive, negative, ambiguity, and regression fixtures"
+      ],
+      "docker_validation": [
+        "make validate in Python 3.11 Docker environment"
+      ],
+      "browser_or_manual_review": "Required checkpoint where specified by the implementation plan; never replaced by AppTest.",
+      "stop_conditions": [
+        "Missing prerequisite",
+        "failed acceptance or safety gate"
+      ],
+      "commit_message": "Implement evaluation and release gates",
+      "next_artifact": "external:release",
+      "capabilities_enabled": [
+        "Evaluation and release gates"
+      ],
+      "capabilities_remaining_blocked": [
+        "Downstream capabilities until exit evidence"
+      ]
+    }
+  ]
+}
