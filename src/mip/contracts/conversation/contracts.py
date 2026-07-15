@@ -1,6 +1,7 @@
 """Typed, provider-free contracts for the conversational control plane."""
 # ruff: noqa: E501
 
+import re
 from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Any
@@ -77,6 +78,42 @@ class VerificationStatus(StrEnum):
     REQUIRES_HUMAN_REVIEW = "requires_human_review"
 
 
+class InteractionMode(StrEnum):
+    GENERAL_EXPLANATION = "general_explanation"
+    PLATFORM_GUIDANCE = "platform_guidance"
+    ARTIFACT_INTERPRETATION = "artifact_interpretation"
+    GOVERNED_ACTION = "governed_action"
+    TYPED_UI_ACTION = "typed_ui_action"
+    UNSUPPORTED = "unsupported"
+
+
+class GroundingSource(StrEnum):
+    GENERAL_MODEL_KNOWLEDGE = "general_model_knowledge"
+    STRUCTURED_PLATFORM_TRUTH = "structured_platform_truth"
+    APPROVED_KNOWLEDGE_RETRIEVAL = "approved_knowledge_retrieval"
+    ACTIVE_ARTIFACT = "active_artifact"
+    RESOLVED_ARTIFACTS = "resolved_artifacts"
+    EVIDENCE_PACKET = "evidence_packet"
+    EXECUTION_RESULT = "execution_result"
+    SOURCE_REFERENCES = "source_references"
+    CLAIM_VERIFICATION = "claim_verification"
+
+
+class FallbackRoute(StrEnum):
+    DETERMINISTIC_ROUTER = "deterministic_router"
+    SAFE_CLARIFICATION = "safe_clarification"
+    PROVIDER_UNAVAILABLE_MESSAGE = "provider_unavailable_message"
+    UNSUPPORTED_RESPONSE = "unsupported_response"
+
+
+class ProviderInvocationStatus(StrEnum):
+    NOT_INVOKED = "not_invoked"
+    PLANNED = "planned"
+    INVOKED = "invoked"
+    FAILED = "failed"
+    FALLBACK_USED = "fallback_used"
+
+
 class JsonContract(ContractBaseModel):
     model_config = ConfigDict(extra="forbid", use_enum_values=True, validate_assignment=True)
 
@@ -88,6 +125,169 @@ class JsonContract(ContractBaseModel):
         return value
 
     schema_version: str = SCHEMA_VERSION
+
+
+class GroundingRequirements(JsonContract):
+    sources: list[GroundingSource] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def valid_sources(self) -> "GroundingRequirements":
+        if GroundingSource.EXECUTION_RESULT in self.sources and GroundingSource.SOURCE_REFERENCES not in self.sources:
+            raise ValueError("execution-result grounding requires source references")
+        return self
+
+
+class TurnClaimPolicy(JsonContract):
+    allowed_claim_categories: list[str] = Field(default_factory=list)
+    blocked_claim_categories: list[str] = Field(default_factory=list)
+    requires_source_references: bool = False
+    requires_artifact_provenance: bool = False
+    requires_claim_verification: bool = False
+    allows_platform_status_claims: bool = False
+    allows_user_data_claims: bool = False
+    allows_numeric_artifact_claims: bool = False
+    allows_execution_claims: bool = False
+    allows_recommendations: bool = False
+
+    @classmethod
+    def for_mode(cls, mode: InteractionMode) -> "TurnClaimPolicy":
+        blocked = ["current_platform_status", "user_data", "artifact_numbers", "execution", "recommendation"]
+        if mode == InteractionMode.PLATFORM_GUIDANCE:
+            return cls(allowed_claim_categories=["platform_guidance"], blocked_claim_categories=blocked, requires_source_references=True, allows_platform_status_claims=True)
+        if mode == InteractionMode.ARTIFACT_INTERPRETATION:
+            return cls(allowed_claim_categories=["artifact_interpretation"], blocked_claim_categories=blocked, requires_source_references=True, requires_artifact_provenance=True, requires_claim_verification=True, allows_numeric_artifact_claims=True)
+        if mode == InteractionMode.GOVERNED_ACTION:
+            return cls(allowed_claim_categories=["validation_status"], blocked_claim_categories=blocked, requires_source_references=True)
+        return cls(blocked_claim_categories=blocked)
+
+
+class FallbackPolicy(JsonContract):
+    fallback_order: list[FallbackRoute] = Field(default_factory=list)
+    allow_deterministic_router: bool = False
+    allow_safe_clarification: bool = False
+    allow_generic_model_answer: bool = False
+    preserve_action_boundaries: bool = True
+
+    @model_validator(mode="after")
+    def order_is_explicit(self) -> "FallbackPolicy":
+        if not self.fallback_order:
+            raise ValueError("fallback order must be explicit")
+        return self
+
+
+class ProviderDisclosure(JsonContract):
+    invocation_status: ProviderInvocationStatus = ProviderInvocationStatus.NOT_INVOKED
+    provider_id: str | None = None
+    model_id: str | None = None
+    prompt_template_id: str | None = None
+    prompt_version: str | None = None
+    configuration_id: str | None = None
+    retrieval_context_id: str | None = None
+    fallback_used: bool = False
+    execution_disclosure: str | None = None
+
+    @model_validator(mode="after")
+    def no_private_data(self) -> "ProviderDisclosure":
+        if self.invocation_status == ProviderInvocationStatus.FALLBACK_USED and not self.fallback_used:
+            raise ValueError("fallback-used status requires fallback_used")
+        return self
+
+
+def _identifier(value: str, field: str) -> str:
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:-]*", value):
+        raise ValueError(f"{field} must be a syntactically valid identifier")
+    return value
+
+
+class GovernedActionProposal(JsonContract):
+    requested_capability_id: str
+    user_goal: str
+    known_inputs: dict[str, Any] = Field(default_factory=dict)
+    inferred_inputs: dict[str, Any] = Field(default_factory=dict)
+    missing_inputs: list[str] = Field(default_factory=list)
+    requested_artifact_ids: list[str] = Field(default_factory=list)
+    requested_execution_mode: ExecutionMode | None = None
+    requested_workflow_node_id: str | None = None
+    confidence: float
+    clarification_required: bool = False
+    clarification_targets: list[str] = Field(default_factory=list)
+    proposal_source: InterpretationSource
+
+    @field_validator("requested_capability_id")
+    @classmethod
+    def valid_capability_id(cls, value: str) -> str:
+        return _identifier(value, "requested_capability_id")
+
+    @field_validator("requested_workflow_node_id")
+    @classmethod
+    def valid_workflow_node_id(cls, value: str | None) -> str | None:
+        return None if value is None else _identifier(value, "requested_workflow_node_id")
+
+    @field_validator("confidence")
+    @classmethod
+    def bounded_confidence(cls, value: float) -> float:
+        if not 0 <= value <= 1:
+            raise ValueError("confidence must be between 0 and 1")
+        return value
+
+    @model_validator(mode="after")
+    def clarification_is_explicit(self) -> "GovernedActionProposal":
+        if self.clarification_required and not self.clarification_targets:
+            raise ValueError("clarification targets are required")
+        return self
+
+
+class TurnDecision(JsonContract):
+    interaction_mode: InteractionMode
+    topic: str
+    domain: str
+    user_goal: str
+    requires_general_knowledge: bool = False
+    requires_platform_truth: bool = False
+    requires_retrieval: bool = False
+    requires_artifact: bool = False
+    requires_execution: bool = False
+    candidate_capability_id: str | None = None
+    proposed_action: GovernedActionProposal | None = None
+    known_inputs: dict[str, Any] = Field(default_factory=dict)
+    inferred_inputs: dict[str, Any] = Field(default_factory=dict)
+    missing_inputs: list[str] = Field(default_factory=list)
+    confidence: float
+    clarification_required: bool = False
+    clarification_targets: list[str] = Field(default_factory=list)
+    grounding_requirements: GroundingRequirements
+    claim_policy: TurnClaimPolicy
+    fallback_policy: FallbackPolicy
+    provider_disclosure: ProviderDisclosure
+
+    @field_validator("candidate_capability_id")
+    @classmethod
+    def valid_candidate(cls, value: str | None) -> str | None:
+        return None if value is None else _identifier(value, "candidate_capability_id")
+
+    @field_validator("confidence")
+    @classmethod
+    def bounded_confidence(cls, value: float) -> float:
+        if not 0 <= value <= 1:
+            raise ValueError("confidence must be between 0 and 1")
+        return value
+
+    @model_validator(mode="after")
+    def enforce_mode_boundary(self) -> "TurnDecision":
+        mode = self.interaction_mode
+        if self.clarification_required and not self.clarification_targets:
+            raise ValueError("clarification targets are required")
+        if mode in {InteractionMode.GENERAL_EXPLANATION, InteractionMode.UNSUPPORTED} and (self.requires_execution or self.requires_artifact):
+            raise ValueError("mode cannot request execution or artifact evidence")
+        if mode == InteractionMode.PLATFORM_GUIDANCE and not self.requires_platform_truth:
+            raise ValueError("platform guidance requires structured platform truth")
+        if mode == InteractionMode.ARTIFACT_INTERPRETATION and (not self.requires_artifact or GroundingSource.CLAIM_VERIFICATION not in self.grounding_requirements.sources):
+            raise ValueError("artifact interpretation requires artifact and claim verification grounding")
+        if mode == InteractionMode.GOVERNED_ACTION and not (self.proposed_action or self.clarification_required or self.candidate_capability_id):
+            raise ValueError("governed action requires proposal, candidate, or clarification")
+        if mode == InteractionMode.TYPED_UI_ACTION and not (self.candidate_capability_id or self.proposed_action):
+            raise ValueError("typed UI action requires a typed action candidate")
+        return self
 
 
 class InteractionEvent(JsonContract):
