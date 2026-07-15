@@ -287,7 +287,8 @@ The current local demo uses in-memory Streamlit session state. A later authentic
 
 `CONVERSATIONAL_CONTROL_PLANE_ARCHITECTURE_COMPLETE_IMPLEMENTATION_PLAN_NEXT`
 
-Next artifact: `MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001`.
+Next artifact: `MIP_CONVERSATIONAL_TURN_MODE_AND_LLM_HANDOFF_CONTRACTS_001`.
+Current amended verdict: `LLM_FIRST_CONVERSATIONAL_FRONT_DOOR_ARCHITECTURE_READY`.
 
 ## Canonical phase definitions
 
@@ -307,3 +308,13 @@ The registry at `docs/architecture/archives/MIP_CONVERSATIONAL_CAPABILITY_ROUTIN
 - **L Evaluation/release:** traceability metrics, adversarial evaluation, release gates, and rollback evidence.
 
 Every phase has a named owner and explicit status. “Deferred”, “blocked”, and “not_applicable” are valid explicit outcomes; omission is not. A positive architecture verdict is valid only when the registry, policy, audit, and governance test agree.
+
+## LLM-first conversational front door remediation
+
+The completed A–E control plane remains authoritative, but the conversational role is amended: an LLM is the primary interface for free-form natural-language conversation when available. The deterministic router is secondary: it handles typed UI actions, explicit reset/navigation, hard safety boundaries, action-proposal validation, and provider-unavailable fallback. It is not the primary conversational brain.
+
+A turn is classified into `general_explanation`, `platform_guidance`, `artifact_interpretation`, `governed_action`, `typed_ui_action`, or `unsupported`. General explanation and platform guidance may answer naturally, with structured platform truth required for current MIP facts. Artifact interpretation requires Phase F resolution, EvidencePacket, and verification. Governed actions produce an untrusted structured proposal that the registry, workflow graph, requirements, artifacts, release gates, and engine owners validate before any future execution. Typed UI actions remain deterministic and enter the persistent workspace directly.
+
+Structured platform truth is read from the capability registry, workflow graph, contracts, statuses, execution modes, blocked claims, release gates, roadmap, and active workspace. Approved explanatory prose is retrieved separately. User and numerical evidence is resolved through artifacts. Retrieval never authorizes execution or substitutes for artifact provenance.
+
+The early conversational lane is CF1 turn-mode/action-handoff contracts, CF2 structured platform truth and approved corpus, CF3 read-only retrieval, CF4 read-only LLM front door, and CF5 conversational quality/safety gate. Phase F, H, G, later artifact-aware LLM orchestration, and action execution are paused until the early lane exits. Existing deterministic A–E work remains complete and is retained as safety/control infrastructure.

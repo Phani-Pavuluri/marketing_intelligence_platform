@@ -932,7 +932,7 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 
 ## Related documents
 
-| MIP conversational capability routing and grounded response architecture 001 | ✓ defined — one persistent control plane, typed interactions, capability routing, requirement/artifact resolution, grounded responses, and claim verification; next: `MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001` |
+| MIP conversational capability routing and grounded response architecture 001 | ✓ amended — LLM-first free-form conversation with deterministic governed handoff; next: `MIP_CONVERSATIONAL_TURN_MODE_AND_LLM_HANDOFF_CONTRACTS_001` |
 
 | MIP guided workspace chat foundation remediation 001 | ✓ implemented — bounded transcript, deterministic free-form routing, and plain-language onboarding; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001` |
 
@@ -951,11 +951,12 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 - [REPO_INTEGRATION_STRATEGY.md](../architecture/REPO_INTEGRATION_STRATEGY.md)
 - [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md)
 - Phase-definition completeness policy and audit (A–L registry): `docs/governance/MIP_PHASE_DEFINITION_COMPLETENESS_POLICY_001.md`, `docs/architecture/MIP_CONVERSATIONAL_CONTROL_PLANE_PHASE_COMPLETENESS_AUDIT_001.md`.
-- Next authorized artifact: `MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001`.
+- Next authorized artifact: `MIP_CONVERSATIONAL_TURN_MODE_AND_LLM_HANDOFF_CONTRACTS_001`.
 - Implementation sequence: `docs/architecture/MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001.md` with twelve gated tasks from typed contracts through release gates.
 - Phase A complete: `MIP_CONVERSATIONAL_CONTROL_PLANE_TYPED_CONTRACTS_001`; next authorized artifact is `MIP_CONVERSATIONAL_CONTROL_PLANE_CAPABILITY_REGISTRY_001`.
 - Phase B complete: `MIP_CONVERSATIONAL_CONTROL_PLANE_CAPABILITY_REGISTRY_001`; next authorized artifact is `MIP_CONVERSATIONAL_CONTROL_PLANE_PERSISTENT_WORKSPACE_AND_EVENTS_001`.
 - Phase C complete: `MIP_CONVERSATIONAL_CONTROL_PLANE_PERSISTENT_WORKSPACE_AND_EVENTS_001`; next authorized artifact is `MIP_CONVERSATIONAL_CONTROL_PLANE_DIALOGUE_ROUTER_001`.
 - Phase D complete: `MIP_CONVERSATIONAL_CONTROL_PLANE_DIALOGUE_ROUTER_001`; next authorized artifact is `MIP_CONVERSATIONAL_CONTROL_PLANE_WORKFLOW_GRAPH_AND_BINDING_001`.
 - Phase E complete: `MIP_CONVERSATIONAL_CONTROL_PLANE_WORKFLOW_GRAPH_AND_BINDING_001`; next authorized artifact is `MIP_CONVERSATIONAL_CONTROL_PLANE_ARTIFACT_AND_REQUIREMENT_RESOLVER_001`.
+- LLM-first front-door remediation: CF1 turn-mode/handoff contracts, CF2 structured platform truth and approved corpus, CF3 read-only retrieval, CF4 read-only LLM front door, and CF5 quality/safety gate precede Phase F; next authorized artifact is `MIP_CONVERSATIONAL_TURN_MODE_AND_LLM_HANDOFF_CONTRACTS_001`.
 - `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001`, `MIP_GUIDED_MEASUREMENT_WORKSPACE_ANSWER_LAYER_001`, and `MIP_GUIDED_MEASUREMENT_WORKSPACE_UPLOAD_READINESS_001` remain retained but dependency-gated or superseded by the control-plane tasks; no disconnected implementation may proceed.

@@ -1,0 +1,23 @@
+{
+  "artifact_id": "MIP_LLM_CONVERSATIONAL_FRONT_DOOR_AND_GOVERNED_ACTION_HANDOFF_ARCHITECTURE_REMEDIATION_001",
+  "artifact_type": "architecture_and_sequence_remediation",
+  "completed_control_plane_retained": true,
+  "deterministic_router_reclassified_as_fallback_and_validator": true,
+  "llm_primary_for_free_form_conversation": true,
+  "typed_ui_actions_remain_deterministic": true,
+  "interaction_modes_defined": ["general_explanation", "platform_guidance", "artifact_interpretation", "governed_action", "typed_ui_action", "unsupported"],
+  "turn_decision_contract_planned": true,
+  "governed_action_proposal_planned": true,
+  "structured_platform_truth_defined": true,
+  "approved_knowledge_corpus_defined": true,
+  "retrieval_boundary_defined": true,
+  "artifact_interpretation_remains_blocked": true,
+  "live_engine_execution_remains_blocked": true,
+  "early_read_only_llm_lane_defined": true,
+  "phase_f_paused_as_immediate_next_task": true,
+  "phase_registry_created": true,
+  "runtime_code_changed": false,
+  "requirements_marker_preserved": "-e .",
+  "architecture_verdict": "LLM_FIRST_CONVERSATIONAL_FRONT_DOOR_ARCHITECTURE_READY",
+  "recommended_next_artifact": "MIP_CONVERSATIONAL_TURN_MODE_AND_LLM_HANDOFF_CONTRACTS_001"
+}

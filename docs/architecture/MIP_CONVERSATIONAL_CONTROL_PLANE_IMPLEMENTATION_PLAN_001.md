@@ -54,4 +54,14 @@ The companion registry is normative and satisfies the existing PhaseDefinition c
 
 `CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_SEQUENCE_READY`
 
-Recommended next artifact: `MIP_CONVERSATIONAL_CONTROL_PLANE_TYPED_CONTRACTS_001`.
+Recommended next artifact: `MIP_CONVERSATIONAL_TURN_MODE_AND_LLM_HANDOFF_CONTRACTS_001`.
+
+## LLM-first sequencing remediation
+
+The prior plan's deterministic router is reclassified as a typed-action handler, hard-boundary detector, action-proposal validator, and provider-failure fallback. Free-form explanatory conversation is owned by the future LLM front door.
+
+The amended sequence is A, B, C, D, E (complete), then CF1 → CF2 (parallel start permitted) → CF3 → CF4 → CF5. Phase F artifact resolution remains paused until CF5. Then H, G, later artifact-grounded LLM interpretation/action orchestration, K, and L proceed under their existing gates. Additional domains and live MMM/GeoX remain deferred.
+
+CF1 is the immediate next artifact. CF1 defines interaction modes, TurnDecision, GovernedActionProposal, grounding and claim policies, provider disclosure, and fallback semantics without provider execution. CF2 may overlap CF1 because it assembles structured truth and approved user-facing corpus metadata. CF3 requires CF1 and CF2. CF4 requires CF1–CF3. CF5 gates Phase F. Governed action handoff may interpret and clarify before Phase F, but artifact interpretation and execution remain blocked. Broad read-only concepts such as knowledge.explain, knowledge.compare, platform.guide, workflow.guide, and artifact.explain are future registry considerations, not vocabulary-per-phrase capabilities.
+
+Required regression corpus includes `test`, `whats MMM`, `whats GeoX`, `what data is needed`, `how can you help`, `measurement`, elliptical follow-ups, and governed action requests. Exact wording is not a release requirement; helpfulness, naturalness, factuality, grounding, safety, and fallback behavior are.
