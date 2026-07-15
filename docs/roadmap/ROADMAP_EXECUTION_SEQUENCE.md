@@ -932,6 +932,8 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 
 ## Related documents
 
+| MIP conversational capability routing and grounded response architecture 001 | ✓ defined — one persistent control plane, typed interactions, capability routing, requirement/artifact resolution, grounded responses, and claim verification; next: `MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001` |
+
 | MIP guided workspace chat foundation remediation 001 | ✓ implemented — bounded transcript, deterministic free-form routing, and plain-language onboarding; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001` |
 
 | MIP guided measurement workspace shell remediation 001 | ✓ implemented — concise welcome, compact starters, one selected answer, and no premature SaaS references; next: `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001` |
