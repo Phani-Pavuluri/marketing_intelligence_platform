@@ -954,4 +954,5 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 - Next authorized artifact: `MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001`.
 - Implementation sequence: `docs/architecture/MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001.md` with twelve gated tasks from typed contracts through release gates.
 - Phase A complete: `MIP_CONVERSATIONAL_CONTROL_PLANE_TYPED_CONTRACTS_001`; next authorized artifact is `MIP_CONVERSATIONAL_CONTROL_PLANE_CAPABILITY_REGISTRY_001`.
+- Phase B complete: `MIP_CONVERSATIONAL_CONTROL_PLANE_CAPABILITY_REGISTRY_001`; next authorized artifact is `MIP_CONVERSATIONAL_CONTROL_PLANE_PERSISTENT_WORKSPACE_AND_EVENTS_001`.
 - `MIP_GUIDED_MEASUREMENT_WORKSPACE_VERTICAL_JOURNEY_001`, `MIP_GUIDED_MEASUREMENT_WORKSPACE_ANSWER_LAYER_001`, and `MIP_GUIDED_MEASUREMENT_WORKSPACE_UPLOAD_READINESS_001` remain retained but dependency-gated or superseded by the control-plane tasks; no disconnected implementation may proceed.
