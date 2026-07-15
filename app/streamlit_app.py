@@ -40,6 +40,7 @@ from app.ui_renderers import (
 )
 from mip.contracts.conversation import EventType
 from mip.control_plane import DialogueRouter, get_workspace, sync_legacy_aliases
+from mip.conversation import ConversationalFrontDoor
 from mip.demo.chat_first_demo import (
     ChatFirstDemoFixture,
     ChatResponseView,
@@ -235,6 +236,19 @@ def _render_chat_first_demo_tab() -> None:
             source_component="chat_input",
             payload={"text": typed_prompt},
         )
+        front_door = ConversationalFrontDoor()
+        if front_door.config.enabled:
+            front_result = front_door.handle(typed_prompt, workspace=workspace)
+            workspace.emit(
+                EventType.ASSISTANT_RESPONSE,
+                source_view="chat",
+                source_component="llm_front_door",
+                payload={"text": front_result.answer, "disclosure": front_result.provider_disclosure.model_dump(mode="json")},
+                causation_id=workspace.events()[-1].event_id,
+            )
+            state.update(sync_legacy_aliases(st.session_state, workspace))
+            state["last_answer_category"] = front_result.turn_decision.interaction_mode.value
+            st.rerun()
         router = DialogueRouter()
         routing = router.route(
             event=workspace.events()[-1],
