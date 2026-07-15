@@ -39,12 +39,11 @@ from app.ui_renderers import (
     readiness_report_to_display_dict,
 )
 from mip.contracts.conversation import EventType
-from mip.control_plane import get_workspace, sync_legacy_aliases
+from mip.control_plane import DialogueRouter, get_workspace, sync_legacy_aliases
 from mip.demo.chat_first_demo import (
     ChatFirstDemoFixture,
     ChatResponseView,
 )
-from mip.demo.guided_workspace_intents import answer_shell_question, classify_shell_intent
 from mip.demo.guided_workspace_shell import (
     CANONICAL_HERO,
     STARTER_PROMPTS,
@@ -220,10 +219,14 @@ def _render_chat_first_demo_tab() -> None:
             active_answer = starter_answer(active_starter_prompt)
             if active_answer is not None:
                 st.info(active_answer.render_text())
-    with st.container(height=420, border=True):
-        for entry in state["conversation_messages"]:
-            with st.chat_message(entry["role"]):
-                st.write(entry["content"])
+    visible_messages = workspace.visible_messages()
+    if visible_messages:
+        st.markdown('<span data-testid="conversation-transcript"></span>', unsafe_allow_html=True)
+        with st.container(height=420, border=True):
+            for event in visible_messages:
+                role = "user" if event.event_type == EventType.USER_MESSAGE.value else "assistant"
+                with st.chat_message(role):
+                    st.write(event.payload.get("text", ""))
     typed_prompt = st.chat_input("Ask MIP about measurement, data, experiments, or planning")
     if typed_prompt:
         workspace.emit(
@@ -232,19 +235,53 @@ def _render_chat_first_demo_tab() -> None:
             source_component="chat_input",
             payload={"text": typed_prompt},
         )
-        intent = classify_shell_intent(
-            typed_prompt, has_active_dataset=state["active_dataset_id"] is not None
+        router = DialogueRouter()
+        routing = router.route(
+            event=workspace.events()[-1],
+            workspace=workspace.current_context(),
+            dialogue=workspace.dialogue_state(),
         )
-        if state["active_dataset_id"] is None or intent != "dataset_specific_without_dataset":
-            shell_response = answer_shell_question(
-                typed_prompt, has_active_dataset=state["active_dataset_id"] is not None
+        workspace.emit(
+            EventType.SYSTEM_RESULT,
+            source_view="chat",
+            source_component="dialogue_router",
+            payload={
+                "action": "routing_update",
+                "dialogue_state": routing.updated_dialogue_state.model_dump(mode="json"),
+                "known_inputs": routing.known_input_updates,
+                "missing_inputs": routing.missing_input_updates,
+            },
+            causation_id=workspace.events()[-1].event_id,
+        )
+        answer_category = routing.intent_envelope.intent
+        if routing.selected_capability and routing.selected_capability.capability_id == "mmm.intake.requirements":
+            answer_text = (
+                "To assess MMM data, MIP needs a business outcome such as conversions or revenue, "
+                "channel spend over matching dates, a consistent time frequency, sufficient history, "
+                "and important non-marketing controls. Geography or segments may also be needed depending on the model."
             )
-            answer_text = shell_response.answer.render_text()
-            answer_category = shell_response.intent
+        elif routing.selected_capability and routing.selected_capability.capability_id == "mmm.intake.readiness":
+            answer_text = (
+                "That is a useful start, but it is not enough by itself. MIP still needs the KPI you want "
+                "to explain, the date range and frequency, the amount of history, and major controls such as "
+                "promotions, holidays, or product changes."
+            )
+            if routing.clarification_targets:
+                answer_text += " What KPI are you trying to explain, and what date range does the data cover?"
+        elif routing.clarification_question:
+            answer_text = routing.clarification_question
+        elif routing.intent_envelope.intent == "platform_capabilities":
+            answer_text = "I'm ready. MIP is working in deterministic mode. Ask about data, MMM, GeoX, planning, or trust."
+        elif routing.intent_envelope.intent == "general_data_requirements":
+            answer_text = (
+                "I'm ready to help. Start with marketing spend by channel, "
+                "the KPI you want to explain, dates, frequency, and relevant controls."
+            )
         else:
-            product_response = product_answer(state, bundle, typed_prompt)
-            answer_text = product_response.text
-            answer_category = product_response.category
+            answer_text = (
+                "I can help with measurement data, MMM, GeoX, planning prerequisites, "
+                "or governed evidence. What would you like to understand?"
+            )
         workspace.emit(
             EventType.ASSISTANT_RESPONSE,
             source_view="chat",

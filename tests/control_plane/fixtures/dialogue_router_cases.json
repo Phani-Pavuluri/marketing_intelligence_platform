@@ -1,0 +1,9 @@
+[
+  {"text":"What data do I need for MMM?","domain":"mmm","intent":"mmm_data_requirements","capability":"mmm.intake.requirements","clarification":false},
+  {"text":"I have spend by channel and geo. Is that enough for MMM?","domain":"mmm","intent":"assess_mmm_readiness","capability":"mmm.intake.readiness","clarification":true},
+  {"text":"What data is needed for GeoX?","domain":"geox","intent":"geox_data_requirements","capability":"geox.intake.requirements","clarification":false},
+  {"text":"Should I use MMM or GeoX?","domain":"platform","intent":"trust_and_uncertainty","capability":null,"clarification":true},
+  {"text":"Can I move budget next quarter?","domain":"planning","intent":"request_plan_simulation","capability":"planning.simulation.request","clarification":false},
+  {"text":"Why is this interval wide?","domain":"mmm","intent":"explain_channel_uncertainty","capability":"mmm.channel_uncertainty.explain","clarification":true},
+  {"text":"What is the weather tomorrow?","domain":"unknown","intent":"unsupported","capability":null,"clarification":true}
+]

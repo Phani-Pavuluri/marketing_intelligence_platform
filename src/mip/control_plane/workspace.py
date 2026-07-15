@@ -147,6 +147,9 @@ class InMemoryWorkspace:
             update.update(entry_mode=EntryMode.EMPTY, active_dataset_id=None, active_use_case_id=None, active_view="workspace_home", active_artifact_id=None, active_workflow_node_id=None, available_artifact_ids=[], session_artifact_ids=[], execution_mode=None, claim_state="unverified")
         elif event.event_type == EventType.SYSTEM_RESULT and payload.get("action") == "enter_sample_mode":
             update.update(entry_mode=EntryMode.SAMPLE, active_view="sample_use_case")
+        elif event.event_type == EventType.SYSTEM_RESULT and payload.get("action") == "routing_update":
+            update["known_inputs"] = {**self._context.known_inputs, **payload.get("known_inputs", {})}
+            update["missing_inputs"] = list(payload.get("missing_inputs", []))
         elif event.event_type == EventType.RESET_REQUESTED:
             self._visible_start = len(self._history)
             update = WorkspaceContext(
