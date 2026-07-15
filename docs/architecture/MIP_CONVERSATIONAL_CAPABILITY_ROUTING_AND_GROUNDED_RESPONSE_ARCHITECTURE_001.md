@@ -288,3 +288,22 @@ The current local demo uses in-memory Streamlit session state. A later authentic
 `CONVERSATIONAL_CONTROL_PLANE_ARCHITECTURE_COMPLETE_IMPLEMENTATION_PLAN_NEXT`
 
 Next artifact: `MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001`.
+
+## Canonical phase definitions
+
+The registry at `docs/architecture/archives/MIP_CONVERSATIONAL_CAPABILITY_ROUTING_AND_GROUNDED_RESPONSE_ARCHITECTURE_001_phase_registry.json` is the normative definition of Phases A–L. Each phase records its objective, entry criteria, consumed contracts and artifacts, deliverables, boundaries, dependencies, implementation and validation tasks, stop/exit conditions, owner, and status. The phase sequence is:
+
+- **A Contracts:** versioned interaction, response, evidence, and error contracts; entry is the approved architecture and exit is serializable contract tests.
+- **B Registry:** capability descriptors, validation, and drift detection; registration never authorizes execution.
+- **C State/events:** serializable session state, append-only events, projections, reset/navigation, and stale-context handling.
+- **D Routing:** deterministic precedence, pending dialogue, capability selection, and fixture-backed router tests.
+- **E Workflows:** explicit workflow graphs and capability bindings; no implicit LLM edges.
+- **F Requirements:** requirement-gap resolution, compatibility, lineage, and readiness decisions.
+- **G Upload readiness:** upload/profile/map/clarify/validate lifecycle, privacy, and readiness gates; no modeling execution.
+- **H Grounded responses:** deterministic evidence packets, citations, claim verification, and safe fallback.
+- **I Retrieval:** governed retrieval metadata, effective dates, deprecation, and contract-authoritative context.
+- **J Constrained LLM:** registry-validated model/prompt identity, bounded tools, timeout, and deterministic fallback.
+- **K Continuity:** dashboard views, report continuity, artifact references, and conversation context.
+- **L Evaluation/release:** traceability metrics, adversarial evaluation, release gates, and rollback evidence.
+
+Every phase has a named owner and explicit status. “Deferred”, “blocked”, and “not_applicable” are valid explicit outcomes; omission is not. A positive architecture verdict is valid only when the registry, policy, audit, and governance test agree.

@@ -1,0 +1,1264 @@
+{
+  "architecture_artifact_id": "MIP_CONVERSATIONAL_CAPABILITY_ROUTING_AND_GROUNDED_RESPONSE_ARCHITECTURE_001",
+  "schema_version": "phase_definition_v1",
+  "phases": [
+    {
+      "phase_id": "phase_a",
+      "phase_name": "Contracts",
+      "phase_type": "platform",
+      "objective": "Define and validate contracts capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "external:approved_architecture"
+      ],
+      "required_prior_capabilities": [
+        "external:approved_architecture"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_a design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_a contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_a artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_a capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "external:approved_architecture"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_b"
+      ],
+      "must_follow": [],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_a artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_B_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_b"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_b",
+      "phase_name": "Registry",
+      "phase_type": "platform",
+      "objective": "Define and validate registry capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_a"
+      ],
+      "required_prior_capabilities": [
+        "phase_a"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_b design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_b contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_b artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_b capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_a"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_c"
+      ],
+      "must_follow": [
+        "phase_a"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_b artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_C_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_c"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_c",
+      "phase_name": "State and events",
+      "phase_type": "platform",
+      "objective": "Define and validate state and events capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_b"
+      ],
+      "required_prior_capabilities": [
+        "phase_b"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_c design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_c contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_c artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_c capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_b"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_d"
+      ],
+      "must_follow": [
+        "phase_b"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_c artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_D_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_d"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_d",
+      "phase_name": "Deterministic routing",
+      "phase_type": "platform",
+      "objective": "Define and validate deterministic routing capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_c"
+      ],
+      "required_prior_capabilities": [
+        "phase_c"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_d design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_d contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_d artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_d capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_c"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_e"
+      ],
+      "must_follow": [
+        "phase_c"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_d artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_E_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_e"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_e",
+      "phase_name": "Workflow orchestration",
+      "phase_type": "platform",
+      "objective": "Define and validate workflow orchestration capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_d"
+      ],
+      "required_prior_capabilities": [
+        "phase_d"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_e design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_e contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_e artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_e capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_d"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_f"
+      ],
+      "must_follow": [
+        "phase_d"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_e artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_F_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_f"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_f",
+      "phase_name": "Requirement resolution",
+      "phase_type": "platform",
+      "objective": "Define and validate requirement resolution capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_e"
+      ],
+      "required_prior_capabilities": [
+        "phase_e"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_f design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_f contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_f artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_f capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_e"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_g"
+      ],
+      "must_follow": [
+        "phase_e"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_f artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_G_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_g"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_g",
+      "phase_name": "Upload readiness",
+      "phase_type": "platform",
+      "objective": "Define and validate upload readiness capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_f"
+      ],
+      "required_prior_capabilities": [
+        "phase_f"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_g design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_g contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_g artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_g capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_f"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_h"
+      ],
+      "must_follow": [
+        "phase_f"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_g artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_H_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_h"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_h",
+      "phase_name": "Grounded response",
+      "phase_type": "platform",
+      "objective": "Define and validate grounded response capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_g"
+      ],
+      "required_prior_capabilities": [
+        "phase_g"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_h design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_h contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_h artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_h capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_g"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_i"
+      ],
+      "must_follow": [
+        "phase_g"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_h artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_I_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_i"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_i",
+      "phase_name": "Governed retrieval",
+      "phase_type": "platform",
+      "objective": "Define and validate governed retrieval capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_h"
+      ],
+      "required_prior_capabilities": [
+        "phase_h"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_i design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_i contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_i artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_i capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_h"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_j"
+      ],
+      "must_follow": [
+        "phase_h"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_i artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_J_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_j"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_j",
+      "phase_name": "Constrained LLM",
+      "phase_type": "platform",
+      "objective": "Define and validate constrained llm capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_i"
+      ],
+      "required_prior_capabilities": [
+        "phase_i"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_j design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_j contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_j artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_j capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_i"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_k"
+      ],
+      "must_follow": [
+        "phase_i"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_j artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_K_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_k"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "deferred"
+    },
+    {
+      "phase_id": "phase_k",
+      "phase_name": "Dashboard continuity",
+      "phase_type": "platform",
+      "objective": "Define and validate dashboard continuity capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_j"
+      ],
+      "required_prior_capabilities": [
+        "phase_j"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_k design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_k contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_k artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_k capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_j"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "phase_l"
+      ],
+      "must_follow": [
+        "phase_j"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_k artifacts as one coherent slice",
+      "recommended_next_artifact": "phase_L_implementation",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "phase_l"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    },
+    {
+      "phase_id": "phase_l",
+      "phase_name": "Evaluation and release",
+      "phase_type": "platform",
+      "objective": "Define and validate evaluation and release capability.",
+      "user_or_platform_outcome": "A traceable, governed control-plane capability.",
+      "rationale": "Prevents implicit behavior and supports safe implementation planning.",
+      "entry_criteria": [
+        "approved architecture",
+        "prior phase exit criteria"
+      ],
+      "required_prior_artifacts": [
+        "phase_k"
+      ],
+      "required_prior_capabilities": [
+        "phase_k"
+      ],
+      "required_decisions": [
+        "scope and ownership decision"
+      ],
+      "inputs": [
+        "typed contracts",
+        "phase registry"
+      ],
+      "contracts_consumed": [
+        "versioned interaction and evidence contracts"
+      ],
+      "artifacts_consumed": [
+        "approved architecture"
+      ],
+      "deliverables": [
+        "phase_l design and acceptance record"
+      ],
+      "contracts_created_or_changed": [
+        "phase_l contracts"
+      ],
+      "artifacts_created_or_changed": [
+        "phase_l artifact"
+      ],
+      "likely_repository_areas": [
+        "docs/architecture",
+        "src/mip",
+        "tests"
+      ],
+      "capabilities_enabled": [
+        "phase_l capability"
+      ],
+      "capabilities_remaining_blocked": [
+        "production rollout until release gates"
+      ],
+      "execution_boundary": "governed platform boundary; no unapproved runtime side effects",
+      "claim_boundary": "claims require typed evidence and verification",
+      "dependencies": [
+        "phase_k"
+      ],
+      "parallelizable_with": [],
+      "must_precede": [
+        "external:implementation_plan"
+      ],
+      "must_follow": [
+        "phase_k"
+      ],
+      "implementation_tasks": [
+        "define contracts",
+        "implement scoped capability",
+        "add focused tests"
+      ],
+      "recommended_commit_boundary": "Commit phase_l artifacts as one coherent slice",
+      "recommended_next_artifact": "MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001",
+      "acceptance_criteria": [
+        "all required fields are explicit",
+        "deterministic behavior is tested",
+        "boundary and stop conditions are documented"
+      ],
+      "focused_tests": [
+        "phase-specific unit and contract tests"
+      ],
+      "integration_tests": [
+        "control-plane integration tests"
+      ],
+      "evaluation_requirements": [
+        "traceability and regression evaluation"
+      ],
+      "browser_or_manual_review": "not_applicable for architecture artifact",
+      "docker_validation": [
+        "Docker Python 3.11 validation"
+      ],
+      "deployment_validation": "required before public deployment",
+      "stop_conditions": [
+        "missing contract",
+        "unverified claim",
+        "failed acceptance test"
+      ],
+      "rollback_or_recovery": "revert the phase commit and preserve prior contracts",
+      "exit_criteria": [
+        "acceptance criteria pass",
+        "validation evidence recorded",
+        "downstream authorization explicit"
+      ],
+      "downstream_authorization": [
+        "external:implementation_plan"
+      ],
+      "owner": "MIP platform architecture",
+      "status": "planned"
+    }
+  ]
+}

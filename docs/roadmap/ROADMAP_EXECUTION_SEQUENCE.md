@@ -950,3 +950,5 @@ Model execution, optimizer execution, sibling imports, actual file upload/parsin
 - [AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md](../architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
 - [REPO_INTEGRATION_STRATEGY.md](../architecture/REPO_INTEGRATION_STRATEGY.md)
 - [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md)
+- Phase-definition completeness policy and audit (A–L registry): `docs/governance/MIP_PHASE_DEFINITION_COMPLETENESS_POLICY_001.md`, `docs/architecture/MIP_CONVERSATIONAL_CONTROL_PLANE_PHASE_COMPLETENESS_AUDIT_001.md`.
+- Next authorized artifact: `MIP_CONVERSATIONAL_CONTROL_PLANE_IMPLEMENTATION_PLAN_001`.
