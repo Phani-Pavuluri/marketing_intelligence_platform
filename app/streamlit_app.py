@@ -38,6 +38,8 @@ from app.ui_renderers import (
     mode_banner,
     readiness_report_to_display_dict,
 )
+from mip.contracts.conversation import EventType
+from mip.control_plane import get_workspace, sync_legacy_aliases
 from mip.demo.chat_first_demo import (
     ChatFirstDemoFixture,
     ChatResponseView,
@@ -53,10 +55,8 @@ from mip.demo.guided_workspace_shell import (
 from mip.demo.product_flow import (
     initial_product_state,
     product_answer,
-    select_dataset,
     select_journey,
     select_sample_mode,
-    select_upload_information,
 )
 from mip.demo.sample_journey import (
     JOURNEY_ID,
@@ -189,9 +189,12 @@ def _render_chat_first_demo_tab() -> None:
         st.error(f"The sample journey could not be loaded safely: {exc}")
         return
 
+    workspace = get_workspace(st.session_state)
     st.session_state.setdefault("product_flow", initial_product_state())
     state: dict[str, Any] = st.session_state["product_flow"]
+    state.update(sync_legacy_aliases(st.session_state, workspace))
     if st.button("Reset conversation", key="product_flow_reset"):
+        workspace.emit(EventType.RESET_REQUESTED, source_view="chat", source_component="reset_button")
         st.session_state["product_flow"] = initial_product_state()
         st.rerun()
     if state["active_dataset_id"] is None:
@@ -201,6 +204,12 @@ def _render_chat_first_demo_tab() -> None:
         for position, (column, label) in enumerate(zip(prompt_columns, STARTER_PROMPTS)):
             with column:
                 if st.button(label, key=f"onboarding_prompt_{position}", width="stretch"):
+                    workspace.emit(
+                        EventType.STARTER_PROMPT_SELECTED,
+                        source_view="chat",
+                        source_component=f"onboarding_prompt_{position}",
+                        payload={"starter_prompt_id": label},
+                    )
                     state["active_starter_prompt_id"] = (
                         None if state["active_starter_prompt_id"] == label else label
                     )
@@ -217,6 +226,12 @@ def _render_chat_first_demo_tab() -> None:
                 st.write(entry["content"])
     typed_prompt = st.chat_input("Ask MIP about measurement, data, experiments, or planning")
     if typed_prompt:
+        workspace.emit(
+            EventType.USER_MESSAGE,
+            source_view="chat",
+            source_component="chat_input",
+            payload={"text": typed_prompt},
+        )
         intent = classify_shell_intent(
             typed_prompt, has_active_dataset=state["active_dataset_id"] is not None
         )
@@ -230,16 +245,14 @@ def _render_chat_first_demo_tab() -> None:
             product_response = product_answer(state, bundle, typed_prompt)
             answer_text = product_response.text
             answer_category = product_response.category
-        state["conversation_messages"].extend(
-            [
-                {"role": "user", "content": typed_prompt, "answer_category": "user"},
-                {
-                    "role": "assistant",
-                    "content": answer_text,
-                    "answer_category": answer_category,
-                },
-            ]
+        workspace.emit(
+            EventType.ASSISTANT_RESPONSE,
+            source_view="chat",
+            source_component="shell_response",
+            payload={"text": answer_text},
+            causation_id=workspace.events()[-1].event_id,
         )
+        state.update(sync_legacy_aliases(st.session_state, workspace))
         state["last_answer_category"] = answer_category
         st.rerun()
     if state["active_dataset_id"] is None:
@@ -250,19 +263,53 @@ def _render_chat_first_demo_tab() -> None:
             st.write("SaaS growth planning: understand paid conversions across Search, Meta, and YouTube; identify Meta uncertainty; explore a GeoX evidence workflow; and assess future-quarter planning readiness.")
             st.caption("KPI: paid conversions · Grain: weekly × DMA · Channels: Search, Meta, YouTube · Controls: four · History: 14 weeks · Mode: deterministic precomputed demo")
             if st.button("Explore SaaS growth-planning example", key="select_sample_use_case"):
+                workspace.emit(
+                    EventType.STARTER_PROMPT_SELECTED,
+                    source_view="chat",
+                    source_component="select_sample_use_case",
+                    payload={"starter_prompt_id": "sample_use_case"},
+                )
+                workspace.emit(
+                    EventType.SYSTEM_RESULT,
+                    source_view="chat",
+                    source_component="select_sample_use_case",
+                    payload={"action": "enter_sample_mode"},
+                )
                 select_sample_mode(state)
                 st.rerun()
         with upload_column:
             st.markdown("**Analyze my data**")
             st.write("Review the planned readiness workspace for channel-spend, KPI outcomes, controls, and optional experiment-evidence CSVs.")
             if st.button("Review readiness workspace scope", key="show_upload_readiness_information"):
-                select_upload_information(state)
+                workspace.emit(
+                    EventType.ANALYZE_MY_DATA_SELECTED,
+                    source_view="chat",
+                    source_component="show_upload_readiness_information",
+                )
+                state.update(sync_legacy_aliases(st.session_state, workspace))
                 st.rerun()
         if state["entry_mode"] == "sample_use_case":
             st.info("Sample use case selected. Activate the preloaded SaaS dataset to begin the current walkthrough.")
             if st.button("Activate SaaS growth-planning example", key="activate_saas_dataset"):
-                select_dataset(state, bundle)
-                state["conversation_messages"].append({"role": "assistant", "content": "Active demo dataset: SaaS subscriptions. This is preloaded deterministic demo data, not an upload."})
+                workspace.emit(
+                    EventType.SAMPLE_USE_CASE_SELECTED,
+                    source_view="sample_use_case",
+                    source_component="activate_saas_dataset",
+                    payload={
+                        "dataset_id": bundle.dataset_id,
+                        "use_case_id": "saas_growth_planning",
+                        "active_view": "sample_use_case",
+                        "available_artifact_ids": ["dataset_manifest", "mmm_panel"],
+                    },
+                )
+                workspace.emit(
+                    EventType.ASSISTANT_RESPONSE,
+                    source_view="sample_use_case",
+                    source_component="activation_notice",
+                    payload={"text": "Active demo dataset: SaaS subscriptions. This is preloaded deterministic demo data, not an upload."},
+                    causation_id=workspace.events()[-1].event_id,
+                )
+                state.update(sync_legacy_aliases(st.session_state, workspace))
                 st.rerun()
         elif state["entry_mode"] == "upload_readiness_information":
             st.info(UPLOAD_INFORMATION_COPY)
@@ -271,12 +318,24 @@ def _render_chat_first_demo_tab() -> None:
     st.subheader("Current sample walkthrough")
     st.caption("P2 will replace these transitional controls with the guided vertical journey.")
     if st.button("Clear sample use case", key="clear_saas_dataset"):
-        st.session_state["product_flow"] = initial_product_state()
+        workspace.emit(
+            EventType.SYSTEM_RESULT,
+            source_view="sample_use_case",
+            source_component="clear_saas_dataset",
+            payload={"action": "clear_sample"},
+        )
+        state.update(sync_legacy_aliases(st.session_state, workspace))
         st.rerun()
     for position, stage in enumerate(ordered_stages(bundle)):
         if st.button(stage["display_name"], key=f"journey_stage_{position}_{stage['stage_id']}"):
             select_journey(state, bundle, stage["stage_id"])
-            state["conversation_messages"].append({"role": "assistant", "content": f"Current stage: {stage['display_name']}. This is {stage['execution_mode'].replace('_', ' ')}."})
+            workspace.emit(
+                EventType.ASSISTANT_RESPONSE,
+                source_view="sample_use_case",
+                source_component="journey_stage",
+                payload={"text": f"Current stage: {stage['display_name']}. This is {stage['execution_mode'].replace('_', ' ')}."},
+            )
+            state.update(sync_legacy_aliases(st.session_state, workspace))
             st.rerun()
     if state["active_stage_id"]:
         stage = next(item for item in ordered_stages(bundle) if item["stage_id"] == state["active_stage_id"])
@@ -288,7 +347,20 @@ def _render_chat_first_demo_tab() -> None:
         for position, prompt in enumerate(prompts):
             if st.button(prompt["label"], key=f"contextual_prompt_{stage['stage_id']}_{position}"):
                 product_response = product_answer(state, bundle, prompt["question"])
-                state["conversation_messages"].extend([{"role": "user", "content": prompt["question"]}, {"role": "assistant", "content": product_response.text}])
+                workspace.emit(
+                    EventType.USER_MESSAGE,
+                    source_view="sample_use_case",
+                    source_component="contextual_prompt",
+                    payload={"text": prompt["question"]},
+                )
+                workspace.emit(
+                    EventType.ASSISTANT_RESPONSE,
+                    source_view="sample_use_case",
+                    source_component="contextual_response",
+                    payload={"text": product_response.text},
+                    causation_id=workspace.events()[-1].event_id,
+                )
+                state.update(sync_legacy_aliases(st.session_state, workspace))
                 st.rerun()
         with st.expander("Execution and lineage details"):
             st.write("Fixture-backed deterministic journey. Live MMM, GeoX, calibration, simulation, and recommendations are not executed.")
