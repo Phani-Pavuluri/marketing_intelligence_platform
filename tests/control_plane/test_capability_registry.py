@@ -19,6 +19,7 @@ REQUIRED_IDS = {
     "geox.readout.explain", "calibration.compatibility.validate", "calibration.signal.explain",
     "mmm.refresh.compare", "decision_package.build", "artifact.open", "report.open",
     "dashboard.context.update",
+    "knowledge.explain", "knowledge.compare", "platform.guide", "workflow.guide", "artifact.explain",
 }
 
 
