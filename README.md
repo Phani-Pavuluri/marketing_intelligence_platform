@@ -14,8 +14,6 @@ Marketing Intelligence Platform with an LLM-powered conversational control plane
 
 **Workflows shown:** cold-start advisory · demo profiling / readiness · calibration mapping · intake overview
 
-**What it is:** A governed **control-plane / workflow shell** that demonstrates MIP contracts, evidence labels, blocked-claim guardrails, and readiness-style reports over built-in fixtures.
-
 **What it is not:** A production app, API service, or measurement engine. It does **not** run MMM or GeoX engines, call LLM providers, persist uploads, or claim causal lift, ROI, power/MDE, matched markets, treatment assignment, or optimized budgets.
 
 **Deployment record:** [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
