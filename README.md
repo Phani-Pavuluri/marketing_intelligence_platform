@@ -1,6 +1,6 @@
 # Marketing Intelligence Platform (MIP)
 
-Causal marketing intelligence **control plane** for governed experimentation, MMM calibration, budget planning, explainable recommendations, and—eventually—a conversational workbench over certified analytical engines.
+Marketing Intelligence Platform with an LLM-powered conversational control plane that unifies causal experimentation, channel incrementality, MMM calibration, and strategic marketing planning into governed, explainable decision workflows.
 
 ## Demo
 
