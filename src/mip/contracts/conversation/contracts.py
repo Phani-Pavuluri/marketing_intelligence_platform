@@ -185,6 +185,12 @@ class ProviderDisclosure(JsonContract):
     retrieval_context_id: str | None = None
     fallback_used: bool = False
     execution_disclosure: str | None = None
+    provider_error_category: str | None = None
+    http_status_class: str | None = None
+    safe_provider_error_code: str | None = None
+    safe_request_id: str | None = None
+    failed_compatibility_stage: str | None = None
+    fallback_reason: str | None = None
 
     @model_validator(mode="after")
     def no_private_data(self) -> "ProviderDisclosure":

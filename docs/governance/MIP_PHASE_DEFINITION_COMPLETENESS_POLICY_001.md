@@ -15,3 +15,5 @@ The registry is normative, the audit records reconciliation and gaps, and the go
 ## Current provider-acceptance status
 
 [MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001](../architecture/MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001.md) is `GROQ_LIVE_ACCEPTANCE_BLOCKED_BY_PROVIDER_FAILURE`. That negative verdict preserves the existing governance boundaries and prohibits public-default promotion until a fresh acceptance run meets every required live, browser, deployment, and fallback threshold.
+
+[MIP_LLM_GROQ_PROVIDER_COMPATIBILITY_REMEDIATION_001](../architecture/MIP_LLM_GROQ_PROVIDER_COMPATIBILITY_REMEDIATION_001.md) remains `GROQ_PROVIDER_BLOCKED_BY_STRUCTURED_OUTPUT_COMPATIBILITY`; Phase F is not authorized.

@@ -23,3 +23,5 @@ Phase F remains paused. A concrete provider remediation must first add a bounded
 ## Current provider-evaluation status
 
 The follow-on [Groq live/public-demo acceptance record](MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001.md) is `GROQ_LIVE_ACCEPTANCE_BLOCKED_BY_PROVIDER_FAILURE`. This historical fake-provider gate remains valid; it does not certify live quality or public deployment.
+
+The subsequent [provider compatibility remediation](MIP_LLM_GROQ_PROVIDER_COMPATIBILITY_REMEDIATION_001.md) is `GROQ_PROVIDER_BLOCKED_BY_STRUCTURED_OUTPUT_COMPATIBILITY`; its sanitized error observability is retained, but it does not satisfy this live-quality gate.

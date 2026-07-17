@@ -4,6 +4,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
+from pydantic import BaseModel
 from mip.contracts.conversation import ProviderDisclosure
 from mip.conversation.provider_config import ProviderConfig
 
@@ -11,9 +12,31 @@ class ProviderUnavailableError(RuntimeError):
     pass
 
 class ProviderError(ProviderUnavailableError):
-    def __init__(self, category: str):
+    def __init__(self, category: str, *, http_status_class: str | None = None, safe_provider_error_code: str | None = None, safe_request_id: str | None = None, failed_compatibility_stage: str | None = None):
         self.category = category
+        self.http_status_class = http_status_class
+        self.safe_provider_error_code = safe_provider_error_code
+        self.safe_request_id = safe_request_id
+        self.failed_compatibility_stage = failed_compatibility_stage
         super().__init__(category)
+
+def _sanitized_provider_error(exc: Exception, *, stage: str) -> ProviderError:
+    """Map provider exceptions to safe diagnostics without retaining response bodies."""
+    status = getattr(exc, "status_code", None)
+    name = type(exc).__name__.casefold()
+    body = getattr(exc, "body", None)
+    error = body.get("error", {}) if isinstance(body, dict) else {}
+    code = error.get("code") or getattr(exc, "code", None)
+    if status == 401: category = "authentication_failure"
+    elif status == 403: category = "permission_failure"
+    elif status == 404: category = "unsupported_model"
+    elif status == 429: category = "rate_limit"
+    elif isinstance(status, int) and 400 <= status < 500: category = "invalid_request"
+    elif isinstance(status, int) and status >= 500: category = "server_failure"
+    elif "timeout" in name: category = "timeout"
+    elif "connection" in name: category = "connection_failure"
+    else: category = "unknown_provider_failure"
+    return ProviderError(category, http_status_class=f"{status // 100}xx" if isinstance(status, int) else None, safe_provider_error_code=str(code) if code else None, safe_request_id=getattr(exc, "request_id", None), failed_compatibility_stage=stage)
 
 @dataclass(frozen=True)
 class LLMConversationRequest:
@@ -44,7 +67,9 @@ class FakeConversationalProvider:
 class ConfiguredProvider:
     """Lazy configured-provider factory; OpenAI is the supported concrete adapter."""
     provider_id = "openai"
-    def __init__(self, config: ProviderConfig): self.config = config
+    def __init__(self, config: ProviderConfig):
+        self.config = config
+        self.provider_id = config.provider_id
     def generate(self, request: LLMConversationRequest) -> LLMConversationResponse:
         if request.config.provider_id == "groq":
             return GroqResponsesProvider(request.config).generate(request)
@@ -52,7 +77,7 @@ class ConfiguredProvider:
             raise ProviderError("provider_not_configured")
         return OpenAIResponsesProvider(request.config).generate(request)
 
-class OpenAIConversationalTurnWireOutput(__import__("pydantic").BaseModel):
+class OpenAIConversationalTurnWireOutput(BaseModel):
     model_config = {"extra": "forbid"}
     interaction_mode: str
     topic: str
@@ -73,6 +98,7 @@ class OpenAIConversationalTurnWireOutput(__import__("pydantic").BaseModel):
     source_document_ids: list[str] = []
     platform_truth_reference_ids: list[str] = []
 
+
 class OpenAIResponsesProvider:
     provider_id = "openai"
     def __init__(self, config: ProviderConfig): self.config = config
@@ -86,9 +112,7 @@ class OpenAIResponsesProvider:
             return LLMConversationResponse(output=parsed.model_dump(), disclosure=ProviderDisclosure(invocation_status="invoked", provider_id="openai", model_id=self.config.model_id, prompt_template_id=self.config.prompt_template_id, prompt_version=self.config.prompt_version, configuration_id=self.config.configuration_id))
         except ProviderError: raise
         except Exception as exc:
-            name = type(exc).__name__.lower()
-            category = "timeout" if "timeout" in name else "authentication_failure" if "auth" in name else "rate_limit" if "rate" in name else "unknown_provider_failure"
-            raise ProviderError(category) from None
+            raise _sanitized_provider_error(exc, stage="full_wire_schema_parse") from None
     def _credential(self) -> str:
         import os
         key = os.getenv("OPENAI_API_KEY", "")
@@ -112,9 +136,7 @@ class GroqResponsesProvider(OpenAIResponsesProvider):
             return LLMConversationResponse(output=parsed.model_dump(), disclosure=ProviderDisclosure(invocation_status="invoked", provider_id="groq", model_id=self.config.model_id, prompt_template_id=self.config.prompt_template_id, prompt_version=self.config.prompt_version, configuration_id=self.config.configuration_id))
         except ProviderError: raise
         except Exception as exc:
-            name = type(exc).__name__.lower()
-            category = "timeout" if "timeout" in name else "authentication_failure" if "auth" in name else "rate_limit" if "rate" in name else "unknown_provider_failure"
-            raise ProviderError(category) from None
+            raise _sanitized_provider_error(exc, stage="full_wire_schema_parse") from None
     def _credential(self) -> str:
         import os
         key = os.getenv("GROQ_API_KEY", "")
