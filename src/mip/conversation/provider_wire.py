@@ -32,6 +32,7 @@ class GroqConversationalProviderWireV2(BaseModel):
     model_config = ConfigDict(extra="forbid")
     interaction_mode: Literal[
         "general_explanation",
+        "comparison",
         "platform_guidance",
         "artifact_interpretation",
         "governed_action",
@@ -96,7 +97,11 @@ def map_groq_wire_to_internal(
 ) -> dict[str, object]:
     wire = GroqConversationalProviderWireV2.model_validate(raw)
     try:
-        mode = InteractionMode(wire.interaction_mode)
+        mode = (
+            InteractionMode.GENERAL_EXPLANATION
+            if wire.interaction_mode == "comparison"
+            else InteractionMode(wire.interaction_mode)
+        )
     except ValueError as exc:
         raise ProviderWireSchemaError("unknown_interaction_mode") from exc
     if wire.proposed_capability_id is not None:
@@ -116,7 +121,11 @@ def map_groq_wire_to_internal(
         r"\b(i|we|mip)\s+(fit|ran|executed|completed)\b", answer
     ):
         raise ProviderWireSchemaError("execution_claim")
-    if "recommend" in answer or "optimal budget" in answer or "treatment market" in answer:
+    if (
+        re.search(r"\b(i|we|mip)\s+recommend", answer)
+        or "optimal budget" in answer
+        or "treatment market" in answer
+    ):
         raise ProviderWireSchemaError("prohibited_claim")
     return {
         "interaction_mode": mode.value,

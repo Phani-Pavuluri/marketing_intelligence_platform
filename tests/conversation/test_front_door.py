@@ -132,6 +132,19 @@ def test_wire_mapper_handles_empty_current_turn_context_safely():
     assert result["platform_truth_reference_ids"] == []
 
 
+def test_wire_mapper_normalizes_comparison_and_safe_recommendation_language():
+    raw = {"interaction_mode": "comparison", "answer": "I would not recommend one method universally.", "topic": "mmm_geox", "domain": "measurement", "user_goal": "compare", "clarification_question": None, "proposed_capability_id": None, "proposed_workflow_node": None, "known_inputs": [], "inferred_inputs": [], "missing_inputs": [], "action_requested": False, "artifact_context_required": False}
+    result = map_groq_wire_to_internal(raw, allowed_source_ids=set(), allowed_truth_ids=set())
+    assert result["interaction_mode"] == "general_explanation"
+
+
+@__import__("pytest").mark.parametrize("answer", ["MIP recommends this budget.", "Choose treatment markets now.", "MIP executed the MMM."])
+def test_wire_mapper_blocks_comparison_safety_violations(answer):
+    raw = {"interaction_mode": "comparison", "answer": answer, "topic": "mmm_geox", "domain": "measurement", "user_goal": "compare", "clarification_question": None, "proposed_capability_id": None, "proposed_workflow_node": None, "known_inputs": [], "inferred_inputs": [], "missing_inputs": [], "action_requested": True, "artifact_context_required": False}
+    with __import__("pytest").raises(Exception):
+        map_groq_wire_to_internal(raw, allowed_source_ids=set(), allowed_truth_ids=set())
+
+
 @__import__("pytest").mark.parametrize(
     ("status", "name", "expected"),
     [
