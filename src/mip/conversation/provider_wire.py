@@ -54,11 +54,11 @@ class GroqConversationalProviderWireV2(BaseModel):
     artifact_context_required: bool
 
 
-def groq_wire_schema() -> dict:
+def groq_wire_schema() -> dict[str, object]:
     return GroqConversationalProviderWireV2.model_json_schema()
 
 
-def lint_groq_wire_schema(schema: dict) -> None:
+def lint_groq_wire_schema(schema: dict[str, object]) -> None:
     """Fail before transport when the restricted provider-wire schema drifts."""
     encoded = json.dumps(schema, sort_keys=True)
     if len(encoded) > GROQ_WIRE_SCHEMA_MAX_BYTES:
@@ -94,8 +94,8 @@ def lint_groq_wire_schema(schema: dict) -> None:
 
 
 def map_groq_wire_to_internal(
-    raw: dict, *, allowed_source_ids: set[str], allowed_truth_ids: set[str]
-) -> dict:
+    raw: dict[str, object], *, allowed_source_ids: set[str], allowed_truth_ids: set[str]
+) -> dict[str, object]:
     wire = GroqConversationalProviderWireV2.model_validate(raw)
     try:
         mode = InteractionMode(wire.interaction_mode)
