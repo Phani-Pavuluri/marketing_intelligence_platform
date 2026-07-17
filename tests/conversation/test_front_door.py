@@ -3,6 +3,7 @@
 from mip.conversation import ConversationalFrontDoor, FakeConversationalProvider, ProviderConfig
 from mip.conversation.provider import ConfiguredProvider, GROQ_BASE_URL, GroqResponsesProvider, LLMConversationRequest, OpenAIResponsesProvider, ProviderError, _sanitized_provider_error
 from mip.control_plane.workspace import InMemoryWorkspace
+from mip.conversation.provider_wire import map_groq_wire_to_internal
 
 
 def workspace():
@@ -66,7 +67,7 @@ def test_groq_connection_error_is_sanitized(monkeypatch):
 def test_openai_adapter_uses_lazy_structured_responses_parse(monkeypatch):
     class Parsed:
         def model_dump(self):
-            return {"interaction_mode": "general_explanation", "answer": "MMM explanation", "topic": "mmm", "domain": "mmm", "user_goal": "explain", "clarification_question": None, "retrieval_document_ids": [], "platform_truth_reference_ids": [], "proposed_capability_id": None, "proposed_workflow_node": None, "known_inputs": [], "inferred_inputs": [], "missing_inputs": [], "action_requested": False, "artifact_context_required": False}
+            return {"interaction_mode": "general_explanation", "answer": "MMM explanation", "topic": "mmm", "domain": "mmm", "user_goal": "explain", "clarification_question": None, "proposed_capability_id": None, "proposed_workflow_node": None, "known_inputs": [], "inferred_inputs": [], "missing_inputs": [], "action_requested": False, "artifact_context_required": False}
     class Responses:
         def parse(self, **kwargs):
             assert kwargs["store"] is False
@@ -115,6 +116,20 @@ def test_groq_model_catalog_fails_closed(monkeypatch):
     monkeypatch.setenv("GROQ_API_KEY", "redacted-test-key")
     with __import__("pytest").raises(Exception):
         GroqResponsesProvider(config).generate(LLMConversationRequest(prompt="hello", config=config))
+
+
+def test_wire_mapper_injects_only_current_turn_references():
+    raw = {"interaction_mode": "general_explanation", "answer": "MMM uses historical data.", "topic": "mmm", "domain": "measurement", "user_goal": "explain", "clarification_question": None, "proposed_capability_id": None, "proposed_workflow_node": None, "known_inputs": [], "inferred_inputs": [], "missing_inputs": [], "action_requested": False, "artifact_context_required": False}
+    result = map_groq_wire_to_internal(raw, allowed_source_ids={"mmm_primer"}, allowed_truth_ids={"truth.current"})
+    assert result["source_document_ids"] == ["mmm_primer"]
+    assert result["platform_truth_reference_ids"] == ["truth.current"]
+
+
+def test_wire_mapper_handles_empty_current_turn_context_safely():
+    raw = {"interaction_mode": "general_explanation", "answer": "MMM uses historical data.", "topic": "mmm", "domain": "measurement", "user_goal": "explain", "clarification_question": None, "proposed_capability_id": None, "proposed_workflow_node": None, "known_inputs": [], "inferred_inputs": [], "missing_inputs": [], "action_requested": False, "artifact_context_required": False}
+    result = map_groq_wire_to_internal(raw, allowed_source_ids=set(), allowed_truth_ids=set())
+    assert result["source_document_ids"] == []
+    assert result["platform_truth_reference_ids"] == []
 
 
 @__import__("pytest").mark.parametrize(

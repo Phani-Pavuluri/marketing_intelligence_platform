@@ -12,7 +12,7 @@ from mip.contracts.conversation import InteractionMode
 from mip.control_plane.capability_registry import DEFAULT_CAPABILITY_REGISTRY
 from mip.control_plane.workflow_graph import DEFAULT_WORKFLOW_GRAPH
 
-GROQ_WIRE_SCHEMA_VERSION = "conversational_provider_wire_v2"
+GROQ_WIRE_SCHEMA_VERSION = "conversational_provider_wire_v3"
 GROQ_WIRE_SCHEMA_MAX_BYTES = 8_000
 
 
@@ -43,8 +43,6 @@ class GroqConversationalProviderWireV2(BaseModel):
     domain: str = Field(min_length=1, max_length=128)
     user_goal: str = Field(min_length=1, max_length=128)
     clarification_question: str | None
-    retrieval_document_ids: list[str] = Field(max_length=10)
-    platform_truth_reference_ids: list[str] = Field(max_length=20)
     proposed_capability_id: str | None
     proposed_workflow_node: str | None
     known_inputs: list[InputItem] = Field(max_length=20)
@@ -111,10 +109,6 @@ def map_groq_wire_to_internal(
             DEFAULT_WORKFLOW_GRAPH.get_node(wire.proposed_workflow_node)
         except LookupError as exc:
             raise ProviderWireSchemaError("unknown_workflow_node") from exc
-    if not set(wire.retrieval_document_ids).issubset(allowed_source_ids):
-        raise ProviderWireSchemaError("unknown_source_document")
-    if not set(wire.platform_truth_reference_ids).issubset(allowed_truth_ids):
-        raise ProviderWireSchemaError("unknown_platform_truth_reference")
     if wire.artifact_context_required or mode == InteractionMode.ARTIFACT_INTERPRETATION:
         raise ProviderWireSchemaError("artifact_context_unresolved")
     answer = wire.answer.casefold()
@@ -131,7 +125,7 @@ def map_groq_wire_to_internal(
         "user_goal": wire.user_goal,
         "answer": wire.answer,
         "requires_platform_truth": mode == InteractionMode.PLATFORM_GUIDANCE,
-        "requires_retrieval": bool(wire.retrieval_document_ids),
+        "requires_retrieval": bool(allowed_source_ids),
         "requires_artifact": False,
         "requires_execution": False,
         "candidate_capability_id": wire.proposed_capability_id,
@@ -143,6 +137,6 @@ def map_groq_wire_to_internal(
         "clarification_targets": [wire.clarification_question]
         if wire.clarification_question
         else [],
-        "source_document_ids": wire.retrieval_document_ids,
-        "platform_truth_reference_ids": wire.platform_truth_reference_ids,
+        "source_document_ids": sorted(allowed_source_ids),
+        "platform_truth_reference_ids": sorted(allowed_truth_ids),
     }
