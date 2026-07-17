@@ -7,6 +7,7 @@ from typing import Protocol
 from pydantic import BaseModel
 from mip.contracts.conversation import ProviderDisclosure
 from mip.conversation.provider_config import ProviderConfig
+from mip.conversation.provider_wire import GroqConversationalProviderWireV2, lint_groq_wire_schema, groq_wire_schema
 
 class ProviderUnavailableError(RuntimeError):
     pass
@@ -128,9 +129,10 @@ class GroqResponsesProvider(OpenAIResponsesProvider):
         if request.config.model_id not in GROQ_MODELS:
             raise ProviderError("unsupported_model")
         try:
+            lint_groq_wire_schema(groq_wire_schema())
             from openai import OpenAI
             client = OpenAI(api_key=self._credential(), base_url=GROQ_BASE_URL, timeout=self.config.timeout_seconds, max_retries=self.config.max_retries)
-            response = client.responses.parse(model=self.config.model_id, instructions="Return only the strict structured output. Never execute tools or claim execution.", input=request.prompt, text_format=OpenAIConversationalTurnWireOutput, max_output_tokens=self.config.max_output_tokens)
+            response = client.responses.parse(model=self.config.model_id, instructions="Return only the strict structured output. Never execute tools or claim execution.", input=request.prompt, text_format=GroqConversationalProviderWireV2, max_output_tokens=self.config.max_output_tokens)
             parsed = getattr(response, "output_parsed", None)
             if parsed is None: raise ProviderError("malformed_structured_output")
             return LLMConversationResponse(output=parsed.model_dump(), disclosure=ProviderDisclosure(invocation_status="invoked", provider_id="groq", model_id=self.config.model_id, prompt_template_id=self.config.prompt_template_id, prompt_version=self.config.prompt_version, configuration_id=self.config.configuration_id))

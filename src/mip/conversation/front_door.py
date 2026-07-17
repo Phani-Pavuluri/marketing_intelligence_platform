@@ -10,6 +10,7 @@ from mip.knowledge import build_platform_truth_snapshot
 from mip.knowledge.retrieval import DEFAULT_APPROVED_KNOWLEDGE_RETRIEVER, KnowledgeRetrievalQuery
 from mip.conversation.provider import ConversationalLLMProvider, ConfiguredProvider, FakeConversationalProvider, LLMConversationRequest, ProviderError, ProviderUnavailableError
 from mip.conversation.provider_config import ProviderConfig
+from mip.conversation.provider_wire import ProviderWireSchemaError, map_groq_wire_to_internal
 
 class ConversationalTurnOutput(BaseModel):
     turn_decision: TurnDecision
@@ -35,8 +36,12 @@ class ConversationalFrontDoor:
                 request = LLMConversationRequest(prompt=self._prompt(text, retrieval, truth), config=self.config)
                 response = self.provider.generate(request)
                 output = response.output
+                if response.disclosure.provider_id == "groq":
+                    output = map_groq_wire_to_internal(output, allowed_source_ids={h.passage.document_id for h in retrieval.hits}, allowed_truth_ids=set(truth.source_references))
                 decision = self._decision(output, retrieval, response.disclosure)
                 return ConversationalTurnOutput(turn_decision=decision, answer=str(output.get("answer", "")), source_document_ids=tuple(h.passage.document_id for h in retrieval.hits), platform_truth_references=truth.source_references, provider_disclosure=response.disclosure)
+            except ProviderWireSchemaError as exc:
+                disclosure = ProviderDisclosure(invocation_status="fallback_used", fallback_used=True, execution_disclosure="Deterministic fallback", provider_id=getattr(self.provider, "provider_id", None), provider_error_category="wire_mapping_failure", failed_compatibility_stage="wire_to_domain_mapping", fallback_reason=str(exc))
             except ProviderError as exc:
                 disclosure = ProviderDisclosure(invocation_status="fallback_used", fallback_used=True, execution_disclosure="Deterministic fallback", provider_id=getattr(self.provider, "provider_id", None), provider_error_category=exc.category, http_status_class=exc.http_status_class, safe_provider_error_code=exc.safe_provider_error_code, safe_request_id=exc.safe_request_id, failed_compatibility_stage=exc.failed_compatibility_stage, fallback_reason="provider_error")
             except Exception:

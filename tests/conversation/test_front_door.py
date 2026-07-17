@@ -66,7 +66,7 @@ def test_groq_connection_error_is_sanitized(monkeypatch):
 def test_openai_adapter_uses_lazy_structured_responses_parse(monkeypatch):
     class Parsed:
         def model_dump(self):
-            return {"interaction_mode": "general_explanation", "topic": "mmm", "domain": "mmm", "user_goal": "explain", "answer": "MMM explanation"}
+            return {"interaction_mode": "general_explanation", "answer": "MMM explanation", "topic": "mmm", "domain": "mmm", "user_goal": "explain", "clarification_question": None, "retrieval_document_ids": [], "platform_truth_reference_ids": [], "proposed_capability_id": None, "proposed_workflow_node": None, "known_inputs": [], "inferred_inputs": [], "missing_inputs": [], "action_requested": False, "artifact_context_required": False}
     class Responses:
         def parse(self, **kwargs):
             assert kwargs["store"] is False
@@ -97,7 +97,7 @@ def test_groq_adapter_uses_compatible_endpoint_without_store(monkeypatch):
             assert "stream" not in kwargs
             assert "background" not in kwargs
             assert "reasoning" not in kwargs
-            assert kwargs["text_format"].__name__ == "OpenAIConversationalTurnWireOutput"
+            assert kwargs["text_format"].__name__ == "GroqConversationalProviderWireV2"
             return type("Response", (), {"output_parsed": Parsed()})()
     class Client:
         def __init__(self, **kwargs):
