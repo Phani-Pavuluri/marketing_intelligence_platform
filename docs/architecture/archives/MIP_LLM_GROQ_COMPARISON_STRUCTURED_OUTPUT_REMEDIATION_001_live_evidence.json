@@ -1,0 +1,49 @@
+{
+  "raw_content_retained": false,
+  "provider": "groq",
+  "records": [
+    {
+      "case_id": "comparison_1_mmm",
+      "request_accepted": true,
+      "structured_parse_status": "passed",
+      "validation_field_path": null,
+      "validation_error_type": null,
+      "validation_error_count": null,
+      "mapping_status": "passed",
+      "claim_guard_status": "passed",
+      "fallback_used": false,
+      "safe_provider_error_code": null,
+      "safe_request_id": null,
+      "latency_ms": 1442
+    },
+    {
+      "case_id": "comparison_2_geox",
+      "request_accepted": true,
+      "structured_parse_status": "passed",
+      "validation_field_path": null,
+      "validation_error_type": null,
+      "validation_error_count": null,
+      "mapping_status": "passed",
+      "claim_guard_status": "passed",
+      "fallback_used": false,
+      "safe_provider_error_code": null,
+      "safe_request_id": null,
+      "latency_ms": 1012
+    },
+    {
+      "case_id": "comparison_3_choice",
+      "request_accepted": true,
+      "structured_parse_status": "passed",
+      "validation_field_path": null,
+      "validation_error_type": null,
+      "validation_error_count": null,
+      "mapping_status": "passed",
+      "claim_guard_status": "passed",
+      "fallback_used": false,
+      "safe_provider_error_code": null,
+      "safe_request_id": null,
+      "latency_ms": 1433,
+      "conditional_guidance": true
+    }
+  ]
+}

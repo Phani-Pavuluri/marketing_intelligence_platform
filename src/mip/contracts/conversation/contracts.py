@@ -190,6 +190,10 @@ class ProviderDisclosure(JsonContract):
     safe_provider_error_code: str | None = None
     safe_request_id: str | None = None
     failed_compatibility_stage: str | None = None
+    validation_field_path: str | None = None
+    validation_error_type: str | None = None
+    expected_schema_field_category: str | None = None
+    validation_error_count: int | None = None
     fallback_reason: str | None = None
 
     @model_validator(mode="after")

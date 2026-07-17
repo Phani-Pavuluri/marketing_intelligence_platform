@@ -1,0 +1,41 @@
+{
+  "artifact_id": "MIP_LLM_GROQ_COMPARISON_STRUCTURED_OUTPUT_REMEDIATION_001",
+  "verdict": "GROQ_COMPARISON_STRUCTURED_OUTPUT_REMEDIATED",
+  "provider_wire_schema_version": "conversational_provider_wire_v3",
+  "original_failure": {
+    "case_id": "comparison_3_choice",
+    "failed_stage": "full_wire_schema_parse",
+    "safe_provider_error_code": "json_validate_failed",
+    "validation_field_path": null,
+    "validation_error_type": null,
+    "validation_error_count": null,
+    "typed_details_exposed_by_provider": false
+  },
+  "remediation": {
+    "groq_only_complete_v3_instruction": true,
+    "nullable_fields_require_explicit_null": true,
+    "list_fields_require_arrays": true,
+    "comparison_interaction_mode_explicit": true,
+    "provider_authored_governance_references_prohibited": true,
+    "capability_and_workflow_identifiers_are_proposals_only": true,
+    "openai_prompt_behavior_unchanged": true,
+    "safe_local_validation_observability": true
+  },
+  "live_verification": {
+    "call_budget": 3,
+    "calls_used": 3,
+    "continuous_conversation": true,
+    "all_turns_parsed_and_mapped_without_fallback": true,
+    "final_guidance_conditional": true
+  },
+  "governance": {
+    "current_turn_reference_injection_preserved": true,
+    "unconditional_recommendations_blocked": true,
+    "execution_blocked": true,
+    "budget_allocation_blocked": true,
+    "treatment_assignment_blocked": true,
+    "public_demo_acceptance_completed": false,
+    "phase_f_remains_paused": true
+  },
+  "recommended_next_artifact": "MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_002"
+}
