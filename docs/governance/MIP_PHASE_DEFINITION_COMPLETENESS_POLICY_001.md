@@ -12,3 +12,6 @@ A positive verdict is prohibited when a required field is missing, unknown, cont
 
 The registry is normative, the audit records reconciliation and gaps, and the governance test enforces schema, ordering, traceability, and verdict compatibility. Every phased artifact must link these three records before its next implementation plan is authorized. Changes to a phase update the registry and audit in the same commit; downstream work stops on a failed governance test.
 
+## Current provider-acceptance status
+
+[MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001](../architecture/MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001.md) is `GROQ_LIVE_ACCEPTANCE_BLOCKED_BY_PROVIDER_FAILURE`. That negative verdict preserves the existing governance boundaries and prohibits public-default promotion until a fresh acceptance run meets every required live, browser, deployment, and fallback threshold.

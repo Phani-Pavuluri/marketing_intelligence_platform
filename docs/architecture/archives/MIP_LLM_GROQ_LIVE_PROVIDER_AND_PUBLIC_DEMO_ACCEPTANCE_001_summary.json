@@ -1,0 +1,15 @@
+{
+  "artifact_id": "MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001",
+  "verdict": "GROQ_LIVE_ACCEPTANCE_BLOCKED_BY_PROVIDER_FAILURE",
+  "date": "2026-07-15",
+  "branch": "main",
+  "head": "6408ee9",
+  "origin_synchronized": true,
+  "prerequisites_satisfied": true,
+  "requirements_editable_install_present": true,
+  "provider": {"id": "groq", "model": "openai/gpt-oss-20b", "adapter": "mip.conversation.provider.GroqResponsesProvider", "prompt_template_id": "mip_read_only_front_door", "prompt_version": "1", "timeout_seconds": 20, "max_retries": 0, "max_output_tokens": 900, "credentials_configured": true, "client_lazy_construction": true, "openai_sdk_version": "1.109.1"},
+  "automated_suites": {"front_door": 6, "provider_and_front_door": 10, "evaluation_gate": 2, "app": 64, "demo": 62, "governance": 339, "status": "passed"},
+  "live_calls": {"known_preplanned_test_triggered_attempts": 4, "deliberate_calls": 11, "known_total_maximum": 15, "successful_groq_disclosures": 0, "fallbacks": 11, "mandatory_regression_fallback_rate": 1.0, "mandatory_regression_old_generic_fallback_count": 3},
+  "browser": {"automation_available": false, "local_acceptance": "pending_manual_checklist", "public_url_network_reachable": true, "public_url_result": "streamlit_auth_redirect", "public_acceptance": "pending_authenticated_browser_and_secret_verification"},
+  "historical_verdict_naming": {"adapter_artifact": "GROQ_HOSTED_OPEN_WEIGHT_PROVIDER_ADAPTER_READY", "completion_report": "GROQ_CONCRETE_PROVIDER_ADAPTER_READY", "naming_mismatch_only": true}
+}

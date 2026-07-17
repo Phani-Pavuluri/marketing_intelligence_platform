@@ -88,3 +88,7 @@ Smoke-test:
 Known issues:
 Next recommendation:
 ```
+
+## Provider deployment status
+
+The later [Groq live/public-demo acceptance record](../architecture/MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001.md) is `GROQ_LIVE_ACCEPTANCE_BLOCKED_BY_PROVIDER_FAILURE`. This P9B deterministic deployment record is unchanged: the hosted Groq secret configuration and authenticated-browser verification remain pending, and Groq is not promoted as the public default.

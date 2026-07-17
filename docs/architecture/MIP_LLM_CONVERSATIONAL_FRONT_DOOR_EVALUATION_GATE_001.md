@@ -19,3 +19,7 @@ Automated control-plane and fake-provider checks remain valid: they cover determ
 Hard safety requirements remain unchanged: no direct execution, no artifact or numerical claims without grounding, no recommendations, no treatment assignment, no secret or private reasoning storage, and deterministic typed actions. Automated Docker validation is the release evidence for these controls; it cannot establish live naturalness or visual acceptance. The requirements marker remains `-e .`.
 
 Phase F remains paused. A concrete provider remediation must first add a bounded SDK-backed adapter, invocation-time credential lookup, typed timeout/error handling, structured-output parsing, and provider smoke evidence. Then run this gate again, followed by the separate live-provider/browser acceptance artifact.
+
+## Current provider-evaluation status
+
+The follow-on [Groq live/public-demo acceptance record](MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001.md) is `GROQ_LIVE_ACCEPTANCE_BLOCKED_BY_PROVIDER_FAILURE`. This historical fake-provider gate remains valid; it does not certify live quality or public deployment.

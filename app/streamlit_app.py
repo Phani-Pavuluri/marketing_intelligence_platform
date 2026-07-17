@@ -247,7 +247,9 @@ def _render_chat_first_demo_tab() -> None:
                 causation_id=workspace.events()[-1].event_id,
             )
             state.update(sync_legacy_aliases(st.session_state, workspace))
-            state["last_answer_category"] = front_result.turn_decision.interaction_mode.value
+            # Contracts serialize StrEnum values for JSON safety, so retain the
+            # category as its string value in session state.
+            state["last_answer_category"] = str(front_result.turn_decision.interaction_mode)
             st.rerun()
         router = DialogueRouter()
         routing = router.route(
