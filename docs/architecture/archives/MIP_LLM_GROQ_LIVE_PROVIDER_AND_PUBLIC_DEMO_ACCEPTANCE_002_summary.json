@@ -1,0 +1,14 @@
+{
+  "artifact_id": "MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_002",
+  "verdict": "GROQ_LIVE_ACCEPTANCE_002_BLOCKED_BY_PROVIDER_FAILURE",
+  "provider": "groq",
+  "model": "openai/gpt-oss-20b",
+  "wire_schema_version": "conversational_provider_wire_v3",
+  "automated_baseline_passed": true,
+  "live_call_limit": 12,
+  "live_calls_used": 5,
+  "mandatory_gate": {"passed": false, "fallback_rate": "1/5", "first_failure_case": "acceptance_2a_test", "failed_stage": "full_wire_schema_parse", "provider_error_category": "invalid_request", "safe_provider_error_code": "json_validate_failed"},
+  "public_demo_provider_promoted": false,
+  "phase_f_resumed": false,
+  "recommended_next_artifact": "MIP_LLM_GROQ_PROVIDER_RUNTIME_REMEDIATION_002"
+}

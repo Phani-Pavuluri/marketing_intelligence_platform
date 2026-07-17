@@ -1,0 +1,10 @@
+{
+  "raw_content_retained": false,
+  "records": [
+    {"case_id":"acceptance_2a_test","request_accepted":false,"structured_parse_status":"not_passed","mapping_status":"not_passed","claim_guard_status":"not_passed","fallback_used":true,"provider_error_category":"invalid_request","safe_provider_error_code":"json_validate_failed","safe_request_id":"req_01kxs3616je708z81vx0ezd348","latency_ms":2272},
+    {"case_id":"acceptance_2a_mmm","request_accepted":true,"structured_parse_status":"passed","mapping_status":"passed","claim_guard_status":"passed","fallback_used":false,"latency_ms":2920},
+    {"case_id":"acceptance_2a_geox","request_accepted":true,"structured_parse_status":"passed","mapping_status":"passed","claim_guard_status":"passed","fallback_used":false,"latency_ms":3390},
+    {"case_id":"acceptance_2a_data","request_accepted":true,"structured_parse_status":"passed","mapping_status":"passed","claim_guard_status":"passed","fallback_used":false,"latency_ms":1689},
+    {"case_id":"acceptance_2a_help","request_accepted":true,"structured_parse_status":"passed","mapping_status":"passed","claim_guard_status":"passed","fallback_used":false,"latency_ms":1808}
+  ]
+}
