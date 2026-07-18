@@ -23,6 +23,23 @@ def test_disabled_provider_falls_back_naturally():
     assert result.provider_disclosure.fallback_used is True or result.provider_disclosure.invocation_status == "not_invoked"
 
 
+@__import__("pytest").mark.parametrize("probe", ["test", "ping", "health check", "are you working"])
+def test_readiness_probes_use_typed_deterministic_route_without_provider_invocation(probe):
+    provider = FakeConversationalProvider()
+    result = ConversationalFrontDoor(provider, ProviderConfig(enabled=True, provider_id="fake", model_id="test")).handle(probe, workspace=workspace())
+    assert provider.calls == 0
+    assert result.provider_disclosure.invocation_status == "not_invoked"
+    assert result.provider_disclosure.fallback_used is False
+    assert "ready" in result.answer.casefold()
+
+
+@__import__("pytest").mark.parametrize("text", ["measurement", "mmm", "geox", "help"])
+def test_analytical_short_inputs_remain_provider_routed(text):
+    provider = FakeConversationalProvider()
+    ConversationalFrontDoor(provider, ProviderConfig(enabled=True, provider_id="fake", model_id="test")).handle(text, workspace=workspace())
+    assert provider.calls == 1
+
+
 def test_provider_failure_preserves_safe_fallback():
     front = ConversationalFrontDoor(FakeConversationalProvider(fail=True), ProviderConfig(enabled=True, provider_id="fake", model_id="test"))
     result = front.handle("how can you help", workspace=workspace())

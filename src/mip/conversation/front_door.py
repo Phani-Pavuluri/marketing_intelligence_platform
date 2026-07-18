@@ -3,7 +3,7 @@
 # mypy: ignore-errors
 from __future__ import annotations
 from pydantic import BaseModel, Field
-from mip.contracts.conversation import ProviderDisclosure, ResponseContract, TurnDecision, InteractionMode, GroundingRequirements, GroundingSource, TurnClaimPolicy, FallbackPolicy, FallbackRoute
+from mip.contracts.conversation import DeterministicConversationRoute, ProviderDisclosure, ResponseContract, TurnDecision, InteractionMode, GroundingRequirements, GroundingSource, TurnClaimPolicy, FallbackPolicy, FallbackRoute
 from mip.control_plane.dialogue_router import DialogueRouter
 from mip.control_plane.workspace import InMemoryWorkspace
 from mip.knowledge import build_platform_truth_snapshot
@@ -27,6 +27,8 @@ class ConversationalFrontDoor:
         self.config = config or ProviderConfig.from_environment()
         self.provider = provider or (ConfiguredProvider(self.config) if self.config.enabled else None)
     def handle(self, text: str, *, workspace: InMemoryWorkspace, context_terms: tuple[str, ...] = ()) -> ConversationalTurnOutput:
+        if self._deterministic_route(text) is DeterministicConversationRoute.READINESS_PROBE:
+            return self._readiness_response()
         truth = build_platform_truth_snapshot()
         query = KnowledgeRetrievalQuery(query_id="front-door", query_text=text, interaction_mode=InteractionMode.GENERAL_EXPLANATION, conversation_context_terms=context_terms)
         retrieval = DEFAULT_APPROVED_KNOWLEDGE_RETRIEVER.retrieve(query)
@@ -47,6 +49,14 @@ class ConversationalFrontDoor:
             except Exception:
                 disclosure = ProviderDisclosure(invocation_status="fallback_used", fallback_used=True, execution_disclosure="Deterministic fallback", provider_id=getattr(self.provider, "provider_id", None), provider_error_category="unknown_provider_failure", failed_compatibility_stage="front_door", fallback_reason="provider_error")
         return self._fallback(text, workspace, disclosure)
+    def _deterministic_route(self, text: str) -> DeterministicConversationRoute | None:
+        if " ".join(text.casefold().split()) in {"test", "ping", "health check", "are you working"}:
+            return DeterministicConversationRoute.READINESS_PROBE
+        return None
+    def _readiness_response(self) -> ConversationalTurnOutput:
+        disclosure = ProviderDisclosure(invocation_status="not_invoked", execution_disclosure="Deterministic readiness probe")
+        decision = TurnDecision(interaction_mode=InteractionMode.GENERAL_EXPLANATION, topic="platform", domain="platform", user_goal="readiness_probe", requires_general_knowledge=True, grounding_requirements=GroundingRequirements(sources=[GroundingSource.GENERAL_MODEL_KNOWLEDGE]), claim_policy=TurnClaimPolicy.for_mode(InteractionMode.GENERAL_EXPLANATION), fallback_policy=FallbackPolicy(fallback_order=[FallbackRoute.DETERMINISTIC_ROUTER, FallbackRoute.SAFE_CLARIFICATION], allow_deterministic_router=True, allow_safe_clarification=True), provider_disclosure=disclosure, confidence=1.0)
+        return ConversationalTurnOutput(turn_decision=decision, answer="MIP is ready to explain measurement, planning, experimentation, and learning boundaries.", provider_disclosure=disclosure)
     def _prompt(self, text, retrieval, truth):
         return f"MIP read-only front door. Answer naturally; never execute. User: {text}\nSources: {[h.passage.content for h in retrieval.hits[:3]]}\nTruth: {truth.global_blocked_claims}"
     def _decision(self, output, retrieval, disclosure):

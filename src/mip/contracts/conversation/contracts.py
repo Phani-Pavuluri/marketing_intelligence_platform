@@ -31,6 +31,10 @@ class EventType(StrEnum):
     SYSTEM_RESULT = "system_result"
 
 
+class DeterministicConversationRoute(StrEnum):
+    READINESS_PROBE = "readiness_probe"
+
+
 class InterpretationSource(StrEnum):
     TYPED_UI_ACTION = "typed_ui_action"
     DETERMINISTIC_RULE = "deterministic_rule"

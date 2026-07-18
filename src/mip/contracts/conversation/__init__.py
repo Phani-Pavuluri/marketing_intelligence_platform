@@ -4,6 +4,7 @@ from mip.contracts.conversation.contracts import (
     SCHEMA_VERSION,
     CapabilityDescriptor,
     CapabilityStatus,
+    DeterministicConversationRoute,
     DialogueResolutionStatus,
     DialogueState,
     EntryMode,
@@ -38,6 +39,7 @@ from mip.contracts.conversation.contracts import (
 __all__ = [
     "CapabilityDescriptor",
     "CapabilityStatus",
+    "DeterministicConversationRoute",
     "DialogueResolutionStatus",
     "DialogueState",
     "EntryMode",
