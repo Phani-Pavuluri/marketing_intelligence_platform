@@ -1,6 +1,8 @@
 """Narrow, non-production runtime wrapper for GeoX envelope consumption."""
+
+from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import Any, Mapping
+from typing import Any
 
 from mip.contracts.geox_envelope_consumer import (
     GeoXEnvelopeConsumerDecision,
@@ -44,17 +46,40 @@ class GeoXEnvelopeConsumerRuntimeOutput:
     validation_errors: tuple[str, ...]
 
 
-_UNSAFE = ("cannot claim production causal lift", "cannot choose treatment/control markets", "cannot authorize causal readout", "cannot export CalibrationSignal", "cannot export MIP ExperimentEvidence", "cannot assemble production TrustReport", "cannot create DecisionSurface", "cannot create RecommendationContract", "cannot provide budget optimization or spend reallocation recommendation", "cannot use this as LLM decisioning authority")
+_UNSAFE = (
+    "cannot claim production causal lift",
+    "cannot choose treatment/control markets",
+    "cannot authorize causal readout",
+    "cannot export CalibrationSignal",
+    "cannot export MIP ExperimentEvidence",
+    "cannot assemble production TrustReport",
+    "cannot create DecisionSurface",
+    "cannot create RecommendationContract",
+    "cannot provide budget optimization or spend reallocation recommendation",
+    "cannot use this as LLM decisioning authority",
+)
 
 
-def consume_geox_artifact_envelope_for_mip(inp: GeoXEnvelopeConsumerRuntimeInput) -> GeoXEnvelopeConsumerRuntimeOutput:
+def consume_geox_artifact_envelope_for_mip(
+    inp: GeoXEnvelopeConsumerRuntimeInput,
+) -> GeoXEnvelopeConsumerRuntimeOutput:
     envelope = dict(inp.envelope)
     unsafe = []
     if envelope.get("authorization_status") in {"authorized", "production_authorized"}:
         unsafe.append("production_authorization_not_consumable")
-    if envelope.get("mip_consumption_status") not in {None, "diagnostic_context_only", "answerability_context_only", "blocked"}:
+    if envelope.get("mip_consumption_status") not in {
+        None,
+        "diagnostic_context_only",
+        "answerability_context_only",
+        "blocked",
+    }:
         unsafe.append("production_consumption_status_not_consumable")
-    if envelope.get("downstream_eligibility") in {"decision_surface", "recommendation_contract", "budget_optimization", "production"}:
+    if envelope.get("downstream_eligibility") in {
+        "decision_surface",
+        "recommendation_contract",
+        "budget_optimization",
+        "production",
+    }:
         unsafe.append("downstream_production_eligibility_not_consumable")
     contract = evaluate_geox_envelope_for_mip_consumption(GeoXEnvelopeConsumerInput(envelope))
     blocked = tuple(contract.blocked_reasons) + tuple(unsafe)
@@ -70,9 +95,61 @@ def consume_geox_artifact_envelope_for_mip(inp: GeoXEnvelopeConsumerRuntimeInput
         status, decision, accepted = "accepted_diagnostic_context", contract.decision.value, True
     else:
         status, decision, accepted = "accepted_answerability_context", contract.decision.value, True
-    can_say = tuple(contract.can_say) + (("artifact envelope was received",) if not validation_errors else ())
-    return GeoXEnvelopeConsumerRuntimeOutput(accepted, status, contract.consumer_status.value, decision, contract.artifact_kind, contract.artifact_id, inp.request_id, inp.user_intent, contract.mip_consumption_status, contract.authorization_status, blocked, contract.warnings, can_say, tuple(dict.fromkeys(contract.cannot_say + _UNSAFE)), {**contract.normalized, "strict": inp.strict}, False, False, False, False, False, False, False, validation_errors)
+    can_say = tuple(contract.can_say) + (
+        ("artifact envelope was received",) if not validation_errors else ()
+    )
+    return GeoXEnvelopeConsumerRuntimeOutput(
+        accepted,
+        status,
+        contract.consumer_status.value,
+        decision,
+        contract.artifact_kind,
+        contract.artifact_id,
+        inp.request_id,
+        inp.user_intent,
+        contract.mip_consumption_status,
+        contract.authorization_status,
+        blocked,
+        contract.warnings,
+        can_say,
+        tuple(dict.fromkeys(contract.cannot_say + _UNSAFE)),
+        {**contract.normalized, "strict": inp.strict},
+        False,
+        False,
+        False,
+        False,
+        False,
+        False,
+        False,
+        validation_errors,
+    )
 
 
-def serialize_geox_envelope_consumer_runtime_output(output: GeoXEnvelopeConsumerRuntimeOutput) -> dict[str, Any]:
-    return {"accepted": output.accepted, "runtime_status": output.runtime_status, "consumer_status": output.consumer_status, "decision": output.decision, "artifact_kind": output.artifact_kind, "artifact_id": output.artifact_id, "request_id": output.request_id, "user_intent": output.user_intent, "mip_consumption_status": output.mip_consumption_status, "authorization_status": output.authorization_status, "blocked_reasons": list(output.blocked_reasons), "warnings": list(output.warnings), "can_say": list(output.can_say), "cannot_say": list(output.cannot_say), "normalized": dict(output.normalized), "ready_for_trust_report_production": False, "ready_for_experiment_evidence_export": False, "ready_for_calibration_signal_export": False, "ready_for_decision_surface": False, "ready_for_recommendation_contract": False, "ready_for_llm_decisioning": False, "ready_for_budget_optimization": False, "validation_errors": list(output.validation_errors)}
+def serialize_geox_envelope_consumer_runtime_output(
+    output: GeoXEnvelopeConsumerRuntimeOutput,
+) -> dict[str, Any]:
+    return {
+        "accepted": output.accepted,
+        "runtime_status": output.runtime_status,
+        "consumer_status": output.consumer_status,
+        "decision": output.decision,
+        "artifact_kind": output.artifact_kind,
+        "artifact_id": output.artifact_id,
+        "request_id": output.request_id,
+        "user_intent": output.user_intent,
+        "mip_consumption_status": output.mip_consumption_status,
+        "authorization_status": output.authorization_status,
+        "blocked_reasons": list(output.blocked_reasons),
+        "warnings": list(output.warnings),
+        "can_say": list(output.can_say),
+        "cannot_say": list(output.cannot_say),
+        "normalized": dict(output.normalized),
+        "ready_for_trust_report_production": False,
+        "ready_for_experiment_evidence_export": False,
+        "ready_for_calibration_signal_export": False,
+        "ready_for_decision_surface": False,
+        "ready_for_recommendation_contract": False,
+        "ready_for_llm_decisioning": False,
+        "ready_for_budget_optimization": False,
+        "validation_errors": list(output.validation_errors),
+    }
