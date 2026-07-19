@@ -1,0 +1,24 @@
+{
+  "artifact_id": "MIP_CANONICAL_ROADMAP_AMENDMENT_001",
+  "status": "canonical_roadmap_amended_governance_only",
+  "ratification_commit": "b4d04cedfda7138f20adb407ab9e8a79ad4ac1cb",
+  "canonical_files_amended": [
+    "docs/roadmap/ROADMAP.md",
+    "docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md"
+  ],
+  "decision_status": {"D1_to_D10": "approved_with_modifications"},
+  "structure": "hybrid_R0_R6_authoritative_sequence_plus_governed_lanes",
+  "governance_states": ["OBSERVED", "PROPOSED", "APPROVED", "AUTHORIZED_FOR_EXECUTION"],
+  "execution_rebase_authorized": false,
+  "implementation_task_generation_authorized": false,
+  "work_freeze_status": "unchanged",
+  "frozen_capabilities": [
+    "acceptance_004", "provider_promotion", "resolver_and_artifact_implementation",
+    "artifact_grounded_benchmark_implementation", "fixture_package_integration",
+    "isolated_test_evidence_storage", "cross_repo_gate_1_and_gate_2_implementation",
+    "private_real_data_integration", "uploads", "persistent_customer_product_artifacts",
+    "live_mmm", "live_geox", "simulation", "optimization", "recommendation_proposal_approval_execution",
+    "external_actions", "automated_decisions", "treatment_assignment", "limited_pilot", "production"
+  ],
+  "canonical_authority_rule": "MIP and the LLM do not perform or replace engine-owned analytical computations or approval-owned decisions."
+}

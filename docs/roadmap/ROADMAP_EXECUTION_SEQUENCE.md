@@ -1,5 +1,25 @@
 # Roadmap Execution Sequence
 
+## Authoritative post-audit gate overlay (2026-07-19)
+
+The ratified D1–D10 amendment in [ROADMAP.md](ROADMAP.md) governs this execution
+sequence. R0–R6 are authoritative; the legacy P/I/CF sequence below is retained
+as historical implementation context only. Any legacy “next authorized artifact”
+statement is superseded where it conflicts with the R0–R6 gates, governed lanes,
+or retained freezes.
+
+`R0 ownership/environment → R1 core benchmark → R2 resolver/artifact lifecycle
+→ R3 artifact-grounded benchmark → R4 release governance → R5 security/operations
+→ R6 pilot/production authorization`.
+
+No lane or legacy task may bypass these gates. All current capabilities remain
+`APPROVED`, not `AUTHORIZED_FOR_EXECUTION`, until a future separately authorized
+execution rebase classifies and reauthorizes bounded work. In particular,
+acceptance-004/provider promotion, resolver/Phase F, uploads/persistent artifacts,
+live engines, simulation, optimization, recommendations, treatment assignment,
+pilot, and production remain frozen. The combined amendment-and-rebase task is
+not revived.
+
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
 **Current main:** `000273a`
