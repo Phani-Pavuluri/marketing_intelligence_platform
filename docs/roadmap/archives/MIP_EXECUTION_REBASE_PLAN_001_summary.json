@@ -1,0 +1,18 @@
+{
+  "artifact_id": "MIP_EXECUTION_REBASE_PLAN_001",
+  "status": "PROPOSED",
+  "authority": "governance_planning_only_not_implementation_authority",
+  "canonical_amendment_commit": "4839d1b267ac58b690bca21988f1798c93274d2a",
+  "disposition_counts": {"retain": 5, "modify": 3, "reorder": 6, "replace": 0, "retire": 0, "remain_blocked": 10},
+  "milestone_counts": {"R0": 3, "R1": 5, "R2": 3, "R3": 3, "R4": 4, "R5": 5, "R6": 4},
+  "lane_counts": {"governance_authorization": 4, "evaluation_numerical_truth": 6, "resolver_artifact_lifecycle": 3, "integration_release": 3, "security_operations": 2, "decision_authorization": 3, "environment_progression": 4},
+  "execution_rebase_authorized": false,
+  "implementation_task_generation_authorized": false,
+  "all_inventory_items_authorized_for_execution": false,
+  "work_freeze_status": "unchanged",
+  "sibling_read_only_status": {
+    "MMM": {"branch": "feat/mmm-public-simulation-handoff-001", "head": "da8bdbe1cc6254d2a09602568b63689aa9a1b404", "origin_main_delta": "0_0", "dirty": true, "canonical_evidence": false},
+    "panel_exp": {"branch": "feature/non-production-geox-mip-artifact-envelope-dry-run-runtime-001", "head": "827a5b8c3932f57f59b3faafc82537f3e9fe5ce9", "origin_main_delta": "0_0", "dirty": true, "canonical_evidence": false}
+  },
+  "future_planning_concepts_not_authorized": ["R0_ownership_environment_matrix", "R1_core_benchmark_governance", "numerical_truth_dataset_program_governance"]
+}
