@@ -1,0 +1,199 @@
+{
+  "artifact_id": "MIP_EXECUTION_REBASE_CLASSIFICATION_REVIEW_001",
+  "status": "review_treatment_recorded",
+  "authority": "review_only_not_classification_ratification_or_execution_authority",
+  "mip_main_evidence_commit": "9e25cdf94898924e805b09576ed4c6409a1dd9cc",
+  "authoritative_rebase_plan_commit": "3197343f56aac51d9699ec02efd046f83959c97c",
+  "inventory_count": 24,
+  "inventory_gap_detected": false,
+  "classification_ratified": true,
+  "classification_groups": {
+    "C1_retain": {
+      "decision_status": "approved_with_modifications",
+      "approved_by": "Phani",
+      "items": ["L1", "N1", "N2", "S1", "E1"],
+      "approved_treatment": {
+        "L1": "retain",
+        "N1": "retain",
+        "N2": "retain_with_producer_fixture_evidence_qualification",
+        "S1": "retain",
+        "E1": "retain"
+      },
+      "does_not_authorize": [
+        "planning",
+        "implementation",
+        "continuation",
+        "fixture_integration",
+        "runtime_capability"
+      ]
+    },
+    "C2": {
+      "decision_question": "Approve A3, N3, and E2 as modified planning classifications with the required scope, containment, sequencing, evidence, and authority corrections?",
+      "decision_status": "approved_with_modifications",
+      "approved_by": "Phani",
+      "items": ["A3", "N3", "E2"],
+      "approved_treatment": {
+        "A3": "modify_isolated_non_customer_test_storage_boundary",
+        "N3": "modify_engine_owned_truth_and_MIP_wrapper_boundary",
+        "E2": "modify_internal_fixture_backed_integration_environment"
+      },
+      "does_not_authorize": [
+        "storage_design",
+        "storage_implementation",
+        "persistence",
+        "uploads",
+        "fixture_integration_continuation",
+        "design",
+        "implementation",
+        "runtime_capability"
+      ],
+      "checkpoint_interpretation": {
+        "proceed_to_is_proposed_next_step_only": true,
+        "recommended_next_artifact_is_execution_authorization": false,
+        "later_docs_only_qualification_requires_separate_authorization": true
+      },
+      "D6_Gate_1_status": "partial",
+      "D6_Gate_2_satisfied": false,
+      "fixture_integration_task_authorized": false
+    },
+    "C3": {
+      "decision_question": "Approve the six reorder classifications, with I1 qualified to preserve completed bounded plumbing evidence without authorizing integration continuation?",
+      "decision_status": "approved_with_modifications",
+      "approved_by": "Phani",
+      "approved_as_proposed": ["L2", "L4", "A1", "S2", "D3"],
+      "qualified_item": {
+        "id": "I1",
+        "disposition": "reorder",
+        "review_outcome": "approved_with_qualification",
+        "bounded_plumbing_factually_complete": true,
+        "D6_Gate_1_status": "partial",
+        "does_not_authorize": [
+          "integration_continuation",
+          "package_calls",
+          "fixture_integration_dry_run",
+          "live_MMM_or_GeoX",
+          "real_data",
+          "exports",
+          "recommendations",
+          "pilot",
+          "production"
+        ]
+      }
+    },
+    "C4": {
+      "decision_question": "Approve the ten remain-blocked classifications, with I2 qualified to recognize partial D6 Gate 1 evidence without treating the release packet as complete?",
+      "decision_status": "approved_with_modifications",
+      "approved_by": "Phani",
+      "approved_as_proposed": ["L3", "A2", "I3", "D1", "D2", "D4", "D5", "E3", "E4"],
+      "qualified_item": {
+        "id": "I2",
+        "disposition": "remain_blocked",
+        "review_outcome": "approved_with_qualification",
+        "D6_Gate_1_status": "partial",
+        "D6_Gate_2_satisfied": false,
+        "full_Gate_1_packet_required": [
+          "producer_and_consumer_versions",
+          "compatibility_matrix",
+          "fixture_ownership",
+          "required_and_optional_field_semantics",
+          "typed_failure_semantics",
+          "release_order",
+          "rollback_order",
+          "known_limitations",
+          "named_owners_and_approvers",
+          "migration_and_deprecation_rules",
+          "authorization_flags"
+        ],
+        "integration_continuation_authorized": false
+      }
+    }
+  },
+  "any_item_authorized_for_execution": false,
+  "planning_task_generation_authorized": false,
+  "implementation_task_generation_authorized": false,
+  "canonical_roadmap_changed": false,
+  "execution_rebase_plan_changed": false,
+  "work_freeze_status": "unchanged",
+  "recorded_ratification_treatment_count": 24,
+  "unratified_classification_count": 0,
+  "mip_evidence": [
+    {"commit": "68e8e8d", "fact": "consumer_contract"},
+    {"commit": "fec3e99", "fact": "non_production_consumer_runtime"},
+    {"commit": "ee6ec8f", "fact": "application_checkpoint"},
+    {"commit": "9e25cdf", "fact": "behavior_preserving_validation_remediation"}
+  ],
+  "panel_exp_read_only_evidence": {
+    "origin_main": "be65ca3a69cdd5644325bfce16d8f61f6aff2787",
+    "worktree_branch": "plan/method-suitability-selection-shadow-validation-harness-001",
+    "worktree_head": "f6458f7866b952e3a8d4cab08684c3c71926e129",
+    "worktree_origin_main_delta": "1_0",
+    "worktree_dirty": true,
+    "local_work_excluded": true,
+    "producer_commits": [
+      {"commit": "19e4027", "fact": "compatibility_envelope_governance_contract"},
+      {"commit": "d736587", "fact": "fixture_only_dry_run_plan"},
+      {"commit": "827a5b8", "fact": "typed_package_side_envelope_runtime_contract"},
+      {"commit": "e081f5f", "fact": "deterministic_fixture_only_cases_A_to_F_runtime"}
+    ]
+  },
+  "completed_evidence_not_authorization": [
+    "classification_ratified",
+    "authorized_for_continuation",
+    "authorized_for_fixture_integration",
+    "authorized_for_production_use"
+  ],
+  "application_checkpoint_language": {
+    "proceed_to_language_is_execution_authorization": false,
+    "recommended_next_artifact_is_execution_authorization": false,
+    "later_docs_only_qualification_recommended": [
+      "PROPOSED_NEXT_ARTIFACT",
+      "SEPARATE_AUTHORIZATION_REQUIRED: true"
+    ]
+  },
+  "disposition_counts": {
+    "retain": 5,
+    "modify": 3,
+    "reorder": 6,
+    "replace": 0,
+    "retire": 0,
+    "remain_blocked": 10
+  },
+  "recommended_outcome_counts": {
+    "approved_with_modifications": 8,
+    "approve_as_proposed": 14,
+    "approved_with_qualification": 2
+  },
+  "inventory_review": [
+    {"id": "L1", "r_lane": "R1/evaluation", "proposed_disposition": "retain", "outcome": "approved_with_modifications"},
+    {"id": "L2", "r_lane": "R1/governance", "proposed_disposition": "reorder", "outcome": "approved_as_proposed"},
+    {"id": "L3", "r_lane": "R1/governance", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"},
+    {"id": "L4", "r_lane": "R3/evaluation", "proposed_disposition": "reorder", "outcome": "approved_as_proposed"},
+    {"id": "A1", "r_lane": "R2/resolver", "proposed_disposition": "reorder", "outcome": "approved_as_proposed"},
+    {"id": "A2", "r_lane": "R2/resolver", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"},
+    {"id": "A3", "r_lane": "R2,R5/artifact_security", "proposed_disposition": "modify", "outcome": "approved_with_modifications"},
+    {"id": "N1", "r_lane": "R1,R3/evaluation", "proposed_disposition": "retain", "outcome": "approved_with_modifications"},
+    {"id": "N2", "r_lane": "R1,R3/evaluation", "proposed_disposition": "retain", "outcome": "approved_with_modifications"},
+    {"id": "N3", "r_lane": "R1,R3/evaluation", "proposed_disposition": "modify", "outcome": "approved_with_modifications"},
+    {"id": "I1", "r_lane": "R4/integration", "proposed_disposition": "reorder", "outcome": "approved_with_qualification"},
+    {"id": "I2", "r_lane": "R4/integration", "proposed_disposition": "remain_blocked", "outcome": "approved_with_qualification"},
+    {"id": "I3", "r_lane": "R4/integration", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"},
+    {"id": "S1", "r_lane": "R0,R5/security", "proposed_disposition": "retain", "outcome": "approved_with_modifications"},
+    {"id": "S2", "r_lane": "R5/operations", "proposed_disposition": "reorder", "outcome": "approved_as_proposed"},
+    {"id": "D1", "r_lane": "R4-R6/integration", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"},
+    {"id": "D2", "r_lane": "R3-R6/decision_authority", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"},
+    {"id": "D3", "r_lane": "R5/governance", "proposed_disposition": "reorder", "outcome": "approved_as_proposed"},
+    {"id": "D4", "r_lane": "R5,R6/authorization", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"},
+    {"id": "D5", "r_lane": "R6/authorization", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"},
+    {"id": "E1", "r_lane": "R0/environment", "proposed_disposition": "retain", "outcome": "approved_with_modifications"},
+    {"id": "E2", "r_lane": "R0,R4/environment", "proposed_disposition": "modify", "outcome": "approved_with_modifications"},
+    {"id": "E3", "r_lane": "R5,R6/environment", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"},
+    {"id": "E4", "r_lane": "R6/environment", "proposed_disposition": "remain_blocked", "outcome": "approved_as_proposed"}
+  ],
+  "minimum_later_sequence_proposed_only": [
+    "ratify_refreshed_classification_review",
+    "qualify_checkpoint_authorization_language_if_required",
+    "reconcile_missing_D6_Gate_1_packet_evidence_if_incomplete",
+    "separately_consider_fixture_integration_dry_run_authorization",
+    "return_to_panel_exp_only_for_producer_owned_defect"
+  ]
+}
