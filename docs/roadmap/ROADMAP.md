@@ -2,6 +2,83 @@
 
 Phased delivery for MIP. Phases are sequential in dependency order; some work may overlap within a phase but not skip gates.
 
+## Canonical decision-lifecycle consolidation (2026-07-20)
+
+This is the primary product roadmap. It supersedes component-first and
+governance-first sequencing as the product storyline while preserving the
+ratified R0–R6 gates below as mandatory cross-cutting controls. Earlier phase,
+track, and near-term material remains completed evidence or historical/supporting
+planning detail; it cannot independently authorize execution.
+
+### Product lifecycle P0–P8
+
+```text
+Business question → evidence readiness → measurement → experiment calibration
+→ scenario comparison → candidate generation → recommendation proposal
+→ human approval → reporting → outcome tracking and learning
+```
+
+| Phase | Product outcome | Mandatory gates and boundary |
+|---|---|---|
+| P0 | Product, ownership, and authority contract | R0; MIP coordinates, MMM/GeoX compute, LLM explains/proposes only when authorized, humans approve consequential decisions. |
+| P1 | Minimum trusted analytical evidence | R1/R3; engine-owned, versioned numerical truth and typed terminal states; no production claim. |
+| P2 | Certified planning evidence lifecycle | R2–R4; certified GeoX readout → MMM calibration compatibility → bounded human-supplied plan comparison → MIP planning-evidence report. |
+| P3 | LLM and artifact-grounding evaluation | R1/R3; benchmark, grounded scenarios, fallback, and target-environment acceptance; promotion still needs explicit approval. |
+| P4 | Certified package integration | R4; actual package entrypoints on certified fixtures plus compatible versions, deterministic replay, and rollback; no customer data. |
+| P5 | Artifact lifecycle and historical memory | R2/R5; identity, lineage, freshness, retention/deletion, access, and distinct test-evidence/product-artifact controls. |
+| P6 | Simulation, candidate generation, and recommendation workflows | R3–R6; separately governed simulation, optimizer candidate, proposal, review, approval, execution, and outcome states. |
+| P7 | Limited real-data pilot | R5/R6; explicit real-data, security, operations, runtime-certification, support, and pilot authorization. |
+| P8 | Production and expansion | R6; successful pilot evidence, production authorization, lifecycle, support, incident, and rollback controls. |
+
+### P2: first evidence-producing cross-repository tranche
+
+The first vertical lifecycle is deliberately bounded:
+
+```text
+certified GeoX experiment evidence
+→ MMM calibration compatibility
+→ MMM baseline-versus-candidate public Ridge simulation
+→ MIP planning-evidence journey
+→ concrete D6 compatibility and rollback evidence
+```
+
+P2 requires certified success, warning, incompatible, stale, blocked, and
+failed fixture cases; MIP must preserve readiness, calibration compatibility,
+full-panel delta-mu, uncertainty availability, range restrictions, diagnostics,
+limitations, terminal state, lineage, permitted claims, and prohibited claims.
+The output is planning evidence for human approval—not optimization, a
+recommendation, spend execution, or treatment assignment.
+
+### Ownership and authority
+
+- **MIP:** intake, workflow coordination, artifact resolution/readiness, governed
+  explanation, scenario coordination, planning-evidence reports, and future
+  proposal/approval-state representation.
+- **MMM:** MMM fitting, diagnostics, calibration treatment, supported-range,
+  response/simulation/optimization calculations, uncertainty/risk, and MMM
+  numerical truth.
+- **GeoX/panel_exp:** experiment validation, feasibility, power/MDE, matching and
+  assignment computation, estimator/inference/readout semantics, and GeoX
+  numerical truth.
+- **LLM:** intent, governed routing, missing-information questions, explanations,
+  and only explicitly authorized bounded proposals. It never creates analytical
+  truth, computes lift/uncertainty/assignment, overrides blockers, approves, or
+  executes.
+
+### D6 and authority boundary
+
+P2/P4 require concrete R4 Gate 1 evidence: producer/consumer versions,
+compatibility matrix, fixture ownership, field and warning/failure semantics,
+release/rollback order, last-known-good versions, limitations, migration,
+owners/approvers, and authorization flags. Gate completion does not authorize
+real data, customer-facing live engines, scheduled workflows, optimization,
+recommendations, assignment, pilot, or production.
+
+All currently frozen capabilities remain frozen. This consolidation creates no
+implementation authority, task authority, real-data authority, live-engine
+authority, simulation/optimization/recommendation authority, pilot authority,
+or production authority.
+
 ## Canonical ratified governance amendment (2026-07-19)
 
 This section is authoritative for post-audit sequencing and supersedes any older

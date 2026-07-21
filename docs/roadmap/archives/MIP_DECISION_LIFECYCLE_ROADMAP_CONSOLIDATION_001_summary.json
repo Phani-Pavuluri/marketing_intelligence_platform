@@ -1,0 +1,84 @@
+{
+  "artifact_id": "MIP_DECISION_LIFECYCLE_ROADMAP_CONSOLIDATION_001",
+  "artifact_version": "1",
+  "status": "consolidated_docs_only_validated",
+  "created_at": "2026-07-20T00:00:00Z",
+  "mip_base_commit": "6c73643370c43b4b22bbb7cab264ccf5a5254fc7",
+  "mmm_evidence_checkpoint": "da8bdbe1cc6254d2a09602568b63689aa9a1b404",
+  "geox_evidence_checkpoint": "d9c9ac038c16646779c26400117379b18f4725a8",
+  "primary_roadmap_model": "progressive_marketing_decision_lifecycle",
+  "phase_ids_and_titles": [
+    {"id": "P0", "title": "Product, ownership, and authority contract"},
+    {"id": "P1", "title": "Minimum trusted analytical evidence"},
+    {"id": "P2", "title": "Certified planning evidence lifecycle"},
+    {"id": "P3", "title": "LLM and artifact-grounding evaluation"},
+    {"id": "P4", "title": "Certified package integration"},
+    {"id": "P5", "title": "Artifact lifecycle and historical memory"},
+    {"id": "P6", "title": "Simulation, candidate generation, and recommendation workflows"},
+    {"id": "P7", "title": "Limited real-data pilot"},
+    {"id": "P8", "title": "Production and expansion"}
+  ],
+  "r0_r6_treatment": "binding_cross_cutting_control_gates",
+  "first_tranche": [
+    "certified_geox_experiment_evidence",
+    "mmm_calibration_compatibility",
+    "mmm_bounded_baseline_vs_candidate_simulation",
+    "mip_planning_evidence_journey",
+    "concrete_d6_release_evidence"
+  ],
+  "p2_exit_criteria": [
+    "certified_terminal_fixture_coverage",
+    "mmm_lineage_range_uncertainty_and_delta_mu",
+    "mip_readiness_warnings_blockers_and_claim_boundaries",
+    "planning_evidence_report",
+    "d6_compatibility_and_rollback_evidence",
+    "human_approval_remains_required"
+  ],
+  "active_control_categories": [
+    "canonical_decision_lifecycle_roadmap",
+    "capability_and_environment_matrix",
+    "evidence_and_release_ledger",
+    "authorization_and_decision_log"
+  ],
+  "historical_or_superseded_control_treatment": "prior_audit_ratification_amendment_rebase_classification_and_legacy_sequences_are_preserved_as_evidence_or_supporting_detail_without_independent_execution_authority",
+  "deferred_capabilities": [
+    "provider_promotion",
+    "acceptance_004",
+    "resolver_and_artifact_implementation",
+    "fixture_integration",
+    "uploads_and_persistent_customer_product_artifacts",
+    "live_mmm_and_geox",
+    "simulation",
+    "optimization",
+    "recommendations",
+    "treatment_assignment",
+    "pilot",
+    "production"
+  ],
+  "authority_flags": {
+    "implementation_authorized": false,
+    "real_data_authorized": false,
+    "live_engines_authorized": false,
+    "simulation_authorized": false,
+    "optimization_authorized": false,
+    "recommendations_authorized": false,
+    "assignment_authorized": false,
+    "pilot_authorized": false,
+    "production_authorized": false
+  },
+  "changed_files": [
+    "docs/roadmap/ROADMAP.md",
+    "docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md",
+    "docs/roadmap/MIP_DECISION_LIFECYCLE_ROADMAP_CONSOLIDATION_001.md",
+    "docs/roadmap/archives/MIP_DECISION_LIFECYCLE_ROADMAP_CONSOLIDATION_001_summary.json"
+  ],
+  "validation_results": {
+    "json": "passed",
+    "markdown_json_consistency": "passed",
+    "git_diff_check": "passed",
+    "focused_roadmap_tests": "passed_via_governance_roadmap_coverage",
+    "focused_documentation_tests": "passed_1",
+    "focused_governance_tests": "passed_339",
+    "make_validate": "passed_2539_passed_5_skipped_1_warning_mypy_469_source_files"
+  }
+}

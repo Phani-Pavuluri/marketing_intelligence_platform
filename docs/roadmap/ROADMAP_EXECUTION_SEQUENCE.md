@@ -1,5 +1,27 @@
 # Roadmap Execution Sequence
 
+## Canonical decision-lifecycle sequence (2026-07-20)
+
+The primary sequence is P0–P8 in [ROADMAP.md](ROADMAP.md): product/authority
+contract; minimum trusted evidence; certified planning evidence lifecycle; LLM
+and artifact-grounding evaluation; certified package integration; artifact
+lifecycle/memory; separately governed decision workflows; limited pilot; then
+production/expansion. R0–R6 remain mandatory cross-cutting control gates, not
+the primary product narrative.
+
+No completed artifact, legacy phase, supporting plan, or old task independently
+authorizes execution. Routine future work requires explicit task authorization,
+prerequisite commits/artifacts verified on `main`, bounded scope, acceptance and
+validation evidence, and explicit non-goals. Major review is reserved for
+ownership/authority changes, real-data use, recommendation/execution authority,
+environment progression, or material architecture change.
+
+The active control artifacts are: (1) this canonical decision-lifecycle roadmap,
+(2) the capability/environment matrix expressed by the R0–R6 gates, (3) an
+evidence and release ledger, and (4) an authorization and decision log.
+Historical P/I/CF details below remain reference material only. They may not
+supersede the P0–P8 lifecycle, R0–R6 gates, or current freezes.
+
 ## Authoritative post-audit gate overlay (2026-07-19)
 
 The ratified D1–D10 amendment in [ROADMAP.md](ROADMAP.md) governs this execution
