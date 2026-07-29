@@ -9,7 +9,12 @@
       "name": "GeoXReadoutConsumerView",
       "producer_artifact": "GeoXGovernedExperimentReadout",
       "transport_wrapper": "GeoXArtifactEnvelope",
-      "consumer_boundary": "handoff_eligibility_is_not_mmm_compatibility"
+      "consumer_boundary": "handoff_eligibility_is_not_mmm_compatibility",
+      "handoff_eligibility_states": [
+        "eligible_for_compatibility_evaluation",
+        "ineligible_for_calibration_handoff",
+        "blocked_for_handoff"
+      ]
     },
     {
       "name": "MMMCompatibilityConsumerView",

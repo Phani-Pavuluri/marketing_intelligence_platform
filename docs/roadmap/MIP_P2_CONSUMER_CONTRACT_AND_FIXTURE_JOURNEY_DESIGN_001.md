@@ -35,6 +35,18 @@ uses them only for governed explanation.
 | `MMMCompatibilityConsumerView` | `MMMCalibrationCompatibilityResult` | artifact identity; schema/package versions; compatibility state (`compatible`, `compatible_with_warning`, `stale`, `incompatible`, or `blocked`); linked GeoX identity; model/run/configuration/dataset lineage; freshness; warnings, blockers, limitations; terminal status; authorization flags | Display MMM's state exactly; never recompute compatibility or convert warning/stale/incompatible/blocked into success. |
 | `MMMSimulationConsumerView` | `MMMPublicSimulationExport` (`mmm_public_simulation_export_v1` candidate) | artifact identity; schema/package versions; baseline/candidate identities and requested scope; producer-supplied full-panel means and delta-mu; uncertainty availability/semantics; supported-range, extrapolation/restriction result; diagnostics, limitations, warnings, blockers; terminal state; run/model/configuration/panel/dataset lineage; authorization flags | Explain only an eligible, terminal producer artifact; absence of uncertainty stays unavailable, and a restriction stays a restriction. |
 
+`GeoXReadoutConsumerView.handoff_eligibility` has this GeoX-owned state
+vocabulary:
+
+- `eligible_for_compatibility_evaluation`;
+- `ineligible_for_calibration_handoff`; and
+- `blocked_for_handoff`.
+
+GeoX determines readout validity and this handoff eligibility. MMM alone
+determines `compatible`, `compatible_with_warning`, `stale`, `incompatible`, or
+`blocked` model-specific compatibility. MIP validates, routes, explains, and
+reports producer results; it does not infer either analytical decision.
+
 Common validation behavior for every view:
 
 - reject unknown schema/package versions as incompatible rather than guessing;
