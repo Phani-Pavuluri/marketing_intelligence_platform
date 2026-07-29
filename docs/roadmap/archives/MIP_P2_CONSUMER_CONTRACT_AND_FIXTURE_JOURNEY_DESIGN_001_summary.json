@@ -1,0 +1,109 @@
+{
+  "artifact_id": "MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001",
+  "artifact_version": "1",
+  "status": "design_only_validated",
+  "mip_base_commit": "c03817871bb3f0f58be933e5ad9d6633432ce9ee",
+  "scope": "p2_certified_planning_evidence_lifecycle_consumer_design",
+  "consumer_views": [
+    {
+      "name": "GeoXReadoutConsumerView",
+      "producer_artifact": "GeoXGovernedExperimentReadout",
+      "transport_wrapper": "GeoXArtifactEnvelope",
+      "consumer_boundary": "handoff_eligibility_is_not_mmm_compatibility"
+    },
+    {
+      "name": "MMMCompatibilityConsumerView",
+      "producer_artifact": "MMMCalibrationCompatibilityResult",
+      "authoritative_states": ["compatible", "compatible_with_warning", "stale", "incompatible", "blocked"]
+    },
+    {
+      "name": "MMMSimulationConsumerView",
+      "producer_artifact": "MMMPublicSimulationExport",
+      "schema_candidate": "mmm_public_simulation_export_v1"
+    }
+  ],
+  "fixture_journeys": [
+    "success",
+    "success_with_warning",
+    "stale_evidence",
+    "incompatible_experiment_and_model",
+    "blocked_experiment_handoff",
+    "blocked_simulation",
+    "failed_producer_artifact",
+    "diagnostic_only_evidence",
+    "research_only_evidence",
+    "unavailable_uncertainty",
+    "supported_range_restriction",
+    "conflicting_or_superseded_artifacts"
+  ],
+  "planning_evidence_report_required_fields": [
+    "business_question",
+    "evidence_inventory",
+    "geox_readout_summary",
+    "geox_handoff_eligibility",
+    "mmm_compatibility_result",
+    "baseline_plan",
+    "candidate_plan",
+    "full_panel_delta_mu",
+    "uncertainty_availability_and_semantics",
+    "supported_range_and_extrapolation_status",
+    "warnings",
+    "blockers",
+    "diagnostics_and_limitations",
+    "permitted_claims",
+    "prohibited_claims",
+    "artifact_versions_and_lineage",
+    "human_review_required",
+    "report_status"
+  ],
+  "d6_consumer_requirements": [
+    "schema_and_package_pins",
+    "required_and_optional_fields",
+    "compatibility_and_warning_failure_behavior",
+    "stale_and_incompatible_behavior",
+    "release_and_rollback_order",
+    "last_known_good_pins",
+    "migration_and_deprecation",
+    "named_producer_and_consumer_owners"
+  ],
+  "runtime_blockers": {
+    "geox": [
+      "numerical_truth_fixture_validation",
+      "final_governed_readout_contract_and_fixtures",
+      "readout_builder_package_entrypoint",
+      "stable_state_semantics",
+      "d6_evidence_and_exact_pins"
+    ],
+    "mmm": [
+      "public_simulation_export",
+      "calibration_compatibility_result",
+      "registered_parsers_and_package_exports",
+      "certified_fixtures_and_verified_lineage",
+      "final_validation_and_exact_pins"
+    ]
+  },
+  "authority_flags": {
+    "runtime_integration_authorized": false,
+    "package_calls_authorized": false,
+    "real_data_authorized": false,
+    "storage_implementation_authorized": false,
+    "simulation_authorized": false,
+    "optimization_authorized": false,
+    "recommendation_authorized": false,
+    "treatment_assignment_authorized": false,
+    "pilot_authorized": false,
+    "production_authorized": false
+  },
+  "changed_files": [
+    "docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md",
+    "docs/roadmap/archives/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001_summary.json"
+  ],
+  "validation_results": {
+    "json": "passed",
+    "markdown_json_consistency": "passed",
+    "git_diff_check": "passed",
+    "focused_documentation_tests": "passed_1",
+    "focused_governance_tests": "passed_339",
+    "make_validate": "passed_2539_passed_5_skipped_1_warning_mypy_469_source_files"
+  }
+}
