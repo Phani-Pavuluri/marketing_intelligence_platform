@@ -58,8 +58,24 @@ custom agent was added.
 
 No product capability was authorized. No live package integration was
 implemented; MMM and GeoX were not modified. `.codex/` and `docs/tasks/` remain
-local-only. The branch is ready only for ChatGPT review:
+local-only. Before the external merge, the branch had this review state:
 
 - **Execution state:** `ready_for_review`
 - **Merge authorization:** `false`
 - **Reviewed head:** not yet recorded
+
+## External merge closure
+
+- **Reviewed head:** `724fed9e85242a880794dffcdb09fbc41c7b7880`
+- **GitHub merge commit:** `16f8384f71d683297d47aab313ff85e8d08bc67f`
+- **Merge mechanism:** GitHub PR #47
+- The reviewed head is an ancestor of `main`.
+- There are no content differences between the reviewed head and the merge
+  result for `AGENTS.md`, `docs/execution/`, or the focused governance test.
+- No approval metadata commit was created before the external merge. This
+  irregularity affected workflow bookkeeping only.
+- No product files changed during closure and no capability authority changed.
+- MMM and GeoX adoption remain the next workflow tasks.
+
+The execution state is now `merged`; task and merge authorization are both
+`false`.
