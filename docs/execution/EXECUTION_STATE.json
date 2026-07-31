@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001",
-  "status": "changes_requested",
+  "status": "ready_for_review",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "3520176126d129e9288a9ce37591299ec856650a",
@@ -15,8 +15,7 @@
   "merge_authorized": false,
   "pr_creation_authorized": false,
   "reviewed_head_sha": null,
-  "implementation_commit_sha": null,
-  "candidate_correction_implementation_commit_sha": "20d5aeea025ad6a4733367b085e583e73580caa2",
+  "implementation_commit_sha": "20d5aeea025ad6a4733367b085e583e73580caa2",
   "reported_nonexistent_implementation_sha": "20d5aee7170df4ce335376170290c167048812d9",
   "rejected_review_head_sha": "29a18a3531bb202c13d9ae7b4fce9d0c3b115703",
   "prior_rejected_review_head_sha": "9a0c4b04ae3cc7f27c02249588388bd8b6436011",
@@ -36,13 +35,11 @@
   "coordination_protocol_adoption_required_in_geox": true,
   "full_suite_validation_required": true,
   "validation_scope": "post_merge_closure_reconciliation_plus_docker_make_validate",
-  "blockers": [
-    "MIP-CLOSURE-RECONCILIATION-NONEXISTENT-IMPLEMENTATION-SHA"
-  ],
-  "review_decision": "changes_requested",
+  "blockers": [],
+  "review_decision": "ready_for_review",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "next_candidate_task_id": "MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001",
   "next_candidate_task_authorized": false,
   "geox_handoff_test_issue_owned_by_mip": false,
-  "task_authoring_note": "The exact remote review head 29a18a3531bb202c13d9ae7b4fce9d0c3b115703 is rejected because it reports nonexistent implementation SHA 20d5aee7170df4ce335376170290c167048812d9. The actual GitHub-observed correction implementation is 20d5aeea025ad6a4733367b085e583e73580caa2. Correct only the three stable execution files, verify object existence and ancestry, rerun the complete gate, and republish for exact-head review."
+  "task_authoring_note": "Correction implementation 20d5aeea025ad6a4733367b085e583e73580caa2 is the sole current implementation for exact-head review. Its Git object exists and is an ancestor of this branch head. Rejected review head 29a18a3531bb202c13d9ae7b4fce9d0c3b115703 and reported nonexistent SHA 20d5aee7170df4ce335376170290c167048812d9 remain rejected history only."
 }

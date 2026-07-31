@@ -1,6 +1,6 @@
 # TASK_COMPLETION_REPORT_V2
 
-## Identity and review decision
+## Identity and execution result
 
 - **Task ID:** `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
@@ -17,13 +17,12 @@
 - **Earlier rejected implementation / review head:**
   `c6648ef8b4a68fb0f863a53c3bb0c2dc167e2e17` /
   `9a0c4b04ae3cc7f27c02249588388bd8b6436011`
-- **GitHub-observed correction implementation:**
-  `20d5aeea025ad6a4733367b085e583e73580caa2`
+- **Correction implementation:** `20d5aeea025ad6a4733367b085e583e73580caa2`
 - **Rejected latest review head:**
   `29a18a3531bb202c13d9ae7b4fce9d0c3b115703`
 - **Invalid SHA reported by rejected head:**
   `20d5aee7170df4ce335376170290c167048812d9`
-- **Current decision:** `changes_requested`
+- **Current decision:** `ready_for_review`
 
 ## GitHub-observed evidence
 
@@ -76,7 +75,7 @@ The actual correction implementation containing those changes is
 `20d5aeea025ad6a4733367b085e583e73580caa2`. The program and focused-test changes
 at that SHA are accepted.
 
-## Changes requested
+## Rejected-review correction completed
 
 ### Nonexistent implementation SHA
 
@@ -136,14 +135,30 @@ Execution-reported local validation on the rejected tree:
 - Docker-backed `make validate`: **2541 passed, 5 skipped, 1 warning**;
 - Ruff and mypy: PASS across **471 source files**.
 
-These counts are locally execution-reported, not hosted-CI evidence. They must be
-rerun after the stable metadata correction. The current focused test checks only
-that the reported implementation SHA is a forty-character string; it did not
-prove that the Git object exists.
+Those rejected-candidate counts are locally execution-reported, not hosted-CI
+evidence. The rejected focused test checked only that the reported implementation
+SHA was a forty-character string; it did not prove that the Git object existed.
 
-## Required republish state
+## Validation on republished correction
 
-On successful correction:
+Execution-reported local validation on the corrected stable-execution tree:
+
+- Git object and ancestry checks for
+  `20d5aeea025ad6a4733367b085e583e73580caa2`: PASS;
+- JSON parsing: PASS;
+- focused coordination-control-plane and execution-handoff tests: **2 passed**;
+- `git diff --check`: PASS;
+- Docker-backed `make validate`: **2541 passed, 5 skipped, 1 warning**;
+- Ruff and mypy: PASS across **471 source files**.
+
+These results are locally execution-reported, not hosted-CI evidence.
+
+## Ready-for-review state
+
+`20d5aeea025ad6a4733367b085e583e73580caa2` is the sole current correction
+implementation SHA. `git cat-file -e` verified the commit object and
+`git merge-base --is-ancestor` verified it is an ancestor of the branch head.
+The invalid reported SHA and rejected latest review head remain history only.
 
 - `status`: `ready_for_review`;
 - `implementation_commit_sha`:
@@ -153,8 +168,6 @@ On successful correction:
 - merge and PR authorization: `false`;
 - reviewed and approval SHAs: `null`;
 - capability authorizations changed: `false`.
-
-On failure, publish an accurate `blocked` state with exact evidence.
 
 ## Limitations and authority
 

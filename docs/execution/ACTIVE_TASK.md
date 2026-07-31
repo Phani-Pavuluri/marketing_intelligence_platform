@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -21,7 +21,7 @@
 - **Earlier intermediate reconciliation commit:** `113ba2c099608a7841e39202710caddabc50fa61`
 - **Earlier rejected reconciliation implementation:** `c6648ef8b4a68fb0f863a53c3bb0c2dc167e2e17`
 - **Earlier rejected review head:** `9a0c4b04ae3cc7f27c02249588388bd8b6436011`
-- **GitHub-observed correction implementation:** `20d5aeea025ad6a4733367b085e583e73580caa2`
+- **Correction implementation:** `20d5aeea025ad6a4733367b085e583e73580caa2`
 - **Rejected latest review head:** `29a18a3531bb202c13d9ae7b4fce9d0c3b115703`
 - **Invalid reported SHA:** `20d5aee7170df4ce335376170290c167048812d9`
 - **MMM main observed:** `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
@@ -60,7 +60,7 @@ The branch implementation correctly:
 The actual GitHub commit containing those corrections is
 `20d5aeea025ad6a4733367b085e583e73580caa2`.
 
-## Exact-head review decision
+## Rejected review history
 
 The exact remote review head
 `29a18a3531bb202c13d9ae7b4fce9d0c3b115703` is **not approved**.
@@ -109,6 +109,16 @@ The republished state must:
 No program file or focused-test change is requested in this correction. The
 substantive sequence, current-main, coordination, ownership, and authority fixes
 at `20d5aeea025ad6a4733367b085e583e73580caa2` are accepted.
+
+## Correction execution result
+
+**Current decision:** `ready_for_review`
+
+`20d5aeea025ad6a4733367b085e583e73580caa2` is the sole current correction
+implementation SHA. `git cat-file -e` verified it as a commit and
+`git merge-base --is-ancestor` verified it is an ancestor of the branch head.
+The invalid reported SHA and rejected review head above remain historical review
+evidence only; they are not current implementation claims.
 
 ## Owned files
 
