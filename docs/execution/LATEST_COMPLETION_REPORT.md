@@ -169,6 +169,24 @@ The invalid reported SHA and rejected latest review head remain history only.
 - reviewed and approval SHAs: `null`;
 - capability authorizations changed: `false`.
 
+## Merge closure
+
+- **Approved review head:** `8655520d895128c0defccf76e632cdb4d1efe891`
+- **Implementation commit:** `20d5aeea025ad6a4733367b085e583e73580caa2`
+- **Resulting implementation main:** fast-forwarded and pushed at
+  `8655520d895128c0defccf76e632cdb4d1efe891`.
+- **Merge validation:** Docker-backed `make validate` passed with 2541 passed,
+  5 skipped, and 1 warning; focused coordination and execution-handoff tests
+  passed; Ruff and mypy passed across 471 source files.
+- **Cleanup evidence:** local and remote
+  `docs/mip-coordination-post-merge-closure-reconciliation-001` branches were
+  deleted after main was pushed and observed absent after `git fetch --prune`.
+- **Limitations:** MMM and GeoX were not modified; the active-task resolver and
+  GeoX handoff-test repair remain unimplemented and unauthorized.
+- **Authority impact:** no capability authorization changed. Live integration,
+  real data, persistence, simulation, optimization, recommendations, pilot,
+  and production remain blocked.
+
 ## Limitations and authority
 
 - `MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001` remains unimplemented and unauthorized.

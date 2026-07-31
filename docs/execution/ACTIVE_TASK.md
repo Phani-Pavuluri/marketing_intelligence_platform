@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -119,6 +119,21 @@ implementation SHA. `git cat-file -e` verified it as a commit and
 `git merge-base --is-ancestor` verified it is an ancestor of the branch head.
 The invalid reported SHA and rejected review head above remain historical review
 evidence only; they are not current implementation claims.
+
+## Merge closure
+
+**Current decision:** `merged`
+
+- **Approved review head:** `8655520d895128c0defccf76e632cdb4d1efe891`
+- **Implementation commit:** `20d5aeea025ad6a4733367b085e583e73580caa2`
+- **Merge result:** fast-forwarded to MIP `main` and pushed at
+  `8655520d895128c0defccf76e632cdb4d1efe891`.
+- **Validation:** Docker-backed `make validate` passed with 2541 passed,
+  5 skipped, and 1 warning; Ruff and mypy passed across 471 source files.
+- **Cleanup:** the local and remote feature branches were deleted and observed
+  absent after the merge.
+- **Authority impact:** no capability authority changed; all existing freezes
+  remain unchanged.
 
 ## Owned files
 
