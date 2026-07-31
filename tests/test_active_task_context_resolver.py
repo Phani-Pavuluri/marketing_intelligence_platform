@@ -3,6 +3,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Protocol, cast
 
 import pytest
 
@@ -17,6 +18,15 @@ SPEC.loader.exec_module(RESOLVER)
 EXPECTED_REPOSITORY = "example/repo"
 FEATURE_BRANCH = "feat/example-task"
 TASK_ID = "EXAMPLE_TASK_001"
+
+
+class ResolutionLike(Protocol):
+    branch_sha: str | None
+    outcome: str
+    feature_branch: str | None
+    reason_code: str
+    status: str
+    task_id: str
 
 
 def git(repo: Path, *args: str) -> str:
@@ -104,8 +114,8 @@ def push_feature_state(
     return sha
 
 
-def resolve(clone: Path):
-    return RESOLVER.resolve_active_task(clone, EXPECTED_REPOSITORY)
+def resolve(clone: Path) -> ResolutionLike:
+    return cast(ResolutionLike, RESOLVER.resolve_active_task(clone, EXPECTED_REPOSITORY))
 
 
 def test_resolves_authorized_task_and_exact_remote_branch(tmp_path: Path) -> None:
