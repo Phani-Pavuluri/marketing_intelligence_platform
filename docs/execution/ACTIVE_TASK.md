@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized governance amendment
+**Status:** in-progress governance amendment
 **Owner:** MIP repository governance
 **Last updated:** 2026-07-30
 **Last verified:** 2026-07-30

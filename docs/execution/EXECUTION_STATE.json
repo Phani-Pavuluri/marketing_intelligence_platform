@@ -1,11 +1,12 @@
 {
-  "schema_version": "mip_repo_execution_state_v1",
+  "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_V2_001",
-  "status": "authorized",
+  "status": "in_progress",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "5eebba6750a3754e4026397d6762c601b1d6a708",
+  "authorization_head_sha": "f83e91ef883af88808e03184b96bea26fba5eef8",
   "feature_branch": "feat/mip-repo-native-execution-handoff-workflow-v2-001",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
@@ -17,5 +18,5 @@
   "capability_authorizations_changed": false,
   "last_updated": "2026-07-30",
   "blockers": [],
-  "task_authoring_note": "Current main may be ahead of base_sha only by the approved task-authoring replacements of ACTIVE_TASK.md, EXECUTION_STATE.json, and LATEST_COMPLETION_REPORT.md. Verify that boundary before creating the feature branch."
+  "task_authoring_note": "base_sha..authorization_head_sha contains only the approved task-authoring replacements of ACTIVE_TASK.md, EXECUTION_STATE.json, and LATEST_COMPLETION_REPORT.md."
 }
