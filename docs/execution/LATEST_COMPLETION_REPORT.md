@@ -1,130 +1,93 @@
 # TASK_COMPLETION_REPORT_V2
 
-## Identity
+## Identity and review decision
 
 - **Task ID:** `MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Pre-authoring base:** `d35fbbb82711b073c3504d5cc0f1b807e9b36c81`
+- **Authorization head:** `221b0dedc73432a9b04d331c2544fe807b8f1013`
+- **Synchronized state-only head:** `11c062eb785b3518d531992aa554d0a3a4c0b84b`
 - **Feature branch:** `feat/mip-active-task-context-resolver-001`
-- **Implementation commit:** `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`
-- **Current decision:** `ready_for_review`
+- **Rejected implementation:** `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`
+- **Rejected exact review head:** `abf57a6fb0c08d23fb51c56a5ea744445b3ab82c`
+- **Current decision:** `changes_requested`
 
-## GitHub-observed starting evidence
+## GitHub-observed evidence
 
-- MIP `main` was observed at
-  `d35fbbb82711b073c3504d5cc0f1b807e9b36c81` before task authoring.
-- The prior reconciliation task is merged, execution authorization is false,
-  and its remote feature branch is absent.
-- The prior closure report contains both review-era and merged current-state
-  prose, demonstrating the duplicated-state defect this task is authorized to
-  prevent.
-- MMM `main` is
-  `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; its execution-handoff
-  reconciliation is merged and no MMM implementation task is active.
-- GeoX `main` is
-  `ee9673c13e69082367c1727568946ac4c1a01015`; its independently authorized
-  `GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001` remains GeoX-owned.
-- No existing MIP active-task resolver implementation or authorized duplicate
-  task was found.
+At exact-head review:
 
-## Authorized result
+- MIP `main` remains `11c062eb785b3518d531992aa554d0a3a4c0b84b`;
+- the rejected feature branch was three commits ahead of `main` without divergence;
+- the sole reported implementation commit exists and is ancestral to the rejected review head;
+- the branch changed ten paths, while the active task authorized nine;
+- the extra changed path is `tests/test_cross_repository_coordination_control_plane.py`;
+- no hosted commit statuses were available for the rejected review head;
+- MMM `main` remains `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`;
+- GeoX `main` remains `ee9673c13e69082367c1727568946ac4c1a01015` with its builder independently authorized;
+- MMM and GeoX were not modified by the candidate.
 
-Implement a deterministic MIP repository command that reads the current task
-pointer from `origin/main:docs/execution/EXECUTION_STATE.json`, validates the
-repository, worktree, lifecycle, authority, remote branch, ancestry, and
-main/branch agreement, then selects the exact remote task branch before
-`ACTIVE_TASK.md` is read.
+## Materially correct work
 
-The task also establishes execution state as the sole machine-readable current
-pointer, mechanically validates the two human-readable stable files, defines
-one real ancestral implementation SHA, and replaces literal task-ID coupling
-with semantic execution invariants.
+The rejected candidate correctly establishes the main architecture:
 
-## Owned paths
+- reads the task pointer from `origin/main:docs/execution/EXECUTION_STATE.json` before branch task prose;
+- verifies repository origin, worktree hygiene, synchronized main, remote branch, ancestry, and local/remote head equality;
+- reports `ready_for_review` as review-only and does not execute merged states;
+- adds `make resume-active-task` and a machine-readable output mode;
+- verifies that a review implementation SHA exists and is ancestral to the branch head;
+- adds temporary-Git scenario tests;
+- updates MIP bootstrap documentation without modifying MMM, GeoX, product code, or capability authority.
 
-Only these paths may change during implementation:
+These portions should be preserved unless a correction is necessary to satisfy the findings below.
 
-- `AGENTS.md`
-- `Makefile`
-- `scripts/resolve_active_task.py`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
-- `tests/test_active_task_context_resolver.py`
+## Findings requiring correction
 
-No program coordination file, runtime, contract, adapter, fixture,
-orchestration, UI, analytical path, MMM path, or GeoX path is owned.
+### 1. Authorized path boundary violated
 
-## Validation requirement
+The task authorizes exactly nine implementation paths, but the candidate also changes `tests/test_cross_repository_coordination_control_plane.py`. That change is relevant to removing literal current-task coupling, but relevance is not authority. The exact head cannot be approved with an unowned path.
 
-The implementation must run focused resolver and governance tests, temporary-Git
-scenario tests, JSON and Markdown consistency checks, exact changed-path
-verification, Ruff, configured mypy, `git diff --check`, and Docker-backed full
-`make validate`.
+An explicit user-authorized scope amendment is required before that path can be retained and corrected. Until then, both task and correction execution remain disabled. Reverting the path may restore the old full-suite governance failure; if so, the task must report `blocked` rather than claim completion.
 
-A completion report must distinguish GitHub-observed evidence from local
-execution-reported validation and contain one real implementation commit SHA.
-Failure of the complete gate must publish `blocked` with exact debt.
+### 2. Non-executable states bypass human-view validation
 
-## Deliverables and acceptance results
+`resolve_active_task` returns immediately for `idle`, `proposed`, `merged`, and `superseded` before calling the Markdown consistency validator. Therefore the resolver would accept the exact duplicated merged/review closure prose this task was created to prevent.
 
-Implemented at `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`:
+The corrected resolver must validate synchronized-main human views before every non-executable return and detect duplicate or contradictory current declarations in both stable Markdown files while excluding explicitly historical evidence.
 
-- `scripts/resolve_active_task.py` and `make resume-active-task`;
-- canonical-pointer-first bootstrap in `AGENTS.md`, the execution standard, and
-  the context index;
-- mechanical execution-state versus human-view consistency rules;
-- real commit-object and ancestry validation for review implementation SHA;
-- semantic temporary-Git scenarios plus task-agnostic coordination assertions.
+### 3. Schema, authority, and lifecycle validation are incomplete
 
-Changed files:
+The resolver does not enforce the exact supported schema value, does not validate `pr_creation_authorized`, and can reach unchecked `authorization_head_sha` access in malformed review state. Branch agreement omits merge/PR authority and authorization-head/base agreement. There is no explicit allowed main-pointer to branch-state transition matrix.
 
-- `AGENTS.md`
-- `Makefile`
-- `scripts/resolve_active_task.py`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
-- `tests/test_active_task_context_resolver.py`
+All malformed or contradictory cases must fail with deterministic reason codes rather than uncaught exceptions or permissive continuation.
+
+### 4. Correction-resumption test does not model the real workflow
+
+The current correction test places `changes_requested` on `origin/main`. In the actual workflow, main remains the stable authorized task/branch pointer while the feature branch carries mutable `changes_requested` or `blocked` state. The current branch-agreement equality on correction authorization can reject that real branch-only correction flow.
+
+The corrected resolver and tests must support an authorized main pointer plus an exact feature branch with changes requested and explicit correction authorization, while still preventing the branch from escalating merge, PR, sibling, or capability authority.
+
+### 5. Minimum test matrix is incomplete
+
+The task required tests for tracked-dirty worktrees, stale/diverged main, repository mismatch, authority mismatch, complete lifecycle transitions, and contradictory current decisions. The candidate does not cover all of them. Add the full matrix recorded in `ACTIVE_TASK.md`, including merged closure contradictions and branch-only correction resumption.
+
+## Validation reported on rejected candidate
+
+Execution-reported local evidence:
+
+- focused resolver/execution/coordination tests: **16 passed**;
+- Docker-backed `make validate`: **2555 passed, 5 skipped, 1 warning**;
+- Ruff and mypy: passed across **472 source files**;
+- JSON, Markdown consistency, changed-path Ruff, resolver mypy, and `git diff --check`: reported PASS.
+
+These results are local execution-reported evidence, not hosted CI. They do not override the owned-path violation or missing required semantic coverage.
+
+## Required next state
+
+Before code correction, obtain explicit user authorization to add:
+
 - `tests/test_cross_repository_coordination_control_plane.py`
 
-The resolver reads `origin/main:docs/execution/EXECUTION_STATE.json` before
-branch task prose, selects only an exact remote-backed executable branch, and
-fails closed on wrong origin, worktree, main, state, authority, branch, ancestry,
-human-view, or implementation-identity inconsistencies. `ready_for_review` is
-review-only; merged and other non-executable states remain on main.
+to the correction-owned boundary. Then correct only the ten resolver-governance paths, run the complete authored validation gate, and publish one new final implementation SHA and exact remote head as `ready_for_review`, or an accurate `blocked` state.
 
-## Validation
-
-Execution-reported local validation on the final review tree:
-
-- JSON parsing and Markdown/current-state consistency: PASS;
-- temporary-Git resolver, execution-handoff, and coordination focused tests:
-  **16 passed**;
-- changed-path Ruff and resolver mypy: PASS;
-- `git diff --check`: PASS;
-- Docker-backed `make validate`: **2555 passed, 5 skipped, 1 warning**;
-  Ruff and mypy passed across **472 source files**.
-
-GitHub-observed evidence is limited to repository refs and commits; the test and
-Docker results above are local execution-reported evidence until reviewed.
-
-## Authority, limitations, and merge readiness
-
-- Capabilities newly authorized: none.
-- Merge and PR authorization: false.
-- MMM and GeoX modified: no.
-- GeoX builder blocked or modified: no.
-- Deferred: MMM and GeoX may adopt their own resolver only through separately
-  authorized owner-repository tasks after their own prerequisite gates.
-- Local-only paths: `.codex/` and `docs/tasks/`.
-
-The branch is ready for exact-head review after the complete Docker validation
-gate passed. No product, analytical, live-integration, real-data,
-persistence, simulation, optimization, recommendation, pilot, or production
-capability is authorized.
+Merge and PR creation remain unauthorized. MMM and GeoX resolver adoption remain unauthorized. The GeoX builder remains unmodified and unblocked. No product, analytical, runtime, live-integration, recommendation, optimization, pilot, production, or package-side-agent authority changed.
