@@ -4,24 +4,24 @@
 **Owner:** MIP program owner with MMM and GeoX owners
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
-**Verified against:** MIP `631763c`; MMM `origin/main` `1b75d1d`; GeoX `origin/main` `ee9673c`
+**Verified against:** MIP `3520176`; MMM `origin/main` `1b75d1d`; GeoX `origin/main` `ee9673c`
 **Update trigger:** a prerequisite merge, D6 packet, or explicit task authorization.
 
-1. **MIP:** complete the coordination-control-plane task.
-2. **GeoX and MMM:** adopt the coordination protocol in parallel (proposed only).
-3. **GeoX:** complete its single authorized governed-readout builder/package
+1. **GeoX and MMM:** adopt the coordination protocol in parallel (proposed only).
+2. **GeoX:** complete its single authorized governed-readout builder/package
    entrypoint task, which includes temporal, freshness, record-kind, schema,
    and producer-version semantics.
-4. **MMM:** implement strict GeoX-readout normalization and certified
+3. **MMM:** implement strict GeoX-readout normalization and certified
    cross-repository compatibility fixtures.
-5. **MIP:** after separate authorization, implement the fixture-only P2
+4. **MIP:** after separate authorization, implement the fixture-only P2
    planning-evidence journey.
-6. **All owners:** reconcile D6 and consider a separately authorized
+5. **All owners:** reconcile D6 and consider a separately authorized
    fixture-only cross-repository dry run.
-7. **Program governance:** seek separate authorization before any live package
+6. **Program governance:** seek separate authorization before any live package
    integration.
 
-Steps 1 and 3 may proceed in parallel where their own repository gates permit.
+The merged coordination control plane is a completed prerequisite. Steps 1 and
+2 may proceed in parallel where their own repository gates permit.
 GeoX authorizes its own builder task; MIP coordination cannot add a dependency
 or authorize that task. Step 4 depends on live merged GeoX producer evidence
 and declared consumer verification; steps 5–7 depend on all prior producer and

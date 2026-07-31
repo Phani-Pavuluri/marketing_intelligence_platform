@@ -17,7 +17,7 @@ def test_cross_repository_coordination_control_plane() -> None:
     assert state["schema_version"] == "mip_cross_repository_coordination_v1"
     assert state["coordinator_repository"] == "Phani-Pavuluri/marketing_intelligence_platform"
     expected_pins = {
-        "mip": "631763cfb75fc42f8b1bf7025c5bce34c39097b5",
+        "mip": "3520176126d129e9288a9ce37591299ec856650a",
         "mmm": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421",
         "geox": "ee9673c13e69082367c1727568946ac4c1a01015",
     }
@@ -27,6 +27,14 @@ def test_cross_repository_coordination_control_plane() -> None:
         entry = repositories[repository_id]
         assert entry["observed_remote_main_sha"] == sha
         assert entry["evidence_paths"]
+    assert repositories["mip"]["active_task_status"] == "merged"
+    assert repositories["mip"]["latest_completed_task"] == (
+        "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001"
+    )
+    assert repositories["mip"]["latest_closure_sha"] == expected_pins["mip"]
+    assert repositories["mip"]["remote_feature_branch_cleanup"] == (
+        "observed_deleted_from_origin"
+    )
     assert (
         repositories["geox"]["active_task_id"]
         == "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001"
@@ -61,6 +69,8 @@ def test_cross_repository_coordination_control_plane() -> None:
     mip_coordination = next(
         entry for entry in workstreams if entry["id"] == "WS-MIP-COORDINATION-001"
     )
+    assert mip_coordination["status"] == "merged"
+    assert mip_coordination["verified_sha"] == expected_pins["mip"]
     assert "live MIP origin/main execution state" in mip_coordination[
         "live_resolution_condition"
     ]
@@ -120,8 +130,7 @@ def test_cross_repository_coordination_control_plane() -> None:
     ):
         assert blocker_id in blocker_ids
     sequence = state["ordered_program_sequence"]
-    assert sequence[:3] == [
-        "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
+    assert sequence[:2] == [
         "GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
         "MMM_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
     ]
@@ -157,5 +166,16 @@ def test_cross_repository_coordination_control_plane() -> None:
     assert "MIP `067aeca571f2702b88aee92f8647ededee1df0f1`" in history
     assert "Second coordination review changes requested" in history
     assert "MIP `96815daf3cfa3d8d5c658016219784e8e94947b8`" in history
+    assert "Second coordination correction implementation published" in history
+    assert "MIP `4c93a7c300b3471ffee2a11ff449094e82a1f11d`" in history
+    assert "Coordination implementation approved and fast-forward merged" in history
+    assert "Approved/merged MIP head `cc1904db8e18b5ba461cca2da738026acadfb43c`" in history
+    assert "Coordination post-merge closure recorded" in history
+    assert "MIP `3520176126d129e9288a9ce37591299ec856650a`" in history
     report = REPORT_PATH.read_text(encoding="utf-8")
     assert "Before `ready_for_review`, replace this section" not in report
+    assert "Current decision:** `ready_for_review`" not in report
+    active_task = (ROOT / "docs" / "execution" / "ACTIVE_TASK.md").read_text(
+        encoding="utf-8"
+    )
+    assert "Resume the existing branch" not in active_task

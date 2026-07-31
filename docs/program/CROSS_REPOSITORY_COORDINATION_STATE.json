@@ -19,17 +19,19 @@
     {
       "id": "mip",
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "observed_remote_main_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5",
-      "program_checkpoint_sha": "4ddbe8323de6af44086da34001ec60072b58c1e8",
+      "observed_remote_main_sha": "3520176126d129e9288a9ce37591299ec856650a",
+      "program_checkpoint_sha": "3520176126d129e9288a9ce37591299ec856650a",
       "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md"],
       "active_task_id": "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
-      "active_task_status": "authorized",
+      "active_task_status": "merged",
       "active_task_authorization_head_sha": "8fd0d30355510b7d239811163680c3dff87bfc7d",
-      "active_task_feature_branch": "docs/mip-cross-repository-coordination-control-plane-001",
-      "current_work_summary": "MIP coordination-control-plane governance refresh.",
-      "latest_completed_task": "MIP_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECOVERY_001",
-      "latest_closure_sha": "38f88467f55d5bc4cc64e5a58b0f08f1639a40d0",
-      "next_eligible_tasks": ["MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001 after prerequisites and separate authorization"],
+      "prior_reviewed_head_sha": "cc1904db8e18b5ba461cca2da738026acadfb43c",
+      "prior_implementation_commit_sha": "4c93a7c300b3471ffee2a11ff449094e82a1f11d",
+      "remote_feature_branch_cleanup": "observed_deleted_from_origin",
+      "current_work_summary": "Coordination-control-plane workstream is merged and historical at the verified closure.",
+      "latest_completed_task": "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
+      "latest_closure_sha": "3520176126d129e9288a9ce37591299ec856650a",
+      "next_eligible_tasks": ["MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001 remains separately unauthorized"],
       "validation_debt": [],
       "authority_boundary": "No P2 runtime, live engine, real-data, persistence, recommendation, pilot, or production authority."
     },
@@ -73,11 +75,11 @@
       "owner_repository": "mip",
       "capability_area": "cross_repository_coordination_governance",
       "task_id": "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
-      "status": "in_progress",
+      "status": "merged",
       "dependencies": [],
       "blocked_by": [],
-      "evidence_paths": ["docs/execution/ACTIVE_TASK.md", "docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
-      "verified_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5",
+      "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md", "docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
+      "verified_sha": "3520176126d129e9288a9ce37591299ec856650a",
       "live_resolution_condition": "Satisfied only when live MIP origin/main execution state records MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001 as merged at an externally approved implementation lineage. Feature-branch review evidence must be read from its exact remote execution files and never satisfies this condition."
     },
     {
@@ -144,7 +146,7 @@
       "dependencies": ["WS-GEOX-READOUT-BUILDER-001", "WS-MMM-NORMALIZATION-FIXTURES-001"],
       "blocked_by": ["P2-D6-RELEASE-COMPATIBILITY-EVIDENCE"],
       "evidence_paths": ["docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md"],
-      "verified_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5",
+      "verified_sha": "3520176126d129e9288a9ce37591299ec856650a",
       "live_resolution_conditions": {
         "WS-GEOX-READOUT-BUILDER-001": "Requires live merged GeoX producer evidence and consumer verification.",
         "WS-MMM-NORMALIZATION-FIXTURES-001": "Requires live merged MMM normalization and certified fixture evidence at an exact pin plus consumer verification."
@@ -206,7 +208,6 @@
     }
   ],
   "ordered_program_sequence": [
-    "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
     "GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
     "MMM_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
     "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001",

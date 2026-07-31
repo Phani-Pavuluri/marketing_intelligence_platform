@@ -4,12 +4,12 @@
 **Owner:** MIP program owner; repository owners verify their own artifacts
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
-**Verified against:** MIP `631763cfb75fc42f8b1bf7025c5bce34c39097b5`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `ee9673c13e69082367c1727568946ac4c1a01015`
+**Verified against:** MIP `3520176126d129e9288a9ce37591299ec856650a`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `ee9673c13e69082367c1727568946ac4c1a01015`
 **Update trigger:** `origin/main` changes relevant to P2 or a D6 release packet.
 
 | Repository | Verified on main | Canonical commits and paths | Active/unresolved work | MIP runtime dependency and caveat |
 |---|---|---|---|---|
-| MIP | `631763c` observed / `4ddbe83` program checkpoint | P2 design plus authorized coordination-control-plane metadata. | Fixture-only P2 work remains separately unauthorized. | Consumer views are design only; no package call, persistence, or runtime adapter is canonical. |
+| MIP | `3520176` prior coordination closure | P2 design plus merged coordination-control-plane metadata; remote feature cleanup was observed. | Fixture-only P2 work and the context resolver remain separately unauthorized. | Consumer views are design only; no package call, persistence, or runtime adapter is canonical. |
 | MMM | `1b75d1d` | `mmm/contracts/public_simulation.py`, `mmm/contracts/calibration_compatibility.py`, and five compatibility fixtures. | Protocol adoption, strict GeoX normalization, certified cross-repository fixtures, and D6 evidence remain proposed/open. | MMM owns compatibility truth; completion of a producer task still requires consumer verification. |
 | GeoX | `ee9673c` observed / `e0cef94` prior closure | governed-readout contract and 12 certified fixtures; live authorized task `GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001` at authorization `c4c9059`. | One producer-owned task covers temporal/version semantics and builder/package entrypoint; full producer validation debt remains. | GeoX owns experiment truth and handoff eligibility; no consumer or runtime handoff is authorized. |
 
