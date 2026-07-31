@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -224,6 +224,17 @@ On successful correction:
 - keep `capability_authorizations_changed: false`;
 - push and prove the exact remote feature-branch head;
 - stop without a PR, merge, or branch deletion.
+
+## Correction execution result
+
+The correction implementation is
+`067aeca571f2702b88aee92f8647ededee1df0f1`. It refreshes the live GeoX pin
+and source identity, represents the GeoX builder once for both blocker IDs,
+removes the invalid protocol-adoption dependency, adds deterministic live-overlay
+resolution rules, separates the GeoX closure and later authorization in history,
+replaces the completion placeholder, and strengthens the focused governance
+test. The task is ready for an exact-head review; `merge_authorized` remains
+`false`, and no capability authority changed.
 
 ## Prohibited actions
 
