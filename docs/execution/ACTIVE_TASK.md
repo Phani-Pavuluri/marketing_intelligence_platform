@@ -1,96 +1,154 @@
 # Active Task
 
-**Status:** blocked pending Docker validation
+**Status:** authorized recovery
 **Owner:** MIP repository governance
 **Last updated:** 2026-07-30
 **Last verified:** 2026-07-30
-**Verified against:** `main` / `5eebba6750a3754e4026397d6762c601b1d6a708`
-**Update trigger:** execution-state transition or task closure.
+**Verified against:** MIP `main` / `e3a6c8cb437296e1319449b471c19301b08d43cb`
+**Update trigger:** execution-state transition, review decision, or task closure.
 
 ## Identity
 
-- **Task ID:** `MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_V2_001`
-- **Base branch/SHA:** `main` / `5eebba6750a3754e4026397d6762c601b1d6a708`
-- **Feature branch:** `feat/mip-repo-native-execution-handoff-workflow-v2-001`
+- **Task ID:** `MIP_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECOVERY_001`
+- **Base branch/SHA:** `main` / `e3a6c8cb437296e1319449b471c19301b08d43cb`
+- **Feature branch:** `feat/mip-repo-native-execution-handoff-v2-recovery-001`
 - **Execution mode:** `branch_and_fast_forward`
+- **Recovery target:** `MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_V2_001`
+- **External PR:** `#48`
+- **External branch head:** `6313c3e807226d20c260b62a6e863d94a213c533`
+- **External merge commit:** `e3a6c8cb437296e1319449b471c19301b08d43cb`
 - **Capability authorizations changed:** `false`
 
-## Objective and owned files
+## Why recovery is required
 
-Amend the repository-native execution workflow so every session synchronizes
-Git state before task discovery, worktree checks permit only the two declared
-local-only paths, approval binds the exact remote feature-branch head without a
-pre-merge metadata commit, merge remains fast-forward-only and Docker-validated,
-and closure is recorded in exactly one post-merge metadata commit.
+PR #48 placed the V2 workflow files on `main` while the committed task was
+`blocked` because Docker-backed `make validate` had not run. The committed state
+had `merge_authorized: false`, no reviewed head, and no approval commit. GitHub
+contained no PR review or conversation approval record when this recovery task
+was authorized. The merge used a GitHub merge commit rather than the required
+fast-forward path.
 
-Owned files are:
+This task must preserve those facts. Do not retroactively describe PR #48 as an
+approved or conforming V2 merge. Do not rewrite or revert Git history merely to
+make it look conforming.
 
-- `AGENTS.md`
+## Objective
+
+Validate the exact V2 workflow tree now present on `main`, reconcile its lineage
+and scope, and produce an auditable recovery branch that can be reviewed and
+fast-forward merged under the V2 exact-head process. After a later explicit
+approval and merge session, close the recovery accurately, remove stale workflow
+branches, and establish the final canonical MIP V2 pin.
+
+This is governance recovery only. No product or analytical implementation is
+owned or authorized.
+
+## Owned files
+
+Execution may modify only:
+
 - `docs/execution/ACTIVE_TASK.md`
 - `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `tests/governance/test_repo_native_execution_handoff.py`
 
-No `docs/program/` file, product code, package integration, MMM repository file,
-or GeoX repository file is owned by this task.
+Do not modify `AGENTS.md`, `TASK_EXECUTION_STANDARD.md`, tests, `docs/program/`,
+product code, contracts, adapters, orchestration, MMM, or GeoX. If an existing
+focused test cannot represent the recovery using the current V2 schema and
+status vocabulary, stop and report the conflict rather than expanding scope.
+
+## Task-authoring boundary
+
+The pre-authoring base is `e3a6c8cb437296e1319449b471c19301b08d43cb`.
+Verify `base_sha..authorization_head_sha` changes only the three stable execution
+files. Because a commit cannot contain its own SHA, one final state-only commit
+may be present immediately after `authorization_head_sha` solely to record that
+boundary. No other path or commit is permitted between the authorization head
+and synchronized `main`.
+
+Create the feature branch from the exact synchronized post-authoring `main`, not
+from stale local state or the pre-authoring base.
 
 ## Prerequisites
 
-- Connected GitHub and local Git both resolve MIP `main` to
-  `5eebba6750a3754e4026397d6762c601b1d6a708` before task authoring.
-- `MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_001` is merged and closed.
-- MMM and GeoX adoption tasks remain untouched, authorized but unstarted, and
-  pinned to obsolete canonical MIP commit `5eebba6`.
-- The task-authoring commits on `main` may be ahead of the task base only by
-  replacement of the three stable task/state/report files.
-- The worktree contains no unrelated tracked or unexpected untracked paths.
+1. Complete the mandatory bootstrap in `AGENTS.md` before reading or executing
+   this task.
+2. Prove local `main == origin/main` and that current `main` descends from
+   `e3a6c8cb437296e1319449b471c19301b08d43cb` only through this task's stable
+   metadata authoring commits.
+3. Verify PR #48 metadata and lineage:
+   - base `f83e91ef883af88808e03184b96bea26fba5eef8`;
+   - branch head `6313c3e807226d20c260b62a6e863d94a213c533`;
+   - merge commit `e3a6c8cb437296e1319449b471c19301b08d43cb`;
+   - no recorded approval may be invented.
+4. Verify the external branch head descends from the original V2 authorization
+   head and that its changed paths are limited to the original V2 task-owned
+   workflow/governance files.
+5. Verify MMM and GeoX are not modified by this task. Their workflow adoption
+   work remains paused pending a closed canonical MIP V2 pin.
+6. Permit local-only untracked content only below `.codex/` and `docs/tasks/`.
+   Stop for unrelated tracked changes or any other unexpected untracked path.
 
-## Deliverables and acceptance
+## Required execution
 
-1. Define mandatory session bootstrap: fetch/prune remote refs, hydrate required
-   history, switch to `main`, pull `origin/main` with `--ff-only`, prove
-   `main == origin/main`, then inspect task and prerequisites.
-2. Define the task-authoring boundary without treating approved stable metadata
-   commits as unrelated product changes.
-3. Permit only `.codex/` and `docs/tasks/` as local-only untracked paths; fail
-   closed on unrelated tracked changes and every other unexpected untracked
-   path.
-4. Keep completion at `ready_for_review` with `merge_authorized: false`; user
-   approval must bind the exact remote feature-branch head SHA.
-5. Remove the required pre-merge approval-metadata commit. A merge session must
-   re-fetch and verify that the approved SHA still equals the remote feature
-   branch head, verify unchanged `main`, run required validation, and merge with
-   `--ff-only`.
-6. Record reviewed head, implementation head, resulting main lineage,
-   validation, approval provenance, authority impact, and branch cleanup in
-   exactly one post-merge closure commit.
-7. Preserve `capability_authorizations_changed: false` and keep all product and
-   package capabilities unauthorized.
-8. Update focused tests so the V2 workflow is enforced and reusable for later
-   MMM and GeoX adoption.
+1. Create and switch to
+   `feat/mip-repo-native-execution-handoff-v2-recovery-001` from exact
+   synchronized `main`.
+2. Record exact Git lineage and changed-path evidence for the original V2 task,
+   PR #48, the external merge commit, and this task-authoring boundary.
+3. Run the focused repository-native execution-handoff test and relevant
+   governance/documentation checks.
+4. Run JSON parsing, Markdown/path consistency checks, Ruff and mypy where
+   applicable, and `git diff --check`.
+5. Run Docker-backed `make validate` on the exact recovery branch tree. Host
+   validation may supplement but never replace the Docker gate.
+6. If Docker validation or any prerequisite fails, update the three stable files
+   to an accurate `blocked` state, commit and push the branch, and stop. Do not
+   claim recovery success.
+7. If every gate passes, write a complete recovery report and publish a
+   `ready_for_review` branch state with:
+   - `task_execution_authorized: true`;
+   - `merge_authorized: false`;
+   - `reviewed_head_sha: null`;
+   - `approval_commit_sha: null`;
+   - populated `implementation_commit_sha`;
+   - `capability_authorizations_changed: false`;
+   - no blockers.
+8. Commit and push the exact remote branch head, verify local/remote equality,
+   and stop for ChatGPT review. Do not create or use a pull request. Do not merge
+   or delete branches during execution.
 
-## Validation and stop condition
+## Completion report requirements
 
-Run JSON parsing, the focused execution-handoff test, focused governance tests,
-changed-path Ruff and mypy where applicable, Markdown/path consistency,
-`git diff --check`, and Docker-backed `make validate`.
+The report must preserve:
 
-Commit and publish the exact feature-branch head with state
-`ready_for_review`, `merge_authorized: false`, no reviewed head, and no approval
-commit; then stop for user review. Do not merge or modify MMM/GeoX until the user
-approves that exact head.
+- original V2 base and authorization head;
+- original implementation and blocked-state branch heads;
+- PR #48 and external merge commit;
+- explicit absence of a conforming pre-merge approval record;
+- exact changed paths and lineage;
+- Docker and host validation evidence;
+- the recovery implementation commit and exact published review head;
+- MMM/GeoX pause state;
+- limitations and deferred work;
+- `capability_authorizations_changed: false`.
 
-No product capability, live engine integration, real data, persistence,
-simulation runtime, optimization, recommendation, treatment assignment, pilot,
-or production capability is authorized.
+## Later approved merge and closure
 
-## Current blocker
+Only after the user approves the exact remote recovery-branch head may Codex run
+`Merge the approved active task`. That merge session must re-fetch and verify the
+approved head, rerun required validation, fast-forward merge without a PR, push
+and verify `main`, delete both the recovery branch and the stale original V2
+feature branch where present, then write exactly one post-merge closure metadata
+commit.
 
-The implementation is published on the authorized feature branch, and host
-validation passes. This Work Mode runtime has no Docker CLI, so the required
-Docker-backed `make validate` cannot run. The task must remain `blocked`; it
-must not transition to `ready_for_review` until that exact implementation tree,
-plus any task-owned validation metadata changes, passes `make validate` in a
-Docker-capable environment.
+The closure must record the external nonconforming merge and the conforming
+recovery separately. It must not convert the former into an approved merge.
+The resulting closure commit becomes the canonical MIP V2 pin for later MMM and
+GeoX workflow adoption reconciliation.
+
+## Prohibited scope and authority
+
+Do not change or authorize product code, live package integration, real data,
+persistence, simulation runtime, optimization, recommendations, treatment
+assignment, pilot, production, MMM numerical truth, GeoX numerical truth, or any
+package-side agent. Do not modify MMM or GeoX repositories.
