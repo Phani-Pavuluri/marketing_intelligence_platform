@@ -4,7 +4,7 @@
 **Owner:** MIP program owner
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
-**Verified against:** MIP `3520176126d129e9288a9ce37591299ec856650a`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `ee9673c13e69082367c1727568946ac4c1a01015`
+**Verified against:** MIP `main` `18ab0d0c798dfcedd3f07034f4561320929477ea`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `ee9673c13e69082367c1727568946ac4c1a01015`
 **Update trigger:** a merged checkpoint, completed gate, or changed authority state.
 
 ## Current phase
@@ -14,17 +14,18 @@ contract and fixture-journey design is merged, while package integration remains
 blocked. P0–P8 and R0–R6 are canonical in
 [`ROADMAP.md`](../roadmap/ROADMAP.md).
 
-The cross-repository coordination control plane is merged and closed at MIP
-`3520176`; its pinned state remains informative only and fails closed when a
-sibling remote main changes. The active post-merge reconciliation is MIP-only
-governance and does not reopen that workstream; see
+The cross-repository coordination control plane is merged and closed at prior
+MIP closure `3520176`; current MIP `main` at this review is `18ab0d0`. Its
+pinned historical state remains informative only and fails closed when a sibling
+remote main changes. The active post-merge reconciliation is MIP-only governance
+and does not reopen that workstream; see
 [Coordination State](CROSS_REPOSITORY_COORDINATION_STATE.json).
 
 ## Verified checkpoints and completed milestone
 
 | Repository | Verified checkpoint | Current verified evidence |
 |---|---|---|
-| MIP | `3520176` prior coordination closure | P0–P8 consolidation, P2 consumer design, and the merged coordination control plane. |
+| MIP | `18ab0d0` current main / `3520176` prior coordination closure | P0–P8 consolidation, P2 consumer design, and the merged coordination control plane. |
 | MMM | `1b75d1d` | `MMMPublicSimulationExport`, compatibility contract/fixtures, and closed V2 workflow reconciliation. |
 | GeoX | `ee9673c` observed / `e0cef94` prior V2 closure | numerical-truth validation, governed-readout contract/fixtures, and one authorized producer-owned builder task covering temporal/version semantics plus builder/package entrypoint. |
 

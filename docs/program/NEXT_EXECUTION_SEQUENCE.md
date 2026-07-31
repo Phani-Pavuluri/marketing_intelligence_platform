@@ -4,7 +4,7 @@
 **Owner:** MIP program owner with MMM and GeoX owners
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
-**Verified against:** MIP `3520176`; MMM `origin/main` `1b75d1d`; GeoX `origin/main` `ee9673c`
+**Verified against:** MIP `main` `18ab0d0` / prior coordination closure `3520176`; MMM `origin/main` `1b75d1d`; GeoX `origin/main` `ee9673c`
 **Update trigger:** a prerequisite merge, D6 packet, or explicit task authorization.
 
 1. **GeoX and MMM:** adopt the coordination protocol in parallel (proposed only).
@@ -23,7 +23,9 @@
 The merged coordination control plane is a completed prerequisite. Steps 1 and
 2 may proceed in parallel where their own repository gates permit.
 GeoX authorizes its own builder task; MIP coordination cannot add a dependency
-or authorize that task. Step 4 depends on live merged GeoX producer evidence
-and declared consumer verification; steps 5–7 depend on all prior producer and
-consumer evidence. Live engines, real
+or authorize that task. Step 3 depends on live merged GeoX producer evidence at
+an exact pin and required consumer verification. Step 4 depends on both that
+live merged GeoX producer evidence and merged MMM normalization/certified-fixture
+evidence, with the declared consumer verification. Steps 5–6 depend on the
+preceding producer and consumer evidence. No step 7 exists. Live engines, real
 data, P6 decision workflows, pilot, and production remain blocked future phases.

@@ -17,14 +17,15 @@ def test_cross_repository_coordination_control_plane() -> None:
     state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
     assert state["schema_version"] == "mip_cross_repository_coordination_v1"
     assert state["coordinator_repository"] == "Phani-Pavuluri/marketing_intelligence_platform"
-    expected_pins = {
+    historical_snapshot_pins = {
         "mip": "3520176126d129e9288a9ce37591299ec856650a",
         "mmm": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421",
         "geox": "ee9673c13e69082367c1727568946ac4c1a01015",
     }
+    current_mip_main_at_review = "18ab0d0c798dfcedd3f07034f4561320929477ea"
     repositories = {entry["id"]: entry for entry in state["repositories"]}
-    assert set(repositories) == set(expected_pins)
-    for repository_id, sha in expected_pins.items():
+    assert set(repositories) == set(historical_snapshot_pins)
+    for repository_id, sha in historical_snapshot_pins.items():
         entry = repositories[repository_id]
         assert entry["observed_remote_main_sha"] == sha
         assert entry["evidence_paths"]
@@ -32,7 +33,7 @@ def test_cross_repository_coordination_control_plane() -> None:
     assert repositories["mip"]["latest_completed_task"] == (
         "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001"
     )
-    assert repositories["mip"]["latest_closure_sha"] == expected_pins["mip"]
+    assert repositories["mip"]["latest_closure_sha"] == historical_snapshot_pins["mip"]
     assert repositories["mip"]["remote_feature_branch_cleanup"] == (
         "observed_deleted_from_origin"
     )
@@ -71,7 +72,7 @@ def test_cross_repository_coordination_control_plane() -> None:
         entry for entry in workstreams if entry["id"] == "WS-MIP-COORDINATION-001"
     )
     assert mip_coordination["status"] == "merged"
-    assert mip_coordination["verified_sha"] == expected_pins["mip"]
+    assert mip_coordination["verified_sha"] == historical_snapshot_pins["mip"]
     assert "live MIP origin/main execution state" in mip_coordination[
         "live_resolution_condition"
     ]
@@ -149,8 +150,25 @@ def test_cross_repository_coordination_control_plane() -> None:
     assert "must not be cached in the shared snapshot" in protocol
     for path in (CURRENT_STATE_PATH, CHECKPOINTS_PATH, SEQUENCE_PATH):
         text = path.read_text(encoding="utf-8")
-        for sha in expected_pins.values():
+        for sha in (
+            current_mip_main_at_review,
+            historical_snapshot_pins["mmm"],
+            historical_snapshot_pins["geox"],
+        ):
             assert sha in text or sha[:7] in text
+    sequence_text = SEQUENCE_PATH.read_text(encoding="utf-8")
+    assert "steps 5–7" not in sequence_text
+    assert "No step 7 exists." in sequence_text
+    assert (
+        "Step 3 depends on live merged GeoX producer evidence at\n"
+        "an exact pin and required consumer verification."
+    ) in sequence_text
+    assert (
+        "Step 4 depends on both that\n"
+        "live merged GeoX producer evidence and merged MMM normalization/certified-fixture\n"
+        "evidence, with the declared consumer verification."
+    ) in sequence_text
+    assert "Steps 5–6 depend on the\npreceding producer and consumer evidence." in sequence_text
     assert "implemented" not in state["authority"].values()
     assert state["authority"]["capability_authorizations_changed"] is False
     history = HISTORY_PATH.read_text(encoding="utf-8")
@@ -183,7 +201,18 @@ def test_cross_repository_coordination_control_plane() -> None:
     assert execution_state["task_id"] == (
         "MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001"
     )
-    assert execution_state["status"] == "ready_for_review"
-    assert "**Status:** ready_for_review" in active_task
-    assert "**Current decision:** `ready_for_review`" in report
+    assert execution_state["current_mip_main_at_review"] == current_mip_main_at_review
+    assert execution_state["prior_task_closure_sha"] == historical_snapshot_pins["mip"]
+    if execution_state["status"] == "ready_for_review":
+        implementation_sha = execution_state["implementation_commit_sha"]
+        assert isinstance(implementation_sha, str)
+        assert len(implementation_sha) == 40
+        assert f"**Correction implementation:** `{implementation_sha}`" in active_task
+        assert f"**Correction implementation:** `{implementation_sha}`" in report
+        assert "implementation_lineage" not in execution_state
+        assert "**Current decision:** `ready_for_review`" in report
+    else:
+        assert execution_state["status"] == "changes_requested"
+        assert "**Status:** changes_requested" in active_task
+        assert "**Current decision:** `changes_requested`" in report
     assert repositories["mip"]["active_task_status"] == "merged"
