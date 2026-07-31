@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready for review
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -319,6 +319,11 @@ authority impact.
 - Full validation passes or the task stops blocked.
 
 ## Prohibited actions
+
+Implementation, validation, and publication are complete. The exact remote
+review head must receive separate external approval before any merge session.
+No pull request, merge, branch deletion, sibling modification, or capability
+authorization is permitted while this task remains `ready_for_review`.
 
 Do not modify MMM or GeoX. Do not create a PR. Do not merge, squash, rebase,
 force-push, or delete branches. Do not implement P2 consumers, adapters, engine
