@@ -37,11 +37,37 @@ Every new or resumed session must perform this sequence before task discovery:
 7. Run `git switch main`.
 8. Run `git pull --ff-only origin main`.
 9. Prove `git rev-parse main` equals `git rev-parse origin/main`.
-10. Only then read `EXECUTION_STATE.json`, `ACTIVE_TASK.md`, the context index,
-    relevant program files, prerequisites, and sibling-repository checkpoints.
+10. Run `make resume-active-task`. It reads the canonical state pointer from
+    `origin/main` before any branch-specific task prose, then selects only the
+    exact verified remote-backed executable branch.
+11. Only after successful executable resolution read `ACTIVE_TASK.md`, the
+    context index, relevant program files, prerequisites, and sibling-repository
+    checkpoints. For review-only or non-executable states, remain on main and
+    stop without treating task prose as execution authority.
 
 Missing credentials, remote refs, history, Docker, dependencies, or verifiable
 state is a blocker. Do not substitute cached chat context.
+
+## Canonical active-task resolver
+
+`scripts/resolve_active_task.py` is the repository-authored active-task
+resolver; `make resume-active-task` is its supported entry point. It validates
+repository/origin identity, worktree hygiene, synchronized main, state schema,
+authorization, lifecycle, branch ancestry, branch-state agreement, and exact
+local/remote branch-head equality before task instructions may be read.
+
+`EXECUTION_STATE.json` on `origin/main` is the sole machine-readable current
+task pointer. `ACTIVE_TASK.md` and `LATEST_COMPLETION_REPORT.md` are derived
+human-readable views and must each expose exactly one current status/decision
+matching state. Historical review/rejection evidence must be labeled historical
+and cannot become current authority. The context index must not repeat the
+active task ID.
+
+The resolver remains on synchronized main for `idle`, `proposed`, `merged`, and
+`superseded`; reports `ready_for_review` as review-only; and permits `blocked`
+or `changes_requested` only when execution or correction authorization is true.
+It fails closed with a nonzero status for origin, worktree, history, ancestry,
+state, authority, branch, or human-view inconsistency.
 
 ## Stable paths, task authoring, and default mode
 

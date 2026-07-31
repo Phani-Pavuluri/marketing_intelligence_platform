@@ -4,8 +4,7 @@
 **Owner:** MIP program owner
 **Last updated:** 2026-07-30
 **Last verified:** 2026-07-30
-**Verified against:** MIP authorization head
-`f83e91ef883af88808e03184b96bea26fba5eef8`
+**Verified against:** execution state on synchronized `origin/main`
 **Update trigger:** canonical source-path or bootstrap change.
 
 ## Fresh Chat Bootstrap
@@ -18,12 +17,15 @@ Use this prompt in a fresh ChatGPT/Codex session:
 > `docs/tasks/`, and stop on unrelated tracked or other unexpected untracked
 > paths. Run `git fetch --prune origin`; hydrate shallow or missing required
 > history; run `git switch main` and `git pull --ff-only origin main`; and prove
-> `git rev-parse main` equals `git rev-parse origin/main`. Then read `AGENTS.md`
-> and all stable `docs/execution/` files, followed by the seven canonical
-> `docs/program/` files. Summarize synchronized current state, active task,
-> latest completion, blockers, dependencies, authority boundaries, and next
-> eligible work. Do not modify files or authorize work unless explicitly
-> requested.
+> `git rev-parse main` equals `git rev-parse origin/main`. Run
+> `make resume-active-task` before reading branch-specific task instructions.
+> It resolves the canonical pointer on `origin/main`, selects only an exact
+> verified executable branch, and reports review-only or non-executable states
+> without guessing. Then read `AGENTS.md`, the stable `docs/execution/` files,
+> and the seven canonical `docs/program/` files. Summarize synchronized current
+> state, active task, latest completion, blockers, dependencies, authority
+> boundaries, and next eligible work. Do not modify files or authorize work
+> unless explicitly requested.
 
 ## Canonical program memory
 

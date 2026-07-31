@@ -1,4 +1,4 @@
-.PHONY: validate validate-docker validate-host validate-public-deployment clean-junk
+.PHONY: validate validate-docker validate-host validate-public-deployment resume-active-task clean-junk
 
 validate:
 	./scripts/validate_ci_local.sh --docker
@@ -11,6 +11,9 @@ validate-host:
 
 validate-public-deployment:
 	./scripts/validate_public_demo_requirements_install.sh
+
+resume-active-task:
+	poetry run python scripts/resolve_active_task.py
 
 clean-junk:
 	find . -type f \( -name '.DS_Store' -o -name 'Thumbs.db' -o -name '*.py[co]' \) -delete

@@ -11,11 +11,15 @@ Before task discovery or implementation:
    is absent, hydrate the required history before continuing.
 3. Run `git switch main` and `git pull --ff-only origin main`.
 4. Verify `git rev-parse main` exactly equals `git rev-parse origin/main`.
-5. Read, in order:
-   - `docs/execution/EXECUTION_STATE.json`
-   - `docs/execution/ACTIVE_TASK.md`
-   - `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-   - the relevant `docs/program/` files.
+5. Run `make resume-active-task`. It reads the canonical pointer from
+   `origin/main` and either selects the exact remote-backed executable branch or
+   reports a non-executable/review-only state.
+6. Read `docs/execution/ACTIVE_TASK.md` only after a successful executable
+   resolution and exact local/remote branch-head proof. Then read the context
+   index (`docs/execution/REPOSITORY_CONTEXT_INDEX.md`) and relevant
+   `docs/program/` files. The stable execution files are
+   `docs/execution/EXECUTION_STATE.json`, `docs/execution/ACTIVE_TASK.md`, and
+   `docs/execution/LATEST_COMPLETION_REPORT.md`.
 
 Stop rather than guess if synchronization, history hydration, execution files,
 authorization, prerequisites, or repository state cannot be verified. Chats and
@@ -23,9 +27,10 @@ pasted summaries are never authoritative repository state.
 
 ## Execute the active task
 
-Verify the authorized task, its task-authoring boundary, prerequisites, owned
-files, and exact feature branch. Resume only when tracked changes are
-task-owned. Run focused and full validation, including Docker-backed
+Use `make resume-active-task` rather than manually discovering a branch. Verify
+the authorized task, its task-authoring boundary, prerequisites, owned files,
+and exact feature branch. Resume only when tracked changes are task-owned. Run
+focused and full validation, including Docker-backed
 `make validate`; write `docs/execution/LATEST_COMPLETION_REPORT.md`; update
 `docs/execution/EXECUTION_STATE.json` to `ready_for_review` with
 `merge_authorized: false`; commit and publish the exact remote feature-branch
