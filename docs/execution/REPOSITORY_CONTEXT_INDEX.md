@@ -4,20 +4,26 @@
 **Owner:** MIP program owner
 **Last updated:** 2026-07-30
 **Last verified:** 2026-07-30
-**Verified against:** MIP `a2bda05fdb32ee621963a6c61261e4f92c67c89e`
-**Update trigger:** canonical source-path change.
+**Verified against:** MIP authorization head
+`f83e91ef883af88808e03184b96bea26fba5eef8`
+**Update trigger:** canonical source-path or bootstrap change.
 
 ## Fresh Chat Bootstrap
 
-Use this prompt in a fresh ChatGPT chat:
+Use this prompt in a fresh ChatGPT/Codex session:
 
-> Use connected GitHub as the source of truth. Treat
+> Use connected GitHub and synchronized Git as the source of truth. Treat
 > `Phani-Pavuluri/marketing_intelligence_platform` as the primary repository.
-> Read `AGENTS.md` and all stable `docs/execution/` files, then read the seven
-> canonical `docs/program/` files. Verify current `main` and connected
-> repository checkpoints. Summarize current state, the active task, latest
-> completion, blockers, dependencies, authority boundaries, and next eligible
-> work. Do not modify files or authorize work unless explicitly requested.
+> First classify the worktree: allow untracked content only below `.codex/` and
+> `docs/tasks/`, and stop on unrelated tracked or other unexpected untracked
+> paths. Run `git fetch --prune origin`; hydrate shallow or missing required
+> history; run `git switch main` and `git pull --ff-only origin main`; and prove
+> `git rev-parse main` equals `git rev-parse origin/main`. Then read `AGENTS.md`
+> and all stable `docs/execution/` files, followed by the seven canonical
+> `docs/program/` files. Summarize synchronized current state, active task,
+> latest completion, blockers, dependencies, authority boundaries, and next
+> eligible work. Do not modify files or authorize work unless explicitly
+> requested.
 
 ## Canonical program memory
 

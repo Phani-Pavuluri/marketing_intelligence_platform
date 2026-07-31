@@ -4,22 +4,35 @@ from pathlib import Path
 
 ROOT = Path(__file__).parents[2]
 EXECUTION = ROOT / "docs" / "execution"
+STANDARD = EXECUTION / "TASK_EXECUTION_STANDARD.md"
 STATE_PATH = EXECUTION / "EXECUTION_STATE.json"
 ACTIVE_TASK = EXECUTION / "ACTIVE_TASK.md"
 REPORT = EXECUTION / "LATEST_COMPLETION_REPORT.md"
+CONTEXT_INDEX = EXECUTION / "REPOSITORY_CONTEXT_INDEX.md"
 AGENTS = ROOT / "AGENTS.md"
 STATUSES = {
-    "idle", "proposed", "authorized", "in_progress", "blocked",
-    "ready_for_review", "changes_requested", "approved_for_merge", "merged",
+    "idle",
+    "proposed",
+    "authorized",
+    "in_progress",
+    "blocked",
+    "ready_for_review",
+    "changes_requested",
+    "merged",
     "superseded",
 }
-BOOTSTRAP_TASK_ID = "MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_001"
+SHA_PATTERN = r"[0-9a-f]{40}"
+
+
+def _assert_sha(value: object) -> None:
+    assert isinstance(value, str)
+    assert re.fullmatch(SHA_PATTERN, value)
 
 
 def test_repo_native_execution_handoff_is_consistent() -> None:
     required_paths = (
-        EXECUTION / "TASK_EXECUTION_STANDARD.md",
-        EXECUTION / "REPOSITORY_CONTEXT_INDEX.md",
+        STANDARD,
+        CONTEXT_INDEX,
         ACTIVE_TASK,
         REPORT,
         STATE_PATH,
@@ -27,8 +40,9 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
     )
     for path in required_paths:
         assert path.is_file()
+
     state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
-    assert state["schema_version"] == "mip_repo_execution_state_v1"
+    assert state["schema_version"] == "mip_repo_execution_state_v2"
     assert state["status"] in STATUSES
     task_id = state["task_id"]
     assert isinstance(task_id, str) and task_id
@@ -38,34 +52,66 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         "capability_authorizations_changed",
     ):
         assert isinstance(state[key], bool)
+    _assert_sha(state["base_sha"])
+    _assert_sha(state["authorization_head_sha"])
     assert (ROOT / state["task_path"]).is_file()
     assert (ROOT / state["completion_report_path"]).is_file()
     assert task_id in ACTIVE_TASK.read_text(encoding="utf-8")
     assert task_id in REPORT.read_text(encoding="utf-8")
+    assert state["capability_authorizations_changed"] is False
+
     agents = AGENTS.read_text(encoding="utf-8")
-    stable_paths: tuple[str, ...] = (
+    for stable_path in (
         "docs/execution/EXECUTION_STATE.json",
         "docs/execution/ACTIVE_TASK.md",
         "docs/execution/LATEST_COMPLETION_REPORT.md",
         "docs/execution/REPOSITORY_CONTEXT_INDEX.md",
-    )
-    for stable_path in stable_paths:
+    ):
         assert stable_path in agents
-    context_index = (EXECUTION / "REPOSITORY_CONTEXT_INDEX.md").read_text(
-        encoding="utf-8"
-    )
-    assert "Fresh Chat Bootstrap" in context_index
-    assert "connected GitHub as the source of truth" in context_index
-    if state["status"] == "ready_for_review":
+
+    standard = STANDARD.read_text(encoding="utf-8")
+    context_index = CONTEXT_INDEX.read_text(encoding="utf-8")
+    combined_bootstrap = f"{agents}\n{standard}\n{context_index}"
+    standard_flat = " ".join(standard.split())
+    for command in (
+        "git fetch --prune origin",
+        "git switch main",
+        "git pull --ff-only origin main",
+        "git rev-parse main",
+        "git rev-parse origin/main",
+    ):
+        assert command in combined_bootstrap
+    for local_only_path in (".codex/", "docs/tasks/"):
+        assert local_only_path in agents
+        assert local_only_path in standard
+        assert local_only_path in context_index
+    assert "unexpected untracked" in combined_bootstrap
+    assert "git fetch --unshallow origin" in standard
+    assert "base_sha..authorization_head_sha" in standard
+
+    assert "No pre-merge approval-metadata commit" in standard_flat
+    assert "git merge --ff-only" in standard
+    assert "Docker-backed `make validate`" in standard
+    assert "exactly one post-merge closure commit" in standard_flat
+    assert "exact remote feature-branch head SHA" in agents
+    assert "Persisted `merge_authorized` remains false" in standard
+
+    if state["status"] in {"authorized", "in_progress", "ready_for_review"}:
         assert state["task_execution_authorized"] is True
         assert state["merge_authorized"] is False
-        assert re.fullmatch(r"[0-9a-f]{7,64}", state["implementation_commit_sha"])
         assert state["reviewed_head_sha"] is None
         assert state["approval_commit_sha"] is None
-    if state["status"] == "approved_for_merge":
+    if state["status"] == "ready_for_review":
+        _assert_sha(state["implementation_commit_sha"])
+    if state["status"] == "blocked":
         assert state["task_execution_authorized"] is True
-        assert state["merge_authorized"] is True
-        assert state["reviewed_head_sha"]
-        assert state["approval_commit_sha"]
-    if task_id == BOOTSTRAP_TASK_ID:
-        assert state["capability_authorizations_changed"] is False
+        assert state["merge_authorized"] is False
+        assert state["reviewed_head_sha"] is None
+        assert state["approval_commit_sha"] is None
+        _assert_sha(state["implementation_commit_sha"])
+        assert state["blockers"]
+    if state["status"] == "merged":
+        assert state["task_execution_authorized"] is False
+        assert state["merge_authorized"] is False
+        _assert_sha(state["reviewed_head_sha"])
+        assert state["approval_commit_sha"] is None

@@ -1,36 +1,70 @@
-# MIP Repository Execution Handoff V1
+# MIP Repository Execution Handoff V2
 
 **Status:** active execution standard
 **Owner:** MIP program governance
 **Last updated:** 2026-07-30
 **Last verified:** 2026-07-30
-**Verified against:** MIP `a2bda05fdb32ee621963a6c61261e4f92c67c89e`
+**Verified against:** authorized task boundary
+`f83e91ef883af88808e03184b96bea26fba5eef8`
 **Update trigger:** an approved execution-governance change.
 
 ## Source precedence
 
-1. Verified Git repository state and committed behavior.
+1. Synchronized Git repository state and committed behavior.
 2. `docs/program/` canonical state.
 3. `docs/execution/` active task and execution state.
 4. Active contracts, roadmaps, ADRs, and validation evidence.
 5. Archived or superseded documents.
 6. Chats and pasted summaries.
 
-A lower-ranked source cannot override a higher-ranked one.
+A lower-ranked source cannot override a higher-ranked one. Repository evidence
+is not synchronized until the bootstrap below passes.
 
-## Stable paths and default mode
+## Mandatory session bootstrap
+
+Every new or resumed session must perform this sequence before task discovery:
+
+1. Resolve the repository root, `origin`, and expected repository identity.
+2. Inspect `git status --porcelain=v1 --untracked-files=all`.
+3. Fail on unrelated tracked changes. During an authorized resumption, every
+   tracked change must be task-owned and explained.
+4. Permit local-only untracked paths only below `.codex/` and `docs/tasks/`.
+   Never stage or commit them. Fail on every other unexpected untracked path.
+5. Run `git fetch --prune origin`.
+6. If the clone is shallow, use `git fetch --unshallow origin`; if a required
+   ancestor is still absent, fetch sufficient additional history and verify the
+   required commit explicitly.
+7. Run `git switch main`.
+8. Run `git pull --ff-only origin main`.
+9. Prove `git rev-parse main` equals `git rev-parse origin/main`.
+10. Only then read `EXECUTION_STATE.json`, `ACTIVE_TASK.md`, the context index,
+    relevant program files, prerequisites, and sibling-repository checkpoints.
+
+Missing credentials, remote refs, history, Docker, dependencies, or verifiable
+state is a blocker. Do not substitute cached chat context.
+
+## Stable paths, task authoring, and default mode
 
 Exactly one current copy exists at `docs/execution/ACTIVE_TASK.md`,
 `docs/execution/LATEST_COMPLETION_REPORT.md`, and
 `docs/execution/EXECUTION_STATE.json`. Future tasks replace these files in
 place; Git history preserves prior versions.
 
+After explicit user authorization, task authoring may replace only those three
+stable files on `main`. The task's `base_sha` identifies the pre-authoring
+content base. The synchronized post-authoring `main` is the
+`authorization_head_sha`; its `base_sha..authorization_head_sha` diff must
+contain only those three files. Create the feature branch from the authorization
+head, never from stale local state.
+
 The default mode is `branch_and_fast_forward`:
 
 ```text
-task proposed → user approval → task/state committed to main → feature-branch execution
-→ completion report → ready_for_review → GitHub/diff review → exact-head approval
-→ fast-forward merge → push/cleanup → merged → next task replaces stable files
+task proposed → user authorization → stable task metadata on main
+→ synchronized feature-branch execution → completion report
+→ ready_for_review → exact remote-head review and external approval
+→ validation → fast-forward implementation → push and cleanup
+→ one closure commit → synchronized merged state
 ```
 
 No pull request is required. `direct_to_main` is permitted only when the active
@@ -38,33 +72,76 @@ task explicitly authorizes it.
 
 ## Statuses and fail-closed rules
 
-Allowed statuses are `idle`, `proposed`, `authorized`, `in_progress`,
-`blocked`, `ready_for_review`, `changes_requested`, `approved_for_merge`,
-`merged`, and `superseded`.
+Allowed V2 statuses are `idle`, `proposed`, `authorized`, `in_progress`,
+`blocked`, `ready_for_review`, `changes_requested`, `merged`, and `superseded`.
+`approved_for_merge` is a legacy V1 persisted state and is not used in V2.
 
-Codex must stop if task status is not authorized; task authorization is false;
-`main` differs from base; a prerequisite is absent; task/state disagree; branch
-does not match; unrelated tracked changes exist; scope or authority is exceeded;
-validation cannot complete (including Docker or dependency failure); merge
-approval is absent; or the branch changes after reviewed head is recorded.
-Proposed, implemented, or validated never means authorized.
+Codex must stop if synchronization fails; main differs from remote main; the
+task-authoring boundary contains other paths; task status is not executable;
+task authorization is false; a prerequisite is absent; task/state disagree;
+the branch does not match; unrelated tracked changes or unexpected untracked
+paths exist; scope or authority is exceeded; required validation cannot
+complete; exact-head approval is absent; main moved; or the remote feature head
+changes after approval. Proposed, implemented, or validated never means
+authorized.
 
-## Authoring, reporting, review, and merge
+## Execution and completion reporting
 
-After user approval, ChatGPT may write the full task into ACTIVE_TASK and state
-on `main`; that metadata authorizes only the named task, never a product
-capability. Before completion, Codex writes the completion report with task and
-repository identity, mode, base/branch/implementation commit, changed files,
-prerequisites, deliverables, acceptance results, focused/full validation, Ruff,
-mypy, diff check, Docker result, GitHub-observed versus local evidence,
-limitations, deferred work, authority impact, merge readiness, and local-only
-paths. It then records `ready_for_review` while merge authorization remains
-false.
+Execution remains within owned files. Before review, Codex writes the completion
+report with:
 
-ChatGPT review uses current main, all stable execution files from the branch,
-complete branch diff and commits, and available GitHub CI. Approval binds an
-exact reviewed head. Merge requires `approved_for_merge`, `merge_authorized`, a
-populated reviewed head that remains an ancestor, only execution-approval
-metadata after it, and passed required validation. Merge is fast-forward only;
-then push, synchronize, delete both branch copies, set state `merged`, and
-preserve the report on main.
+- task, repository, execution mode, base, authorization head, feature branch,
+  implementation commit, and exact published review head;
+- task-authoring boundary and prerequisite evidence;
+- changed files, deliverables, and acceptance results;
+- focused and full validation, Ruff, mypy, `git diff --check`, Docker-backed
+  `make validate`, and GitHub-observed versus local evidence;
+- limitations, deferred work, authority impact, merge readiness, and local-only
+  paths.
+
+The published feature branch ends at `ready_for_review` with
+`task_execution_authorized: true`, `merge_authorized: false`,
+`reviewed_head_sha: null`, and `approval_commit_sha: null`. The exact review head
+is the remote branch ref; it cannot be embedded in its own commit.
+
+## Exact-head approval and merge
+
+Approval is an external user decision that names or unambiguously accepts the
+exact remote feature-branch head SHA reported for review. No pre-merge
+approval-metadata commit is created. Persisted `merge_authorized` remains false
+until closure because changing it would change the reviewed branch.
+
+A merge session must:
+
+1. Complete the mandatory bootstrap and verify unchanged
+   `authorization_head_sha` on `main`.
+2. Fetch the remote feature branch and prove its head equals the approved SHA.
+3. Verify the approved head descends from the authorization head and its diff is
+   limited to owned files.
+4. Run focused checks and Docker-backed `make validate` on the exact approved
+   tree.
+5. Run `git switch main` and `git merge --ff-only <approved-sha>`.
+6. Rerun required validation on the fast-forwarded tree, push `main`, and prove
+   local and remote main equal the approved implementation head.
+7. Delete the remote feature branch, delete the local feature branch where
+   present, and observe the cleanup results.
+
+Any mismatch stops the merge. A pull request, squash, rebase, merge commit, or
+force update does not satisfy this workflow.
+
+## Single closure commit
+
+After the approved implementation is on remote `main` and cleanup has been
+observed, update only the stable task/state/report files and create exactly one
+post-merge closure commit. It records:
+
+- approval source and exact reviewed head;
+- authorization head and implementation/merged-main head;
+- validation evidence and GitHub/local synchronization;
+- branch-cleanup results;
+- limitations, deferred work, and authority impact.
+
+The merged state sets both authorization booleans false, preserves
+`approval_commit_sha: null`, and records the reviewed head. Validate the closure
+metadata, push the one closure commit, and again prove local main equals remote
+main. The closure commit does not authorize a product or engine capability.
