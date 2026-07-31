@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -125,6 +125,16 @@ On success:
 - keep capability authority unchanged;
 - push and verify the exact remote feature head;
 - stop without PR, merge, or branch deletion.
+
+## Second correction execution result
+
+Corrected implementation `4c93a7c300b3471ffee2a11ff449094e82a1f11d`
+removes mutable feature-branch status and head from the shared coordination
+snapshot, adds a stable exact-branch evidence policy, correctly separates the
+two review decisions from the first correction implementation in history, and
+extends the focused test to enforce both boundaries. The task is ready for a
+new exact-head review only: `merge_authorized` and PR authorization remain
+`false`; capability authority is unchanged.
 
 ## Prohibited actions
 

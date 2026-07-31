@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
-  "status": "changes_requested",
+  "status": "ready_for_review",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "4ddbe8323de6af44086da34001ec60072b58c1e8",
@@ -17,7 +17,7 @@
   "reviewed_head_sha": null,
   "rejected_review_head_sha": "96815daf3cfa3d8d5c658016219784e8e94947b8",
   "prior_rejected_review_head_sha": "55b5dc7b6d58d268688955daa84ec9378ebdc8c7",
-  "implementation_commit_sha": null,
+  "implementation_commit_sha": "4c93a7c300b3471ffee2a11ff449094e82a1f11d",
   "rejected_implementation_commit_sha": "067aeca571f2702b88aee92f8647ededee1df0f1",
   "prior_rejected_implementation_commit_sha": "47ea2dc6f9a0096cfc76c975c6516c777ad20968",
   "approval_commit_sha": null,
@@ -33,11 +33,8 @@
   "coordination_protocol_adoption_required_in_geox": true,
   "full_suite_validation_required": true,
   "validation_scope": "corrected_cross_repository_coordination_governance_plus_docker_make_validate",
-  "blockers": [
-    "MIP-COORD-REVIEW-MUTABLE-FEATURE-STATE-CACHE",
-    "MIP-COORD-REVIEW-HISTORY-EVIDENCE-ATTRIBUTION"
-  ],
-  "review_decision": "changes_requested",
+  "blockers": [],
+  "review_decision": "ready_for_review_after_second_corrections",
   "review_corrections_source": "docs/execution/ACTIVE_TASK.md",
-  "task_authoring_note": "The original task-authoring boundary remains unchanged. External review rejected remote head 96815daf3cfa3d8d5c658016219784e8e94947b8 after corrected implementation 067aeca571f2702b88aee92f8647ededee1df0f1 because mutable feature-branch state remained cached in the shared snapshot and history evidence was attributed to the wrong commit."
+  "task_authoring_note": "The original task-authoring boundary remains unchanged. The rejected review heads 55b5dc7b6d58d268688955daa84ec9378ebdc8c7 and 96815daf3cfa3d8d5c658016219784e8e94947b8 remain historical evidence. Corrected implementation 4c93a7c300b3471ffee2a11ff449094e82a1f11d removes mutable feature-branch state from the shared snapshot and corrects history attribution for a new exact-head review."
 }
