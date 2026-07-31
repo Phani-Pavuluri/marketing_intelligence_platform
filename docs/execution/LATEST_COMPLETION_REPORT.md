@@ -14,6 +14,22 @@
 - **Current correction implementation:** `4c93a7c300b3471ffee2a11ff449094e82a1f11d`
 - **Current decision:** `ready_for_review`
 
+## Post-merge closure
+
+- **Approved exact review head:** `cc1904db8e18b5ba461cca2da738026acadfb43c`.
+- **Merged main before closure:** `cc1904db8e18b5ba461cca2da738026acadfb43c`.
+- **Merge mechanism:** local `git merge --ff-only` followed by `git push origin main`.
+- **Approval provenance:** explicit user approval of the exact remote head; no
+  pre-merge approval-metadata commit was created, so `approval_commit_sha`
+  remains `null`.
+- **Merge validation:** focused coordination/execution/documentation tests: 3
+  passed; focused governance: 340 passed; Docker `make validate`: 2541 passed,
+  5 skipped, 1 warning; Ruff and mypy clean across 471 source files.
+- **Synchronization:** local and `origin/main` both equaled the approved head
+  before this one closure commit.
+- **Cleanup:** the completed feature branch is deleted only after this closure
+  commit is pushed and main synchronization is verified.
+
 ## GitHub-observed source evidence
 
 - MIP `origin/main`: `631763cfb75fc42f8b1bf7025c5bce34c39097b5`.

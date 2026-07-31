@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
-  "status": "ready_for_review",
+  "status": "merged",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "4ddbe8323de6af44086da34001ec60072b58c1e8",
@@ -10,11 +10,11 @@
   "feature_branch": "docs/mip-cross-repository-coordination-control-plane-001",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_execution_authorized": true,
-  "correction_execution_authorized": true,
+  "task_execution_authorized": false,
+  "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
-  "reviewed_head_sha": null,
+  "reviewed_head_sha": "cc1904db8e18b5ba461cca2da738026acadfb43c",
   "rejected_review_head_sha": "96815daf3cfa3d8d5c658016219784e8e94947b8",
   "prior_rejected_review_head_sha": "55b5dc7b6d58d268688955daa84ec9378ebdc8c7",
   "implementation_commit_sha": "4c93a7c300b3471ffee2a11ff449094e82a1f11d",
@@ -36,5 +36,7 @@
   "blockers": [],
   "review_decision": "ready_for_review_after_second_corrections",
   "review_corrections_source": "docs/execution/ACTIVE_TASK.md",
-  "task_authoring_note": "The original task-authoring boundary remains unchanged. The rejected review heads 55b5dc7b6d58d268688955daa84ec9378ebdc8c7 and 96815daf3cfa3d8d5c658016219784e8e94947b8 remain historical evidence. Corrected implementation 4c93a7c300b3471ffee2a11ff449094e82a1f11d removes mutable feature-branch state from the shared snapshot and corrects history attribution for a new exact-head review."
+  "merged_main_sha": "cc1904db8e18b5ba461cca2da738026acadfb43c",
+  "merge_validation": "Focused coordination/execution/documentation tests: 3 passed; focused governance: 340 passed; Docker make validate: 2541 passed, 5 skipped, 1 warning; Ruff and mypy clean across 471 source files.",
+  "task_authoring_note": "The original task-authoring boundary remains unchanged. External approval named reviewed head cc1904db8e18b5ba461cca2da738026acadfb43c; it was fast-forwarded to main. The rejected review heads 55b5dc7b6d58d268688955daa84ec9378ebdc8c7 and 96815daf3cfa3d8d5c658016219784e8e94947b8 remain historical evidence. No approval metadata commit was created before merge and no capability authority changed."
 }

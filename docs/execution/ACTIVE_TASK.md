@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -135,6 +135,17 @@ two review decisions from the first correction implementation in history, and
 extends the focused test to enforce both boundaries. The task is ready for a
 new exact-head review only: `merge_authorized` and PR authorization remain
 `false`; capability authority is unchanged.
+
+## Merge closure
+
+The externally approved exact remote head
+`cc1904db8e18b5ba461cca2da738026acadfb43c` was fast-forwarded to `main` and
+pushed after authored merge validation. The corrected implementation remains
+`4c93a7c300b3471ffee2a11ff449094e82a1f11d`; no pre-merge approval-metadata
+commit was created. This task is closed: task and correction execution
+authorization are false, merge authorization remains false, and no capability
+authority changed. Feature-branch cleanup occurs only after this closure commit
+is synchronized.
 
 ## Prohibited actions
 
