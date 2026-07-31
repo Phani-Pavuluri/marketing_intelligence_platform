@@ -103,6 +103,13 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         assert state["approval_commit_sha"] is None
     if state["status"] == "ready_for_review":
         _assert_sha(state["implementation_commit_sha"])
+    if state["status"] == "blocked":
+        assert state["task_execution_authorized"] is True
+        assert state["merge_authorized"] is False
+        assert state["reviewed_head_sha"] is None
+        assert state["approval_commit_sha"] is None
+        _assert_sha(state["implementation_commit_sha"])
+        assert state["blockers"]
     if state["status"] == "merged":
         assert state["task_execution_authorized"] is False
         assert state["merge_authorized"] is False

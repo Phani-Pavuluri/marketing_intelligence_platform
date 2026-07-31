@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** in-progress governance amendment
+**Status:** blocked pending Docker validation
 **Owner:** MIP repository governance
 **Last updated:** 2026-07-30
 **Last verified:** 2026-07-30
@@ -85,3 +85,12 @@ approves that exact head.
 No product capability, live engine integration, real data, persistence,
 simulation runtime, optimization, recommendation, treatment assignment, pilot,
 or production capability is authorized.
+
+## Current blocker
+
+The implementation is published on the authorized feature branch, and host
+validation passes. This Work Mode runtime has no Docker CLI, so the required
+Docker-backed `make validate` cannot run. The task must remain `blocked`; it
+must not transition to `ready_for_review` until that exact implementation tree,
+plus any task-owned validation metadata changes, passes `make validate` in a
+Docker-capable environment.
