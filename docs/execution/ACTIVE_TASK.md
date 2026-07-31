@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -9,49 +9,30 @@
 
 - **Task ID:** `MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Pre-authoring base:** `main` / `d35fbbb82711b073c3504d5cc0f1b807e9b36c81`
+- **Pre-authoring base:** `d35fbbb82711b073c3504d5cc0f1b807e9b36c81`
+- **Authorization head:** `221b0dedc73432a9b04d331c2544fe807b8f1013`
+- **Synchronized state-only head:** `11c062eb785b3518d531992aa554d0a3a4c0b84b`
 - **Feature branch:** `feat/mip-active-task-context-resolver-001`
-- **Execution mode:** `branch_and_fast_forward`
+- **Rejected implementation:** `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`
+- **Rejected exact review head:** `abf57a6fb0c08d23fb51c56a5ea744445b3ab82c`
 - **Observed MMM main:** `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
 - **Observed GeoX main:** `ee9673c13e69082367c1727568946ac4c1a01015`
 - **Capability authorizations changed:** `false`
-- **Implementation commit:** `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`
 
-## Purpose
+## Review decision
 
-Implement the MIP-owned canonical active-task resolver and simplify the
-repository-native execution handoff so a fresh or resumed agent selects the
-correct remote task branch before reading branch-specific task instructions.
-The resolver must replace manual task discovery, not analytical or product
-logic.
+The exact remote head `abf57a6fb0c08d23fb51c56a5ea744445b3ab82c`
+is not approved. The resolver direction and implementation identity are useful,
+but the candidate violates the authorized path boundary and does not satisfy all
+required fail-closed semantics or the minimum test matrix.
 
-This task addresses the verified workflow failures from the completed
-coordination work: branch-dependent `ACTIVE_TASK.md` discovery, duplicated
-current-state prose, nonexistent or ambiguous implementation SHAs, and tests
-that couple unrelated work to literal task IDs rather than semantic execution
-invariants.
+Correction execution is not authorized yet because one required correction
+needs an explicit scope amendment. Do not modify the branch until the user
+authorizes adding the named path below to this task.
 
-## Current evidence and non-overlap
+## Authority blocker: owned-path amendment required
 
-MIP prior task `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` is merged
-and closed at current MIP `main`
-`d35fbbb82711b073c3504d5cc0f1b807e9b36c81`; execution authorization is false.
-Its completion report retains contradictory pre-merge and merged current-state
-claims, which this task must eliminate by replacing the stable files and adding
-mechanical consistency rules.
-
-MMM is merged with no active implementation task at
-`1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`. GeoX has the separately authorized
-producer-owned task `GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001` at
-`ee9673c13e69082367c1727568946ac4c1a01015`. This MIP task neither modifies nor
-blocks that work.
-
-No existing MIP resolver implementation or authorized resolver task was found at
-task authorization. The completed implementation is recorded below.
-
-## Owned files
-
-Execution may modify only:
+The authorized implementation boundary contains exactly these nine paths:
 
 - `AGENTS.md`
 - `Makefile`
@@ -63,194 +44,83 @@ Execution may modify only:
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 - `tests/test_active_task_context_resolver.py`
 
-Do not modify MIP runtime, contracts, adapters, fixtures, orchestration, UI,
-analytical code, roadmap/program coordination files, MMM, or GeoX.
+The rejected implementation also modifies:
 
-## Task-authoring boundary
+- `tests/test_cross_repository_coordination_control_plane.py`
 
-The pre-authoring base is
-`d35fbbb82711b073c3504d5cc0f1b807e9b36c81`. Task authoring may change only
-`ACTIVE_TASK.md` and `LATEST_COMPLETION_REPORT.md`; one immediately following
-state-only commit may change only `EXECUTION_STATE.json` to record the exact
-authorization head. Create the feature branch from that synchronized state-only
-commit. Stop on any other intervening path or commit.
+That tenth path is outside the authorized boundary. Its change is substantively
+related because the existing test hard-couples repository governance to a prior
+current task, but this relationship does not retroactively grant authority.
+Explicit user authorization is required before this path may become correction-
+owned. Reverting it without a scope amendment is expected to restore the old
+state-coupled full-suite failure; if that occurs, publish `blocked` rather than
+hiding the debt.
 
-## Required implementation
+## Required technical corrections after scope authorization
 
-### 1. Repository-authored resolver
+### 1. Validate human views for every lifecycle state
 
-Add `scripts/resolve_active_task.py` and `make resume-active-task`. From a
-synchronized MIP checkout, the command must deterministically:
+The resolver currently returns immediately for `idle`, `proposed`, `merged`, and
+`superseded`, before validating `ACTIVE_TASK.md` and
+`LATEST_COMPLETION_REPORT.md`. This fails the task's primary closure-consistency
+requirement. Validate the synchronized-main human views before every
+non-executable return, including merged closure state. Detect duplicate or
+contradictory current status/decision declarations in both files while ignoring
+explicitly historical evidence.
 
-1. verify repository root and exact `origin` identity;
-2. classify the worktree and allow local-only untracked content only below
-   `.codex/` and `docs/tasks/`;
-3. fetch and prune `origin` and hydrate required history;
-4. synchronize local `main` with `origin/main` using fast-forward-only behavior;
-5. read the canonical pointer branch-independently from
-   `origin/main:docs/execution/EXECUTION_STATE.json` before reading
-   `ACTIVE_TASK.md`;
-6. validate schema, task ID, status, authorization booleans, feature branch,
-   authorization head, repository identity, and allowed lifecycle transition;
-7. fetch the exact remote feature branch when the state is resumable;
-8. verify the branch descends from the authorization head and that its branch
-   execution state agrees with the main pointer on repository, task ID, branch,
-   and authority;
-9. switch to the exact remote-backed branch and prove local `HEAD` equals the
-   remote branch head before permitting task instruction reads; and
-10. emit a deterministic human-readable and machine-readable resolution summary.
+### 2. Enforce complete schema, authority, and lifecycle agreement
 
-Fail closed on wrong repository/origin, dirty or unexpected worktree, stale or
-diverged main, missing history, missing branch, ancestry failure, task mismatch,
-unauthorized execution, invalid status, inconsistent state, or local/remote head
-mismatch. Never guess a branch or silently create one.
+Validate the exact supported execution-state schema and all required booleans,
+including `pr_creation_authorized`. Require a valid authorization-head SHA for
+every state that needs a feature branch. Replace unchecked key access with
+reason-coded fail-closed errors.
 
-For non-executable states (`idle`, `proposed`, `merged`, or `superseded`), remain
-on synchronized `main`, report the state, and stop without selecting a feature
-branch. `ready_for_review` must be reported as review-only rather than executable.
-`blocked` or `changes_requested` may resume only when the applicable execution or
-correction authorization is explicitly true.
+Define and enforce allowed main-pointer to branch-state transitions. Branch
+agreement must cover repository, task ID, feature branch, authorization head,
+base identity, and all authority fields that must remain invariant. A branch may
+never set merge or PR authority when the main pointer does not authorize it.
 
-### 2. Canonical state and derived prose rules
+### 3. Support the real branch-only correction model
 
-Make `docs/execution/EXECUTION_STATE.json` the sole mutable machine-readable
-current-task pointer. `ACTIVE_TASK.md` and `LATEST_COMPLETION_REPORT.md` remain
-human-readable task and evidence views, but must be mechanically checked against
-state rather than treated as independent current-state authorities.
+`origin/main` remains the stable task-and-branch pointer after authorization;
+mutable `blocked`, `changes_requested`, and `ready_for_review` state lives on the
+feature branch. The current test places `changes_requested` on main and therefore
+does not represent actual review correction flow. Support a main pointer that
+remains `authorized` while the exact feature branch records
+`changes_requested` with explicit correction authorization. Preserve fail-closed
+checks without requiring mutable branch correction authority to equal stale main
+review metadata.
 
-Define and enforce:
+### 4. Complete the minimum semantic test matrix
 
-- exactly one current status/decision in each human-readable stable file;
-- historical review or rejection evidence is explicitly labeled historical and
-  cannot be parsed as current state;
-- closure replaces or normalizes review-era current claims rather than merely
-  appending contradictory merged prose;
-- the repository context index points to canonical sources and never has to
-  repeat the current task ID;
-- stale context-index prose cannot block an unrelated authorized task;
-- current task identity and branch selection come only from execution state.
+Add deterministic temporary-Git tests for every required case, including:
 
-### 3. Exact implementation identity
+- dirty tracked worktree;
+- stale and diverged local main;
+- repository identity mismatch separate from wrong origin;
+- branch authority mismatch, including merge and PR flags;
+- invalid or missing authorization head without uncaught exceptions;
+- allowed and disallowed main-to-branch lifecycle transitions;
+- realistic branch-only `changes_requested` resumption;
+- duplicate current decision in the completion report;
+- contradictory merged closure prose on synchronized main;
+- `idle`, `proposed`, and `superseded` non-executable behavior;
+- existing local feature branch whose head differs from the remote head.
 
-Define `implementation_commit_sha` as the single final implementation-tree
-commit immediately before review-state metadata publication. Earlier commits may
-be retained only as historical lineage. Before `ready_for_review`, validate that
-the SHA:
+The tests must prove that context-index task text is not authority and must not
+require the current task ID to appear in the context index.
 
-- is exactly forty hexadecimal characters;
-- exists as a commit object;
-- is an ancestor of the exact remote review head; and
-- is named consistently in execution state, active task, and completion report.
+### 5. Scope and publication
 
-String length alone is insufficient.
+After explicit scope authorization, correct only the ten resolver-governance
+paths. Keep MMM, GeoX, program coordination files, product code, analytical code,
+runtime, contracts, adapters, fixtures, orchestration, and UI unchanged.
 
-### 4. Bootstrap integration
+Rerun the complete authored validation gate, including Docker-backed
+`make validate`, exact changed-path verification, focused temporary-Git tests,
+JSON and Markdown consistency, Ruff, mypy, and `git diff --check`. Publish one
+new final implementation-tree SHA and one new exact remote review head as
+`ready_for_review`, or publish an accurate `blocked` state.
 
-Update `AGENTS.md`, the execution standard, and the context index so agents:
-
-1. synchronize `main` without reading branch-specific task prose;
-2. run `make resume-active-task`;
-3. read `ACTIVE_TASK.md` only after resolver success and branch proof; and
-4. stop on non-executable, review-only, merged, or contradictory state.
-
-Keep Codex prompts minimal because durable instructions remain in Git.
-
-### 5. Semantic tests
-
-Add isolated deterministic tests using temporary local Git repositories and bare
-remotes. Cover at minimum:
-
-- successful authorized-task resolution and exact branch checkout;
-- merged/no-active-task behavior;
-- `ready_for_review` review-only behavior;
-- authorized correction resumption;
-- wrong origin/repository;
-- dirty tracked and unexpected untracked paths;
-- permitted `.codex/` and `docs/tasks/` local-only paths;
-- stale/diverged main;
-- missing remote branch;
-- authorization-head ancestry failure;
-- main/branch task or authority mismatch;
-- nonexistent implementation SHA;
-- implementation SHA not ancestral to review head;
-- duplicate or contradictory current decisions in Markdown;
-- stale context-index task text not being used for branch selection.
-
-Tests must validate semantics and Git objects, not require the current task ID to
-appear in every document.
-
-## Acceptance criteria
-
-- `make resume-active-task` resolves the exact remote task branch from
-  `origin/main` state before branch-specific instruction reads.
-- Wrong-repository, stale-state, ancestry, ownership, and authority conflicts
-  fail closed with actionable reason codes and nonzero exit status.
-- Merged and review-only states never trigger execution.
-- Execution state is the sole machine current-state pointer.
-- Human-readable stable files cannot contain multiple current decisions.
-- One real, ancestral implementation SHA is required for review.
-- Context-index staleness cannot block unrelated task execution.
-- No sibling repository, product code, capability, or analytical truth changes.
-
-## Validation gate
-
-Run on the exact implementation tree:
-
-- focused resolver and execution-handoff tests;
-- all relevant documentation/governance tests;
-- resolver scenario tests against temporary Git repositories;
-- JSON parsing and Markdown/current-state consistency checks;
-- exact changed-path verification;
-- Ruff on every changed Python file;
-- configured mypy for the resolver surface;
-- `git diff --check`;
-- Docker-backed full `make validate`.
-
-If the complete gate cannot finish successfully, publish an accurate `blocked`
-state with exact validation debt. Focused success cannot hide full-suite debt.
-
-## State transitions
-
-On success, publish `ready_for_review` with one real
-`implementation_commit_sha`, empty blockers, task execution authorization true,
-merge and PR authorization false, reviewed and approval SHAs null, unchanged
-capability authority, and the exact remote branch head reported separately.
-
-On failure, publish `blocked` with specific blockers and evidence, commit and
-push the exact branch head, and stop.
-
-Do not create a PR, merge, squash, rebase, force-push, delete branches, or modify
-MMM or GeoX during execution.
-
-## Execution result
-
-The sole implementation commit is `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`.
-It adds `make resume-active-task` and `scripts/resolve_active_task.py`, updates
-the bootstrap/source-of-truth documentation, and adds isolated temporary-Git
-semantic tests. The resolver selects only the exact remote-backed authorized
-branch from `origin/main` state, reports review-only/non-executable states
-without branch selection, and fails closed on repository, worktree, state,
-authority, ancestry, implementation-identity, or human-view disagreement.
-
-The branch is `ready_for_review`. Task execution authorization remains true for
-review; merge and PR authorization remain false; reviewed and approval SHAs
-remain null; capability authorizations remain unchanged. MMM and GeoX were not
-modified, their adoption remains unauthorized, and the GeoX builder remains
-unmodified and unblocked.
-
-## Deferred owner-repository adoption
-
-This task defines and stabilizes the MIP canonical resolver behavior only. It
-does not authorize MMM or GeoX adoption. After this task is merged and closed:
-
-- MMM may combine coordination-protocol and resolver adoption in one separately
-  authorized MMM task;
-- GeoX may do the same only after its active builder task is merged and closed;
-- each repository must resolve its own `origin/main` and its own feature branch;
-- MIP must not mutate sibling branches or override sibling execution state.
-
-## Prohibited authority
-
-This task does not authorize live engine integration, real data, uploads,
-persistence, scheduling, simulation, optimization, recommendations, treatment
-assignment, LLM decisioning, pilot, production, or package-side agents.
+Do not create a PR, merge, rebase, squash, force-push, delete branches, modify
+siblings, authorize sibling adoption, or change capability authority.
