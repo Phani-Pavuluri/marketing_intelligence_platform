@@ -1,24 +1,27 @@
 {
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-  "task_id": "MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_V2_001",
-  "status": "blocked",
+  "task_id": "MIP_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECOVERY_001",
+  "status": "authorized",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
-  "base_sha": "5eebba6750a3754e4026397d6762c601b1d6a708",
-  "authorization_head_sha": "f83e91ef883af88808e03184b96bea26fba5eef8",
-  "feature_branch": "feat/mip-repo-native-execution-handoff-workflow-v2-001",
+  "base_sha": "e3a6c8cb437296e1319449b471c19301b08d43cb",
+  "authorization_head_sha": "e3a6c8cb437296e1319449b471c19301b08d43cb",
+  "feature_branch": "feat/mip-repo-native-execution-handoff-v2-recovery-001",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": true,
   "merge_authorized": false,
   "reviewed_head_sha": null,
-  "implementation_commit_sha": "90e5074f390426085642ff50a5debec37cf03923",
+  "implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-07-30",
-  "blockers": [
-    "Docker CLI unavailable in the current Work Mode runtime; required Docker-backed make validate has not run."
-  ],
-  "task_authoring_note": "base_sha..authorization_head_sha contains only the approved task-authoring replacements of ACTIVE_TASK.md, EXECUTION_STATE.json, and LATEST_COMPLETION_REPORT.md."
+  "blockers": [],
+  "recovery_target_task_id": "MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_V2_001",
+  "external_merge_pr_number": 48,
+  "external_merge_branch_head_sha": "6313c3e807226d20c260b62a6e863d94a213c533",
+  "external_merge_commit_sha": "e3a6c8cb437296e1319449b471c19301b08d43cb",
+  "external_merge_was_authorized": false,
+  "task_authoring_note": "This is the initial task-authoring state. The final task-authoring update must replace authorization_head_sha with the exact commit whose base_sha..authorization_head_sha diff contains only ACTIVE_TASK.md, EXECUTION_STATE.json, and LATEST_COMPLETION_REPORT.md."
 }
