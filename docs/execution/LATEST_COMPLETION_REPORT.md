@@ -58,3 +58,25 @@ The execution state is `ready_for_review` with this recovery evidence commit as
 its implementation commit. The exact published review head is the remote branch
 ref after the state commit and is reported externally rather than embedded in
 its own commit. Merge authorization remains false.
+
+## Conforming recovery merge closure
+
+- **Approval source:** explicit user approval of exact recovery head
+  `25ea5204bc6210dde9343d6ef49254f6b3689d71`.
+- **Authorization head:** `4091ad0362fed9ddcf3dc7e125b6ac660b651aef`.
+- **Implementation and merged-main head before closure:**
+  `25ea5204bc6210dde9343d6ef49254f6b3689d71`.
+- **Merge mechanism:** local `git merge --ff-only` after the exact-head checks;
+  no pull request or pre-merge approval metadata commit was created.
+- **Validation:** focused execution/docs/governance checks and Docker-backed
+  `make validate` passed before and after the fast-forward (2,540 passed,
+  5 skipped, 1 warning; Ruff and mypy clean across 470 source files).
+- **Synchronization:** local `main` equaled `origin/main` at the merged
+  implementation head before this closure commit.
+- **Cleanup:** local and remote recovery branches were deleted; the stale
+  original V2 feature branch was also deleted remotely.
+
+The earlier GitHub PR #48 merge remains separately recorded as nonconforming.
+This conforming recovery closure does not retroactively authorize it. MMM and
+GeoX adoption remain deferred pending the canonical MIP V2 pin created by this
+closure. No capability authority changed.

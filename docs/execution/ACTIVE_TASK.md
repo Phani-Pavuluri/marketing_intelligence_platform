@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready for review
+**Status:** merged and closed
 **Owner:** MIP repository governance
 **Last updated:** 2026-07-30
 **Last verified:** 2026-07-30
@@ -18,6 +18,8 @@
 - **External branch head:** `6313c3e807226d20c260b62a6e863d94a213c533`
 - **External merge commit:** `e3a6c8cb437296e1319449b471c19301b08d43cb`
 - **Capability authorizations changed:** `false`
+- **Approved recovery head:** `25ea5204bc6210dde9343d6ef49254f6b3689d71`
+- **Conforming merge mechanism:** local fast-forward after exact-head approval
 
 ## Why recovery is required
 
@@ -148,9 +150,10 @@ GeoX workflow adoption reconciliation.
 
 ## Prohibited scope and authority
 
-Recovery evidence and required validation are complete. The exact published
-review head must be approved externally before any merge session; no merge,
-pull request, or branch cleanup is authorized during execution.
+The exact recovery head was explicitly approved, validated, fast-forwarded to
+`main`, pushed, and followed by branch cleanup. This task is merged and closed.
+The earlier PR #48 remains an external nonconforming merge and is not
+retroactively described as conforming or approved.
 
 Do not change or authorize product code, live package integration, real data,
 persistence, simulation runtime, optimization, recommendations, treatment
