@@ -1,50 +1,58 @@
 # TASK_COMPLETION_REPORT_V2
 
-## Identity
+## Identity and recovery lineage
 
 - **Task ID:** `MIP_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECOVERY_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Execution status:** authorized; not started
 - **Execution mode:** `branch_and_fast_forward`
-- **Pre-authoring base:**
-  `e3a6c8cb437296e1319449b471c19301b08d43cb`
-- **Feature branch:**
-  `feat/mip-repo-native-execution-handoff-v2-recovery-001`
+- **Pre-authoring base:** `e3a6c8cb437296e1319449b471c19301b08d43cb`
+- **Task authorization head:** `4091ad0362fed9ddcf3dc7e125b6ac660b651aef`
+- **Feature branch:** `feat/mip-repo-native-execution-handoff-v2-recovery-001`
 - **Recovery target:** `MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_V2_001`
 
-## Verified recovery trigger
+Synchronized `main` is `679e825a6151ee67481c0def9af385952bd533c7`. The
+pre-authoring base through authorization head changes only `ACTIVE_TASK.md`,
+`EXECUTION_STATE.json`, and `LATEST_COMPLETION_REPORT.md`; the single later
+commit `679e825` is the permitted state-only boundary record.
 
-The prior V2 workflow branch was externally merged through GitHub PR #48 while
-its committed state was blocked pending Docker-backed validation and retained
-`merge_authorized: false`, a null reviewed head, and a null approval commit.
-The external branch head was
-`6313c3e807226d20c260b62a6e863d94a213c533`; the resulting merge commit was
-`e3a6c8cb437296e1319449b471c19301b08d43cb`.
+## External-merge record
 
-This authorized task exists to validate and reconcile that repository state. It
-does not retroactively approve PR #48 and does not authorize history rewriting.
+GitHub PR #48 had base `f83e91ef883af88808e03184b96bea26fba5eef8`, external
+branch head `6313c3e807226d20c260b62a6e863d94a213c533`, and merge commit
+`e3a6c8cb437296e1319449b471c19301b08d43cb`. The external head descends from
+the original V2 authorization head `f83e91ef883af88808e03184b96bea26fba5eef8`.
 
-## Authorized-task placeholder
+The original V2 implementation commit was
+`90e5074f390426085642ff50a5debec37cf03923`; its blocked-state branch head was
+`6313c3e807226d20c260b62a6e863d94a213c533`. The original V2 changed paths were
+limited to the workflow/governance files required by that task. PR #48 was
+externally merged while the committed state remained blocked: no conforming
+pre-merge approval record is claimed or invented, and the GitHub merge commit
+does not satisfy the required fast-forward process.
 
-Before `ready_for_review`, replace this placeholder with the complete recovery
-evidence required by `docs/execution/ACTIVE_TASK.md`, including:
+## Validation and acceptance evidence
 
-- task-authoring boundary and synchronized-main evidence;
-- PR #48 metadata, exact lineage, and changed paths;
-- original V2 implementation and blocked-state evidence;
-- explicit approval-record findings without invention;
-- focused, governance, Ruff, mypy, diff, and Docker validation results;
-- exact recovery implementation commit and published branch head;
-- blockers, limitations, deferred work, and branch state;
-- MMM and GeoX pause confirmation;
-- authority impact.
+- Execution-handoff consistency test: **1 passed**.
+- Documentation tests: **1 passed**.
+- Governance tests: **340 passed**.
+- JSON parsing, Markdown/path consistency, and `git diff --check`: **passed**.
+- Ruff and mypy for the applicable focused test: **passed**.
+- Docker-backed `make validate`: **2,540 passed, 5 skipped, 1 warning**;
+  Ruff passed and mypy reported no issues in **470 source files**.
 
-## Current authority
+These are locally execution-reported validation results. The GitHub-observed
+evidence is the committed PR #48 lineage above; this recovery does not claim a
+missing GitHub approval or CI record.
 
-`capability_authorizations_changed` remains `false`. This task changes only
-repository execution metadata. It does not authorize product capabilities,
-live MMM/GeoX integration, real data, persistence, simulation, optimization,
-recommendations, assignment, pilot, production, or package-side agents.
+## Scope, limitations, and authority
 
-No execution result, review approval, merge approval, or recovery completion is
-implied by this placeholder.
+This recovery changes only stable execution metadata. MMM and GeoX are not
+modified and their workflow adoption remains paused until a closed canonical
+MIP V2 pin exists. No product capability, live package integration, real data,
+persistence, simulation, optimization, recommendations, assignment, pilot,
+production, or package-side agents are authorized.
+
+The final ready-for-review state will identify this recovery evidence commit as
+its implementation commit. The exact published review head is the remote branch
+ref after that state commit and is reported externally rather than embedded in
+its own commit.
