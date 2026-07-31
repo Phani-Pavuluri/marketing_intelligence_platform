@@ -10,6 +10,7 @@ CHECKPOINTS_PATH = PROGRAM / "REPOSITORY_CHECKPOINTS.md"
 SEQUENCE_PATH = PROGRAM / "NEXT_EXECUTION_SEQUENCE.md"
 HISTORY_PATH = PROGRAM / "CROSS_REPOSITORY_COORDINATION_HISTORY.md"
 REPORT_PATH = ROOT / "docs" / "execution" / "LATEST_COMPLETION_REPORT.md"
+EXECUTION_STATE_PATH = ROOT / "docs" / "execution" / "EXECUTION_STATE.json"
 
 
 def test_cross_repository_coordination_control_plane() -> None:
@@ -174,8 +175,15 @@ def test_cross_repository_coordination_control_plane() -> None:
     assert "MIP `3520176126d129e9288a9ce37591299ec856650a`" in history
     report = REPORT_PATH.read_text(encoding="utf-8")
     assert "Before `ready_for_review`, replace this section" not in report
-    assert "Current decision:** `ready_for_review`" not in report
     active_task = (ROOT / "docs" / "execution" / "ACTIVE_TASK.md").read_text(
         encoding="utf-8"
     )
     assert "Resume the existing branch" not in active_task
+    execution_state = json.loads(EXECUTION_STATE_PATH.read_text(encoding="utf-8"))
+    assert execution_state["task_id"] == (
+        "MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001"
+    )
+    assert execution_state["status"] == "ready_for_review"
+    assert "**Status:** ready_for_review" in active_task
+    assert "**Current decision:** `ready_for_review`" in report
+    assert repositories["mip"]["active_task_status"] == "merged"
