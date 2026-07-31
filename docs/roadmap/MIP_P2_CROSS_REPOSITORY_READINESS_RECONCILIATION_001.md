@@ -15,7 +15,7 @@ and the pinned coordination state.
 |---|---|---|
 | MIP | `631763cfb75fc42f8b1bf7025c5bce34c39097b5` | Coordination task authorized; P2 journey remains separately unauthorized. |
 | MMM | `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421` | Compatibility foundation is merged; normalization and cross-repository fixtures remain open. |
-| GeoX | `e0cef94c063b03b29e1e1760fb1c2320ce497b56` | Governed-readout fixtures are merged; builder and temporal/version semantics are producer-owned authorized work. |
+| GeoX | `ee9673c13e69082367c1727568946ac4c1a01015` observed / `e0cef94c063b03b29e1e1760fb1c2320ce497b56` prior closure | Governed-readout fixtures are merged; one GeoX-owned authorized builder task advances temporal/version semantics and builder/package entrypoint. |
 
 ## Stable P2 blockers
 

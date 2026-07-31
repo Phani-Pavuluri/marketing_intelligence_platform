@@ -4,7 +4,7 @@
 **Owner:** MIP program owner
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
-**Verified against:** MIP `631763cfb75fc42f8b1bf7025c5bce34c39097b5`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `e0cef94c063b03b29e1e1760fb1c2320ce497b56`
+**Verified against:** MIP `631763cfb75fc42f8b1bf7025c5bce34c39097b5`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `ee9673c13e69082367c1727568946ac4c1a01015`
 **Update trigger:** a merged checkpoint, completed gate, or changed authority state.
 
 ## Current phase
@@ -24,7 +24,7 @@ remote main changes; see [Coordination State](CROSS_REPOSITORY_COORDINATION_STAT
 |---|---|---|
 | MIP | `631763c` observed / `4ddbe83` program checkpoint | P0–P8 consolidation, P2 consumer design, and the authorized coordination task. |
 | MMM | `1b75d1d` | `MMMPublicSimulationExport`, compatibility contract/fixtures, and closed V2 workflow reconciliation. |
-| GeoX | `e0cef94` | numerical-truth validation, governed-readout contract/fixtures, and an authorized producer-owned builder task. |
+| GeoX | `ee9673c` observed / `e0cef94` prior V2 closure | numerical-truth validation, governed-readout contract/fixtures, and one authorized producer-owned builder task covering temporal/version semantics plus builder/package entrypoint. |
 
 The current first evidence tranche remains: certified GeoX experiment evidence
 → MMM calibration compatibility → MMM bounded baseline-versus-candidate

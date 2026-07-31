@@ -3,7 +3,13 @@
   "program_id": "mip_cross_repository_coordination",
   "coordinator_repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "verification_date": "2026-07-31",
-  "stale_state_behavior": "If live remote main differs from observed_remote_main_sha, re-read the sibling execution state and completion report; do not infer status from this snapshot.",
+  "stale_state_behavior": "If live remote main differs from observed_remote_main_sha, apply the deterministic live overlay: re-read origin/main, EXECUTION_STATE.json, ACTIVE_TASK.md, and LATEST_COMPLETION_REPORT.md; record source SHA and verification date; evaluate the dependency from live evidence without rewriting this historical snapshot or granting authority.",
+  "live_overlay_rules": {
+    "source_precedence": ["repository_origin_main", "repository_execution_state", "repository_active_task", "repository_completion_report", "coordination_snapshot"],
+    "merged_dependency_condition": "A dependency on a coordination workstream is satisfied only when the owner's live origin/main execution state records the named task as merged at an externally approved implementation lineage.",
+    "stale_snapshot_behavior": "A cached in_progress or authorized entry is reconciled from the live overlay; it cannot permanently block an otherwise proven merged dependency.",
+    "authority_boundary": "Live overlay changes eligibility assessment only. It does not authorize tasks, capabilities, integrations, or releases."
+  },
   "repositories": [
     {
       "id": "mip",
@@ -13,6 +19,8 @@
       "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md"],
       "active_task_id": "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
       "active_task_status": "authorized",
+      "active_task_authorization_head_sha": "8fd0d30355510b7d239811163680c3dff87bfc7d",
+      "active_task_feature_branch": "docs/mip-cross-repository-coordination-control-plane-001",
       "current_work_summary": "MIP coordination-control-plane governance refresh.",
       "latest_completed_task": "MIP_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECOVERY_001",
       "latest_closure_sha": "38f88467f55d5bc4cc64e5a58b0f08f1639a40d0",
@@ -27,6 +35,8 @@
       "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md", "mmm/contracts/calibration_compatibility.py"],
       "active_task_id": "MMM_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECONCILIATION_001",
       "active_task_status": "merged",
+      "active_task_authorization_head_sha": "dda1f31a1e429a4cede791b4f21a979aefe375c5",
+      "active_task_feature_branch": "feat/mmm-repo-native-execution-handoff-v2-reconciliation-001",
       "current_work_summary": "No active MMM implementation task; coordination-protocol adoption is proposed.",
       "latest_completed_task": "MMM_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECONCILIATION_001",
       "latest_closure_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421",
@@ -37,10 +47,13 @@
     {
       "id": "geox",
       "repository": "Phani-Pavuluri/panel_exp",
-      "observed_remote_main_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56",
+      "observed_remote_main_sha": "ee9673c13e69082367c1727568946ac4c1a01015",
       "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md", "panel_exp/contracts/geox_governed_experiment_readout.py"],
       "active_task_id": "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001",
       "active_task_status": "authorized",
+      "active_task_base_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56",
+      "active_task_authorization_head_sha": "c4c9059a6a6e882a10a356350376d8a64fb14057",
+      "active_task_feature_branch": "feat/geox-governed-readout-builder-package-entrypoint-001",
       "current_work_summary": "Producer-owned deterministic governed-readout builder and temporal/version semantics are authorized in GeoX only.",
       "latest_completed_task": "GEOX_REPO_NATIVE_EXECUTION_HANDOFF_V2_ADOPTION_RECOVERY_001",
       "latest_closure_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56",
@@ -59,7 +72,13 @@
       "dependencies": [],
       "blocked_by": [],
       "evidence_paths": ["docs/execution/ACTIVE_TASK.md", "docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
-      "verified_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5"
+      "verified_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5",
+      "live_resolution_condition": "Satisfied only when live MIP origin/main execution state records MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001 as merged at an externally approved implementation lineage.",
+      "feature_branch_review_state": {
+        "observed_feature_head_sha": "b0a9a9c1812b1ae1740d85fbb29827d60d338ebe",
+        "status": "changes_requested",
+        "purpose": "Correction execution is separate from the MIP main observation and does not satisfy this workstream dependency."
+      }
     },
     {
       "id": "WS-GEOX-PROTOCOL-ADOPTION-001",
@@ -70,7 +89,10 @@
       "dependencies": ["WS-MIP-COORDINATION-001"],
       "blocked_by": [],
       "evidence_paths": ["docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
-      "verified_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56"
+      "verified_sha": "ee9673c13e69082367c1727568946ac4c1a01015",
+      "live_resolution_conditions": {
+        "WS-MIP-COORDINATION-001": "Eligible only after the live overlay observes the MIP coordination task merged on MIP origin/main; a stale cached MIP workstream must be reconciled rather than treated as a permanent block."
+      }
     },
     {
       "id": "WS-MMM-PROTOCOL-ADOPTION-001",
@@ -81,7 +103,10 @@
       "dependencies": ["WS-MIP-COORDINATION-001"],
       "blocked_by": [],
       "evidence_paths": ["docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
-      "verified_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421"
+      "verified_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421",
+      "live_resolution_conditions": {
+        "WS-MIP-COORDINATION-001": "Eligible only after the live overlay observes the MIP coordination task merged on MIP origin/main."
+      }
     },
     {
       "id": "WS-GEOX-READOUT-BUILDER-001",
@@ -89,10 +114,12 @@
       "capability_area": "governed_readout_builder_entrypoint",
       "task_id": "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001",
       "status": "authorized_in_sibling_repository",
-      "dependencies": ["WS-GEOX-PROTOCOL-ADOPTION-001"],
-      "blocked_by": ["P2-GEOX-TEMPORAL-VERSION-SEMANTICS"],
+      "dependencies": [],
+      "blocked_by": [],
       "evidence_paths": ["panel_exp/contracts/geox_governed_experiment_readout.py", "docs/execution/ACTIVE_TASK.md"],
-      "verified_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56"
+      "verified_sha": "ee9673c13e69082367c1727568946ac4c1a01015",
+      "advances_blockers": ["P2-GEOX-TEMPORAL-VERSION-SEMANTICS", "P2-GEOX-READOUT-BUILDER-ENTRYPOINT"],
+      "owner_authority": "GeoX authorized this workstream in its own repository. MIP coordination metadata neither adds dependencies nor authorizes it."
     },
     {
       "id": "WS-MMM-NORMALIZATION-FIXTURES-001",
@@ -103,7 +130,10 @@
       "dependencies": ["WS-GEOX-READOUT-BUILDER-001"],
       "blocked_by": ["P2-MMM-GEOX-NORMALIZATION", "P2-MMM-CROSS-REPOSITORY-FIXTURES"],
       "evidence_paths": ["mmm/contracts/calibration_compatibility.py"],
-      "verified_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421"
+      "verified_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421",
+      "live_resolution_conditions": {
+        "WS-GEOX-READOUT-BUILDER-001": "Requires a live GeoX merged builder state at an exact producer pin plus declared consumer verification; authorized or feature-branch producer work is not completion."
+      }
     },
     {
       "id": "WS-MIP-P2-JOURNEY-001",
@@ -114,7 +144,11 @@
       "dependencies": ["WS-GEOX-READOUT-BUILDER-001", "WS-MMM-NORMALIZATION-FIXTURES-001"],
       "blocked_by": ["P2-D6-RELEASE-COMPATIBILITY-EVIDENCE"],
       "evidence_paths": ["docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md"],
-      "verified_sha": "4ddbe8323de6af44086da34001ec60072b58c1e8"
+      "verified_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5",
+      "live_resolution_conditions": {
+        "WS-GEOX-READOUT-BUILDER-001": "Requires live merged GeoX producer evidence and consumer verification.",
+        "WS-MMM-NORMALIZATION-FIXTURES-001": "Requires live merged MMM normalization and certified fixture evidence at an exact pin plus consumer verification."
+      }
     }
   ],
   "blockers": [
@@ -126,7 +160,8 @@
       "evidence": ["panel_exp/contracts/geox_governed_experiment_readout.py", "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001"],
       "resolution_criteria": "Merged deterministic temporal, freshness, record-kind, schema, and producer-version semantics with full producer validation.",
       "consumer_verification_required": true,
-      "unblocks": ["P2-GEOX-READOUT-BUILDER-ENTRYPOINT"]
+      "unblocks": [],
+      "advanced_by_workstream": "WS-GEOX-READOUT-BUILDER-001"
     },
     {
       "id": "P2-GEOX-READOUT-BUILDER-ENTRYPOINT",
@@ -136,7 +171,8 @@
       "evidence": ["GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001", "tests/fixtures/geox_governed_readouts/manifest.json"],
       "resolution_criteria": "Merged public deterministic builder/package entrypoint and certified fixture conformance at an exact GeoX pin.",
       "consumer_verification_required": true,
-      "unblocks": ["P2-MMM-GEOX-NORMALIZATION"]
+      "unblocks": ["P2-MMM-GEOX-NORMALIZATION"],
+      "advanced_by_workstream": "WS-GEOX-READOUT-BUILDER-001"
     },
     {
       "id": "P2-MMM-GEOX-NORMALIZATION",
@@ -173,8 +209,7 @@
     "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
     "GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
     "MMM_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
-    "GEOX_GOVERNED_READOUT_TEMPORAL_VERSION_AND_ENVELOPE_SEMANTICS_001",
-    "GEOX_GOVERNED_READOUT_BUILDER_ENTRYPOINT_001",
+    "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001",
     "MMM_GEOX_READOUT_NORMALIZATION_AND_CROSS_REPOSITORY_FIXTURES_001",
     "MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001",
     "D6 reconciliation and fixture-only cross-repository dry run",

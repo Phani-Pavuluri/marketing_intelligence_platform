@@ -2,9 +2,9 @@
 
 **Status:** append-oriented active-decision index
 **Owner:** MIP program governance
-**Last updated:** 2026-07-30
-**Last verified:** 2026-07-30
-**Verified against:** MIP `89caf56`; MMM `origin/main` `9a3aa5c`; GeoX `origin/main` `8601823`
+**Last updated:** 2026-07-31
+**Last verified:** 2026-07-31
+**Verified against:** MIP `631763c`; MMM `origin/main` `1b75d1d`; GeoX `origin/main` `ee9673c`
 **Update trigger:** a new approved architecture/authority decision or supersession.
 
 | ID | Date | Status | Decision and consequence | Authoritative source | Supersession |
