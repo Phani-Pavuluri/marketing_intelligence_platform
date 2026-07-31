@@ -9,6 +9,8 @@
 - **Task authorization head:** `4091ad0362fed9ddcf3dc7e125b6ac660b651aef`
 - **Feature branch:** `feat/mip-repo-native-execution-handoff-v2-recovery-001`
 - **Recovery target:** `MIP_REPO_NATIVE_EXECUTION_HANDOFF_WORKFLOW_V2_001`
+- **Recovery implementation commit:**
+  `ea1c0ede695eeb1e039ab013704c484acb78e94d`
 
 Synchronized `main` is `679e825a6151ee67481c0def9af385952bd533c7`. The
 pre-authoring base through authorization head changes only `ACTIVE_TASK.md`,
@@ -52,7 +54,7 @@ MIP V2 pin exists. No product capability, live package integration, real data,
 persistence, simulation, optimization, recommendations, assignment, pilot,
 production, or package-side agents are authorized.
 
-The final ready-for-review state will identify this recovery evidence commit as
+The execution state is `ready_for_review` with this recovery evidence commit as
 its implementation commit. The exact published review head is the remote branch
-ref after that state commit and is reported externally rather than embedded in
-its own commit.
+ref after the state commit and is reported externally rather than embedded in
+its own commit. Merge authorization remains false.

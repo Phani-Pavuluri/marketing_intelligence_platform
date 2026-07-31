@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized recovery
+**Status:** ready for review
 **Owner:** MIP repository governance
 **Last updated:** 2026-07-30
 **Last verified:** 2026-07-30
@@ -147,6 +147,10 @@ The resulting closure commit becomes the canonical MIP V2 pin for later MMM and
 GeoX workflow adoption reconciliation.
 
 ## Prohibited scope and authority
+
+Recovery evidence and required validation are complete. The exact published
+review head must be approved externally before any merge session; no merge,
+pull request, or branch cleanup is authorized during execution.
 
 Do not change or authorize product code, live package integration, real data,
 persistence, simulation runtime, optimization, recommendations, treatment
