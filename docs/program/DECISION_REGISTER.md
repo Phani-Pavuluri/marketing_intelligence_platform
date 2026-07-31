@@ -18,6 +18,7 @@
 | D-007 | 2026-07-30 | approved | Cross-repository contracts are versioned and fail closed. | MIP P2 design; R4/D6 | — |
 | D-008 | 2026-07-20 | approved | Environment boundaries and human approval remain mandatory. | `ROADMAP.md` D4/D8/D9 treatment | — |
 | D-009 | 2026-07-30 | approved | Fixture evidence does not establish production readiness. | P2 design; authority matrix | — |
+| D-010 | 2026-07-31 | approved | Cross-repository coordination is a pinned, stale-failing program view; sibling execution files and live Git remain authoritative. | `CROSS_REPOSITORY_COORDINATION_PROTOCOL.md` | — |
 
 Detailed rationale remains in the cited canonical documents; this register does
 not independently authorize execution.

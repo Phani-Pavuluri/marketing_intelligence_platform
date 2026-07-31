@@ -99,6 +99,14 @@ report with:
 - limitations, deferred work, authority impact, merge readiness, and local-only
   paths.
 
+For a task affecting MMM or GeoX, the active task and completion report must
+also identify affected repositories, workstream and capability owner,
+dependency/blocker IDs advanced or resolved, merged evidence SHA/paths,
+consumer verification still required, newly eligible work, validation debt, and
+authority impact. Before authoring or executing it, agents must read the MIP
+coordination protocol/state, verify affected sibling remote mains, and stop on
+stale snapshots or duplicate ownership.
+
 The published feature branch ends at `ready_for_review` with
 `task_execution_authorized: true`, `merge_authorized: false`,
 `reviewed_head_sha: null`, and `approval_commit_sha: null`. The exact review head

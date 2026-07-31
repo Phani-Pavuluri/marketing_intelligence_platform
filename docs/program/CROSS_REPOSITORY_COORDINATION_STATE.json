@@ -1,0 +1,191 @@
+{
+  "schema_version": "mip_cross_repository_coordination_v1",
+  "program_id": "mip_cross_repository_coordination",
+  "coordinator_repository": "Phani-Pavuluri/marketing_intelligence_platform",
+  "verification_date": "2026-07-31",
+  "stale_state_behavior": "If live remote main differs from observed_remote_main_sha, re-read the sibling execution state and completion report; do not infer status from this snapshot.",
+  "repositories": [
+    {
+      "id": "mip",
+      "repository": "Phani-Pavuluri/marketing_intelligence_platform",
+      "observed_remote_main_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5",
+      "program_checkpoint_sha": "4ddbe8323de6af44086da34001ec60072b58c1e8",
+      "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md"],
+      "active_task_id": "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
+      "active_task_status": "authorized",
+      "current_work_summary": "MIP coordination-control-plane governance refresh.",
+      "latest_completed_task": "MIP_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECOVERY_001",
+      "latest_closure_sha": "38f88467f55d5bc4cc64e5a58b0f08f1639a40d0",
+      "next_eligible_tasks": ["MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001 after prerequisites and separate authorization"],
+      "validation_debt": [],
+      "authority_boundary": "No P2 runtime, live engine, real-data, persistence, recommendation, pilot, or production authority."
+    },
+    {
+      "id": "mmm",
+      "repository": "Phani-Pavuluri/MMM",
+      "observed_remote_main_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421",
+      "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md", "mmm/contracts/calibration_compatibility.py"],
+      "active_task_id": "MMM_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECONCILIATION_001",
+      "active_task_status": "merged",
+      "current_work_summary": "No active MMM implementation task; coordination-protocol adoption is proposed.",
+      "latest_completed_task": "MMM_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECONCILIATION_001",
+      "latest_closure_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421",
+      "next_eligible_tasks": ["MMM_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001 proposed", "MMM_GEOX_READOUT_NORMALIZATION_AND_CROSS_REPOSITORY_FIXTURES_001 proposed"],
+      "validation_debt": [],
+      "authority_boundary": "MMM retains compatibility and scenario-computation truth; no live integration authority."
+    },
+    {
+      "id": "geox",
+      "repository": "Phani-Pavuluri/panel_exp",
+      "observed_remote_main_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56",
+      "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md", "panel_exp/contracts/geox_governed_experiment_readout.py"],
+      "active_task_id": "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001",
+      "active_task_status": "authorized",
+      "current_work_summary": "Producer-owned deterministic governed-readout builder and temporal/version semantics are authorized in GeoX only.",
+      "latest_completed_task": "GEOX_REPO_NATIVE_EXECUTION_HANDOFF_V2_ADOPTION_RECOVERY_001",
+      "latest_closure_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56",
+      "next_eligible_tasks": ["GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001 proposed"],
+      "validation_debt": ["Complete GeoX suite remains a producer-owned validation requirement for the authorized builder task."],
+      "authority_boundary": "GeoX owns experiment truth and handoff eligibility; no MIP consumer or live integration authority."
+    }
+  ],
+  "workstreams": [
+    {
+      "id": "WS-MIP-COORDINATION-001",
+      "owner_repository": "mip",
+      "capability_area": "cross_repository_coordination_governance",
+      "task_id": "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
+      "status": "in_progress",
+      "dependencies": [],
+      "blocked_by": [],
+      "evidence_paths": ["docs/execution/ACTIVE_TASK.md", "docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
+      "verified_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5"
+    },
+    {
+      "id": "WS-GEOX-PROTOCOL-ADOPTION-001",
+      "owner_repository": "geox",
+      "capability_area": "cross_repository_coordination_protocol",
+      "task_id": "GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
+      "status": "proposed",
+      "dependencies": ["WS-MIP-COORDINATION-001"],
+      "blocked_by": [],
+      "evidence_paths": ["docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
+      "verified_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56"
+    },
+    {
+      "id": "WS-MMM-PROTOCOL-ADOPTION-001",
+      "owner_repository": "mmm",
+      "capability_area": "cross_repository_coordination_protocol",
+      "task_id": "MMM_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
+      "status": "proposed",
+      "dependencies": ["WS-MIP-COORDINATION-001"],
+      "blocked_by": [],
+      "evidence_paths": ["docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
+      "verified_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421"
+    },
+    {
+      "id": "WS-GEOX-READOUT-BUILDER-001",
+      "owner_repository": "geox",
+      "capability_area": "governed_readout_builder_entrypoint",
+      "task_id": "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001",
+      "status": "authorized_in_sibling_repository",
+      "dependencies": ["WS-GEOX-PROTOCOL-ADOPTION-001"],
+      "blocked_by": ["P2-GEOX-TEMPORAL-VERSION-SEMANTICS"],
+      "evidence_paths": ["panel_exp/contracts/geox_governed_experiment_readout.py", "docs/execution/ACTIVE_TASK.md"],
+      "verified_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56"
+    },
+    {
+      "id": "WS-MMM-NORMALIZATION-FIXTURES-001",
+      "owner_repository": "mmm",
+      "capability_area": "geox_readout_normalization_and_cross_repository_fixtures",
+      "task_id": "MMM_GEOX_READOUT_NORMALIZATION_AND_CROSS_REPOSITORY_FIXTURES_001",
+      "status": "proposed",
+      "dependencies": ["WS-GEOX-READOUT-BUILDER-001"],
+      "blocked_by": ["P2-MMM-GEOX-NORMALIZATION", "P2-MMM-CROSS-REPOSITORY-FIXTURES"],
+      "evidence_paths": ["mmm/contracts/calibration_compatibility.py"],
+      "verified_sha": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421"
+    },
+    {
+      "id": "WS-MIP-P2-JOURNEY-001",
+      "owner_repository": "mip",
+      "capability_area": "fixture_only_planning_evidence_journey",
+      "task_id": "MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001",
+      "status": "proposed",
+      "dependencies": ["WS-GEOX-READOUT-BUILDER-001", "WS-MMM-NORMALIZATION-FIXTURES-001"],
+      "blocked_by": ["P2-D6-RELEASE-COMPATIBILITY-EVIDENCE"],
+      "evidence_paths": ["docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md"],
+      "verified_sha": "4ddbe8323de6af44086da34001ec60072b58c1e8"
+    }
+  ],
+  "blockers": [
+    {
+      "id": "P2-GEOX-TEMPORAL-VERSION-SEMANTICS",
+      "owner_repository": "geox",
+      "affected_consumers": ["mip", "mmm"],
+      "state": "in_progress",
+      "evidence": ["panel_exp/contracts/geox_governed_experiment_readout.py", "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001"],
+      "resolution_criteria": "Merged deterministic temporal, freshness, record-kind, schema, and producer-version semantics with full producer validation.",
+      "consumer_verification_required": true,
+      "unblocks": ["P2-GEOX-READOUT-BUILDER-ENTRYPOINT"]
+    },
+    {
+      "id": "P2-GEOX-READOUT-BUILDER-ENTRYPOINT",
+      "owner_repository": "geox",
+      "affected_consumers": ["mip", "mmm"],
+      "state": "in_progress",
+      "evidence": ["GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001", "tests/fixtures/geox_governed_readouts/manifest.json"],
+      "resolution_criteria": "Merged public deterministic builder/package entrypoint and certified fixture conformance at an exact GeoX pin.",
+      "consumer_verification_required": true,
+      "unblocks": ["P2-MMM-GEOX-NORMALIZATION"]
+    },
+    {
+      "id": "P2-MMM-GEOX-NORMALIZATION",
+      "owner_repository": "mmm",
+      "affected_consumers": ["mip"],
+      "state": "open",
+      "evidence": ["mmm/contracts/calibration_compatibility.py"],
+      "resolution_criteria": "Merged strict GeoX-readout normalization with exact schema/version behavior and typed failures.",
+      "consumer_verification_required": true,
+      "unblocks": ["P2-MMM-CROSS-REPOSITORY-FIXTURES"]
+    },
+    {
+      "id": "P2-MMM-CROSS-REPOSITORY-FIXTURES",
+      "owner_repository": "mmm",
+      "affected_consumers": ["mip"],
+      "state": "open",
+      "evidence": ["tests/fixtures/mip_export/calibration_compatibility_v1/"],
+      "resolution_criteria": "Merged certified fixtures pairing normalized GeoX readouts with MMM compatibility states and provenance.",
+      "consumer_verification_required": true,
+      "unblocks": ["P2-D6-RELEASE-COMPATIBILITY-EVIDENCE"]
+    },
+    {
+      "id": "P2-D6-RELEASE-COMPATIBILITY-EVIDENCE",
+      "owner_repository": "mip",
+      "affected_consumers": ["mip", "mmm", "geox"],
+      "state": "open",
+      "evidence": ["docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md"],
+      "resolution_criteria": "Version pins, compatibility matrix, release/rollback order, migration, failure semantics, named owners, and consumer verification are merged.",
+      "consumer_verification_required": true,
+      "unblocks": ["MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001"]
+    }
+  ],
+  "ordered_program_sequence": [
+    "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001",
+    "GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
+    "MMM_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001",
+    "GEOX_GOVERNED_READOUT_TEMPORAL_VERSION_AND_ENVELOPE_SEMANTICS_001",
+    "GEOX_GOVERNED_READOUT_BUILDER_ENTRYPOINT_001",
+    "MMM_GEOX_READOUT_NORMALIZATION_AND_CROSS_REPOSITORY_FIXTURES_001",
+    "MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001",
+    "D6 reconciliation and fixture-only cross-repository dry run",
+    "Separate authorization before live package integration"
+  ],
+  "authority": {
+    "capability_authorizations_changed": false,
+    "runtime_integration": "blocked",
+    "recommendations": "blocked",
+    "optimization": "blocked",
+    "production": "blocked",
+    "package_side_agents": "blocked"
+  }
+}

@@ -2,9 +2,9 @@
 
 **Status:** current verified snapshot
 **Owner:** MIP program owner
-**Last updated:** 2026-07-30
-**Last verified:** 2026-07-30
-**Verified against:** MIP `89caf56e73e814b6f5e0d0584536f8705ac97803`; MMM `origin/main` `9a3aa5cb9a48c9a59d45e266685228835237f328`; GeoX `origin/main` `860182386c39f487747de5f43e67a31e9978e57c`
+**Last updated:** 2026-07-31
+**Last verified:** 2026-07-31
+**Verified against:** MIP `631763cfb75fc42f8b1bf7025c5bce34c39097b5`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `e0cef94c063b03b29e1e1760fb1c2320ce497b56`
 **Update trigger:** a merged checkpoint, completed gate, or changed authority state.
 
 ## Current phase
@@ -14,13 +14,17 @@ contract and fixture-journey design is merged, while package integration remains
 blocked. P0–P8 and R0–R6 are canonical in
 [`ROADMAP.md`](../roadmap/ROADMAP.md).
 
+The current MIP task establishes the cross-repository coordination control
+plane. Its pinned state is informative only and fails closed when a sibling
+remote main changes; see [Coordination State](CROSS_REPOSITORY_COORDINATION_STATE.json).
+
 ## Verified checkpoints and completed milestone
 
 | Repository | Verified checkpoint | Current verified evidence |
 |---|---|---|
-| MIP | `89caf56` | P0–P8 consolidation and the P2 consumer/fixture design, including GeoX handoff and MMM compatibility state vocabulary. |
-| MMM | `9a3aa5c` | `MMMPublicSimulationExport`, bounded Ridge fixture comparison, supported-range evidence, and `MMMCalibrationCompatibilityResult` with five compatibility fixtures. |
-| GeoX | `8601823` | numerical-truth generator/validation, `GeoXGovernedExperimentReadout` contract, and certified governed-readout fixtures. |
+| MIP | `631763c` observed / `4ddbe83` program checkpoint | P0–P8 consolidation, P2 consumer design, and the authorized coordination task. |
+| MMM | `1b75d1d` | `MMMPublicSimulationExport`, compatibility contract/fixtures, and closed V2 workflow reconciliation. |
+| GeoX | `e0cef94` | numerical-truth validation, governed-readout contract/fixtures, and an authorized producer-owned builder task. |
 
 The current first evidence tranche remains: certified GeoX experiment evidence
 → MMM calibration compatibility → MMM bounded baseline-versus-candidate
@@ -33,11 +37,12 @@ fixture-only P2 consumer and planning-evidence journey implementation, using
 only certified producer fixtures and the merged MIP design. It is not yet
 authorized by this packet.
 
-Immediate blockers are: GeoX's governed readout builder/package entrypoint and
-temporal/freshness/record-envelope/package-version semantics; MMM's strict GeoX
-readout normalization adapter and certified cross-repository compatibility
-fixtures; and final D6 version, compatibility, release, rollback, migration,
-failure, and owner evidence.
+Current P2 blockers are `P2-GEOX-TEMPORAL-VERSION-SEMANTICS`,
+`P2-GEOX-READOUT-BUILDER-ENTRYPOINT`, `P2-MMM-GEOX-NORMALIZATION`,
+`P2-MMM-CROSS-REPOSITORY-FIXTURES`, and
+`P2-D6-RELEASE-COMPATIBILITY-EVIDENCE`. Their owners, evidence, and consumer
+verification conditions are in the coordination state; none is resolved by a
+producer task report alone.
 
 ## Authority freezes
 

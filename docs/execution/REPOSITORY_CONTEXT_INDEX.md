@@ -34,6 +34,9 @@ Use this prompt in a fresh ChatGPT/Codex session:
 - `docs/program/NEXT_EXECUTION_SEQUENCE.md`
 - `docs/program/DECISION_REGISTER.md`
 - `docs/program/DEFERRED_AND_PARKED_WORK.md`
+- `docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md`
+- `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json`
+- `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md`
 
 ## Roadmap and P2 design
 
@@ -57,3 +60,8 @@ Use this prompt in a fresh ChatGPT/Codex session:
 Verify exact engine checkpoints from GitHub and
 `docs/program/REPOSITORY_CHECKPOINTS.md` before dependent work. This index
 points to sources and does not duplicate their authority.
+
+For cross-repository work, verify the coordination-state SHAs against live
+sibling Git and inspect the sibling execution state, completion report,
+workstream, blocker, and owner records. A stale coordination snapshot is a
+fail-closed orientation trigger, not cached authority.

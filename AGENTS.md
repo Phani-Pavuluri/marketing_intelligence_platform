@@ -31,6 +31,18 @@ task-owned. Run focused and full validation, including Docker-backed
 `merge_authorized: false`; commit and publish the exact remote feature-branch
 head; then stop without merging.
 
+## Cross-repository task rule
+
+Before proposing or executing work that affects MMM or GeoX, read
+`docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md` and
+`CROSS_REPOSITORY_COORDINATION_STATE.json`; verify every affected sibling SHA
+against live Git; read live sibling execution state and completion evidence when
+the snapshot is stale or a dependency exists; and stop on overlapping
+workstream IDs or ownership conflicts. Record dependency IDs in the active task
+and include the protocol's cross-repository impact section in the completion
+report. Refresh coordination state only when the task explicitly owns a
+verified refresh.
+
 ## Merge the externally approved head
 
 User approval must identify the exact remote feature-branch head SHA. Re-run the
