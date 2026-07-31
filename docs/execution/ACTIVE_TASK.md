@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -10,12 +10,17 @@
 - **Task ID:** `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Pre-authoring base:** `main` / `3520176126d129e9288a9ce37591299ec856650a`
+- **Authorization head:** `15657c31501f1376a015b773d913861f63322fb5`
+- **Synchronized main after state authorization:** `18ab0d0c798dfcedd3f07034f4561320929477ea`
 - **Feature branch:** `docs/mip-coordination-post-merge-closure-reconciliation-001`
 - **Execution mode:** `branch_and_fast_forward`
 - **Prior task:** `MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001`
 - **Approved prior review head / merged implementation head:** `cc1904db8e18b5ba461cca2da738026acadfb43c`
 - **Prior correction implementation:** `4c93a7c300b3471ffee2a11ff449094e82a1f11d`
 - **Prior closure commit:** `3520176126d129e9288a9ce37591299ec856650a`
+- **Rejected reconciliation implementation:** `c6648ef8b4a68fb0f863a53c3bb0c2dc167e2e17`
+- **Rejected review head:** `9a0c4b04ae3cc7f27c02249588388bd8b6436011`
+- **Earlier intermediate reconciliation commit:** `113ba2c099608a7841e39202710caddabc50fa61`
 - **MMM main observed:** `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
 - **GeoX main observed:** `ee9673c13e69082367c1727568946ac4c1a01015`
 - **Capability authorizations changed:** `false`
@@ -35,59 +40,112 @@ outside MIP authority.
 
 ## Starting evidence
 
-Live Git at authorization shows:
+The prior coordination implementation was externally approved at exact head
+`cc1904db8e18b5ba461cca2da738026acadfb43c`, fast-forwarded, and closed at
+`3520176126d129e9288a9ce37591299ec856650a`. The completed remote feature branch
+was observed absent. MMM remains merged at
+`1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`. GeoX remains independently
+authorized at `ee9673c13e69082367c1727568946ac4c1a01015` for
+`GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001`. No sibling capability or
+consumer-verification state changed.
 
-- MIP `main` at closure `3520176126d129e9288a9ce37591299ec856650a`;
-- the approved exact head `cc1904db8e18b5ba461cca2da738026acadfb43c`
-  is the parent merged implementation lineage;
-- the completed remote MIP feature branch is absent;
-- MMM remains merged at `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`;
-- GeoX remains independently authorized at
-  `ee9673c13e69082367c1727568946ac4c1a01015` for
-  `GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001`;
-- no sibling capability or consumer verification has changed.
-
-The prior closure currently contains contradictory current-state evidence:
-`LATEST_COMPLETION_REPORT.md` still says `ready_for_review` and names the old
-pre-merge MIP main as current; `ACTIVE_TASK.md` retains obsolete correction
-instructions; `EXECUTION_STATE.json` retains review-era decision/checkpoint
-fields; the coordination snapshot and canonical program files still describe
-the prior MIP task as authorized or in progress; and focused tests do not enforce
-post-merge consistency.
+This reconciliation task was authored from prior closure `3520176126d129e9288a9ce37591299ec856650a`.
+Its two-file authorization head is `15657c31501f1376a015b773d913861f63322fb5`,
+and synchronized MIP `main` after the state-only authorization commit is
+`18ab0d0c798dfcedd3f07034f4561320929477ea`.
 
 ## Authorized result
 
 Produce a narrow post-merge reconciliation that:
 
-1. makes the three stable execution files agree that the prior coordination task
-   is merged and closed;
-2. distinguishes the approved review head, merged implementation head, closure
-   commit, current synchronized main, and this new task's authorization lineage;
-3. records remote feature-branch deletion as GitHub-observed evidence and does
-   not claim unverified local cleanup;
+1. makes the three stable execution files agree on the current reconciliation
+   task state and the prior coordination task's merged closure;
+2. distinguishes the prior approved review head, prior merged implementation
+   head, prior closure commit, this task's authorization lineage, current
+   synchronized MIP `main`, and the exact remote reconciliation review head;
+3. records remote prior-feature-branch deletion as GitHub-observed evidence and
+   does not claim unverified local cleanup;
 4. removes obsolete instructions to resume, correct, review, or merge the prior
    task from current stable state;
-5. transitions the MIP repository entry and `WS-MIP-COORDINATION-001` in the
-   coordination snapshot to merged historical state at the verified prior
+5. transitions the prior MIP repository entry and `WS-MIP-COORDINATION-001` in
+   the coordination snapshot to merged historical state at the verified prior
    closure, while preserving deterministic live-overlay behavior;
-6. appends the corrected implementation, approval, fast-forward merge, closure,
-   and post-merge reconciliation events to coordination history without
-   rewriting prior events;
+6. preserves append-only coordination history without treating review or task-
+   authoring SHAs as implementation evidence;
 7. updates program current state, repository checkpoints, and next execution
    sequence so the completed coordination task is not still listed as pending;
 8. records that MMM and GeoX protocol adoption remain proposed and independently
    owner-authorized, and that the existing GeoX builder may continue without a
    retroactive MIP dependency;
-9. adds focused tests that fail on mixed `merged`/`ready_for_review` state, stale
-   current MIP evidence, missing closure history, obsolete resume instructions,
-   unobserved-cleanup claims, or an `in_progress` MIP coordination workstream
-   after live merged closure; and
+9. adds focused tests that fail on mixed current-task state, stale current MIP
+   evidence, missing closure history, obsolete resume instructions, unobserved-
+   cleanup claims, an `in_progress` prior MIP coordination workstream after live
+   merged closure, or internally inconsistent sequence numbering; and
 10. preserves all runtime, integration, real-data, recommendation, optimization,
     pilot, production, and package-side-agent freezes.
 
+## Exact-head review decision
+
+The exact remote review head
+`9a0c4b04ae3cc7f27c02249588388bd8b6436011` is **not approved**. The core
+post-merge transition is materially correct, remains within scope, and preserves
+ownership and authority. Three source-consistency defects must be corrected.
+
+### 1. Publish one current implementation SHA
+
+The task requires one implementation SHA. The rejected report instead lists two
+"Implementation commits," while execution state names
+`c6648ef8b4a68fb0f863a53c3bb0c2dc167e2e17` as current, stores a two-SHA
+`implementation_lineage`, and then describes
+`113ba2c099608a7841e39202710caddabc50fa61` as the implementation ready for
+review.
+
+Publish one new final correction implementation SHA. The completion report,
+`implementation_commit_sha`, task execution result, and task-authoring note must
+all name that same single SHA. Earlier commits may remain Git history, but must
+be labeled intermediate or rejected history rather than additional current
+implementation SHAs. Do not embed the final remote review-head SHA in the commit
+that creates it.
+
+### 2. Distinguish current MIP main from prior closure
+
+At review, live MIP `main` is
+`18ab0d0c798dfcedd3f07034f4561320929477ea`, not prior closure
+`3520176126d129e9288a9ce37591299ec856650a`. The rejected completion report calls
+the prior closure MIP `origin/main`; `PROGRAM_CURRENT_STATE.md` and
+`REPOSITORY_CHECKPOINTS.md` also label the prior closure as their current
+remote-main verification source.
+
+Correct the current evidence model:
+
+- `3520176126d129e9288a9ce37591299ec856650a` is the prior task closure and this
+  task's pre-authoring base;
+- `15657c31501f1376a015b773d913861f63322fb5` is the two-file authorization head;
+- `18ab0d0c798dfcedd3f07034f4561320929477ea` is synchronized MIP `main` after the
+  state-only authorization commit and remains the live main at this review;
+- the correction implementation and exact remote review head remain feature-
+  branch evidence, not MIP-main evidence.
+
+The historical coordination snapshot may remain pinned to prior closure where
+its repository-main observation is intentionally historical, but current-state,
+checkpoint, execution, and report wording must not call that prior closure the
+current MIP remote main.
+
+### 3. Repair renumbered sequence semantics
+
+`NEXT_EXECUTION_SEQUENCE.md` now has six steps but still says "steps 5–7." It
+also says step 4 depends on live merged GeoX evidence, even though the direct
+GeoX-producer dependency belongs to MMM normalization in step 3, while MIP step
+4 depends on both merged GeoX producer evidence and merged MMM normalization /
+certified fixtures with required consumer verification.
+
+Correct the prose to the current six-step numbering and exact dependency chain.
+Extend the focused test so nonexistent step references and this dependency
+misassignment fail.
+
 ## Owned files
 
-Execution may modify only:
+Corrections may modify only:
 
 - `docs/execution/ACTIVE_TASK.md`
 - `docs/execution/EXECUTION_STATE.json`
@@ -116,7 +174,7 @@ other test path is owned. No MMM or GeoX path is owned.
 
 ## Validation gate
 
-Run on the exact implementation tree:
+Run on the exact corrected tree:
 
 - focused coordination-control-plane and execution/documentation tests;
 - JSON parsing and Markdown/path consistency checks;
@@ -128,50 +186,27 @@ Run on the exact implementation tree:
 Publish `blocked` with exact evidence if the complete authored gate cannot finish
 successfully. Focused success does not hide full-suite debt.
 
-## Acceptance criteria
+## Required republish state
 
-- Stable execution files agree on current task status and prior merged closure.
-- The prior completion report no longer describes the current decision as
-  `ready_for_review`.
-- Current GitHub-observed MIP evidence distinguishes prior closure
-  `3520176126d129e9288a9ce37591299ec856650a` from this task's later
-  authorization/implementation heads.
-- Remote branch cleanup is recorded as observed; local cleanup is not claimed
-  without evidence.
-- Obsolete prior-task resume/correction instructions are absent from current
-  stable task state.
-- The coordination snapshot represents the prior MIP coordination workstream as
-  merged, not authorized or in progress, while retaining stale-snapshot overlay
-  rules.
-- Canonical current-state, checkpoint, sequence, and history files reflect the
-  prior merge and closure.
-- Tests enforce these post-merge invariants.
-- MMM and GeoX remain unmodified and authoritative for their own work.
-- All capability authority flags remain false or blocked.
+On success:
 
-## State transitions
-
-On success, publish `ready_for_review` with one implementation SHA, empty
-blockers, `task_execution_authorized: true`, `merge_authorized: false`, null
-reviewed/approval SHAs, unchanged capability authority, exact validation counts,
-and the exact remote feature-branch head observed externally after push.
+- publish one new correction implementation SHA;
+- publish a final metadata commit setting `ready_for_review`;
+- set `implementation_commit_sha` to that one SHA and remove contradictory
+  current implementation-lineage claims;
+- retain `9a0c4b04ae3cc7f27c02249588388bd8b6436011` and
+  `c6648ef8b4a68fb0f863a53c3bb0c2dc167e2e17` as rejected review / implementation
+  history;
+- clear the three blockers only after corrections and complete validation pass;
+- keep task and correction execution authorized until review;
+- keep merge and PR authorization false;
+- keep reviewed and approval SHAs null;
+- keep capability authority unchanged;
+- push and verify the exact remote feature head;
+- stop without PR, merge, or branch deletion.
 
 On failure, publish an accurate `blocked` state with specific blockers and exact
 validation evidence, commit and push the branch, and stop.
-
-Do not create a pull request, merge, squash, rebase, force-push, delete branches,
-or modify sibling repositories during execution.
-
-## Execution result
-
-Implementation `c6648ef8b4a68fb0f863a53c3bb0c2dc167e2e17` completes the prior
-coordination workstream to merged historical state at closure
-`3520176126d129e9288a9ce37591299ec856650a`, records the approved fast-forward
-head and GitHub-observed remote branch deletion, and removes obsolete pending
-coordination sequencing. Focused and Docker-backed validation passed. This task
-is ready only for an exact-head review: `merge_authorized` and PR authorization
-remain `false`; the active-task resolver and every capability freeze remain
-separately unauthorized.
 
 ## Prohibited authority
 
