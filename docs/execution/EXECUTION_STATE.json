@@ -6,7 +6,7 @@
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "e3a6c8cb437296e1319449b471c19301b08d43cb",
-  "authorization_head_sha": "e3a6c8cb437296e1319449b471c19301b08d43cb",
+  "authorization_head_sha": "4091ad0362fed9ddcf3dc7e125b6ac660b651aef",
   "feature_branch": "feat/mip-repo-native-execution-handoff-v2-recovery-001",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
@@ -23,5 +23,5 @@
   "external_merge_branch_head_sha": "6313c3e807226d20c260b62a6e863d94a213c533",
   "external_merge_commit_sha": "e3a6c8cb437296e1319449b471c19301b08d43cb",
   "external_merge_was_authorized": false,
-  "task_authoring_note": "This is the initial task-authoring state. The final task-authoring update must replace authorization_head_sha with the exact commit whose base_sha..authorization_head_sha diff contains only ACTIVE_TASK.md, EXECUTION_STATE.json, and LATEST_COMPLETION_REPORT.md."
+  "task_authoring_note": "base_sha..authorization_head_sha changes only ACTIVE_TASK.md, EXECUTION_STATE.json, and LATEST_COMPLETION_REPORT.md. Synchronized main is expected to be one state-only recording commit ahead of authorization_head_sha; no other intervening path or commit is permitted."
 }
