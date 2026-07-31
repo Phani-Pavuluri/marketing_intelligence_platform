@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -21,6 +21,7 @@
 - **Rejected reconciliation implementation:** `c6648ef8b4a68fb0f863a53c3bb0c2dc167e2e17`
 - **Rejected review head:** `9a0c4b04ae3cc7f27c02249588388bd8b6436011`
 - **Earlier intermediate reconciliation commit:** `113ba2c099608a7841e39202710caddabc50fa61`
+- **Correction implementation:** `20d5aee7170df4ce335376170290c167048812d9`
 - **MMM main observed:** `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
 - **GeoX main observed:** `ee9673c13e69082367c1727568946ac4c1a01015`
 - **Capability authorizations changed:** `false`
@@ -84,7 +85,7 @@ Produce a narrow post-merge reconciliation that:
 10. preserves all runtime, integration, real-data, recommendation, optimization,
     pilot, production, and package-side-agent freezes.
 
-## Exact-head review decision
+## Rejected review history
 
 The exact remote review head
 `9a0c4b04ae3cc7f27c02249588388bd8b6436011` is **not approved**. The core
@@ -143,6 +144,18 @@ Correct the prose to the current six-step numbering and exact dependency chain.
 Extend the focused test so nonexistent step references and this dependency
 misassignment fail.
 
+## Correction execution result
+
+**Current decision:** `ready_for_review`
+
+Correction implementation `20d5aee7170df4ce335376170290c167048812d9` is the
+sole current implementation for this task. It corrects the current-MIP-main
+evidence and the six-step dependency semantics, while preserving the historical
+coordination snapshot at prior closure and all ownership and authority
+boundaries. The earlier intermediate, rejected implementation, and rejected
+review-head SHAs above remain review history only and are not current
+implementation evidence.
+
 ## Owned files
 
 Corrections may modify only:
@@ -186,27 +199,16 @@ Run on the exact corrected tree:
 Publish `blocked` with exact evidence if the complete authored gate cannot finish
 successfully. Focused success does not hide full-suite debt.
 
-## Required republish state
+## Ready-for-review state
 
-On success:
-
-- publish one new correction implementation SHA;
-- publish a final metadata commit setting `ready_for_review`;
-- set `implementation_commit_sha` to that one SHA and remove contradictory
-  current implementation-lineage claims;
-- retain `9a0c4b04ae3cc7f27c02249588388bd8b6436011` and
-  `c6648ef8b4a68fb0f863a53c3bb0c2dc167e2e17` as rejected review / implementation
-  history;
-- clear the three blockers only after corrections and complete validation pass;
-- keep task and correction execution authorized until review;
-- keep merge and PR authorization false;
-- keep reviewed and approval SHAs null;
-- keep capability authority unchanged;
-- push and verify the exact remote feature head;
-- stop without PR, merge, or branch deletion.
-
-On failure, publish an accurate `blocked` state with specific blockers and exact
-validation evidence, commit and push the branch, and stop.
+The three requested corrections are implemented at
+`20d5aee7170df4ce335376170290c167048812d9`. `implementation_commit_sha` names
+only that SHA; rejected review and implementation SHAs remain historical. The
+three blockers are cleared after the complete authored validation gate passes.
+Task and correction execution remain authorized for review, while merge and PR
+authorization remain false; reviewed and approval SHAs remain null. Capability
+authority remains unchanged. The branch must stop after pushing its exact remote
+review head, without a PR, merge, or branch deletion.
 
 ## Prohibited authority
 
