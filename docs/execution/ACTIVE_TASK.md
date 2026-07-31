@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready for review
+**Status:** changes_requested
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -8,325 +8,226 @@
 ## Identity
 
 - **Task ID:** `MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001`
-- **Pre-authoring base:** `main` / `4ddbe8323de6af44086da34001ec60072b58c1e8`
 - **Feature branch:** `docs/mip-cross-repository-coordination-control-plane-001`
 - **Execution mode:** `branch_and_fast_forward`
-- **Supersedes before execution:** `MIP_P2_CROSS_REPOSITORY_READINESS_RECONCILIATION_001`
-- **Current MIP checkpoint:** `4ddbe8323de6af44086da34001ec60072b58c1e8`
-- **Current MMM checkpoint:** `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
-- **Current GeoX checkpoint:** `e0cef94c063b03b29e1e1760fb1c2320ce497b56`
+- **Pre-authoring base:** `4ddbe8323de6af44086da34001ec60072b58c1e8`
+- **Authorization head:** `8fd0d30355510b7d239811163680c3dff87bfc7d`
+- **Synchronized MIP main at review:** `631763cfb75fc42f8b1bf7025c5bce34c39097b5`
+- **Rejected implementation commit:** `47ea2dc6f9a0096cfc76c975c6516c777ad20968`
+- **Rejected remote review head:** `55b5dc7b6d58d268688955daa84ec9378ebdc8c7`
+- **MMM main verified at review:** `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
+- **GeoX main verified at review:** `ee9673c13e69082367c1727568946ac4c1a01015`
 - **Capability authorizations changed:** `false`
 
-## Why the prior task is superseded
+## Review decision
 
-The prior readiness reconciliation would refresh stale checkpoints and publish a
-one-time sequence, but it would not prevent future coordination drift. MIP,
-MMM, and GeoX need a durable Git-native mechanism that tells every arm:
+The first implementation is not approved. It establishes the intended MIP-owned
+coordination protocol, state, history, bootstrap rules, and focused test, but the
+published ledger contains stale and internally contradictory sibling evidence,
+duplicates already-authorized GeoX work, imposes an invalid cross-repository
+dependency, lacks executable live dependency-resolution semantics, retains a
+completion placeholder, and tests the incorrect cached state.
 
-- what each repository is working on now;
-- what it completed recently and at which exact closure SHA;
-- which cross-repository blockers are open, in progress, awaiting consumer
-  verification, resolved, or superseded;
-- which tasks depend on those blockers;
-- what becomes eligible when evidence is merged;
-- where ownership lies so two repositories do not implement the same contract,
-  adapter, policy, or analytical responsibility;
-- when a cached coordination snapshot is stale and must not be trusted.
+Resume this existing feature branch. Do not create a replacement branch, PR, or
+merge. Re-fetch all three remote mains and stable execution files before making
+corrections. Live Git at correction time overrides the review-time pins above.
 
-This replacement task includes the readiness reconciliation but adds the
-coordination protocol and state needed for ongoing program execution.
+## Review blockers
 
-## Purpose
+1. `MIP-COORD-REVIEW-STALE-GEOX-PIN`
+2. `MIP-COORD-REVIEW-DUPLICATE-GEOX-WORK`
+3. `MIP-COORD-REVIEW-INVALID-OWNER-DEPENDENCY`
+4. `MIP-COORD-REVIEW-LIVE-RESOLUTION-GAP`
+5. `MIP-COORD-REVIEW-COMPLETION-PLACEHOLDER`
+6. `MIP-COORD-REVIEW-TEST-COVERAGE-GAP`
 
-Create the MIP-owned cross-repository coordination control plane while keeping
-each repository authoritative for its own execution state and completion
-report. The coordination layer is a verified, pinned program view; it never
-overrides live sibling Git state.
+## Mandatory correction bootstrap
 
-This is documentation, governance, machine-readable coordination state, and
-focused consistency testing only. It does not implement P2 consumers, engine
-contracts, adapters, package entrypoints, simulations, recommendations,
-orchestration, or runtime integration.
+Before modifying anything:
 
-## Source-of-truth and staleness rules
+1. Synchronize the MIP branch and verify its exact remote head.
+2. Fetch current remote `main` for MIP, MMM, and GeoX.
+3. Read root `AGENTS.md` and the stable execution files in all three repos.
+4. Read MIP coordination protocol, state, history, program state, checkpoints,
+   next sequence, decision register, and P2 consumer design.
+5. Read the live GeoX active task and execution state rather than inferring its
+   status from the cached MIP ledger.
+6. Stop on a changed branch lineage, overlapping non-task-owned changes,
+   unresolved authority conflict, or unverifiable sibling state.
 
-1. Each repository's synchronized `main`, `docs/execution/EXECUTION_STATE.json`,
-   `ACTIVE_TASK.md`, and `LATEST_COMPLETION_REPORT.md` remain authoritative for
-   that repository.
-2. MIP owns the cross-repository coordination snapshot and dependency ledger.
-3. Every repository entry in the coordination snapshot must record the exact
-   observed remote-main SHA and evidence paths.
-4. If live remote `main` differs from the recorded SHA, the coordination entry
-   is stale. Agents must re-read the sibling repository directly and may not
-   infer status from the stale snapshot.
-5. A producer task marked completed does not automatically resolve a consumer
-   blocker. Resolution requires merged producer evidence and the declared
-   consumer-verification condition.
-6. Chats, pasted summaries, local feature branches, and unmerged files are not
-   coordination authority.
+At review time, GeoX `main` was
+`ee9673c13e69082367c1727568946ac4c1a01015`, with active authorized task
+`GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001`. Do not hardcode that as
+current if live GeoX `main` has advanced.
 
-## Prerequisites and source evidence
+## Required corrections
 
-Complete the mandatory bootstrap in `AGENTS.md`, prove local
-`main == origin/main`, and verify the task-authoring boundary.
+### 1. Correct all stale sibling evidence
 
-Verify current remote mains and read the stable execution files in all three
-repositories:
+Update every current-checkpoint reference using live Git, including:
 
-- MIP: `Phani-Pavuluri/marketing_intelligence_platform@4ddbe8323de6af44086da34001ec60072b58c1e8`;
-- MMM: `Phani-Pavuluri/MMM@1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`;
-- GeoX: `Phani-Pavuluri/panel_exp@e0cef94c063b03b29e1e1760fb1c2320ce497b56`.
+- `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json`
+- `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md`
+- `docs/program/PROGRAM_CURRENT_STATE.md`
+- `docs/program/REPOSITORY_CHECKPOINTS.md`
+- `docs/program/NEXT_EXECUTION_SEQUENCE.md`
+- `docs/roadmap/MIP_P2_CROSS_REPOSITORY_READINESS_RECONCILIATION_001.md`
+- `docs/execution/LATEST_COMPLETION_REPORT.md`
+- `tests/test_cross_repository_coordination_control_plane.py`
 
-Read at minimum:
+Keep GeoX `e0cef94c063b03b29e1e1760fb1c2320ce497b56` only as the prior V2 closure
+and builder-task base when supported by live GeoX Git. Never combine that old
+SHA with the newer builder task/status.
 
-- all three repositories' `AGENTS.md`;
-- all three repositories' stable execution files;
-- MIP `PROGRAM_CURRENT_STATE.md`, `REPOSITORY_CHECKPOINTS.md`,
-  `NEXT_EXECUTION_SEQUENCE.md`, `DECISION_REGISTER.md`, and P2 consumer design;
-- MMM `mmm/contracts/calibration_compatibility.py` and current producer evidence;
-- GeoX `panel_exp/contracts/geox_governed_experiment_readout.py` and current
-  governed-readout evidence.
+For active sibling tasks, record sufficient source identity to verify the state:
+observed remote-main SHA, task ID/status, authorization head, base/closure where
+relevant, feature branch, evidence paths, and verification date.
 
-Compare the prior MIP-recorded engine checkpoints to current engine `main` and
-separate workflow-only changes from product-contract changes.
+### 2. Represent the existing GeoX work once
+
+The live GeoX task
+`GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001` already owns:
+
+- temporal boundaries;
+- deterministic freshness and expiry;
+- record kind and schema;
+- producer package-version semantics;
+- governed-readout builder;
+- package entrypoint.
+
+Represent this as one owner-repository workstream advancing both:
+
+- `P2-GEOX-TEMPORAL-VERSION-SEMANTICS`
+- `P2-GEOX-READOUT-BUILDER-ENTRYPOINT`
+
+Remove the separate proposed temporal and builder tasks from the program
+sequence, or explicitly mark those old identities absorbed/superseded by the
+existing combined authorized GeoX task. Do not create parallel aliases for the
+same capability.
+
+### 3. Preserve repository authority
+
+Remove any dependency from the already-authorized GeoX builder task to
+`GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001`.
+
+Remove any statement that GeoX implementation depends on MIP authorization.
+GeoX authorizes GeoX work. Protocol adoption is separate governance work and may
+run later or in parallel unless GeoX itself records it as a dependency.
+
+MIP coordination metadata may observe and sequence owner-repository work, but it
+cannot add, split, block, or authorize that work retroactively.
+
+### 4. Make dependency resolution executable
+
+For every workstream dependency, add an explicit live resolution condition and
+source evidence. At minimum:
+
+- `WS-MIP-COORDINATION-001` is satisfied only when live MIP execution state
+  records this task as merged at the externally approved implementation lineage;
+- sibling protocol-adoption work becomes eligible from that live merged
+  condition even when the cached MIP repository entry is stale;
+- a stale snapshot invokes a deterministic live overlay/reconciliation step;
+- cached `in_progress` status cannot permanently block work after live Git shows
+  the dependency merged;
+- repository-main observed state, feature-branch review state, producer
+  completion, consumer verification, and coordination-ledger state remain
+  distinct.
+
+Define how a live overlay changes eligibility without silently mutating cached
+history or claiming the ledger itself is current.
+
+### 5. Correct coordination history
+
+Record GeoX V2 closure at `e0cef94...` as one historical event. Record the later
+GeoX builder authorization at its own exact live authorization/main evidence as
+a separate event. Do not attribute the later task to the earlier closure SHA.
+
+The history remains append-only in meaning: preserve prior events and add a
+correction/reconciliation event rather than rewriting historical facts into a
+single combined event.
+
+### 6. Replace completion placeholders
+
+Remove the entire instructional placeholder beginning with
+`Before ready_for_review, replace this section` from the completion report.
+The corrected report must contain one actual execution-evidence section and one
+current implementation SHA, with no stale implementation/review claims.
+
+### 7. Strengthen focused governance tests
+
+Update `tests/test_cross_repository_coordination_control_plane.py` to verify:
+
+- exact current sibling pins and source task/status evidence;
+- an active sibling task agrees with its observed main and authorization head;
+- one owner workstream may advance multiple blocker IDs;
+- the single live GeoX builder workstream advances both GeoX blocker IDs;
+- no duplicate temporal/builder tasks remain proposed;
+- the GeoX builder does not depend on protocol adoption;
+- no GeoX task is described as requiring MIP authorization;
+- every dependency has an explicit live resolution condition;
+- stale coordinator-self state is reconcilable from live merged execution state;
+- coordination history separates closure from later authorization;
+- the completion report contains no placeholder instructions;
+- all authority freezes remain unchanged.
+
+Do not merely hardcode a new set of SHAs. Test the consistency relationships
+that prevented the first implementation from failing closed.
 
 ## Owned files
 
-Execution may modify only:
+Corrections may modify only the original task-owned paths:
 
-- `AGENTS.md`;
-- `docs/execution/TASK_EXECUTION_STANDARD.md`;
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`;
-- `docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md`;
-- `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json`;
-- `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md`;
-- `docs/program/PROGRAM_CURRENT_STATE.md`;
-- `docs/program/REPOSITORY_CHECKPOINTS.md`;
-- `docs/program/NEXT_EXECUTION_SEQUENCE.md`;
-- `docs/program/DECISION_REGISTER.md`;
-- `docs/roadmap/MIP_P2_CROSS_REPOSITORY_READINESS_RECONCILIATION_001.md`;
-- `tests/test_cross_repository_coordination_control_plane.py`;
-- `docs/execution/ACTIVE_TASK.md`;
-- `docs/execution/EXECUTION_STATE.json`;
-- `docs/execution/LATEST_COMPLETION_REPORT.md`.
+- `AGENTS.md`
+- `docs/execution/TASK_EXECUTION_STANDARD.md`
+- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
+- `docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md`
+- `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json`
+- `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md`
+- `docs/program/PROGRAM_CURRENT_STATE.md`
+- `docs/program/REPOSITORY_CHECKPOINTS.md`
+- `docs/program/NEXT_EXECUTION_SEQUENCE.md`
+- `docs/program/DECISION_REGISTER.md`
+- `docs/roadmap/MIP_P2_CROSS_REPOSITORY_READINESS_RECONCILIATION_001.md`
+- `tests/test_cross_repository_coordination_control_plane.py`
+- `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/EXECUTION_STATE.json`
+- `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-No other path is authorized. Do not modify MMM or GeoX.
-
-## Required coordination artifacts
-
-### 1. Coordination protocol
-
-Add `docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md` defining:
-
-- source precedence and stale-snapshot behavior;
-- repository ownership boundaries;
-- workstream identity and duplicate-work prevention;
-- dependency and blocker lifecycle;
-- producer-completion versus consumer-verification distinction;
-- required cross-repository impact section in task completion reports;
-- task proposal, execution, review, closure, and coordination refresh rules;
-- how new chats and Codex sessions orient across repositories;
-- no capability authority from coordination metadata.
-
-Before any cross-repository-affecting task is proposed, the proposing arm must
-read the live execution state and latest completion report from all affected
-repositories, then check the coordination ledger for overlapping active
-workstreams and ownership conflicts. An unresolved overlap is a blocker, not an
-invitation to duplicate implementation.
-
-### 2. Machine-readable coordination state
-
-Add `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json` with a strict,
-deterministic schema containing at least:
-
-- schema version, program ID, coordinator repository, and verification date;
-- exact observed MIP, MMM, and GeoX remote-main SHAs;
-- per-repository active task ID/status, current work summary, latest completed
-  task and closure SHA, next eligible tasks, validation debt, and authority
-  boundary;
-- workstreams with unique IDs, owner repository, capability area, task ID,
-  status, dependencies, blocked/unblocked tasks, evidence paths, and verified
-  SHA;
-- blockers with unique IDs, owner, affected consumers, state, evidence,
-  resolution criteria, consumer-verification requirement, and tasks unblocked;
-- ordered program sequence;
-- explicit stale-state behavior.
-
-Allowed blocker states must distinguish at least:
-
-- `open`;
-- `in_progress`;
-- `producer_completed_pending_consumer_verification`;
-- `resolved`;
-- `superseded`.
-
-Resolved blockers must cite merged evidence and the required consumer
-verification. No blocker may be resolved solely because a task report says
-"completed."
-
-### 3. Coordination history
-
-Add `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md` as an append-only,
-human-readable ledger of material program events. Seed it with:
-
-- MIP V2 workflow closure;
-- MMM V2 workflow closure;
-- GeoX import-health recovery and V2 workflow closure;
-- the current P2 readiness reconciliation;
-- exact closure SHAs and cross-repository impact;
-- historical/nonconforming merge events only where they remain relevant to
-  execution governance.
-
-Git history preserves every version, but this ledger must let a fresh chat see
-recent program progression without reconstructing all commits.
-
-## Required program reconciliation
-
-Update MIP program memory to current exact pins and classify the P2 dependencies
-using stable IDs. At minimum record:
-
-- `P2-GEOX-TEMPORAL-VERSION-SEMANTICS`;
-- `P2-GEOX-READOUT-BUILDER-ENTRYPOINT`;
-- `P2-MMM-GEOX-NORMALIZATION`;
-- `P2-MMM-CROSS-REPOSITORY-FIXTURES`;
-- `P2-D6-RELEASE-COMPATIBILITY-EVIDENCE`.
-
-Reverify each against current Git. Preserve only blockers actually supported by
-current evidence. Separate blockers from unrelated validation debt, including
-the unresolved full GeoX suite.
-
-Update:
-
-- `PROGRAM_CURRENT_STATE.md`;
-- `REPOSITORY_CHECKPOINTS.md`;
-- `NEXT_EXECUTION_SEQUENCE.md`;
-- `DECISION_REGISTER.md` only for newly supported decisions;
-- `REPOSITORY_CONTEXT_INDEX.md`.
-
-The current proposed sequence must become:
-
-1. this MIP coordination-control-plane task;
-2. `GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001` and
-   `MMM_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001` in parallel;
-3. `GEOX_GOVERNED_READOUT_TEMPORAL_VERSION_AND_ENVELOPE_SEMANTICS_001`;
-4. `GEOX_GOVERNED_READOUT_BUILDER_ENTRYPOINT_001`;
-5. `MMM_GEOX_READOUT_NORMALIZATION_AND_CROSS_REPOSITORY_FIXTURES_001`;
-6. `MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001`;
-7. D6 reconciliation and fixture-only cross-repository dry run;
-8. separate authorization before live package integration.
-
-The protocol-adoption tasks are proposed only; do not modify sibling repos or
-authorize those tasks here.
-
-## MIP bootstrap and execution-standard changes
-
-Update MIP `AGENTS.md` and `TASK_EXECUTION_STANDARD.md` so every new or resumed
-MIP task that affects another repository must:
-
-1. read the coordination protocol and state;
-2. verify recorded sibling SHAs against connected GitHub;
-3. read live sibling execution state and completion reports when a recorded SHA
-   is stale or the task depends on that sibling;
-4. check for overlapping workstream IDs and ownership conflicts;
-5. record dependency IDs in the active task;
-6. include a cross-repository impact section in the completion report;
-7. leave coordination state unchanged unless the task owns a verified refresh.
-
-Future GeoX and MMM adoption tasks must apply equivalent bootstrap rules in
-those repositories.
-
-## Cross-repository completion impact contract
-
-The protocol must require every task affecting another arm to report:
-
-- affected repositories;
-- workstream ID and capability owner;
-- dependency/blocker IDs created, advanced, resolved, or superseded;
-- exact merged evidence SHA and paths;
-- consumer verification still required;
-- newly eligible tasks;
-- validation debt introduced or retired;
-- authority impact.
-
-This is coordination metadata only. It cannot declare analytical compatibility,
-production readiness, or consumer acceptance without the owning repository's
-evidence.
-
-## Focused test requirements
-
-Add `tests/test_cross_repository_coordination_control_plane.py` verifying:
-
-- exact current MIP/MMM/GeoX pins appear in coordination and program files;
-- stale old engine pins are historical, not current;
-- repository/workstream/blocker IDs are unique;
-- every dependency and `unblocks` reference resolves to a declared ID/task;
-- no two active workstreams claim the same owner/capability area;
-- every resolved blocker has merged evidence and consumer verification;
-- coordination entries contain exact observed SHAs and evidence paths;
-- bootstrap rules require live sibling verification and duplicate-work checks;
-- current P2 blocker IDs and ordered follow-on tasks are present;
-- workflow completion is not equated with product readiness;
-- runtime integration, recommendations, optimization, production, and
-  package-side-agent authority remain blocked or false.
+No sibling repository or other MIP path is authorized.
 
 ## Validation gate
 
-Run:
+Run on the corrected exact branch tree:
 
-- the new focused coordination test;
-- relevant existing execution, documentation, and governance tests;
+- focused coordination-control-plane test;
+- relevant execution, documentation, and governance tests;
 - JSON parsing and Markdown/path consistency checks;
-- Ruff and mypy for changed Python files;
+- Ruff and mypy for the changed Python surface;
 - `git diff --check`;
 - exact changed-path verification;
-- Docker-backed `make validate` on the exact feature-branch tree.
+- Docker-backed `make validate`.
 
-Record exact pass/skip/warning counts. On any prerequisite or validation
-failure, publish an accurate `blocked` state and stop.
+Record exact pass, skip, and warning counts. If required validation cannot finish
+successfully, publish an accurate `blocked` state with exact evidence.
 
-## State transition and completion
+## Required republish state
 
-On success:
+On successful correction:
 
-- publish `ready_for_review`;
-- record the full implementation SHA;
-- keep task execution authorized and merge authorization false;
-- keep reviewed and approval SHAs null;
-- keep blockers empty;
-- keep capability authorizations unchanged;
-- push and verify the exact remote feature head;
+- commit the corrected implementation;
+- replace the rejected implementation SHA with the new full implementation SHA;
+- publish a final metadata commit setting status to `ready_for_review`;
+- keep `task_execution_authorized: true`;
+- keep `merge_authorized: false`;
+- keep approval SHA null;
+- clear review blockers only after the corrections and validation pass;
+- keep `capability_authorizations_changed: false`;
+- push and prove the exact remote feature-branch head;
 - stop without a PR, merge, or branch deletion.
-
-The completion report must record the superseded unexecuted readiness task, the
-new coordination artifacts, exact live pins, blocker decisions, workstream and
-dependency state, validation, limitations, proposed sibling adoption tasks, and
-authority impact.
-
-## Acceptance criteria
-
-- Every arm can discover current work, recent completion, blockers, dependencies,
-  next eligibility, validation debt, and ownership from Git.
-- A stale MIP coordination snapshot fails closed and triggers direct sibling
-  orientation.
-- Duplicate or overlapping cross-repository work is detected before task
-  authorization.
-- Blocker resolution requires producer evidence and declared consumer
-  verification.
-- MIP program memory uses current exact pins.
-- The P2 sequence and ownership are explicit.
-- No product, analytical, runtime, recommendation, optimization, treatment,
-  pilot, production, or agent capability is introduced or authorized.
-- Full validation passes or the task stops blocked.
 
 ## Prohibited actions
 
-Implementation, validation, and publication are complete. The exact remote
-review head must receive separate external approval before any merge session.
-No pull request, merge, branch deletion, sibling modification, or capability
-authorization is permitted while this task remains `ready_for_review`.
-
 Do not modify MMM or GeoX. Do not create a PR. Do not merge, squash, rebase,
-force-push, or delete branches. Do not implement P2 consumers, adapters, engine
-contracts, package entrypoints, orchestration, LLM behavior, persistence,
-uploads, real data, simulations, recommendations, optimization, or production
-paths.
+force-push, or delete branches. Do not implement P2 consumers, engine contracts,
+adapters, package entrypoints, simulations, recommendations, optimization,
+orchestration, live integration, real data, pilot, production, or agents.
