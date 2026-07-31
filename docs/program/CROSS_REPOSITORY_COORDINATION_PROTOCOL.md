@@ -34,6 +34,14 @@ entry can never permanently block work after live Git proves the dependency is
 merged. The overlay does not itself authorize work or silently mutate the
 append-only history.
 
+The coordination snapshot records repository-main observations only. Mutable
+feature-branch review state must be read at the exact remote branch head from
+that branch's `docs/execution/EXECUTION_STATE.json`, `ACTIVE_TASK.md`, and
+`LATEST_COMPLETION_REPORT.md`; it must not be cached in the shared snapshot.
+Rejected heads remain repository execution metadata and coordination-history
+evidence. A feature branch, regardless of review state, never satisfies a
+merged workstream dependency.
+
 New or resumed cross-repository work must:
 
 1. verify all affected remote-main SHAs and execution files;

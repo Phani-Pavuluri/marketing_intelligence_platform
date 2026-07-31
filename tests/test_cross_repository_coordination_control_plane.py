@@ -61,12 +61,24 @@ def test_cross_repository_coordination_control_plane() -> None:
     mip_coordination = next(
         entry for entry in workstreams if entry["id"] == "WS-MIP-COORDINATION-001"
     )
-    assert mip_coordination["live_resolution_condition"] == (
-        "Satisfied only when live MIP origin/main execution state records "
-        "MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001 as merged at an "
-        "externally approved implementation lineage."
+    assert "live MIP origin/main execution state" in mip_coordination[
+        "live_resolution_condition"
+    ]
+    assert "never satisfies this condition" in mip_coordination[
+        "live_resolution_condition"
+    ]
+    assert "feature_branch_review_state" not in mip_coordination
+    assert state["feature_branch_review_source"]["snapshot_scope"] == (
+        "repository_main_observations_only"
     )
-    assert mip_coordination["feature_branch_review_state"]["status"] == "changes_requested"
+    assert state["feature_branch_review_source"]["exact_remote_branch_evidence_paths"] == [
+        "docs/execution/EXECUTION_STATE.json",
+        "docs/execution/ACTIVE_TASK.md",
+        "docs/execution/LATEST_COMPLETION_REPORT.md",
+    ]
+    assert "never satisfies a merged workstream dependency" in state[
+        "feature_branch_review_source"
+    ]["rule"]
     assert state["live_overlay_rules"]["merged_dependency_condition"]
     assert "cannot permanently block" in state["live_overlay_rules"]["stale_snapshot_behavior"]
     geox_builder = next(
@@ -124,6 +136,7 @@ def test_cross_repository_coordination_control_plane() -> None:
     assert "duplicate ownership" in protocol
     assert "live overlay" in protocol
     assert "cannot retroactively add" in protocol
+    assert "must not be cached in the shared snapshot" in protocol
     for path in (CURRENT_STATE_PATH, CHECKPOINTS_PATH, SEQUENCE_PATH):
         text = path.read_text(encoding="utf-8")
         for sha in expected_pins.values():
@@ -137,5 +150,12 @@ def test_cross_repository_coordination_control_plane() -> None:
         "`c4c9059a6a6e882a10a356350376d8a64fb14057`"
         in history
     )
+    assert "First coordination review changes requested" in history
+    assert "MIP `b0a9a9c1812b1ae1740d85fbb29827d60d338ebe`" in history
+    assert "Review decision only" in history
+    assert "First coordination correction implementation published" in history
+    assert "MIP `067aeca571f2702b88aee92f8647ededee1df0f1`" in history
+    assert "Second coordination review changes requested" in history
+    assert "MIP `96815daf3cfa3d8d5c658016219784e8e94947b8`" in history
     report = REPORT_PATH.read_text(encoding="utf-8")
     assert "Before `ready_for_review`, replace this section" not in report

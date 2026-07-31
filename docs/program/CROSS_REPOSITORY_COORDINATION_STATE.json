@@ -10,6 +10,11 @@
     "stale_snapshot_behavior": "A cached in_progress or authorized entry is reconciled from the live overlay; it cannot permanently block an otherwise proven merged dependency.",
     "authority_boundary": "Live overlay changes eligibility assessment only. It does not authorize tasks, capabilities, integrations, or releases."
   },
+  "feature_branch_review_source": {
+    "snapshot_scope": "repository_main_observations_only",
+    "exact_remote_branch_evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md"],
+    "rule": "Mutable feature-branch review status and head are not cached here. Read them from the exact remote feature branch; a feature branch never satisfies a merged workstream dependency."
+  },
   "repositories": [
     {
       "id": "mip",
@@ -73,12 +78,7 @@
       "blocked_by": [],
       "evidence_paths": ["docs/execution/ACTIVE_TASK.md", "docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md"],
       "verified_sha": "631763cfb75fc42f8b1bf7025c5bce34c39097b5",
-      "live_resolution_condition": "Satisfied only when live MIP origin/main execution state records MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001 as merged at an externally approved implementation lineage.",
-      "feature_branch_review_state": {
-        "observed_feature_head_sha": "b0a9a9c1812b1ae1740d85fbb29827d60d338ebe",
-        "status": "changes_requested",
-        "purpose": "Correction execution is separate from the MIP main observation and does not satisfy this workstream dependency."
-      }
+      "live_resolution_condition": "Satisfied only when live MIP origin/main execution state records MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001 as merged at an externally approved implementation lineage. Feature-branch review evidence must be read from its exact remote execution files and never satisfies this condition."
     },
     {
       "id": "WS-GEOX-PROTOCOL-ADOPTION-001",
