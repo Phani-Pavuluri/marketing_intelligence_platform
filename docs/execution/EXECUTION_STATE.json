@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001",
-  "status": "authorized",
+  "status": "ready_for_review",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "d35fbbb82711b073c3504d5cc0f1b807e9b36c81",
@@ -15,7 +15,7 @@
   "merge_authorized": false,
   "pr_creation_authorized": false,
   "reviewed_head_sha": null,
-  "implementation_commit_sha": null,
+  "implementation_commit_sha": "18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0",
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-07-31",
@@ -32,7 +32,7 @@
   "mmm_resolver_adoption_authorized": false,
   "geox_resolver_adoption_authorized": false,
   "geox_active_builder_must_remain_unmodified": true,
-  "review_decision": "authorized",
+  "review_decision": "ready_for_review",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
-  "task_authoring_note": "The pre-authoring base through authorization_head_sha changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. This immediately following commit changes only EXECUTION_STATE.json and authorizes execution. Create feat/mip-active-task-context-resolver-001 from this exact synchronized main."
+  "task_authoring_note": "Implementation 18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0 is the sole final implementation tree for exact-head review. It adds the repository-authored resolver, semantic temporary-Git tests, and derived-prose consistency rules. Merge and PR authorization remain false; no capability authority changed."
 }

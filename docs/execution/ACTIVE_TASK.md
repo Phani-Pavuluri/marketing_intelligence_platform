@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -15,6 +15,7 @@
 - **Observed MMM main:** `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
 - **Observed GeoX main:** `ee9673c13e69082367c1727568946ac4c1a01015`
 - **Capability authorizations changed:** `false`
+- **Implementation commit:** `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`
 
 ## Purpose
 
@@ -45,7 +46,8 @@ producer-owned task `GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001` at
 `ee9673c13e69082367c1727568946ac4c1a01015`. This MIP task neither modifies nor
 blocks that work.
 
-No existing MIP resolver implementation or authorized resolver task was found.
+No existing MIP resolver implementation or authorized resolver task was found at
+task authorization. The completed implementation is recorded below.
 
 ## Owned files
 
@@ -219,6 +221,22 @@ push the exact branch head, and stop.
 
 Do not create a PR, merge, squash, rebase, force-push, delete branches, or modify
 MMM or GeoX during execution.
+
+## Execution result
+
+The sole implementation commit is `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`.
+It adds `make resume-active-task` and `scripts/resolve_active_task.py`, updates
+the bootstrap/source-of-truth documentation, and adds isolated temporary-Git
+semantic tests. The resolver selects only the exact remote-backed authorized
+branch from `origin/main` state, reports review-only/non-executable states
+without branch selection, and fails closed on repository, worktree, state,
+authority, ancestry, implementation-identity, or human-view disagreement.
+
+The branch is `ready_for_review`. Task execution authorization remains true for
+review; merge and PR authorization remain false; reviewed and approval SHAs
+remain null; capability authorizations remain unchanged. MMM and GeoX were not
+modified, their adoption remains unauthorized, and the GeoX builder remains
+unmodified and unblocked.
 
 ## Deferred owner-repository adoption
 

@@ -7,7 +7,8 @@
 - **Execution mode:** `branch_and_fast_forward`
 - **Pre-authoring base:** `d35fbbb82711b073c3504d5cc0f1b807e9b36c81`
 - **Feature branch:** `feat/mip-active-task-context-resolver-001`
-- **Current decision:** `authorized`
+- **Implementation commit:** `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`
+- **Current decision:** `ready_for_review`
 
 ## GitHub-observed starting evidence
 
@@ -68,13 +69,62 @@ A completion report must distinguish GitHub-observed evidence from local
 execution-reported validation and contain one real implementation commit SHA.
 Failure of the complete gate must publish `blocked` with exact debt.
 
-## Current status and authority
+## Deliverables and acceptance results
 
-Task metadata is being authorized on `main`; implementation has not started.
-No implementation commit or review head exists. Task execution is authorized
-only after the immediately following state-only authorization commit and exact
-feature-branch creation.
+Implemented at `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`:
 
-Merge and PR creation remain unauthorized. Capability authorizations remain
-unchanged. MMM and GeoX resolver adoption remain proposed future owner-repository
-work only; GeoX's active builder is not modified or blocked.
+- `scripts/resolve_active_task.py` and `make resume-active-task`;
+- canonical-pointer-first bootstrap in `AGENTS.md`, the execution standard, and
+  the context index;
+- mechanical execution-state versus human-view consistency rules;
+- real commit-object and ancestry validation for review implementation SHA;
+- semantic temporary-Git scenarios plus task-agnostic coordination assertions.
+
+Changed files:
+
+- `AGENTS.md`
+- `Makefile`
+- `scripts/resolve_active_task.py`
+- `docs/execution/TASK_EXECUTION_STANDARD.md`
+- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
+- `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/EXECUTION_STATE.json`
+- `docs/execution/LATEST_COMPLETION_REPORT.md`
+- `tests/test_active_task_context_resolver.py`
+- `tests/test_cross_repository_coordination_control_plane.py`
+
+The resolver reads `origin/main:docs/execution/EXECUTION_STATE.json` before
+branch task prose, selects only an exact remote-backed executable branch, and
+fails closed on wrong origin, worktree, main, state, authority, branch, ancestry,
+human-view, or implementation-identity inconsistencies. `ready_for_review` is
+review-only; merged and other non-executable states remain on main.
+
+## Validation
+
+Execution-reported local validation on the final review tree:
+
+- JSON parsing and Markdown/current-state consistency: PASS;
+- temporary-Git resolver, execution-handoff, and coordination focused tests:
+  **16 passed**;
+- changed-path Ruff and resolver mypy: PASS;
+- `git diff --check`: PASS;
+- Docker-backed `make validate`: **2555 passed, 5 skipped, 1 warning**;
+  Ruff and mypy passed across **472 source files**.
+
+GitHub-observed evidence is limited to repository refs and commits; the test and
+Docker results above are local execution-reported evidence until reviewed.
+
+## Authority, limitations, and merge readiness
+
+- Capabilities newly authorized: none.
+- Merge and PR authorization: false.
+- MMM and GeoX modified: no.
+- GeoX builder blocked or modified: no.
+- Deferred: MMM and GeoX may adopt their own resolver only through separately
+  authorized owner-repository tasks after their own prerequisite gates.
+- Local-only paths: `.codex/` and `docs/tasks/`.
+
+The branch is ready for exact-head review after the complete Docker validation
+gate passed. No product, analytical, live-integration, real-data,
+persistence, simulation, optimization, recommendation, pilot, or production
+capability is authorized.
