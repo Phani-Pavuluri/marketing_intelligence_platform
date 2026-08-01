@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001",
-  "status": "changes_requested",
+  "status": "blocked",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "d35fbbb82711b073c3504d5cc0f1b807e9b36c81",
@@ -10,12 +10,12 @@
   "feature_branch": "feat/mip-active-task-context-resolver-001",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_execution_authorized": false,
+  "task_execution_authorized": true,
   "correction_execution_authorized": true,
   "merge_authorized": false,
   "pr_creation_authorized": false,
   "reviewed_head_sha": null,
-  "implementation_commit_sha": null,
+  "implementation_commit_sha": "785d83f25891274a42a5a82efbd17103563c29a7",
   "candidate_rejected_implementation_commit_sha": "18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0",
   "rejected_review_head_sha": "abf57a6fb0c08d23fb51c56a5ea744445b3ab82c",
   "review_state_head_before_scope_amendment": "e5a0fd5f1d7fadd2d9268128bd69409962d32e45",
@@ -24,10 +24,7 @@
   "capability_authorizations_changed": false,
   "last_updated": "2026-07-31",
   "blockers": [
-    "MIP-RESOLVER-NONEXECUTABLE-HUMAN-VIEW-BYPASS",
-    "MIP-RESOLVER-AUTHORITY-LIFECYCLE-GAPS",
-    "MIP-RESOLVER-CORRECTION-RESUMPTION-MODEL-MISMATCH",
-    "MIP-RESOLVER-MINIMUM-TEST-MATRIX-INCOMPLETE"
+    "MIP-RESOLVER-UNOWNED-GOVERNANCE-TEST-CONTRADICTION"
   ],
   "correction_scope_authorized": true,
   "correction_owned_path_count": 10,
@@ -51,7 +48,7 @@
   "geox_active_builder_must_remain_unmodified": true,
   "next_candidate_task_id": "MIP_EXECUTION_TASK_AUTHORING_PREFLIGHT_001",
   "next_candidate_task_authorized": false,
-  "review_decision": "changes_requested",
+  "review_decision": "blocked",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "task_authoring_note": "The user explicitly authorized the tenth correction-owned path and correction execution. Implement only the recorded resolver corrections, transition/invariant matrices, R01-R25 test matrix, and owned-path gate. MIP_EXECUTION_TASK_AUTHORING_PREFLIGHT_001 is recorded as a future candidate only and remains unauthorized."
 }

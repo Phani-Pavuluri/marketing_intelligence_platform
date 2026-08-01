@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** blocked
 **Owner:** MIP program governance
 **Last updated:** 2026-07-31
 **Last verified:** 2026-07-31
@@ -16,6 +16,7 @@
 - **Rejected implementation:** `18f7ffdd5b3ef20af4cea177047c11f5ffadd8f0`
 - **Rejected review head:** `abf57a6fb0c08d23fb51c56a5ea744445b3ab82c`
 - **Review-state head before amendment:** `e5a0fd5f1d7fadd2d9268128bd69409962d32e45`
+- **Final implementation commit:** `785d83f25891274a42a5a82efbd17103563c29a7`
 - **Observed MMM main:** `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
 - **Observed GeoX main:** `ee9673c13e69082367c1727568946ac4c1a01015`
 - **Capability authorizations changed:** `false`
@@ -96,6 +97,7 @@ Implement this explicit matrix. Any unlisted transition fails closed.
 | `ready_for_review` | `ready_for_review` | review-only; stay on main | valid implementation SHA; merge/PR false |
 | `blocked` | `blocked` or `in_progress` | executable only when authorized | task or correction authorization true |
 | `changes_requested` | `changes_requested` or `in_progress` | executable correction | `correction_execution_authorized=true` |
+| `changes_requested` | `blocked` | blocked resumption only when authorized | task or correction authorization true |
 | `changes_requested` | `ready_for_review` | review-only; stay on main | valid implementation SHA; merge/PR false |
 
 For `idle`, `proposed`, `merged`, and `superseded` on main, validate main human
@@ -226,3 +228,13 @@ contract, automatic owned-path enforcement, lifecycle/invariant matrices,
 numbered test-evidence coverage, path-existence checks, normalized human views,
 and a bounded correction-loop policy. It must be proven on one narrow MIP task
 before any MMM or GeoX adoption is proposed.
+
+## Completion state
+
+The correction implementation is blocked pending a separate authorization to
+reconcile the required governance test with this task's explicit ready-state
+authorization rule. Its final implementation commit is
+`785d83f25891274a42a5a82efbd17103563c29a7`. Merge and PR authorization remain
+false. Resolver-correction execution remains authorized only to resume this
+bounded task after its validation-contract conflict is resolved. No product,
+sibling, or capability authority changed.

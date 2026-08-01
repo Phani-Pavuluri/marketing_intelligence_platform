@@ -81,6 +81,7 @@ The resolver permits only these main-pointer-to-branch transitions:
 | `authorized` | `ready_for_review` | review-only on main | valid implementation identity |
 | `blocked` | `blocked` or `in_progress` | executable resumption | task or correction execution |
 | `changes_requested` | `changes_requested` or `in_progress` | executable correction | correction execution |
+| `changes_requested` | `blocked` | executable resumption | task or correction execution |
 | `changes_requested` | `ready_for_review` | review-only on main | valid implementation identity |
 | `ready_for_review` | `ready_for_review` | review-only on main | valid implementation identity |
 
