@@ -24,6 +24,7 @@ class ResolutionLike(Protocol):
     branch_sha: str | None
     outcome: str
     feature_branch: str | None
+    main_sha: str
     reason_code: str
     status: str
     task_id: str
