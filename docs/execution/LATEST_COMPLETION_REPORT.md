@@ -1,80 +1,67 @@
 # TASK_COMPLETION_REPORT_V2
 
-## Identity
+## Identity and current decision
 
 - **Task ID:** `MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Pre-authoring base:** `d35fbbb82711b073c3504d5cc0f1b807e9b36c81`
+- **Main before supersession:** `11c062eb785b3518d531992aa554d0a3a4c0b84b`
 - **Feature branch:** `feat/mip-active-task-context-resolver-001`
-- **Current decision:** `authorized`
+- **Preserved candidate implementation:** `785d83f25891274a42a5a82efbd17103563c29a7`
+- **Superseded exact branch head:** `b96dfc4365d5aadf9425d31aa576664f58270fa5`
+- **Current decision:** `superseded`
 
-## GitHub-observed starting evidence
+## GitHub-observed evidence
 
-- MIP `main` was observed at
-  `d35fbbb82711b073c3504d5cc0f1b807e9b36c81` before task authoring.
-- The prior reconciliation task is merged, execution authorization is false,
-  and its remote feature branch is absent.
-- The prior closure report contains both review-era and merged current-state
-  prose, demonstrating the duplicated-state defect this task is authorized to
-  prevent.
-- MMM `main` is
-  `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; its execution-handoff
-  reconciliation is merged and no MMM implementation task is active.
-- GeoX `main` is
-  `ee9673c13e69082367c1727568946ac4c1a01015`; its independently authorized
-  `GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001` remains GeoX-owned.
-- No existing MIP active-task resolver implementation or authorized duplicate
-  task was found.
+At the supersession decision:
 
-## Authorized result
+- MIP `main` remained `11c062eb785b3518d531992aa554d0a3a4c0b84b`;
+- the feature branch was thirteen commits ahead of `main` without divergence;
+- its exact remote head was `b96dfc4365d5aadf9425d31aa576664f58270fa5`;
+- the branch recorded candidate implementation
+  `785d83f25891274a42a5a82efbd17103563c29a7`;
+- the branch status was `blocked` on
+  `MIP-RESOLVER-UNOWNED-GOVERNANCE-TEST-CONTRADICTION`;
+- MMM remained merged at
+  `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; and
+- GeoX remained independently authorized at
+  `ee9673c13e69082367c1727568946ac4c1a01015`.
 
-Implement a deterministic MIP repository command that reads the current task
-pointer from `origin/main:docs/execution/EXECUTION_STATE.json`, validates the
-repository, worktree, lifecycle, authority, remote branch, ancestry, and
-main/branch agreement, then selects the exact remote task branch before
-`ACTIVE_TASK.md` is read.
+## Preserved implementation evidence
 
-The task also establishes execution state as the sole machine-readable current
-pointer, mechanically validates the two human-readable stable files, defines
-one real ancestral implementation SHA, and replaces literal task-ID coupling
-with semantic execution invariants.
+The branch reported completion of pointer-first task resolution, lifecycle and
+authority validation, human-view consistency, branch-only correction handling,
+implementation ancestry checks, and the R01-R25 semantic test matrix.
+Execution-reported validation was:
 
-## Owned paths
+- focused resolver and governance tests: **46 passed**;
+- Docker-backed `make validate`: **2585 passed, 5 skipped, 1 warning**;
+- Ruff passed; and
+- mypy reported no issues across **472** source files.
 
-Only these paths may change during implementation:
+These results are historical local execution-reported evidence. They do not
+constitute approval, consumer acceptance, or merge authority.
 
-- `AGENTS.md`
-- `Makefile`
-- `scripts/resolve_active_task.py`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
-- `tests/test_active_task_context_resolver.py`
+## Supersession rationale
 
-No program coordination file, runtime, contract, adapter, fixture,
-orchestration, UI, analytical path, MMM path, or GeoX path is owned.
+The task combined several independently reviewable outcomes under one branch:
+repository resolution, lifecycle enforcement, authority invariants, human-view
+normalization, correction resumption, coordination-test repair, and a 25-case
+test framework. Review and correction expanded the task further until a new
+unowned governance-test contract blocked publication.
 
-## Validation requirement
+The project now adopts the rule that one authorized task must produce one
+independently reviewable and mergeable evidence unit. Continuing this branch
+would violate that rule and prolong the correction loop. The task is therefore
+superseded without merge. Its implementation and branch remain available as
+source material for future narrowly scoped resolver tasks.
 
-The implementation must run focused resolver and governance tests, temporary-Git
-scenario tests, JSON and Markdown consistency checks, exact changed-path
-verification, Ruff, configured mypy, `git diff --check`, and Docker-backed full
-`make validate`.
+## Authority and next work
 
-A completion report must distinguish GitHub-observed evidence from local
-execution-reported validation and contain one real implementation commit SHA.
-Failure of the complete gate must publish `blocked` with exact debt.
-
-## Current status and authority
-
-Task metadata is being authorized on `main`; implementation has not started.
-No implementation commit or review head exists. Task execution is authorized
-only after the immediately following state-only authorization commit and exact
-feature-branch creation.
-
-Merge and PR creation remain unauthorized. Capability authorizations remain
-unchanged. MMM and GeoX resolver adoption remain proposed future owner-repository
-work only; GeoX's active builder is not modified or blocked.
+- Task execution, correction execution, merge, and PR creation are false.
+- No product, analytical, runtime, sibling, or capability authority changed.
+- The GeoX builder remains owner-authorized and unmodified by MIP.
+- `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001` is the next eligible MIP task.
+- The lean-standard task must remain docs-only, establish one concise program
+  standard and MIP authoring shape, use a narrow validation gate, and leave MMM
+  and GeoX adoption to separately authorized owner-repository tasks.
