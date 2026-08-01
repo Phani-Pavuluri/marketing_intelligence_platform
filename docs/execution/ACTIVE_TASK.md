@@ -96,6 +96,7 @@ Implement this explicit matrix. Any unlisted transition fails closed.
 | `ready_for_review` | `ready_for_review` | review-only; stay on main | valid implementation SHA; merge/PR false |
 | `blocked` | `blocked` or `in_progress` | executable only when authorized | task or correction authorization true |
 | `changes_requested` | `changes_requested` or `in_progress` | executable correction | `correction_execution_authorized=true` |
+| `changes_requested` | `ready_for_review` | review-only; stay on main | valid implementation SHA; merge/PR false |
 
 For `idle`, `proposed`, `merged`, and `superseded` on main, validate main human
 views, remain on main, and do not fetch or select a feature branch.

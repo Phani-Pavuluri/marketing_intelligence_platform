@@ -69,6 +69,31 @@ or `changes_requested` only when execution or correction authorization is true.
 It fails closed with a nonzero status for origin, worktree, history, ancestry,
 state, authority, branch, or human-view inconsistency.
 
+### Resolver V2 lifecycle and invariant matrices
+
+The resolver permits only these main-pointer-to-branch transitions:
+
+| Main pointer | Branch state | Result | Required branch authority |
+|---|---|---|---|
+| `authorized` | `authorized` or `in_progress` | executable | task execution |
+| `authorized` | `blocked` | executable resumption | task or correction execution |
+| `authorized` | `changes_requested` | executable correction | correction execution |
+| `authorized` | `ready_for_review` | review-only on main | valid implementation identity |
+| `blocked` | `blocked` or `in_progress` | executable resumption | task or correction execution |
+| `changes_requested` | `changes_requested` or `in_progress` | executable correction | correction execution |
+| `changes_requested` | `ready_for_review` | review-only on main | valid implementation identity |
+| `ready_for_review` | `ready_for_review` | review-only on main | valid implementation identity |
+
+`idle`, `proposed`, `merged`, and `superseded` validate their human views and
+remain on main without fetching a feature branch. Every other transition fails
+closed. Before transition selection, the resolver requires exact agreement on
+schema, repository/task identity, execution mode, base and authorization SHAs,
+feature branch, stable execution paths, affected repositories when present,
+sibling/owner flags when present, and capability-authority state. Only lifecycle
+state, execution/correction authorization, blockers, and implementation lineage
+may evolve. A feature branch may never set merge or PR authorization, approval
+metadata, capability authority, or sibling-adoption authority.
+
 ## Stable paths, task authoring, and default mode
 
 Exactly one current copy exists at `docs/execution/ACTIVE_TASK.md`,
