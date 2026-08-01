@@ -366,6 +366,15 @@ def test_r04_blocked_resumption(tmp_path: Path) -> None:
         resolve(clone)
 
 
+def test_correction_can_publish_blocked_resumption_state(tmp_path: Path) -> None:
+    seed, clone, _ = make_repository(tmp_path, "changes_requested")
+    branch_state = read_state(seed, "main")
+    branch_state["status"] = "blocked"
+    branch_state["blockers"] = ["UNOWNED_VALIDATION_CONFLICT"]
+    push_feature_state(seed, branch_state)
+    assert resolve(clone).status == "blocked"
+
+
 def test_r05_ready_review_only(tmp_path: Path) -> None:
     seed, clone, _ = make_repository(tmp_path)
     implementation = git(seed, "rev-parse", "HEAD")

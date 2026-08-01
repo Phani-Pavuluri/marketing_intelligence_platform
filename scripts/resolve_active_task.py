@@ -42,6 +42,7 @@ TRANSITIONS: dict[tuple[str, str], str] = {
     ("blocked", "in_progress"): "resumption",
     ("changes_requested", "changes_requested"): "correction",
     ("changes_requested", "in_progress"): "correction",
+    ("changes_requested", "blocked"): "resumption",
     # Publishing a completed correction for review is the terminal correction
     # transition; it does not grant merge or product authority.
     ("changes_requested", "ready_for_review"): "review",
