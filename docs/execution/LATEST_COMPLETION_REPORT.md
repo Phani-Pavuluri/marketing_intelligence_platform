@@ -2,66 +2,64 @@
 
 ## Identity and current decision
 
-- **Task ID:** `MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001`
+- **Task ID:** `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Main before supersession:** `11c062eb785b3518d531992aa554d0a3a4c0b84b`
-- **Feature branch:** `feat/mip-active-task-context-resolver-001`
-- **Preserved candidate implementation:** `785d83f25891274a42a5a82efbd17103563c29a7`
-- **Superseded exact branch head:** `b96dfc4365d5aadf9425d31aa576664f58270fa5`
-- **Current decision:** `superseded`
+- **Pre-authoring base:** `70bd688b2506ca0bb3cb572dd00552bf10f1e9b8`
+- **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
+- **Current decision:** `proposed`
 
-## GitHub-observed evidence
+## GitHub-observed starting evidence
 
-At the supersession decision:
+- The oversized resolver task was superseded without merge at
+  `70bd688b2506ca0bb3cb572dd00552bf10f1e9b8`.
+- Its preserved branch head is
+  `b96dfc4365d5aadf9425d31aa576664f58270fa5`; its candidate implementation is
+  `785d83f25891274a42a5a82efbd17103563c29a7`.
+- MMM remains merged at
+  `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421` with no active implementation
+  task.
+- GeoX remains independently authorized at
+  `ee9673c13e69082367c1727568946ac4c1a01015`; MIP does not modify, split, or
+  block its active task.
+- No canonical lean repository delivery standard currently exists under
+  `docs/program/`.
 
-- MIP `main` remained `11c062eb785b3518d531992aa554d0a3a4c0b84b`;
-- the feature branch was thirteen commits ahead of `main` without divergence;
-- its exact remote head was `b96dfc4365d5aadf9425d31aa576664f58270fa5`;
-- the branch recorded candidate implementation
-  `785d83f25891274a42a5a82efbd17103563c29a7`;
-- the branch status was `blocked` on
-  `MIP-RESOLVER-UNOWNED-GOVERNANCE-TEST-CONTRADICTION`;
-- MMM remained merged at
-  `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; and
-- GeoX remained independently authorized at
-  `ee9673c13e69082367c1727568946ac4c1a01015`.
+## Authorized outcome after state recording
 
-## Preserved implementation evidence
+Create one concise MIP-owned program standard and update MIP task-authoring,
+bootstrap, and navigation guidance so future work is decomposed into one
+independently mergeable outcome and receives validation proportional to its
+risk tier.
 
-The branch reported completion of pointer-first task resolution, lifecycle and
-authority validation, human-view consistency, branch-only correction handling,
-implementation ancestry checks, and the R01-R25 semantic test matrix.
-Execution-reported validation was:
+This is a docs-only Tier 1 task. It does not implement automation, resolver code,
+execution-state schema changes, coordination-ledger updates, sibling adoption,
+or product capability.
 
-- focused resolver and governance tests: **46 passed**;
-- Docker-backed `make validate`: **2585 passed, 5 skipped, 1 warning**;
-- Ruff passed; and
-- mypy reported no issues across **472** source files.
+## Owned paths
 
-These results are historical local execution-reported evidence. They do not
-constitute approval, consumer acceptance, or merge authority.
+Only these seven paths may change:
 
-## Supersession rationale
+- `AGENTS.md`
+- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`
+- `docs/execution/TASK_EXECUTION_STANDARD.md`
+- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
+- `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/EXECUTION_STATE.json`
+- `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-The task combined several independently reviewable outcomes under one branch:
-repository resolution, lifecycle enforcement, authority invariants, human-view
-normalization, correction resumption, coordination-test repair, and a 25-case
-test framework. Review and correction expanded the task further until a new
-unowned governance-test contract blocked publication.
+## Validation requirement
 
-The project now adopts the rule that one authorized task must produce one
-independently reviewable and mergeable evidence unit. Continuing this branch
-would violate that rule and prolong the correction loop. The task is therefore
-superseded without merge. Its implementation and branch remain available as
-source material for future narrowly scoped resolver tasks.
+Use the task-authorized narrow docs-only gate: JSON parsing, Markdown structure
+and path checks, exact changed-path verification, `git diff --check`, and any
+existing focused documentation/governance consistency test directly affected by
+these files. Do not run Docker, Ruff, mypy, or the full suite unless an unexpected
+executable dependency is discovered; in that case publish `blocked` instead of
+widening scope.
 
-## Authority and next work
+## Authority
 
-- Task execution, correction execution, merge, and PR creation are false.
-- No product, analytical, runtime, sibling, or capability authority changed.
-- The GeoX builder remains owner-authorized and unmodified by MIP.
-- `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001` is the next eligible MIP task.
-- The lean-standard task must remain docs-only, establish one concise program
-  standard and MIP authoring shape, use a narrow validation gate, and leave MMM
-  and GeoX adoption to separately authorized owner-repository tasks.
+Task execution is not authorized until the immediately following state-only
+commit records the exact task-authoring head. Merge and PR creation remain
+false. Capability authority remains unchanged. MMM and GeoX adoption remain
+unauthorized and owner-repository controlled.
