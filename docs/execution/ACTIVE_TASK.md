@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -18,7 +18,8 @@
 
 ## Review decision
 
-Changes remain required. Commit `3c34b29564292e4d2728d3a69e950774e3e2a748` correctly adds branch-aware resumed-task guidance to `AGENTS.md`, `docs/execution/TASK_EXECUTION_STANDARD.md`, and the focused governance test. It is not a review-publication head.
+Commit `3c34b29564292e4d2728d3a69e950774e3e2a748` implements the branch-aware
+guidance; the completed frozen tree is ready for exact-head review only.
 
 Codex stopped after the substantive commit and did not:
 

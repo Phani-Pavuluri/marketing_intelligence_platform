@@ -8,7 +8,7 @@
 - **Authorization head:** `39abc3d66a80054b2b293a73f2dbeb690eb2304b`
 - **Accepted minimal-prompt implementation:** `9bb63c02e476a8a13855192b9df77d4238a3673b`
 - **Incomplete branch-state implementation:** `3c34b29564292e4d2728d3a69e950774e3e2a748`
-- **Current decision:** `changes_requested`
+- **Current decision:** `ready_for_review`
 
 ## Review finding
 
