@@ -1,150 +1,179 @@
 # Active Task
 
-**Status:** merged
+**Status:** authorized
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
 
 ## Identity
 
-- **Task ID:** `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001`
+- **Task ID:** `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
-- **Rejected review head:** `9f829c3e12ca79698c6cabda1e8089e9d4567fa1`
-- **Correction implementation commit:** `ee0905feb962150f850c33f5e20aa6fde03c8caf`
-- **Risk tier:** Tier 1 — documentation and governance guidance only
+- **Pre-authoring base:** `main` / `dab329bc6ff9d62971bbe12a7398e08131a4cf22`
+- **Feature branch:** `docs/mip-definition-ready-task-authorization-standard-001`
+- **Execution mode:** `branch_and_fast_forward`
+- **Risk tier:** Tier 1 — documentation/governance rule plus focused governance test
+- **Prior task:** `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001`
+- **Prior closure:** `dab329bc6ff9d62971bbe12a7398e08131a4cf22`
 - **Capability authorizations changed:** `false`
 
-## Closure
+## Primary mergeable outcome
 
-The user explicitly approved exact reviewed head
-`dd870de03d9a214f427f12e680b1f1f8ab4ad20b` in ChatGPT. It was fast-forwarded
-to `main` and pushed without a pull request or merge commit.
+Make definition-readiness an operative pre-authorization requirement for future
+MIP executable tasks. A task must be sufficiently decided that the execution
+agent implements an already-defined contract rather than deciding what the
+contract should mean.
 
-The resulting main lineage before this closure commit is
-`106f428de44e0e37405355f73e90ba6cbacd82a0 →
-dd870de03d9a214f427f12e680b1f1f8ab4ad20b`. The sole correction implementation
-commit is `ee0905feb962150f850c33f5e20aa6fde03c8caf`.
+This is one independently reviewable outcome: the task-authoring rule and its
+focused governance assertion establish one authorization gate. It cannot be
+split further without leaving either an unenforced rule or a test with no
+canonical requirement.
 
-The local and remote feature branches were deleted after main synchronization.
-Approval provenance is the user's explicit ChatGPT approval; no separate
-approval-metadata commit exists. This task is closed. No capability authority
-changed.
+## Problem being closed
 
-## Completed correction outcome
+The merged lean delivery standard controls task size, merge boundaries,
+risk-tier validation, and durable completion evidence. It does not yet require
+an executable task to prove that behavioral, schema, compatibility, migration,
+failure, and authority decisions relevant to its changed surface are resolved
+before authorization.
 
-Final validation evidence is repository-durable: the review-publication commit
-itself carries the exact-tree validation receipt. The lean workflow remains
-unchanged; no resolver, automation framework, task schema, status file, or
-checkpoint system was introduced.
+A grammatically small task can therefore remain semantically vague and delegate
+contract design to Codex. This task closes only that gap. It does not create a
+new task schema, resolver, automation framework, approval state, checklist
+service, or coordination mechanism.
 
-This is one outcome because the execution rule and the current task's durable
-receipt close the same verified handoff gap.
+## Definition-ready behavioral contract
 
-## Correction-owned paths
+Before a future MIP task may be `authorized` for execution, its stable active
+task must identify, at the level appropriate to the changed surface:
 
-Correction execution may modify only:
+1. **Primary mergeable outcome** — one independently reviewable result.
+2. **Exact observable behavior or contract** — what changes and what must remain
+   unchanged.
+3. **Resolved design decisions** — architectural, schema, authority, and policy
+   choices required for implementation.
+4. **Inputs and outputs** — including exact public signatures, fields, types, or
+   serialized shapes when the task changes those surfaces.
+5. **Failure semantics** — fail-closed behavior, reason/error outcomes, and
+   prohibited fallback or inference.
+6. **Compatibility or migration policy** — required only when versions,
+   persisted artifacts, public contracts, or migration surfaces change;
+   otherwise explicitly `not_applicable`.
+7. **Owned paths and prohibited scope**.
+8. **Named acceptance tests or deterministic evidence** — concrete cases and
+   expected outcomes, not only broad quality statements.
+9. **Focused validation and applicable risk-tier gate**.
+10. **Deferred successors** — independently mergeable work not owned here.
+11. **Unresolved execution-blocking design questions:** `none`.
+
+The requirement is surface-proportional. A documentation-only task does not
+invent API fields or migration policy. A public API task must define its public
+signature and behavior. A schema task must define fields, types, invariants,
+version behavior, and compatibility. A state-machine task must define allowed
+transitions and failures. A migration task must define source/target versions,
+rollback, and incompatible cases.
+
+If any execution-blocking design decision remains unresolved, the task must
+remain `proposed`, be marked `blocked` for design, or be split. Codex must not
+select among materially different contract meanings during execution.
+
+## Resolved design decisions for this task
+
+- The rule applies to future MIP executable tasks at authorization time.
+- The rule is descriptive Markdown enforced by the existing focused governance
+  test; no new schema or automation is introduced.
+- Requirements are conditional on the changed surface, preventing artificial
+  API or migration detail for routine documentation tasks.
+- `unresolved execution-blocking design questions: none` is mandatory for
+  execution authorization.
+- Research or design-discovery tasks may still be authorized when their primary
+  outcome is a bounded decision/evidence artifact rather than implementation;
+  they must not claim implementation authority.
+- MMM and GeoX adoption is not part of this task and requires separate
+  owner-repository authorization after this MIP rule is merged.
+
+## Owned paths
+
+Execution may modify only:
 
 1. `AGENTS.md`
-2. `docs/execution/TASK_EXECUTION_STANDARD.md`
-3. `docs/execution/ACTIVE_TASK.md`
-4. `docs/execution/EXECUTION_STATE.json`
-5. `docs/execution/LATEST_COMPLETION_REPORT.md`
+2. `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`
+3. `docs/execution/TASK_EXECUTION_STANDARD.md`
+4. `tests/governance/test_repo_native_execution_handoff.py`
+5. `docs/execution/ACTIVE_TASK.md`
+6. `docs/execution/EXECUTION_STATE.json`
+7. `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-Do not modify the lean standard, context index, tests, Makefiles, resolver or
-automation code, coordination files, contracts, product/runtime/analytical code,
-MMM, or GeoX.
+Do not modify coordination files, roadmaps, product/runtime/analytical code,
+contracts, adapters, fixtures, application code, MMM, or GeoX.
 
-## Correction record
+## Required implementation
 
-### Durable publication rule
+1. Add a concise definition-ready rule to `LEAN_REPOSITORY_DELIVERY_STANDARD.md`.
+2. Make the rule operative in `TASK_EXECUTION_STANDARD.md` before executable
+   task authorization.
+3. Add a compact reminder to `AGENTS.md` that execution authorization requires
+   resolved implementation meaning and no unresolved execution-blocking design
+   questions.
+4. Strengthen the existing focused governance test to assert the canonical rule,
+   surface-proportional behavior, and fail-closed handling of unresolved design.
+5. Publish one current completion narrative and a durable exact-tree validation
+   receipt under the merged publication rule.
 
-Update `AGENTS.md` and `TASK_EXECUTION_STANDARD.md` so that:
+Do not add a new task template file, JSON schema, resolver, linter service,
+workflow engine, status, or checkpoint framework.
 
-- the task-owned tree is frozen before final publication validation;
-- the task-authorized risk-tier gate runs on the exact tree to be published;
-- locally observed command results and GitHub-observed evidence are clearly
-  distinguished;
-- `LATEST_COMPLETION_REPORT.md` records deliverables, validation categories,
-  exact counts, blockers, limitations, validation debt, sibling impact, and
-  authority impact;
-- the final review-publication commit message is the durable validation receipt
-  for that commit's exact Git tree;
-- no task-owned file may change after that publication commit; any change
-  invalidates the receipt and requires a new validated publication head; and
-- review must use Git evidence and must not depend on pasted Codex output.
+## Named acceptance tests
 
-Do not require validation results to self-reference the commit SHA that contains
-them. The commit already cryptographically binds its message to its exact tree.
-The publication commit may reference its implementation parent SHA.
+The focused governance test must prove that canonical repository guidance:
 
-### Required receipt trailers
-
-The review-publication commit message must include, at minimum:
-
-```text
-Task-ID: MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001
-Implementation-SHA: <correction-implementation-sha>
-Receipt-Scope: exact-commit-tree
-Validation-Gate: tier_1_docs_only
-Validation-Result: passed
-JSON-Parse: passed
-Markdown-Consistency: passed
-Changed-Paths: passed
-Git-Diff-Check: passed
-Focused-Tests: 1 passed
-Full-Suite: not_required
-Worktree-State: clean_except_allowed_local_only
-Evidence-Source: codex_local_plus_github_remote
-Capability-Authority: unchanged
-```
-
-Use accurate values. If any required check fails or cannot run, publish
-`blocked`; do not create a passing receipt.
-
-### Current correction publication
-
-The rule change was implemented in
-`ee0905feb962150f850c33f5e20aa6fde03c8caf`. The review-publication commit
-`dd870de03d9a214f427f12e680b1f1f8ab4ad20b` carried the durable receipt and was
-fast-forwarded exactly to main.
-
-The closed state records:
-
-- one real correction implementation SHA;
-- `status: merged`;
-- `task_execution_authorized: false`;
-- `correction_execution_authorized: false`;
-- empty blockers;
-- merge and PR creation false;
-- reviewed head `dd870de03d9a214f427f12e680b1f1f8ab4ad20b` and approval commit
-  null; and
-- unchanged capability and sibling authority.
+- requires a primary mergeable outcome and exact observable behavior;
+- requires resolved design decisions and inputs/outputs appropriate to the
+  changed surface;
+- requires failure semantics and conditional compatibility/migration policy;
+- requires named acceptance tests or deterministic evidence;
+- requires unresolved execution-blocking design questions to be `none` before
+  executable authorization;
+- states that unresolved meaning remains proposed, design-blocked, or split;
+- prevents Codex from deciding materially different contract meanings during
+  implementation;
+- preserves surface proportionality; and
+- preserves separate owner-repository authority for MMM and GeoX adoption.
 
 ## Validation gate
 
-Run:
+Run the Tier 1 gate on the frozen publication tree:
 
-- JSON parsing for `EXECUTION_STATE.json`;
+- JSON parsing for `docs/execution/EXECUTION_STATE.json`;
 - Markdown/current-state consistency;
-- exact correction-delta changed-path verification against the five
-  correction-owned paths;
-- complete task-diff verification against the seven original task-owned paths;
+- exact task-authoring boundary verification;
+- exact changed-path verification against the seven owned paths;
 - `git diff --check`;
 - `pytest -q tests/governance/test_repo_native_execution_handoff.py`;
-- inspection of the final publication commit trailers; and
-- proof that local and remote feature-branch heads equal the published receipt
-  commit.
+- receipt-trailer inspection; and
+- local/remote publication-head equality after push.
 
-Docker, Ruff, mypy, and the full suite are `not_required` for this Tier 1
-correction unless an unexpected executable dependency or repository-authored
-gate is discovered. In that case, publish accurate `blocked` state rather than
-widening scope.
+Docker, Ruff, mypy, and the full suite are `not_required` unless the changed
+focused test or another repository-authored gate requires them. If a required
+check cannot run or fails, publish accurate `blocked` state rather than widening
+scope or claiming completion.
+
+## Deferred successors
+
+- `MMM_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_ADOPTION_001` — proposed
+  owner-repository adoption only; not authorized here.
+- `GEOX_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_ADOPTION_001` — proposed
+  owner-repository adoption only; must not alter or override the current GeoX
+  builder task.
+- Any GeoX builder supersession or rescoping remains a GeoX-owned decision.
 
 ## Authority and stop conditions
 
-Correction execution is closed. Merge, PR creation, sibling adoption, and
-capability authority remain false. The task must not be re-executed; a later
-task requires separate authorization.
+Task execution is authorized only for this MIP Tier 1 outcome. Merge and PR
+creation are unauthorized. No product, analytical, live-integration, real-data,
+persistence, recommendation, pilot, production, MMM, GeoX, or capability
+authority changes.
 
-The receipt head is on main; stop at `merged`.
+Create the exact feature branch from synchronized post-authoring `main`, execute
+the task, publish a durable `ready_for_review` receipt, push the exact branch
+head, and stop without PR or merge.
