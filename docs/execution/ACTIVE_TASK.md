@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -18,16 +18,21 @@
 - **Capability authorizations changed:** `false`
 - **Implementation commit:** `67abc7cfc2f02c45abb442d1f61834bcdc6287e7`
 
-## Published review state
+## Closure
 
-The definition-ready authorization rule is implemented and validated on the
-frozen review-publication tree. This task is ready for exact-head review only.
-Task execution remains authorized for the reviewed branch; correction execution,
-merge, PR creation, sibling adoption, and capability authority remain false.
+The user explicitly approved exact reviewed head
+`a7d7525cb0df79b35ce60ae98e01ae908e1a2112` in ChatGPT. It was fast-forwarded
+to `main` and pushed with no pull request or merge commit.
 
-The final review-publication commit carries the durable exact-tree validation
-receipt and is the only review candidate. No task-owned file may change after
-that receipt commit without a new validation receipt.
+The resulting main lineage before this closure commit is
+`bb2e15fa3ceec1debb42d252b04ef9db2f7a9c49 →
+a7d7525cb0df79b35ce60ae98e01ae908e1a2112`. The sole implementation commit is
+`67abc7cfc2f02c45abb442d1f61834bcdc6287e7`.
+
+The local and remote feature branches were deleted after main synchronization.
+Approval provenance is the user's explicit ChatGPT approval; no separate
+approval-metadata commit exists. This task is closed. No capability authority
+changed.
 
 ## Primary mergeable outcome
 
@@ -181,11 +186,9 @@ scope or claiming completion.
 
 ## Authority and stop conditions
 
-The implementation is complete and ready for review only. Merge and PR creation
-are unauthorized. No product, analytical, live-integration, real-data,
-persistence, recommendation, pilot, production, MMM, GeoX, or capability
-authority changes.
+The implementation is merged and closed. No product, analytical,
+live-integration, real-data, persistence, recommendation, pilot, production,
+MMM, GeoX, or capability authority changed.
 
-The exact feature branch was created from synchronized post-authoring `main`.
-Review the durable `ready_for_review` receipt and stop without PR or merge until
-an exact-head external approval is recorded.
+The task must not be re-executed. MMM and GeoX definition-ready adoption remain
+deferred and require separate owner-repository authorization.
