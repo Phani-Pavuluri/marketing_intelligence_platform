@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -9,175 +9,98 @@
 
 - **Task ID:** `MIP_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Pre-authoring base:** `main` / `2904334247980e564409b7815c812572d80c8419`
 - **Feature branch:** `docs/mip-invocation-only-codex-prompt-standard-001`
-- **Execution mode:** `branch_and_fast_forward`
-- **Risk tier:** Tier 1 — documentation/governance rule plus focused governance test
-- **Prior task:** `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001`
-- **Prior closure:** `2904334247980e564409b7815c812572d80c8419`
-- **Rejected review head:** `fa8ff9612732f34a4d90275da017c7125ec9cea0`
-- **Rejected candidate implementation:** `2f1ec3efdd6f68d5c8097e534c869d982ab2d6ec`
+- **Authorization head:** `39abc3d66a80054b2b293a73f2dbeb690eb2304b`
+- **Rejected first review head:** `fa8ff9612732f34a4d90275da017c7125ec9cea0`
+- **Accepted behavioral correction implementation:** `9bb63c02e476a8a13855192b9df77d4238a3673b`
+- **Rejected corrected publication head:** `c09ec85b43442f505e710625bad0e33f56b3d300`
+- **Risk tier:** Tier 1 — documentation/governance plus focused governance test
 - **Capability authorizations changed:** `false`
 
 ## Review decision
 
-The bounded correction is complete. Execution and correction now use exactly
-`Synchronize from Git and execute the active task.` The corrected tree is ready
-for exact-head review only.
+The invocation-only behavioral correction is accepted. Canonical execution and
+correction invocation is exactly:
 
-The candidate says prompts must not restate workflow steps or stop conditions,
-while also prescribing execution and correction prompts that say to publish a
-review state, push the exact branch head, and stop. That is internally
-contradictory and does not achieve the requested minimal invocation.
+`Synchronize from Git and execute the active task.`
 
-One bounded correction cycle is authorized. Do not create a replacement task or
-branch.
+The merge invocation adds only the externally approved exact remote head SHA.
+The substantive files and focused test correctly prohibit prompt-level
+publication, push, validation, cleanup, workflow, and stop instructions.
+
+The corrected publication head is rejected because the three stable execution
+files do not represent one current state:
+
+- `EXECUTION_STATE.json` says `ready_for_review` and correction authorization is
+  false;
+- `ACTIVE_TASK.md` still says one correction cycle is authorized and its final
+  authority section says correction execution is true and unfinished; and
+- `LATEST_COMPLETION_REPORT.md` remains the prior correction-authorization
+  report rather than a current corrected completion report.
+
+This is a final publication-state normalization correction, not a new behavioral
+outcome or another substantive correction cycle.
 
 ## Primary mergeable outcome
 
-Make Codex prompts genuinely invocation-only so Git remains the sole durable
-source for task scope, behavior, validation, paths, workflow, authority, and
-stop conditions.
+Make MIP Codex prompts genuinely invocation-only while keeping one coherent,
+Git-durable current task, state, and completion report.
 
-This remains one independently reviewable outcome: the canonical prompt contract
-and its focused governance assertion establish one execution handoff rule.
+## Exact observable behavior
 
-## Corrected exact observable behavior
-
-After this task merges:
-
-1. The canonical normal execution invocation is:
+1. Execution and correction invocation:
    `Synchronize from Git and execute the active task.`
-2. The same canonical invocation applies when the active task is
-   `changes_requested`; the task status and Git-authored instructions determine
-   that the authorized correction is executed.
-3. The canonical merge invocation identifies only the merge operation and the
-   external approval fact:
+2. Merge invocation:
    `Synchronize from Git and execute the active task's merge and closure workflow. Approved exact remote head: <SHA>.`
-4. Invocation text must not repeat publication states, push instructions,
-   validation commands, paths, workflow steps, cleanup steps, stop conditions,
-   expected repository SHAs already in Git, or implementation details.
-5. A prompt may carry only an external fact unavailable in reviewed Git state,
-   principally the exact externally approved remote head SHA for merge, or a
-   narrowly necessary runtime/connector fact explicitly allowed by the active
-   task.
-6. Chat, pasted summaries, and prompt text cannot repair, expand, override, or
-   reinterpret an incomplete active task. If Git lacks sufficient durable
-   instructions, Codex stops fail-closed.
+3. Invocation text carries no durable scope, paths, behavior, validation,
+   publication, push, cleanup, workflow, authority, or stop conditions.
+4. Missing or inconsistent Git instructions fail closed.
+5. MMM and GeoX adoption remains separately owner-authorized.
 
-## Resolved design decisions
+## Correction-owned paths
 
-- Execution and correction use the same minimal invocation because Git state
-  determines which authorized operation is active.
-- Merge adds only the exact approved SHA because that approval cannot be written
-  into the reviewed tree without changing it.
-- Durable execution, publication, validation, push, cleanup, and stop behavior
-  remain in `AGENTS.md`, `TASK_EXECUTION_STANDARD.md`, and the active task—not in
-  the invocation.
-- No new prompt file, registry, schema, resolver, wrapper, bot, service, status,
-  or checkpoint system is introduced.
-- This task updates MIP only. MMM and GeoX adoption requires separate
-  owner-repository authorization.
-- The current GeoX builder task remains unmodified and uninterpreted.
+This final normalization may modify only:
 
-## Inputs and outputs
+1. `docs/execution/ACTIVE_TASK.md`
+2. `docs/execution/EXECUTION_STATE.json`
+3. `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-- **Input:** an authorized or externally approved repository-native operation
-  represented in committed Git state.
-- **Output:** canonical MIP guidance and a focused governance assertion requiring
-  truly minimal invocation-only prompts.
-- **Public API/schema/migration compatibility:** `not_applicable`.
-
-## Failure semantics
-
-- If the active task, execution state, approval evidence, branch, or Git-authored
-  workflow is incomplete or inconsistent, stop rather than supplementing it
-  from chat.
-- Prompt text must not broaden scope, reduce validation, change authority,
-  invent approval, or override repository state.
-- A merge fails closed without the exact externally approved remote head SHA.
-- Execution or correction fails closed when Git lacks a complete definition-ready
-  active task.
-
-## Owned paths
-
-Correction execution may modify only:
-
-1. `AGENTS.md`
-2. `docs/execution/TASK_EXECUTION_STANDARD.md`
-3. `tests/governance/test_repo_native_execution_handoff.py`
-4. `docs/execution/ACTIVE_TASK.md`
-5. `docs/execution/EXECUTION_STATE.json`
-6. `docs/execution/LATEST_COMPLETION_REPORT.md`
-
-Do not modify the lean standard, context index, coordination files, roadmaps,
-contracts, adapters, fixtures, application/runtime/analytical code, MMM, or
-GeoX.
+Do not modify `AGENTS.md`, `TASK_EXECUTION_STANDARD.md`, the focused governance
+test, any program or coordination file, product/runtime/analytical code, MMM, or
+GeoX. Behavioral implementation `9bb63c02e476a8a13855192b9df77d4238a3673b`
+must remain unchanged.
 
 ## Required correction
 
-1. Revise `AGENTS.md` so its invocation-only rule does not imply that prompt
-   text carries workflow or stop instructions.
-2. Revise the prompt contract in `TASK_EXECUTION_STANDARD.md` to use the exact
-   minimal execution/correction and merge invocations above.
-3. Remove prompt-level publication, push, cleanup, validation, and stop language;
-   retain those obligations only in Git-authored workflow sections.
-4. Strengthen the focused governance test to assert the exact minimal
-   invocations and the prohibition on workflow/stop duplication.
-5. Replace the current completion report with one current correction narrative.
-6. Freeze the corrected tree, run the full Tier 1 gate, publish a new durable
-   exact-tree receipt, push the exact branch head, and stop at
-   `ready_for_review` or accurate `blocked`.
-
-## Named acceptance tests
-
-The focused governance test must prove that canonical MIP guidance:
-
-- contains exactly the minimal execution/correction invocation
-  `Synchronize from Git and execute the active task.`;
-- contains a minimal merge invocation plus only the exact approved SHA external
-  fact;
-- uses active Git status to distinguish normal execution from correction;
-- says durable scope, paths, behavior, validation, workflow, authority, cleanup,
-  and stop conditions belong in Git;
-- forbids invocation text from repeating publication, push, validation, cleanup,
-  or stop instructions;
-- prohibits prompt text from repairing, expanding, overriding, or
-  reinterpreting the active task;
-- requires fail-closed stopping when Git lacks sufficient durable instructions;
-- preserves exact-head approval and repository authority; and
-- preserves separate owner-repository adoption for MMM and GeoX.
+1. Replace this task with one current `ready_for_review` narrative that records
+   the accepted behavioral implementation and no longer claims correction
+   execution remains authorized or unfinished.
+2. Replace the completion report with one current corrected completion report,
+   including the accepted implementation SHA, exact validation counts, rejected
+   heads, limitations, sibling impact, and authority impact.
+3. Publish consistent `ready_for_review` state with correction authorization
+   false, blockers empty, merge/PR false, and the final publication-normalization
+   implementation SHA.
+4. Freeze the exact tree, run the complete Tier 1 gate, create a new durable
+   receipt commit, push the exact remote head, and stop.
 
 ## Validation gate
 
-Run the Tier 1 gate on the frozen corrected publication tree:
+Run on the frozen final publication tree:
 
-- JSON parsing for `docs/execution/EXECUTION_STATE.json`;
-- Markdown/current-state consistency;
-- exact task-authoring and review-correction boundary verification;
-- exact complete task diff against the six owned paths;
-- exact correction delta against the six correction-owned paths;
-- implementation-path verification against the three substantive paths;
-- publication-path verification against the three stable execution files;
+- JSON parsing;
+- task/state/report current-state consistency;
+- authorization and review-decision boundary checks;
+- complete task diff limited to the six original owned paths;
+- final normalization delta limited to the three stable execution files;
+- behavioral implementation remains exactly `9bb63c02e476a8a13855192b9df77d4238a3673b`;
 - `git diff --check`;
 - `pytest -q tests/governance/test_repo_native_execution_handoff.py`;
-- receipt-trailer inspection; and
+- durable receipt inspection; and
 - local/remote publication-head equality after push.
 
-Docker, Ruff, mypy, and the full suite are `not_required` unless an unexpected
-executable dependency or another repository-authored gate makes them applicable.
-If a required check cannot run or fails, publish accurate `blocked` state rather
-than widening scope or claiming completion.
-
-## Deferred successors
-
-- `MMM_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_ADOPTION_001` — proposed
-  owner-repository adoption only; not authorized here.
-- `GEOX_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_ADOPTION_001` — proposed
-  owner-repository adoption only; must not alter the current GeoX builder task.
-- MMM and GeoX adoption of the combined lean, definition-ready, risk-tier,
-  durable-receipt, and invocation-only structure remains separately
-  owner-authorized.
+Docker, Ruff, mypy, and the full suite remain `not_required` for this Tier 1
+correction unless another repository-authored gate makes them applicable.
 
 ## Unresolved execution-blocking design questions
 
@@ -185,12 +108,7 @@ than widening scope or claiming completion.
 
 ## Authority and stop conditions
 
-Correction execution is authorized only for this bounded MIP Tier 1 correction.
-Task execution remains true; correction execution is true. Merge and PR creation
-remain unauthorized. No product, analytical, live-integration, real-data,
-persistence, recommendation, pilot, production, MMM, GeoX, or capability
-authority changes.
-
-Execute the correction on the existing feature branch, publish a new durable
-`ready_for_review` receipt or accurate `blocked` state, push the exact branch
-head, and stop without PR or merge.
+Task and final normalization execution are authorized on the existing branch.
+Merge and PR creation are unauthorized. No product, analytical, data,
+persistence, recommendation, production, MMM, GeoX, or capability authority
+changes. Publish `ready_for_review` or accurate `blocked` and stop without merge.
