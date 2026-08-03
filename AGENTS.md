@@ -21,6 +21,11 @@ Stop rather than guess if synchronization, history hydration, execution files,
 authorization, prerequisites, or repository state cannot be verified. Chats and
 pasted summaries are never authoritative repository state.
 
+Before authoring or executing a task, read
+`docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`. Keep one task to one
+independently reviewable mergeable outcome; split an independently valid
+checkpoint into a successor task and use validation proportionate to its risk.
+
 ## Execute the active task
 
 Verify the authorized task, its task-authoring boundary, prerequisites, owned

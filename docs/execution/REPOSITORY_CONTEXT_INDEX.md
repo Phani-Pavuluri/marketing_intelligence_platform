@@ -27,6 +27,8 @@ Use this prompt in a fresh ChatGPT/Codex session:
 
 ## Canonical program memory
 
+- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md` — task shape and
+  risk-tiered delivery guidance
 - `docs/program/PROGRAM_CHARTER.md`
 - `docs/program/PROGRAM_CURRENT_STATE.md`
 - `docs/program/REPOSITORY_CHECKPOINTS.md`

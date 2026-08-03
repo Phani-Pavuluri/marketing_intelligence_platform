@@ -50,6 +50,16 @@ Exactly one current copy exists at `docs/execution/ACTIVE_TASK.md`,
 `docs/execution/EXECUTION_STATE.json`. Future tasks replace these files in
 place; Git history preserves prior versions.
 
+### Required delivery shape
+
+Every future MIP task must declare only its primary mergeable outcome, risk
+tier, why it cannot be split further, owned paths, focused validation, and
+deferred successor tasks. Authors must stop and split work when a meaningful
+portion can be validated and merged independently. Apply
+`docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md` for the tier and its
+minimum validation; this does not weaken Git authority, exact-head review,
+ownership, or authority boundaries.
+
 After explicit user authorization, task authoring may replace only those three
 stable files on `main`. The task's `base_sha` identifies the pre-authoring
 content base. The synchronized post-authoring `main` is the
