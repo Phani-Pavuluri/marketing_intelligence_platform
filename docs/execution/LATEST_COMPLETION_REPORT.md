@@ -1,136 +1,50 @@
 # TASK_COMPLETION_REPORT_V2
 
-## Identity
+## Current authorization
 
-- **Task ID:** `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001`
-- **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Base branch / SHA:** `main` / `106f428de44e0e37405355f73e90ba6cbacd82a0`
-- **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
-- **Rejected review head:** `9f829c3e12ca79698c6cabda1e8089e9d4567fa1`
-- **Correction implementation SHA:** `ee0905feb962150f850c33f5e20aa6fde03c8caf`
-- **Current decision:** `merged`
+- **Task ID:** `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001`
+- **Status:** `authorized`
+- **Pre-authoring base:** `dab329bc6ff9d62971bbe12a7398e08131a4cf22`
+- **Feature branch:** `docs/mip-definition-ready-task-authorization-standard-001`
+- **Risk tier:** Tier 1 documentation/governance plus focused test
+- **Capability authority changed:** `false`
 
-## Deliverables and acceptance results
+The user authorized the next MIP task after review of the merged lean-delivery closure. The prior task is closed at `dab329bc6ff9d62971bbe12a7398e08131a4cf22`; its approved head was `dd870de03d9a214f427f12e680b1f1f8ab4ad20b`, its correction implementation was `ee0905feb962150f850c33f5e20aa6fde03c8caf`, both Tier 1 focused runs reported `1 passed`, and the completed branch was deleted locally and remotely.
 
-The correction adds the durable exact-tree publication-receipt rule to
-`AGENTS.md` and `docs/execution/TASK_EXECUTION_STANDARD.md`. The final
-publication records the resulting review state in the three stable execution
-files. The rule requires final validation before publication, a commit-message
-receipt bound by Git to the exact tree, and a new receipt for any later
-task-owned change.
+The prior report contained a stale pre-merge subsection, but its identity, closure section, active task, and execution state all recorded the final decision as `merged`. This new task replaces the stable current report; the closure remains recoverable from Git history.
 
-| Acceptance criterion | Result |
-| --- | --- |
-| Exact-tree durable receipt rule | passed |
-| Locally observed versus GitHub-observed evidence distinguished | passed |
-| Completion report records counts, scope, limitations, sibling impact, and authority impact | passed |
-| Correction implementation has one real SHA | passed (`ee0905feb962150f850c33f5e20aa6fde03c8caf`) |
-| Review state is `ready_for_review` with correction authorization closed | passed |
-| Capability authority changed | false |
+## Authorized outcome
 
-## Validation receipt evidence
+Make definition-readiness an operative MIP pre-authorization gate. Future executable tasks must define exact observable behavior, resolved design decisions, surface-appropriate inputs and outputs, failure semantics, conditional compatibility or migration policy, named acceptance evidence, and `unresolved execution-blocking design questions: none`.
 
-The following results are locally observed command evidence for the exact
-publication tree. The review-publication commit message carries the same
-required receipt values and is the durable Git record.
+The rule must remain proportional to the changed surface and must not create a new schema, resolver, automation framework, task service, status, or checkpoint system.
 
-| Validation category | Result |
-| --- | --- |
-| JSON parsing: `python3 -m json.tool docs/execution/EXECUTION_STATE.json` | passed |
-| Markdown/current-state consistency | passed |
-| Complete task diff from synchronized `main` | passed; exactly seven original task-owned paths |
-| Correction delta from `9f829c3e12ca79698c6cabda1e8089e9d4567fa1` | passed; exactly five correction-owned paths |
-| `git diff --check` | passed |
-| `poetry run pytest -q tests/governance/test_repo_native_execution_handoff.py` | passed; 1 passed |
-| Docker, Ruff, mypy, full suite | not_required for the authorized Tier 1 docs-only gate |
-| Final receipt-trailer inspection | passed |
-| Local/remote receipt-head equality | pending publication; verified immediately after push |
+## Owned paths
 
-## Evidence sources
+- `AGENTS.md`
+- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`
+- `docs/execution/TASK_EXECUTION_STANDARD.md`
+- `tests/governance/test_repo_native_execution_handoff.py`
+- `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/EXECUTION_STATE.json`
+- `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-- **GitHub-observed evidence:** synchronized `main`, feature-branch ancestry,
-  branch heads, and changed-path scope are verified from `origin`.
-- **Locally observed evidence:** JSON parse, Markdown consistency,
-  changed-path checks, `git diff --check`, and the focused governance test.
+The task-authoring boundary may change only the three stable execution files. One immediate state-only commit may follow the authorization head solely to record that non-self-referential boundary.
 
-## Limitations, debt, and sibling impact
+## Required validation
 
-- **Blockers:** none.
-- **Validation debt:** none for the authorized Tier 1 gate; Docker, Ruff,
-  mypy, and the full suite are explicitly `not_required`.
-- **Known limitation:** review must inspect the exact receipt commit and its
-  trailers; this report intentionally does not replace Git evidence.
-- **MMM and GeoX:** not modified; their lean-standard adoption remains deferred
-  and unauthorized.
+- JSON parse
+- Markdown/current-state consistency
+- task-authoring and changed-path verification
+- `git diff --check`
+- focused governance test with exact count
+- durable receipt inspection
+- local/remote publication-head equality
 
-## Authority and merge readiness
+Docker, Ruff, mypy, and the full suite are `not_required` unless another repository-authored gate makes them applicable.
 
-- **Merge readiness:** `READY_FOR_REVIEW` only; merge and PR authorization are
-  false.
-- **Capability impact:** no product, runtime, analytical, data, persistence,
-  recommendation, pilot, or production capability was authorized.
-- **Local-only paths:** `.codex/` and `docs/tasks/` remain untracked and are
-  excluded from commits.
-- **Stop condition:** after the receipt commit is pushed and local/remote heads
-  agree, stop without PR, merge, rebase, squash, force-push, branch deletion,
-  or sibling modification.
+## Sibling and authority impact
 
-## Merge closure
+Live MMM `main` remains `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`. Live GeoX `main` remains `ee9673c13e69082367c1727568946ac4c1a01015`. Neither sibling is modified or authorized. Their later adoption remains owner-controlled, and the current GeoX builder task is not changed or superseded.
 
-- **Approval source:** the user explicitly approved exact reviewed head
-  `dd870de03d9a214f427f12e680b1f1f8ab4ad20b` in ChatGPT.
-- **Reviewed head / publication receipt:**
-  `dd870de03d9a214f427f12e680b1f1f8ab4ad20b`
-- **Correction implementation SHA:**
-  `ee0905feb962150f850c33f5e20aa6fde03c8caf`
-- **Merge mechanism:** `git merge --ff-only` to local `main`, followed by
-  `git push origin main`; no PR, squash, rebase, or merge commit was used.
-- **Resulting main lineage before the closure commit:**
-  `106f428de44e0e37405355f73e90ba6cbacd82a0 →
-  dd870de03d9a214f427f12e680b1f1f8ab4ad20b`.
-
-### Pre-merge and post-fast-forward validation
-
-Both exact-head checks passed using the authorized Tier 1 gate:
-
-| Check | Pre-merge reviewed head | Post-fast-forward main |
-| --- | --- | --- |
-| JSON parse | passed | passed |
-| Markdown/current-state consistency | passed | passed |
-| Seven authorized task paths | passed | passed |
-| Five correction-owned paths | passed | passed |
-| `git diff --check` | passed | passed |
-| Focused governance test | passed; 1 passed | passed; 1 passed |
-| Durable receipt trailers | passed; all 14 required trailers | passed; all 14 required trailers |
-| Docker, Ruff, mypy, full suite | not_required | not_required |
-
-### Evidence, synchronization, and cleanup
-
-- **GitHub-observed evidence:** `origin/main` and the feature branch were
-  fetched; main began at
-  `106f428de44e0e37405355f73e90ba6cbacd82a0`; the remote feature head matched
-  the approved SHA; the approved head descended from authorization boundary
-  `845d4bea477df7514128548193cbb942e04c20dc`.
-- **Locally observed evidence:** exact-head state checks, JSON parsing,
-  Markdown consistency, path checks, receipt inspection, diff hygiene, and
-  two focused-test runs.
-- **Synchronization:** the approved head was pushed to `origin/main`; local
-  main and origin/main matched before this closure commit.
-- **Cleanup:** local branch
-  `docs/mip-lean-repository-delivery-standard-001` deleted successfully;
-  remote branch of the same name deleted successfully.
-
-### Limitations, sibling impact, and authority
-
-- **Limitations / validation debt:** none for this Tier 1 task. Docker, Ruff,
-  mypy, and the full suite remain explicitly not required by the task-authored
-  gate.
-- **Sibling impact:** MMM and GeoX were not changed; their lean-standard
-  adoption remains deferred and unauthorized.
-- **Authority impact:** no capability authority changed. Live integration,
-  real data, persistence, simulation, optimization, recommendations, pilot,
-  and production remain outside this documentation task.
-- **Closure state:** merged. Task and correction execution authorization,
-  merge authorization, and PR authorization are false; blockers are empty;
-  `approval_commit_sha` remains null because no approval-metadata commit was
-  created before the external user approval and fast-forward merge.
+Task execution is authorized. Merge, PR creation, sibling adoption, and capability authority remain false. Publish `ready_for_review` or accurate `blocked` state, push the exact feature head, and stop without PR or merge.
