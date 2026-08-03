@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_001",
-  "status": "authorized",
+  "status": "ready_for_review",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "2904334247980e564409b7815c812572d80c8419",
@@ -15,7 +15,7 @@
   "merge_authorized": false,
   "pr_creation_authorized": false,
   "reviewed_head_sha": null,
-  "implementation_commit_sha": null,
+  "implementation_commit_sha": "2f1ec3efdd6f68d5c8097e534c869d982ab2d6ec",
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-08-03",
@@ -35,7 +35,7 @@
   "mmm_invocation_only_adoption_authorized": false,
   "geox_invocation_only_adoption_authorized": false,
   "geox_active_builder_must_remain_unmodified": true,
-  "review_decision": "authorized",
+  "review_decision": "ready_for_review",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
-  "task_authoring_note": "Task and report were authored through 39abc3d66a80054b2b293a73f2dbeb690eb2304b. This state records that boundary. Only the six MIP paths are owned; sibling and capability authority remain unchanged."
+  "task_authoring_note": "The MIP-only invocation-only prompt contract is implemented by 2f1ec3efdd6f68d5c8097e534c869d982ab2d6ec and published for exact-head review through a durable validation-receipt commit. Merge, PR creation, sibling adoption, GeoX task changes, and capability authority remain false."
 }

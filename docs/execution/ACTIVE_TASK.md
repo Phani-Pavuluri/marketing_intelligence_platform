@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -16,6 +16,13 @@
 - **Prior task:** `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001`
 - **Prior closure:** `2904334247980e564409b7815c812572d80c8419`
 - **Capability authorizations changed:** `false`
+- **Implementation commit:** `2f1ec3efdd6f68d5c8097e534c869d982ab2d6ec`
+
+## Published review state
+
+The invocation-only prompt contract is implemented and validated on the frozen
+review-publication tree. This task is ready for exact-head review only. Merge,
+PR creation, sibling adoption, and capability authority remain false.
 
 ## Primary mergeable outcome
 
@@ -123,6 +130,8 @@ Docker, Ruff, mypy, and the full suite are `not_required` unless an unexpected e
 
 ## Authority and stop conditions
 
-Task execution is authorized only for this MIP Tier 1 outcome. Merge and PR creation are unauthorized. No product, analytical, live-integration, real-data, persistence, recommendation, pilot, production, MMM, GeoX, or capability authority changes.
+The implementation is complete and ready for review only. No product,
+analytical, live-integration, real-data, persistence, recommendation, pilot,
+production, MMM, GeoX, or capability authority changed.
 
 Create the exact feature branch from synchronized post-authoring `main`, execute the task, publish a durable `ready_for_review` receipt or accurate `blocked` state, push the exact branch head, and stop without PR or merge.
