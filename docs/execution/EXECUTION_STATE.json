@@ -40,5 +40,5 @@
   "geox_active_builder_must_remain_unmodified": true,
   "review_decision": "ready_for_review",
   "review_decision_source": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_authoring_note": "Accepted implementation d8ba108faba403019845d7b72a71b791d7ab819f is unchanged. Publication head 8dae4069c166aa638360e4295ae3d50a93843e13 is rejected because its completion report retains authorization-era and unfinished-work prose and omits required current completion evidence. One bounded three-file publication correction is authorized; merge, PR creation, sibling adoption, GeoX task changes, and capability authority remain false."
+  "task_authoring_note": "Accepted implementation d8ba108faba403019845d7b72a71b791d7ab819f is published for exact-head review. Rejected publication head 8dae4069c166aa638360e4295ae3d50a93843e13 remains historical evidence. No further correction is authorized; merge, PR creation, sibling adoption, GeoX task changes, and capability authority remain false."
 }
