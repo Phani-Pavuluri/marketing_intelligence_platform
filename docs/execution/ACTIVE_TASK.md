@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -16,6 +16,18 @@
 - **Prior task:** `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001`
 - **Prior closure:** `dab329bc6ff9d62971bbe12a7398e08131a4cf22`
 - **Capability authorizations changed:** `false`
+- **Implementation commit:** `67abc7cfc2f02c45abb442d1f61834bcdc6287e7`
+
+## Published review state
+
+The definition-ready authorization rule is implemented and validated on the
+frozen review-publication tree. This task is ready for exact-head review only.
+Task execution remains authorized for the reviewed branch; correction execution,
+merge, PR creation, sibling adoption, and capability authority remain false.
+
+The final review-publication commit carries the durable exact-tree validation
+receipt and is the only review candidate. No task-owned file may change after
+that receipt commit without a new validation receipt.
 
 ## Primary mergeable outcome
 
@@ -169,11 +181,11 @@ scope or claiming completion.
 
 ## Authority and stop conditions
 
-Task execution is authorized only for this MIP Tier 1 outcome. Merge and PR
-creation are unauthorized. No product, analytical, live-integration, real-data,
+The implementation is complete and ready for review only. Merge and PR creation
+are unauthorized. No product, analytical, live-integration, real-data,
 persistence, recommendation, pilot, production, MMM, GeoX, or capability
 authority changes.
 
-Create the exact feature branch from synchronized post-authoring `main`, execute
-the task, publish a durable `ready_for_review` receipt, push the exact branch
-head, and stop without PR or merge.
+The exact feature branch was created from synchronized post-authoring `main`.
+Review the durable `ready_for_review` receipt and stop without PR or merge until
+an exact-head external approval is recorded.

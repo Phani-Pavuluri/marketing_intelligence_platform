@@ -1,50 +1,68 @@
 # TASK_COMPLETION_REPORT_V2
 
-## Current authorization
+## Identity
 
 - **Task ID:** `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001`
-- **Status:** `authorized`
-- **Pre-authoring base:** `dab329bc6ff9d62971bbe12a7398e08131a4cf22`
+- **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
+- **Execution mode:** `branch_and_fast_forward`
+- **Base / authorization head:**
+  `dab329bc6ff9d62971bbe12a7398e08131a4cf22` /
+  `b9613ab057caa8ac9529eb2ab0c3c8f7a7a9649c`
 - **Feature branch:** `docs/mip-definition-ready-task-authorization-standard-001`
-- **Risk tier:** Tier 1 documentation/governance plus focused test
-- **Capability authority changed:** `false`
+- **Implementation commit:** `67abc7cfc2f02c45abb442d1f61834bcdc6287e7`
+- **Current decision:** `ready_for_review`
 
-The user authorized the next MIP task after review of the merged lean-delivery closure. The prior task is closed at `dab329bc6ff9d62971bbe12a7398e08131a4cf22`; its approved head was `dd870de03d9a214f427f12e680b1f1f8ab4ad20b`, its correction implementation was `ee0905feb962150f850c33f5e20aa6fde03c8caf`, both Tier 1 focused runs reported `1 passed`, and the completed branch was deleted locally and remotely.
+## Deliverables and acceptance results
 
-The prior report contained a stale pre-merge subsection, but its identity, closure section, active task, and execution state all recorded the final decision as `merged`. This new task replaces the stable current report; the closure remains recoverable from Git history.
+The task makes definition-readiness an operative MIP pre-authorization rule.
+Canonical guidance now requires, at the level appropriate to the changed
+surface, one primary mergeable outcome; exact observable behavior and preserved
+boundaries; resolved decisions; inputs/outputs; failure semantics; conditional
+compatibility or migration policy; named acceptance evidence; focused
+validation; owned/prohibited paths; deferred successors; and `unresolved
+execution-blocking design questions: none`.
 
-## Authorized outcome
+| Acceptance criterion | Result |
+| --- | --- |
+| Lean delivery standard states the surface-proportional rule | passed |
+| Execution standard makes the rule operative before authorization | passed |
+| AGENTS.md requires resolved implementation meaning | passed |
+| Focused governance test asserts the rule and fail-closed handling | passed |
+| MMM and GeoX adoption remains separate owner-repository work | passed |
+| Capability authority changed | false |
 
-Make definition-readiness an operative MIP pre-authorization gate. Future executable tasks must define exact observable behavior, resolved design decisions, surface-appropriate inputs and outputs, failure semantics, conditional compatibility or migration policy, named acceptance evidence, and `unresolved execution-blocking design questions: none`.
+## Validation evidence
 
-The rule must remain proportional to the changed surface and must not create a new schema, resolver, automation framework, task service, status, or checkpoint system.
+The results below are locally observed on the frozen review-publication tree.
+The final publication commit carries the durable exact-tree receipt.
 
-## Owned paths
+| Validation category | Result |
+| --- | --- |
+| JSON parse: `python3 -m json.tool docs/execution/EXECUTION_STATE.json` | passed |
+| Markdown/current-state consistency | passed |
+| Task-authoring boundary | passed; authorization diffs contain only the three stable execution files |
+| Changed paths from synchronized main | passed; exactly seven owned paths |
+| `git diff --check` | passed |
+| `poetry run pytest -q tests/governance/test_repo_native_execution_handoff.py` | passed; 1 passed |
+| Receipt-trailer inspection | passed |
+| Docker, Ruff, mypy, full suite | not_required for the authorized Tier 1 gate |
+| Local/remote publication-head equality | pending publication; verified immediately after push |
 
-- `AGENTS.md`
-- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `tests/governance/test_repo_native_execution_handoff.py`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
+## Evidence sources, limitations, and authority
 
-The task-authoring boundary may change only the three stable execution files. One immediate state-only commit may follow the authorization head solely to record that non-self-referential boundary.
-
-## Required validation
-
-- JSON parse
-- Markdown/current-state consistency
-- task-authoring and changed-path verification
-- `git diff --check`
-- focused governance test with exact count
-- durable receipt inspection
-- local/remote publication-head equality
-
-Docker, Ruff, mypy, and the full suite are `not_required` unless another repository-authored gate makes them applicable.
-
-## Sibling and authority impact
-
-Live MMM `main` remains `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`. Live GeoX `main` remains `ee9673c13e69082367c1727568946ac4c1a01015`. Neither sibling is modified or authorized. Their later adoption remains owner-controlled, and the current GeoX builder task is not changed or superseded.
-
-Task execution is authorized. Merge, PR creation, sibling adoption, and capability authority remain false. Publish `ready_for_review` or accurate `blocked` state, push the exact feature head, and stop without PR or merge.
+- **GitHub-observed evidence:** synchronized MIP main at
+  `bb2e15fa3ceec1debb42d252b04ef9db2f7a9c49`, authorization-head ancestry, and
+  feature-branch path scope.
+- **Locally observed evidence:** JSON parsing, Markdown consistency,
+  task-authoring and changed-path checks, `git diff --check`, and the focused
+  governance test.
+- **Blockers / validation debt:** none for the Tier 1 gate. Docker, Ruff, mypy,
+  and the full suite are explicitly not required.
+- **Sibling impact:** MMM and GeoX were not modified; their adoption remains
+  deferred, owner-controlled, and unauthorized. The current GeoX builder task
+  remains unchanged.
+- **Authority impact:** no product, analytical, live integration, real-data,
+  persistence, recommendation, pilot, production, or capability authority was
+  granted.
+- **Merge readiness:** ready for external exact-head review only; merge and PR
+  authorization remain false. `.codex/` and `docs/tasks/` remain local-only.
