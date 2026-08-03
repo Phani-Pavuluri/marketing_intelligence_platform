@@ -7,91 +7,45 @@
 - **Feature branch:** `docs/mip-invocation-only-codex-prompt-standard-001`
 - **Authorization head:** `39abc3d66a80054b2b293a73f2dbeb690eb2304b`
 - **Accepted minimal-prompt implementation:** `9bb63c02e476a8a13855192b9df77d4238a3673b`
+- **Incomplete branch-state implementation:** `3c34b29564292e4d2728d3a69e950774e3e2a748`
 - **Current decision:** `changes_requested`
 
-## Runtime finding
+## Review finding
 
-The minimal invocation was exercised against the live repository:
+Commit `3c34b29564292e4d2728d3a69e950774e3e2a748` correctly adds the intended branch-aware resumed-task guidance:
 
-`Synchronize from Git and execute the active task.`
+- synchronize and read `main` for task identity, authorization head, and declared feature branch;
+- verify repository identity, task ID, branch name, and authorization ancestry;
+- keep `main` authoritative for authorization provenance;
+- use the verified feature branch for current lifecycle state;
+- do not stop merely because `main` has an older lifecycle snapshot; and
+- publish a Git-durable `blocked` result when a safe authorized branch write exists.
 
-Codex synchronized `main` successfully. `main` still recorded the task as
-`authorized`, while the declared remote feature branch had advanced to newer
-review and correction state. Because the repository did not define which ref was
-authoritative for resumed lifecycle state, Codex stopped rather than guessing.
+The commit changes only `AGENTS.md`, `docs/execution/TASK_EXECUTION_STANDARD.md`, and `tests/governance/test_repo_native_execution_handoff.py`.
 
-That stop was correct under the existing fail-closed rules. However, the result
-was printed only in terminal/chat output. It was not written to the feature
-branch as `blocked` evidence and did not update the completion report. This
-violates the repository-native zero-copy-paste goal and proves the invocation-only
-contract is incomplete.
+It is not an approvable review head because Codex stopped after the substantive commit. The branch still retained the prior `changes_requested` task, state, and runtime-finding report. No current completion report, final implementation SHA, complete Tier 1 validation evidence, or exact-tree receipt was published.
 
-## Root cause
+The focused governance test also asserts only selected phrases and does not yet cover the complete named branch-resolution contract required by the active task.
 
-The current bootstrap defines synchronization of `main`, but not deterministic
-resumption precedence after a feature branch exists:
+## GitHub-observed evidence
 
-- `main` contains the original authorization snapshot and feature-branch name;
-- the remote feature branch contains later `changes_requested`, correction,
-  blocked, or `ready_for_review` state; and
-- no canonical rule states that verified branch lifecycle state supersedes stale
-  main lifecycle state while main remains authoritative for authorization
-  provenance.
-
-Without that rule, the minimal prompt cannot safely execute branch-resident
-corrections.
+- Live MIP `main` remains `a7b4e1d3701ff163942f0c42a8e7a91388840b51`.
+- The branch advanced from review-decision head `4fe46582c7f4a86fcdb48932b45ebfc63e4eee7f` to substantive commit `3c34b29564292e4d2728d3a69e950774e3e2a748`.
+- That delta is one commit and exactly three substantive paths.
+- The three stable execution files were not updated by Codex after implementation.
+- No durable validation-receipt commit exists for the new tree.
 
 ## Required correction
 
-Add a branch-aware active-state resolution rule:
+Continue on the same branch and complete the Git-authored task:
 
-1. Synchronize and read `main` first.
-2. Obtain the task ID, authorization head, and exact feature-branch name from
-   Git-authored main state.
-3. Fetch the declared remote feature branch.
-4. Verify repository identity, task ID, branch name, and ancestry from the
-   authorization head.
-5. Use `main` as authority for the original authorization boundary.
-6. Use the verified feature branch as authority for the latest resumed lifecycle
-   status, review decision, blockers, implementation SHA, and completion report.
-7. Do not stop merely because main retains the original authorized snapshot.
-8. Fail closed on mismatches, ambiguous branches, invalid ancestry, or
-   inconsistent branch task/state/report.
-9. When the authorized branch and write target are safely established, publish
-   any fail-closed outcome as Git-durable `blocked` evidence before stopping.
-10. Never treat terminal or chat output as the completion report.
+1. Strengthen the focused governance test to cover the full branch-resolution, identity, ancestry, mismatch, durable-blocked-reporting, and sibling-authority contract.
+2. Replace `ACTIVE_TASK.md`, `EXECUTION_STATE.json`, and `LATEST_COMPLETION_REPORT.md` with one current `ready_for_review` or accurate `blocked` state.
+3. Record one final implementation SHA.
+4. Run the complete Tier 1 gate on the frozen final tree with exact results and counts.
+5. Create and push the durable exact-tree validation-receipt commit.
+6. Stop without PR or merge.
 
-The canonical prompt remains unchanged:
+## Authority impact
 
-`Synchronize from Git and execute the active task.`
-
-## Scope and authority
-
-The correction is limited to:
-
-- `AGENTS.md`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `tests/governance/test_repo_native_execution_handoff.py`
-- the three stable execution files
-
-No product, analytical, contract, coordination, MMM, GeoX, or capability
-authority changes. MMM and GeoX adoption remains separately owner-authorized.
-
-## Validation required
-
-The final corrected publication must record:
-
-- JSON parsing;
-- current-state consistency;
-- authorization and correction boundaries;
-- six-path task scope;
-- three-path substantive implementation and three-path publication scope;
-- exact preservation of the minimal invocation;
-- focused governance test result and exact count;
-- `git diff --check`;
-- durable receipt inspection;
-- GitHub-observed versus locally observed evidence; and
-- local/remote publication-head equality.
-
-Docker, Ruff, mypy, and the full suite remain `not_required` for this Tier 1
-correction unless another repository-authored gate makes them applicable.
+Task and correction execution remain authorized. Merge and PR creation remain false. MMM and GeoX adoption remain separately unauthorized. The current GeoX builder task and all capability authority remain unchanged.
