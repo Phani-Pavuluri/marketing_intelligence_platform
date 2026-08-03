@@ -43,6 +43,8 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         assert path.is_file()
 
     state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    active_text = ACTIVE_TASK.read_text(encoding="utf-8")
+    report_text = REPORT.read_text(encoding="utf-8")
     assert state["schema_version"] == "mip_repo_execution_state_v2"
     assert state["status"] in STATUSES
     task_id = state["task_id"]
@@ -57,8 +59,8 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
     _assert_sha(state["authorization_head_sha"])
     assert (ROOT / state["task_path"]).is_file()
     assert (ROOT / state["completion_report_path"]).is_file()
-    assert task_id in ACTIVE_TASK.read_text(encoding="utf-8")
-    assert task_id in REPORT.read_text(encoding="utf-8")
+    assert task_id in active_text
+    assert task_id in report_text
     assert state["capability_authorizations_changed"] is False
 
     agents = AGENTS.read_text(encoding="utf-8")
@@ -116,13 +118,64 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
     assert "`not_applicable`" in standard
     assert "retain `proposed`,\nmark it design-blocked, or split" in standard
 
+    invocation_guidance = f"{agents}\n{standard}"
+    for requirement in (
+        "Invocation-only prompt rule",
+        "Codex prompts are invocation-only",
+        "Synchronize from Git and execute the active task.",
+        "exact externally approved remote head SHA",
+        "must not restate durable scope, owned paths, behavior, validation",
+        "cannot repair, expand, override, or reinterpret",
+        "fail-closed blocker",
+        "separately authorized owner-repository decision",
+    ):
+        assert requirement in invocation_guidance
+    assert "publish `ready_for_review`" not in standard
+    assert "push\nthe exact branch head" not in standard
+    resumed_guidance = f"{agents}\n{standard}"
+    for requirement in (
+        "verified branch is authoritative for current lifecycle state",
+        "Main remains authority\nfor authorization provenance",
+        "Do not stop merely because main has\nan older lifecycle snapshot",
+        "terminal or chat output is not a completion report",
+        "task ID, branch name, and authorization ancestry",
+        "Fail closed on mismatches or\ninconsistent evidence",
+        "record\nany fail-closed result there as `blocked`",
+    ):
+        assert requirement in resumed_guidance
+
     if state["status"] in {"authorized", "in_progress", "ready_for_review"}:
         assert state["task_execution_authorized"] is True
         assert state["merge_authorized"] is False
         assert state["reviewed_head_sha"] is None
         assert state["approval_commit_sha"] is None
     if state["status"] == "ready_for_review":
-        _assert_sha(state["implementation_commit_sha"])
+        implementation_sha = state["implementation_commit_sha"]
+        _assert_sha(implementation_sha)
+        assert state["correction_execution_authorized"] is False
+        assert "**Status:** ready_for_review" in active_text
+        assert "**Current decision:** `ready_for_review`" in report_text
+        assert implementation_sha in active_text
+        assert implementation_sha in report_text
+        for text in (active_text, report_text):
+            assert not re.search(
+                r"^## Required (?:final )?correction\s*$",
+                text,
+                flags=re.IGNORECASE | re.MULTILINE,
+            )
+        combined_current_state = f"{active_text}\n{report_text}".lower()
+        for stale_phrase in (
+            "**status:** changes_requested",
+            "**current decision:** `changes_requested`",
+            "correction execution remains authorized",
+            "correction execution are authorized",
+            "no current completion report",
+            "no durable validation-receipt",
+            "no validation receipt exists",
+            "publication work as missing",
+            "remain unfinished",
+        ):
+            assert stale_phrase not in combined_current_state
     if state["status"] == "blocked":
         assert state["task_execution_authorized"] is True
         assert state["merge_authorized"] is False

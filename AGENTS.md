@@ -44,11 +44,29 @@ must identify the implementation parent, validation gate/results, evidence
 source, worktree state, and authority impact. Do not modify task-owned files
 after that commit; any change requires a new validated receipt head.
 
+For a resumed task, synchronize and read `main` first for task identity,
+authorization head, and declared feature branch. Then verify that remote branch
+for repository identity, task ID, branch name, and authorization ancestry. A
+verified branch is authoritative for current lifecycle state; `main` remains
+authoritative for authorization provenance. Do not stop merely because main has
+an older lifecycle snapshot. When a safe authorized branch write exists, record
+any fail-closed result there as `blocked`; terminal output is not completion
+evidence.
+
 Before authorizing an executable task, require definition-ready implementation
 meaning: one primary mergeable outcome, exact observable behavior, resolved
 surface-appropriate decisions, named acceptance evidence, and no unresolved
 execution-blocking design questions. Stop or split the work rather than choosing
 among materially different contract meanings during execution.
+
+## Invocation-only prompt rule
+
+Codex prompts are invocation-only. The execution and correction invocation is
+`Synchronize from Git and execute the active task.` A merge invocation adds only
+the exact externally approved remote head SHA. Durable task scope, owned paths,
+behavior, validation, workflow, authority, and stop conditions belong in Git;
+prompt text must not repeat, repair, expand, override, or reinterpret them.
+Missing Git instructions are a fail-closed blocker.
 
 ## Cross-repository task rule
 

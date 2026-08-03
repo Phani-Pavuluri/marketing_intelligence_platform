@@ -175,6 +175,34 @@ binds its message to the exact tree. No task-owned file may change after the
 receipt commit; any change requires a new validated publication head. Review
 uses this Git evidence and must not depend on pasted terminal or chat output.
 
+## Invocation-only Codex prompt contract
+
+The execution and correction invocation is exactly:
+`Synchronize from Git and execute the active task.` The active Git status and
+Git-authored instructions determine whether it is normal execution or a
+correction. The merge invocation is exactly:
+`Synchronize from Git and execute the active task's merge and closure workflow. Approved exact remote head: <SHA>.`
+The SHA is the only normally required external fact because approval is absent
+from the reviewed tree.
+
+Prompts must not restate durable scope, owned paths, behavior, validation,
+workflow, cleanup, or stop conditions. Those instructions belong in committed Git state.
+Prompt text cannot repair, expand, override, or reinterpret an incomplete active
+task. Missing Git-authored instructions are a fail-closed blocker, not authority
+to supplement the task from chat. This MIP rule does not authorize MMM or GeoX
+adoption; each remains a separately authorized owner-repository decision.
+
+## Resumed feature-branch state
+
+Synchronize `main` first and obtain task ID, authorization head, and feature
+branch from its committed state. Verify the declared remote feature branch's
+repository identity, task ID, branch name, and ancestry. Main remains authority
+for authorization provenance; the verified feature branch is authority for the
+latest resumed lifecycle state, blockers, implementation SHA, and report. Do
+not stop on a stale main lifecycle snapshot. Fail closed on mismatches or
+inconsistent evidence, and publish `blocked` to the safe authorized branch when
+one exists; terminal or chat output is not a completion report.
+
 ## Exact-head approval and merge
 
 Approval is an external user decision that names or unambiguously accepts the
