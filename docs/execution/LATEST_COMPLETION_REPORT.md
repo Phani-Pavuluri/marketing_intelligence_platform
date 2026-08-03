@@ -7,7 +7,7 @@
 - **Feature branch:** `docs/mip-invocation-only-codex-prompt-standard-001`
 - **Rejected review head:** `fa8ff9612732f34a4d90275da017c7125ec9cea0`
 - **Rejected candidate implementation:** `2f1ec3efdd6f68d5c8097e534c869d982ab2d6ec`
-- **Current decision:** `changes_requested`
+- **Current decision:** `ready_for_review`
 
 ## Review finding
 

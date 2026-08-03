@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -21,9 +21,9 @@
 
 ## Review decision
 
-Changes are required. The candidate correctly moves durable scope, behavior,
-validation, paths, authority, and stop conditions into Git, but its own prompt
-contract still repeats workflow and stop instructions.
+The bounded correction is complete. Execution and correction now use exactly
+`Synchronize from Git and execute the active task.` The corrected tree is ready
+for exact-head review only.
 
 The candidate says prompts must not restate workflow steps or stop conditions,
 while also prescribing execution and correction prompts that say to publish a
