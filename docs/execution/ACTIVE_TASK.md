@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -15,15 +15,21 @@
 - **Risk tier:** Tier 1 — documentation and governance guidance only
 - **Capability authorizations changed:** `false`
 
-## Review publication
+## Closure
 
-The bounded correction is complete and ready for exact-head review. The final
-review-publication commit contains the durable validation receipt for its exact
-tree and names correction implementation commit
-`ee0905feb962150f850c33f5e20aa6fde03c8caf`.
+The user explicitly approved exact reviewed head
+`dd870de03d9a214f427f12e680b1f1f8ab4ad20b` in ChatGPT. It was fast-forwarded
+to `main` and pushed without a pull request or merge commit.
 
-Review must use Git-durable evidence. The rejected head is retained only as the
-source of the durable-receipt correction; it does not authorize a merge.
+The resulting main lineage before this closure commit is
+`106f428de44e0e37405355f73e90ba6cbacd82a0 →
+dd870de03d9a214f427f12e680b1f1f8ab4ad20b`. The sole correction implementation
+commit is `ee0905feb962150f850c33f5e20aa6fde03c8caf`.
+
+The local and remote feature branches were deleted after main synchronization.
+Approval provenance is the user's explicit ChatGPT approval; no separate
+approval-metadata commit exists. This task is closed. No capability authority
+changed.
 
 ## Completed correction outcome
 
@@ -99,19 +105,20 @@ Use accurate values. If any required check fails or cannot run, publish
 ### Current correction publication
 
 The rule change was implemented in
-`ee0905feb962150f850c33f5e20aa6fde03c8caf`. The three stable execution files
-now record `ready_for_review`; the final Tier 1 publication checks apply to the
-exact tree in the review-publication commit.
+`ee0905feb962150f850c33f5e20aa6fde03c8caf`. The review-publication commit
+`dd870de03d9a214f427f12e680b1f1f8ab4ad20b` carried the durable receipt and was
+fast-forwarded exactly to main.
 
-The publication state records:
+The closed state records:
 
 - one real correction implementation SHA;
-- `status: ready_for_review`;
-- `task_execution_authorized: true`;
+- `status: merged`;
+- `task_execution_authorized: false`;
 - `correction_execution_authorized: false`;
 - empty blockers;
 - merge and PR creation false;
-- reviewed head and approval commit null; and
+- reviewed head `dd870de03d9a214f427f12e680b1f1f8ab4ad20b` and approval commit
+  null; and
 - unchanged capability and sibling authority.
 
 ## Validation gate
@@ -137,7 +144,7 @@ widening scope.
 ## Authority and stop conditions
 
 Correction execution is closed. Merge, PR creation, sibling adoption, and
-capability authority remain false. Do not force-push, merge, rebase, squash,
-delete branches, modify siblings, or create additional process artifacts.
+capability authority remain false. The task must not be re-executed; a later
+task requires separate authorization.
 
-Push the exact receipt head and stop at `ready_for_review`.
+The receipt head is on main; stop at `merged`.

@@ -8,7 +8,7 @@
 - **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
 - **Rejected review head:** `9f829c3e12ca79698c6cabda1e8089e9d4567fa1`
 - **Correction implementation SHA:** `ee0905feb962150f850c33f5e20aa6fde03c8caf`
-- **Current decision:** `ready_for_review`
+- **Current decision:** `merged`
 
 ## Deliverables and acceptance results
 
@@ -74,3 +74,63 @@ required receipt values and is the durable Git record.
 - **Stop condition:** after the receipt commit is pushed and local/remote heads
   agree, stop without PR, merge, rebase, squash, force-push, branch deletion,
   or sibling modification.
+
+## Merge closure
+
+- **Approval source:** the user explicitly approved exact reviewed head
+  `dd870de03d9a214f427f12e680b1f1f8ab4ad20b` in ChatGPT.
+- **Reviewed head / publication receipt:**
+  `dd870de03d9a214f427f12e680b1f1f8ab4ad20b`
+- **Correction implementation SHA:**
+  `ee0905feb962150f850c33f5e20aa6fde03c8caf`
+- **Merge mechanism:** `git merge --ff-only` to local `main`, followed by
+  `git push origin main`; no PR, squash, rebase, or merge commit was used.
+- **Resulting main lineage before the closure commit:**
+  `106f428de44e0e37405355f73e90ba6cbacd82a0 →
+  dd870de03d9a214f427f12e680b1f1f8ab4ad20b`.
+
+### Pre-merge and post-fast-forward validation
+
+Both exact-head checks passed using the authorized Tier 1 gate:
+
+| Check | Pre-merge reviewed head | Post-fast-forward main |
+| --- | --- | --- |
+| JSON parse | passed | passed |
+| Markdown/current-state consistency | passed | passed |
+| Seven authorized task paths | passed | passed |
+| Five correction-owned paths | passed | passed |
+| `git diff --check` | passed | passed |
+| Focused governance test | passed; 1 passed | passed; 1 passed |
+| Durable receipt trailers | passed; all 14 required trailers | passed; all 14 required trailers |
+| Docker, Ruff, mypy, full suite | not_required | not_required |
+
+### Evidence, synchronization, and cleanup
+
+- **GitHub-observed evidence:** `origin/main` and the feature branch were
+  fetched; main began at
+  `106f428de44e0e37405355f73e90ba6cbacd82a0`; the remote feature head matched
+  the approved SHA; the approved head descended from authorization boundary
+  `845d4bea477df7514128548193cbb942e04c20dc`.
+- **Locally observed evidence:** exact-head state checks, JSON parsing,
+  Markdown consistency, path checks, receipt inspection, diff hygiene, and
+  two focused-test runs.
+- **Synchronization:** the approved head was pushed to `origin/main`; local
+  main and origin/main matched before this closure commit.
+- **Cleanup:** local branch
+  `docs/mip-lean-repository-delivery-standard-001` deleted successfully;
+  remote branch of the same name deleted successfully.
+
+### Limitations, sibling impact, and authority
+
+- **Limitations / validation debt:** none for this Tier 1 task. Docker, Ruff,
+  mypy, and the full suite remain explicitly not required by the task-authored
+  gate.
+- **Sibling impact:** MMM and GeoX were not changed; their lean-standard
+  adoption remains deferred and unauthorized.
+- **Authority impact:** no capability authority changed. Live integration,
+  real data, persistence, simulation, optimization, recommendations, pilot,
+  and production remain outside this documentation task.
+- **Closure state:** merged. Task and correction execution authorization,
+  merge authorization, and PR authorization are false; blockers are empty;
+  `approval_commit_sha` remains null because no approval-metadata commit was
+  created before the external user approval and fast-forward merge.
