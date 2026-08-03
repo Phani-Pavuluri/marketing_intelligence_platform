@@ -136,6 +136,9 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         "Main remains authority\nfor authorization provenance",
         "Do not stop merely because main has\nan older lifecycle snapshot",
         "terminal or chat output is not a completion report",
+        "task ID, branch name, and authorization ancestry",
+        "Fail closed on mismatches or\ninconsistent evidence",
+        "record\nany fail-closed result there as `blocked`",
     ):
         assert requirement in resumed_guidance
 
