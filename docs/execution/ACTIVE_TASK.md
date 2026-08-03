@@ -1,161 +1,98 @@
 # Active Task
 
-**Status:** merged
+**Status:** authorized
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
 
 ## Identity
 
-- **Task ID:** `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001`
+- **Task ID:** `MIP_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Pre-authoring base:** `main` / `dab329bc6ff9d62971bbe12a7398e08131a4cf22`
-- **Feature branch:** `docs/mip-definition-ready-task-authorization-standard-001`
+- **Pre-authoring base:** `main` / `2904334247980e564409b7815c812572d80c8419`
+- **Feature branch:** `docs/mip-invocation-only-codex-prompt-standard-001`
 - **Execution mode:** `branch_and_fast_forward`
 - **Risk tier:** Tier 1 — documentation/governance rule plus focused governance test
-- **Prior task:** `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001`
-- **Prior closure:** `dab329bc6ff9d62971bbe12a7398e08131a4cf22`
+- **Prior task:** `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001`
+- **Prior closure:** `2904334247980e564409b7815c812572d80c8419`
 - **Capability authorizations changed:** `false`
-- **Implementation commit:** `67abc7cfc2f02c45abb442d1f61834bcdc6287e7`
-
-## Closure
-
-The user explicitly approved exact reviewed head
-`a7d7525cb0df79b35ce60ae98e01ae908e1a2112` in ChatGPT. It was fast-forwarded
-to `main` and pushed with no pull request or merge commit.
-
-The resulting main lineage before this closure commit is
-`bb2e15fa3ceec1debb42d252b04ef9db2f7a9c49 →
-a7d7525cb0df79b35ce60ae98e01ae908e1a2112`. The sole implementation commit is
-`67abc7cfc2f02c45abb442d1f61834bcdc6287e7`.
-
-The local and remote feature branches were deleted after main synchronization.
-Approval provenance is the user's explicit ChatGPT approval; no separate
-approval-metadata commit exists. This task is closed. No capability authority
-changed.
 
 ## Primary mergeable outcome
 
-Make definition-readiness an operative pre-authorization requirement for future
-MIP executable tasks. A task must be sufficiently decided that the execution
-agent implements an already-defined contract rather than deciding what the
-contract should mean.
+Make Codex prompts invocation-only so Git remains the sole durable source for task scope, behavior, validation, paths, workflow, and stop conditions.
 
-This is one independently reviewable outcome: the task-authoring rule and its
-focused governance assertion establish one authorization gate. It cannot be
-split further without leaving either an unenforced rule or a test with no
-canonical requirement.
+This is one independently reviewable outcome: the canonical prompt contract and its focused governance assertion establish one execution handoff rule. It cannot be split further without leaving either unenforced guidance or a test with no canonical requirement.
 
-## Problem being closed
+## Exact observable behavior
 
-The merged lean delivery standard controls task size, merge boundaries,
-risk-tier validation, and durable completion evidence. It does not yet require
-an executable task to prove that behavioral, schema, compatibility, migration,
-failure, and authority decisions relevant to its changed surface are resolved
-before authorization.
+After this task merges:
 
-A grammatically small task can therefore remain semantically vague and delegate
-contract design to Codex. This task closes only that gap. It does not create a
-new task schema, resolver, automation framework, approval state, checklist
-service, or coordination mechanism.
+1. A normal execution prompt identifies only the repository operation: synchronize from Git, read `AGENTS.md` and the active task, execute it, publish `ready_for_review` or accurate `blocked`, push the exact branch head, and stop.
+2. A correction prompt identifies only the correction operation: synchronize, read the active `changes_requested` task, execute the authorized correction, publish the new exact review head or accurate `blocked`, push, and stop.
+3. A merge prompt identifies only the merge/closure operation plus the exact externally approved remote head SHA, because external approval is not written into the reviewed tree.
+4. Prompts must not restate durable scope, owned paths, implementation behavior, validation commands, expected repository SHAs already recorded in Git, workflow steps, or stop conditions.
+5. A prompt may carry only an external fact unavailable in the reviewed repository state, such as the exact user-approved SHA, or a narrowly necessary connector/runtime fact explicitly allowed by the active task.
+6. Chat, pasted summaries, and prompt text cannot repair, expand, override, or reinterpret an incomplete active task. If Git lacks sufficient durable instructions, Codex stops fail-closed.
 
-## Definition-ready behavioral contract
+The resulting standard must make short prompts safe because all durable execution meaning is already present in Git.
 
-Before a future MIP task may be `authorized` for execution, its stable active
-task must identify, at the level appropriate to the changed surface:
+## Resolved design decisions
 
-1. **Primary mergeable outcome** — one independently reviewable result.
-2. **Exact observable behavior or contract** — what changes and what must remain
-   unchanged.
-3. **Resolved design decisions** — architectural, schema, authority, and policy
-   choices required for implementation.
-4. **Inputs and outputs** — including exact public signatures, fields, types, or
-   serialized shapes when the task changes those surfaces.
-5. **Failure semantics** — fail-closed behavior, reason/error outcomes, and
-   prohibited fallback or inference.
-6. **Compatibility or migration policy** — required only when versions,
-   persisted artifacts, public contracts, or migration surfaces change;
-   otherwise explicitly `not_applicable`.
-7. **Owned paths and prohibited scope**.
-8. **Named acceptance tests or deterministic evidence** — concrete cases and
-   expected outcomes, not only broad quality statements.
-9. **Focused validation and applicable risk-tier gate**.
-10. **Deferred successors** — independently mergeable work not owned here.
-11. **Unresolved execution-blocking design questions:** `none`.
+- The rule applies to future MIP Codex execution, correction, and merge invocations.
+- Durable instructions belong in `AGENTS.md`, `TASK_EXECUTION_STANDARD.md`, the stable active task, and relevant repository evidence.
+- The exact externally approved review-head SHA remains in the merge invocation because adding it to the reviewed branch would invalidate exact-head approval.
+- No new prompt file, prompt registry, schema, resolver, CLI wrapper, bot, automation service, status, or checkpoint system is introduced.
+- This task updates MIP only. MMM and GeoX adoption requires separate owner-repository authorization.
+- The current GeoX builder task is not modified, superseded, blocked, or reinterpreted.
 
-The requirement is surface-proportional. A documentation-only task does not
-invent API fields or migration policy. A public API task must define its public
-signature and behavior. A schema task must define fields, types, invariants,
-version behavior, and compatibility. A state-machine task must define allowed
-transitions and failures. A migration task must define source/target versions,
-rollback, and incompatible cases.
+## Inputs and outputs
 
-If any execution-blocking design decision remains unresolved, the task must
-remain `proposed`, be marked `blocked` for design, or be split. Codex must not
-select among materially different contract meanings during execution.
+- **Input:** an already-authorized or externally approved repository-native operation represented in committed Git state.
+- **Output:** canonical MIP guidance and a focused governance assertion requiring invocation-only prompts.
+- **Public API/schema/migration compatibility:** `not_applicable`; this task changes documentation and governance tests only.
 
-## Resolved design decisions for this task
+## Failure semantics
 
-- The rule applies to future MIP executable tasks at authorization time.
-- The rule is descriptive Markdown enforced by the existing focused governance
-  test; no new schema or automation is introduced.
-- Requirements are conditional on the changed surface, preventing artificial
-  API or migration detail for routine documentation tasks.
-- `unresolved execution-blocking design questions: none` is mandatory for
-  execution authorization.
-- Research or design-discovery tasks may still be authorized when their primary
-  outcome is a bounded decision/evidence artifact rather than implementation;
-  they must not claim implementation authority.
-- MMM and GeoX adoption is not part of this task and requires separate
-  owner-repository authorization after this MIP rule is merged.
+- If the active task, execution state, approval evidence, branch, or Git-authored workflow is incomplete or inconsistent, stop rather than supplementing it from chat.
+- Prompt text must not broaden owned scope, reduce validation, change authority, invent an approval, or override repository state.
+- A merge must fail closed without the exact externally approved remote head SHA.
+- A normal execution or correction invocation must fail closed when Git does not contain a complete definition-ready task.
 
 ## Owned paths
 
 Execution may modify only:
 
 1. `AGENTS.md`
-2. `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`
-3. `docs/execution/TASK_EXECUTION_STANDARD.md`
-4. `tests/governance/test_repo_native_execution_handoff.py`
-5. `docs/execution/ACTIVE_TASK.md`
-6. `docs/execution/EXECUTION_STATE.json`
-7. `docs/execution/LATEST_COMPLETION_REPORT.md`
+2. `docs/execution/TASK_EXECUTION_STANDARD.md`
+3. `tests/governance/test_repo_native_execution_handoff.py`
+4. `docs/execution/ACTIVE_TASK.md`
+5. `docs/execution/EXECUTION_STATE.json`
+6. `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-Do not modify coordination files, roadmaps, product/runtime/analytical code,
-contracts, adapters, fixtures, application code, MMM, or GeoX.
+Do not modify the lean standard, context index, coordination files, roadmaps, contracts, adapters, fixtures, application/runtime/analytical code, MMM, or GeoX.
 
 ## Required implementation
 
-1. Add a concise definition-ready rule to `LEAN_REPOSITORY_DELIVERY_STANDARD.md`.
-2. Make the rule operative in `TASK_EXECUTION_STANDARD.md` before executable
-   task authorization.
-3. Add a compact reminder to `AGENTS.md` that execution authorization requires
-   resolved implementation meaning and no unresolved execution-blocking design
-   questions.
-4. Strengthen the existing focused governance test to assert the canonical rule,
-   surface-proportional behavior, and fail-closed handling of unresolved design.
-5. Publish one current completion narrative and a durable exact-tree validation
-   receipt under the merged publication rule.
-
-Do not add a new task template file, JSON schema, resolver, linter service,
-workflow engine, status, or checkpoint framework.
+1. Add a concise invocation-only prompt rule to `AGENTS.md`.
+2. Add an operative prompt contract to `TASK_EXECUTION_STANDARD.md` covering execution, correction, and merge invocations.
+3. State that durable instructions must not be duplicated in prompts and that missing Git instructions are a blocker, not permission to repair from chat.
+4. Preserve the exact approved SHA as the only normally required external merge fact.
+5. Strengthen the existing focused governance test to assert the canonical rule and fail-closed behavior.
+6. Publish one current completion narrative and a durable exact-tree validation receipt.
 
 ## Named acceptance tests
 
-The focused governance test must prove that canonical repository guidance:
+The focused governance test must prove that canonical MIP guidance:
 
-- requires a primary mergeable outcome and exact observable behavior;
-- requires resolved design decisions and inputs/outputs appropriate to the
-  changed surface;
-- requires failure semantics and conditional compatibility/migration policy;
-- requires named acceptance tests or deterministic evidence;
-- requires unresolved execution-blocking design questions to be `none` before
-  executable authorization;
-- states that unresolved meaning remains proposed, design-blocked, or split;
-- prevents Codex from deciding materially different contract meanings during
-  implementation;
-- preserves surface proportionality; and
-- preserves separate owner-repository authority for MMM and GeoX adoption.
+- names Codex prompts as invocation-only;
+- requires synchronization and reading `AGENTS.md` plus the active task;
+- covers execution, correction, and merge operations;
+- permits the exact externally approved SHA in a merge invocation;
+- says scope, owned paths, behavior, validation, workflow, and stop conditions belong in Git;
+- prohibits prompt text from repairing, expanding, overriding, or reinterpreting the active task;
+- requires fail-closed stopping when Git lacks sufficient durable instructions;
+- preserves exact-head approval and repository authority; and
+- preserves separate owner-repository adoption for MMM and GeoX.
 
 ## Validation gate
 
@@ -164,31 +101,28 @@ Run the Tier 1 gate on the frozen publication tree:
 - JSON parsing for `docs/execution/EXECUTION_STATE.json`;
 - Markdown/current-state consistency;
 - exact task-authoring boundary verification;
-- exact changed-path verification against the seven owned paths;
+- exact changed-path verification against the six owned paths;
+- implementation-path verification against the three substantive paths;
+- publication-path verification against the three stable execution files;
 - `git diff --check`;
 - `pytest -q tests/governance/test_repo_native_execution_handoff.py`;
 - receipt-trailer inspection; and
 - local/remote publication-head equality after push.
 
-Docker, Ruff, mypy, and the full suite are `not_required` unless the changed
-focused test or another repository-authored gate requires them. If a required
-check cannot run or fails, publish accurate `blocked` state rather than widening
-scope or claiming completion.
+Docker, Ruff, mypy, and the full suite are `not_required` unless an unexpected executable dependency or another repository-authored gate makes them applicable. If a required check cannot run or fails, publish accurate `blocked` state rather than widening scope or claiming completion.
 
 ## Deferred successors
 
-- `MMM_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_ADOPTION_001` — proposed
-  owner-repository adoption only; not authorized here.
-- `GEOX_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_ADOPTION_001` — proposed
-  owner-repository adoption only; must not alter or override the current GeoX
-  builder task.
-- Any GeoX builder supersession or rescoping remains a GeoX-owned decision.
+- `MMM_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_ADOPTION_001` — proposed owner-repository adoption only; not authorized here.
+- `GEOX_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_ADOPTION_001` — proposed owner-repository adoption only; must not alter the current GeoX builder task.
+- MMM and GeoX adoption of the combined lean, definition-ready, risk-tier, durable-receipt, and invocation-only structure remains separately owner-authorized.
+
+## Unresolved execution-blocking design questions
+
+`none`
 
 ## Authority and stop conditions
 
-The implementation is merged and closed. No product, analytical,
-live-integration, real-data, persistence, recommendation, pilot, production,
-MMM, GeoX, or capability authority changed.
+Task execution is authorized only for this MIP Tier 1 outcome. Merge and PR creation are unauthorized. No product, analytical, live-integration, real-data, persistence, recommendation, pilot, production, MMM, GeoX, or capability authority changes.
 
-The task must not be re-executed. MMM and GeoX definition-ready adoption remain
-deferred and require separate owner-repository authorization.
+Create the exact feature branch from synchronized post-authoring `main`, execute the task, publish a durable `ready_for_review` receipt or accurate `blocked` state, push the exact branch head, and stop without PR or merge.
