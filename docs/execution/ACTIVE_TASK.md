@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -16,6 +16,13 @@
 - **Prior task:** `MIP_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_001`
 - **Prior closure:** `6419600e09f5ad24248266d87e808b5405cce54b`
 - **Capability authorizations changed:** `false`
+- **Implementation:** `d8ba108faba403019845d7b72a71b791d7ab819f`
+
+## Published review state
+
+Successful orientation is now non-terminal; the frozen implementation is ready
+for exact-head review. Merge, PR, sibling adoption, and capability authority are
+unchanged and false.
 
 ## Primary mergeable outcome
 
