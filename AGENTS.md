@@ -30,8 +30,11 @@ checkpoint into a successor task and use validation proportionate to its risk.
 
 Verify the authorized task, its task-authoring boundary, prerequisites, owned
 files, and exact feature branch. Resume only when tracked changes are
-task-owned. Run focused and full validation, including Docker-backed
-`make validate`; write `docs/execution/LATEST_COMPLETION_REPORT.md`; update
+task-owned. Run the active task's declared risk-tier validation gate for
+execution, exact-head review, and post-fast-forward validation. Docker-backed
+`make validate` remains required whenever Tier 3, the active task, the changed
+surface, or another repository-authored gate requires it. Write
+`docs/execution/LATEST_COMPLETION_REPORT.md`; update
 `docs/execution/EXECUTION_STATE.json` to `ready_for_review` with
 `merge_authorized: false`; commit and publish the exact remote feature-branch
 head; then stop without merging.
@@ -53,8 +56,8 @@ verified refresh.
 User approval must identify the exact remote feature-branch head SHA. Re-run the
 mandatory bootstrap, re-fetch the feature branch, verify its head still equals
 the approved SHA, verify `main` has not moved beyond the authorization boundary,
-and rerun required validation. Use `git merge --ff-only`; never create a
-pre-merge approval-metadata commit.
+and rerun the active task's required risk-tier gate. Use `git merge --ff-only`;
+never create a pre-merge approval-metadata commit.
 
 After the fast-forwarded implementation is pushed and branch cleanup is
 observed, record approval provenance, reviewed head, validation, authority

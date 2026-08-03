@@ -104,8 +104,10 @@ report with:
   implementation commit, and exact published review head;
 - task-authoring boundary and prerequisite evidence;
 - changed files, deliverables, and acceptance results;
-- focused and full validation, Ruff, mypy, `git diff --check`, Docker-backed
-  `make validate`, and GitHub-observed versus local evidence;
+- each validation category marked `passed`, `failed`, `blocked`, or
+  `not_required`, including focused checks, full suite, Ruff, mypy,
+  `git diff --check`, Docker-backed `make validate`, and GitHub-observed versus
+  local evidence;
 - limitations, deferred work, authority impact, merge readiness, and local-only
   paths.
 
@@ -122,6 +124,16 @@ The published feature branch ends at `ready_for_review` with
 `reviewed_head_sha: null`, and `approval_commit_sha: null`. The exact review head
 is the remote branch ref; it cannot be embedded in its own commit.
 
+### Operative risk-tier validation
+
+The active task's declared risk-tier gate controls execution, exact-head review,
+and post-fast-forward validation. Tier 1 may use its explicitly declared narrow
+documentation/governance gate. Tier 2 uses the focused and surface-required
+validation stated by its task. Docker-backed full validation is mandatory for
+Tier 3 and whenever the active task, changed public/analytical/package surface,
+or another repository-authored gate requires it. A required category that cannot
+run is `blocked`; a category outside the applicable gate is `not_required`.
+
 ## Exact-head approval and merge
 
 Approval is an external user decision that names or unambiguously accepts the
@@ -136,10 +148,10 @@ A merge session must:
 2. Fetch the remote feature branch and prove its head equals the approved SHA.
 3. Verify the approved head descends from the authorization head and its diff is
    limited to owned files.
-4. Run focused checks and Docker-backed `make validate` on the exact approved
-   tree.
+4. Run the active task's required risk-tier gate on the exact approved tree,
+   including Docker-backed `make validate` whenever it is required.
 5. Run `git switch main` and `git merge --ff-only <approved-sha>`.
-6. Rerun required validation on the fast-forwarded tree, push `main`, and prove
+6. Rerun that required gate on the fast-forwarded tree, push `main`, and prove
    local and remote main equal the approved implementation head.
 7. Delete the remote feature branch, delete the local feature branch where
    present, and observe the cleanup results.
@@ -156,6 +168,8 @@ post-merge closure commit. It records:
 - approval source and exact reviewed head;
 - authorization head and implementation/merged-main head;
 - validation evidence and GitHub/local synchronization;
+- validation-category statuses for the execution, exact-head, and
+  post-fast-forward gates;
 - branch-cleanup results;
 - limitations, deferred work, and authority impact.
 
