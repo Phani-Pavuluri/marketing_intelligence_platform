@@ -68,6 +68,12 @@ behavior, validation, workflow, authority, and stop conditions belong in Git;
 prompt text must not repeat, repair, expand, override, or reinterpret them.
 Missing Git instructions are a fail-closed blocker.
 
+Successful orientation is non-terminal once an executable task and safe
+authorized write target are verified. Continue without another user prompt until
+publishing `ready_for_review` or Git-durable `blocked`; an orientation-only or
+chat-only summary is not a task outcome. External stopping is allowed only when
+no safe authorized write target exists and must explain that condition.
+
 ## Cross-repository task rule
 
 Before proposing or executing work that affects MMM or GeoX, read

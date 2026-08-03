@@ -192,6 +192,16 @@ task. Missing Git-authored instructions are a fail-closed blocker, not authority
 to supplement the task from chat. This MIP rule does not authorize MMM or GeoX
 adoption; each remains a separately authorized owner-repository decision.
 
+## Successful-orientation terminal outcomes
+
+After successful orientation establishes an executable task and safe authorized
+branch, continue without another user prompt through implementation, validation,
+publication, and push. The only terminal outcomes are `ready_for_review` with a
+durable receipt or Git-durable `blocked` with blocker, attempted evidence,
+validation status, and resolution condition. An orientation-only, chat-only, or
+“no changes made” summary is invalid completion evidence. External stopping is
+allowed only when no safe authorized write target exists and must explain why.
+
 ## Resumed feature-branch state
 
 Synchronize `main` first and obtain task ID, authorization head, and feature

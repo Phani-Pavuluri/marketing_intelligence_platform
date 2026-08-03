@@ -143,6 +143,13 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         "record\nany fail-closed result there as `blocked`",
     ):
         assert requirement in resumed_guidance
+    for requirement in (
+        "Successful orientation is non-terminal",
+        "Continue without another user prompt",
+        "orientation-only or\nchat-only summary is not a task outcome",
+        "no safe authorized write target exists",
+    ):
+        assert requirement in f"{agents}\n{standard}"
 
     if state["status"] in {"authorized", "in_progress", "ready_for_review"}:
         assert state["task_execution_authorized"] is True
