@@ -14,8 +14,10 @@ governance test passed (`1 passed`). Docker, Ruff, mypy, and full suite are not
 required for this Tier-1 task.
 
 GitHub-observed evidence covers authorization provenance, branch scope, and
-ancestry. Locally observed evidence covers validation. Blockers, limitations,
-and validation debt are empty. Consumer verification is not applicable to this
-governance-only task. Newly eligible work is external exact-head review only.
-MMM and GeoX are unchanged and adoption remains unauthorized. No capability
-authority changed; merge and PR authorization remain false.
+ancestry. Locally observed evidence covers validation. Blockers and validation
+debt are empty. Limitation: this is governance enforcement only; no runtime
+controller or external process guarantee is introduced. Consumer verification
+is not applicable to this governance-only task. Newly eligible work is external
+exact-head review only. MMM and GeoX are unchanged and adoption remains
+unauthorized. No capability authority changed; merge and PR authorization remain
+false.
