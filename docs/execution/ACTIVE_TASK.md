@@ -1,23 +1,26 @@
 # Active Task
 
-**Status:** proposed
+**Status:** authorized
 **Owner:** MIP program governance
-**Last updated:** 2026-07-31
-**Last verified:** 2026-07-31
+**Last updated:** 2026-08-03
+**Last verified:** 2026-08-03
 
 ## Identity
 
 - **Task ID:** `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Pre-authoring base:** `70bd688b2506ca0bb3cb572dd00552bf10f1e9b8`
+- **Task-authoring head:** `845d4bea477df7514128548193cbb942e04c20dc`
+- **State authorization commit:** `aa74f576d0515e0289df25cef461fe118649c4b0`
 - **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
 - **Execution mode:** `branch_and_fast_forward`
 - **Capability authorizations changed:** `false`
 
-The task-authoring head is the commit containing this task and the matching
-completion report. The immediately following state-only commit must record that
-exact head in `EXECUTION_STATE.json` and authorize execution. No other
-intervening commit or path is permitted.
+Execution is authorized by the state-only commit above. A subsequent metadata-only
+consistency correction aligns this human task view and the completion report with
+`EXECUTION_STATE.json`. Before implementation, the untouched feature branch must
+be fast-forwarded to the corrected synchronized `main`. This correction does not
+change task scope, ownership, validation tier, or authority.
 
 ## Delivery shape
 

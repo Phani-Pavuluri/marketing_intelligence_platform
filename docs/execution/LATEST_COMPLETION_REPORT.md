@@ -6,8 +6,10 @@
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Pre-authoring base:** `70bd688b2506ca0bb3cb572dd00552bf10f1e9b8`
+- **Task-authoring head:** `845d4bea477df7514128548193cbb942e04c20dc`
+- **State authorization commit:** `aa74f576d0515e0289df25cef461fe118649c4b0`
 - **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
-- **Current decision:** `proposed`
+- **Current decision:** `authorized`
 
 ## GitHub-observed starting evidence
 
@@ -25,7 +27,17 @@
 - No canonical lean repository delivery standard currently exists under
   `docs/program/`.
 
-## Authorized outcome after state recording
+## Authorization consistency correction
+
+`EXECUTION_STATE.json` authorized execution at state-only commit
+`aa74f576d0515e0289df25cef461fe118649c4b0`, while the two human-readable stable
+views still said `proposed`. The execution agent correctly stopped before
+implementation. This metadata-only correction aligns the human views to
+`authorized` without changing task scope, owned paths, validation tier, sibling
+state, or capability authority. Before implementation, the untouched feature
+branch must be fast-forwarded to the corrected synchronized `main`.
+
+## Authorized outcome
 
 Create one concise MIP-owned program standard and update MIP task-authoring,
 bootstrap, and navigation guidance so future work is decomposed into one
@@ -59,7 +71,6 @@ widening scope.
 
 ## Authority
 
-Task execution is not authorized until the immediately following state-only
-commit records the exact task-authoring head. Merge and PR creation remain
-false. Capability authority remains unchanged. MMM and GeoX adoption remain
-unauthorized and owner-repository controlled.
+Task execution is authorized. Merge and PR creation remain false. Capability
+authority remains unchanged. MMM and GeoX adoption remain unauthorized and
+owner-repository controlled.
