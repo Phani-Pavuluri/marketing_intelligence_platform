@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -11,80 +11,97 @@
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Feature branch:** `docs/mip-invocation-only-codex-prompt-standard-001`
 - **Authorization head:** `39abc3d66a80054b2b293a73f2dbeb690eb2304b`
-- **Accepted minimal-prompt implementation:** `9bb63c02e476a8a13855192b9df77d4238a3673b`
-- **Accepted branch-aware implementation and test head:** `9376284a35f6dda7d1b9a535e5cf23c565f759ad`
-- **Rejected publication head:** `cdaa1c9c69fee7445b9c5a04b3d5996dbd5a4a91`
-- **Risk tier:** Tier 1 — documentation/governance plus focused governance test
+- **Accepted substantive implementation:** `9376284a35f6dda7d1b9a535e5cf23c565f759ad`
+- **Rejected publication head:** `0bb05e3a9d5024c9107b131a00d547f5587c3f86`
+- **Risk tier:** Tier 1 — governance test plus stable execution publication
 - **Capability authorizations changed:** `false`
 
 ## Review decision
 
-The substantive implementation is accepted and this final publication is ready
-for exact-head review. Canonical guidance now:
+The invocation-only and resumed-feature-branch behavior is accepted. No changes
+are authorized to `AGENTS.md` or `docs/execution/TASK_EXECUTION_STANDARD.md`.
 
-- preserves the exact invocation `Synchronize from Git and execute the active task.`;
-- reads synchronized `main` for task identity, authorization provenance, and the declared feature branch;
-- verifies repository identity, task ID, branch name, and authorization ancestry;
-- uses the verified feature branch for current resumed lifecycle state;
-- does not stop merely because `main` retains an older lifecycle snapshot; and
-- requires Git-durable `blocked` evidence when a safe authorized branch write exists.
+Exact head `0bb05e3a9d5024c9107b131a00d547f5587c3f86` is rejected because it marks the
+task `ready_for_review` while retaining a current `Required correction` section,
+claims correction execution remains authorized, and preserves a completion
+report that describes the prior publication defect as though it were still
+current.
 
-Implementation `9376284a35f6dda7d1b9a535e5cf23c565f759ad` also strengthens the focused governance test for identity, ancestry, mismatch, and durable blocked reporting.
-
-The final stable task, state, and report now present one coherent review state.
+The repeated failure mode is incremental status editing without replacing stale
+current-state prose. This correction must make that contradiction impossible to
+publish as passing evidence.
 
 ## Primary mergeable outcome
 
-Publish one coherent, exact-tree `ready_for_review` state for the accepted invocation-only and branch-aware execution standard.
+Publish one coherent exact-tree `ready_for_review` state for accepted
+implementation `9376284a35f6dda7d1b9a535e5cf23c565f759ad`, enforced by a focused
+governance assertion that rejects stale correction prose in review-ready state.
 
 ## Correction-owned paths
 
-1. `docs/execution/ACTIVE_TASK.md`
-2. `docs/execution/EXECUTION_STATE.json`
-3. `docs/execution/LATEST_COMPLETION_REPORT.md`
+1. `tests/governance/test_repo_native_execution_handoff.py`
+2. `docs/execution/ACTIVE_TASK.md`
+3. `docs/execution/EXECUTION_STATE.json`
+4. `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-Do not modify program or coordination files, roadmaps, contracts, adapters, fixtures, product/runtime/analytical code, MMM, GeoX, `AGENTS.md`, `TASK_EXECUTION_STANDARD.md`, or the focused governance test unless validation fails and the task is accurately published as `blocked`.
+Do not modify any other path. In particular, preserve `AGENTS.md`,
+`docs/execution/TASK_EXECUTION_STANDARD.md`, program and coordination files,
+product/runtime/analytical code, MMM, and GeoX unchanged.
 
-## Required correction
+## Required implementation
 
-1. Replace this file with one current `ready_for_review` narrative that records accepted implementation `9376284a35f6dda7d1b9a535e5cf23c565f759ad` and no longer describes execution work as missing.
-2. Publish consistent execution state with:
+1. Strengthen the focused governance test so that when execution state is
+   `ready_for_review` it requires:
+   - the active task and completion report to declare the same current status;
+   - the recorded implementation SHA to appear in both files;
+   - no `Required correction` or `Required final correction` heading;
+   - no claim that correction execution remains authorized or unfinished;
+   - no claim that a current completion report, validation evidence, or receipt
+     is missing; and
+   - no stale `changes_requested` current-decision marker.
+2. Replace this file completely at publication time. The final active task must
+   contain only current review-ready identity, accepted outcome, validation,
+   limitations, and authority. It must not retain this correction section.
+3. Replace `LATEST_COMPLETION_REPORT.md` completely. The final report must contain
+   the completed outcome, exact implementation SHA, exact validation results,
+   GitHub-observed versus locally reported evidence, limitations, validation
+   debt, sibling impact, consumer verification, authority impact, and exact
+   review readiness. Prior rejected heads may appear only in a clearly historical
+   review-history section.
+4. Publish consistent `EXECUTION_STATE.json` with:
    - `status: ready_for_review`;
-   - `implementation_commit_sha: 9376284a35f6dda7d1b9a535e5cf23c565f759ad`;
-   - task execution true;
-   - correction execution false;
+   - the final implementation SHA for this correction;
+   - `correction_execution_authorized: false`;
    - merge and PR creation false;
    - blockers empty;
    - reviewed head and approval commit null; and
    - sibling and capability authority unchanged.
-3. Replace the completion report with one current report containing:
-   - exact implementation SHA and branch;
-   - complete deliverables;
-   - GitHub-observed versus locally observed evidence;
-   - exact Tier 1 validation results and test count;
-   - limitations and validation debt;
-   - sibling impact and consumer verification;
-   - authority impact; and
-   - exact review readiness.
-4. Freeze the corrected tree, run the complete Tier 1 gate, create a new durable exact-tree receipt commit, push the exact remote branch head, and stop without PR or merge.
+5. Freeze the final tree, run the complete Tier 1 gate, create one exact-tree
+   validation-receipt commit, push the exact remote branch head, and stop without
+   PR or merge.
 
 ## Validation gate
 
 Run on the frozen final publication tree:
 
 - JSON parsing;
-- task/state/report current-state consistency;
+- task/state/report current-state consistency, including the new stale-prose
+  rejection assertions;
 - authorization and correction-boundary checks;
-- complete task diff limited to the six original owned paths;
-- final correction delta limited to the three stable execution files;
-- accepted substantive implementation remains exactly `9376284a35f6dda7d1b9a535e5cf23c565f759ad`;
+- complete task diff limited to the original six owned paths;
+- this final correction delta limited to the four correction-owned paths;
+- accepted substantive implementation remains exactly
+  `9376284a35f6dda7d1b9a535e5cf23c565f759ad`;
 - exact minimal invocation remains unchanged;
 - `git diff --check`;
-- `pytest -q tests/governance/test_repo_native_execution_handoff.py` with exact count;
+- `pytest -q tests/governance/test_repo_native_execution_handoff.py` with exact
+  count;
 - durable receipt inspection; and
 - local/remote publication-head equality after push.
 
-Docker, Ruff, mypy, and the full suite remain `not_required` unless another repository-authored gate makes them applicable. A required failure must be published as accurate Git-durable `blocked` state.
+Docker, Ruff, mypy, and the full suite remain `not_required` unless another
+repository-authored gate makes them applicable. A required failure must be
+published as accurate Git-durable `blocked` state.
 
 ## Unresolved execution-blocking design questions
 
@@ -92,4 +109,7 @@ Docker, Ruff, mypy, and the full suite remain `not_required` unless another repo
 
 ## Authority and stop conditions
 
-Task and final publication correction execution are authorized on the existing feature branch. Merge and PR creation remain unauthorized. No product, analytical, data, persistence, recommendation, production, MMM, GeoX, or capability authority changes.
+Task and this final correction are authorized on the existing feature branch.
+Merge and PR creation remain unauthorized. MMM and GeoX adoption remain
+separately unauthorized. The active GeoX builder and all product, analytical,
+recommendation, production, and capability authority remain unchanged.
