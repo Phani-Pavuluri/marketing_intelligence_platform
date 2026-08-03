@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -12,6 +12,7 @@
 - **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
 - **Rejected implementation commit:** `25d254a20a0eca75094c0b4a4d7e5cd23944e55c`
 - **Rejected review head:** `0f48c697df28ff57241e894115f9bc2c47ee01e2`
+- **Correction implementation commit:** `9dda47f3f90877161175c02a736694d5ee253f48`
 - **Capability authorizations changed:** `false`
 
 ## Review decision
@@ -52,3 +53,9 @@ Run JSON and Markdown consistency checks, exact changed-path verification, `git 
 On success, publish `ready_for_review` with one new implementation commit SHA, empty blockers, merge and PR creation false, and unchanged capability authority. Push the exact branch head and stop.
 
 Do not create a PR, merge, rebase, squash, force-push again, delete branches, modify siblings, or authorize any capability.
+
+## Publication state
+
+The bounded correction is ready for exact-head review. Its review-publication
+commit contains only stable execution metadata and the completion report. Merge
+and PR creation remain false; no capability authority changed.
