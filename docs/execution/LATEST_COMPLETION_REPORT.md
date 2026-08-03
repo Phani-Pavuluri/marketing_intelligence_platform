@@ -4,53 +4,76 @@
 
 - **Task ID:** `MIP_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Base / authorization head:** `2904334247980e564409b7815c812572d80c8419` /
-  `39abc3d66a80054b2b293a73f2dbeb690eb2304b`
 - **Feature branch:** `docs/mip-invocation-only-codex-prompt-standard-001`
-- **Implementation commit:** `2f1ec3efdd6f68d5c8097e534c869d982ab2d6ec`
-- **Current decision:** `ready_for_review`
+- **Rejected review head:** `fa8ff9612732f34a4d90275da017c7125ec9cea0`
+- **Rejected candidate implementation:** `2f1ec3efdd6f68d5c8097e534c869d982ab2d6ec`
+- **Current decision:** `changes_requested`
 
-## Deliverables and acceptance results
+## Review finding
 
-Canonical MIP guidance now makes Codex prompts invocation-only. Execution and
-correction prompts identify only the Git-authored operation. Merge prompts may
-add only the exact externally approved remote head SHA. Durable scope, paths,
-behavior, validation, workflow, authority, and stop conditions stay in Git;
-missing Git instructions fail closed.
+The candidate is correctly scoped and its Tier 1 receipt is durable, but the
+behavioral contract is internally inconsistent.
 
-| Acceptance criterion | Result |
-| --- | --- |
-| Invocation-only rule in `AGENTS.md` | passed |
-| Operative execution/correction/merge prompt contract | passed |
-| Exact approved merge SHA remains the external fact | passed |
-| Focused governance assertion and fail-closed behavior | passed |
-| MMM/GeoX adoption remains separately authorized | passed |
-| Capability authority changed | false |
+It says invocation text must not repeat workflow steps or stop conditions while
+its prescribed execution and correction prompts still say to publish a review
+state, push the exact branch head, and stop. Those are durable workflow and stop
+instructions that belong in Git, not in the invocation. The candidate therefore
+does not fully achieve the requested minimal prompt contract.
 
-## Validation evidence
+## Required correction
 
-| Validation category | Result |
-| --- | --- |
-| JSON parse | passed |
-| Markdown/current-state consistency | passed |
-| Task-authoring boundary | passed |
-| Six owned paths; three implementation and three publication paths | passed |
-| `git diff --check` | passed |
-| `poetry run pytest -q tests/governance/test_repo_native_execution_handoff.py` | passed; 1 passed |
-| Docker, Ruff, mypy, full suite | not_required for Tier 1 |
-| Receipt trailers | passed |
-| Local/remote receipt-head equality | pending publication; verified after push |
+The corrected canonical invocations are:
 
-## Evidence and authority
+- Execution or correction:
+  `Synchronize from Git and execute the active task.`
+- Merge and closure:
+  `Synchronize from Git and execute the active task's merge and closure workflow. Approved exact remote head: <SHA>.`
 
-- **GitHub-observed:** synchronized MIP main, authorization boundary, and
-  feature scope.
-- **Locally observed:** JSON, Markdown consistency, path checks, diff hygiene,
-  and focused test.
-- **Blockers / validation debt:** none for Tier 1.
-- **Sibling impact:** MMM and GeoX were not modified; adoption and the current
-  GeoX builder task remain deferred and unauthorized.
-- **Authority impact:** no product, runtime, analytical, data, persistence,
-  recommendation, pilot, production, or capability authority changed.
-- **Merge readiness:** exact-head external review only; merge and PR false.
-  `.codex/` and `docs/tasks/` remain local-only.
+The active task status and committed Git instructions determine whether the
+operation is normal execution, correction, or merge. Invocation text must not
+repeat publication states, push instructions, validation, cleanup, workflow, or
+stop conditions.
+
+Update only the six task-owned paths. Strengthen the focused governance test to
+assert the exact minimal invocations and the prohibition on workflow/stop
+restatement.
+
+## Evidence reviewed
+
+### GitHub-observed
+
+- `main` remains `a7b4e1d3701ff163942f0c42a8e7a91388840b51`.
+- Rejected branch head is
+  `fa8ff9612732f34a4d90275da017c7125ec9cea0`.
+- The rejected candidate is exactly two commits ahead of main.
+- The complete candidate diff contains only the six authorized paths.
+- Rejected implementation `2f1ec3efdd6f68d5c8097e534c869d982ab2d6ec`
+  changes only `AGENTS.md`, `TASK_EXECUTION_STANDARD.md`, and the focused
+  governance test.
+- The rejected publication commit changes only the three stable execution
+  files and carries a durable Tier 1 receipt.
+
+### Candidate-reported local validation
+
+The rejected receipt records JSON, Markdown/current-state, task-authoring,
+changed-path, `git diff --check`, and receipt checks as passed; the focused test
+reported `1 passed`; Docker, Ruff, mypy, and the full suite were `not_required`.
+Those checks establish integrity of the rejected tree but do not resolve the
+behavioral contradiction.
+
+## Correction authorization
+
+One bounded correction cycle is authorized on the existing branch.
+
+- **Task execution authorized:** true
+- **Correction execution authorized:** true
+- **Merge authorized:** false
+- **PR creation authorized:** false
+- **Blockers:** none
+- **Capability authority changed:** false
+- **MMM/GeoX adoption:** deferred and separately unauthorized
+- **GeoX active builder:** unchanged
+
+Publish a new exact corrected review head with one correction implementation SHA,
+a current completion report, the complete Tier 1 gate, and a durable exact-tree
+receipt. Stop at `ready_for_review` or accurate `blocked`.
