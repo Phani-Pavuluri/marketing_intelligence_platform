@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 
 - **Task ID:** `MIP_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_001`
 - **Feature branch:** `docs/mip-invocation-only-codex-prompt-standard-001`
@@ -11,4 +11,6 @@ The completed MIP-only outcome preserves the exact minimal invocation, resolves
 resumed feature-branch state, requires durable blocked evidence, and rejects
 stale review narratives. Tier-1 checks passed on the frozen publication tree.
 MMM and GeoX adoption remain unauthorized; the GeoX builder is unchanged.
-Merge, PR creation, and all capability authority remain false.
+The reviewed head `db23d79629a2571db10b2dafe7218de14ba54351` was externally
+merged through merge commit `cab14518095f1458d0f53e01ea039164a1669da4`. This
+closure records that merge-method exception; no capability authority changed.
