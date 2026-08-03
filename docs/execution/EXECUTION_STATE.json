@@ -17,16 +17,15 @@
   "reviewed_head_sha": null,
   "implementation_commit_sha": null,
   "accepted_minimal_prompt_implementation_sha": "9bb63c02e476a8a13855192b9df77d4238a3673b",
-  "prior_rejected_review_head_sha": "fa8ff9612732f34a4d90275da017c7125ec9cea0",
-  "prior_rejected_publication_head_sha": "c09ec85b43442f505e710625bad0e33f56b3d300",
-  "branch_resolution_finding_head_sha": "18743001a1a462e8e237c9adc34af601c353a83c",
+  "incomplete_branch_state_implementation_sha": "3c34b29564292e4d2728d3a69e950774e3e2a748",
+  "rejected_review_head_sha": "3c34b29564292e4d2728d3a69e950774e3e2a748",
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-08-03",
   "blockers": [],
   "risk_tier": "tier_1_docs_governance_focused_test",
   "full_suite_validation_required": false,
-  "validation_scope": "branch_aware_active_state_resolution_and_durable_blocked_reporting",
+  "validation_scope": "complete_branch_aware_resolution_test_and_review_publication",
   "prior_task_id": "MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001",
   "prior_task_closure_sha": "2904334247980e564409b7815c812572d80c8419",
   "current_mmm_checkpoint": "1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421",
@@ -42,5 +41,5 @@
   "geox_active_builder_must_remain_unmodified": true,
   "review_decision": "changes_requested",
   "review_decision_source": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_authoring_note": "A real minimal invocation synchronized main, observed a newer remote feature branch, and stopped because repository guidance did not define main-versus-branch lifecycle precedence. The stop result remained terminal-only and was not a Git-durable blocked or completion report. One bounded correction is authorized on the existing branch to make main authoritative for authorization provenance, the verified feature branch authoritative for resumed lifecycle state, and fail-closed outcomes Git-durable whenever a safe authorized branch write is possible. Merge, PR creation, sibling adoption, GeoX task changes, and capability authority remain false."
+  "task_authoring_note": "Commit 3c34b29564292e4d2728d3a69e950774e3e2a748 adds the substantive branch-aware guidance but is rejected as a review head because Codex did not update the stable task/state/report, run and publish the complete Tier 1 gate, or create a durable exact-tree receipt. One bounded completion correction remains authorized on the existing branch. Merge, PR creation, sibling adoption, GeoX task changes, and capability authority remain false."
 }
