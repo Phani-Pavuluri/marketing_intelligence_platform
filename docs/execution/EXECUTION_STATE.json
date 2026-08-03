@@ -11,7 +11,7 @@
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": true,
-  "correction_execution_authorized": true,
+  "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
   "reviewed_head_sha": null,
@@ -24,7 +24,7 @@
   "blockers": [],
   "risk_tier": "tier_1_docs_only",
   "full_suite_validation_required": false,
-  "validation_scope": "bounded_validation_rule_correction_plus_focused_governance_check",
+  "validation_scope": "json_markdown_paths_changed_paths_and_focused_governance_check",
   "prior_task_id": "MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001",
   "prior_task_supersession_sha": "70bd688b2506ca0bb3cb572dd00552bf10f1e9b8",
   "prior_task_preserved_branch_head_sha": "b96dfc4365d5aadf9425d31aa576664f58270fa5",
@@ -38,5 +38,5 @@
   "geox_active_builder_must_remain_unmodified": true,
   "review_decision": "ready_for_review",
   "review_decision_source": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_authoring_note": "The user authorized a one-time clean reset to rejected review head 0f48c697df28ff57241e894115f9bc2c47ee01e2 and the bounded validation-rule correction. Correction execution is authorized; merge, PR creation, sibling adoption, and capability authority remain false."
+  "task_authoring_note": "The current review candidate contains the lean task-sizing standard and operative risk-tier validation. Correction execution is closed. The exact remote feature-branch head is the review target; merge, PR creation, sibling adoption, and capability authority remain false."
 }
