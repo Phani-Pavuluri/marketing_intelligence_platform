@@ -1,76 +1,76 @@
 # TASK_COMPLETION_REPORT_V2
 
-## Identity and review decision
+## Identity
 
 - **Task ID:** `MIP_LEAN_REPOSITORY_DELIVERY_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
+- **Base branch / SHA:** `main` / `106f428de44e0e37405355f73e90ba6cbacd82a0`
 - **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
 - **Rejected review head:** `9f829c3e12ca79698c6cabda1e8089e9d4567fa1`
-- **Prior correction implementation commit:** `9dda47f3f90877161175c02a736694d5ee253f48`
-- **Current decision:** `changes_requested`
+- **Correction implementation SHA:** `ee0905feb962150f850c33f5e20aa6fde03c8caf`
+- **Current decision:** `ready_for_review`
 
-## Review result
+## Deliverables and acceptance results
 
-The lean task-sizing standard and risk-tier validation behavior are accepted.
-The candidate is rejected only because the final exact-head validation results
-were available in Codex-local terminal output but were not durably recoverable
-from Git.
+The correction adds the durable exact-tree publication-receipt rule to
+`AGENTS.md` and `docs/execution/TASK_EXECUTION_STANDARD.md`. The final
+publication records the resulting review state in the three stable execution
+files. The rule requires final validation before publication, a commit-message
+receipt bound by Git to the exact tree, and a new receipt for any later
+task-owned change.
 
-The missing evidence included the exact command outcomes, focused test count,
-complete and normalization changed-path checks, local worktree state, and the
-distinction between GitHub-observed and locally observed evidence. Requiring the
-user to paste those results into chat violates the repository-native handoff
-objective.
+| Acceptance criterion | Result |
+| --- | --- |
+| Exact-tree durable receipt rule | passed |
+| Locally observed versus GitHub-observed evidence distinguished | passed |
+| Completion report records counts, scope, limitations, sibling impact, and authority impact | passed |
+| Correction implementation has one real SHA | passed (`ee0905feb962150f850c33f5e20aa6fde03c8caf`) |
+| Review state is `ready_for_review` with correction authorization closed | passed |
+| Capability authority changed | false |
 
-## Authorized bounded correction
+## Validation receipt evidence
 
-Correction execution is authorized for one Tier 1 outcome:
+The following results are locally observed command evidence for the exact
+publication tree. The review-publication commit message carries the same
+required receipt values and is the durable Git record.
 
-- make the review-publication commit message the durable validation receipt for
-  that commit's exact Git tree;
-- require the completion report to record substantive validation, exact counts,
-  blockers, limitations, validation debt, sibling impact, and authority impact;
-- require final publication trailers containing the implementation SHA, gate,
-  result, changed-path checks, focused test count, full-suite disposition,
-  worktree state, evidence source, and authority impact;
-- forbid task-owned changes after receipt publication; and
-- make review reconstructable from Git without pasted terminal or chat output.
+| Validation category | Result |
+| --- | --- |
+| JSON parsing: `python3 -m json.tool docs/execution/EXECUTION_STATE.json` | passed |
+| Markdown/current-state consistency | passed |
+| Complete task diff from synchronized `main` | passed; exactly seven original task-owned paths |
+| Correction delta from `9f829c3e12ca79698c6cabda1e8089e9d4567fa1` | passed; exactly five correction-owned paths |
+| `git diff --check` | passed |
+| `poetry run pytest -q tests/governance/test_repo_native_execution_handoff.py` | passed; 1 passed |
+| Docker, Ruff, mypy, full suite | not_required for the authorized Tier 1 docs-only gate |
+| Final receipt-trailer inspection | passed |
+| Local/remote receipt-head equality | pending publication; verified immediately after push |
 
-Only these paths are correction-owned:
+## Evidence sources
 
-- `AGENTS.md`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
+- **GitHub-observed evidence:** synchronized `main`, feature-branch ancestry,
+  branch heads, and changed-path scope are verified from `origin`.
+- **Locally observed evidence:** JSON parse, Markdown consistency,
+  changed-path checks, `git diff --check`, and the focused governance test.
 
-No new resolver, automation, task schema, status file, checkpoint system,
-product/runtime/analytical code, coordination record, MMM change, or GeoX change
-is authorized.
+## Limitations, debt, and sibling impact
 
-## Required validation
+- **Blockers:** none.
+- **Validation debt:** none for the authorized Tier 1 gate; Docker, Ruff,
+  mypy, and the full suite are explicitly `not_required`.
+- **Known limitation:** review must inspect the exact receipt commit and its
+  trailers; this report intentionally does not replace Git evidence.
+- **MMM and GeoX:** not modified; their lean-standard adoption remains deferred
+  and unauthorized.
 
-- JSON parsing: required.
-- Markdown/current-state consistency: required.
-- Complete task diff limited to the seven original task-owned paths: required.
-- Correction delta limited to the five correction-owned paths: required.
-- `git diff --check`: required.
-- Focused governance test
-  `tests/governance/test_repo_native_execution_handoff.py`: required.
-- Final publication commit trailer inspection: required.
-- Local/remote receipt-head equality: required.
-- Docker, Ruff, mypy, and full suite: `not_required` unless an unexpected
-  executable dependency or repository-authored gate is discovered.
+## Authority and merge readiness
 
-If any required validation fails or cannot run, publish accurate `blocked`
-state. Do not create a passing receipt from incomplete evidence.
-
-## Publication and authority
-
-On success, publish one real correction implementation SHA and one final
-review-publication commit whose message contains the exact-tree validation
-receipt. Set `ready_for_review`, close correction execution, clear blockers, and
-leave merge, PR creation, sibling adoption, and capability authority false.
-
-Push the exact receipt head and stop without merge, PR, rebase, squash,
-force-push, branch deletion, or sibling modification.
+- **Merge readiness:** `READY_FOR_REVIEW` only; merge and PR authorization are
+  false.
+- **Capability impact:** no product, runtime, analytical, data, persistence,
+  recommendation, pilot, or production capability was authorized.
+- **Local-only paths:** `.codex/` and `docs/tasks/` remain untracked and are
+  excluded from commits.
+- **Stop condition:** after the receipt commit is pushed and local/remote heads
+  agree, stop without PR, merge, rebase, squash, force-push, branch deletion,
+  or sibling modification.

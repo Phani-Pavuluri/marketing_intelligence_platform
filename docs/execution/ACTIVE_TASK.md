@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -11,27 +11,26 @@
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
 - **Rejected review head:** `9f829c3e12ca79698c6cabda1e8089e9d4567fa1`
-- **Prior correction implementation commit:** `9dda47f3f90877161175c02a736694d5ee253f48`
+- **Correction implementation commit:** `ee0905feb962150f850c33f5e20aa6fde03c8caf`
 - **Risk tier:** Tier 1 — documentation and governance guidance only
 - **Capability authorizations changed:** `false`
 
-## Review decision
+## Review publication
 
-The lean task-sizing standard and operative risk-tier validation rules are
-accepted. Exact head `9f829c3e12ca79698c6cabda1e8089e9d4567fa1`
-is rejected only because its final validation results exist in Codex-local
-terminal output but are not durably recoverable from Git.
+The bounded correction is complete and ready for exact-head review. The final
+review-publication commit contains the durable validation receipt for its exact
+tree and names correction implementation commit
+`ee0905feb962150f850c33f5e20aa6fde03c8caf`.
 
-A reviewer must not need pasted chat or terminal output to determine the exact
-commands run, test counts, changed-path checks, validation debt, worktree state,
-or authority impact for a published review head.
+Review must use Git-durable evidence. The rejected head is retained only as the
+source of the durable-receipt correction; it does not authorize a merge.
 
-## Primary mergeable correction outcome
+## Completed correction outcome
 
-Make final validation evidence repository-durable before `ready_for_review` by
-requiring the review-publication commit itself to carry the exact-tree validation
-receipt. Preserve the existing lean workflow; do not introduce a new resolver,
-automation framework, task schema, status file, or checkpoint system.
+Final validation evidence is repository-durable: the review-publication commit
+itself carries the exact-tree validation receipt. The lean workflow remains
+unchanged; no resolver, automation framework, task schema, status file, or
+checkpoint system was introduced.
 
 This is one outcome because the execution rule and the current task's durable
 receipt close the same verified handoff gap.
@@ -50,9 +49,9 @@ Do not modify the lean standard, context index, tests, Makefiles, resolver or
 automation code, coordination files, contracts, product/runtime/analytical code,
 MMM, or GeoX.
 
-## Required correction
+## Correction record
 
-### 1. Durable publication rule
+### Durable publication rule
 
 Update `AGENTS.md` and `TASK_EXECUTION_STANDARD.md` so that:
 
@@ -73,7 +72,7 @@ Do not require validation results to self-reference the commit SHA that contains
 them. The commit already cryptographically binds its message to its exact tree.
 The publication commit may reference its implementation parent SHA.
 
-### 2. Required receipt trailers
+### Required receipt trailers
 
 The review-publication commit message must include, at minimum:
 
@@ -97,14 +96,14 @@ Capability-Authority: unchanged
 Use accurate values. If any required check fails or cannot run, publish
 `blocked`; do not create a passing receipt.
 
-### 3. Current correction publication
+### Current correction publication
 
-Implement the rule change in one correction implementation commit. Then prepare
-the three stable execution files for `ready_for_review`, run the final Tier 1
-publication checks on the exact tree to be committed, and create one
-review-publication commit containing the receipt trailers above.
+The rule change was implemented in
+`ee0905feb962150f850c33f5e20aa6fde03c8caf`. The three stable execution files
+now record `ready_for_review`; the final Tier 1 publication checks apply to the
+exact tree in the review-publication commit.
 
-The publication state must record:
+The publication state records:
 
 - one real correction implementation SHA;
 - `status: ready_for_review`;
@@ -137,7 +136,7 @@ widening scope.
 
 ## Authority and stop conditions
 
-Correction execution is authorized. Merge, PR creation, sibling adoption, and
+Correction execution is closed. Merge, PR creation, sibling adoption, and
 capability authority remain false. Do not force-push, merge, rebase, squash,
 delete branches, modify siblings, or create additional process artifacts.
 
