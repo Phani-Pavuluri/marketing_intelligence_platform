@@ -116,6 +116,19 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
     assert "`not_applicable`" in standard
     assert "retain `proposed`,\nmark it design-blocked, or split" in standard
 
+    invocation_guidance = f"{agents}\n{standard}"
+    for requirement in (
+        "Invocation-only prompt rule",
+        "Codex prompts are invocation-only",
+        "synchronize from Git, read `AGENTS.md` and the active task",
+        "exact externally approved remote head SHA",
+        "must not restate durable scope, owned paths, behavior, validation",
+        "cannot repair, expand, override, or reinterpret",
+        "fail-closed blocker",
+        "separately authorized owner-repository decision",
+    ):
+        assert requirement in invocation_guidance
+
     if state["status"] in {"authorized", "in_progress", "ready_for_review"}:
         assert state["task_execution_authorized"] is True
         assert state["merge_authorized"] is False

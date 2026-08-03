@@ -50,6 +50,15 @@ surface-appropriate decisions, named acceptance evidence, and no unresolved
 execution-blocking design questions. Stop or split the work rather than choosing
 among materially different contract meanings during execution.
 
+## Invocation-only prompt rule
+
+Codex prompts are invocation-only: they identify the repository operation and,
+for a merge, the exact externally approved remote head SHA. Durable task scope,
+owned paths, behavior, validation, workflow, authority, and stop conditions
+belong in Git and must not be repeated, repaired, expanded, overridden, or
+reinterpreted by prompt text. Synchronize, read this file and the active task,
+then stop fail-closed when Git lacks sufficient durable instructions.
+
 ## Cross-repository task rule
 
 Before proposing or executing work that affects MMM or GeoX, read

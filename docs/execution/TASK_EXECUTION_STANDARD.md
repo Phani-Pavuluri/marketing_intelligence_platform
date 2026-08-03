@@ -175,6 +175,22 @@ binds its message to the exact tree. No task-owned file may change after the
 receipt commit; any change requires a new validated publication head. Review
 uses this Git evidence and must not depend on pasted terminal or chat output.
 
+## Invocation-only Codex prompt contract
+
+Execution and correction prompts identify only the repository operation:
+synchronize from Git, read `AGENTS.md` and the active task, execute the
+Git-authored operation, publish `ready_for_review` or accurate `blocked`, push
+the exact branch head, and stop. A merge prompt additionally carries the exact
+externally approved remote head SHA because that approval is unavailable in the
+reviewed tree.
+
+Prompts must not restate durable scope, owned paths, behavior, validation,
+workflow, or stop conditions. Those instructions belong in committed Git state.
+Prompt text cannot repair, expand, override, or reinterpret an incomplete active
+task. Missing Git-authored instructions are a fail-closed blocker, not authority
+to supplement the task from chat. This MIP rule does not authorize MMM or GeoX
+adoption; each remains a separately authorized owner-repository decision.
+
 ## Exact-head approval and merge
 
 Approval is an external user decision that names or unambiguously accepts the
