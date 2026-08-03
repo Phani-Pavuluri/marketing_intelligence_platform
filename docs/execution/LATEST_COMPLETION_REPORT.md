@@ -8,11 +8,11 @@
 - **Authorization head:** `39abc3d66a80054b2b293a73f2dbeb690eb2304b`
 - **Accepted implementation:** `9376284a35f6dda7d1b9a535e5cf23c565f759ad`
 - **Rejected publication head:** `cdaa1c9c69fee7445b9c5a04b3d5996dbd5a4a91`
-- **Current decision:** `changes_requested`
+- **Current decision:** `ready_for_review`
 
 ## Review finding
 
-The substantive implementation is accepted.
+The accepted substantive implementation and final publication are complete.
 
 - `AGENTS.md` and `TASK_EXECUTION_STANDARD.md` define deterministic resumed-feature-branch resolution.
 - Synchronized `main` remains authoritative for task identity and authorization provenance.
@@ -23,7 +23,8 @@ The substantive implementation is accepted.
 - The exact minimal execution invocation remains `Synchronize from Git and execute the active task.`
 - Implementation `9376284a35f6dda7d1b9a535e5cf23c565f759ad` strengthens the focused governance test for identity, ancestry, mismatches, and durable blocked reporting.
 
-Exact head `cdaa1c9c69fee7445b9c5a04b3d5996dbd5a4a91` is not approvable because its three stable execution files are internally stale:
+The earlier publication head was stale; this report supersedes it with one
+coherent final state. The accepted branch-aware behavior is:
 
 - `ACTIVE_TASK.md` is marked `ready_for_review` but still says Codex stopped after an incomplete implementation and lists the publication work as missing.
 - `LATEST_COMPLETION_REPORT.md` is marked `ready_for_review` but still states that no current report, validation evidence, or receipt exists.

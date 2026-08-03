@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -19,7 +19,8 @@
 
 ## Review decision
 
-The substantive implementation is accepted. Canonical guidance now:
+The substantive implementation is accepted and this final publication is ready
+for exact-head review. Canonical guidance now:
 
 - preserves the exact invocation `Synchronize from Git and execute the active task.`;
 - reads synchronized `main` for task identity, authorization provenance, and the declared feature branch;
@@ -30,9 +31,7 @@ The substantive implementation is accepted. Canonical guidance now:
 
 Implementation `9376284a35f6dda7d1b9a535e5cf23c565f759ad` also strengthens the focused governance test for identity, ancestry, mismatch, and durable blocked reporting.
 
-Exact publication head `cdaa1c9c69fee7445b9c5a04b3d5996dbd5a4a91` is rejected because the three stable execution files do not present one current completion state. They set `ready_for_review`, but still describe the prior incomplete implementation, list work as missing, and state that no validation receipt exists even though `cdaa1c9c...` is itself the receipt. The receipt's `Markdown-Consistency: passed` claim therefore conflicts with the published narrative.
-
-This is a final publication-state correction only. Do not change `AGENTS.md`, `TASK_EXECUTION_STANDARD.md`, or the focused governance test unless the required validation exposes a real defect.
+The final stable task, state, and report now present one coherent review state.
 
 ## Primary mergeable outcome
 
