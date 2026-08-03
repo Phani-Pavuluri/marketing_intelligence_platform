@@ -130,6 +130,14 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         assert requirement in invocation_guidance
     assert "publish `ready_for_review`" not in standard
     assert "push\nthe exact branch head" not in standard
+    resumed_guidance = f"{agents}\n{standard}"
+    for requirement in (
+        "verified branch is authoritative for current lifecycle state",
+        "Main remains authority\nfor authorization provenance",
+        "Do not stop merely because main has\nan older lifecycle snapshot",
+        "terminal or chat output is not a completion report",
+    ):
+        assert requirement in resumed_guidance
 
     if state["status"] in {"authorized", "in_progress", "ready_for_review"}:
         assert state["task_execution_authorized"] is True

@@ -192,6 +192,17 @@ task. Missing Git-authored instructions are a fail-closed blocker, not authority
 to supplement the task from chat. This MIP rule does not authorize MMM or GeoX
 adoption; each remains a separately authorized owner-repository decision.
 
+## Resumed feature-branch state
+
+Synchronize `main` first and obtain task ID, authorization head, and feature
+branch from its committed state. Verify the declared remote feature branch's
+repository identity, task ID, branch name, and ancestry. Main remains authority
+for authorization provenance; the verified feature branch is authority for the
+latest resumed lifecycle state, blockers, implementation SHA, and report. Do
+not stop on a stale main lifecycle snapshot. Fail closed on mismatches or
+inconsistent evidence, and publish `blocked` to the safe authorized branch when
+one exists; terminal or chat output is not a completion report.
+
 ## Exact-head approval and merge
 
 Approval is an external user decision that names or unambiguously accepts the
