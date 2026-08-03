@@ -52,12 +52,12 @@ among materially different contract meanings during execution.
 
 ## Invocation-only prompt rule
 
-Codex prompts are invocation-only: they identify the repository operation and,
-for a merge, the exact externally approved remote head SHA. Durable task scope,
-owned paths, behavior, validation, workflow, authority, and stop conditions
-belong in Git and must not be repeated, repaired, expanded, overridden, or
-reinterpreted by prompt text. Synchronize, read this file and the active task,
-then stop fail-closed when Git lacks sufficient durable instructions.
+Codex prompts are invocation-only. The execution and correction invocation is
+`Synchronize from Git and execute the active task.` A merge invocation adds only
+the exact externally approved remote head SHA. Durable task scope, owned paths,
+behavior, validation, workflow, authority, and stop conditions belong in Git;
+prompt text must not repeat, repair, expand, override, or reinterpret them.
+Missing Git instructions are a fail-closed blocker.
 
 ## Cross-repository task rule
 

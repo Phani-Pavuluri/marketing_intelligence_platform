@@ -120,7 +120,7 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
     for requirement in (
         "Invocation-only prompt rule",
         "Codex prompts are invocation-only",
-        "synchronize from Git, read `AGENTS.md` and the active task",
+        "Synchronize from Git and execute the active task.",
         "exact externally approved remote head SHA",
         "must not restate durable scope, owned paths, behavior, validation",
         "cannot repair, expand, override, or reinterpret",
@@ -128,6 +128,8 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         "separately authorized owner-repository decision",
     ):
         assert requirement in invocation_guidance
+    assert "publish `ready_for_review`" not in standard
+    assert "push\nthe exact branch head" not in standard
 
     if state["status"] in {"authorized", "in_progress", "ready_for_review"}:
         assert state["task_execution_authorized"] is True
