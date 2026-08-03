@@ -1,125 +1,78 @@
 # TASK_COMPLETION_REPORT_V2
 
-## Identity
+## Current authorization
 
-- **Task ID:** `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001`
+- **Task ID:** `MIP_INVOCATION_ONLY_CODEX_PROMPT_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Execution mode:** `branch_and_fast_forward`
-- **Base / authorization head:**
-  `dab329bc6ff9d62971bbe12a7398e08131a4cf22` /
-  `b9613ab057caa8ac9529eb2ab0c3c8f7a7a9649c`
-- **Feature branch:** `docs/mip-definition-ready-task-authorization-standard-001`
-- **Implementation commit:** `67abc7cfc2f02c45abb442d1f61834bcdc6287e7`
-- **Current decision:** `merged`
+- **Status:** `authorized`
+- **Pre-authoring base:** `2904334247980e564409b7815c812572d80c8419`
+- **Feature branch:** `docs/mip-invocation-only-codex-prompt-standard-001`
+- **Risk tier:** Tier 1 documentation/governance plus focused test
+- **Capability authority changed:** `false`
 
-## Deliverables and acceptance results
+The user authorized proceeding after review of the merged definition-ready task and requested that Codex prompts be reduced to synchronization plus execution of the Git-authored active task.
 
-The task makes definition-readiness an operative MIP pre-authorization rule.
-Canonical guidance now requires, at the level appropriate to the changed
-surface, one primary mergeable outcome; exact observable behavior and preserved
-boundaries; resolved decisions; inputs/outputs; failure semantics; conditional
-compatibility or migration policy; named acceptance evidence; focused
-validation; owned/prohibited paths; deferred successors; and `unresolved
-execution-blocking design questions: none`.
+## Prior closure review
 
-| Acceptance criterion | Result |
-| --- | --- |
-| Lean delivery standard states the surface-proportional rule | passed |
-| Execution standard makes the rule operative before authorization | passed |
-| AGENTS.md requires resolved implementation meaning | passed |
-| Focused governance test asserts the rule and fail-closed handling | passed |
-| MMM and GeoX adoption remains separate owner-repository work | passed |
-| Capability authority changed | false |
+The prior task `MIP_DEFINITION_READY_TASK_AUTHORIZATION_STANDARD_001` is merged and closed on MIP `main` at `2904334247980e564409b7815c812572d80c8419`.
 
-## Validation evidence
+- Approved review head: `a7d7525cb0df79b35ce60ae98e01ae908e1a2112`.
+- Implementation commit: `67abc7cfc2f02c45abb442d1f61834bcdc6287e7`.
+- Merge method: fast-forward only; no PR or merge commit.
+- Pre-merge focused governance test: `1 passed`.
+- Post-fast-forward focused governance test: `1 passed`.
+- JSON, Markdown/current-state, task-authoring boundary, changed-path, receipt, and `git diff --check` checks: passed before and after merge.
+- Docker, Ruff, mypy, and full suite: `not_required` for the authorized Tier 1 gate.
+- Local and remote feature branches: deleted.
+- Blockers and applicable validation debt: none.
+- MMM, GeoX, and capability authority: unchanged.
 
-The results below are locally observed on the frozen review-publication tree.
-The final publication commit carries the durable exact-tree receipt.
+The prior closure report retained a stale pre-merge readiness sentence above its final merged closure. The final identity, execution state, active task, and closure section all correctly record `merged`; this new task replaces the current stable report while prior evidence remains in Git history.
 
-| Validation category | Result |
-| --- | --- |
-| JSON parse: `python3 -m json.tool docs/execution/EXECUTION_STATE.json` | passed |
-| Markdown/current-state consistency | passed |
-| Task-authoring boundary | passed; authorization diffs contain only the three stable execution files |
-| Changed paths from synchronized main | passed; exactly seven owned paths |
-| `git diff --check` | passed |
-| `poetry run pytest -q tests/governance/test_repo_native_execution_handoff.py` | passed; 1 passed |
-| Receipt-trailer inspection | passed |
-| Docker, Ruff, mypy, full suite | not_required for the authorized Tier 1 gate |
-| Local/remote publication-head equality | pending publication; verified immediately after push |
+## Authorized outcome
 
-## Evidence sources, limitations, and authority
+Make MIP Codex prompts invocation-only. Durable scope, behavior, paths, validation, workflow, authority, and stop conditions must remain in committed repository files. Prompts identify only the operation and an external fact unavailable in Git, principally the exact externally approved review-head SHA for merge.
 
-- **GitHub-observed evidence:** synchronized MIP main at
-  `bb2e15fa3ceec1debb42d252b04ef9db2f7a9c49`, authorization-head ancestry, and
-  feature-branch path scope.
-- **Locally observed evidence:** JSON parsing, Markdown consistency,
-  task-authoring and changed-path checks, `git diff --check`, and the focused
-  governance test.
-- **Blockers / validation debt:** none for the Tier 1 gate. Docker, Ruff, mypy,
-  and the full suite are explicitly not required.
-- **Sibling impact:** MMM and GeoX were not modified; their adoption remains
-  deferred, owner-controlled, and unauthorized. The current GeoX builder task
-  remains unchanged.
-- **Authority impact:** no product, analytical, live integration, real-data,
-  persistence, recommendation, pilot, production, or capability authority was
-  granted.
-- **Merge readiness:** ready for external exact-head review only; merge and PR
-  authorization remain false. `.codex/` and `docs/tasks/` remain local-only.
+If Git lacks sufficient durable instructions, Codex must stop rather than supplementing or reinterpreting the task from chat.
 
-## Merge closure
+## Owned paths
 
-- **Approval source:** the user explicitly approved exact reviewed head
-  `a7d7525cb0df79b35ce60ae98e01ae908e1a2112` in ChatGPT.
-- **Reviewed head / durable receipt:**
-  `a7d7525cb0df79b35ce60ae98e01ae908e1a2112`
-- **Implementation SHA:** `67abc7cfc2f02c45abb442d1f61834bcdc6287e7`
-- **Merge mechanism:** `git merge --ff-only` to local `main`, followed by
-  `git push origin main`; no PR, squash, rebase, or merge commit was used.
-- **Resulting main lineage before this closure commit:**
-  `bb2e15fa3ceec1debb42d252b04ef9db2f7a9c49 →
-  a7d7525cb0df79b35ce60ae98e01ae908e1a2112`.
+- `AGENTS.md`
+- `docs/execution/TASK_EXECUTION_STANDARD.md`
+- `tests/governance/test_repo_native_execution_handoff.py`
+- `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/EXECUTION_STATE.json`
+- `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-### Exact validation evidence
+The task does not modify product, analytical, coordination, roadmap, MMM, or GeoX files.
 
-The complete authored Tier 1 gate passed both before merge on the exact reviewed
-head and after fast-forward on `main`:
+## Definition-ready status
 
-| Command or check | Pre-merge result | Post-fast-forward result |
-| --- | --- | --- |
-| `python3 -m json.tool docs/execution/EXECUTION_STATE.json` | passed | passed |
-| Markdown/current-state consistency script | passed | passed |
-| Task-authoring boundary and seven-path scope checks | passed | passed |
-| Implementation four-path and publication three-path checks | passed | passed |
-| Durable receipt-trailer inspection | passed; all 15 required trailers | passed; all 15 required trailers |
-| `git diff --check` | passed | passed |
-| `poetry run pytest -q tests/governance/test_repo_native_execution_handoff.py` | passed; 1 passed | passed; 1 passed |
-| Docker, Ruff, mypy, full suite | not_required | not_required |
+- Primary mergeable outcome: invocation-only Codex prompt contract.
+- Exact observable behavior: specified in `ACTIVE_TASK.md`.
+- Resolved design decisions: complete.
+- Inputs and outputs: defined.
+- Failure semantics: fail closed on insufficient Git instructions or missing exact approval.
+- Compatibility or migration policy: `not_applicable`.
+- Named acceptance tests: defined.
+- Deferred successors: owner-repository MMM and GeoX adoption.
+- Unresolved execution-blocking design questions: `none`.
 
-### Evidence, synchronization, and cleanup
+## Required validation
 
-- **GitHub-observed evidence:** `origin/main` began at
-  `bb2e15fa3ceec1debb42d252b04ef9db2f7a9c49`; the remote feature head matched
-  the approved SHA; the approved head descended from authorization boundary
-  `b9613ab057caa8ac9529eb2ab0c3c8f7a7a9649c`; and the pushed approved main head
-  matched local main before closure.
-- **Locally observed evidence:** JSON parsing, Markdown consistency, boundary
-  and path checks, receipt inspection, `git diff --check`, and two focused-test
-  runs.
-- **Cleanup:** local branch
-  `docs/mip-definition-ready-task-authorization-standard-001` deleted
-  successfully; the remote branch of the same name deleted successfully.
-- **Limitations / validation debt:** none for the Tier 1 gate. Docker, Ruff,
-  mypy, and the full suite remain explicitly not required.
+- JSON parse.
+- Markdown/current-state consistency.
+- Task-authoring boundary and exact six-path scope.
+- Three substantive implementation paths and three publication paths.
+- `git diff --check`.
+- Focused governance test with exact count.
+- Durable receipt inspection.
+- Local/remote publication-head equality.
 
-### Sibling and authority boundary
+Docker, Ruff, mypy, and the full suite are `not_required` unless another repository-authored gate makes them applicable.
 
-MMM and GeoX were not modified. MMM and GeoX definition-ready adoption remain
-deferred and separately owner-authorized; the GeoX builder task remains
-unchanged. No product, analytical, live-integration, real-data, persistence,
-recommendation, pilot, production, or capability authority changed.
+## Sibling and authority impact
 
-The final state is `merged`: task and correction execution authorization, merge
-authorization, and PR authorization are false; blockers are empty; the reviewed
-head and implementation SHA are retained; and `approval_commit_sha` remains
-null because no pre-merge approval metadata commit was created.
+Live MMM `main` remains `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`. Live GeoX `main` remains `ee9673c13e69082367c1727568946ac4c1a01015`. Neither sibling is modified or authorized. The current GeoX builder task remains untouched.
+
+Task execution is authorized. Merge, PR creation, sibling adoption, and capability authority remain false. Publish `ready_for_review` or accurate `blocked`, push the exact feature head, and stop.
