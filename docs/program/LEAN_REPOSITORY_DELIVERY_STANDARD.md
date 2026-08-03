@@ -22,6 +22,28 @@ One correction cycle is the default. If review exposes a new contract,
 migration, integration surface, or independently mergeable outcome, re-scope it
 as a successor task rather than expanding the existing branch.
 
+## Definition-ready authorization
+
+Before an executable MIP task is authorized, its active task must define one
+primary mergeable outcome, exact observable behavior and preserved boundaries,
+resolved design and authority decisions, and inputs/outputs appropriate to the
+changed surface. It must also identify failure semantics, named acceptance tests
+or deterministic evidence, owned and prohibited paths, focused validation, and
+deferred successors.
+
+Compatibility or migration policy is required when public contracts, versions,
+persisted artifacts, or migrations change; otherwise it is explicitly
+`not_applicable`. API, schema, state-machine, and migration surfaces require
+their corresponding signatures, fields/types/invariants, transitions/failures,
+or source/target/rollback behavior. Routine documentation work must not invent
+those details.
+
+The task must state `unresolved execution-blocking design questions: none`.
+Unresolved implementation meaning leaves the work `proposed`, design-blocked,
+or split into a bounded decision/evidence task. Codex must not decide among
+materially different contract meanings during execution. MMM and GeoX adoption
+of this rule remains a separately authorized owner-repository decision.
+
 ## Risk tiers
 
 | Tier | Scope | Minimum validation |

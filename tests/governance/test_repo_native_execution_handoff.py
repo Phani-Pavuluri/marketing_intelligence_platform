@@ -5,6 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).parents[2]
 EXECUTION = ROOT / "docs" / "execution"
 STANDARD = EXECUTION / "TASK_EXECUTION_STANDARD.md"
+LEAN_STANDARD = ROOT / "docs" / "program" / "LEAN_REPOSITORY_DELIVERY_STANDARD.md"
 STATE_PATH = EXECUTION / "EXECUTION_STATE.json"
 ACTIVE_TASK = EXECUTION / "ACTIVE_TASK.md"
 REPORT = EXECUTION / "LATEST_COMPLETION_REPORT.md"
@@ -70,6 +71,7 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         assert stable_path in agents
 
     standard = STANDARD.read_text(encoding="utf-8")
+    lean_standard = LEAN_STANDARD.read_text(encoding="utf-8")
     context_index = CONTEXT_INDEX.read_text(encoding="utf-8")
     combined_bootstrap = f"{agents}\n{standard}\n{context_index}"
     standard_flat = " ".join(standard.split())
@@ -95,6 +97,24 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
     assert "exactly one post-merge closure commit" in standard_flat
     assert "exact remote feature-branch head SHA" in agents
     assert "Persisted `merge_authorized` remains false" in standard
+
+    definition_ready_guidance = f"{agents}\n{standard}\n{lean_standard}"
+    for requirement in (
+        "primary mergeable outcome",
+        "exact observable behavior",
+        "resolved design",
+        "inputs/outputs appropriate to the changed surface",
+        "failure semantics",
+        "Compatibility or migration policy",
+        "named acceptance tests or deterministic evidence",
+        "unresolved execution-blocking design questions: none",
+        "materially different contract meanings",
+        "separately authorized owner-repository decision",
+    ):
+        assert requirement in definition_ready_guidance
+    assert "Surface proportionality" in standard
+    assert "`not_applicable`" in standard
+    assert "retain `proposed`,\nmark it design-blocked, or split" in standard
 
     if state["status"] in {"authorized", "in_progress", "ready_for_review"}:
         assert state["task_execution_authorized"] is True

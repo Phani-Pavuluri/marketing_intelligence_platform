@@ -67,6 +67,30 @@ content base. The synchronized post-authoring `main` is the
 contain only those three files. Create the feature branch from the authorization
 head, never from stale local state.
 
+### Definition-ready executable authorization
+
+Before an executable MIP task is authorized, its stable active task must define
+one primary mergeable outcome; exact observable behavior and preserved
+boundaries; resolved design, schema, authority, and policy decisions; and
+inputs/outputs appropriate to the changed surface. It must also define failure
+semantics, named acceptance tests or deterministic evidence, owned paths and
+prohibited scope, focused validation, and deferred successors.
+
+Compatibility or migration policy is required only when public contracts,
+versions, persisted artifacts, or migration surfaces change; otherwise it must
+be explicitly `not_applicable`. Public API, schema, state-machine, and migration
+work must define their relevant signatures, fields/types/invariants,
+transitions/failures, or source/target/rollback behavior. Surface proportionality
+does not permit an executable task to omit decisions material to its changed
+surface.
+
+An executable authorization requires `unresolved execution-blocking design
+questions: none`. If a material decision remains unresolved, retain `proposed`,
+mark it design-blocked, or split a bounded decision/evidence task. Codex must
+not select among materially different contract meanings during implementation.
+This MIP rule does not authorize MMM or GeoX adoption; each is a separately
+authorized owner-repository decision.
+
 The default mode is `branch_and_fast_forward`:
 
 ```text

@@ -44,6 +44,12 @@ must identify the implementation parent, validation gate/results, evidence
 source, worktree state, and authority impact. Do not modify task-owned files
 after that commit; any change requires a new validated receipt head.
 
+Before authorizing an executable task, require definition-ready implementation
+meaning: one primary mergeable outcome, exact observable behavior, resolved
+surface-appropriate decisions, named acceptance evidence, and no unresolved
+execution-blocking design questions. Stop or split the work rather than choosing
+among materially different contract meanings during execution.
+
 ## Cross-repository task rule
 
 Before proposing or executing work that affects MMM or GeoX, read
