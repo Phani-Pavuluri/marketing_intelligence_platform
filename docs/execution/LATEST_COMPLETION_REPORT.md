@@ -6,71 +6,45 @@
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Pre-authoring base:** `70bd688b2506ca0bb3cb572dd00552bf10f1e9b8`
-- **Task-authoring head:** `845d4bea477df7514128548193cbb942e04c20dc`
-- **State authorization commit:** `aa74f576d0515e0289df25cef461fe118649c4b0`
+- **Authorization head:** `845d4bea477df7514128548193cbb942e04c20dc`
 - **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
-- **Current decision:** `authorized`
+- **Implementation commit:** `25d254a20a0eca75094c0b4a4d7e5cd23944e55c`
+- **Current decision:** `ready_for_review`
 
-## GitHub-observed starting evidence
+## Deliverables
 
-- The oversized resolver task was superseded without merge at
-  `70bd688b2506ca0bb3cb572dd00552bf10f1e9b8`.
-- Its preserved branch head is
-  `b96dfc4365d5aadf9425d31aa576664f58270fa5`; its candidate implementation is
-  `785d83f25891274a42a5a82efbd17103563c29a7`.
-- MMM remains merged at
-  `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421` with no active implementation
-  task.
-- GeoX remains independently authorized at
-  `ee9673c13e69082367c1727568946ac4c1a01015`; MIP does not modify, split, or
-  block its active task.
-- No canonical lean repository delivery standard currently exists under
-  `docs/program/`.
+- Created `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`.
+- Added the minimal mandatory delivery shape to
+  `docs/execution/TASK_EXECUTION_STANDARD.md`.
+- Added concise pointers from `AGENTS.md` and
+  `docs/execution/REPOSITORY_CONTEXT_INDEX.md`.
 
-## Authorization consistency correction
+The standard requires one independently reviewable mergeable outcome per task,
+risk-tiered validation, split boundaries for independently valid checkpoints,
+and one correction cycle before structural re-scope. Git authority, exact-head
+review, ownership, and authority boundaries remain non-negotiable.
 
-`EXECUTION_STATE.json` authorized execution at state-only commit
-`aa74f576d0515e0289df25cef461fe118649c4b0`, while the two human-readable stable
-views still said `proposed`. The execution agent correctly stopped before
-implementation. This metadata-only correction aligns the human views to
-`authorized` without changing task scope, owned paths, validation tier, sibling
-state, or capability authority. Before implementation, the untouched feature
-branch must be fast-forwarded to the corrected synchronized `main`.
+## Acceptance and validation
 
-## Authorized outcome
+- Canonical lean-delivery standard: passed.
+- Minimal task delivery shape: passed.
+- Bootstrap and navigation pointers: passed.
+- JSON parsing: passed.
+- Markdown structure and referenced-path checks: passed.
+- Focused execution-governance check:
+  `tests/governance/test_repo_native_execution_handoff.py` — **1 passed**.
+- Changed-path review and `git diff --check`: passed.
 
-Create one concise MIP-owned program standard and update MIP task-authoring,
-bootstrap, and navigation guidance so future work is decomposed into one
-independently mergeable outcome and receives validation proportional to its
-risk tier.
+This Tier 1 documentation task did not require Docker, Ruff, mypy, or the full
+test suite; no executable path was changed.
 
-This is a docs-only Tier 1 task. It does not implement automation, resolver code,
-execution-state schema changes, coordination-ledger updates, sibling adoption,
-or product capability.
+## Authority and review readiness
 
-## Owned paths
+- Merge and PR creation remain false.
+- Capability authorizations remain unchanged.
+- MMM and GeoX adoption remain unauthorized; neither repository was modified.
+- No automation, resolver, coordination ledger, product, runtime, analytical,
+  or capability change was made.
+- Local-only paths remain `.codex/` and `docs/tasks/`.
 
-Only these seven paths may change:
-
-- `AGENTS.md`
-- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
-
-## Validation requirement
-
-Use the task-authorized narrow docs-only gate: JSON parsing, Markdown structure
-and path checks, exact changed-path verification, `git diff --check`, and any
-existing focused documentation/governance consistency test directly affected by
-these files. Do not run Docker, Ruff, mypy, or the full suite unless an unexpected
-executable dependency is discovered; in that case publish `blocked` instead of
-widening scope.
-
-## Authority
-
-Task execution is authorized. Merge and PR creation remain false. Capability
-authority remains unchanged. MMM and GeoX adoption remain unauthorized and
-owner-repository controlled.
+The branch is ready only for exact-head review.

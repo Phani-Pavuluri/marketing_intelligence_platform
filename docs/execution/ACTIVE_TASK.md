@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -12,6 +12,7 @@
 - **Pre-authoring base:** `70bd688b2506ca0bb3cb572dd00552bf10f1e9b8`
 - **Task-authoring head:** `845d4bea477df7514128548193cbb942e04c20dc`
 - **State authorization commit:** `aa74f576d0515e0289df25cef461fe118649c4b0`
+- **Implementation commit:** `25d254a20a0eca75094c0b4a4d7e5cd23944e55c`
 - **Feature branch:** `docs/mip-lean-repository-delivery-standard-001`
 - **Execution mode:** `branch_and_fast_forward`
 - **Capability authorizations changed:** `false`
@@ -149,3 +150,9 @@ authority. Push the exact branch head and stop.
 
 On failure, publish `blocked` with exact debt. Do not create a PR, merge, rebase,
 squash, force-push, delete branches, modify siblings, or authorize adoption.
+
+## Publication state
+
+The implementation is ready for exact-head review. The review-publication
+commit contains only stable execution metadata and the completion report. Merge
+and PR creation remain unauthorized; no capability authority changed.
