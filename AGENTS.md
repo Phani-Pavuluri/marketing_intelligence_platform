@@ -37,7 +37,12 @@ surface, or another repository-authored gate requires it. Write
 `docs/execution/LATEST_COMPLETION_REPORT.md`; update
 `docs/execution/EXECUTION_STATE.json` to `ready_for_review` with
 `merge_authorized: false`; commit and publish the exact remote feature-branch
-head; then stop without merging.
+head; then stop without merging. Before final publication, freeze the task-owned
+tree and run the applicable gate on that exact tree. The final publication
+commit message is the durable validation receipt for its exact Git tree; it
+must identify the implementation parent, validation gate/results, evidence
+source, worktree state, and authority impact. Do not modify task-owned files
+after that commit; any change requires a new validated receipt head.
 
 ## Cross-repository task rule
 

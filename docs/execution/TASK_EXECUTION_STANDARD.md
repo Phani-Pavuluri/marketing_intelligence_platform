@@ -134,6 +134,23 @@ Tier 3 and whenever the active task, changed public/analytical/package surface,
 or another repository-authored gate requires it. A required category that cannot
 run is `blocked`; a category outside the applicable gate is `not_required`.
 
+### Durable exact-tree publication receipt
+
+Before `ready_for_review`, freeze the task-owned tree and run the active task's
+applicable validation gate on that exact tree. `LATEST_COMPLETION_REPORT.md`
+must distinguish GitHub-observed repository evidence from locally observed
+command results and record deliverables, validation-category statuses and exact
+counts, blockers, limitations, validation debt, sibling impact, and authority
+impact.
+
+The final review-publication commit message is the durable validation receipt
+for that commit's exact tree. It identifies the implementation parent, gate,
+results, changed-path evidence, worktree state, evidence source, and authority
+impact. The receipt need not self-reference its own SHA: Git cryptographically
+binds its message to the exact tree. No task-owned file may change after the
+receipt commit; any change requires a new validated publication head. Review
+uses this Git evidence and must not depend on pasted terminal or chat output.
+
 ## Exact-head approval and merge
 
 Approval is an external user decision that names or unambiguously accepts the
