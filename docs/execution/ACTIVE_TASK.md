@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -41,7 +41,7 @@ focused invariant test form one execution contract. Updating only guidance or
 only tests would preserve contradictory behavior. MMM and GeoX adoption are
 separate owner-repository successor tasks and are not part of this merge unit.
 
-## Orientation and eligibility evidence
+## Orientation and eligibility evidence at authorization
 
 Connected GitHub established:
 
@@ -256,18 +256,47 @@ changes only repository guidance, execution metadata, and one focused semantic
 test. Discovery of a runtime or broader executable dependency is a blocker, not
 permission to widen scope.
 
-## Task-authoring and authorization boundaries
+## External review decision — changes requested
 
-## Publication result
-
-- **Implementation SHA:** `dde6969b1192b97aea519c9589d27186f19b6db2`
-- **Review state:** `ready_for_review`
-- **Blockers:** none
+- **Rejected exact remote head:** `e390f1b47f8a7c5dfaa7a05613c2c4de73e4a548`
+- **Retained implementation SHA:** `dde6969b1192b97aea519c9589d27186f19b6db2`
+- **Review state:** `changes_requested`
+- **Correction execution:** one bounded correction cycle authorized
 - **Merge and PR authority:** `false`
 - **Capability authority:** unchanged
 
-The final publication commit is the frozen exact-tree validation receipt. No
-task-owned file may change after it without a new validated publication.
+### Required correction
+
+1. Remove the contradictory invocation-only contract from `AGENTS.md`. It must
+   not say that Codex prompts remain invocation-only or that the exact execution
+   invocation remains `Synchronize from Git and execute the active task.` The
+   Git-authoritative thin launcher is the replacement standard, not an optional
+   overlay on the superseded one-line rule.
+2. Strengthen the focused tests so they enforce the replacement semantically:
+   the old invocation-only and exact one-line requirements must be absent; the
+   canonical execution, correction, and merge launcher contracts and their
+   allowed/prohibited instance values must be asserted directly; and the four
+   new semantic groups must remain separate rather than inheriting unrelated
+   lifecycle assertions accidentally.
+3. Refresh live sibling evidence before publication. MMM `main` is now
+   `ac546548784385baab67d7c935e5a4fcdfc9e1af` with
+   `MMM_REPOSITORY_EXECUTION_PROTOCOL_ADOPTION_001` merged at reviewed head
+   `c370dc7cd59a61cc2e19025d1a2328c7867b63be`; that merge adopted the older
+   standard and requires a future MMM-owned successor after this MIP standard
+   merges. GeoX `main` is now
+   `e9b7d311ecaf5a90e227d8299f745a0e8f332368`, and
+   `GEOX_EXECUTION_BRANCH_BINDING_REAUTHORING_001` is superseded without merge
+   with preserved branch head `9d0da6bb96dd7711ab8c91bbef21a80a4b816973`.
+4. Run the complete frozen Tier-1 gate on the corrected exact tree, publish a
+   new implementation SHA and exact-tree receipt, push, verify remote-head
+   equality, and stop only at a new durable `ready_for_review` or genuine
+   `blocked` state.
+
+The passing locally reported focused tests at the rejected head do not satisfy
+acceptance because the assertions preserve the superseded rule and do not catch
+the contradiction. Do not merge or approve the rejected head.
+
+## Task-authoring and authorization boundaries
 
 - Pre-authoring base: `976d3a1daeae9c52c8772e5112574f698951a57c`.
 - The authoring range may change only `docs/execution/ACTIVE_TASK.md` and
@@ -305,11 +334,13 @@ failures are unfinished work and must be corrected within scope.
 
 ## Deferred successors
 
-- MMM may separately decide whether to supersede or replace its current
-  invocation-only adoption branch after this MIP standard is merged. MIP does
-  not authorize that disposition.
-- GeoX may separately adopt this standard after its current branch-binding task
-  reaches a terminal state and this MIP standard is merged.
+- MMM has now merged the older invocation-only adoption on `main` at
+  `ac546548784385baab67d7c935e5a4fcdfc9e1af`. MMM may separately authorize a
+  successor adoption only after this corrected MIP standard is merged; MIP does
+  not authorize or modify that work.
+- GeoX has superseded its branch-binding reauthoring task without merge on
+  `main` at `e9b7d311ecaf5a90e227d8299f745a0e8f332368`. Any future adoption remains a
+  separate GeoX-owned authorization after this corrected MIP standard is merged.
 - P2 coordination reconciliation, GeoX governed-readout capability, MMM
   normalization/fixtures, and MIP fixture-only planning remain separate tasks.
 - No additional prompt, receipt, lifecycle, or navigation framework is
