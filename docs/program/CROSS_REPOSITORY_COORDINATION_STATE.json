@@ -66,7 +66,16 @@
       "latest_closure_sha": "e0cef94c063b03b29e1e1760fb1c2320ce497b56",
       "next_eligible_tasks": ["GEOX_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001 proposed"],
       "validation_debt": ["Complete GeoX suite remains a producer-owned validation requirement for the authorized builder task."],
-      "authority_boundary": "GeoX owns experiment truth and handoff eligibility; no MIP consumer or live integration authority."
+      "authority_boundary": "GeoX owns experiment truth and handoff eligibility; no MIP consumer or live integration authority.",
+      "live_overlay_2026_08_04": {
+        "verification_date": "2026-08-04",
+        "source_sha": "7f829395bc305550ea1311421a4181dafed795b8",
+        "source_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md"],
+        "current_task_id": "GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001",
+        "current_task_status": "authorized",
+        "ownership": "GeoX producer workstream only",
+        "no_authority_effect": "This live overlay neither authorizes MIP consumer work nor changes product, runtime, real-data, pilot, production, or capability authority."
+      }
     }
   ],
   "workstreams": [

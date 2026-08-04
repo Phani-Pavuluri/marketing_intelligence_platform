@@ -105,3 +105,20 @@ details are unavailable from Git. The pilot hypothesis is therefore a strong
 process inference, not measured causal proof. The remaining question is whether
 the bounded manifest and immutable checker catch failures without creating a
 larger workflow system; the proposed pilot is designed to answer that question.
+
+## Correction evidence addendum
+
+The corrected matrix separates the originally collapsed lifecycle evidence:
+MIP launcher attempts are `MIP-001` and `MIP-002`; the parked consumer bridge
+is `MIP-003`; MMM protocol correction and PR #19 are `MMM-001` and `MMM-PR-19`;
+the MMM reconciliation control is `MMM-CONTROL-001`; GeoX branch-binding and
+calibration-handoff failures are `GEOX-001` and `GEOX-002`; the active manifest
+is context `GEOX-CONTEXT-001`; and producer fixture evidence is
+`GEOX-CONTROL-001`.
+
+The causal mechanism is not that every task fails for every category. MIP-001
+directly supports contradiction/self-oracle/lifecycle-drift conclusions;
+MIP-003 supports missing producer-pair preflight; GEOX-001 and GEOX-002 support
+frozen-contract replay, correction anchoring, and invalid blocker conclusions.
+PR #19 supports only the recorded external-merge approval gap. Facts marked
+unavailable in the matrix are not used as measured ROI inputs.

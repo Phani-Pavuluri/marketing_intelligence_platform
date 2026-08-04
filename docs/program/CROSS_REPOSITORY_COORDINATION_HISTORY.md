@@ -19,6 +19,7 @@
 | 2026-07-31 | Coordination post-merge closure recorded | MIP `3520176126d129e9288a9ce37591299ec856650a` | Recorded approved head, validation, merged state, and GitHub-observed remote feature-branch deletion; no capability authority changed. |
 | 2026-07-31 | Post-merge closure reconciliation authorized | MIP `18ab0d0c798dfcedd3f07034f4561320929477ea` | Narrow MIP-only reconciliation of current execution and coordination records; no resolver, sibling, or capability work authorized. |
 | 2026-08-04 | Codex execution root-cause audit live overlay | MIP `cda803790be15089412038ac33f2af8205b5e83f`; MMM `f2e0eade0ad917c1b28ab5521e6d35a35047d988`; GeoX `7f829395bc305550ea1311421a4181dafed795b8` | Preserves the parked MIP P2 blocker and GeoX producer-manifest task as live context only; no sibling, consumer, or capability authority changed. |
+| 2026-08-04 | Corrected execution-audit overlay verification | GeoX `7f829395bc305550ea1311421a4181dafed795b8`; `GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001` execution files | Records the current GeoX producer task as separately owned authorized context only. It does not establish MIP consumer acceptance, resolve the parked P2 provenance blocker, or grant capability authority. |
 
 Historical nonconforming external workflow merges remain recorded in each
 repository's execution history where relevant. They are governance evidence,
