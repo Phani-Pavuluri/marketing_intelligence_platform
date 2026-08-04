@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001",
-  "status": "ready_for_review",
+  "status": "changes_requested",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "9d2172844660e59cc01dce243b0ccd5a2554831d",
@@ -16,19 +16,23 @@
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": true,
-  "correction_execution_authorized": false,
+  "correction_execution_authorized": true,
   "merge_authorized": false,
   "pr_creation_authorized": false,
   "reviewed_head_sha": null,
-  "rejected_review_head_sha": null,
-  "implementation_commit_sha": "26f6a2e8d9d2fa64a5a095113feb7458d90945f2",
+  "rejected_review_head_sha": "9794085ad55014b4c104ccce74f9bbd87a255049",
+  "implementation_commit_sha": null,
+  "rejected_implementation_commit_sha": "26f6a2e8d9d2fa64a5a095113feb7458d90945f2",
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-08-04",
   "blockers": [],
+  "correction_cycles_max": 1,
+  "correction_cycles_completed": 0,
+  "correction_cycles_remaining": 1,
   "risk_tier": "tier_2_cross_repository_forensic_governance_and_roi_audit",
   "full_suite_validation_required": false,
-  "validation_scope": "changed_json_parse_audit_schema_checks_exact_owned_paths_diff_markdown_references_prohibited_path_scan_exact_tree_receipt_remote_head_equality",
+  "validation_scope": "changed_json_parse_complete_incident_and_control_schema_required_sample_exact_git_evidence_roi_option_and_scenario_schema_exact_owned_paths_diff_markdown_references_prohibited_path_scan_exact_tree_receipt_remote_head_equality",
   "unresolved_execution_blocking_design_questions": [],
   "affected_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform",
@@ -41,8 +45,9 @@
   "coordination_workstream_id": "WS-MIP-CODEX-EXECUTION-ROOT-CAUSE-ROI-AUDIT-001",
   "coordination_capability_owner": "mip_cross_repository_execution_governance_audit",
   "mip_blocked_product_head": "480b32040ce185b8ff091435121c4bea6fc6c453",
-  "mmm_live_main_at_initial_authorization": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
-  "geox_live_main_at_initial_authorization": "7f829395bc305550ea1311421a4181dafed795b8",
+  "mip_live_main_at_review": "cda803790be15089412038ac33f2af8205b5e83f",
+  "mmm_live_main_at_review": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
+  "geox_live_main_at_review": "7f829395bc305550ea1311421a4181dafed795b8",
   "parked_product_workstreams": [
     {
       "task_id": "MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001",
@@ -57,7 +62,7 @@
     {
       "repository": "Phani-Pavuluri/panel_exp",
       "task_id": "GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001",
-      "status_at_initial_authorization": "authorized",
+      "status_at_review": "authorized",
       "observed_main_sha": "7f829395bc305550ea1311421a4181dafed795b8",
       "feature_branch": "feat/geox-certified-calibration-source-manifest-001",
       "modified_or_authorized_by_mip": false
@@ -65,7 +70,7 @@
     {
       "repository": "Phani-Pavuluri/MMM",
       "task_id": "MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001",
-      "status_at_initial_authorization": "proposed_non_executable_stale_dependency",
+      "status_at_review": "proposed_non_executable_stale_dependency",
       "observed_main_sha": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
       "feature_branch": null,
       "modified_or_authorized_by_mip": false
@@ -83,8 +88,8 @@
   "coordination_refresh_authorized": true,
   "next_task_id": "MIP_MACHINE_READABLE_TASK_AND_TASKCTL_PILOT_001",
   "next_task_authorized": false,
-  "review_decision": "ready_for_review",
+  "review_decision": "changes_requested",
   "review_decision_source": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "prompt_strategy": "invocation_only_per_current_merged_mip_agents_for_this_audit",
-  "task_authoring_note": "Implementation commit 26f6a2e8d9d2fa64a5a095113feb7458d90945f2 publishes the evidence-only audit, incident matrix, ROI model, and dated coordination live overlay. It does not authorize a pilot, sibling work, product capability, or workflow implementation."
+  "prompt_strategy": "invocation_only_per_current_merged_mip_agents_for_correction",
+  "task_authoring_note": "Exact review head 9794085ad55014b4c104ccce74f9bbd87a255049 is rejected because the mandatory evidence sample, incident/control schema, causal analysis, ROI option model, scenario model, and semantic validation are incomplete. The complete frozen task contract remains available at that rejected head. One bounded correction cycle is authorized on the same branch. Merge, PR, sibling, product, analytical, runtime, pilot, production, and capability authority remain false."
 }
