@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001",
-  "status": "ready_for_review",
+  "status": "changes_requested",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "cda803790be15089412038ac33f2af8205b5e83f",
@@ -13,13 +13,14 @@
   "feature_branch_created": true,
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_execution_authorized": true,
-  "correction_execution_authorized": false,
+  "task_execution_authorized": false,
+  "correction_execution_authorized": true,
   "merge_authorized": false,
   "pr_creation_authorized": false,
-  "reviewed_head_sha": null,
-  "rejected_review_head_sha": null,
+  "reviewed_head_sha": "5e01767b0cf4a86262631c607bc2b0365f12253a",
+  "rejected_review_head_sha": "5e01767b0cf4a86262631c607bc2b0365f12253a",
   "implementation_commit_sha": "3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7",
+  "rejected_implementation_commit_sha": "3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7",
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-08-04",
@@ -29,7 +30,7 @@
   "correction_cycles_remaining": 1,
   "risk_tier": "tier_2_cross_repository_forensic_evidence_package",
   "full_suite_validation_required": false,
-  "validation_scope": "two_json_parse_exact_12_record_identity_required_keys_unique_ids_sha_syntax_matrix_ledger_foreign_keys_mandatory_anchor_coverage_null_unavailable_lookup_proof_git_cat_file_commit_existence_prohibited_analysis_fields_exact_owned_paths_diff_exact_tree_receipt_remote_head_equality",
+  "validation_scope": "two_json_parse_exact_12_record_identity_required_keys_unique_ids_sha_syntax_matrix_ledger_field_level_foreign_keys_mandatory_anchor_coverage_specific_null_lookup_proof_known_anchor_truth_assertions_branch_file_truth_prohibited_analysis_fields_exact_owned_paths_diff_exact_tree_receipt_remote_head_equality",
   "unresolved_execution_blocking_design_questions": [],
   "affected_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform",
@@ -41,11 +42,11 @@
   ],
   "coordination_workstream_id": "WS-MIP-CODEX-EXECUTION-EVIDENCE-MATRIX-001",
   "coordination_capability_owner": "mip_repository_execution_governance_evidence",
-  "source_repository_pins_at_authoring": {
-    "mip_main": "cda803790be15089412038ac33f2af8205b5e83f",
+  "source_repository_pins_at_rejected_review": {
+    "mip_main": "fc0ab44254a7a17982582798c0ace7285fde9bef",
     "mmm_main": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
     "geox_main": "d0f0ba937c79528abd34d7ff89eb4601080805e9",
-    "geox_context_branch": "feat/geox-certified-calibration-source-manifest-001"
+    "geox_context_branch_head": "c18f56341b50c58505b59fc6cacf2337ca7f9fc4"
   },
   "prior_task": {
     "task_id": "MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001",
@@ -65,6 +66,26 @@
       "resolved": false
     }
   ],
+  "review_findings": [
+    "generic_not_found_and_not_applicable_ledger_entries_are_not_field_specific_lookup_proof",
+    "mip_thin_launcher_001_known_correction_lifecycle_omitted",
+    "mip_thin_launcher_002_known_implementation_and_receipt_marked_not_found",
+    "mmm_pr_19_known_authorization_evidence_marked_not_found",
+    "geox_active_context_contradicts_exact_pinned_branch_state",
+    "geox_preserved_branch_sha_misclassified_as_main_disable_commit",
+    "successful_controls_not_reconstructed_to_required_evidence_depth",
+    "validator_checks_shape_and_commit_existence_but_not_evidence_truth"
+  ],
+  "required_correction_anchors": {
+    "mip_thin_launcher_001_correction_implementation": "0e08dc1f77f91ce45e45d1f874c5ae505dfea129",
+    "mip_thin_launcher_001_corrected_receipt": "69f7fd7178844576b8a3bdb84a881b3d38a3b8c5",
+    "mip_thin_launcher_002_implementation": "fe767166b08522764976f987368c8df5f6a9279f",
+    "mip_thin_launcher_002_receipt": "4c682711365ba8255fcb1e4a9a3643cf5842efec",
+    "mmm_pr19_task_authoring_or_authorization": "02aaf1f29247a7aa95a783107c0e16bffdaa365e",
+    "mmm_pr19_authorized_state": "ef63068c37041bdde55373cc08ef19333aa0fb5e",
+    "geox_fixture_preserved_branch_head": "a84d85277f9bbc35c08a40308d65858adbd36713",
+    "geox_context_branch_head": "c18f56341b50c58505b59fc6cacf2337ca7f9fc4"
+  },
   "sibling_repositories_read_only": true,
   "coordination_refresh_authorized": false,
   "execution_standard_changes_authorized": false,
@@ -79,8 +100,8 @@
   "pilot_recommendation_authorized": false,
   "next_task_id": "MIP_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_DECISION_001",
   "next_task_authorized": false,
-  "review_decision": "ready_for_review",
-  "review_decision_source": "docs/execution/ACTIVE_TASK.md",
-  "prompt_strategy": "full_task_specific_per_project_execution_contract",
-  "task_authoring_note": "Evidence package implementation 3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7 is ready for external review. It contains 12 records and 75 ledger entries at MIP fc0ab44254a7a17982582798c0ace7285fde9bef, MMM f2e0eade0ad917c1b28ab5521e6d35a35047d988, GeoX d0f0ba937c79528abd34d7ff89eb4601080805e9, and GeoX context branch c18f56341b50c58505b59fc6cacf2337ca7f9fc4. Correction, merge, PR, sibling, and capability authority remain false."
+  "review_decision": "changes_requested",
+  "review_decision_source": "docs/execution/LATEST_COMPLETION_REPORT.md",
+  "prompt_strategy": "full_task_specific_correction_per_project_execution_contract",
+  "task_authoring_note": "External review rejected exact remote head 5e01767b0cf4a86262631c607bc2b0365f12253a and implementation 3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7. One bounded correction cycle is authorized on the existing branch. Correction must replace generic null lookup proof with field-specific evidence, restore known lifecycle anchors, align GeoX active context to its exact branch state, correct preserved-branch identity, and publish a new exact-tree receipt. Merge, PR, sibling, product, analytical, root-cause, ROI, pilot, and capability authority remain false."
 }
