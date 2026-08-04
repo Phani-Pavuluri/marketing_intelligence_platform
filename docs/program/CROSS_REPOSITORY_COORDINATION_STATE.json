@@ -62,18 +62,20 @@
     {
       "id": "geox",
       "repository": "Phani-Pavuluri/panel_exp",
-      "observed_remote_main_sha": "a4bf6bfaa4311dacd3642d289dca3917543e0309",
+      "observed_remote_main_sha": "f15b0ee1713eaa46b7dc55e597e713443f5a8d32",
       "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md", "panel_exp/contracts/geox_governed_experiment_readout.py"],
       "active_task_id": "GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001",
-      "active_task_status": "authorized",
+      "active_task_status": "superseded",
       "active_task_authorization_head_sha": "686c3505151ee7073d52a9e70a8ea1b3f942ced4",
       "active_task_feature_branch": "docs/geox-lean-repository-delivery-standard-adoption-001",
-      "review_branch_head_sha": "6cf6c2584af78c6c288cd572cf4d9e31416b2cc6",
-      "review_branch_status": "ready_for_review",
+      "preserved_branch_head_sha": "bb1ac8d5ce29e2cab33eb680b3b7db76110f35f1",
+      "preserved_branch_status": "changes_requested_historical_only",
       "superseded_task_id": "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001",
       "superseded_task_status": "superseded_without_merge",
-      "current_work_summary": "Owner-authorized GeoX lean-delivery governance is review-ready on a feature branch; the prior builder is superseded without merge.",
-      "validation_debt": ["No merged producer successor, certified fixture replay evidence, or consumer verification exists."],
+      "next_eligible_task_id": "GEOX_EXECUTION_BRANCH_BINDING_001",
+      "next_eligible_task_status": "proposed",
+      "current_work_summary": "GeoX lean-delivery adoption is superseded without merge; its preserved branch is historical only. GeoX branch binding is the next proposed governance task, and no producer successor is authorized.",
+      "validation_debt": ["No merged GeoX governance successor, producer successor, certified fixture replay evidence, or consumer verification exists."],
       "authority_boundary": "GeoX owns experiment truth and handoff eligibility; no MIP consumer or live integration authority."
     }
   ],
@@ -108,9 +110,9 @@
       "status": "authorized",
       "dependencies": [],
       "blocked_by": [],
-      "verified_sha": "a4bf6bfaa4311dacd3642d289dca3917543e0309",
-      "review_branch_head_sha": "6cf6c2584af78c6c288cd572cf4d9e31416b2cc6",
-      "live_resolution_condition": "The review-ready feature branch is evidence only; only a GeoX merged and closed owner-repository state satisfies this governance workstream."
+      "verified_sha": "f15b0ee1713eaa46b7dc55e597e713443f5a8d32",
+      "preserved_branch_head_sha": "bb1ac8d5ce29e2cab33eb680b3b7db76110f35f1",
+      "live_resolution_condition": "Superseded without merge. Its preserved branch is historical only and cannot satisfy any governance, producer, consumer, or release dependency."
     },
     {
       "id": "WS-GEOX-READOUT-BUILDER-001",
@@ -120,8 +122,19 @@
       "status": "superseded",
       "dependencies": [],
       "blocked_by": [],
-      "verified_sha": "a4bf6bfaa4311dacd3642d289dca3917543e0309",
+      "verified_sha": "f15b0ee1713eaa46b7dc55e597e713443f5a8d32",
       "live_resolution_condition": "Superseded without merge. Preserved branch evidence cannot satisfy producer, consumer, or release dependencies."
+    },
+    {
+      "id": "WS-GEOX-EXECUTION-BRANCH-BINDING-001",
+      "owner_repository": "geox",
+      "capability_area": "repository_execution_branch_binding",
+      "task_id": "GEOX_EXECUTION_BRANCH_BINDING_001",
+      "status": "proposed",
+      "dependencies": [],
+      "blocked_by": [],
+      "verified_sha": "f15b0ee1713eaa46b7dc55e597e713443f5a8d32",
+      "live_resolution_condition": "GeoX alone may authorize and merge this governance successor. It changes no analytical or P2 capability authority."
     },
     {
       "id": "WS-GEOX-PRODUCER-SUCCESSOR-SEQUENCE-001",
@@ -129,10 +142,10 @@
       "capability_area": "governed_readout_producer_successors",
       "task_id": null,
       "status": "proposed",
-      "dependencies": ["WS-GEOX-LEAN-DELIVERY-ADOPTION-001"],
+      "dependencies": ["WS-GEOX-EXECUTION-BRANCH-BINDING-001"],
       "blocked_by": ["P2-GEOX-TEMPORAL-VERSION-SEMANTICS", "P2-GEOX-READOUT-BUILDER-ENTRYPOINT"],
       "successor_outcomes": ["governed-readout temporal lifecycle contract", "typed producer builder", "certified fixture generation, hashes, and replay semantics", "optional envelope plus final handoff/integration validation"],
-      "live_resolution_conditions": {"WS-GEOX-LEAN-DELIVERY-ADOPTION-001": "GeoX must declare and merge its owner-repository successor work. MIP does not invent successor task IDs or authorize it."}
+      "live_resolution_conditions": {"WS-GEOX-EXECUTION-BRANCH-BINDING-001": "GeoX must separately authorize and merge branch binding, then declare the producer successor work. MIP does not invent successor task IDs or authorize it."}
     },
     {
       "id": "WS-MMM-NORMALIZATION-FIXTURES-001",
@@ -162,6 +175,6 @@
     {"id": "P2-MMM-CROSS-REPOSITORY-FIXTURES", "owner_repository": "mmm", "affected_consumers": ["mip"], "state": "open", "evidence": ["MMM certified cross-repository fixture package"], "resolution_criteria": "Merged MMM certified fixtures pairing normalized GeoX readouts with compatibility states, provenance, and MIP-consumable evidence.", "consumer_verification_required": true, "unblocks": ["P2-D6-RELEASE-COMPATIBILITY-EVIDENCE"]},
     {"id": "P2-D6-RELEASE-COMPATIBILITY-EVIDENCE", "owner_repository": "mip", "affected_consumers": ["mip", "mmm", "geox"], "state": "open", "evidence": ["docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md"], "resolution_criteria": "Exact version pins, compatibility matrix, release/rollback order, migration, failure semantics, named owners, and declared consumer verification are merged.", "consumer_verification_required": true, "unblocks": ["MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001"]}
   ],
-  "ordered_program_sequence": ["MMM_REPOSITORY_EXECUTION_PROTOCOL_ADOPTION_001", "GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001", "GeoX owner-declared producer successor sequence", "MMM_GEOX_READOUT_NORMALIZATION_AND_CROSS_REPOSITORY_FIXTURES_001", "MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001", "D6 reconciliation and fixture-only cross-repository dry run", "Separate authorization before live package integration"],
+  "ordered_program_sequence": ["MMM_REPOSITORY_EXECUTION_PROTOCOL_ADOPTION_001", "GEOX_EXECUTION_BRANCH_BINDING_001", "GeoX owner-declared producer successor sequence", "MMM_GEOX_READOUT_NORMALIZATION_AND_CROSS_REPOSITORY_FIXTURES_001", "MIP_P2_FIXTURE_ONLY_PLANNING_EVIDENCE_JOURNEY_001", "D6 reconciliation and fixture-only cross-repository dry run", "Separate authorization before live package integration"],
   "authority": {"capability_authorizations_changed": false, "runtime_integration": "blocked", "real_data": "blocked", "persistence": "blocked", "recommendations": "blocked", "optimization": "blocked", "pilot": "blocked", "production": "blocked", "package_side_agents": "blocked"}
 }

@@ -54,7 +54,8 @@ def test_live_repository_pins_and_protocol_adoption_states_are_coherent() -> Non
         repositories["geox"]["active_task_id"]
         == "GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001"
     )
-    assert repositories["geox"]["review_branch_status"] == "ready_for_review"
+    assert repositories["geox"]["active_task_status"] == "superseded"
+    assert repositories["geox"]["next_eligible_task_id"] == "GEOX_EXECUTION_BRANCH_BINDING_001"
     branch_source = _object(state["feature_branch_review_source"])
     assert branch_source["snapshot_scope"] == "repository_main_observations_only"
 
@@ -69,6 +70,7 @@ def test_geox_builder_supersession_and_successor_sequence_are_fail_closed() -> N
     assert successors["status"] == "proposed"
     assert successors["task_id"] is None
     assert len(_list(successors["successor_outcomes"])) == 4
+    assert successors["dependencies"] == ["WS-GEOX-EXECUTION-BRANCH-BINDING-001"]
     blockers = _by_id(_list(state["blockers"]))
     assert blockers["P2-GEOX-TEMPORAL-VERSION-SEMANTICS"]["state"] == "open"
     assert blockers["P2-GEOX-READOUT-BUILDER-ENTRYPOINT"]["state"] == "open"

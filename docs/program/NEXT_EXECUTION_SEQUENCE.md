@@ -5,23 +5,25 @@
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
 
-1. **MMM and GeoX:** complete their separate owner-authorized execution-governance
-   adoption tasks. Authorization and review evidence are not merged completion.
-2. **GeoX:** after owner-repository authorization, establish the governed-readout
+1. **MMM:** complete its owner-authorized execution-governance adoption task.
+   Authorization is not merged completion.
+2. **GeoX:** separately authorize and complete the proposed execution-branch
+   binding task. Its prior lean-delivery adoption is superseded without merge.
+3. **GeoX:** after owner-repository authorization, establish the governed-readout
    temporal lifecycle contract, typed producer builder, certified fixture/hash/
    replay evidence, and optional envelope plus final handoff validation.
-3. **MMM:** after exact merged GeoX producer evidence, full producer validation,
+4. **MMM:** after exact merged GeoX producer evidence, full producer validation,
    and declared MMM consumer verification, separately authorize strict
    normalization and certified cross-repository fixtures.
-4. **MIP:** after exact merged GeoX and MMM evidence, declared MIP consumer
+5. **MIP:** after exact merged GeoX and MMM evidence, declared MIP consumer
    verification, and D6 release/compatibility evidence, separately consider the
    fixture-only planning-evidence journey.
-5. **All owners:** separately reconcile D6 and only then consider a bounded
+6. **All owners:** separately reconcile D6 and only then consider a bounded
    fixture-only cross-repository dry run.
-6. **Program governance:** require separate authorization before any live
+7. **Program governance:** require separate authorization before any live
    package integration.
 
-The superseded GeoX builder and the stale MIP resolver are historical only and
+The superseded GeoX lean-adoption and builder tasks and the stale MIP resolver are historical only and
 do not occupy an active sequence slot. No feature branch satisfies a merged
 dependency. P0–P8 and R0–R6 remain authoritative; live engines, real data,
 persistence, simulation, optimization, recommendations, assignment, pilot, and

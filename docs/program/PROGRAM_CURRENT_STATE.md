@@ -4,7 +4,7 @@
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
-**Verified against:** MIP `main` `976d3a1daeae9c52c8772e5112574f698951a57c`; MMM `origin/main` `b8878dfa4bcd178a0472c3b812492a5bb4ac0b45`; GeoX `origin/main` `a4bf6bfaa4311dacd3642d289dca3917543e0309`
+**Verified against:** MIP `main` `976d3a1daeae9c52c8772e5112574f698951a57c`; MMM `origin/main` `b8878dfa4bcd178a0472c3b812492a5bb4ac0b45`; GeoX `origin/main` `f15b0ee1713eaa46b7dc55e597e713443f5a8d32`
 
 ## Current phase
 
@@ -24,12 +24,13 @@ evidence only; resolver reauthoring is deferred and unauthorized.
 |---|---|---|---|
 | MIP | `976d3a1` | Reconciliation task authorized on its declared MIP branch. | Governance snapshot only; no P2 implementation authority. |
 | MMM | `b8878df` | `MMM_REPOSITORY_EXECUTION_PROTOCOL_ADOPTION_001` is authorized. The former MMM protocol task is absorbed, not separately executable. | No merged MMM normalization or fixture evidence exists. |
-| GeoX | `a4bf6bf` | `GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001` is authorized on main; branch `6cf6c258` is `ready_for_review`. | The branch is review evidence only, not a merged dependency. The former builder is superseded without merge. |
+| GeoX | `f15b0ee` | `GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001` is superseded without merge; preserved branch `bb1ac8d` is historical only. `GEOX_EXECUTION_BRANCH_BINDING_001` is proposed. | No GeoX governance or producer successor is merged. The old builder is also superseded without merge. |
 
 ## P2 critical path and blockers
 
-The former single GeoX builder task is not active execution. GeoX must declare
-and complete, in its own repository, the following proposed outcomes: a
+The former single GeoX builder task is not active execution. GeoX must first
+separately authorize and complete its proposed branch-binding governance task,
+then declare and complete, in its own repository, the following proposed outcomes: a
 governed-readout temporal lifecycle contract; typed producer builder; certified
 fixture generation with hashes and replay semantics; and optional envelope plus
 final handoff/integration validation. MIP does not assign task IDs or authorize
