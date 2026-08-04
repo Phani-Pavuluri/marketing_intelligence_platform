@@ -1,18 +1,16 @@
 {
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-  "task_id": "MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001",
+  "task_id": "MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001",
   "status": "authorized",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
-  "base_sha": "9d2172844660e59cc01dce243b0ccd5a2554831d",
-  "authorization_head_sha": "3d514206a2746b16dc1de3e56a92b6d79389aece",
-  "feature_branch": "docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1",
-  "prior_authorization_head_sha": "ad96a77ed0a70e59d0cd00bda5c0889918be1fb1",
-  "prior_authorized_state_head_sha": "af0c3ed29cad3843a2c79f5c269b9c1863d369d9",
-  "prior_feature_branch": "docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001",
-  "prior_feature_branch_head_sha": "23f5f4ff957f71f5ab8f1d6f9bf99dab4a00e923",
-  "prior_feature_branch_disposition": "historical_metadata_reconciliation_only_do_not_execute_or_merge",
+  "base_sha": "cda803790be15089412038ac33f2af8205b5e83f",
+  "task_authoring_start_sha": "3b69964be7fd9b56a29c8aa261465884f8260c9d",
+  "task_authoring_head_sha": "98422e2503809691c1df22c06fd8e5b132d0d2e0",
+  "authorization_head_sha": "98422e2503809691c1df22c06fd8e5b132d0d2e0",
+  "feature_branch": "docs/mip-codex-execution-incident-evidence-matrix-001",
+  "feature_branch_created": true,
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": true,
@@ -26,9 +24,12 @@
   "capability_authorizations_changed": false,
   "last_updated": "2026-08-04",
   "blockers": [],
-  "risk_tier": "tier_2_cross_repository_forensic_governance_and_roi_audit",
+  "maximum_correction_cycles": 1,
+  "correction_cycles_completed": 0,
+  "correction_cycles_remaining": 1,
+  "risk_tier": "tier_2_cross_repository_forensic_evidence_package",
   "full_suite_validation_required": false,
-  "validation_scope": "changed_json_parse_audit_schema_checks_exact_owned_paths_diff_markdown_references_prohibited_path_scan_exact_tree_receipt_remote_head_equality",
+  "validation_scope": "two_json_parse_exact_12_record_identity_required_keys_unique_ids_sha_syntax_matrix_ledger_foreign_keys_mandatory_anchor_coverage_null_unavailable_lookup_proof_git_cat_file_commit_existence_prohibited_analysis_fields_exact_owned_paths_diff_exact_tree_receipt_remote_head_equality",
   "unresolved_execution_blocking_design_questions": [],
   "affected_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform",
@@ -38,41 +39,34 @@
   "modified_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform"
   ],
-  "coordination_workstream_id": "WS-MIP-CODEX-EXECUTION-ROOT-CAUSE-ROI-AUDIT-001",
-  "coordination_capability_owner": "mip_cross_repository_execution_governance_audit",
-  "mip_blocked_product_head": "480b32040ce185b8ff091435121c4bea6fc6c453",
-  "mmm_live_main_at_initial_authorization": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
-  "geox_live_main_at_initial_authorization": "7f829395bc305550ea1311421a4181dafed795b8",
+  "coordination_workstream_id": "WS-MIP-CODEX-EXECUTION-EVIDENCE-MATRIX-001",
+  "coordination_capability_owner": "mip_repository_execution_governance_evidence",
+  "source_repository_pins_at_authoring": {
+    "mip_main": "cda803790be15089412038ac33f2af8205b5e83f",
+    "mmm_main": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
+    "geox_main": "d0f0ba937c79528abd34d7ff89eb4601080805e9",
+    "geox_context_branch": "feat/geox-certified-calibration-source-manifest-001"
+  },
+  "prior_task": {
+    "task_id": "MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001",
+    "status": "superseded_without_merge",
+    "rejected_remote_head_sha": "3233f424ad388b30ef2181eab8198a45fb5edf03",
+    "rejected_implementation_sha": "c9134f0c036581290ef686ee7e5d1058055c952d",
+    "preserved_branch": "docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1",
+    "correction_cycles_consumed": 1,
+    "merge_authorized": false
+  },
   "parked_product_workstreams": [
     {
       "task_id": "MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001",
       "status": "blocked",
       "blocker_id": "BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001",
       "blocked_head_merged_to_main": "480b32040ce185b8ff091435121c4bea6fc6c453",
-      "resolution_condition": "Merged producer evidence from GeoX and MMM plus fresh MIP consumer verification and separate reauthorization.",
       "resolved": false
     }
   ],
-  "concurrent_sibling_work": [
-    {
-      "repository": "Phani-Pavuluri/panel_exp",
-      "task_id": "GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001",
-      "status_at_initial_authorization": "authorized",
-      "observed_main_sha": "7f829395bc305550ea1311421a4181dafed795b8",
-      "feature_branch": "feat/geox-certified-calibration-source-manifest-001",
-      "modified_or_authorized_by_mip": false
-    },
-    {
-      "repository": "Phani-Pavuluri/MMM",
-      "task_id": "MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001",
-      "status_at_initial_authorization": "proposed_non_executable_stale_dependency",
-      "observed_main_sha": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
-      "feature_branch": null,
-      "modified_or_authorized_by_mip": false
-    }
-  ],
-  "audit_only": true,
   "sibling_repositories_read_only": true,
+  "coordination_refresh_authorized": false,
   "execution_standard_changes_authorized": false,
   "test_harness_changes_authorized": false,
   "taskctl_implementation_authorized": false,
@@ -80,11 +74,13 @@
   "prompt_generator_implementation_authorized": false,
   "ci_or_git_hook_changes_authorized": false,
   "product_or_analytical_changes_authorized": false,
-  "coordination_refresh_authorized": true,
-  "next_task_id": "MIP_MACHINE_READABLE_TASK_AND_TASKCTL_PILOT_001",
+  "root_cause_analysis_authorized": false,
+  "roi_analysis_authorized": false,
+  "pilot_recommendation_authorized": false,
+  "next_task_id": "MIP_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_DECISION_001",
   "next_task_authorized": false,
   "review_decision": "authorized",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
-  "prompt_strategy": "invocation_only_per_current_merged_mip_agents_for_this_audit",
-  "task_authoring_note": "The clean branch reauthoring range 9d2172844660e59cc01dce243b0ccd5a2554831d..3d514206a2746b16dc1de3e56a92b6d79389aece changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. This immediate state-only commit changes only EXECUTION_STATE.json and authorizes the exact -r1 branch. The original audit branch is historical metadata-reconciliation evidence only and must not be executed or merged. Audit scope, validation, sibling ownership, product blocker, analytical boundaries, and capability authority are unchanged."
+  "prompt_strategy": "full_task_specific_per_project_execution_contract",
+  "task_authoring_note": "The authoring range cda803790be15089412038ac33f2af8205b5e83f..98422e2503809691c1df22c06fd8e5b132d0d2e0 changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. This immediate state-only commit changes only EXECUTION_STATE.json. The declared branch must be created from this exact state-only commit."
 }
