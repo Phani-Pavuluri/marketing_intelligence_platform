@@ -1,99 +1,66 @@
-# TASK_AUTHORIZATION_REPORT
+# TASK_SUPERSESSION_REPORT
 
 ## Current decision
 
+**SUPERSEDED WITHOUT MERGE**
+
 - **Task ID:** `MIP_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Status:** `authorized`
-- **Pre-authoring base:** `976d3a1daeae9c52c8772e5112574f698951a57c`
-- **Feature branch:** `docs/mip-git-authoritative-thin-launcher-standard-001`
-- **Risk tier:** Tier 1 repository execution governance
-- **Implementation SHA:** not yet created
-- **Capability authority:** unchanged
+- **Authorization head:** `a315d7ba8084188a8017f87ba67e7bc836a9aeb1`
+- **First rejected review head:** `e390f1b47f8a7c5dfaa7a05613c2c4de73e4a548`
+- **Final rejected review head:** `69f7fd7178844576b8a3bdb84a881b3d38a3b8c5`
+- **Corrected implementation candidate:** `0e08dc1f77f91ce45e45d1f874c5ae505dfea129`
+- **Preserved final branch head:** `6e90f1a23b5ff952264e15e634b469be06f52c56`
+- **Merge, PR, task, correction, sibling, and capability authority:** false
 
-## Orientation and eligibility evidence
+## GitHub-observed review evidence
 
-Connected GitHub verified MIP `main` at
-`976d3a1daeae9c52c8772e5112574f698951a57c` before authoring.
-The prior P2 reconciliation task is superseded without merge on its preserved
-branch at `0629af616943c53e8d4a275dec147624bb9e040c`; it has no remaining task,
-correction, merge, or PR authority.
+The corrected branch changed exactly the six task-owned paths and published an exact-tree receipt. External review nevertheless found the published lifecycle state internally contradictory:
 
-Live sibling evidence is read-only:
+- `ready_for_review` coexisted with an operative-looking `changes_requested` section and required-correction subsection;
+- stale wording still said one correction cycle was authorized after correction execution was closed;
+- the lifecycle test did not catch all Markdown heading levels or the exact stale authority wording;
+- the duplication test did not directly enforce the full prohibited task-instance set against each canonical launcher block.
 
-- MMM `b8878dfa4bcd178a0472c3b812492a5bb4ac0b45`; its protocol-adoption branch is
-  `ready_for_review` at `c370dc7cd59a61cc2e19025d1a2328c7867b63be`
-  against the older invocation-only standard.
-- GeoX `0a463ad96cda31dc2bdc962fd24f5481bb7aede9`; its branch-binding reauthoring
-  branch records `changes_requested` at
-  `377050f76ddc03d6feb6f4f75eb2c9c9f8c954d1`.
+The branch consumed its single authorized correction cycle. It is preserved as historical failed-attempt evidence only and must not be resumed or merged.
 
-Neither sibling owns or modifies MIP's execution-standard files. MIP cannot
-approve, supersede, correct, merge, or authorize either sibling task. No roadmap
-audit or product-capability task is required to define this bounded standard
-correction.
+## Locally reported validation
 
-## Primary outcome
+The rejected correction reported:
 
-The authorized outcome replaces the exact one-line invocation-only prompt rule
-with a Git-authoritative thin-launcher contract that:
+- focused pytest: `6 passed`;
+- JSON parse: passed;
+- Markdown/current-state consistency: locally reported passed, but external semantic review failed;
+- task-authoring boundary: passed;
+- exact changed paths: passed;
+- `git diff --check`: passed;
+- Ruff: passed;
+- mypy: passed;
+- Docker-backed `make validate`: not required;
+- full suite: not required.
 
-- keeps all durable task meaning and authority in Git;
-- allows only repository path, synchronization, repository reads, Git-declared
-  branch resumption, continuation, remote durable terminal outcomes, and
-  prohibited-operation reminders in execution and correction launchers;
-- permits only the local path and externally approved exact head as merge
-  instance values;
-- explicitly makes orientation and progress updates non-terminal; and
-- requires continuation until the remote feature branch records
-  `ready_for_review` or a genuine `blocked` state.
+These locally reported results do not satisfy acceptance because the test contract permitted the contradictory exact tree.
 
-The complete behavior, canonical launchers, allowed/prohibited prompt boundary,
-owned paths, semantic tests, validation gate, publication contract, and deferred
-successors are recorded in `docs/execution/ACTIVE_TASK.md`.
+## Validation debt
 
-## Supersession and overlap decision
+- coherent current lifecycle state is not yet enforced across `ACTIVE_TASK.md`, `EXECUTION_STATE.json`, and `LATEST_COMPLETION_REPORT.md`;
+- direct canonical-block enforcement does not yet cover the complete prohibited task-instance value set;
+- MIP `main` still retains the previously merged invocation-only prompt standard until a separately authorized replacement task succeeds.
 
-`MIP_P2_ROADMAP_AND_COORDINATION_RECONCILIATION_AFTER_GEOX_SUPERSESSION_001`
-is not resumed or merged. Its branch remains historical only. This new task does
-not update roadmap or coordination state and does not absorb any P2, MMM, or GeoX
-capability work.
+## Cross-repository impact
 
-The current MMM adoption head implements the older standard. Its disposition is
-an MMM-owned future decision after the new MIP standard is merged; no MMM state
-is changed or authorized here. GeoX adoption is likewise separate and deferred.
+- MMM `main` observed at `f2e0eade0ad917c1b28ab5521e6d35a35047d988`; its MIP thin-launcher adoption is proposed and blocked pending merged MIP evidence.
+- GeoX `main` observed at `e9b7d311ecaf5a90e227d8299f745a0e8f332368`; its branch-binding reauthoring task is superseded without merge.
+- Consumer verification: not applicable.
+- Affected and modified repository: MIP only.
+- Capability authority: unchanged.
 
-## Task-authoring boundary
+## Limitations
 
-The authoring range starts at
-`976d3a1daeae9c52c8772e5112574f698951a57c` and changes only:
+No product, analytical, runtime, integration, contract, adapter, fixture, orchestration, LLM, reporting, UI, recommendation, simulation, optimization, pilot, production, or sibling behavior was approved or merged.
 
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
+## Final authority and next work
 
-The commit containing this report is the final task-authoring head. The
-immediate next commit must be state-only, changing only
-`docs/execution/EXECUTION_STATE.json` to record that exact head and authorize the
-declared feature branch. The branch must be created from the resulting
-synchronized state-only `main`.
+Task execution, correction execution, merge, PR creation, sibling implementation, analytical behavior, and capability authority are false.
 
-## Validation requirement
-
-The Tier-1 gate requires JSON and Markdown consistency, authoring-boundary and
-exact changed-path verification, `git diff --check`, the focused repository
-execution-handoff test, Ruff and configured mypy for the changed test, an
-exact-tree publication receipt, and local/remote branch-head equality.
-Docker-backed `make validate` and the full suite are `not_required` for this
-documentation/governance-only surface.
-
-## Authority and non-actions
-
-This authorization changes only MIP repository-execution governance. It does
-not modify or authorize product code, contracts, adapters, fixtures,
-orchestration, LLM behavior, reporting, UI, analytical truth, sibling work,
-live integration, real data, persistence, simulation, optimization,
-recommendations, assignment, pilot, production, or package-side agents.
-
-Merge authority, PR authority, correction authority, sibling authority, and
-capability authority remain false. No implementation occurred during task
-authoring.
+No successor is authorized by this report. Any replacement must be freshly authored from synchronized live `main`, preserve useful content only as historical candidate evidence, and define exact current-state coherence plus direct canonical-block tests before execution authorization.
