@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -254,3 +254,15 @@ Do not add task details, branch names, SHAs, validation commands, workflow steps
 - No additional prompt, receipt, lifecycle, navigation, roadmap, or coordination framework is authorized by this task.
 
 **Unresolved execution-blocking design questions: none.**
+
+## Publication result
+
+- **Implementation SHA:** `fe767166b08522764976f987368c8df5f6a9279f`
+- **Review state:** `ready_for_review`
+- **Blockers:** none
+- **Correction execution:** `false`
+- **Merge and PR authority:** `false`
+- **Capability authority:** unchanged
+
+The final publication commit is the frozen exact-tree validation receipt. No
+task-owned file may change after it without a new validated publication.
