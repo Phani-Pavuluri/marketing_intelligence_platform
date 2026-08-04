@@ -1,93 +1,101 @@
-# TASK_COMPLETION_REPORT_V2
+# TASK_AUTHORIZATION_REPORT
 
 ## Current decision
 
-- **Task ID:** `MIP_EXECUTION_TERMINAL_OUTCOME_ENFORCEMENT_001`
-- **Feature branch:** `docs/mip-execution-terminal-outcome-enforcement-001`
-- **Implementation SHA:** `d8ba108faba403019845d7b72a71b791d7ab819f`
-- **Approved review head:** `97c529e22d14a3b7066b9ad6bbade4288f9bd7ab`
-- **Merged main head:** `97c529e22d14a3b7066b9ad6bbade4288f9bd7ab`
-- **Current decision:** `merged`
+- **Task ID:** `MIP_P2_ROADMAP_AND_COORDINATION_RECONCILIATION_AFTER_GEOX_SUPERSESSION_001`
+- **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
+- **Status:** `authorized`
+- **Pre-authoring base:** `369805d923454a51ce98845cea29bdb1ee3c3895`
+- **Feature branch:** `docs/mip-p2-roadmap-coordination-reconciliation-after-geox-supersession-001`
+- **Risk tier:** Tier 3 cross-repository coordination governance
+- **Implementation SHA:** not yet created
+- **Capability authority:** unchanged
 
-## Approval and merge
+## Orientation and eligibility evidence
 
-The user explicitly approved exact remote head
-`97c529e22d14a3b7066b9ad6bbade4288f9bd7ab`. Live GitHub verification showed that `main`
-had not moved, the remote feature branch still matched the approved head, the
-approved head descended from the authorization boundary, and the complete task
-diff was limited to the six authorized paths.
+Connected GitHub verified MIP `main` at
+`369805d923454a51ce98845cea29bdb1ee3c3895`. The prior terminal-outcome task is
+merged and closed; execution, correction, merge, PR, sibling-adoption, and
+capability authority are false.
 
-`main` was advanced by fast-forward directly to the approved head. No pull
-request, merge commit, squash, rebase, or force update was used.
+Live sibling overlay verified:
 
-## Deliverables
+- MMM `b8878dfa4bcd178a0472c3b812492a5bb4ac0b45`, where `MMM_REPOSITORY_EXECUTION_PROTOCOL_ADOPTION_001` is authorized and the former proposed MMM coordination-protocol task is absorbed.
+- GeoX `a4bf6bfaa4311dacd3642d289dca3917543e0309`, where `GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001` is authorized and the oversized governed-readout builder task is superseded without merge.
 
-The merged MIP governance outcome:
+MIP's program-current-state, checkpoints, sequence, coordination snapshot, and
+roadmap execution-current-state text still describe older repository pins and
+the superseded single GeoX builder task. A bounded current-state reconciliation
+is therefore definition-ready and necessary before another MIP product task.
 
-- defines successful orientation as non-terminal once an executable task and
-  safe authorized branch are established;
-- requires execution to continue without another user prompt;
-- permits only durable `ready_for_review` or Git-durable `blocked` terminal
-  outcomes after successful orientation;
-- rejects orientation-only, chat-only, and “no changes made” summaries as
-  completion evidence;
-- preserves the exact minimal invocation; and
-- preserves exact-head review, fail-closed behavior, sibling ownership, and
-  capability-authority boundaries.
+## Overlap resolution
 
-## Validation evidence
+The remote MIP branch `feat/mip-active-task-context-resolver-001` is preserved at
+`b96dfc4365d5aadf9425d31aa576664f58270fa5`, 13 commits ahead and 72 commits
+behind current `main`, with merge base
+`11c062eb785b3518d531992aa554d0a3a4c0b84b`. Its branch state is blocked with
+previous correction authority and implementation
+`785d83f25891274a42a5a82efbd17103563c29a7`.
 
-### GitHub-observed
+Because that branch cannot be fast-forward merged and overlaps stable execution
+and coordination-test paths, this authorization supersedes
+`MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001` without merge. The branch is historical
+partial evidence only. It must not be resumed, rebased, force-updated, merged,
+opened as a PR, or reused wholesale. Resolver reauthoring is deferred and
+unauthorized.
 
-- authorization head: `7012add4baa284107a88f953e4d10d91c9e31b04`;
-- approved remote head and merged `main`: `97c529e22d14a3b7066b9ad6bbade4288f9bd7ab`;
-- accepted substantive implementation: `d8ba108faba403019845d7b72a71b791d7ab819f`;
-- complete task diff: exactly the six authorized paths;
-- `main` equals the approved head after fast-forward;
-- remote feature branch: deleted; and
-- MMM and GeoX checkpoint pins remain unchanged.
+This durable supersession removes duplicate execution ownership before the new
+feature branch is created.
 
-### Receipt-reported and reconstructed exact-tree validation
+## Primary outcome and scope
 
-The exact-tree receipt at `97c529e22d14a3b7066b9ad6bbade4288f9bd7ab` records:
+The authorized outcome is one exact, live-overlay-based P2 program snapshot that:
 
-- JSON parsing: passed;
-- Markdown/current-state consistency: passed;
-- changed-path verification: passed;
-- `git diff --check`: passed;
-- focused governance test: `1 passed`;
-- full suite: `not_required`;
-- worktree evidence: reconstructed exact GitHub tree; and
-- capability authority: unchanged.
+- preserves the canonical P0–P8 lifecycle and R0–R6 gates;
+- records live MIP/MMM/GeoX repository mains and execution states;
+- records both sibling protocol-adoption tasks without treating authorization as completion;
+- marks the old GeoX builder workstream superseded and replaces it with the four owner-declared proposed producer outcomes;
+- leaves GeoX producer blockers open;
+- leaves MMM normalization/fixtures blocked on exact merged GeoX evidence and consumer verification;
+- leaves the MIP P2 journey blocked on exact GeoX, MMM, consumer-verification, and D6 evidence;
+- removes stale current-main, immediate-next-phase, and single-builder sequencing text;
+- converts coordination tests from historical task identity checks to semantic current-state checks; and
+- preserves every authority freeze.
 
-Because the fast-forward did not change the approved tree, the same exact-tree
-gate applies to the post-fast-forward content. Closure metadata JSON parsing and
-merged-state consistency passed before publication.
+The exact owned paths, prohibited scope, semantic acceptance tests, Tier-3 gate,
+publication requirements, and deferred successors are fully specified in
+`docs/execution/ACTIVE_TASK.md`.
 
-## Cleanup
+## Task-authoring boundary
 
-- Remote feature branch: deleted, GitHub-observed.
-- Local feature branch: deleted, user-reported.
-- `main` synchronization: GitHub-observed at `97c529e22d14a3b7066b9ad6bbade4288f9bd7ab`
-  before this single closure metadata commit.
+The authoring range starts at
+`369805d923454a51ce98845cea29bdb1ee3c3895` and changes only:
 
-## Blockers, limitations, and validation debt
+- `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-- Blockers: none.
-- Validation debt: none for the authorized Tier-1 gate.
-- Docker, Ruff, mypy, and the full suite: `not_required`.
-- Limitation: this is repository governance enforcement only; it does not add a
-  runtime controller or guarantee that an external execution environment cannot
-  terminate abruptly.
+The commit containing this report is the task-authoring head. The immediate next
+commit must be state-only, changing only
+`docs/execution/EXECUTION_STATE.json` to record the exact authoring head and
+execution authorization. The feature branch must be created from the resulting
+synchronized state-only `main`.
 
-## Sibling, consumer, and authority impact
+## Validation requirement
 
-- MMM checkpoint: `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`;
-  no MMM files or authority changed.
-- GeoX checkpoint: `ee9673c13e69082367c1727568946ac4c1a01015`;
-  no GeoX files, active builder state, or authority changed.
-- Consumer verification: not applicable for this MIP governance-only task.
-- Newly eligible work: no successor is authorized by this closure. Separate MMM
-  and GeoX adoption tasks remain proposed owner-repository work only.
-- Capability authority: unchanged and false.
-- Task execution, correction execution, merge, and PR authorization: false.
+This Tier-3 coordination task requires JSON and Markdown consistency, exact
+repository pin and changed-path checks, focused coordination and execution
+handoff tests, Ruff and mypy for the changed Python test, `git diff --check`, and
+Docker-backed `make validate` on the exact frozen tree. Old or sibling validation
+cannot substitute for the task's own gate.
+
+## Authority and non-actions
+
+This authorization changes only MIP program-governance execution authority for
+the bounded reconciliation task. It does not modify or authorize MIP product
+code, resolver runtime, GeoX or MMM work, analytical truth, fixture integration,
+LLM behavior, simulation, optimization, recommendations, real data, persistence,
+assignment, pilot, production, or package-side agents.
+
+Merge authority, PR authority, correction authority, sibling authority, and
+capability authority remain false. No implementation occurred in this authoring
+session.
