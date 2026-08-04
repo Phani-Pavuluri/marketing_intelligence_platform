@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -347,3 +347,17 @@ failures are unfinished work and must be corrected within scope.
   authorized by this task.
 
 **Unresolved execution-blocking design questions: none.**
+
+## Corrected publication result
+
+- **Implementation SHA:** `0e08dc1f77f91ce45e45d1f874c5ae505dfea129`
+- **Review state:** `ready_for_review`
+- **Correction execution:** closed
+- **Blockers:** none
+- **Merge and PR authority:** `false`
+- **Capability authority:** unchanged
+
+The final publication commit is the frozen exact-tree validation receipt. The
+MMM merged older-standard adoption and GeoX superseded branch-binding task are
+read-only sibling facts only; each future adoption remains separately owned and
+unauthorized.
