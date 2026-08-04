@@ -1,75 +1,66 @@
-# TASK_AUTHORIZATION_REPORT
+# TASK_SUPERSESSION_REPORT
 
 ## Current decision
 
-- **Current decision:** `authorized`
+- **Current decision:** `superseded_without_merge`
 - **Task ID:** `MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Feature branch:** `docs/mip-codex-execution-incident-evidence-matrix-001`
-- **Risk tier:** Tier 2 cross-repository forensic evidence package
+- **Rejected implementation:** `3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7`
+- **Rejected review head:** `5e01767b0cf4a86262631c607bc2b0365f12253a`
+- **Final preserved remote branch head:** `59d23f2c3ce57cfb7272a1230600a2c5fd02721f`
 - **Capability authority:** unchanged
 
-## Prior audit disposition
+## Disposition
 
-`MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001` is rejected and superseded without merge.
+The evidence-matrix task and the wider forensic execution-audit lane are closed without merge. The remaining correction work was not published as a corrected implementation or exact-tree receipt, and further archaeology is not justified relative to product delay.
 
-- rejected remote head: `3233f424ad388b30ef2181eab8198a45fb5edf03`
-- rejected implementation: `c9134f0c036581290ef686ee7e5d1058055c952d`
-- preserved branch: `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1`
-- correction cycles: `1 of 1` consumed
+The preserved branch is historical evidence only. It is not approved for execution, correction, merge, rebase, force update, or reuse as a future implementation base.
 
-The metadata repair at the rejected head made the lifecycle report coherent, but the substantive audit remained unreliable. Known MMM lifecycle evidence was marked unavailable, MIP thin-launcher task 002 was misclassified, and the validator checked record shape rather than evidence truthfulness. The branch remains historical forensic evidence and is not merge-authorized.
+## Durable findings retained
 
-## Authorized outcome
+The work established practical delivery rules that remain applicable through existing repository standards:
 
-Produce one normalized 12-record cross-repository incident evidence matrix and one lookup ledger proving every populated, not-applicable, unavailable, or inaccessible lifecycle fact.
+- keep each milestone to one independently reviewable outcome;
+- freeze prerequisites, owned paths, prohibited scope, and exact acceptance evidence before execution;
+- validate external truth and behavior, not only artifact shape;
+- maintain coherent lifecycle state across the three stable execution files;
+- permit one bounded correction by default and supersede or split when the task expands;
+- keep execution-governance investment subordinate to real product progress.
 
-This task owns evidence reconstruction only. It does not produce root-cause conclusions, counterfactual recommendations, ROI, a pilot decision, execution tooling, standards changes, or product changes.
+These findings do not authorize a new execution framework.
 
-## Live orientation at authoring
+## Existing controls and validation
 
-- MIP `main`: `cda803790be15089412038ac33f2af8205b5e83f`
-- MMM `main`: `f2e0eade0ad917c1b28ab5521e6d35a35047d988`
-- GeoX `main`: `d0f0ba937c79528abd34d7ff89eb4601080805e9`
-- GeoX producer branch `feat/geox-certified-calibration-source-manifest-001` currently records a correction-cycle state on its exact remote branch and remains separately owned.
+MIP retains its existing execution safeguards:
 
-The parked MIP P2 provenance blocker remains unresolved. MMM and GeoX are read-only evidence sources. No sibling workstream or capability authority changes.
+- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`;
+- `docs/execution/TASK_EXECUTION_STANDARD.md`;
+- `tests/governance/test_repo_native_execution_handoff.py`;
+- task-specific exact owned-path checks and repository-required validation gates.
 
-## Deliverables
+No new task manifest, generator, standalone validator, `taskctl`, adapter framework, CI workflow, Git hook, dashboard, or orchestration layer was created or authorized.
 
-1. `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001.json`
-2. `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_LOOKUP_LOG_001.json`
+This supersession is a metadata-only repository decision. No Docker or full application validation is required. The exact changed paths for this decision are limited to:
 
-The matrix must contain exactly eight incident records, one active-context record, and three successful-control records. The lookup ledger must make every lifecycle value auditable and must prove actual failed lookups before a fact can be marked unavailable.
+- `docs/execution/ACTIVE_TASK.md`;
+- `docs/execution/LATEST_COMPLETION_REPORT.md`;
+- `docs/execution/EXECUTION_STATE.json` in the immediate state-only follow-up commit.
 
-## Owned paths
+## Product and sibling impact
 
-Only these five paths may change during execution:
+- The parked MIP P2 bridge remains blocked by `BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001`.
+- MMM and GeoX remain read-only owner repositories for their respective analytical and producer truth.
+- No consumer verification occurred.
+- No product workstream advanced or regressed from this supersession.
+- No product, analytical, runtime, real-data, persistence, simulation, optimization, recommendation, pilot, production, or capability authority changed.
 
-- `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001.json`
-- `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_LOOKUP_LOG_001.json`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
+## Local partial work
 
-No coordination, audit-report, ROI, standard, test, code, fixture, sibling, PR, merge, or capability change is authorized.
+Any uncommitted local evidence-matrix or lookup-ledger edits from the stopped correction are not Git evidence. They must be discarded or retained only below an allowed local-only path and must not be carried into a future task.
 
-## Validation and publication
+## Next work
 
-The final frozen tree must pass JSON parsing, exact 12-record identity/count checks, required-key checks, matrix-to-ledger foreign-key checks, mandatory-anchor coverage, null/unavailable lookup proof, local `git cat-file` existence checks for every found commit, prohibited-analysis-field scanning, exact owned-path verification, `git diff --check`, exact-tree receipt, push, and local/remote equality.
+No implementation task is currently authorized. The next task must be selected from fresh live product-roadmap orientation and must be a small product or analytical milestone using the existing execution safeguards.
 
-Docker and the full application suite are not required because executable code and tests are prohibited.
-
-The task must stop at one Git-durable remote `ready_for_review` or genuine external-evidence `blocked` state. Correction, merge, PR, sibling, product, analytical, runtime, pilot, production, and capability authority remain false.
-
-## Authoring boundary
-
-- pre-authoring main: `cda803790be15089412038ac33f2af8205b5e83f`
-- active-task authoring commit: `3b69964be7fd9b56a29c8aa261465884f8260c9d`
-- this report commit is the task-authoring head
-- the immediate next commit must modify only `docs/execution/EXECUTION_STATE.json` to record authorization
-- create the declared feature branch from that state-only authorization commit
-
-## Deferred successor
-
-`MIP_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_DECISION_001` remains unauthorized until the evidence package is externally approved, fast-forward merged, and closed.
+No pull request or merge was created for the superseded task.
