@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -281,3 +281,16 @@ Incomplete implementation or stale evidence is not success. Do not leave the
 current decision only in chat or terminal output.
 
 **Unresolved execution-blocking design questions: none.**
+
+## Publication result
+
+- **Implementation SHA:** `c4a849b00cc8f0c954b6c3ffcc56b914a4ee0614`
+- **Review state:** `ready_for_review`
+- **Blockers:** none
+- **Merge and PR authority:** false
+- **Capability authority:** unchanged
+
+The implementation reconciles the live GeoX supersession observed at
+`f15b0ee1713eaa46b7dc55e597e713443f5a8d32`; it does not make a producer,
+consumer, release, or runtime dependency eligible. The exact-tree validation
+receipt is the final publication commit and is recorded in the completion report.
