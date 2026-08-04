@@ -2,11 +2,13 @@
 
 ## Current decision
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
-`MIP_P2_ROADMAP_AND_COORDINATION_RECONCILIATION_AFTER_GEOX_SUPERSESSION_001`
-has published an MIP-only, fail-closed P2 coordination snapshot for exact-head
-review. It does not authorize implementation or any product capability.
+Exact remote head `1f2783fbb490673b9aaf82f74fe5923df5d2e97f`
+is rejected. The reconciliation is directionally correct, but its final live
+GeoX overlay is stale and its coordination JSON contains a contradictory GeoX
+workstream status. Correction execution is authorized on the existing feature
+branch and only within the original eleven owned paths.
 
 ## Identity and lineage
 
@@ -15,72 +17,95 @@ review. It does not authorize implementation or any product capability.
 - **Base branch/SHA:** `main` / `369805d923454a51ce98845cea29bdb1ee3c3895`
 - **Authorization head:** `72e1fd36578bdd589175e0a9f71bb32e6eb045d5`
 - **Feature branch:** `docs/mip-p2-roadmap-coordination-reconciliation-after-geox-supersession-001`
-- **Implementation SHA:** `c4a849b00cc8f0c954b6c3ffcc56b914a4ee0614`
+- **Rejected review head:** `1f2783fbb490673b9aaf82f74fe5923df5d2e97f`
+- **Implementation at rejected head:** `c4a849b00cc8f0c954b6c3ffcc56b914a4ee0614`
 - **Prior substantive reconciliation SHA:** `e52bb3db06c12d0171004f22bad8cc9db6250dc9`
 - **Risk tier:** Tier 3 cross-repository coordination governance
 
-## Deliverables and acceptance evidence
+## Review scope and evidence
 
-The reconciliation updated only the eleven task-owned paths: program current
-state, repository checkpoints, next sequence, coordination JSON and append-only
-history, roadmap execution current-state text, navigation index, the semantic
-coordination test, and the three stable execution files.
+Live GitHub review verified:
 
-It records MMM `b8878dfa4bcd178a0472c3b812492a5bb4ac0b45` with its authorized
-protocol-adoption task; it records GeoX
-`f15b0ee1713eaa46b7dc55e597e713443f5a8d32` with its lean-adoption task
-superseded without merge and preserved branch
-`bb1ac8d5ce29e2cab33eb680b3b7db76110f35f1` as historical only. It retains all
-five P2 blockers as open, preserves the stale MIP resolver as superseded
-historical evidence, and records the GeoX owner-declared four-outcome producer
-sequence as proposed without inventing task IDs or authority.
-
-The semantic test has seven explicit groups covering live pins/protocol states,
-GeoX supersession, consumer verification, stale execution-sequence removal,
-resolver supersession, authority freezes, and current-state rather than stale
-task-identity coupling.
-
-## Validation
-
-- JSON parsing: passed for execution and coordination state.
-- Markdown/current-state consistency: passed by focused semantic and handoff
-  tests.
-- Task-authoring and immediate state-only boundaries: verified.
-- Changed paths: only the eleven owned paths.
-- `git diff --check`: passed.
-- `poetry run pytest -q tests/test_cross_repository_coordination_control_plane.py`:
-  `7 passed`.
-- `poetry run pytest -q tests/governance/test_repo_native_execution_handoff.py`:
-  `1 passed`.
-- Ruff for the changed Python test: passed.
-- mypy for the changed Python test: passed.
-- Docker-backed `make validate`: `2547 passed`, `5 skipped`, `1 warning`; Ruff
+- MIP `main` remains `976d3a1daeae9c52c8772e5112574f698951a57c`.
+- The rejected feature branch was three commits ahead of `main`, zero behind,
+  and changed exactly the eleven authorized paths.
+- The exact publication receipt was created at `2026-08-04T00:44:25Z` and
+  reports the Tier-3 gate as passed: focused tests `7 passed` and `1 passed`;
+  Docker-backed `make validate` `2547 passed`, `5 skipped`, `1 warning`; Ruff
   passed; mypy passed across `471` source files.
+- Those validation results are locally execution-reported evidence. They do not
+  override stale or contradictory repository-state evidence.
 
-GitHub-verifiable evidence is the exact branch commits and live remote SHA
-observations. Validation counts above are locally execution-reported evidence;
-available hosted CI must be reviewed independently.
+## Blocking findings
 
-## Cross-repository impact and limitations
+### 1. Stale GeoX live overlay
 
-MMM and GeoX were inspected read-only and were not modified. GeoX's live main
-advanced during this task, so the final snapshot records its superseded state
-rather than the earlier review-ready branch state. No feature branch, preserved
-branch, task authorization, or local validation satisfies a merged dependency.
+The rejected snapshot records GeoX main
+`f15b0ee1713eaa46b7dc55e597e713443f5a8d32` and
+`GEOX_EXECUTION_BRANCH_BINDING_001` as merely proposed.
 
-No producer successor, certified fixture replay evidence, MMM normalization,
-consumer verification, D6 packet, fixture journey, live package integration,
-or resolver reauthoring is authorized. The next potential work remains
-owner-repository and separately authorized.
+GeoX main had already advanced at `2026-08-04T00:42:08Z` to
+`d17bb81c9dbc67f773fd71068c26b14c92989f42`, where:
 
-## Authority impact and merge readiness
+- task ID is `GEOX_EXECUTION_BRANCH_BINDING_001`;
+- status is `authorized`;
+- authorization head is `dc68853e87a65a494c942b3fe2794e321a22b036`;
+- feature branch is `feat/geox-execution-branch-binding-001`;
+- task execution is authorized; and
+- merge, PR, analytical, builder-successor, publication-successor, and capability
+  authority remain false.
 
-- **Capabilities newly authorized:** none.
-- **Capability authority changed:** false.
+The MIP implementation commit was created at `2026-08-04T00:42:30Z` and the
+receipt at `2026-08-04T00:44:25Z`, both after the GeoX main transition. The
+published snapshot therefore does not satisfy its own required final live-state
+verification.
+
+### 2. Contradictory GeoX workstream status
+
+Within the rejected coordination JSON:
+
+- the GeoX repository entry records
+  `GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001` as `superseded`; but
+- `WS-GEOX-LEAN-DELIVERY-ADOPTION-001` records the same task as `authorized`,
+  despite its own resolution text saying it was superseded without merge.
+
+Repository, workstream, ordered sequence, and Markdown views must agree on one
+current lifecycle state. Historical authorization may remain only as clearly
+labeled lineage, not as the current workstream status.
+
+## Required correction
+
+1. Re-fetch MIP, MMM, and GeoX live `main` and read each repository's
+   `AGENTS.md`, `EXECUTION_STATE.json`, `ACTIVE_TASK.md`,
+   `REPOSITORY_CONTEXT_INDEX.md`, and `LATEST_COMPLETION_REPORT.md` immediately
+   before editing and again immediately before publication.
+2. Apply the live overlay using the final exact repository SHAs and lifecycle
+   states. Never combine an older SHA with a newer task/status.
+3. Update the existing eleven owned paths as needed so:
+   - GeoX branch binding is represented at its actual live state;
+   - the superseded lean-delivery repository and workstream entries both read
+     `superseded`;
+   - the branch-binding workstream reflects its actual live state;
+   - sequence, current state, checkpoints, roadmap execution text, history, and
+     semantic tests agree;
+   - all five P2 blockers remain open; and
+   - MMM normalization, MIP P2 journey, D6, runtime, product, analytical, and
+     capability authority remain fail-closed.
+4. Strengthen the semantic test so current repository-task and matching
+   workstream lifecycle states cannot contradict one another.
+5. Run the complete Tier-3 validation gate on the frozen corrected tree and
+   publish a new exact-tree receipt. Retain rejected head
+   `1f2783fbb490673b9aaf82f74fe5923df5d2e97f` as historical review evidence.
+
+## Authority and validation impact
+
+- **Correction execution:** authorized on the existing branch.
 - **Merge authorization:** false.
 - **PR authorization:** false.
-- **Blockers:** none for this documentation/governance review outcome.
-- **Local-only paths:** `.codex/` and `docs/tasks/` only.
+- **Capabilities newly authorized:** none.
+- **Capability authority changed:** false.
+- **Product/runtime/sibling modifications:** prohibited.
+- **Prior validation debt:** the complete Tier-3 gate must be rerun after the
+  correction; the rejected receipt cannot be reused.
 
-The branch is ready only for external exact-head review. No merge is performed
-by this task.
+No approval or merge is permitted for the rejected head.
