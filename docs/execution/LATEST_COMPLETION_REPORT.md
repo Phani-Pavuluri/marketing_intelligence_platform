@@ -2,10 +2,12 @@
 
 ## Current decision
 
-- **Current decision:** `task_authored_pending_state_authorization`
+- **Current decision:** `authorized`
 - **Task ID:** `MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Pre-authoring base:** `480b32040ce185b8ff091435121c4bea6fc6c453`
+- **Authorization head:** `ad96a77ed0a70e59d0cd00bda5c0889918be1fb1`
+- **Authorized state head:** `af0c3ed29cad3843a2c79f5c269b9c1863d369d9`
 - **Feature branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001`
 - **Risk tier:** Tier 2 cross-repository forensic governance and ROI audit
 - **Implementation SHA:** not yet created
@@ -59,14 +61,16 @@ The final verdict must be one of:
 
 Token, compute, human-time, and elapsed-time values not recoverable from Git must be expressed through formulas and explicitly labeled assumptions, not fabricated measurements.
 
-## Task-authoring boundary
+## Authorization reconciliation
 
-The authoring range starts at `480b32040ce185b8ff091435121c4bea6fc6c453` and changes only:
+The task-authoring range remains `480b32040ce185b8ff091435121c4bea6fc6c453..ad96a77ed0a70e59d0cd00bda5c0889918be1fb1` and changes only:
 
 - `docs/execution/ACTIVE_TASK.md`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-The commit containing this report is the final task-authoring head. The immediate next commit must change only `docs/execution/EXECUTION_STATE.json`, record that exact authoring head, and authorize the exact declared feature branch. The branch must be created from the resulting synchronized state-only main head.
+The immediate authorization commit remains `af0c3ed29cad3843a2c79f5c269b9c1863d369d9` and changes only `docs/execution/EXECUTION_STATE.json`.
+
+The later metadata-only reconciliation commits update the two human-readable lifecycle views from `task_authored_pending_state_authorization` to `authorized`. They do not change the authorization head, task scope, owned paths, validation gate, authority flags, sibling state, or capability authority.
 
 ## Validation requirement
 
@@ -86,6 +90,6 @@ Docker-backed `make validate` and the application full suite are not required be
 
 ## Authority and non-actions
 
-Task execution becomes true only in the immediate state-only authorization commit. Correction, merge, PR, sibling, analytical, product, release, real-data, runtime, pilot, production, and capability authority remain false.
+Task execution is authorized. Correction, merge, PR, sibling, analytical, product, release, real-data, runtime, pilot, production, and capability authority remain false.
 
 A machine-readable task or `taskctl` pilot remains a separately reviewed successor and is not authorized by this audit.
