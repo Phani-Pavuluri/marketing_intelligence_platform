@@ -175,15 +175,59 @@ binds its message to the exact tree. No task-owned file may change after the
 receipt commit; any change requires a new validated publication head. Review
 uses this Git evidence and must not depend on pasted terminal or chat output.
 
-## Invocation-only Codex prompt contract
+## Git-authoritative thin launcher contract
 
-The execution and correction invocation is exactly:
-`Synchronize from Git and execute the active task.` The active Git status and
-Git-authored instructions determine whether it is normal execution or a
-correction. The merge invocation is exactly:
-`Synchronize from Git and execute the active task's merge and closure workflow. Approved exact remote head: <SHA>.`
-The SHA is the only normally required external fact because approval is absent
-from the reviewed tree.
+Launchers are operational only; Git remains the sole durable source for task
+meaning. The execution launcher must direct synchronization, reading execution
+files, main-to-feature-branch resolution, implementation, validation,
+exact-tree publication, push, remote-head verification, non-terminal progress,
+durable `ready_for_review` or `blocked`, and no PR/merge/capability action. The
+correction launcher differs only by directing the Git-authored `changes_requested`
+correction. The merge launcher may additionally carry only the approved exact
+remote head SHA; all validation, fast-forward, closure, cleanup, and authority
+semantics remain Git-authored.
+
+### Canonical execution launcher
+
+```text
+Work in <local repository path>.
+
+Synchronize main from Git and read AGENTS.md and the repository execution files. Resolve authorization provenance and the exact feature branch from synchronized main, then fetch and resume that remote feature branch and read its current execution files.
+
+Execute the active task through implementation, required validation, exact-tree publication, push, and remote-head verification.
+
+Progress updates are non-terminal. Do not stop or return control merely to report orientation or progress. Stop only when the remote feature branch durably records ready_for_review or a genuine blocked state.
+
+Do not create a pull request, merge, or change capability authority.
+```
+
+### Canonical correction launcher
+
+```text
+Work in <local repository path>.
+
+Synchronize main from Git and read AGENTS.md and the repository execution files. Resolve authorization provenance and the exact feature branch from synchronized main, then fetch and resume that remote feature branch and read its current execution files.
+
+Execute the Git-authored changes_requested correction through the complete required validation, a new exact-tree publication, push, and remote-head verification.
+
+Progress updates are non-terminal. Do not stop or return control merely to report orientation or progress. Stop only when the remote feature branch durably records a new ready_for_review or a genuine blocked state.
+
+Do not create a pull request, merge, or change capability authority.
+```
+
+### Canonical merge launcher
+
+```text
+Work in <local repository path>.
+
+Synchronize main from Git and read AGENTS.md and the repository execution files. Execute the active task's merge and closure workflow.
+
+Approved exact remote head: <FULL_SHA>
+
+Revalidate the approved head, fast-forward merge only, validate after fast-forward, push main, perform task-branch cleanup, create exactly one closure commit, and verify local and remote main equality.
+
+Do not create a pull request, squash, rebase, force-push, or create a merge commit.
+```
 
 Prompts must not restate durable scope, owned paths, behavior, validation,
 workflow, cleanup, or stop conditions. Those instructions belong in committed Git state.

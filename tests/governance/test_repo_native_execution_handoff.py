@@ -156,6 +156,42 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
         assert state["merge_authorized"] is False
         assert state["reviewed_head_sha"] is None
         assert state["approval_commit_sha"] is None
+
+
+def test_git_authoritative_thin_launcher_preserves_git_only_task_meaning() -> None:
+    text = f"{AGENTS.read_text(encoding='utf-8')}\n{STANDARD.read_text(encoding='utf-8')}"
+    assert "sole durable task authority" in text
+    assert "must be resolved from Git" in text
+    assert "cannot\nrepair, expand, override, or reinterpret" in text
+
+
+def test_execution_and_correction_launchers_are_operational_and_non_terminal() -> None:
+    text = STANDARD.read_text(encoding="utf-8")
+    for phrase in (
+        "main-to-feature-branch",
+        "exact-tree publication",
+        "remote-head verification",
+        "non-terminal progress",
+        "ready_for_review",
+        "blocked",
+        "no PR/merge/capability action",
+    ):
+        assert phrase in text
+
+
+def test_merge_launcher_requires_only_path_and_approved_exact_sha() -> None:
+    text = STANDARD.read_text(encoding="utf-8")
+    assert "approved exact\nremote head SHA" in text
+    assert "fast-forward, closure, cleanup" in text
+
+
+def test_launchers_forbid_task_instance_duplication() -> None:
+    state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    active_text = ACTIVE_TASK.read_text(encoding="utf-8")
+    report_text = REPORT.read_text(encoding="utf-8")
+    text = AGENTS.read_text(encoding="utf-8")
+    assert "Task identity, branch, non-approved SHAs, scope, paths, validation" in text
+    assert "dependencies, correction details, implementation guidance, and sibling state" in text
     if state["status"] == "ready_for_review":
         implementation_sha = state["implementation_commit_sha"]
         _assert_sha(implementation_sha)
