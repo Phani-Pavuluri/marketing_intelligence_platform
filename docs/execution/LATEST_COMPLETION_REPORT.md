@@ -1,50 +1,75 @@
-# TASK_REAUTHORIZATION_REPORT
+# TASK_AUTHORIZATION_REPORT
 
 ## Current decision
 
-- **Current decision:** `task_reauthored_pending_state_authorization`
-- **Task ID:** `MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001`
+- **Current decision:** `authorized`
+- **Task ID:** `MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Prior authorization head:** `ad96a77ed0a70e59d0cd00bda5c0889918be1fb1`
-- **Prior authorized state head:** `af0c3ed29cad3843a2c79f5c269b9c1863d369d9`
-- **Prior branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001`
-- **Prior branch head:** `23f5f4ff957f71f5ab8f1d6f9bf99dab4a00e923`
-- **Reauthorized feature branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1`
-- **Risk tier:** Tier 2 cross-repository forensic governance and ROI audit
-- **Implementation SHA:** not yet created
+- **Feature branch:** `docs/mip-codex-execution-incident-evidence-matrix-001`
+- **Risk tier:** Tier 2 cross-repository forensic evidence package
 - **Capability authority:** unchanged
 
-## Reason for reauthorization
+## Prior audit disposition
 
-The original branch and `main` acquired equivalent lifecycle-reconciliation content through separate commit lineages. That divergence would prevent the required future fast-forward merge even though the execution metadata content matched.
+`MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001` is rejected and superseded without merge.
 
-The prior branch is therefore historical metadata-reconciliation evidence only. It is not approved for execution or merge. No audit implementation occurred there.
+- rejected remote head: `3233f424ad388b30ef2181eab8198a45fb5edf03`
+- rejected implementation: `c9134f0c036581290ef686ee7e5d1058055c952d`
+- preserved branch: `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1`
+- correction cycles: `1 of 1` consumed
 
-This reauthorization changes no audit scope, evidence sample, acceptance requirement, validation gate, sibling ownership, product blocker, analytical boundary, or capability authority. It only creates a clean branch lineage from synchronized current `main`.
+The metadata repair at the rejected head made the lifecycle report coherent, but the substantive audit remained unreliable. Known MMM lifecycle evidence was marked unavailable, MIP thin-launcher task 002 was misclassified, and the validator checked record shape rather than evidence truthfulness. The branch remains historical forensic evidence and is not merge-authorized.
 
-## Prior product workstream disposition
+## Authorized outcome
 
-`MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001` remains blocked by `BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001`. It remains parked pending merged producer evidence and later MIP consumer verification.
+Produce one normalized 12-record cross-repository incident evidence matrix and one lookup ledger proving every populated, not-applicable, unavailable, or inaccessible lifecycle fact.
 
-GeoX's active `GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001` work remains separately owned. MMM's current thin-launcher proposal remains non-executable and stale. This audit does not modify or authorize either sibling.
+This task owns evidence reconstruction only. It does not produce root-cause conclusions, counterfactual recommendations, ROI, a pilot decision, execution tooling, standards changes, or product changes.
 
-## Authorized outcome after state commit
+## Live orientation at authoring
 
-Produce an evidence-grounded incident matrix, causal root-cause analysis, solution comparison, engineering-effort estimate, ROI model, and direct go/no-go recommendation for improving Git-native Codex execution across MIP, MMM, and GeoX.
+- MIP `main`: `cda803790be15089412038ac33f2af8205b5e83f`
+- MMM `main`: `f2e0eade0ad917c1b28ab5521e6d35a35047d988`
+- GeoX `main`: `d0f0ba937c79528abd34d7ff89eb4601080805e9`
+- GeoX producer branch `feat/geox-certified-calibration-source-manifest-001` currently records a correction-cycle state on its exact remote branch and remains separately owned.
 
-The audit remains read-only against sibling repositories and may modify only its declared MIP audit, coordination, and execution metadata paths.
+The parked MIP P2 provenance blocker remains unresolved. MMM and GeoX are read-only evidence sources. No sibling workstream or capability authority changes.
 
-## Reauthoring boundary
+## Deliverables
 
-The reauthoring starts from MIP `main` at `9d2172844660e59cc01dce243b0ccd5a2554831d` and changes only:
+1. `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001.json`
+2. `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_LOOKUP_LOG_001.json`
 
+The matrix must contain exactly eight incident records, one active-context record, and three successful-control records. The lookup ledger must make every lifecycle value auditable and must prove actual failed lookups before a fact can be marked unavailable.
+
+## Owned paths
+
+Only these five paths may change during execution:
+
+- `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001.json`
+- `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_LOOKUP_LOG_001.json`
 - `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-The commit containing this report is the new task-authoring head. The immediate next commit must change only `docs/execution/EXECUTION_STATE.json`, record that exact authoring head, and authorize the exact `-r1` branch. The new branch must be created from the resulting state-only main head.
+No coordination, audit-report, ROI, standard, test, code, fixture, sibling, PR, merge, or capability change is authorized.
 
-## Validation and authority
+## Validation and publication
 
-The Tier-2 audit validation gate remains unchanged. Docker-backed full application validation is not required because executable or production code remains prohibited.
+The final frozen tree must pass JSON parsing, exact 12-record identity/count checks, required-key checks, matrix-to-ledger foreign-key checks, mandatory-anchor coverage, null/unavailable lookup proof, local `git cat-file` existence checks for every found commit, prohibited-analysis-field scanning, exact owned-path verification, `git diff --check`, exact-tree receipt, push, and local/remote equality.
 
-Task execution becomes true only in the immediate state-only reauthorization commit. Correction, merge, PR, sibling, product, analytical, runtime, pilot, production, and capability authority remain false.
+Docker and the full application suite are not required because executable code and tests are prohibited.
+
+The task must stop at one Git-durable remote `ready_for_review` or genuine external-evidence `blocked` state. Correction, merge, PR, sibling, product, analytical, runtime, pilot, production, and capability authority remain false.
+
+## Authoring boundary
+
+- pre-authoring main: `cda803790be15089412038ac33f2af8205b5e83f`
+- active-task authoring commit: `3b69964be7fd9b56a29c8aa261465884f8260c9d`
+- this report commit is the task-authoring head
+- the immediate next commit must modify only `docs/execution/EXECUTION_STATE.json` to record authorization
+- create the declared feature branch from that state-only authorization commit
+
+## Deferred successor
+
+`MIP_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_DECISION_001` remains unauthorized until the evidence package is externally approved, fast-forward merged, and closed.
