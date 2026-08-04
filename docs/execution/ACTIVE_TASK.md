@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** task_reauthored_pending_state_authorization
 **Owner:** MIP cross-repository coordination and execution-governance owner
 **Last updated:** 2026-08-04
 **Last verified:** 2026-08-04
@@ -10,13 +10,17 @@
 - **Task ID:** `MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Pre-authoring base:** `480b32040ce185b8ff091435121c4bea6fc6c453`
-- **Authorization head:** `ad96a77ed0a70e59d0cd00bda5c0889918be1fb1`
-- **Authorized state head:** `af0c3ed29cad3843a2c79f5c269b9c1863d369d9`
-- **Feature branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001`
+- **Prior authorization head:** `ad96a77ed0a70e59d0cd00bda5c0889918be1fb1`
+- **Prior authorized state head:** `af0c3ed29cad3843a2c79f5c269b9c1863d369d9`
+- **Prior branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001`
+- **Prior branch head:** `23f5f4ff957f71f5ab8f1d6f9bf99dab4a00e923`
+- **Reauthorized feature branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1`
 - **Execution mode:** `branch_and_fast_forward`
 - **Risk tier:** Tier 2 — cross-repository forensic governance and ROI audit
 - **Coordination workstream:** `WS-MIP-CODEX-EXECUTION-ROOT-CAUSE-ROI-AUDIT-001`
 - **Capability authorizations changed:** `false`
+
+The prior branch is preserved as metadata-reconciliation history only. It must not be executed, merged, rebased, force-updated, or used as review evidence. The audit scope, evidence sample, acceptance requirements, and authority boundaries are unchanged.
 
 ## Primary independently mergeable outcome
 
@@ -40,10 +44,8 @@ This is a read-only audit of MMM and GeoX. It does not modify sibling repositori
 
 Connected GitHub established before task authoring:
 
-- MIP `main`: `480b32040ce185b8ff091435121c4bea6fc6c453`.
 - MIP task `MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001` is durably `blocked` by `BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001`; no implementation occurred. This product workstream is parked, not cancelled or resolved.
 - MMM `main`: `f2e0eade0ad917c1b28ab5521e6d35a35047d988`. `MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001` is a non-executable stale proposal blocked on a superseded MIP standard. No MMM implementation task overlaps this audit.
-- GeoX `main`: `7f829395bc305550ea1311421a4181dafed795b8`.
 - GeoX task `GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001` is separately authorized on `feat/geox-certified-calibration-source-manifest-001`. It is active producer work and must not be modified, reviewed, blocked, superseded, or treated as completed by this audit.
 - GeoX task `GEOX_CERTIFIED_CALIBRATION_HANDOFF_SOURCE_FIXTURE_001` is superseded without merge after a failed implementation, failed correction, and invalid blocked claim; its preserved branch is historical evidence only.
 - MIP's coordination snapshot is stale and must be refreshed only for verified current workstreams and blocker preservation; live Git remains authoritative.
@@ -331,11 +333,10 @@ If required history or evidence is inaccessible, publish `blocked` with the exac
 
 ## Task-authoring and authorization boundary
 
-- Pre-authoring base: `480b32040ce185b8ff091435121c4bea6fc6c453`.
-- The task-authoring range may change only `docs/execution/ACTIVE_TASK.md` and `docs/execution/LATEST_COMPLETION_REPORT.md`.
-- The final task-authoring head must be recorded in the immediate next state-only commit.
-- The immediate next commit may change only `docs/execution/EXECUTION_STATE.json` and authorize the exact feature branch.
-- Create the feature branch from the resulting state-only main head.
+- The original task scope was authored from blocked product-state base `480b32040ce185b8ff091435121c4bea6fc6c453`.
+- This branch reauthoring changes only the three execution metadata files and corrects branch lineage after lifecycle reconciliation.
+- The immediate next state-only commit must record the new authoring head and authorize the exact `-r1` branch.
+- Create the `-r1` branch from that resulting state-only main head.
 
 ## Deferred successor
 
