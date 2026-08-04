@@ -1,0 +1,17 @@
+{
+  "schema_version": "mip_codex_execution_audit_incident_matrix_v1",
+  "evidence_classification": ["git_observed", "strong_inference", "unavailable"],
+  "incidents": [
+    {"repository":"mip","task_id":"MIP_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_001","base_sha":"9bed0f30879e68473a37b0e65d449ea0b6a6e3f3","implementation_sha":"dde6969b1192b97aea519c9589d27186f19b6db2","rejected_sha":"e390f1b47f8a7c5dfaa7a05613c2c4de73e4a548","disposition":"superseded_without_merge","correction_cycles":1,"root_causes":["prompt_git_duplication","self_modifiable_acceptance_oracle","duplicated_lifecycle_state"],"evidence":"docs/execution/LATEST_COMPLETION_REPORT.md","confidence":"high"},
+    {"repository":"mip","task_id":"MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001","blocked_sha":"480b32040ce185b8ff091435121c4bea6fc6c453","disposition":"blocked","correction_cycles":0,"root_causes":["missing_preauthorization_dependency_proof","stale_cross_repository_evidence"],"evidence":"docs/execution/LATEST_COMPLETION_REPORT.md","confidence":"high"},
+    {"repository":"mmm","task_id":"MMM_REPO_NATIVE_EXECUTION_HANDOFF_ADOPTION_001","merged_sha":"ad55fef6799a8bd717108781ad44fc88fa116df7","disposition":"historical_nonconforming_external_merge","correction_cycles":null,"root_causes":["incomplete_exact_tree_receipt","reviewer_or_authoring_error"],"evidence":"docs/execution/EXECUTION_STATE.json","confidence":"medium"},
+    {"repository":"mmm","task_id":"MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001","disposition":"proposed_non_executable","correction_cycles":0,"root_causes":["stale_cross_repository_evidence"],"evidence":"docs/execution/EXECUTION_STATE.json","confidence":"high"},
+    {"repository":"geox","task_id":"GEOX_EXECUTION_BRANCH_BINDING_REAUTHORING_001","preserved_branch_sha":"9d0da6bb96dd7711ab8c91bbef21a80a4b816973","disposition":"superseded_without_merge","correction_cycles":1,"root_causes":["correction_anchor_drift","self_modifiable_acceptance_oracle","duplicated_lifecycle_state"],"evidence":"docs/execution/LATEST_COMPLETION_REPORT.md","confidence":"high"},
+    {"repository":"geox","task_id":"GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001","authorization_sha":"486c626dcf24d176ab30e034057348f92b6257d4","disposition":"active_context_only","correction_cycles":0,"root_causes":[],"evidence":"docs/execution/EXECUTION_STATE.json","confidence":"high"}
+  ],
+  "controls": [
+    {"repository":"mip","task_id":"MIP_CROSS_REPOSITORY_COORDINATION_CONTROL_PLANE_001","disposition":"merged_control","evidence":"3520176126d129e9288a9ce37591299ec856650a"},
+    {"repository":"mmm","task_id":"MMM_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECONCILIATION_001","disposition":"merged_control","evidence":"1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421"},
+    {"repository":"geox","task_id":"GEOX_CERTIFIED_GOVERNED_READOUT_FIXTURES_001","disposition":"merged_control","evidence":"860182386c39f487747de5f43e67a31e9978e57c"}
+  ]
+}

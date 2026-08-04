@@ -216,6 +216,15 @@
     "D6 reconciliation and fixture-only cross-repository dry run",
     "Separate authorization before live package integration"
   ],
+  "audit_live_overlay_2026_08_04": {
+    "mip_main": "cda803790be15089412038ac33f2af8205b5e83f",
+    "mmm_main": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
+    "geox_main": "7f829395bc305550ea1311421a4181dafed795b8",
+    "mip_p2_bridge": "parked_blocked_by_BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001",
+    "geox_manifest_task": "authorized_in_geox_only_not_completed_or_consumer_accepted",
+    "mmm_thin_launcher": "proposed_non_executable_stale_dependency",
+    "authority_boundary": "Audit observation does not authorize sibling work, consumer acceptance, or any runtime capability."
+  },
   "authority": {
     "capability_authorizations_changed": false,
     "runtime_integration": "blocked",
