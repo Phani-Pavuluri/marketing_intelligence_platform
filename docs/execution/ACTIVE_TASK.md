@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -284,13 +284,40 @@ current decision only in chat or terminal output.
 
 ## Publication result
 
-- **Implementation SHA:** `c4a849b00cc8f0c954b6c3ffcc56b914a4ee0614`
-- **Review state:** `ready_for_review`
-- **Blockers:** none
+- **Rejected exact review head:** `1f2783fbb490673b9aaf82f74fe5923df5d2e97f`
+- **Implementation at rejected head:** `c4a849b00cc8f0c954b6c3ffcc56b914a4ee0614`
+- **Review state:** `changes_requested`
+- **Correction execution:** authorized on this exact branch
 - **Merge and PR authority:** false
 - **Capability authority:** unchanged
 
-The implementation reconciles the live GeoX supersession observed at
-`f15b0ee1713eaa46b7dc55e597e713443f5a8d32`; it does not make a producer,
-consumer, release, or runtime dependency eligible. The exact-tree validation
-receipt is the final publication commit and is recorded in the completion report.
+## Required correction
+
+The rejected publication is directionally correct but not current enough for
+approval.
+
+1. The receipt at `2026-08-04T00:44:25Z` records GeoX main
+   `f15b0ee1713eaa46b7dc55e597e713443f5a8d32` and
+   `GEOX_EXECUTION_BRANCH_BINDING_001` as proposed. GeoX main had already moved at
+   `2026-08-04T00:42:08Z` to
+   `d17bb81c9dbc67f773fd71068c26b14c92989f42`, where that task is authorized at
+   authorization head `dc68853e87a65a494c942b3fe2794e321a22b036` on
+   `feat/geox-execution-branch-binding-001`.
+2. The rejected coordination JSON records the GeoX repository entry as
+   `GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001` / `superseded`, but its
+   corresponding `WS-GEOX-LEAN-DELIVERY-ADOPTION-001` workstream as
+   `authorized`. Historical and current status must agree.
+
+Correction must re-read live MIP, MMM, and GeoX mains and exact execution files
+immediately before editing and again immediately before publication. Update the
+existing eleven owned paths as needed so every repository entry, workstream,
+sequence, Markdown view, and semantic test agrees with the final live evidence.
+At minimum, record GeoX branch binding with its actual live lifecycle state,
+mark the superseded lean-delivery workstream as superseded, keep every P2 blocker
+open, and preserve all owner and authority boundaries.
+
+Run the complete Tier-3 validation gate on the frozen corrected tree and publish
+a new exact-tree receipt. Retain rejected head
+`1f2783fbb490673b9aaf82f74fe5923df5d2e97f` as historical review evidence. Do
+not modify product/runtime code, siblings, canonical P0–P8, or capability
+authority.
