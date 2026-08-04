@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP cross-repository coordination and execution-governance owner
 **Last updated:** 2026-08-04
 **Last verified:** 2026-08-04
@@ -14,7 +14,7 @@
 - **Authorized branch baseline:** `cda803790be15089412038ac33f2af8205b5e83f`
 - **Rejected implementation SHA:** `26f6a2e8d9d2fa64a5a095113feb7458d90945f2`
 - **Rejected review head:** `9794085ad55014b4c104ccce74f9bbd87a255049`
-- **Correction cycles:** one authorized, zero completed, one remaining
+- **Correction cycles:** one authorized, one completed, zero remaining
 - **Execution mode:** `branch_and_fast_forward`
 - **Risk tier:** Tier 2 — cross-repository forensic governance and ROI audit
 - **Capability authorizations changed:** `false`
@@ -183,3 +183,11 @@ Re-run the complete frozen Tier-2 audit gate plus the correction-specific determ
 Publish one corrected implementation commit and one exact-tree receipt. Stop at a new remote `ready_for_review` head with correction authority false, merge and PR authority false, and local/remote equality.
 
 A missing historical fact that Git genuinely cannot prove must be represented as unavailable with evidence limitations. It is not permission to omit a required record. Gaps in reasoning, schema completeness, incident coverage, or ROI analysis are unfinished work, not external blockers.
+
+## Corrected publication result
+
+- **Status:** `ready_for_review`
+- **Corrected implementation SHA:** `c9134f0c036581290ef686ee7e5d1058055c952d`
+- **Correction cycle:** `1 of 1` completed; no further correction execution is authorized.
+- **Review boundary:** this is review evidence only. Merge, PR, sibling, product, analytical, runtime, pilot, production, and capability authority remain false.
+- **Historical review evidence:** rejected head `9794085ad55014b4c104ccce74f9bbd87a255049` and rejected implementation `26f6a2e8d9d2fa64a5a095113feb7458d90945f2` remain preserved for the reviewer.

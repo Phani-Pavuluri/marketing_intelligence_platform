@@ -1,5 +1,31 @@
 # TASK_REVIEW_DECISION_V1
 
+## Corrected publication completion
+
+- **Task ID:** `MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001`
+- **Milestone:** bounded correction of the cross-repository Codex-execution root-cause and ROI audit
+- **Branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1`
+- **Corrected implementation SHA:** `c9134f0c036581290ef686ee7e5d1058055c952d`
+- **Rejected history preserved:** review head `9794085ad55014b4c104ccce74f9bbd87a255049`; implementation `26f6a2e8d9d2fa64a5a095113feb7458d90945f2`.
+- **Lifecycle:** correction cycle `1 of 1` is complete; status is `ready_for_review`; correction execution is false; merge and PR authority are false.
+
+### Corrected deliverables and counts
+
+The corrected matrix contains eight incident records, one active-context record, and three successful-control records. Every record carries the frozen lifecycle, evidence, counterfactual, confidence, and unavailable-fact fields. The audit cites matrix evidence IDs for its material causal claims. The ROI model contains five alternatives and conservative, base, and aggressive assumed—not measured—break-even scenarios. The current GeoX source-manifest work remains active context only; the parked MIP P2 blocker remains unresolved.
+
+### Validation evidence
+
+- Deterministic inline semantic validator: `PASS (records=12)`; it checked required identities, unique IDs, required record keys, valid/unavailable lifecycle SHAs, evidence classifications and pointers, five complete options, three ordered scenarios, the allowed verdict, pilot thresholds, the parked P2 blocker, active GeoX ownership, and the owned-path boundary.
+- JSON parsing: `PASS` for the incident matrix, ROI model, coordination state, and execution state.
+- `git diff --check`: `PASS`.
+- Full application/Docker validation: not run because this correction is documentation-only and the frozen Tier-2 gate excludes executable code and test changes.
+
+Git-observed evidence is explicitly labeled in the matrix with exact repository refs. Locally reported validation is separately labeled. Historical elapsed time, token usage, compute cost, and facts absent from Git are marked unavailable rather than inferred.
+
+### Authority, sibling, and review boundary
+
+No PR or merge was created. MMM and GeoX were read-only evidence sources; neither repository was modified. No product, analytical, runtime, real-data, persistence, pilot, production, or capability authority changed. The next proposed pilot remains unauthorized. Local-only `.codex/` and `docs/tasks/` remain excluded from the task-owned changes.
+
 ## Current decision
 
 - **Current decision:** `changes_requested`
