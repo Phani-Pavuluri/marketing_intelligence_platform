@@ -50,12 +50,18 @@ def test_live_repository_pins_and_protocol_adoption_states_are_coherent() -> Non
         repositories["mmm"]["absorbed_task_id"]
         == "MMM_CROSS_REPOSITORY_COORDINATION_PROTOCOL_ADOPTION_001"
     )
+    geox = repositories["geox"]
+    assert geox["observed_remote_main_sha"] == "d17bb81c9dbc67f773fd71068c26b14c92989f42"
+    assert geox["active_task_id"] == "GEOX_EXECUTION_BRANCH_BINDING_001"
+    assert geox["active_task_status"] == "authorized"
+    assert geox["active_task_authorization_head_sha"] == "dc68853e87a65a494c942b3fe2794e321a22b036"
+    workstreams = _by_id(_list(state["workstreams"]))
+    assert workstreams["WS-GEOX-EXECUTION-BRANCH-BINDING-001"]["task_id"] == geox["active_task_id"]
     assert (
-        repositories["geox"]["active_task_id"]
-        == "GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001"
+        workstreams["WS-GEOX-EXECUTION-BRANCH-BINDING-001"]["status"]
+        == geox["active_task_status"]
     )
-    assert repositories["geox"]["active_task_status"] == "superseded"
-    assert repositories["geox"]["next_eligible_task_id"] == "GEOX_EXECUTION_BRANCH_BINDING_001"
+    assert workstreams["WS-GEOX-LEAN-DELIVERY-ADOPTION-001"]["status"] == "superseded"
     branch_source = _object(state["feature_branch_review_source"])
     assert branch_source["snapshot_scope"] == "repository_main_observations_only"
 

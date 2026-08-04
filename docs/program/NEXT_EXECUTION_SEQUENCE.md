@@ -7,8 +7,9 @@
 
 1. **MMM:** complete its owner-authorized execution-governance adoption task.
    Authorization is not merged completion.
-2. **GeoX:** separately authorize and complete the proposed execution-branch
-   binding task. Its prior lean-delivery adoption is superseded without merge.
+2. **GeoX:** complete the owner-authorized execution-branch binding task. Its
+   prior lean-delivery adoption is superseded without merge; authorization is
+   not merge completion.
 3. **GeoX:** after owner-repository authorization, establish the governed-readout
    temporal lifecycle contract, typed producer builder, certified fixture/hash/
    replay evidence, and optional envelope plus final handoff validation.

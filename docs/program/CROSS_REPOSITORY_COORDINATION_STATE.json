@@ -62,19 +62,18 @@
     {
       "id": "geox",
       "repository": "Phani-Pavuluri/panel_exp",
-      "observed_remote_main_sha": "f15b0ee1713eaa46b7dc55e597e713443f5a8d32",
+      "observed_remote_main_sha": "d17bb81c9dbc67f773fd71068c26b14c92989f42",
       "evidence_paths": ["docs/execution/EXECUTION_STATE.json", "docs/execution/ACTIVE_TASK.md", "docs/execution/LATEST_COMPLETION_REPORT.md", "panel_exp/contracts/geox_governed_experiment_readout.py"],
-      "active_task_id": "GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001",
-      "active_task_status": "superseded",
-      "active_task_authorization_head_sha": "686c3505151ee7073d52a9e70a8ea1b3f942ced4",
-      "active_task_feature_branch": "docs/geox-lean-repository-delivery-standard-adoption-001",
-      "preserved_branch_head_sha": "bb1ac8d5ce29e2cab33eb680b3b7db76110f35f1",
-      "preserved_branch_status": "changes_requested_historical_only",
+      "active_task_id": "GEOX_EXECUTION_BRANCH_BINDING_001",
+      "active_task_status": "authorized",
+      "active_task_authorization_head_sha": "dc68853e87a65a494c942b3fe2794e321a22b036",
+      "active_task_feature_branch": "feat/geox-execution-branch-binding-001",
+      "superseded_lean_delivery_task_id": "GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001",
+      "superseded_lean_delivery_status": "superseded_without_merge",
+      "superseded_lean_delivery_preserved_branch_head_sha": "bb1ac8d5ce29e2cab33eb680b3b7db76110f35f1",
       "superseded_task_id": "GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001",
       "superseded_task_status": "superseded_without_merge",
-      "next_eligible_task_id": "GEOX_EXECUTION_BRANCH_BINDING_001",
-      "next_eligible_task_status": "proposed",
-      "current_work_summary": "GeoX lean-delivery adoption is superseded without merge; its preserved branch is historical only. GeoX branch binding is the next proposed governance task, and no producer successor is authorized.",
+      "current_work_summary": "GeoX branch binding is authorized in GeoX only. Lean-delivery adoption and the prior builder are superseded without merge, and no producer successor is authorized.",
       "validation_debt": ["No merged GeoX governance successor, producer successor, certified fixture replay evidence, or consumer verification exists."],
       "authority_boundary": "GeoX owns experiment truth and handoff eligibility; no MIP consumer or live integration authority."
     }
@@ -107,10 +106,10 @@
       "owner_repository": "geox",
       "capability_area": "repository_execution_governance",
       "task_id": "GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001",
-      "status": "authorized",
+      "status": "superseded",
       "dependencies": [],
       "blocked_by": [],
-      "verified_sha": "f15b0ee1713eaa46b7dc55e597e713443f5a8d32",
+      "verified_sha": "d17bb81c9dbc67f773fd71068c26b14c92989f42",
       "preserved_branch_head_sha": "bb1ac8d5ce29e2cab33eb680b3b7db76110f35f1",
       "live_resolution_condition": "Superseded without merge. Its preserved branch is historical only and cannot satisfy any governance, producer, consumer, or release dependency."
     },
@@ -122,7 +121,7 @@
       "status": "superseded",
       "dependencies": [],
       "blocked_by": [],
-      "verified_sha": "f15b0ee1713eaa46b7dc55e597e713443f5a8d32",
+      "verified_sha": "d17bb81c9dbc67f773fd71068c26b14c92989f42",
       "live_resolution_condition": "Superseded without merge. Preserved branch evidence cannot satisfy producer, consumer, or release dependencies."
     },
     {
@@ -130,11 +129,13 @@
       "owner_repository": "geox",
       "capability_area": "repository_execution_branch_binding",
       "task_id": "GEOX_EXECUTION_BRANCH_BINDING_001",
-      "status": "proposed",
+      "status": "authorized",
       "dependencies": [],
       "blocked_by": [],
-      "verified_sha": "f15b0ee1713eaa46b7dc55e597e713443f5a8d32",
-      "live_resolution_condition": "GeoX alone may authorize and merge this governance successor. It changes no analytical or P2 capability authority."
+      "verified_sha": "d17bb81c9dbc67f773fd71068c26b14c92989f42",
+      "authorization_head_sha": "dc68853e87a65a494c942b3fe2794e321a22b036",
+      "feature_branch": "feat/geox-execution-branch-binding-001",
+      "live_resolution_condition": "Authorized in GeoX only. A GeoX merged and closed owner-repository state is required before this governance workstream can satisfy any dependency; it changes no analytical or P2 capability authority."
     },
     {
       "id": "WS-GEOX-PRODUCER-SUCCESSOR-SEQUENCE-001",
