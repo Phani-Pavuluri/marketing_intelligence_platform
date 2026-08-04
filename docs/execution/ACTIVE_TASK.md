@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** task_authored_pending_state_authorization
+**Status:** authorized
 **Owner:** MIP cross-repository coordination and execution-governance owner
 **Last updated:** 2026-08-04
 **Last verified:** 2026-08-04
@@ -10,6 +10,8 @@
 - **Task ID:** `MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Pre-authoring base:** `480b32040ce185b8ff091435121c4bea6fc6c453`
+- **Authorization head:** `ad96a77ed0a70e59d0cd00bda5c0889918be1fb1`
+- **Authorized state head:** `af0c3ed29cad3843a2c79f5c269b9c1863d369d9`
 - **Feature branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001`
 - **Execution mode:** `branch_and_fast_forward`
 - **Risk tier:** Tier 2 — cross-repository forensic governance and ROI audit
