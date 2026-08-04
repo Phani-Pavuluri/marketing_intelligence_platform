@@ -1,13 +1,13 @@
 {
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-  "task_id": "MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001",
-  "status": "blocked",
+  "task_id": "MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001",
+  "status": "authorized",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
-  "base_sha": "f8fb482e51697f004d3fa2a6b229f6729d423cef",
-  "authorization_head_sha": "f8392e85016a39e5d729fa50bb2798c694936380",
-  "feature_branch": "feat/mip-p2-geox-mmm-compatibility-fixture-bridge-001",
+  "base_sha": "480b32040ce185b8ff091435121c4bea6fc6c453",
+  "authorization_head_sha": "ad96a77ed0a70e59d0cd00bda5c0889918be1fb1",
+  "feature_branch": "docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": true,
@@ -19,13 +19,11 @@
   "implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
-  "last_updated": "2026-08-03",
-  "blockers": [
-    "BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001"
-  ],
-  "risk_tier": "tier_3_cross_repository_producer_contract_certified_fixture_integration",
-  "full_suite_validation_required": true,
-  "validation_scope": "producer_pin_and_fixture_provenance_json_exact_owned_paths_diff_focused_and_adjacent_tests_ruff_mypy_deterministic_replay_docker_make_validate_exact_tree_receipt_remote_head_equality",
+  "last_updated": "2026-08-04",
+  "blockers": [],
+  "risk_tier": "tier_2_cross_repository_forensic_governance_and_roi_audit",
+  "full_suite_validation_required": false,
+  "validation_scope": "changed_json_parse_audit_schema_checks_exact_owned_paths_diff_markdown_references_prohibited_path_scan_exact_tree_receipt_remote_head_equality",
   "unresolved_execution_blocking_design_questions": [],
   "affected_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform",
@@ -35,27 +33,53 @@
   "modified_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform"
   ],
-  "coordination_workstream_id": "WS-MIP-P2-GEOX-MMM-COMPATIBILITY-FIXTURE-BRIDGE-001",
-  "coordination_capability_owner": "mip_p2_consumer_integration",
-  "geox_live_main_pin": "e9b7d311ecaf5a90e227d8299f745a0e8f332368",
-  "geox_contract_path": "panel_exp/contracts/geox_governed_experiment_readout.py",
-  "geox_fixture_root": "tests/fixtures/geox_governed_readouts",
-  "geox_task_execution_observed": false,
-  "mmm_live_main_pin": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
-  "mmm_contract_path": "mmm/contracts/calibration_compatibility.py",
-  "mmm_fixture_root": "tests/fixtures/mip_export/calibration_compatibility_v1",
-  "mmm_task_execution_observed": false,
-  "producer_truth_recomputed_by_mip": false,
-  "calibration_signal_construction_authorized": false,
-  "mmm_compatibility_evaluation_authorized": false,
-  "simulation_authorized": false,
-  "planning_evidence_report_authorized": false,
-  "real_package_runtime_authorized": false,
-  "real_data_authorized": false,
-  "next_task_id": "MIP_P2_MMM_PUBLIC_SIMULATION_AND_PLANNING_EVIDENCE_FIXTURE_JOURNEY_001",
+  "coordination_workstream_id": "WS-MIP-CODEX-EXECUTION-ROOT-CAUSE-ROI-AUDIT-001",
+  "coordination_capability_owner": "mip_cross_repository_execution_governance_audit",
+  "mip_live_main_at_authorization": "480b32040ce185b8ff091435121c4bea6fc6c453",
+  "mmm_live_main_at_authorization": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
+  "geox_live_main_at_authorization": "7f829395bc305550ea1311421a4181dafed795b8",
+  "parked_product_workstreams": [
+    {
+      "task_id": "MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001",
+      "status": "blocked",
+      "blocker_id": "BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001",
+      "blocked_head_merged_to_main": "480b32040ce185b8ff091435121c4bea6fc6c453",
+      "resolution_condition": "Merged producer evidence from GeoX and MMM plus fresh MIP consumer verification and separate reauthorization.",
+      "resolved": false
+    }
+  ],
+  "concurrent_sibling_work": [
+    {
+      "repository": "Phani-Pavuluri/panel_exp",
+      "task_id": "GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001",
+      "status": "authorized",
+      "observed_main_sha": "7f829395bc305550ea1311421a4181dafed795b8",
+      "feature_branch": "feat/geox-certified-calibration-source-manifest-001",
+      "modified_or_authorized_by_mip": false
+    },
+    {
+      "repository": "Phani-Pavuluri/MMM",
+      "task_id": "MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001",
+      "status": "proposed_non_executable_stale_dependency",
+      "observed_main_sha": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
+      "feature_branch": null,
+      "modified_or_authorized_by_mip": false
+    }
+  ],
+  "audit_only": true,
+  "sibling_repositories_read_only": true,
+  "execution_standard_changes_authorized": false,
+  "test_harness_changes_authorized": false,
+  "taskctl_implementation_authorized": false,
+  "task_schema_implementation_authorized": false,
+  "prompt_generator_implementation_authorized": false,
+  "ci_or_git_hook_changes_authorized": false,
+  "product_or_analytical_changes_authorized": false,
+  "coordination_refresh_authorized": true,
+  "next_task_id": "MIP_MACHINE_READABLE_TASK_AND_TASKCTL_PILOT_001",
   "next_task_authorized": false,
-  "review_decision": "blocked",
-  "review_decision_source": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "prompt_strategy": "full_task_specific_codex_prompt_grounded_in_live_git",
-  "task_authoring_note": "Live producer verification found no certified provenance-linked GeoX governed-readout and MMM compatibility fixture pair. GeoX manifest states mmm_compatibility_emitted false; MMM fixtures reference unrelated source_readout_id and lineage identities. MIP must not fabricate, mutate, or recompute producer truth. A producer-owned certified paired fixture at exact pins is required before this task can resume."
+  "review_decision": "authorized",
+  "review_decision_source": "docs/execution/ACTIVE_TASK.md",
+  "prompt_strategy": "invocation_only_per_current_merged_mip_agents_for_this_audit",
+  "task_authoring_note": "The task-authoring range 480b32040ce185b8ff091435121c4bea6fc6c453..ad96a77ed0a70e59d0cd00bda5c0889918be1fb1 changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. This immediate state-only commit changes only EXECUTION_STATE.json and authorizes the exact audit branch. The parked P2 blocker remains unresolved; GeoX active producer work and MMM's non-executable proposal remain separately owned. Merge, PR, correction, sibling, product, analytical, runtime, pilot, production, and capability authority remain false."
 }
