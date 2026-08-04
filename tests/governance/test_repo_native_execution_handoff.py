@@ -118,18 +118,20 @@ def test_repo_native_execution_handoff_is_consistent() -> None:
     assert "`not_applicable`" in standard
     assert "retain `proposed`,\nmark it design-blocked, or split" in standard
 
-    invocation_guidance = f"{agents}\n{standard}"
+    launcher_guidance = f"{agents}\n{standard}"
     for requirement in (
-        "Invocation-only prompt rule",
-        "Codex prompts are invocation-only",
-        "Synchronize from Git and execute the active task.",
-        "exact externally approved remote head SHA",
+        "Git-authoritative thin launcher rule",
+        "Git-authoritative thin launcher contract",
+        "Git is the sole durable task authority",
+        "Approved exact remote head",
         "must not restate durable scope, owned paths, behavior, validation",
-        "cannot repair, expand, override, or reinterpret",
+        "cannot\ndefine, repair, expand, override, or reinterpret",
         "fail-closed blocker",
         "separately authorized owner-repository decision",
     ):
-        assert requirement in invocation_guidance
+        assert requirement in launcher_guidance
+    assert "Codex prompts are invocation-only" not in launcher_guidance
+    assert "The execution and correction invocation is exactly" not in launcher_guidance
     assert "publish `ready_for_review`" not in standard
     assert "push\nthe exact branch head" not in standard
     resumed_guidance = f"{agents}\n{standard}"
@@ -162,36 +164,59 @@ def test_git_authoritative_thin_launcher_preserves_git_only_task_meaning() -> No
     text = f"{AGENTS.read_text(encoding='utf-8')}\n{STANDARD.read_text(encoding='utf-8')}"
     assert "sole durable task authority" in text
     assert "must be resolved from Git" in text
-    assert "cannot\nrepair, expand, override, or reinterpret" in text
+    assert "cannot\ndefine, repair, expand, override, or reinterpret" in text
+    assert "Codex prompts are invocation-only" not in text
+    assert "The execution and correction invocation is exactly" not in text
 
 
 def test_execution_and_correction_launchers_are_operational_and_non_terminal() -> None:
     text = STANDARD.read_text(encoding="utf-8")
-    for phrase in (
-        "main-to-feature-branch",
-        "exact-tree publication",
-        "remote-head verification",
-        "non-terminal progress",
-        "ready_for_review",
-        "blocked",
-        "no PR/merge/capability action",
-    ):
-        assert phrase in text
+    for launcher in ("Canonical execution launcher", "Canonical correction launcher"):
+        start = text.index(f"### {launcher}")
+        block = text[start : text.index("```", text.index("```", start) + 3) + 3]
+        for phrase in (
+            "Work in <local repository path>.",
+            "Synchronize main from Git",
+            "exact feature branch from synchronized main",
+            "exact-tree publication, push, and remote-head verification",
+            "Progress updates are non-terminal.",
+            "ready_for_review",
+            "genuine blocked state",
+            "Do not create a pull request, merge, or change capability authority.",
+        ):
+            assert phrase in block
+        assert "Task ID:" not in block
+        assert "Feature branch:" not in block
+    assert "changes_requested correction" in text
 
 
 def test_merge_launcher_requires_only_path_and_approved_exact_sha() -> None:
     text = STANDARD.read_text(encoding="utf-8")
-    assert "approved exact\nremote head SHA" in text
-    assert "fast-forward, closure, cleanup" in text
+    start = text.index("### Canonical merge launcher")
+    block = text[start : text.index("```", text.index("```", start) + 3) + 3]
+    assert "Work in <local repository path>." in block
+    assert "Approved exact remote head: <FULL_SHA>" in block
+    assert "fast-forward merge only" in block
+    assert "closure commit" in block
+    assert (
+        "Do not create a pull request, squash, rebase, force-push, or create a merge commit."
+        in block
+    )
+    assert "Task ID:" not in block
+    assert "Feature branch:" not in block
 
 
 def test_launchers_forbid_task_instance_duplication() -> None:
-    state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
-    active_text = ACTIVE_TASK.read_text(encoding="utf-8")
-    report_text = REPORT.read_text(encoding="utf-8")
     text = AGENTS.read_text(encoding="utf-8")
     assert "Task identity, branch, non-approved SHAs, scope, paths, validation" in text
     assert "dependencies, correction details, implementation guidance, and sibling state" in text
+    assert "The exact execution invocation remains" not in text
+
+
+def test_execution_lifecycle_state_is_consistent() -> None:
+    state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    active_text = ACTIVE_TASK.read_text(encoding="utf-8")
+    report_text = REPORT.read_text(encoding="utf-8")
     if state["status"] == "ready_for_review":
         implementation_sha = state["implementation_commit_sha"]
         _assert_sha(implementation_sha)
