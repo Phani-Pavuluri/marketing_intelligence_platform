@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -257,6 +257,17 @@ test. Discovery of a runtime or broader executable dependency is a blocker, not
 permission to widen scope.
 
 ## Task-authoring and authorization boundaries
+
+## Publication result
+
+- **Implementation SHA:** `dde6969b1192b97aea519c9589d27186f19b6db2`
+- **Review state:** `ready_for_review`
+- **Blockers:** none
+- **Merge and PR authority:** `false`
+- **Capability authority:** unchanged
+
+The final publication commit is the frozen exact-tree validation receipt. No
+task-owned file may change after it without a new validated publication.
 
 - Pre-authoring base: `976d3a1daeae9c52c8772e5112574f698951a57c`.
 - The authoring range may change only `docs/execution/ACTIVE_TASK.md` and
