@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Owner:** MIP cross-repository execution-governance owner
 **Last updated:** 2026-08-04
 **Last verified:** 2026-08-04
@@ -310,3 +310,10 @@ If a required repository object or preserved branch is genuinely inaccessible, p
 `MIP_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_DECISION_001` may be authored only after this evidence package is externally reviewed, approved, fast-forward merged, and closed. It must consume the merged matrix and lookup ledger without repeating repository archaeology.
 
 **Unresolved execution-blocking design questions:** none.
+
+## Publication result
+
+- **Status:** `ready_for_review`
+- **Evidence-package implementation SHA:** `3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7`
+- **Evidence package:** 12 records and 75 lookup-ledger entries.
+- **Authority:** task execution remains true for this completed publication; correction, merge, PR, sibling, and capability authority remain false.

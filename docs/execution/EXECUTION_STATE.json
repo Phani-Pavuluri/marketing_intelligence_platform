@@ -2,7 +2,7 @@
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
   "task_id": "MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001",
-  "status": "authorized",
+  "status": "ready_for_review",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
   "base_sha": "cda803790be15089412038ac33f2af8205b5e83f",
@@ -19,7 +19,7 @@
   "pr_creation_authorized": false,
   "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
-  "implementation_commit_sha": null,
+  "implementation_commit_sha": "3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7",
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-08-04",
@@ -79,8 +79,8 @@
   "pilot_recommendation_authorized": false,
   "next_task_id": "MIP_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_DECISION_001",
   "next_task_authorized": false,
-  "review_decision": "authorized",
+  "review_decision": "ready_for_review",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "prompt_strategy": "full_task_specific_per_project_execution_contract",
-  "task_authoring_note": "The authoring range cda803790be15089412038ac33f2af8205b5e83f..98422e2503809691c1df22c06fd8e5b132d0d2e0 changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. This immediate state-only commit changes only EXECUTION_STATE.json. The declared branch must be created from this exact state-only commit."
+  "task_authoring_note": "Evidence package implementation 3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7 is ready for external review. It contains 12 records and 75 ledger entries at MIP fc0ab44254a7a17982582798c0ace7285fde9bef, MMM f2e0eade0ad917c1b28ab5521e6d35a35047d988, GeoX d0f0ba937c79528abd34d7ff89eb4601080805e9, and GeoX context branch c18f56341b50c58505b59fc6cacf2337ca7f9fc4. Correction, merge, PR, sibling, and capability authority remain false."
 }
