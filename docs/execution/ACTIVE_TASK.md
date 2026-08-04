@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** task_reauthored_pending_state_authorization
+**Status:** ready_for_review
 **Owner:** MIP cross-repository coordination and execution-governance owner
 **Last updated:** 2026-08-04
 **Last verified:** 2026-08-04
@@ -343,3 +343,10 @@ If required history or evidence is inaccessible, publish `blocked` with the exac
 A bounded machine-readable-task and `taskctl` MVP pilot may be considered only if this audit is externally reviewed, merged, and recommends `proceed_with_bounded_pilot`. It is not authorized here.
 
 **Unresolved execution-blocking design questions: none.**
+
+## Publication result
+
+- **Implementation SHA:** `26f6a2e8d9d2fa64a5a095113feb7458d90945f2`
+- **Review state:** `ready_for_review`
+- **Blockers:** none
+- **Authority impact:** unchanged
