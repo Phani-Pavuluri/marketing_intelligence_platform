@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** blocked
 **Owner:** MIP integration and consumer-contract owner
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -261,3 +261,13 @@ A genuine missing producer fixture, incompatible live producer contract, externa
 `MIP_P2_MMM_PUBLIC_SIMULATION_AND_PLANNING_EVIDENCE_FIXTURE_JOURNEY_001` may be considered only after this bridge is externally reviewed, merged, and closed. It is not authorized here.
 
 **Unresolved execution-blocking design questions: none.**
+
+## Blocked execution result
+
+- **Status:** `blocked`
+- **Blocker:** `BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001`
+- **Resolution condition:** GeoX and MMM owners must publish a certified,
+  provenance-linked governed-readout and calibration-compatibility fixture pair
+  at exact merged producer pins, including matching readout and evidence lineage
+  identities and the required terminal cases.
+- **Authority impact:** unchanged; no MIP bridge implementation occurred.
