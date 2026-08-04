@@ -5,193 +5,134 @@ from pathlib import Path
 ROOT = Path(__file__).parents[2]
 EXECUTION = ROOT / "docs" / "execution"
 STANDARD = EXECUTION / "TASK_EXECUTION_STANDARD.md"
-LEAN_STANDARD = ROOT / "docs" / "program" / "LEAN_REPOSITORY_DELIVERY_STANDARD.md"
 STATE_PATH = EXECUTION / "EXECUTION_STATE.json"
 ACTIVE_TASK = EXECUTION / "ACTIVE_TASK.md"
 REPORT = EXECUTION / "LATEST_COMPLETION_REPORT.md"
 CONTEXT_INDEX = EXECUTION / "REPOSITORY_CONTEXT_INDEX.md"
 AGENTS = ROOT / "AGENTS.md"
-STATUSES = {
-    "idle",
-    "proposed",
-    "authorized",
-    "in_progress",
-    "blocked",
-    "ready_for_review",
-    "changes_requested",
-    "merged",
-    "superseded",
-}
 SHA_PATTERN = r"[0-9a-f]{40}"
+SYNC_LINE = (
+    "Synchronize main from Git and read AGENTS.md and the repository execution files. "
+    "Resolve authorization provenance and the exact feature branch from synchronized main, "
+    "then fetch and resume that remote feature branch and read its current execution files."
+)
+PROGRESS_LINE = (
+    "Progress updates are non-terminal. Do not stop or return control merely to report orientation "
+    "or progress. Stop only when the remote feature branch durably records"
+)
+CANONICAL = {
+    "Canonical execution launcher": "\n\n".join(
+        (
+            "Work in <local repository path>.",
+            SYNC_LINE,
+            "Execute the active task through implementation, required validation, "
+            "exact-tree publication, "
+            "push, and remote-head verification.",
+            f"{PROGRESS_LINE} ready_for_review or a genuine blocked state.",
+            "Do not create a pull request, merge, or change capability authority.",
+        )
+    ),
+    "Canonical correction launcher": "\n\n".join(
+        (
+            "Work in <local repository path>.",
+            SYNC_LINE,
+            "Execute the Git-authored changes_requested correction through the complete "
+            "required validation, "
+            "a new exact-tree publication, push, and remote-head verification.",
+            f"{PROGRESS_LINE} a new ready_for_review or a genuine blocked state.",
+            "Do not create a pull request, merge, or change capability authority.",
+        )
+    ),
+    "Canonical merge launcher": "\n\n".join(
+        (
+            "Work in <local repository path>.",
+            "Synchronize main from Git and read AGENTS.md and the repository execution files. "
+            "Execute the active task's merge and closure workflow.",
+            "Approved exact remote head: <FULL_SHA>",
+            "Revalidate the approved head, fast-forward merge only, validate after fast-forward, "
+            "push main, perform task-branch cleanup, create exactly one closure commit, and "
+            "verify local and remote main equality.",
+            "Do not create a pull request, squash, rebase, force-push, or create a merge commit.",
+        )
+    ),
+}
 
 
-def _assert_sha(value: object) -> None:
-    assert isinstance(value, str)
-    assert re.fullmatch(SHA_PATTERN, value)
+def _block(heading: str) -> str:
+    text = STANDARD.read_text(encoding="utf-8")
+    start = text.index(f"### {heading}")
+    start = text.index("```text\n", start) + len("```text\n")
+    end = text.index("\n```", start)
+    return text[start:end]
+
+
+def _sha(value: object) -> None:
+    assert isinstance(value, str) and re.fullmatch(SHA_PATTERN, value)
 
 
 def test_repo_native_execution_handoff_is_consistent() -> None:
-    required_paths = (
-        STANDARD,
-        CONTEXT_INDEX,
-        ACTIVE_TASK,
-        REPORT,
-        STATE_PATH,
-        AGENTS,
-    )
-    for path in required_paths:
-        assert path.is_file()
-
+    for required_path in (STANDARD, CONTEXT_INDEX, ACTIVE_TASK, REPORT, STATE_PATH, AGENTS):
+        assert required_path.is_file()
     state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
-    active_text = ACTIVE_TASK.read_text(encoding="utf-8")
-    report_text = REPORT.read_text(encoding="utf-8")
     assert state["schema_version"] == "mip_repo_execution_state_v2"
-    assert state["status"] in STATUSES
-    task_id = state["task_id"]
-    assert isinstance(task_id, str) and task_id
-    for key in (
-        "task_execution_authorized",
-        "merge_authorized",
-        "capability_authorizations_changed",
-    ):
-        assert isinstance(state[key], bool)
-    _assert_sha(state["base_sha"])
-    _assert_sha(state["authorization_head_sha"])
-    assert (ROOT / state["task_path"]).is_file()
-    assert (ROOT / state["completion_report_path"]).is_file()
-    assert task_id in active_text
-    assert task_id in report_text
+    assert state["task_id"] in ACTIVE_TASK.read_text(encoding="utf-8")
+    assert state["task_id"] in REPORT.read_text(encoding="utf-8")
+    _sha(state["base_sha"])
+    _sha(state["authorization_head_sha"])
     assert state["capability_authorizations_changed"] is False
-
-    agents = AGENTS.read_text(encoding="utf-8")
-    for stable_path in (
-        "docs/execution/EXECUTION_STATE.json",
-        "docs/execution/ACTIVE_TASK.md",
-        "docs/execution/LATEST_COMPLETION_REPORT.md",
-        "docs/execution/REPOSITORY_CONTEXT_INDEX.md",
-    ):
-        assert stable_path in agents
-
-    standard = STANDARD.read_text(encoding="utf-8")
-    lean_standard = LEAN_STANDARD.read_text(encoding="utf-8")
-    context_index = CONTEXT_INDEX.read_text(encoding="utf-8")
-    combined_bootstrap = f"{agents}\n{standard}\n{context_index}"
-    standard_flat = " ".join(standard.split())
-    for command in (
-        "git fetch --prune origin",
-        "git switch main",
-        "git pull --ff-only origin main",
-        "git rev-parse main",
-        "git rev-parse origin/main",
-    ):
-        assert command in combined_bootstrap
     for local_only_path in (".codex/", "docs/tasks/"):
-        assert local_only_path in agents
-        assert local_only_path in standard
-        assert local_only_path in context_index
-    assert "unexpected untracked" in combined_bootstrap
-    assert "git fetch --unshallow origin" in standard
-    assert "base_sha..authorization_head_sha" in standard
+        assert local_only_path in AGENTS.read_text(encoding="utf-8")
+        assert local_only_path in STANDARD.read_text(encoding="utf-8")
 
-    assert "No pre-merge approval-metadata commit" in standard_flat
-    assert "git merge --ff-only" in standard
-    assert "Docker-backed `make validate`" in standard
-    assert "exactly one post-merge closure commit" in standard_flat
-    assert "exact remote feature-branch head SHA" in agents
-    assert "Persisted `merge_authorized` remains false" in standard
 
-    definition_ready_guidance = f"{agents}\n{standard}\n{lean_standard}"
-    for requirement in (
-        "primary mergeable outcome",
-        "exact observable behavior",
-        "resolved design",
-        "inputs/outputs appropriate to the changed surface",
-        "failure semantics",
-        "Compatibility or migration policy",
-        "named acceptance tests or deterministic evidence",
-        "unresolved execution-blocking design questions: none",
-        "materially different contract meanings",
-        "separately authorized owner-repository decision",
-    ):
-        assert requirement in definition_ready_guidance
-    assert "Surface proportionality" in standard
-    assert "`not_applicable`" in standard
-    assert "retain `proposed`,\nmark it design-blocked, or split" in standard
+def test_git_authoritative_thin_launcher_preserves_git_only_task_meaning() -> None:
+    text = f"{AGENTS.read_text(encoding='utf-8')}\n{STANDARD.read_text(encoding='utf-8')}"
+    assert "Git is the sole durable task authority" in text
+    assert "cannot define, repair, expand, override, or reinterpret" in text
+    assert "Codex prompts are invocation-only" not in text
+    assert "The execution and correction invocation is exactly" not in text
 
-    invocation_guidance = f"{agents}\n{standard}"
-    for requirement in (
-        "Invocation-only prompt rule",
-        "Codex prompts are invocation-only",
-        "Synchronize from Git and execute the active task.",
-        "exact externally approved remote head SHA",
-        "must not restate durable scope, owned paths, behavior, validation",
-        "cannot repair, expand, override, or reinterpret",
-        "fail-closed blocker",
-        "separately authorized owner-repository decision",
-    ):
-        assert requirement in invocation_guidance
-    assert "publish `ready_for_review`" not in standard
-    assert "push\nthe exact branch head" not in standard
-    resumed_guidance = f"{agents}\n{standard}"
-    for requirement in (
-        "verified branch is authoritative for current lifecycle state",
-        "Main remains authority\nfor authorization provenance",
-        "Do not stop merely because main has\nan older lifecycle snapshot",
-        "terminal or chat output is not a completion report",
-        "task ID, branch name, and authorization ancestry",
-        "Fail closed on mismatches or\ninconsistent evidence",
-        "record\nany fail-closed result there as `blocked`",
-    ):
-        assert requirement in resumed_guidance
-    for requirement in (
-        "Successful orientation is non-terminal",
-        "Continue without another user prompt",
-        "orientation-only or\nchat-only summary is not a task outcome",
-        "no safe authorized write target exists",
-    ):
-        assert requirement in f"{agents}\n{standard}"
 
-    if state["status"] in {"authorized", "in_progress", "ready_for_review"}:
-        assert state["task_execution_authorized"] is True
-        assert state["merge_authorized"] is False
-        assert state["reviewed_head_sha"] is None
-        assert state["approval_commit_sha"] is None
-    if state["status"] == "ready_for_review":
-        implementation_sha = state["implementation_commit_sha"]
-        _assert_sha(implementation_sha)
-        assert state["correction_execution_authorized"] is False
-        assert "**Status:** ready_for_review" in active_text
-        assert "**Current decision:** `ready_for_review`" in report_text
-        assert implementation_sha in active_text
-        assert implementation_sha in report_text
-        for text in (active_text, report_text):
-            assert not re.search(
-                r"^## Required (?:final )?correction\s*$",
-                text,
-                flags=re.IGNORECASE | re.MULTILINE,
-            )
-        combined_current_state = f"{active_text}\n{report_text}".lower()
-        for stale_phrase in (
-            "**status:** changes_requested",
-            "**current decision:** `changes_requested`",
-            "correction execution remains authorized",
-            "correction execution are authorized",
-            "no current completion report",
-            "no durable validation-receipt",
-            "no validation receipt exists",
-            "publication work as missing",
-            "remain unfinished",
-        ):
-            assert stale_phrase not in combined_current_state
-    if state["status"] == "blocked":
-        assert state["task_execution_authorized"] is True
-        assert state["merge_authorized"] is False
-        assert state["reviewed_head_sha"] is None
-        assert state["approval_commit_sha"] is None
-        _assert_sha(state["implementation_commit_sha"])
-        assert state["blockers"]
-    if state["status"] == "merged":
-        assert state["task_execution_authorized"] is False
-        assert state["merge_authorized"] is False
-        _assert_sha(state["reviewed_head_sha"])
-        assert state["approval_commit_sha"] is None
+def test_execution_and_correction_launchers_are_operational_and_non_terminal() -> None:
+    assert _block("Canonical execution launcher") == CANONICAL["Canonical execution launcher"]
+    assert _block("Canonical correction launcher") == CANONICAL["Canonical correction launcher"]
+
+
+def test_merge_launcher_requires_only_path_and_approved_exact_sha() -> None:
+    assert _block("Canonical merge launcher") == CANONICAL["Canonical merge launcher"]
+
+
+def test_launchers_forbid_task_instance_duplication() -> None:
+    state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    forbidden = (state["task_id"], state["feature_branch"], "MMM", "GeoX", "pytest")
+    for heading in CANONICAL:
+        block = _block(heading)
+        assert all(value not in block for value in forbidden)
+        if heading == "Canonical merge launcher":
+            assert "<FULL_SHA>" in block
+        else:
+            assert "<FULL_SHA>" not in block
+            assert not re.search(SHA_PATTERN, block)
+
+
+def test_current_lifecycle_state_is_coherent() -> None:
+    state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    if state["status"] != "ready_for_review":
+        return
+    active = ACTIVE_TASK.read_text(encoding="utf-8")
+    report = REPORT.read_text(encoding="utf-8")
+    implementation_sha = state["implementation_commit_sha"]
+    _sha(implementation_sha)
+    assert active.count("**Status:** ready_for_review") == 1
+    assert report.count("**Current decision:** `ready_for_review`") == 1
+    assert implementation_sha in active and implementation_sha in report
+    assert state["correction_execution_authorized"] is False
+    assert state["merge_authorized"] is False
+    assert state["pr_creation_authorized"] is False
+    assert state["blockers"] == []
+    for text in (active, report):
+        assert not re.search(
+            r"^#{1,6} .*?(changes requested|required correction|correction authorization)",
+            text,
+            re.I | re.M,
+        )

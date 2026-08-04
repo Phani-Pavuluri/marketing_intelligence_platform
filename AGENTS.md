@@ -59,13 +59,18 @@ surface-appropriate decisions, named acceptance evidence, and no unresolved
 execution-blocking design questions. Stop or split the work rather than choosing
 among materially different contract meanings during execution.
 
-## Invocation-only prompt rule
+## Git-authoritative thin launcher rule
 
-Codex prompts are invocation-only. The execution and correction invocation is
-`Synchronize from Git and execute the active task.` A merge invocation adds only
-the exact externally approved remote head SHA. Durable task scope, owned paths,
-behavior, validation, workflow, authority, and stop conditions belong in Git;
-prompt text must not repeat, repair, expand, override, or reinterpret them.
+Git is the sole durable task authority. Thin launchers may carry only stable
+operational execution control: the local repository path, synchronization and
+required Git reads, main-to-feature-branch resumption, continuation through
+exact-tree publication and remote verification, non-terminal progress,
+durable terminal outcomes, prohibited PR/merge/capability actions, and an
+externally approved exact merge SHA. Task identity, branch, non-approved SHAs,
+scope, paths, validation, dependencies, correction details, implementation
+guidance, and sibling state must be resolved from Git and may not be copied
+from chat. Prompt text cannot define, repair, expand, override, or reinterpret
+Git-authored task meaning.
 Missing Git instructions are a fail-closed blocker.
 
 Successful orientation is non-terminal once an executable task and safe
