@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Owner:** MIP program governance
 **Last updated:** 2026-08-03
 **Last verified:** 2026-08-03
@@ -285,13 +285,13 @@ current decision only in chat or terminal output.
 ## Publication result
 
 - **Rejected exact review head:** `1f2783fbb490673b9aaf82f74fe5923df5d2e97f`
-- **Implementation at rejected head:** `c4a849b00cc8f0c954b6c3ffcc56b914a4ee0614`
-- **Review state:** `changes_requested`
-- **Correction execution:** authorized on this exact branch
+- **Correction implementation:** `bfae4c619ce207fc8c4bae0a64080224b4c4a8a8`
+- **Review state:** `ready_for_review`
+- **Correction execution:** closed
 - **Merge and PR authority:** false
 - **Capability authority:** unchanged
 
-## Required correction
+## Historical correction record
 
 The rejected publication is directionally correct but not current enough for
 approval.
@@ -308,16 +308,8 @@ approval.
    corresponding `WS-GEOX-LEAN-DELIVERY-ADOPTION-001` workstream as
    `authorized`. Historical and current status must agree.
 
-Correction must re-read live MIP, MMM, and GeoX mains and exact execution files
-immediately before editing and again immediately before publication. Update the
-existing eleven owned paths as needed so every repository entry, workstream,
-sequence, Markdown view, and semantic test agrees with the final live evidence.
-At minimum, record GeoX branch binding with its actual live lifecycle state,
-mark the superseded lean-delivery workstream as superseded, keep every P2 blocker
-open, and preserve all owner and authority boundaries.
-
-Run the complete Tier-3 validation gate on the frozen corrected tree and publish
-a new exact-tree receipt. Retain rejected head
-`1f2783fbb490673b9aaf82f74fe5923df5d2e97f` as historical review evidence. Do
-not modify product/runtime code, siblings, canonical P0–P8, or capability
-authority.
+The correction re-read live MIP, MMM, and GeoX mains and exact execution files.
+It records GeoX branch binding and lean delivery as superseded without merge,
+records proposed reauthoring without authority, keeps every P2 blocker open, and
+preserves all owner and authority boundaries. The exact-tree receipt in the
+completion report provides the final validation evidence.
