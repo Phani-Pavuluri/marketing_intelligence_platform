@@ -7,6 +7,8 @@
   "base_branch": "main",
   "base_sha": "480b32040ce185b8ff091435121c4bea6fc6c453",
   "authorization_head_sha": "ad96a77ed0a70e59d0cd00bda5c0889918be1fb1",
+  "authorized_state_head_sha": "af0c3ed29cad3843a2c79f5c269b9c1863d369d9",
+  "lifecycle_reconciliation_head_sha": "7eb8c460c871f8d1c764bfc600170c7a0f577aeb",
   "feature_branch": "docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
@@ -81,5 +83,5 @@
   "review_decision": "authorized",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "prompt_strategy": "invocation_only_per_current_merged_mip_agents_for_this_audit",
-  "task_authoring_note": "The task-authoring range 480b32040ce185b8ff091435121c4bea6fc6c453..ad96a77ed0a70e59d0cd00bda5c0889918be1fb1 changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. This immediate state-only commit changes only EXECUTION_STATE.json and authorizes the exact audit branch. The parked P2 blocker remains unresolved; GeoX active producer work and MMM's non-executable proposal remain separately owned. Merge, PR, correction, sibling, product, analytical, runtime, pilot, production, and capability authority remain false."
+  "task_authoring_note": "The task-authoring range 480b32040ce185b8ff091435121c4bea6fc6c453..ad96a77ed0a70e59d0cd00bda5c0889918be1fb1 changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. Authorization remains at state-only commit af0c3ed29cad3843a2c79f5c269b9c1863d369d9. Metadata-only reconciliation through 7eb8c460c871f8d1c764bfc600170c7a0f577aeb made the human-readable lifecycle views coherent without changing scope, authority, sibling state, or capability authority. The parked P2 blocker remains unresolved; GeoX active producer work and MMM's non-executable proposal remain separately owned. Merge, PR, correction, sibling, product, analytical, runtime, pilot, production, and capability authority remain false."
 }
