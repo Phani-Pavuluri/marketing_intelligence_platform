@@ -5,11 +5,14 @@
   "status": "authorized",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
-  "base_sha": "480b32040ce185b8ff091435121c4bea6fc6c453",
-  "authorization_head_sha": "ad96a77ed0a70e59d0cd00bda5c0889918be1fb1",
-  "authorized_state_head_sha": "af0c3ed29cad3843a2c79f5c269b9c1863d369d9",
-  "lifecycle_reconciliation_head_sha": "7eb8c460c871f8d1c764bfc600170c7a0f577aeb",
-  "feature_branch": "docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001",
+  "base_sha": "9d2172844660e59cc01dce243b0ccd5a2554831d",
+  "authorization_head_sha": "3d514206a2746b16dc1de3e56a92b6d79389aece",
+  "feature_branch": "docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1",
+  "prior_authorization_head_sha": "ad96a77ed0a70e59d0cd00bda5c0889918be1fb1",
+  "prior_authorized_state_head_sha": "af0c3ed29cad3843a2c79f5c269b9c1863d369d9",
+  "prior_feature_branch": "docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001",
+  "prior_feature_branch_head_sha": "23f5f4ff957f71f5ab8f1d6f9bf99dab4a00e923",
+  "prior_feature_branch_disposition": "historical_metadata_reconciliation_only_do_not_execute_or_merge",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": true,
@@ -37,9 +40,9 @@
   ],
   "coordination_workstream_id": "WS-MIP-CODEX-EXECUTION-ROOT-CAUSE-ROI-AUDIT-001",
   "coordination_capability_owner": "mip_cross_repository_execution_governance_audit",
-  "mip_live_main_at_authorization": "480b32040ce185b8ff091435121c4bea6fc6c453",
-  "mmm_live_main_at_authorization": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
-  "geox_live_main_at_authorization": "7f829395bc305550ea1311421a4181dafed795b8",
+  "mip_blocked_product_head": "480b32040ce185b8ff091435121c4bea6fc6c453",
+  "mmm_live_main_at_initial_authorization": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
+  "geox_live_main_at_initial_authorization": "7f829395bc305550ea1311421a4181dafed795b8",
   "parked_product_workstreams": [
     {
       "task_id": "MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001",
@@ -54,7 +57,7 @@
     {
       "repository": "Phani-Pavuluri/panel_exp",
       "task_id": "GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001",
-      "status": "authorized",
+      "status_at_initial_authorization": "authorized",
       "observed_main_sha": "7f829395bc305550ea1311421a4181dafed795b8",
       "feature_branch": "feat/geox-certified-calibration-source-manifest-001",
       "modified_or_authorized_by_mip": false
@@ -62,7 +65,7 @@
     {
       "repository": "Phani-Pavuluri/MMM",
       "task_id": "MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001",
-      "status": "proposed_non_executable_stale_dependency",
+      "status_at_initial_authorization": "proposed_non_executable_stale_dependency",
       "observed_main_sha": "f2e0eade0ad917c1b28ab5521e6d35a35047d988",
       "feature_branch": null,
       "modified_or_authorized_by_mip": false
@@ -83,5 +86,5 @@
   "review_decision": "authorized",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "prompt_strategy": "invocation_only_per_current_merged_mip_agents_for_this_audit",
-  "task_authoring_note": "The task-authoring range 480b32040ce185b8ff091435121c4bea6fc6c453..ad96a77ed0a70e59d0cd00bda5c0889918be1fb1 changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. Authorization remains at state-only commit af0c3ed29cad3843a2c79f5c269b9c1863d369d9. Metadata-only reconciliation through 7eb8c460c871f8d1c764bfc600170c7a0f577aeb made the human-readable lifecycle views coherent without changing scope, authority, sibling state, or capability authority. The parked P2 blocker remains unresolved; GeoX active producer work and MMM's non-executable proposal remain separately owned. Merge, PR, correction, sibling, product, analytical, runtime, pilot, production, and capability authority remain false."
+  "task_authoring_note": "The clean branch reauthoring range 9d2172844660e59cc01dce243b0ccd5a2554831d..3d514206a2746b16dc1de3e56a92b6d79389aece changes only ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md. This immediate state-only commit changes only EXECUTION_STATE.json and authorizes the exact -r1 branch. The original audit branch is historical metadata-reconciliation evidence only and must not be executed or merged. Audit scope, validation, sibling ownership, product blocker, analytical boundaries, and capability authority are unchanged."
 }
