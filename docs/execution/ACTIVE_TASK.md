@@ -1,345 +1,312 @@
 # Active Task
 
-**Status:** task_reauthored_pending_state_authorization
-**Owner:** MIP cross-repository coordination and execution-governance owner
+**Status:** authorized
+**Owner:** MIP cross-repository execution-governance owner
 **Last updated:** 2026-08-04
 **Last verified:** 2026-08-04
 
 ## Identity
 
-- **Task ID:** `MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001`
+- **Task ID:** `MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Pre-authoring base:** `480b32040ce185b8ff091435121c4bea6fc6c453`
-- **Prior authorization head:** `ad96a77ed0a70e59d0cd00bda5c0889918be1fb1`
-- **Prior authorized state head:** `af0c3ed29cad3843a2c79f5c269b9c1863d369d9`
-- **Prior branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001`
-- **Prior branch head:** `23f5f4ff957f71f5ab8f1d6f9bf99dab4a00e923`
-- **Reauthorized feature branch:** `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1`
+- **Feature branch:** `docs/mip-codex-execution-incident-evidence-matrix-001`
 - **Execution mode:** `branch_and_fast_forward`
-- **Risk tier:** Tier 2 — cross-repository forensic governance and ROI audit
-- **Coordination workstream:** `WS-MIP-CODEX-EXECUTION-ROOT-CAUSE-ROI-AUDIT-001`
+- **Risk tier:** Tier 2 — cross-repository forensic evidence package
+- **Coordination workstream:** `WS-MIP-CODEX-EXECUTION-EVIDENCE-MATRIX-001`
+- **Capability owner:** MIP repository execution-governance evidence
 - **Capability authorizations changed:** `false`
 
-The prior branch is preserved as metadata-reconciliation history only. It must not be executed, merged, rebased, force-updated, or used as review evidence. The audit scope, evidence sample, acceptance requirements, and authority boundaries are unchanged.
+## Prior task disposition
 
-## Primary independently mergeable outcome
+`MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001` is superseded without merge.
 
-Publish one evidence-grounded cross-repository audit that explains why Codex execution has repeatedly:
+- rejected remote head: `3233f424ad388b30ef2181eab8198a45fb5edf03`
+- rejected implementation: `c9134f0c036581290ef686ee7e5d1058055c952d`
+- preserved branch: `docs/mip-cross-repository-codex-execution-root-cause-roi-audit-001-r1`
+- correction cycles consumed: `1 of 1`
+- supersession reason: the corrected audit remained factually unreliable because known Git lifecycle evidence was marked unavailable, MIP thin-launcher task 002 was misdiagnosed, and the semantic validator checked structural shape rather than evidence truthfulness.
 
-- stopped after orientation instead of reaching a durable terminal state;
-- missed or incompletely implemented frozen acceptance requirements;
-- changed or weakened the tests that judged its own work;
-- modified incorrect or incomplete path sets;
-- published internally inconsistent lifecycle metadata;
-- relied on stale sibling evidence;
-- selected non-canonical validation paths or asserted invalid environment blockers;
-- treated correction work as a narrow patch instead of re-satisfying the complete frozen task;
-- consumed repeated review, validation, prompt, and compute cycles without producing mergeable product work.
+The rejected branch is forensic source evidence only. Do not merge, modify, rebase, force-update, or treat it as an approved audit.
 
-The audit must identify root causes, distinguish workflow defects from model variability, evaluate concrete remedies, estimate implementation effort and operational value, and make a clear go/no-go recommendation for a bounded executable-control-plane pilot.
+## Current repository pins at task authoring
 
-This is a read-only audit of MMM and GeoX. It does not modify sibling repositories, execution standards, prompt contracts, tests, tooling, analytical code, or product capabilities.
+- MIP `main`: `cda803790be15089412038ac33f2af8205b5e83f`
+- MMM `main`: `f2e0eade0ad917c1b28ab5521e6d35a35047d988`
+- GeoX `main`: `d0f0ba937c79528abd34d7ff89eb4601080805e9`
+- GeoX live producer branch: `feat/geox-certified-calibration-source-manifest-001`; its branch execution state currently records `changes_requested`/blocked evidence after the sole correction cycle. That mutable branch is context only and must be refreshed during execution.
 
-## Live orientation and concurrent work
+Before implementation, fetch and re-read all three current remote mains and the exact GeoX producer branch. Stop on inaccessible history or overlapping ownership. MMM and GeoX remain read-only.
 
-Connected GitHub established before task authoring:
+## Primary independently reviewable outcome
 
-- MIP task `MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001` is durably `blocked` by `BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001`; no implementation occurred. This product workstream is parked, not cancelled or resolved.
-- MMM `main`: `f2e0eade0ad917c1b28ab5521e6d35a35047d988`. `MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001` is a non-executable stale proposal blocked on a superseded MIP standard. No MMM implementation task overlaps this audit.
-- GeoX task `GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001` is separately authorized on `feat/geox-certified-calibration-source-manifest-001`. It is active producer work and must not be modified, reviewed, blocked, superseded, or treated as completed by this audit.
-- GeoX task `GEOX_CERTIFIED_CALIBRATION_HANDOFF_SOURCE_FIXTURE_001` is superseded without merge after a failed implementation, failed correction, and invalid blocked claim; its preserved branch is historical evidence only.
-- MIP's coordination snapshot is stale and must be refreshed only for verified current workstreams and blocker preservation; live Git remains authoritative.
+Publish one exact, Git-grounded incident evidence package containing:
 
-Before audit execution, re-fetch all three repositories and fail closed on ownership overlap, changed task identities, or inaccessible required historical evidence.
+1. a normalized 12-record cross-repository incident/context/control matrix; and
+2. a lookup ledger proving how every populated, null, not-applicable, or unavailable lifecycle field was resolved.
 
-## Audit questions
+This milestone performs repository archaeology and evidence normalization only. It does **not** decide root causes, recommend controls, estimate ROI, authorize a pilot, update execution standards, or modify product workstreams.
 
-The final audit must answer:
+## Why this milestone is split from the prior audit
 
-1. What concrete failure modes occurred across MIP, MMM, and GeoX?
-2. Which failures were caused primarily by ambiguous or oversized task contracts, prompt design, duplicated state, self-modifiable tests, stale evidence, environment/tool selection, correction semantics, review gaps, or irreducible agent variability?
-3. Why did apparently successful focused validation fail to prove semantic correctness?
-4. Why did Codex change wrong or incomplete paths even when owned paths were listed?
-5. Why did lifecycle state drift between `ACTIVE_TASK.md`, `EXECUTION_STATE.json`, `LATEST_COMPLETION_REPORT.md`, commit receipts, and coordination files?
-6. Why were producer prerequisites and cross-repository gaps discovered only after task authorization?
-7. Why were non-canonical validation paths or invalid blocked claims accepted by the executor?
-8. Which controls would have prevented each incident before implementation, before publication, or before merge?
-9. What is the smallest concrete remedy that improves reliability without creating a large workflow platform?
-10. Is the remedy worth its engineering cost based on observed rework, review, validation, compute, and product-delay evidence?
+The rejected audit combined historical reconstruction, causal attribution, ROI estimation, coordination refresh, recommendation, and lifecycle publication. That scope allowed incomplete evidence to be hidden behind schema-complete JSON. This task freezes the evidence layer first so a later decision task can consume an externally reviewed source rather than repeat repository archaeology.
 
-## Required evidence sample
+## Required record sample
 
-At minimum, inspect exact remote history, diffs, execution files, reports, tests, and relevant preserved branches for:
+Create exactly these 12 separately identified records:
 
-### MIP
+### MIP incidents
 
 1. `MIP_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_001`
 2. `MIP_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_002`
 3. `MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001`
-4. one successful MIP product or contract task as a control
+
+### MMM incidents and context
+
+4. `MMM_REPOSITORY_EXECUTION_PROTOCOL_ADOPTION_001`
+5. `MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001`
+6. historical PR `#19` / `MMM_REPO_NATIVE_EXECUTION_HANDOFF_ADOPTION_001`
+
+### GeoX incidents and context
+
+7. `GEOX_EXECUTION_BRANCH_BINDING_001` and its reauthoring successor, represented as one linked incident family only when every materially distinct attempt is separately enumerated inside the record
+8. `GEOX_CERTIFIED_CALIBRATION_HANDOFF_SOURCE_FIXTURE_001`
+9. `GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001` as active context only
+
+### Successful controls
+
+10. one successful MIP product or contract task
+11. `MMM_REPO_NATIVE_EXECUTION_HANDOFF_V2_RECONCILIATION_001`
+12. `GEOX_CERTIFIED_GOVERNED_READOUT_FIXTURES_001`
+
+Do not substitute a different incident identity without recording why the named identity is unavailable. Additional records are prohibited; use nested attempts inside the required record when needed.
+
+## Required starting anchors
+
+These anchors are mandatory lookup starting points, not permission to skip full-history inspection.
+
+### MIP
+
+- thin launcher 001 authoring: `4685d126f145e269f1b2e9f051fb8e5c14f55d1a`
+- thin launcher 001 authorization: `a315d7ba8084188a8017f87ba67e7bc836a9aeb1`
+- thin launcher 001 authorization boundary: `9bed0f30879e68473a37b0e65d449ea0b6a6e3f3`
+- thin launcher 001 implementation: `dde6969b1192b97aea519c9589d27186f19b6db2`
+- thin launcher 001 rejected head: `e390f1b47f8a7c5dfaa7a05613c2c4de73e4a548`
+- thin launcher 001 supersession on main: `c277a3681dfad2d4e9261f5578748a4cb160504e`, `464b69c3ba197e5490dcfb76dd9b1613e3b33360`, `45eca4e8ca75bd9f152c2d025f9c57773dfa27ee`
+- thin launcher 002 authoring: `92d327e1fc022fc20baf503b984fefc847a9cbf1`
+- thin launcher 002 authorization: `786f7ddbf30dcdada794af6691d18e68bf762542`
+- thin launcher 002 authorization boundary: `950ec89c9345caa506b0101774516fb89af8d0bc`
+- thin launcher 002 supersession on main: `35bce9894a1726893a0123f575b86d62518a0962`, `b6006f6bc9b057c5def2303a046b2e9cf0886bc4`, `f8fb482e51697f004d3fa2a6b229f6729d423cef`
+- P2 task authoring: `fdcf473dc2f42a3bcfeacc21719f1fa8c77b7675`
+- P2 authorization record: `f8392e85016a39e5d729fa50bb2798c694936380`
+- P2 state authorization: `0b4cd1fca73716e4968c2ceb70c594ad8aadd8ca`
+- P2 blocked head: `480b32040ce185b8ff091435121c4bea6fc6c453`
 
 ### MMM
 
-5. `MMM_REPOSITORY_EXECUTION_PROTOCOL_ADOPTION_001`, including initial rejected head and successful correction
-6. `MMM_GIT_AUTHORITATIVE_THIN_LAUNCHER_STANDARD_ADOPTION_001`
-7. historical nonconforming PR #19
-8. one successful MMM analytical or public-contract task as a control
+- protocol authoring: `f54bb07fdf749916e6219eeb1b1b1e5f9245e5d3`
+- protocol task authorization: `c3c84956ad968532b81b36e8d5f41670cc96367c`
+- protocol authorization boundary: `b8878dfa4bcd178a0472c3b812492a5bb4ac0b45`
+- first implementation: `bde826a4b21e35c1b313db781c8d3c1d7f39d2cc`
+- first receipt: `ccb25680b90fa6eb4ce4dc2d6f84051797641fa6`
+- review/correction metadata: `999ceec479e0db4b8ed50177924858613353adff`, `e6fe3b8e3d0ee040bda5522acb3dbe512302bbb2`, `05aad8ede0fd939da1ee699e02fba331558a67de`
+- corrected implementation: `0e77ce6b787bd508600c1496288a459b8d821edf`
+- corrected receipt: `c370dc7cd59a61cc2e19025d1a2328c7867b63be`
+- closure: `ac546548784385baab67d7c935e5a4fcdfc9e1af`
+- thin-launcher proposal: `b93562a2c2a3aec2897e6196a6f2095bce6c16db`, `a7d45e0b6451e8c64cf3a94c8c888afd9fecf070`, `f2e0eade0ad917c1b28ab5521e6d35a35047d988`
+- PR #19 implementation: `f0b0ae35619739a4ff3d95f2cf7c93bf7ec523a0`
+- PR #19 ready head: `ea16ab7e7b1089f5de479eeffb236fad2767edf1`
+- PR #19 merge commit: `ad55fef6799a8bd717108781ad44fc88fa116df7`
+- reconciliation control authoring: `a90136e7e86a60cee0846381144d478e483269c4`
+- reconciliation authorization: `dda1f31a1e429a4cede791b4f21a979aefe375c5`
+- reconciliation implementation: `9187b5bfe7fe13c4a6b3be7aa742b627027eaa84`
+- reconciliation review head: `5bc26f987d191bd2251cd12a35de5d0a49a3cbc5`
+- reconciliation closure: `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`
 
 ### GeoX
 
-9. `GEOX_EXECUTION_BRANCH_BINDING_001` and/or its reauthoring successor
-10. `GEOX_CERTIFIED_CALIBRATION_HANDOFF_SOURCE_FIXTURE_001`
-11. the current `GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001` only as live concurrent-work context, not as a completed incident
-12. one successful GeoX producer-contract or method task as a control
+- branch-binding authoring: `d5e38b0c8c207be71374b6a7de97f5d04c557fdb`
+- branch-binding authorization: `dc68853e87a65a494c942b3fe2794e321a22b036`, `d17bb81c9dbc67f773fd71068c26b14c92989f42`
+- branch-binding supersession: `fc99f4a362ac1b7790e6a865c6232bb51e86de2d`, `799848c0d58ab4eda19bfa964c675822b298eb32`, `b6c714ced8a9c6e9c1fcb0f6b4f7f79a542c5a7f`
+- reauthoring: `956daef5ce74d04b78bfdecccd5821fe9c607d08`, `584af216c390ef86aca0631f289fa0f4456a4375`, `94d512eeffc549cdd98d0dffa166caeb9d75c2c1`, `0a463ad96cda31dc2bdc962fd24f5481bb7aede9`
+- reauthoring supersession: `d3f64937798234c45f1c7f473e27a2dc993551c6`, `944ffe0485f95d95b33a230c0dc220fb7e28a082`, `e9b7d311ecaf5a90e227d8299f745a0e8f332368`
+- calibration handoff source authoring: `f72635c67c7d917759a9c5114bde3d2a404ef831`
+- calibration handoff source authorization: `0c7f13509ba8569c132513405cc12f999ab57232`, `f8829922aa93ada66de5f8d36abd49bb4bcfe3eb`
+- calibration handoff preserved implementation/review/correction anchors: `191ddbe918cde06ee30c12b3a3d3998e917b86f5`, `49059bf5baae58764c7c80e015c8ddccf590117a`, `1c08554dc4d50b1a73c33af49ff7b9f6e2756889`, `8986036c0c114b7ff75ac675e69cfbb69223b3ff`
+- calibration handoff supersession on main: `f02e43af25a624ac3de97df3c9df2b26736d6e61`, `bb95b8a40c9b750a5a8db3b0650c851c041da540`, `80dbe14c6b2ce74b33a2b776c5e567afba582bf5`
+- active source-manifest authoring/authorization: `dad4c1c5427dc7534eb8018e79d1d9bcbe8651ed`, `486c626dcf24d176ab30e034057348f92b6257d4`, `d12a46d191eb7998870a6f040af9c424f18a4e31`
+- governed-readout fixture control: `9b74696bb930a06a3e2d4af78a1b9ea7b65cf99d`, `860182386c39f487747de5f43e67a31e9978e57c`, `2fbfaf14efd5701f22a8c34258c2a9873037e084`
 
-Add other incidents only when they materially improve causal coverage. Do not pad the sample with repetitive metadata-only commits.
-
-## Required deliverables
-
-### 1. Main audit report
-
-Create:
-
-`docs/audits/MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001.md`
-
-The report must contain:
-
-- executive verdict;
-- current repository and workstream orientation;
-- methodology and evidence limitations;
-- incident comparison across all three repositories;
-- root-cause taxonomy;
-- causal chains from task authoring through execution, validation, review, correction, and disposition;
-- explanation of prompt-length versus Git-prose tradeoffs;
-- analysis of self-modifiable acceptance tests;
-- analysis of duplicated lifecycle state and stale coordination evidence;
-- analysis of official versus ad hoc validation paths;
-- analysis of correction-cycle behavior;
-- concrete target operating model;
-- solution alternatives and tradeoffs;
-- engineering effort estimate;
-- compute, review, and workflow-efficiency model;
-- recommendation and pilot go/no-go criteria;
-- exact limitations and unresolved questions.
-
-### 2. Structured incident and counterfactual matrix
+## Matrix artifact
 
 Create:
 
-`docs/audits/archives/MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001_incident_matrix.json`
+`docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001.json`
 
-For every incident/control, record at minimum:
+Top-level keys:
 
-- repository;
-- task ID;
-- exact base, authorization, implementation, rejected/reviewed, correction, blocked, merged, closure, and preserved-branch SHAs when applicable;
-- prompt mode when evidenced;
-- task risk tier and approximate scope size from Git;
-- observed changed paths and commit count;
-- reported validation commands/counts where evidenced;
-- exact first-pass and final disposition;
-- correction cycles;
-- observed failure modes;
-- primary and contributing root-cause categories;
-- GitHub-observed evidence paths;
-- locally reported evidence clearly labeled;
-- facts unavailable from Git;
-- counterfactual controls that would likely have prevented or caught the failure;
-- confidence level and rationale.
+- `schema_version`
+- `generated_at`
+- `source_repository_pins`
+- `record_count`
+- `record_type_counts`
+- `records`
+- `known_limitations`
 
-Do not infer a SHA, validation count, prompt, token count, or elapsed time that Git does not support.
+Every record must contain:
 
-### 3. Solution and ROI model
+- `record_id`
+- `repository`
+- `task_id`
+- `record_type` (`incident`, `active_context`, or `successful_control`)
+- `attempts`
+- `base_sha`
+- `task_authoring_sha`
+- `authorization_sha`
+- `authorization_boundary_sha`
+- `implementation_sha`
+- `publication_or_receipt_sha`
+- `rejected_review_sha`
+- `correction_authoring_sha`
+- `correction_implementation_sha`
+- `correction_receipt_sha`
+- `blocked_sha`
+- `merged_sha`
+- `closure_sha`
+- `preserved_branch_sha`
+- `branch_names`
+- `risk_tier`
+- `prompt_mode`
+- `owned_paths`
+- `observed_changed_paths`
+- `commit_count`
+- `validation_evidence`
+- `first_pass_disposition`
+- `final_disposition`
+- `correction_cycles`
+- `review_findings`
+- `evidence_item_ids`
+- `unavailable_fields`
+- `evidence_confidence`
+- `confidence_rationale`
+
+Use JSON `null` only for not-applicable or genuinely unresolved values. Every null must be explained in `unavailable_fields` and linked to lookup-ledger evidence.
+
+Do not include root-cause labels, counterfactual controls, solution recommendations, effort estimates, ROI, or pilot decisions.
+
+## Lookup ledger artifact
 
 Create:
 
-`docs/audits/archives/MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001_solution_roi.json`
+`docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_LOOKUP_LOG_001.json`
 
-Compare at least:
+Every matrix lifecycle fact and evidence item must reference one or more ledger IDs. Every ledger entry must contain:
 
-1. current full manually authored prompts plus prose Git tasks;
-2. invocation-only prompts plus prose Git tasks;
-3. generated full prompts from one machine-readable task manifest;
-4. a bounded executable `taskctl`-style control plane;
-5. a larger external workflow/orchestration system.
+- `lookup_id`
+- `repository`
+- `source_type` (`commit`, `branch_file`, `main_file`, `pull_request`, `comparison`, or `command_result`)
+- `requested_ref`
+- `path_or_pr`
+- `lookup_command_or_action`
+- `lookup_status` (`found`, `not_applicable`, `not_found`, or `inaccessible`)
+- `resolved_sha`
+- `observed_subject_or_value`
+- `evidence_classification` (`git_observed`, `locally_reported`, or `unavailable`)
+- `proposition_proved`
+- `captured_at`
 
-For each option record:
+A matrix field may be marked unavailable only when the ledger records an actual lookup attempt with status `not_found` or `inaccessible`. A not-applicable field must use `not_applicable`, not `unavailable`.
 
-- problems addressed and not addressed;
-- implementation components;
-- estimated engineering effort range;
-- migration effort per repository;
-- expected effect on wrong-path changes, stale dependency discovery, lifecycle contradictions, validation compliance, correction cycles, human review time, repeated validation, and prompt/token repetition;
-- operational risks and maintenance burden;
-- reversibility;
-- recommended status.
+## Evidence rules
 
-Use conservative, base, and aggressive scenarios. When token, compute, or human-time data is unavailable, use formulas and explicitly labeled assumptions rather than fabricated measurements.
-
-## Root-cause taxonomy requirements
-
-Use a consistent taxonomy covering at least:
-
-- task-definition ambiguity or excessive scope;
-- prompt/Git duplication or contradiction;
-- prose-only enforcement gap;
-- self-modifiable acceptance oracle;
-- duplicated lifecycle state;
-- stale cross-repository evidence;
-- missing preauthorization dependency proof;
-- non-canonical validation invocation;
-- correction anchoring on recent patch rather than frozen contract;
-- incomplete exact-tree receipt;
-- reviewer or authoring error;
-- environment/tooling obstruction;
-- residual LLM planning or implementation variability.
-
-Every material conclusion must point to one or more exact Git evidence items. Separate observed fact, strong inference, weak inference, and unavailable evidence.
-
-## Concrete solution evaluation
-
-The report must evaluate, not automatically endorse, a bounded design with:
-
-- one machine-readable task specification;
-- generated human-readable task documentation;
-- immutable execution-governance checks outside task-owned paths;
-- deterministic preauthorization dependency and path verification;
-- named official validation profiles;
-- atomic lifecycle publication commands;
-- generated full Codex prompts from the machine-readable task;
-- exact-tree receipt generation;
-- deterministic approved-head fast-forward and closure workflow;
-- cross-repository live-overlay checks at authorization, execution start, publication, and merge.
-
-The audit must explain why each component is or is not necessary, and identify the smallest MVP. Do not implement any component in this task.
-
-## ROI and worth-it decision
-
-The final report must provide a direct verdict:
-
-- `proceed_with_bounded_pilot`;
-- `continue_full_prompts_without_tooling`;
-- `retain_current_git_native_model`;
-- or `do_not_invest`.
-
-The verdict must include:
-
-- estimated implementation effort;
-- expected break-even condition;
-- which observed failure classes it would prevent;
-- which failures would remain;
-- maintenance cost;
-- pilot duration and success thresholds;
-- stop conditions that would make further investment unjustified.
-
-Recommended pilot thresholds must address first-pass terminal correctness, wrong-path changes, prerequisite discovery, official validation compliance, lifecycle consistency, correction cycles, review effort, repeated validation, and prompt-size reduction.
-
-## Product-workstream preservation
-
-Refresh only the verified parts of:
-
-- `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json`
-- `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md`
-
-The refresh must preserve:
-
-- MIP blocker `BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001` as unresolved;
-- the blocked MIP P2 bridge as parked pending producer evidence and later MIP consumer verification;
-- GeoX's active `GEOX_CERTIFIED_CALIBRATION_SOURCE_MANIFEST_001` workstream at its exact live main/branch evidence;
-- MMM's current non-executable stale thin-launcher proposal;
-- producer completion not being equivalent to MIP consumer acceptance;
-- no sibling or capability authority from this audit.
-
-Do not rewrite historical coordination facts as though they were current. Use a dated live-overlay/audit entry and keep source SHAs explicit.
+- Inspect exact commit diffs and the execution files at the exact relevant refs.
+- Do not rely on current `main` alone to reconstruct a prior branch lifecycle.
+- Do not infer one SHA from a nearby commit message.
+- Do not treat a completion message as Git evidence unless the same fact exists in a committed artifact or commit object.
+- Separate Git-observed validation from locally reported validation.
+- Record exact validation commands and counts only when a committed receipt/report supports them.
+- Record prompt mode only from a committed task, `AGENTS.md`, or execution-state field at the relevant ref.
+- A current branch state is context, not a final incident disposition.
+- The prior rejected audit is an evidence source for reviewer findings only; it is not authoritative when contradicted by underlying Git.
 
 ## Owned paths
 
-The audit may modify only:
+Implementation may modify only:
 
-1. `docs/audits/MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001.md`
-2. `docs/audits/archives/MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001_incident_matrix.json`
-3. `docs/audits/archives/MIP_CROSS_REPOSITORY_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_AUDIT_001_solution_roi.json`
-4. `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json`
-5. `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md`
-6. `docs/execution/ACTIVE_TASK.md`
-7. `docs/execution/EXECUTION_STATE.json`
-8. `docs/execution/LATEST_COMPLETION_REPORT.md`
+1. `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001.json`
+2. `docs/audits/archives/MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_LOOKUP_LOG_001.json`
+3. `docs/execution/ACTIVE_TASK.md`
+4. `docs/execution/EXECUTION_STATE.json`
+5. `docs/execution/LATEST_COMPLETION_REPORT.md`
 
 No other path is authorized.
 
 ## Prohibited scope
 
-Do not modify MMM or GeoX. Do not modify:
+Do not modify:
 
-- `AGENTS.md`;
-- `TASK_EXECUTION_STANDARD.md`;
-- any execution-governance or product test;
-- application, analytical, contract, adapter, fixture, LLM, orchestration, UI, deployment, or package code;
-- active or preserved sibling feature branches;
-- GitHub issues, pull requests, branch protections, workflows, or repository settings.
+- MMM or GeoX;
+- MIP coordination state/history;
+- the rejected audit artifacts;
+- `AGENTS.md` or execution standards;
+- tests, validators, CI, Git hooks, application code, analytical code, contracts, adapters, fixtures, LLM, orchestration, UI, or deployment;
+- product blockers or sibling workstream states.
 
-Do not implement `taskctl`, a task schema, prompt generator, validation profile, CI workflow, Git hook, LangGraph flow, or external orchestration system. These may be recommended only.
-
-Do not resolve, close, rename, or absorb the P2 product blocker or the active GeoX producer task.
+Do not create a PR, merge, squash, rebase, force-push, or merge commit. Do not implement `taskctl`, a task schema, prompt generator, workflow engine, root-cause report, ROI model, or pilot.
 
 ## Acceptance requirements
 
 The final exact tree must prove:
 
-1. all three current repository mains and execution states were freshly verified;
-2. the minimum evidence sample is complete or every missing item is explicitly documented;
-3. each incident has exact evidence and observed/inferred separation;
-4. at least one successful control exists per repository;
-5. the audit distinguishes model error from system-design error;
-6. every recommended control maps to observed incident prevention or detection;
-7. the ROI model contains conservative/base/aggressive scenarios and no fabricated measured costs;
-8. the report gives a direct worth-it verdict and bounded MVP;
-9. the active GeoX task and parked MIP blocker remain correctly represented;
-10. no sibling repository or execution-standard/test surface changed.
+1. exactly 12 required records exist with counts `8 incidents`, `1 active_context`, and `3 successful_controls`;
+2. every mandatory starting anchor is present in the lookup ledger with `found` status or an explicit repository contradiction;
+3. every non-null lifecycle SHA is a lowercase 40-character commit verified by a successful lookup;
+4. every null field is classified `not_applicable`, `not_found`, or `inaccessible` through a linked ledger entry;
+5. every evidence item proves one narrow proposition and cites an exact repository/ref/path or PR;
+6. current MIP, MMM, GeoX mains and the GeoX producer branch were refreshed during execution;
+7. MIP thin-launcher task 002 includes the rejected semantic-review findings about narrowed/self-modified acceptance coverage rather than being described only as unmerged;
+8. MMM protocol adoption includes its known authoring, authorization, first publication, rejection/correction, corrected receipt, merge, and closure lineage;
+9. GeoX calibration-handoff source fixture includes implementation failure, rejected review, correction, invalid blocked publication, and supersession evidence;
+10. successful controls use the same evidence depth as incidents;
+11. no causal conclusion, recommendation, ROI assumption, or pilot decision appears;
+12. no prohibited path changed.
 
 ## Validation gate
 
-On the final frozen task-owned tree run:
+On the frozen final task-owned tree run:
 
-- JSON parsing for every changed JSON file;
-- deterministic schema checks for required keys, unique task IDs, valid 40-character SHAs, evidence classification, scenario ordering, and option coverage in both audit JSON files;
-- exact owned-path verification;
+- JSON parsing for both artifacts and `EXECUTION_STATE.json`;
+- a non-committed semantic validator checking exact record identities, record counts, required keys, unique IDs, SHA syntax, matrix-to-ledger foreign keys, mandatory-anchor coverage, null/unavailable rules, evidence classifications, and prohibited analytical fields;
+- a second independent script that verifies every `found` commit SHA exists in the declared local repository with `git cat-file -e <sha>^{commit}`;
+- exact owned-path validation from the authorization baseline;
 - `git diff --check`;
-- Markdown link/path/reference checks using existing repository tooling when available;
-- a second independent scan proving no prohibited path changed;
-- local/remote feature-branch equality after push;
-- exact-tree publication receipt.
+- a scan proving no root-cause, recommendation, ROI, or pilot fields appear in either artifact;
+- local/remote branch equality after push;
+- one exact-tree publication receipt.
 
-Docker-backed `make validate` and the full application test suite are not required because this task changes only documentation, evidence JSON, coordination metadata, and execution metadata. Any executable Python or production-code change is out of scope rather than a reason to widen validation.
+Docker and the full application suite are not required because executable code and tests are prohibited.
 
 ## Publication contract
 
-On success publish one exact remote `ready_for_review` head containing:
+On success publish one remote `ready_for_review` head containing:
 
-- one implementation SHA and one exact-tree receipt;
-- exact MIP, MMM, and GeoX evidence pins;
-- exact incident/control count;
+- one evidence-package implementation SHA;
+- one exact-tree receipt;
+- exact MIP/MMM/GeoX pins and GeoX branch context;
+- exact record and ledger-entry counts;
 - exact changed paths;
-- JSON/schema/link/diff/path-validation results;
-- GitHub-observed evidence separated from locally reported or assumed evidence;
-- direct verdict, effort range, ROI assumptions, limitations, and pilot criteria;
-- preserved P2 blocker and current GeoX workstream;
+- exact validation commands and results;
+- Git-observed versus locally reported evidence counts;
+- unavailable/not-applicable counts and limitations;
+- confirmation that no causal or ROI decision was made;
 - empty task blockers;
-- task execution true, correction/merge/PR false;
-- no capability-authority change;
+- task execution true; correction, merge, and PR authority false;
+- no sibling, product, analytical, runtime, pilot, production, or capability authority change;
 - local/remote branch equality.
 
-If required history or evidence is inaccessible, publish `blocked` with the exact missing evidence and resolution condition. Gaps in reasoning, incident coverage, ROI modeling, or report quality are unfinished audit work and must not be mislabeled as an external blocker.
-
-## Task-authoring and authorization boundary
-
-- The original task scope was authored from blocked product-state base `480b32040ce185b8ff091435121c4bea6fc6c453`.
-- This branch reauthoring changes only the three execution metadata files and corrects branch lineage after lifecycle reconciliation.
-- The immediate next state-only commit must record the new authoring head and authorize the exact `-r1` branch.
-- Create the `-r1` branch from that resulting state-only main head.
+If a required repository object or preserved branch is genuinely inaccessible, publish Git-durable `blocked` with the exact object, attempted lookup, and resolution condition. Missing analysis is not a blocker because analysis is out of scope.
 
 ## Deferred successor
 
-A bounded machine-readable-task and `taskctl` MVP pilot may be considered only if this audit is externally reviewed, merged, and recommends `proceed_with_bounded_pilot`. It is not authorized here.
+`MIP_CODEX_EXECUTION_ROOT_CAUSE_AND_ROI_DECISION_001` may be authored only after this evidence package is externally reviewed, approved, fast-forward merged, and closed. It must consume the merged matrix and lookup ledger without repeating repository archaeology.
 
-**Unresolved execution-blocking design questions: none.**
+**Unresolved execution-blocking design questions:** none.
