@@ -18,6 +18,7 @@
 | 2026-07-31 | Coordination implementation approved and fast-forward merged | Approved/merged MIP head `cc1904db8e18b5ba461cca2da738026acadfb43c` | Exact external approval was applied by fast-forward; no capability authority changed. |
 | 2026-07-31 | Coordination post-merge closure recorded | MIP `3520176126d129e9288a9ce37591299ec856650a` | Recorded approved head, validation, merged state, and GitHub-observed remote feature-branch deletion; no capability authority changed. |
 | 2026-07-31 | Post-merge closure reconciliation authorized | MIP `18ab0d0c798dfcedd3f07034f4561320929477ea` | Narrow MIP-only reconciliation of current execution and coordination records; no resolver, sibling, or capability work authorized. |
+| 2026-08-03 | P2 roadmap and coordination reconciliation authorized | MIP `976d3a1daeae9c52c8772e5112574f698951a57c`; authorization `72e1fd36578bdd589175e0a9f71bb32e6eb045d5` | Live overlay records MMM `b8878df` protocol adoption as authorized and GeoX `a4bf6bf` lean-delivery adoption as authorized; GeoX review branch `6cf6c258` is evidence only. `MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001` at preserved branch `b96dfc4` and the old GeoX builder are superseded without merge; all P2 blockers and authority freezes remain open/unchanged. |
 
 Historical nonconforming external workflow merges remain recorded in each
 repository's execution history where relevant. They are governance evidence,

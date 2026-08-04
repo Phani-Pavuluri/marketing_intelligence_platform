@@ -2,11 +2,11 @@
 
 **Status:** active navigation index
 **Owner:** MIP program owner
-**Last updated:** 2026-07-30
-**Last verified:** 2026-07-30
-**Verified against:** MIP authorization head
-`f83e91ef883af88808e03184b96bea26fba5eef8`
-**Update trigger:** canonical source-path or bootstrap change.
+**Last updated:** 2026-08-03
+**Last verified:** 2026-08-03
+**Update trigger:** canonical source-path or bootstrap change. Exact current
+repository checkpoints belong in the program checkpoint and coordination sources,
+not this navigation index.
 
 ## Fresh Chat Bootstrap
 

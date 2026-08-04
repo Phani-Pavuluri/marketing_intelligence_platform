@@ -1,59 +1,52 @@
 # Program Current State
 
-**Status:** current verified snapshot
-**Owner:** MIP program owner
-**Last updated:** 2026-07-31
-**Last verified:** 2026-07-31
-**Verified against:** MIP `main` `18ab0d0c798dfcedd3f07034f4561320929477ea`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `ee9673c13e69082367c1727568946ac4c1a01015`
-**Update trigger:** a merged checkpoint, completed gate, or changed authority state.
+**Status:** current live-overlay snapshot; no capability authority
+**Owner:** MIP program governance
+**Last updated:** 2026-08-03
+**Last verified:** 2026-08-03
+**Verified against:** MIP `main` `976d3a1daeae9c52c8772e5112574f698951a57c`; MMM `origin/main` `b8878dfa4bcd178a0472c3b812492a5bb4ac0b45`; GeoX `origin/main` `a4bf6bfaa4311dacd3642d289dca3917543e0309`
 
 ## Current phase
 
-The program is at the fixture-only P2 preparation boundary: the MIP consumer
-contract and fixture-journey design is merged, while package integration remains
-blocked. P0–P8 and R0–R6 are canonical in
-[`ROADMAP.md`](../roadmap/ROADMAP.md).
+The program remains at the fixture-only P2 preparation boundary. P0–P8 remains
+the product lifecycle and R0–R6 remain binding cross-cutting gates in
+[`ROADMAP.md`](../roadmap/ROADMAP.md). This current-state reconciliation does
+not alter either lifecycle or authorize product/runtime work.
 
-The cross-repository coordination control plane is merged and closed at prior
-MIP closure `3520176`; current MIP `main` at this review is `18ab0d0`. Its
-pinned historical state remains informative only and fails closed when a sibling
-remote main changes. The active post-merge reconciliation is MIP-only governance
-and does not reopen that workstream; see
-[Coordination State](CROSS_REPOSITORY_COORDINATION_STATE.json).
+MIP is executing the MIP-only governance task
+`MIP_P2_ROADMAP_AND_COORDINATION_RECONCILIATION_AFTER_GEOX_SUPERSESSION_001`.
+The stale resolver branch is superseded without merge and is historical partial
+evidence only; resolver reauthoring is deferred and unauthorized.
 
-## Verified checkpoints and completed milestone
+## Live sibling overlay
 
-| Repository | Verified checkpoint | Current verified evidence |
-|---|---|---|
-| MIP | `18ab0d0` current main / `3520176` prior coordination closure | P0–P8 consolidation, P2 consumer design, and the merged coordination control plane. |
-| MMM | `1b75d1d` | `MMMPublicSimulationExport`, compatibility contract/fixtures, and closed V2 workflow reconciliation. |
-| GeoX | `ee9673c` observed / `e0cef94` prior V2 closure | numerical-truth validation, governed-readout contract/fixtures, and one authorized producer-owned builder task covering temporal/version semantics plus builder/package entrypoint. |
+| Repository | Live `origin/main` | Current execution evidence | Dependency meaning |
+|---|---|---|---|
+| MIP | `976d3a1` | Reconciliation task authorized on its declared MIP branch. | Governance snapshot only; no P2 implementation authority. |
+| MMM | `b8878df` | `MMM_REPOSITORY_EXECUTION_PROTOCOL_ADOPTION_001` is authorized. The former MMM protocol task is absorbed, not separately executable. | No merged MMM normalization or fixture evidence exists. |
+| GeoX | `a4bf6bf` | `GEOX_LEAN_REPOSITORY_DELIVERY_STANDARD_ADOPTION_001` is authorized on main; branch `6cf6c258` is `ready_for_review`. | The branch is review evidence only, not a merged dependency. The former builder is superseded without merge. |
 
-The current first evidence tranche remains: certified GeoX experiment evidence
-→ MMM calibration compatibility → MMM bounded baseline-versus-candidate
-comparison → MIP planning-evidence journey → concrete D6 evidence.
+## P2 critical path and blockers
 
-## Eligible next MIP work and blockers
+The former single GeoX builder task is not active execution. GeoX must declare
+and complete, in its own repository, the following proposed outcomes: a
+governed-readout temporal lifecycle contract; typed producer builder; certified
+fixture generation with hashes and replay semantics; and optional envelope plus
+final handoff/integration validation. MIP does not assign task IDs or authorize
+those owner-repository successors.
 
-`MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001` may be considered only through separate
-authorization after this reconciliation is merged; it is not authorized by this
-packet. Fixture-only P2 consumer work also remains separately unauthorized.
-
-Current P2 blockers are `P2-GEOX-TEMPORAL-VERSION-SEMANTICS`,
-`P2-GEOX-READOUT-BUILDER-ENTRYPOINT`, `P2-MMM-GEOX-NORMALIZATION`,
-`P2-MMM-CROSS-REPOSITORY-FIXTURES`, and
-`P2-D6-RELEASE-COMPATIBILITY-EVIDENCE`. Their owners, evidence, and consumer
-verification conditions are in the coordination state; none is resolved by a
-producer task report alone.
+`P2-GEOX-TEMPORAL-VERSION-SEMANTICS` and
+`P2-GEOX-READOUT-BUILDER-ENTRYPOINT` remain open. MMM normalization and
+certified cross-repository fixtures remain proposed until the exact merged GeoX
+producer sequence, full producer validation, and MMM consumer verification
+exist. The MIP P2 fixture-only planning-evidence journey remains proposed and
+unauthorized until exact merged GeoX and MMM evidence, declared MIP consumer
+verification, and D6 release/compatibility evidence exist.
 
 ## Authority freezes
 
 Runtime package integration, live MMM/GeoX, real customer data, uploads,
 persistent customer/product artifacts, jobs, simulation runtime, optimization,
-recommendation lifecycle, treatment assignment, pilot, and production remain
-blocked. See [Authority and Freeze Matrix](AUTHORITY_AND_FREEZE_MATRIX.md) and
-[Next Execution Sequence](NEXT_EXECUTION_SEQUENCE.md).
-
-Detailed sources: [MIP P2 consumer design](../roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md),
-[Repository checkpoints](REPOSITORY_CHECKPOINTS.md), and
-[Decision register](DECISION_REGISTER.md).
+recommendations, treatment assignment, pilot, and production remain blocked.
+See [Authority and Freeze Matrix](AUTHORITY_AND_FREEZE_MATRIX.md) and
+[Coordination State](CROSS_REPOSITORY_COORDINATION_STATE.json).

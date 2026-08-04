@@ -44,8 +44,12 @@ not revived.
 
 Condensed implementation sequence derived from [ROADMAP_EXECUTION_AUDIT_001.md](../audits/ROADMAP_EXECUTION_AUDIT_001.md).
 
-**Current main:** `000273a`
-**Immediate next phase:** MIP tool registry + LLM explanation contracts (no LLM runtime yet)
+**Current-state source:** The live P2 dependency snapshot is maintained in
+[`PROGRAM_CURRENT_STATE.md`](../program/PROGRAM_CURRENT_STATE.md),
+[`REPOSITORY_CHECKPOINTS.md`](../program/REPOSITORY_CHECKPOINTS.md), and
+[`CROSS_REPOSITORY_COORDINATION_STATE.json`](../program/CROSS_REPOSITORY_COORDINATION_STATE.json).
+Those sources are stale-failing and do not authorize execution. Historical
+implementation inventory below is not an immediate-next-phase instruction.
 
 > **Groq live/public-demo acceptance (2026-07-15):** [MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001](../architecture/MIP_LLM_GROQ_LIVE_PROVIDER_AND_PUBLIC_DEMO_ACCEPTANCE_001.md) is `GROQ_LIVE_ACCEPTANCE_BLOCKED_BY_PROVIDER_FAILURE`. Groq remains an implemented candidate; OpenAI remains a quality benchmark; the deterministic router remains active fallback. No public-provider promotion is authorized.
 

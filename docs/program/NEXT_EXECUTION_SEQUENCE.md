@@ -2,30 +2,27 @@
 
 **Status:** proposed sequencing; no step is authorized by this file
 **Owner:** MIP program owner with MMM and GeoX owners
-**Last updated:** 2026-07-31
-**Last verified:** 2026-07-31
-**Verified against:** MIP `main` `18ab0d0` / prior coordination closure `3520176`; MMM `origin/main` `1b75d1d`; GeoX `origin/main` `ee9673c`
-**Update trigger:** a prerequisite merge, D6 packet, or explicit task authorization.
+**Last updated:** 2026-08-03
+**Last verified:** 2026-08-03
 
-1. **GeoX and MMM:** adopt the coordination protocol in parallel (proposed only).
-2. **GeoX:** complete its single authorized governed-readout builder/package
-   entrypoint task, which includes temporal, freshness, record-kind, schema,
-   and producer-version semantics.
-3. **MMM:** implement strict GeoX-readout normalization and certified
-   cross-repository compatibility fixtures.
-4. **MIP:** after separate authorization, implement the fixture-only P2
-   planning-evidence journey.
-5. **All owners:** reconcile D6 and consider a separately authorized
+1. **MMM and GeoX:** complete their separate owner-authorized execution-governance
+   adoption tasks. Authorization and review evidence are not merged completion.
+2. **GeoX:** after owner-repository authorization, establish the governed-readout
+   temporal lifecycle contract, typed producer builder, certified fixture/hash/
+   replay evidence, and optional envelope plus final handoff validation.
+3. **MMM:** after exact merged GeoX producer evidence, full producer validation,
+   and declared MMM consumer verification, separately authorize strict
+   normalization and certified cross-repository fixtures.
+4. **MIP:** after exact merged GeoX and MMM evidence, declared MIP consumer
+   verification, and D6 release/compatibility evidence, separately consider the
+   fixture-only planning-evidence journey.
+5. **All owners:** separately reconcile D6 and only then consider a bounded
    fixture-only cross-repository dry run.
-6. **Program governance:** seek separate authorization before any live package
-   integration.
+6. **Program governance:** require separate authorization before any live
+   package integration.
 
-The merged coordination control plane is a completed prerequisite. Steps 1 and
-2 may proceed in parallel where their own repository gates permit.
-GeoX authorizes its own builder task; MIP coordination cannot add a dependency
-or authorize that task. Step 3 depends on live merged GeoX producer evidence at
-an exact pin and required consumer verification. Step 4 depends on both that
-live merged GeoX producer evidence and merged MMM normalization/certified-fixture
-evidence, with the declared consumer verification. Steps 5–6 depend on the
-preceding producer and consumer evidence. No step 7 exists. Live engines, real
-data, P6 decision workflows, pilot, and production remain blocked future phases.
+The superseded GeoX builder and the stale MIP resolver are historical only and
+do not occupy an active sequence slot. No feature branch satisfies a merged
+dependency. P0–P8 and R0–R6 remain authoritative; live engines, real data,
+persistence, simulation, optimization, recommendations, assignment, pilot, and
+production remain blocked.
