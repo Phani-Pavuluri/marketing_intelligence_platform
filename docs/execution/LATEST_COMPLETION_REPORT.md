@@ -1,66 +1,29 @@
-# TASK_SUPERSESSION_REPORT
+# TASK_AUTHORIZATION_REPORT
 
 ## Current decision
 
-- **Current decision:** `superseded_without_merge`
-- **Task ID:** `MIP_CODEX_EXECUTION_INCIDENT_EVIDENCE_MATRIX_001`
+- **Decision:** `authorized`
+- **Task:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-- **Feature branch:** `docs/mip-codex-execution-incident-evidence-matrix-001`
-- **Rejected implementation:** `3a3f4b99eb7ebaa6fa3869e34145cc111892fcc7`
-- **Rejected review head:** `5e01767b0cf4a86262631c607bc2b0365f12253a`
-- **Final preserved remote branch head:** `59d23f2c3ce57cfb7272a1230600a2c5fd02721f`
+- **Pre-authoring base:** `9762afccca0790dd897f833d4dbea2f847aa6401`
+- **Feature branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
+- **Risk tier:** Tier 3
+- **Implementation:** none exists yet
+- **Task execution:** authorized
+- **Correction execution:** false
+- **Merge/PR authority:** false
 - **Capability authority:** unchanged
 
-## Disposition
+## Verified source checkpoints
 
-The evidence-matrix task and the wider forensic execution-audit lane are closed without merge. The remaining correction work was not published as a corrected implementation or exact-tree receipt, and further archaeology is not justified relative to product delay.
+- MIP main: `9762afccca0790dd897f833d4dbea2f847aa6401`
+- MMM main: `fe8e784923994406a2e4907d28debd872d61fd73`
+- GeoX main: `b11646bab1f461964644a6526ef4967a8f04624d`
 
-The preserved branch is historical evidence only. It is not approved for execution, correction, merge, rebase, force update, or reuse as a future implementation base.
+The task is program-tracking and ledger authoring only. It does not implement
+runtime behavior, certify GeoX, authorize MMM or GeoX work, resume the parked
+bridge, or authorize CalibrationSignal, optimization, planning,
+recommendations, real data, runtime integration, pilot, or production.
 
-## Durable findings retained
-
-The work established practical delivery rules that remain applicable through existing repository standards:
-
-- keep each milestone to one independently reviewable outcome;
-- freeze prerequisites, owned paths, prohibited scope, and exact acceptance evidence before execution;
-- validate external truth and behavior, not only artifact shape;
-- maintain coherent lifecycle state across the three stable execution files;
-- permit one bounded correction by default and supersede or split when the task expands;
-- keep execution-governance investment subordinate to real product progress.
-
-These findings do not authorize a new execution framework.
-
-## Existing controls and validation
-
-MIP retains its existing execution safeguards:
-
-- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`;
-- `docs/execution/TASK_EXECUTION_STANDARD.md`;
-- `tests/governance/test_repo_native_execution_handoff.py`;
-- task-specific exact owned-path checks and repository-required validation gates.
-
-No new task manifest, generator, standalone validator, `taskctl`, adapter framework, CI workflow, Git hook, dashboard, or orchestration layer was created or authorized.
-
-This supersession is a metadata-only repository decision. No Docker or full application validation is required. The exact changed paths for this decision are limited to:
-
-- `docs/execution/ACTIVE_TASK.md`;
-- `docs/execution/LATEST_COMPLETION_REPORT.md`;
-- `docs/execution/EXECUTION_STATE.json` in the immediate state-only follow-up commit.
-
-## Product and sibling impact
-
-- The parked MIP P2 bridge remains blocked by `BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001`.
-- MMM and GeoX remain read-only owner repositories for their respective analytical and producer truth.
-- No consumer verification occurred.
-- No product workstream advanced or regressed from this supersession.
-- No product, analytical, runtime, real-data, persistence, simulation, optimization, recommendation, pilot, production, or capability authority changed.
-
-## Local partial work
-
-Any uncommitted local evidence-matrix or lookup-ledger edits from the stopped correction are not Git evidence. They must be discarded or retained only below an allowed local-only path and must not be carried into a future task.
-
-## Next work
-
-No implementation task is currently authorized. The next task must be selected from fresh live product-roadmap orientation and must be a small product or analytical milestone using the existing execution safeguards.
-
-No pull request or merge was created for the superseded task.
+Full Docker validation is required during execution. The next GeoX milestone
+remains explicitly unauthorized. No PR or merge is authorized.
