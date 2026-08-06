@@ -2,9 +2,24 @@
 
 - **Milestone:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
 - **Branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
-- **Implementation commit:** `4fd95a3b9075ca38a5469b591bb346df1552c19c`
+- **Implementation commit:** `3727a7973f046a8046f6c349856949c7df1555eb`
 - **Lifecycle:** `blocked`
-- **Reason:** required Tier 3 repository validation could not run in the available execution environment.
+- **Blocker:** `BLOCK-MIP-P2-LEDGER-COORDINATION-CONTROL-PLANE-TEST-ACTIVE-TASK-ASSUMPTION-001`
+
+## Behavior preserved and corrected
+
+- Preserved the P2 capability ledger, its exact current MIP, MMM, and GeoX
+  pins, seven capability records, six-item unauthorized sequence, and false
+  capability-authority boundary.
+- Refined the new ledger governance test to evaluate the paragraph containing a
+  stale SHA. A stale SHA is accepted only in explicitly historical, prior,
+  superseded, archived, or coordination-provenance context; it remains rejected
+  when represented as current verified state, an active observation, a current
+  checkpoint, a prerequisite, or an execution-sequence value.
+- Preserved the required historical GeoX coordination provenance
+  `ee9673c13e69082367c1727568946ac4c1a01015`; it is not current GeoX main.
+- Restored current task-owned navigation text required by the existing
+  coordination-control-plane test without changing coordination history.
 
 ## Changed paths
 
@@ -14,85 +29,34 @@
 - `docs/program/NEXT_EXECUTION_SEQUENCE.md`
 - `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
 - `tests/docs/test_p2_capability_checkpoint_ledger.py`
-- `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-## Behavior implemented
+## Validation evidence
 
-- Added the machine-readable P2 capability-checkpoint ledger with exact MIP,
-  MMM, and GeoX main observations.
-- Separated implementation, validation, certification, consumer verification,
-  and downstream eligibility for seven P2 capabilities.
-- Recorded the exact six-step dependency sequence with every step unauthorized
-  and only the GeoX test-isolation milestone marked next eligible.
-- Preserved false authority for sibling work, certification, MMM implementation,
-  bridge resumption, CalibrationSignal construction, simulation, optimization,
-  planning, recommendations, real data, runtime integration, pilot, and
-  production.
-- Aligned current-state, repository-checkpoint, execution-sequence, and context
-  navigation documents with the ledger and removed stale repository pins.
-- Added a standard-library governance test for schema, pins, state vocabularies,
-  dependency acyclicity, false authority, capability invariants, parked bridge,
-  exact sequence, document alignment, and stale-pin rejection.
+- `python3 -m json.tool docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json >/dev/null` — passed.
+- `poetry run pytest -q tests/docs/test_p2_capability_checkpoint_ledger.py` — `5 passed in 0.01s`.
+- `poetry run pytest -q tests/test_cross_repository_coordination_control_plane.py` — failed: its assertion requires the superseded active task ID `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` instead of this authorized task ID.
+- `poetry run ruff check tests/docs/test_p2_capability_checkpoint_ledger.py` — passed (`All checks passed!`).
+- `poetry run mypy` — passed (`Success: no issues found in 204 source files`).
+- `git diff --check` — passed before publication.
+- `make validate` — failed in the required Docker gate with the same unrelated
+  coordination-control-plane assertion: `1 failed, 2545 passed, 5 skipped, 1 warning`.
 
-## Validation run
+`pytest -q tests/docs` did not run separately after the mandatory exact
+coordination-control-plane test failed. No exact-tree validation receipt was
+created because the complete Tier 3 gate did not pass.
 
-- `python -m json.tool docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json`
-  - **Result:** passed.
-- `pytest -q tests/docs/test_p2_capability_checkpoint_ledger.py`
-  - **Result:** `5 passed in 0.03s` on the corrected task-owned content.
-- `git diff --cached --check` over the task-owned implementation paths
-  - **Initial result:** failed because Markdown hard-break spaces created
-    trailing whitespace.
-  - **Correction:** removed the task-owned trailing whitespace.
-  - **Final result:** passed.
+## Resolution condition and limitations
 
-## Validation not run
+The failure is not correctable within this task: it is in an existing test that
+is outside the owned-path boundary and hard-codes a superseded active task.
+Separately authorize a narrow correction to make that test validate the current
+active lifecycle without pinning the old task ID. Resume this exact branch,
+rerun the full Tier 3 gate, and publish an exact-tree receipt only if every
+gate passes.
 
-- Ruff: not run; `ruff` binary is unavailable.
-- mypy: not run; `mypy` binary is unavailable.
-- `make validate`: not run; no complete repository checkout or Docker binary is
-  available in this environment.
-- Exact-tree repository receipt: not produced because the complete required gate
-  did not run.
-
-Environment diagnostics:
-
-- `git ls-remote https://github.com/Phani-Pavuluri/marketing_intelligence_platform.git ...`
-  failed with `Could not resolve host: github.com`.
-- `docker --version` failed with `docker: command not found`.
-- `ruff --version` failed with `ruff: command not found`.
-- `mypy --version` failed with `mypy: command not found`.
-
-## Blocker and resolution
-
-- **Blocker:** `BLOCK-MIP-P2-LEDGER-TIER3-VALIDATION-ENVIRONMENT-001`
-- **Resolution condition:** resume the exact remote branch in a synchronized MIP
-  checkout with Docker and repository development tools, verify the branch
-  ancestry and implementation head, run JSON parsing, focused pytest, Ruff,
-  mypy, `git diff --check`, and full Docker `make validate` on the frozen tree,
-  then publish an exact-tree receipt and `ready_for_review` only if every
-  required gate passes.
-
-## Cross-repository impact
-
-- **Affected repositories:** MIP, MMM, GeoX.
-- **Modified repository:** MIP only.
-- **Workstream:** `WS-MIP-P2-CAPABILITY-CHECKPOINT-LEDGER-RECOVERY-001`.
-- **MMM observed main:** `fe8e784923994406a2e4907d28debd872d61fd73`.
-- **GeoX observed main:** `b11646bab1f461964644a6526ef4967a8f04624d`.
-- No sibling task was authorized or modified.
-- No producer certification or consumer verification was claimed.
-- No blocker in the product dependency chain was resolved.
-- `GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001` remains next
-  eligible but unauthorized.
-
-## Git and authority
-
-- Feature branch was fast-forwarded from stale head
-  `041e7cc43c04b01272e4cb1a42bbb001142d106b` to authorized MIP main
-  `c3897ed0b1ca096d186a9cabda36e1b926c4e71f` before implementation.
-- No PR, merge, squash, rebase, force-push, or merge commit was created.
-- Merge and PR authority remain false.
-- Capability authority is unchanged.
+No PR, merge, sibling-repository modification, analytical/runtime change, or
+capability authorization was created. MMM and GeoX remain read-only. The parked
+MIP GeoX/MMM bridge remains blocked, and all authority freezes remain unchanged.

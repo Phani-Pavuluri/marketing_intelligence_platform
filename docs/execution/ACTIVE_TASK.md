@@ -98,16 +98,21 @@ otherwise publish an evidenced `blocked` result. No sibling authority changes.
 
 ## Blocked execution result
 
-Implementation is present at
-`4fd95a3b9075ca38a5469b591bb346df1552c19c`. JSON parsing, focused governance
-pytest (`5 passed`), and changed-file `git diff --check` passed after correcting
-task-owned trailing whitespace. Required Ruff, mypy, repository Docker
-`make validate`, and exact-tree receipt could not run in the available execution
-environment because no complete checkout is mounted, direct GitHub DNS access
-is unavailable, and Docker/Ruff/mypy binaries are absent.
+The resumed validation implementation is
+`3727a7973f046a8046f6c349856949c7df1555eb`. It corrects the ledger test so
+historical coordination provenance is permitted only in explicitly historical
+context, while stale pins remain rejected as current verified state.
 
-Resolution condition: resume this exact branch in a synchronized repository
-environment, verify the implementation head and current branch ancestry, run the
-complete declared Tier 3 gate on the frozen task-owned tree, and publish either
-`ready_for_review` or a new evidenced blocked state. Do not alter task meaning,
+JSON parsing, focused ledger governance pytest (`5 passed`), Ruff, mypy, and
+`git diff --check` passed. The required repository Docker `make validate` gate
+failed with `1 failed, 2545 passed, 5 skipped, 1 warning`: the unrelated
+`tests/test_cross_repository_coordination_control_plane.py` hard-codes
+`MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` as the current active
+task, contradicting this authorized task's required active identity. This task
+does not own that existing test and must not alter it or falsify lifecycle state.
+
+Resolution condition: separately authorize a correction to the
+coordination-control-plane test that removes its superseded current-task
+assumption without weakening its coordination assertions. Then resume this
+exact branch and rerun the complete Tier 3 gate. Do not alter task meaning,
 sibling state, analytical behavior, or capability authority.

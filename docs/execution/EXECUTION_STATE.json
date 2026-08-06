@@ -19,14 +19,14 @@
   "pr_creation_authorized": false,
   "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
-  "implementation_commit_sha": "4fd95a3b9075ca38a5469b591bb346df1552c19c",
+  "implementation_commit_sha": "3727a7973f046a8046f6c349856949c7df1555eb",
   "rejected_implementation_commit_sha": null,
   "superseded_branch_head_sha": "59d23f2c3ce57cfb7272a1230600a2c5fd02721f",
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-08-05",
   "blockers": [
-    "BLOCK-MIP-P2-LEDGER-TIER3-VALIDATION-ENVIRONMENT-001"
+    "BLOCK-MIP-P2-LEDGER-COORDINATION-CONTROL-PLANE-TEST-ACTIVE-TASK-ASSUMPTION-001"
   ],
   "maximum_correction_cycles": 1,
   "correction_cycles_completed": 0,
@@ -72,5 +72,5 @@
   "review_decision": "blocked",
   "review_decision_source": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "prompt_strategy": "full_task_specific_codex_prompt_grounded_in_live_git",
-  "task_authoring_note": "The ledger implementation exists at 4fd95a3b9075ca38a5469b591bb346df1552c19c. JSON parsing, focused governance pytest (5 passed), and changed-file diff checking passed after correcting task-owned whitespace. Required Ruff, mypy, full Docker make validate, and exact-tree repository receipt could not run because this execution environment has no complete repository checkout, no Docker, no Ruff or mypy binaries, and no direct GitHub DNS access. Resume only in a synchronized repository environment and run the complete declared gate without changing task meaning or authority."
+  "task_authoring_note": "The resumed synchronized environment completed JSON parsing, focused ledger governance pytest (5 passed), changed-file diff checking, Ruff, and mypy. The task-owned stale-pin test now permits explicitly historical coordination provenance while rejecting stale values when presented as current. The repository Docker gate fails on tests/test_cross_repository_coordination_control_plane.py because that unrelated test hard-codes MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001 as the current active task, while this authorized task correctly records MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001. The failure is outside this task's owned test path; do not alter the coordination-control-plane test or falsify the active execution state. Resolve by updating that test in a separately authorized task to derive or otherwise validate the current active task without pinning a superseded one, then resume this exact branch and rerun the complete Tier 3 gate."
 }
