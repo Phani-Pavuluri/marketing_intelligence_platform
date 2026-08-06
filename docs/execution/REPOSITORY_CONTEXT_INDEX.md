@@ -1,69 +1,64 @@
 # Repository Context Index
 
-**Status:** active navigation index
-**Owner:** MIP program owner
-**Last updated:** 2026-07-30
-**Last verified:** 2026-07-30
-**Verified against:** MIP authorization head
-`f83e91ef883af88808e03184b96bea26fba5eef8`
-**Update trigger:** canonical source-path or bootstrap change.
+**Status:** active navigation index  
+**Owner:** MIP program owner  
+**Last updated:** 2026-08-05  
+**Last verified:** 2026-08-05  
+**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`  
+**Update trigger:** canonical source-path, repository pin, capability checkpoint, or bootstrap change.
 
-## Fresh Chat Bootstrap
+## Fresh chat bootstrap
 
-Use this prompt in a fresh ChatGPT/Codex session:
+Use connected GitHub and synchronized Git as the source of truth. Read the root
+`AGENTS.md`, then `docs/execution/EXECUTION_STATE.json`, `ACTIVE_TASK.md`, this
+index, and `LATEST_COMPLETION_REPORT.md`. Read the P2 capability ledger and
+relevant program files before interpreting roadmaps or proposing work. Verify
+all affected sibling main SHAs and execution evidence. Stop rather than infer
+through stale pins, branch conflicts, unresolved ownership, or missing authority.
 
-> Use connected GitHub and synchronized Git as the source of truth. Treat
-> `Phani-Pavuluri/marketing_intelligence_platform` as the primary repository.
-> First classify the worktree: allow untracked content only below `.codex/` and
-> `docs/tasks/`, and stop on unrelated tracked or other unexpected untracked
-> paths. Run `git fetch --prune origin`; hydrate shallow or missing required
-> history; run `git switch main` and `git pull --ff-only origin main`; and prove
-> `git rev-parse main` equals `git rev-parse origin/main`. Then read `AGENTS.md`
-> and all stable `docs/execution/` files, followed by the seven canonical
-> `docs/program/` files. Summarize synchronized current state, active task,
-> latest completion, blockers, dependencies, authority boundaries, and next
-> eligible work. Do not modify files or authorize work unless explicitly
-> requested.
+## Current P2 navigation
 
-## Canonical program memory
+- `docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json` — machine-readable current
+  capability, dependency, validation, certification, consumer-verification, and
+  downstream-eligibility state.
+- `docs/program/PROGRAM_CURRENT_STATE.md` — concise current program position.
+- `docs/program/REPOSITORY_CHECKPOINTS.md` — verified repository-main evidence.
+- `docs/program/NEXT_EXECUTION_SEQUENCE.md` — exact six-step dependency order;
+  sequencing only, not authorization.
+- `docs/program/AUTHORITY_AND_FREEZE_MATRIX.md` — blocked and permitted authority.
+- `docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md` — ownership,
+  precedence, live-overlay, and consumer-verification rules.
+- `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json` — historical
+  coordination snapshot; apply the protocol's live overlay when pins are stale.
 
-- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md` — task shape and
-  risk-tiered delivery guidance
-- `docs/program/PROGRAM_CHARTER.md`
-- `docs/program/PROGRAM_CURRENT_STATE.md`
-- `docs/program/REPOSITORY_CHECKPOINTS.md`
-- `docs/program/AUTHORITY_AND_FREEZE_MATRIX.md`
-- `docs/program/NEXT_EXECUTION_SEQUENCE.md`
-- `docs/program/DECISION_REGISTER.md`
-- `docs/program/DEFERRED_AND_PARKED_WORK.md`
-- `docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md`
-- `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json`
-- `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md`
+## Roadmaps
 
-## Roadmap and P2 design
+- `docs/roadmap/ROADMAP.md` — long-range MIP capability phases.
+- `docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md` — roadmap-level sequencing.
+- `docs/roadmap/MIP_DECISION_LIFECYCLE_ROADMAP_CONSOLIDATION_001.md` — lifecycle
+  consolidation.
+- `docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md` — P2
+  consumer and fixture-journey design.
 
-- `docs/roadmap/ROADMAP.md`
-- `docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md`
-- `docs/roadmap/MIP_DECISION_LIFECYCLE_ROADMAP_CONSOLIDATION_001.md`
-- `docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md`
+Roadmaps describe future capability direction. They do not replace the P2
+capability ledger or repository execution state.
 
 ## Execution handoff
 
+- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`
 - `docs/execution/TASK_EXECUTION_STANDARD.md`
+- `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/ACTIVE_TASK.md`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
-- `docs/execution/EXECUTION_STATE.json`
+
+Execution files define exactly one repository-local milestone. The capability
+ledger never authorizes a task, merge, analytical behavior, or sibling change.
 
 ## Connected repositories
 
 - `Phani-Pavuluri/MMM`
 - `Phani-Pavuluri/panel_exp`
 
-Verify exact engine checkpoints from GitHub and
-`docs/program/REPOSITORY_CHECKPOINTS.md` before dependent work. This index
-points to sources and does not duplicate their authority.
-
-For cross-repository work, verify the coordination-state SHAs against live
-sibling Git and inspect the sibling execution state, completion report,
-workstream, blocker, and owner records. A stale coordination snapshot is a
-fail-closed orientation trigger, not cached authority.
+Current verified pins are recorded above and in the P2 ledger. A feature branch
+never satisfies a merged dependency. Reported completion without exact merged
+repository evidence and required consumer verification remains blocked.

@@ -1,22 +1,36 @@
 # Repository Checkpoints
 
-**Status:** verified remote-main inventory
-**Owner:** MIP program owner; repository owners verify their own artifacts
-**Last updated:** 2026-07-31
-**Last verified:** 2026-07-31
-**Verified against:** MIP `main` `18ab0d0c798dfcedd3f07034f4561320929477ea`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `ee9673c13e69082367c1727568946ac4c1a01015`
-**Update trigger:** `origin/main` changes relevant to P2 or a D6 release packet.
+**Status:** verified remote-main P2 inventory  
+**Owner:** MIP program owner; each repository owns its analytical and execution truth  
+**Last updated:** 2026-08-05  
+**Last verified:** 2026-08-05  
+**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`  
+**Update trigger:** a relevant sibling-main change, capability transition, or D6 evidence packet.
 
-| Repository | Verified on main | Canonical commits and paths | Active/unresolved work | MIP runtime dependency and caveat |
+| Repository | Verified main | Current P2 evidence | Unresolved work | Authority boundary |
 |---|---|---|---|---|
-| MIP | `18ab0d0` current main / `3520176` prior coordination closure | P2 design plus merged coordination-control-plane metadata; remote feature cleanup was observed. | Fixture-only P2 work and the context resolver remain separately unauthorized. | Consumer views are design only; no package call, persistence, or runtime adapter is canonical. |
-| MMM | `1b75d1d` | `mmm/contracts/public_simulation.py`, `mmm/contracts/calibration_compatibility.py`, and five compatibility fixtures. | Protocol adoption, strict GeoX normalization, certified cross-repository fixtures, and D6 evidence remain proposed/open. | MMM owns compatibility truth; completion of a producer task still requires consumer verification. |
-| GeoX | `ee9673c` observed / `e0cef94` prior closure | governed-readout contract and 12 certified fixtures; live authorized task `GEOX_GOVERNED_READOUT_BUILDER_PACKAGE_ENTRYPOINT_001` at authorization `c4c9059`. | One producer-owned task covers temporal/version semantics and builder/package entrypoint; full producer validation debt remains. | GeoX owns experiment truth and handoff eligibility; no consumer or runtime handoff is authorized. |
+| MIP | `c3897ed0b1ca096d186a9cabda36e1b926c4e71f` | P2 consumer design, coordination protocol, and the authorized capability-ledger recovery contract | Parked bridge at `480b32040ce185b8ff091435121c4bea6fc6c453`; D6 and planning journey blocked | MIP owns coordination, consumer contracts, reporting, LLM behavior, and UX; it cannot certify GeoX or determine MMM compatibility truth |
+| MMM | `fe8e784923994406a2e4907d28debd872d61fd73` | Calibration compatibility contract and existing package fixtures | No certified provenance-linked GeoX/MMM fixture pair; no active implementation task | MMM owns model, compatibility, simulation, optimization, and MMM numerical truth |
+| GeoX | `b11646bab1f461964644a6526ef4967a8f04624d` | Generator, strict validator surface, governed-readout source manifest, and 12-case generated manifest | Normal package-import test isolation and exact-tree producer certification are missing; prior task was superseded without merge | GeoX owns experiment design, inference, governed readouts, handoff eligibility, and experiment numerical truth |
 
-Sibling local worktrees were not used as evidence: MMM and GeoX had only local
-`docs/tasks/` untracked content at verification. Local feature branches are not
-canonical. Reported statements without the listed remote-main source remain
-unverified until their owner supplies a committed path and pin.
+## GeoX checkpoint detail
 
-The current coordination snapshot and dependency ledger are
-[`CROSS_REPOSITORY_COORDINATION_STATE.json`](CROSS_REPOSITORY_COORDINATION_STATE.json).
+- Generator implementation checkpoint:
+  `d0f0ba937c79528abd34d7ff89eb4601080805e9`.
+- Validator main-line implementation lineage:
+  `c1d1311494e7cc637141b09097ef929567a960f6`.
+- Rejected and divergent historical heads
+  `89c3ded7620b85e382cecec5243ca84f8fb93c95`,
+  `c18f56341b50c58505b59fc6cacf2337ca7f9fc4`, and
+  `2b6745b9cbcf5a17196796231a39fec4336b5d1f` are diagnostic history only.
+  They must not be merged, cherry-picked, reused, or treated as certification
+  evidence.
+
+## Capability ledger relationship
+
+[`P2_CAPABILITY_CHECKPOINT_LEDGER.json`](P2_CAPABILITY_CHECKPOINT_LEDGER.json)
+records current implementation, validation, certification, consumer-verification,
+and downstream-eligibility states. Repository roadmaps retain long-range
+technical priorities. Repository execution files retain the single active task
+and branch lifecycle. This checkpoint file summarizes verified main evidence
+without replacing any of those authorities.

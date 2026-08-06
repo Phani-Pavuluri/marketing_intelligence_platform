@@ -1,59 +1,58 @@
 # Program Current State
 
-**Status:** current verified snapshot
-**Owner:** MIP program owner
-**Last updated:** 2026-07-31
-**Last verified:** 2026-07-31
-**Verified against:** MIP `main` `18ab0d0c798dfcedd3f07034f4561320929477ea`; MMM `origin/main` `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`; GeoX `origin/main` `ee9673c13e69082367c1727568946ac4c1a01015`
-**Update trigger:** a merged checkpoint, completed gate, or changed authority state.
+**Status:** current verified P2 capability snapshot  
+**Owner:** MIP program owner  
+**Last updated:** 2026-08-05  
+**Last verified:** 2026-08-05  
+**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`  
+**Update trigger:** a merged capability checkpoint, completed validation or certification gate, consumer verification, or authority change.
 
 ## Current phase
 
-The program is at the fixture-only P2 preparation boundary: the MIP consumer
-contract and fixture-journey design is merged, while package integration remains
-blocked. P0–P8 and R0–R6 are canonical in
-[`ROADMAP.md`](../roadmap/ROADMAP.md).
+The program remains at the fixture-only P2 preparation boundary. The current
+missing checkpoint is `P2_GEOX_CALIBRATION_SOURCE_PRODUCER_CHECKPOINT`.
+Long-range sequencing remains in the repository roadmaps; current capability
+truth and dependency eligibility are recorded in
+[`P2_CAPABILITY_CHECKPOINT_LEDGER.json`](P2_CAPABILITY_CHECKPOINT_LEDGER.json).
+Execution authority remains repository-local in each repository's synchronized
+`docs/execution/` files.
 
-The cross-repository coordination control plane is merged and closed at prior
-MIP closure `3520176`; current MIP `main` at this review is `18ab0d0`. Its
-pinned historical state remains informative only and fails closed when a sibling
-remote main changes. The active post-merge reconciliation is MIP-only governance
-and does not reopen that workstream; see
-[Coordination State](CROSS_REPOSITORY_COORDINATION_STATE.json).
+## Current capability position
 
-## Verified checkpoints and completed milestone
+| Capability | Implementation | Validation / certification | Downstream status |
+|---|---|---|---|
+| GeoX calibration-source generator | Merged on GeoX main | Component-validated; not producer-certified | Blocked |
+| GeoX calibration-source validator | Present on GeoX main | Normal package-import execution and exact-tree certification remain unproven | Blocked |
+| Combined GeoX calibration-source producer | Present on GeoX main | Incomplete and uncertified | Blocked |
+| MMM provenance-linked compatibility fixtures | Not started | Requires a certified GeoX producer checkpoint | Blocked |
+| MIP GeoX/MMM compatibility bridge | Parked at `480b32040ce185b8ff091435121c4bea6fc6c453` | Consumer verification unavailable | Blocked |
+| D6 release-compatibility evidence | Not started | Requires the verified bridge | Blocked |
+| Fixture-only planning-evidence journey | Not started | Requires D6 evidence | Blocked |
 
-| Repository | Verified checkpoint | Current verified evidence |
-|---|---|---|
-| MIP | `18ab0d0` current main / `3520176` prior coordination closure | P0–P8 consolidation, P2 consumer design, and the merged coordination control plane. |
-| MMM | `1b75d1d` | `MMMPublicSimulationExport`, compatibility contract/fixtures, and closed V2 workflow reconciliation. |
-| GeoX | `ee9673c` observed / `e0cef94` prior V2 closure | numerical-truth validation, governed-readout contract/fixtures, and one authorized producer-owned builder task covering temporal/version semantics plus builder/package entrypoint. |
+A merged implementation, component test result, producer certification,
+consumer verification, and downstream eligibility are separate states. A
+feature-branch head is never merged capability evidence.
 
-The current first evidence tranche remains: certified GeoX experiment evidence
-→ MMM calibration compatibility → MMM bounded baseline-versus-candidate
-comparison → MIP planning-evidence journey → concrete D6 evidence.
+## Next eligible work
 
-## Eligible next MIP work and blockers
+Only `GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001` is next
+eligible for separate GeoX task authoring and authorization. It is not
+authorized by MIP. Its bounded outcome is to prove normal package/import test
+isolation for the existing generator and validator surfaces and record the
+remaining certification gap. It must not certify the producer or change MMM or
+MIP behavior.
 
-`MIP_ACTIVE_TASK_CONTEXT_RESOLVER_001` may be considered only through separate
-authorization after this reconciliation is merged; it is not authorized by this
-packet. Fixture-only P2 consumer work also remains separately unauthorized.
-
-Current P2 blockers are `P2-GEOX-TEMPORAL-VERSION-SEMANTICS`,
-`P2-GEOX-READOUT-BUILDER-ENTRYPOINT`, `P2-MMM-GEOX-NORMALIZATION`,
-`P2-MMM-CROSS-REPOSITORY-FIXTURES`, and
-`P2-D6-RELEASE-COMPATIBILITY-EVIDENCE`. Their owners, evidence, and consumer
-verification conditions are in the coordination state; none is resolved by a
-producer task report alone.
+The complete unauthorized sequence is maintained in
+[`NEXT_EXECUTION_SEQUENCE.md`](NEXT_EXECUTION_SEQUENCE.md) and the machine-readable
+ledger.
 
 ## Authority freezes
 
-Runtime package integration, live MMM/GeoX, real customer data, uploads,
-persistent customer/product artifacts, jobs, simulation runtime, optimization,
-recommendation lifecycle, treatment assignment, pilot, and production remain
-blocked. See [Authority and Freeze Matrix](AUTHORITY_AND_FREEZE_MATRIX.md) and
-[Next Execution Sequence](NEXT_EXECUTION_SEQUENCE.md).
+No sibling task, GeoX certification, MMM implementation, parked-bridge resume,
+`CalibrationSignal` construction, simulation, optimization, planning,
+recommendation, real-data use, runtime integration, pilot, or production action
+is authorized by this snapshot.
 
-Detailed sources: [MIP P2 consumer design](../roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md),
-[Repository checkpoints](REPOSITORY_CHECKPOINTS.md), and
-[Decision register](DECISION_REGISTER.md).
+Detailed sources: [Repository checkpoints](REPOSITORY_CHECKPOINTS.md),
+[Authority and freeze matrix](AUTHORITY_AND_FREEZE_MATRIX.md), and
+[the P2 consumer design](../roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md).
