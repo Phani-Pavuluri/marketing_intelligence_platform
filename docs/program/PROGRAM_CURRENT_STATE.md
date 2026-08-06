@@ -56,3 +56,8 @@ is authorized by this snapshot.
 Detailed sources: [Repository checkpoints](REPOSITORY_CHECKPOINTS.md),
 [Authority and freeze matrix](AUTHORITY_AND_FREEZE_MATRIX.md), and
 [the P2 consumer design](../roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md).
+
+Historical coordination provenance remains `18ab0d0c798dfcedd3f07034f4561320929477ea`
+(MIP), `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421` (MMM), and
+`ee9673c13e69082367c1727568946ac4c1a01015` (GeoX); it is not current P2
+capability evidence.

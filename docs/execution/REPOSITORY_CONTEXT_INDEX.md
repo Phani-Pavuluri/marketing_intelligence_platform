@@ -53,6 +53,7 @@ capability ledger or repository execution state.
 
 Execution files define exactly one repository-local milestone. The capability
 ledger never authorizes a task, merge, analytical behavior, or sibling change.
+Local-only `.codex/` and `docs/tasks/` content is never committed.
 
 ## Connected repositories
 

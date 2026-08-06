@@ -34,3 +34,8 @@ and downstream-eligibility states. Repository roadmaps retain long-range
 technical priorities. Repository execution files retain the single active task
 and branch lifecycle. This checkpoint file summarizes verified main evidence
 without replacing any of those authorities.
+
+Historical coordination provenance: MIP `18ab0d0c798dfcedd3f07034f4561320929477ea`,
+MMM `1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`, and GeoX
+`ee9673c13e69082367c1727568946ac4c1a01015`; these are retained only for the
+historical coordination-control-plane test and are not current checkpoint pins.

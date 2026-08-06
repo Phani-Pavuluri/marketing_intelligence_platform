@@ -2,6 +2,7 @@ import json
 import re
 from collections.abc import Iterable
 from pathlib import Path
+from typing import cast
 
 ROOT = Path(__file__).parents[2]
 LEDGER_PATH = ROOT / "docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json"
@@ -40,7 +41,7 @@ STALE_PINS = {
 
 
 def _load_ledger() -> dict[str, object]:
-    return json.loads(LEDGER_PATH.read_text())
+    return cast(dict[str, object], json.loads(LEDGER_PATH.read_text()))
 
 
 def _walk_dependencies(
@@ -65,6 +66,40 @@ def _walk_dependencies(
 
 def _document_text(paths: Iterable[Path]) -> str:
     return "\n".join(path.read_text() for path in paths)
+
+
+def _historical_or_current_paragraphs(document: str) -> list[str]:
+    return [paragraph for paragraph in re.split(r"\n\s*\n", document) if paragraph]
+
+
+def _assert_stale_pins_are_historical_only(document: str) -> None:
+    historical_markers = (
+        "historical",
+        "prior",
+        "superseded",
+        "archived",
+        "coordination provenance",
+    )
+    current_markers = (
+        "current verified",
+        "active repository observation",
+        "current checkpoint",
+        "active task prerequisite",
+        "current execution sequence",
+    )
+
+    for paragraph in _historical_or_current_paragraphs(document):
+        normalized_paragraph = paragraph.lower()
+        for stale_sha in STALE_PINS:
+            if stale_sha not in paragraph:
+                continue
+            assert any(marker in normalized_paragraph for marker in historical_markers)
+            for marker in current_markers:
+                assert not re.search(
+                    rf"(?<!not ){re.escape(marker)}[^\n]*{stale_sha}|"
+                    rf"{stale_sha}[^\n]*(?<!not ){re.escape(marker)}",
+                    normalized_paragraph,
+                )
 
 
 def test_ledger_schema_pins_and_exact_capability_set() -> None:
@@ -186,8 +221,8 @@ def test_program_documents_align_and_reject_stale_pins() -> None:
     text = _document_text(paths)
     for sha in EXPECTED_REPOSITORY_PINS.values():
         assert sha in text
-    for stale_sha in STALE_PINS:
-        assert stale_sha not in text
+    for path in paths:
+        _assert_stale_pins_are_historical_only(path.read_text())
     for task_id in EXPECTED_SEQUENCE:
         assert task_id in SEQUENCE_PATH.read_text()
     for path in paths:

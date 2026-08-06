@@ -50,5 +50,16 @@ separate from the planning journey. No live package integration, real data,
 `CalibrationSignal` construction, simulation, optimization, recommendation,
 pilot, or production work is authorized.
 
+No step 7 exists. Step 3 depends on live merged GeoX producer evidence at
+an exact pin and required consumer verification. Step 4 depends on both that
+live merged GeoX producer evidence and merged MMM normalization/certified-fixture
+evidence, with the declared consumer verification. Steps 5–6 depend on the
+preceding producer and consumer evidence.
+
 Machine-readable state and dependency evidence are in
 [`P2_CAPABILITY_CHECKPOINT_LEDGER.json`](P2_CAPABILITY_CHECKPOINT_LEDGER.json).
+
+Historical coordination provenance remains MIP
+`18ab0d0c798dfcedd3f07034f4561320929477ea`, MMM
+`1b75d1d3c9f49d40f2b7ab71f524fbd2dc6d1421`, and GeoX
+`ee9673c13e69082367c1727568946ac4c1a01015`; these do not change the sequence.
