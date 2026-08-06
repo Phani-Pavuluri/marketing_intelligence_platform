@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** authorized
+**Status:** blocked
 **Task ID:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 **Pre-authoring evidence base:** `9762afccca0790dd897f833d4dbea2f847aa6401`
@@ -63,8 +63,8 @@ Create `docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json` with schema
 through chat summaries, exactly `mip`, `mmm`, `geox` observations, the exact
 six-item sequence, seven acyclic capability records, and an authority object
 whose sibling-task, GeoX-certification, MMM, bridge, CalibrationSignal,
-simulation, optimization, planning, recommendation, real-data, runtime,
-pilot and production flags are all false.
+simulation, optimization, planning, recommendation, real-data, runtime, pilot
+and production flags are all false.
 
 Required capability states are: GeoX generator merged/component-validated;
 GeoX validator present on main but incomplete/uncertified and blocked; combined
@@ -95,3 +95,19 @@ parsing, focused pytest, Ruff, mypy, `git diff --check`, and `make validate` on
 the frozen feature tree. Task-owned failures must be corrected, not hidden as
 environment blockers. Publish `ready_for_review` only after the complete gate;
 otherwise publish an evidenced `blocked` result. No sibling authority changes.
+
+## Blocked execution result
+
+Implementation is present at
+`4fd95a3b9075ca38a5469b591bb346df1552c19c`. JSON parsing, focused governance
+pytest (`5 passed`), and changed-file `git diff --check` passed after correcting
+task-owned trailing whitespace. Required Ruff, mypy, repository Docker
+`make validate`, and exact-tree receipt could not run in the available execution
+environment because no complete checkout is mounted, direct GitHub DNS access
+is unavailable, and Docker/Ruff/mypy binaries are absent.
+
+Resolution condition: resume this exact branch in a synchronized repository
+environment, verify the implementation head and current branch ancestry, run the
+complete declared Tier 3 gate on the frozen task-owned tree, and publish either
+`ready_for_review` or a new evidenced blocked state. Do not alter task meaning,
+sibling state, analytical behavior, or capability authority.
