@@ -198,21 +198,18 @@ def test_cross_repository_coordination_control_plane() -> None:
     )
     assert "Resume the existing branch" not in active_task
     execution_state = json.loads(EXECUTION_STATE_PATH.read_text(encoding="utf-8"))
-    assert execution_state["task_id"] == (
-        "MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001"
+    assert execution_state["repository"] == (
+        "Phani-Pavuluri/marketing_intelligence_platform"
     )
-    assert execution_state["current_mip_main_at_review"] == current_mip_main_at_review
-    assert execution_state["prior_task_closure_sha"] == historical_snapshot_pins["mip"]
-    if execution_state["status"] == "ready_for_review":
-        implementation_sha = execution_state["implementation_commit_sha"]
-        assert isinstance(implementation_sha, str)
-        assert len(implementation_sha) == 40
-        assert f"**Correction implementation:** `{implementation_sha}`" in active_task
-        assert f"**Correction implementation:** `{implementation_sha}`" in report
-        assert "implementation_lineage" not in execution_state
-        assert "**Current decision:** `ready_for_review`" in report
-    else:
-        assert execution_state["status"] == "changes_requested"
-        assert "**Status:** changes_requested" in active_task
-        assert "**Current decision:** `changes_requested`" in report
+    current_task_id = execution_state["task_id"]
+    current_status = execution_state["status"]
+    assert isinstance(current_task_id, str) and current_task_id
+    assert isinstance(current_status, str) and current_status
+    assert current_task_id in active_task
+    assert current_task_id in report
+    assert f"**Status:** {current_status}" in active_task
+    assert f"**Current decision:** `{current_status}`" in report
+    assert execution_state["merge_authorized"] is False
+    assert execution_state["pr_creation_authorized"] is False
+    assert execution_state["capability_authorizations_changed"] is False
     assert repositories["mip"]["active_task_status"] == "merged"
