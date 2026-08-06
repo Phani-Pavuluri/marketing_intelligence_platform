@@ -1,62 +1,53 @@
-# MIP P2 Capability Checkpoint Ledger Recovery — Blocked Completion Report
+# MIP P2 Capability Checkpoint Ledger Recovery — Changes Requested
 
 - **Milestone:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
 - **Branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
-- **Implementation commit:** `3727a7973f046a8046f6c349856949c7df1555eb`
-- **Lifecycle:** `blocked`
-- **Blocker:** `BLOCK-MIP-P2-LEDGER-COORDINATION-CONTROL-PLANE-TEST-ACTIVE-TASK-ASSUMPTION-001`
+- **Reviewed and rejected remote head:** `35e03b2852022ef510f8fff409a06e26f975f29e`
+- **Implementation commit under review:** `3727a7973f046a8046f6c349856949c7df1555eb`
+- **Current decision:** `changes_requested`
+- **Correction cycles authorized:** one of one
 
-## Behavior preserved and corrected
+## Review finding
 
-- Preserved the P2 capability ledger, its exact current MIP, MMM, and GeoX
-  pins, seven capability records, six-item unauthorized sequence, and false
-  capability-authority boundary.
-- Refined the new ledger governance test to evaluate the paragraph containing a
-  stale SHA. A stale SHA is accepted only in explicitly historical, prior,
-  superseded, archived, or coordination-provenance context; it remains rejected
-  when represented as current verified state, an active observation, a current
-  checkpoint, a prerequisite, or an execution-sequence value.
-- Preserved the required historical GeoX coordination provenance
-  `ee9673c13e69082367c1727568946ac4c1a01015`; it is not current GeoX main.
-- Restored current task-owned navigation text required by the existing
-  coordination-control-plane test without changing coordination history.
+The ledger implementation and its paragraph-context-aware stale-pin correction are acceptable in direction. JSON parsing, the focused ledger test, Ruff, mypy, and `git diff --check` passed. The required Docker gate failed with `1 failed, 2545 passed, 5 skipped, 1 warning`.
 
-## Changed paths
+The remaining failure is in `tests/test_cross_repository_coordination_control_plane.py`. That test correctly validates the immutable historical coordination snapshot, but its final mutable-execution section incorrectly requires `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` to remain the current task in `docs/execution/EXECUTION_STATE.json`. The current authorized task is `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`, so the assertion is obsolete.
 
-- `docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json`
-- `docs/program/PROGRAM_CURRENT_STATE.md`
-- `docs/program/REPOSITORY_CHECKPOINTS.md`
-- `docs/program/NEXT_EXECUTION_SEQUENCE.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `tests/docs/test_p2_capability_checkpoint_ledger.py`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
+Creating and merging a separate prerequisite task would move `main` and make this branch non-fast-forwardable under the repository's no-rebase and no-merge-commit rules. The defect is directly adjacent to the execution-document alignment changed by this milestone. The task's single correction cycle therefore owns only this existing test path in addition to the prior task-owned paths.
 
-## Validation evidence
+## Required correction
 
-- `python3 -m json.tool docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json >/dev/null` — passed.
-- `poetry run pytest -q tests/docs/test_p2_capability_checkpoint_ledger.py` — `5 passed in 0.01s`.
-- `poetry run pytest -q tests/test_cross_repository_coordination_control_plane.py` — failed: its assertion requires the superseded active task ID `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` instead of this authorized task ID.
-- `poetry run ruff check tests/docs/test_p2_capability_checkpoint_ledger.py` — passed (`All checks passed!`).
-- `poetry run mypy` — passed (`Success: no issues found in 204 source files`).
-- `git diff --check` — passed before publication.
-- `make validate` — failed in the required Docker gate with the same unrelated
-  coordination-control-plane assertion: `1 failed, 2545 passed, 5 skipped, 1 warning`.
+Preserve every assertion covering the historical coordination snapshot, historical repository pins, workstreams, blockers, ownership, authority, ordered historical sequence, protocol, history, and provenance.
 
-`pytest -q tests/docs` did not run separately after the mandatory exact
-coordination-control-plane test failed. No exact-tree validation receipt was
-created because the complete Tier 3 gate did not pass.
+Replace only the obsolete assertions against mutable current execution files with generic lifecycle-coherence checks:
 
-## Resolution condition and limitations
+- current execution repository is MIP;
+- current task ID is non-empty and appears in `ACTIVE_TASK.md` and this report;
+- lifecycle status is represented consistently across the three execution files;
+- merge, PR, and capability-authority flags remain false;
+- superseded task-specific fields such as `current_mip_main_at_review` and `prior_task_closure_sha` are not required from the current execution state.
 
-The failure is not correctable within this task: it is in an existing test that
-is outside the owned-path boundary and hard-codes a superseded active task.
-Separately authorize a narrow correction to make that test validate the current
-active lifecycle without pinning the old task ID. Resume this exact branch,
-rerun the full Tier 3 gate, and publish an exact-tree receipt only if every
-gate passes.
+Do not edit `CROSS_REPOSITORY_COORDINATION_STATE.json`, coordination history, sibling repositories, runtime or analytical code, CI, Docker, dependencies, or authority rules.
 
-No PR, merge, sibling-repository modification, analytical/runtime change, or
-capability authorization was created. MMM and GeoX remain read-only. The parked
-MIP GeoX/MMM bridge remains blocked, and all authority freezes remain unchanged.
+## Required validation
+
+Run on one frozen task-owned tree:
+
+```bash
+python3 -m json.tool docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json >/dev/null
+poetry run pytest -q tests/docs/test_p2_capability_checkpoint_ledger.py
+poetry run pytest -q tests/test_cross_repository_coordination_control_plane.py
+poetry run pytest -q tests/docs
+poetry run ruff check tests/docs/test_p2_capability_checkpoint_ledger.py tests/test_cross_repository_coordination_control_plane.py
+poetry run mypy
+git diff --check
+make validate
+```
+
+Publish `ready_for_review` and the exact-tree validation receipt only if every required command passes. Otherwise publish a Git-durable blocked state with exact diagnostics.
+
+## Authority and Git
+
+No PR or merge is authorized. No sibling, analytical, runtime, capability, pilot, or production authority changes. Do not merge, squash, rebase, force-push, or create a merge commit.
+
+Two transient metadata-history commits created and then removed an empty `docs/tasks/.placeholder`; they leave no tree diff. They must not appear in final changed paths or be represented as implementation evidence.
