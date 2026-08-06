@@ -1,10 +1,10 @@
 # Repository Context Index
 
-**Status:** active navigation index  
-**Owner:** MIP program owner  
-**Last updated:** 2026-08-05  
-**Last verified:** 2026-08-05  
-**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`  
+**Status:** active navigation index
+**Owner:** MIP program owner
+**Last updated:** 2026-08-05
+**Last verified:** 2026-08-05
+**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`
 **Update trigger:** canonical source-path, repository pin, capability checkpoint, or bootstrap change.
 
 ## Fresh chat bootstrap

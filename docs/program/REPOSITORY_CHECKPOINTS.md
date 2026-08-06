@@ -1,10 +1,10 @@
 # Repository Checkpoints
 
-**Status:** verified remote-main P2 inventory  
-**Owner:** MIP program owner; each repository owns its analytical and execution truth  
-**Last updated:** 2026-08-05  
-**Last verified:** 2026-08-05  
-**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`  
+**Status:** verified remote-main P2 inventory
+**Owner:** MIP program owner; each repository owns its analytical and execution truth
+**Last updated:** 2026-08-05
+**Last verified:** 2026-08-05
+**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`
 **Update trigger:** a relevant sibling-main change, capability transition, or D6 evidence packet.
 
 | Repository | Verified main | Current P2 evidence | Unresolved work | Authority boundary |

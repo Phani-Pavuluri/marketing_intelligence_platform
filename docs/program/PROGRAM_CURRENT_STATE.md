@@ -1,10 +1,10 @@
 # Program Current State
 
-**Status:** current verified P2 capability snapshot  
-**Owner:** MIP program owner  
-**Last updated:** 2026-08-05  
-**Last verified:** 2026-08-05  
-**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`  
+**Status:** current verified P2 capability snapshot
+**Owner:** MIP program owner
+**Last updated:** 2026-08-05
+**Last verified:** 2026-08-05
+**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`
 **Update trigger:** a merged capability checkpoint, completed validation or certification gate, consumer verification, or authority change.
 
 ## Current phase

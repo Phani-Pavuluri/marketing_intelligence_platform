@@ -1,10 +1,10 @@
 # Next Execution Sequence
 
-**Status:** dependency order only; no step is authorized by this file  
-**Owner:** MIP program owner with GeoX and MMM repository owners  
-**Last updated:** 2026-08-05  
-**Last verified:** 2026-08-05  
-**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`  
+**Status:** dependency order only; no step is authorized by this file
+**Owner:** MIP program owner with GeoX and MMM repository owners
+**Last updated:** 2026-08-05
+**Last verified:** 2026-08-05
+**Verified against:** MIP `main` `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`; MMM `main` `fe8e784923994406a2e4907d28debd872d61fd73`; GeoX `main` `b11646bab1f461964644a6526ef4967a8f04624d`
 **Update trigger:** a prerequisite merge, certification, consumer verification, D6 packet, or explicit repository-local task authorization.
 
 1. `GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001`
