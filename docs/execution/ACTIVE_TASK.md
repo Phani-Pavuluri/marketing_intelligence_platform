@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 **Task ID:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 **Feature branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
@@ -89,3 +89,12 @@ created; otherwise publish an evidenced `blocked` state.
 ## Git workflow
 
 Use the existing feature branch. Commit and push the correction and exact-tree validation receipt. Do not create a PR, merge, squash, rebase, force-push, or merge commit. Do not modify sibling repositories or change analytical, capability, merge, PR, pilot, or production authority.
+
+## Closure
+
+Externally approved head `ccc82f3eb62a6cbdbdd877b69bc645e12ce0b913` was
+fast-forwarded to `main`. The implementation is
+`17edf7aadc7967566cc8fbb2ecbb4be8fb8d29f7`. The complete Tier 3 gate passed
+before and after the fast-forward. The local and remote feature branches were
+deleted. No PR, merge commit, sibling modification, or capability-authority
+change occurred.

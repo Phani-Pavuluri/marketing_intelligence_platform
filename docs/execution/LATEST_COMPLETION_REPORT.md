@@ -1,10 +1,10 @@
-# MIP P2 Capability Checkpoint Ledger Recovery — Ready for Review
+# MIP P2 Capability Checkpoint Ledger Recovery — Merged
 
 - **Milestone:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
 - **Branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
 - **Correction implementation:** `17edf7aadc7967566cc8fbb2ecbb4be8fb8d29f7`
 - **Reviewed and rejected head:** `35e03b2852022ef510f8fff409a06e26f975f29e`
-- **Current decision:** `ready_for_review`
+- **Current decision:** `merged`
 - **Correction cycle:** `1 of 1 complete`
 
 ## Behavior implemented
@@ -56,3 +56,29 @@ capability authority changed. MMM and GeoX remain read-only. The parked MIP
 GeoX/MMM bridge remains blocked. No PR or merge was created. The branch is ready
 only for external exact-head review after the durable validation receipt is
 published.
+
+## Closure
+
+- **Approval source:** user-approved exact remote head
+  `ccc82f3eb62a6cbdbdd877b69bc645e12ce0b913`.
+- **Reviewed head:** `ccc82f3eb62a6cbdbdd877b69bc645e12ce0b913`.
+- **Implementation commit:** `17edf7aadc7967566cc8fbb2ecbb4be8fb8d29f7`.
+- **Merge method:** fast-forward only; `main` advanced from
+  `c3897ed0b1ca096d186a9cabda36e1b926c4e71f` to the reviewed head.
+- **Pre-merge validation:** JSON parsing; ledger pytest `5 passed`;
+  coordination pytest `1 passed`; documentation pytest `6 passed`; Ruff;
+  mypy across 204 source files; `git diff --check`; Docker `make validate`
+  `2546 passed, 5 skipped, 1 warning`.
+- **Post-fast-forward validation:** the same commands and results, including
+  Docker `make validate` `2546 passed, 5 skipped, 1 warning`.
+- **GitHub-observed evidence:** the approved remote branch matched the reviewed
+  head before merge; pushed `origin/main` matched the fast-forwarded main.
+- **Locally observed evidence:** all validation commands above passed; local
+  main matched origin/main before closure metadata.
+- **Cleanup:** local feature branch deleted; remote feature branch deleted.
+- **Validation not run / blockers:** none.
+- **Authority impact:** none. MMM and GeoX were not modified; no analytical,
+  runtime, capability, merge, PR, pilot, production, or product authority
+  changed.
+
+No PR and no merge commit were created.
