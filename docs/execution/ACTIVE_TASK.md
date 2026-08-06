@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 **Task ID:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 **Feature branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
@@ -42,13 +42,17 @@ Source/runtime code, other tests or fixtures, coordination history/state, standa
 
 Preserve schema `mip_p2_capability_checkpoint_ledger_v1`, the exact current repository pins, seven acyclic capability records, the exact six-item unauthorized execution sequence, and all false authority flags. Preserve paragraph-context-aware historical-pin validation: historical coordination provenance is permitted only when explicitly historical and remains rejected as current state.
 
-## Correction cycle 1 of 1
+## Correction cycle 1 of 1 — complete
 
 The full Docker gate at rejected head `35e03b2852022ef510f8fff409a06e26f975f29e` failed because `tests/test_cross_repository_coordination_control_plane.py` validates a historical coordination snapshot but also hard-codes `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` as the task ID in the mutable current execution files.
 
-Modify only the stale mutable-current-task portion of that test. Preserve every assertion covering the historical coordination snapshot, historical repository pins, workstreams, blockers, ownership, authority, ordered historical sequence, protocol, history, and historical provenance.
+Modified only the stale mutable-current-task portion of that test at
+`17edf7aadc7967566cc8fbb2ecbb4be8fb8d29f7`. The correction preserves every
+assertion covering the historical coordination snapshot, historical repository
+pins, workstreams, blockers, ownership, authority, ordered historical sequence,
+protocol, history, and historical provenance.
 
-Replace the obsolete current-task assertions with generic lifecycle-coherence checks:
+The replacement generic lifecycle-coherence checks require:
 
 - current `EXECUTION_STATE.json` repository is MIP;
 - current task ID is a non-empty string and appears in `ACTIVE_TASK.md` and `LATEST_COMPLETION_REPORT.md`;
@@ -56,11 +60,13 @@ Replace the obsolete current-task assertions with generic lifecycle-coherence ch
 - `merge_authorized`, `pr_creation_authorized`, and `capability_authorizations_changed` remain false;
 - the test must not require task-specific fields from the superseded closure task, including `current_mip_main_at_review` or `prior_task_closure_sha`.
 
-Do not change historical coordination JSON or documentation to satisfy the test. Do not weaken the test into a simple existence check.
+Historical coordination JSON or documentation was not changed to satisfy the
+test, and the test remains a lifecycle-coherence assertion rather than a simple
+existence check.
 
 ## Required validation
 
-Run on one frozen task-owned tree:
+Passed on the correction tree and must be rerun on the exact receipt tree:
 
 ```bash
 python3 -m json.tool docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json >/dev/null
@@ -73,7 +79,12 @@ git diff --check
 make validate
 ```
 
-Task-owned failures must be corrected. Publish `ready_for_review` only when every required gate passes and an exact-tree validation receipt is created. Otherwise publish an evidenced `blocked` state.
+All required correction-tree gates passed: ledger pytest `5 passed`,
+coordination pytest `1 passed`, documentation pytest `6 passed`, Ruff passed,
+mypy passed across 204 source files, `git diff --check` passed, and Docker
+`make validate` reported `2546 passed, 5 skipped, 1 warning`. Publish
+`ready_for_review` only after the final exact-tree validation receipt is
+created; otherwise publish an evidenced `blocked` state.
 
 ## Git workflow
 
