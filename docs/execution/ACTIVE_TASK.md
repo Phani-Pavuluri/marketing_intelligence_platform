@@ -1,9 +1,8 @@
 # Active Task
 
-**Status:** blocked
+**Status:** changes_requested
 **Task ID:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-**Pre-authoring evidence base:** `9762afccca0790dd897f833d4dbea2f847aa6401`
 **Feature branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
 **Execution mode:** `branch_and_fast_forward`
 **Risk tier:** Tier 3
@@ -12,107 +11,70 @@
 
 ## Objective
 
-Create one machine-readable P2 capability-checkpoint ledger and align MIP
-program-navigation documents. The ledger distinguishes implementation on main,
-component validation, producer certification, consumer verification, and
-downstream eligibility. This is program tracking only: it does not modify or
-certify GeoX/MMM, resume the parked bridge, construct CalibrationSignal, alter
-TrustReport/DecisionSurface, or authorize analytical, runtime, planning,
-recommendation, real-data, pilot, or production behavior.
+Create one machine-readable P2 capability-checkpoint ledger and align MIP program-navigation documents. The ledger distinguishes implementation on main, component validation, producer certification, consumer verification, and downstream eligibility. This task does not modify or certify GeoX/MMM, resume the parked bridge, construct CalibrationSignal, alter TrustReport/DecisionSurface, or authorize analytical, runtime, planning, recommendation, real-data, pilot, or production behavior.
 
-## North-star and control
+## Prerequisite evidence
 
-`certified GeoX producer evidence -> provenance-linked MMM compatibility fixtures -> MIP GeoX/MMM compatibility bridge -> D6 release-compatibility evidence -> fixture-only planning-evidence journey`
-
-Current missing checkpoint: `P2_GEOX_CALIBRATION_SOURCE_PRODUCER_CHECKPOINT`
-Next eligible (unauthorized) milestone:
-`GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001` in
-`Phani-Pavuluri/panel_exp`.
-
-## Verified source checkpoints
-
-- MIP: `9762afccca0790dd897f833d4dbea2f847aa6401`; parked bridge
-  `feat/mip-p2-geox-mmm-compatibility-fixture-bridge-001` at
-  `480b32040ce185b8ff091435121c4bea6fc6c453`, blocked by
-  `BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001`.
-- MMM: `fe8e784923994406a2e4907d28debd872d61fd73`; compatibility contract and
-  existing fixtures are not a provenance-linked GeoX/MMM pair; no MMM task is
-  authorized.
-- GeoX: `b11646bab1f461964644a6526ef4967a8f04624d`, disposition
-  `superseded_without_merge`; generator `d0f0ba937c79528abd34d7ff89eb4601080805e9`,
-  validator lineage `c1d1311494e7cc637141b09097ef929567a960f6`, rejected
-  implementation `89c3ded7620b85e382cecec5243ca84f8fb93c95`, rejected head
-  `c18f56341b50c58505b59fc6cacf2337ca7f9fc4`, divergent historical head
-  `2b6745b9cbcf5a17196796231a39fec4336b5d1f`.
+- MIP main: `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`.
+- MMM main: `fe8e784923994406a2e4907d28debd872d61fd73`.
+- GeoX main: `b11646bab1f461964644a6526ef4967a8f04624d`.
+- Reviewed and rejected remote head: `35e03b2852022ef510f8fff409a06e26f975f29e`.
+- Existing implementation commit: `3727a7973f046a8046f6c349856949c7df1555eb`.
 
 ## Owned paths
 
-The implementation may modify only the P2 ledger JSON, current-state,
-checkpoint, sequence and context-index documents, the new governance test, and
-the three execution files. Source/runtime code, existing tests/fixtures,
-coordination history, standards, CI/Docker/dependencies, MMM, GeoX, and the
-parked bridge are prohibited. No PR, merge, squash, rebase, force-push or merge
-commit is authorized.
+The task may modify only:
 
-## Ledger contract and classifications
+- `docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json`
+- `docs/program/PROGRAM_CURRENT_STATE.md`
+- `docs/program/REPOSITORY_CHECKPOINTS.md`
+- `docs/program/NEXT_EXECUTION_SEQUENCE.md`
+- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
+- `tests/docs/test_p2_capability_checkpoint_ledger.py`
+- `tests/test_cross_repository_coordination_control_plane.py` only for the correction specified below
+- `docs/execution/ACTIVE_TASK.md`
+- `docs/execution/EXECUTION_STATE.json`
+- `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-Create `docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json` with schema
-`mip_p2_capability_checkpoint_ledger_v1`, program
-`causal_marketing_intelligence_platform`, phase `P2`, missing checkpoint above,
-`last_verified: 2026-08-05`, ordered source precedence from synchronized mains
-through chat summaries, exactly `mip`, `mmm`, `geox` observations, the exact
-six-item sequence, seven acyclic capability records, and an authority object
-whose sibling-task, GeoX-certification, MMM, bridge, CalibrationSignal,
-simulation, optimization, planning, recommendation, real-data, runtime, pilot
-and production flags are all false.
+Source/runtime code, other tests or fixtures, coordination history/state, standards, CI, Docker, dependencies, MMM, GeoX, and the parked bridge are prohibited.
 
-Required capability states are: GeoX generator merged/component-validated;
-GeoX validator present on main but incomplete/uncertified and blocked; combined
-GeoX producer present but blocked/uncertified; MMM linked fixtures not started
-and blocked; parked MIP bridge blocked at its exact head; D6 evidence and the
-planning journey not started and blocked. Dependencies must resolve and be
-acyclic; feature branches are not merged evidence.
+## Preserved ledger behavior
 
-The six-item sequence is exactly:
+Preserve schema `mip_p2_capability_checkpoint_ledger_v1`, the exact current repository pins, seven acyclic capability records, the exact six-item unauthorized execution sequence, and all false authority flags. Preserve paragraph-context-aware historical-pin validation: historical coordination provenance is permitted only when explicitly historical and remains rejected as current state.
 
-1. `GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001`
-2. `GEOX_CALIBRATION_SOURCE_MANIFEST_CERTIFICATION_RECOVERY_001`
-3. `P2_MMM_PROVENANCE_LINKED_COMPATIBILITY_FIXTURES`
-4. `P2_MIP_GEOX_MMM_COMPATIBILITY_BRIDGE`
-5. `P2_D6_RELEASE_COMPATIBILITY_EVIDENCE`
-6. `P2_MIP_PLANNING_EVIDENCE_JOURNEY`
+## Correction cycle 1 of 1
 
-All are unauthorized; only the first is next eligible.
+The full Docker gate at rejected head `35e03b2852022ef510f8fff409a06e26f975f29e` failed because `tests/test_cross_repository_coordination_control_plane.py` validates a historical coordination snapshot but also hard-codes `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` as the task ID in the mutable current execution files.
 
-## Governance and validation
+Modify only the stale mutable-current-task portion of that test. Preserve every assertion covering the historical coordination snapshot, historical repository pins, workstreams, blockers, ownership, authority, ordered historical sequence, protocol, history, and historical provenance.
 
-Create the standard-library governance test covering exact schema/constants,
-repository pins and SHA format, seven capability keys, vocabularies, resolved
-acyclic dependencies, false authority, unauthorized next milestone,
-certification/validation invariants, parked bridge head, sequence, document
-alignment and stale-pin rejection. Required execution validation is JSON
-parsing, focused pytest, Ruff, mypy, `git diff --check`, and `make validate` on
-the frozen feature tree. Task-owned failures must be corrected, not hidden as
-environment blockers. Publish `ready_for_review` only after the complete gate;
-otherwise publish an evidenced `blocked` result. No sibling authority changes.
+Replace the obsolete current-task assertions with generic lifecycle-coherence checks:
 
-## Blocked execution result
+- current `EXECUTION_STATE.json` repository is MIP;
+- current task ID is a non-empty string and appears in `ACTIVE_TASK.md` and `LATEST_COMPLETION_REPORT.md`;
+- current status is represented consistently in the active task and report;
+- `merge_authorized`, `pr_creation_authorized`, and `capability_authorizations_changed` remain false;
+- the test must not require task-specific fields from the superseded closure task, including `current_mip_main_at_review` or `prior_task_closure_sha`.
 
-The resumed validation implementation is
-`3727a7973f046a8046f6c349856949c7df1555eb`. It corrects the ledger test so
-historical coordination provenance is permitted only in explicitly historical
-context, while stale pins remain rejected as current verified state.
+Do not change historical coordination JSON or documentation to satisfy the test. Do not weaken the test into a simple existence check.
 
-JSON parsing, focused ledger governance pytest (`5 passed`), Ruff, mypy, and
-`git diff --check` passed. The required repository Docker `make validate` gate
-failed with `1 failed, 2545 passed, 5 skipped, 1 warning`: the unrelated
-`tests/test_cross_repository_coordination_control_plane.py` hard-codes
-`MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` as the current active
-task, contradicting this authorized task's required active identity. This task
-does not own that existing test and must not alter it or falsify lifecycle state.
+## Required validation
 
-Resolution condition: separately authorize a correction to the
-coordination-control-plane test that removes its superseded current-task
-assumption without weakening its coordination assertions. Then resume this
-exact branch and rerun the complete Tier 3 gate. Do not alter task meaning,
-sibling state, analytical behavior, or capability authority.
+Run on one frozen task-owned tree:
+
+```bash
+python3 -m json.tool docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json >/dev/null
+poetry run pytest -q tests/docs/test_p2_capability_checkpoint_ledger.py
+poetry run pytest -q tests/test_cross_repository_coordination_control_plane.py
+poetry run pytest -q tests/docs
+poetry run ruff check tests/docs/test_p2_capability_checkpoint_ledger.py tests/test_cross_repository_coordination_control_plane.py
+poetry run mypy
+git diff --check
+make validate
+```
+
+Task-owned failures must be corrected. Publish `ready_for_review` only when every required gate passes and an exact-tree validation receipt is created. Otherwise publish an evidenced `blocked` state.
+
+## Git workflow
+
+Use the existing feature branch. Commit and push the correction and exact-tree validation receipt. Do not create a PR, merge, squash, rebase, force-push, or merge commit. Do not modify sibling repositories or change analytical, capability, merge, PR, pilot, or production authority.
