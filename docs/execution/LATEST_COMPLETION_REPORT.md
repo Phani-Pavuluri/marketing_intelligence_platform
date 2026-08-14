@@ -1,178 +1,95 @@
-# MIP Root README Narrative Flow Polish — Merged
+# MIP Root README External-Review Clarity and Onboarding Polish — Authorized
 
-- **Milestone:** `MIP_ROOT_README_NARRATIVE_FLOW_POLISH_001`
-- **Current decision:** `merged`
+- **Milestone:** `MIP_ROOT_README_EXTERNAL_REVIEW_CLARITY_AND_ONBOARDING_POLISH_001`
+- **Current decision:** `authorized`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Pre-authoring base:** `ebe2aae41433bf315f0da999c498d65c92e0030d`
-- **Authorization provenance:** `1433a60dde979bae576cd6207e7ec7c4aa26dfee`
-- **Finalized branch baseline:** `02948303eb41b31b06d9cd59a92fca4fb47e41c3`
-- **Feature branch:** `docs/mip-root-readme-narrative-flow-polish-001`
-- **Implementation commit:** `4360cf7b4fbe489d9af4a310afb63ae9c182eaf0`
-- **Approved and reviewed head:** `26db57a67c6d5d57ff64005bd50c59e8980377a2`
-- **Risk tier:** Tier 1
+- **Pre-authoring base:** `7c6708d602093d415c0063e8607c19cdaff4b9a5`
+- **Authorization provenance:** `null` until metadata finalization
+- **Feature branch:** `docs/mip-root-readme-external-review-clarity-and-onboarding-polish-001`
+- **Risk tier:** Tier 1 — routine repository-local documentation
 - **Compatibility/migration policy:** `not_applicable`
+- **Unresolved execution-blocking design questions:** none
 
-## Delivered outcome
+## Authorized outcome
 
-The root README now introduces MIP through a concise causal-learning narrative,
-then makes the MMM → uncertainty → targeted experiment → compatible evidence →
-MMM-owned calibration → planning → next-gap cycle explicit. The existing major
-information architecture is preserved; this is a focused narrative polish, not
-a broad rewrite.
+Refine only the root README so a first-time reader can understand why MIP
+exists, identify the business jobs it supports, follow its evidence-routing
+model, see concrete decision journeys, understand its capability inventory, and
+successfully try the deterministic product through verified hosted, local app,
+API, package, CLI, and contributor-validation paths.
 
-Implementation content changes only `README.md`. Lifecycle publication updates
-are limited to the three stable execution files.
+The work must simplify the top-level learning loop, distinguish user jobs from
+process, replace the dense system visual with five stages and three paths, and
+turn Demo and quick start into verified onboarding. Implementation owns only
+`README.md` and changes no behavior or authority.
 
-## Narrative-flow polish
+## Verified authoring inputs
 
-- Replaced the list-heavy opening with three short sentences explaining MMM's
-  portfolio role, experiments' causal role, MIP's learning loop, and AI's
-  non-authoritative interaction role.
-- Rebuilt “Why MIP exists” from the portfolio view through uncertainty,
-  targeted experimentation, governed causal lift, compatibility,
-  `CalibrationSignal`, MMM-owned calibration, planning, and the next gap.
-- Expanded “How MIP works” into three explicit paths—GeoX, MMM, and existing
-  evidence—with path-specific readiness and analytical steps before evidence
-  convergence.
-- Added explicit measurement-answer, planning-answer, and
-  insufficient-evidence branches, followed by explanation and return to the
-  learning loop.
-- Preserved the three existing journeys and added one short measurement-strategy
-  / cold-start journey.
-- Reordered the nine Core capabilities from business framing through readiness,
-  workflow selection, measurement, calibration eligibility, MMM portfolio
-  measurement, planning, trust, and next action.
-- Made no general rewrite of the AI, architecture/trust, maturity, quick-start,
-  deeper-documentation, or license sections.
+Synchronized repository evidence establishes:
 
-## Preserved factual and authority boundaries
+- Python `>=3.11,<4.0` and Poetry packaging in `pyproject.toml`;
+- canonical Streamlit entrypoint `app/streamlit_app.py`;
+- deterministic `mip-demo` and backward-compatible `mip-app` Poetry scripts;
+- FastAPI `GET /health`, `GET /version`, and deterministic POST routes
+  `/advisory/cold-start`, `/readiness/assess`, `/calibration/map`, and
+  `/intake/overview`, with request contracts in `src/mip/service/contracts.py`;
+- shared deterministic workflow functions in `src/mip/service/workflows.py`;
+- repository commands `make validate-host`, `make validate`,
+  `make validate-docker`, and `make validate-public-deployment`;
+- a deterministic fixture-backed public UI with Measurement Copilot starter and
+  sample-journey paths plus Advanced tools for advisory, readiness, calibration,
+  profiling, and intake.
 
-- `TrustReport` remains the sole trust verdict.
-- `CalibrationSignal` remains the sole GeoX → MMM bridge.
-- Full-panel Δμ remains the sole MMM production decision surface.
-- GeoX retains experiment design/inference and experiment numerical truth.
-- MMM retains fitting, diagnostics, calibration application, simulation,
-  optimization, and MMM numerical truth.
-- MIP remains the orchestration, governance, consumer-workflow, UX, and LLM
-  layer; it neither edits MMM coefficients nor recomputes GeoX lift.
-- Experiment evidence must pass quality, compatibility, uncertainty, freshness,
-  and governance checks before informing MMM; automatic recalibration is not
-  claimed.
-- Current live engine, planning, and LLM maturity remains conservatively labeled.
+Execution must re-verify these surfaces and examples on the synchronized branch
+before publishing them.
 
-## Validation evidence
+## Authorization provenance
 
-### Focused Tier-1 README gate
+The first authorization commit may contain `authorization_head_sha: null`
+because it cannot embed its own Git SHA. One later metadata-only commit will
+record that first commit as immutable authorization provenance. The finalized
+feature-branch baseline must descend from it, and the intervening diff may
+contain only the three stable execution files. No README or implementation
+change may occur before branch creation.
 
-- `git diff --check` — passed.
-- README relative-link resolver — passed: `relative_links=31 missing=0`.
-- Ordered heading and journey check — passed: `ordered_headings=17`, including
-  all four journey headings.
-- “Why MIP exists” connected-loop check — passed:
-  `why_loop_markers=11/11`.
-- “How MIP works” system-flow check — passed:
-  `system_flow_markers=18/18`.
-- Core capabilities first-column progression — passed: `capability_order=9`.
-- Entrypoint checks — passed for `app/streamlit_app.py`,
-  `src/mip/cli/demo.py`, and `src/mip/service/app.py`.
-- Poetry script checks — passed for `mip-demo` and `mip-app`.
-- Implementation diff inspection — passed; the README diff matches the narrow
-  authorized narrative polish.
-- Protected-surface check — passed; P2, program, architecture, source, and test
-  surfaces are unchanged.
+## Definition-ready evidence
 
-### Repository tests
+- One primary, independently reviewable README front-door usability outcome is
+  defined.
+- Exact section roles, learning-loop semantics, five-stage system visual,
+  onboarding surfaces, examples, boundaries, and failure semantics are in
+  `ACTIVE_TASK.md`.
+- Owned and prohibited paths and the focused Tier-1 validation gate are explicit.
+- Compatibility/migration is `not_applicable`.
+- Unresolved execution-blocking design questions: none.
+- One correction cycle is available.
 
-- Documentation tests discovered under `tests/docs` and README-sensitive tests
-  identified in `tests/app/test_streamlit_entrypoint.py` and
-  `tests/app/test_public_demo_deployment_readiness.py`.
-- Focused documentation and README/deployment test run — passed:
-  `31 passed in 0.41s`.
-- Frozen publication-tree tests additionally included execution-handoff and
-  coordination-coherence coverage — passed: `33 passed`.
+## Authoring boundary and validation
 
-### Validation categories
-
-- Focused documentation checks: `passed`.
-- Relevant existing tests: `passed`.
-- Execution-state JSON parsing: `passed`.
-- `git diff --check`: `passed`.
-- Implementation-content scope: `passed`; only `README.md`.
-- P2 sequence and authority preservation: `passed`.
-- Full-suite pytest: `not_required` for this Tier-1 Markdown-only surface.
-- Ruff: `not_required`.
-- mypy: `not_required`.
-- Docker-backed `make validate`: `not_required`.
-- GitHub-observed evidence: the initial remote feature branch equaled finalized
-  `main` at `02948303eb41b31b06d9cd59a92fca4fb47e41c3`; final remote equality is
-  verified after publication.
-- Locally observed evidence: focused gates passed on the frozen candidate tree.
-
-## Changed paths
-
-Implementation content:
-
-- `README.md`
-
-Lifecycle publication metadata:
+Only these files may change during task authoring:
 
 - `docs/execution/ACTIVE_TASK.md`
 - `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-No source, product, test, fixture, app, architecture, roadmap, governance,
-program-ledger, coordination, dependency, CI, Docker, data, or sibling path was
-modified.
+Authoring validation requires JSON parsing, `git diff --check`, changed-path
+verification, README unchanged verification, focused execution-state governance
+tests, authorization ancestry, and local/remote equality after publication.
+Full pytest, Ruff, mypy, and Docker-backed `make validate` are `not_required`
+for this Tier-1 authoring-only metadata surface.
 
-## Authority, limitations, and deferred work
+## Authority and program impact
 
-No product, analytical, runtime, planning, recommendation, real-data, pilot,
-production, sibling, coordination, capability, merge, or PR authority changed.
-Task execution remains authorized only for the published task; correction,
-merge, and PR authority remain false.
+Task execution is authorized only for the declared README outcome. Correction,
+merge, and PR authority are false. Capability authorizations are unchanged.
+No product, analytical, runtime, planning, recommendation, real-data, sibling,
+coordination, capability, pilot, or production authority is granted.
 
-The P2 sequence is unchanged. The parked MIP GeoX/MMM bridge remains blocked,
-and `GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001` remains next
-eligible and unauthorized. GeoX certification, MMM implementation,
-`CalibrationSignal` construction, simulation, optimization, planning,
-recommendations, runtime integration, real data, pilot, and production remain
-unauthorized.
+The previous README task remains merged and closed. The P2 sequence is
+unchanged; the parked MIP GeoX/MMM bridge remains blocked; and
+`GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001` remains next
+eligible and unauthorized.
 
-No validation debt or blocker remains for this Tier-1 milestone. No PR was
-created.
-
-## Merge and closure
-
-- **Approval provenance:** the user externally approved exact remote head
-  `26db57a67c6d5d57ff64005bd50c59e8980377a2`.
-- **Authorization provenance:** immutable
-  `1433a60dde979bae576cd6207e7ec7c4aa26dfee`.
-- **Reviewed head:** `26db57a67c6d5d57ff64005bd50c59e8980377a2`.
-- **Implementation commit:** `4360cf7b4fbe489d9af4a310afb63ae9c182eaf0`.
-- **Merge method:** fast-forward only; `main` advanced from
-  `02948303eb41b31b06d9cd59a92fca4fb47e41c3` to the exact reviewed head. No
-  merge commit, squash, rebase, force-push, or cherry-pick occurred.
-- **Exact-head validation:** JSON and `git diff --check` passed; all 31 relative
-  links resolved; 17 headings were ordered; loop markers were `11/11`; system
-  markers were `18/18`; capability order was `9/9`; entrypoints passed;
-  protected surfaces were unchanged; focused tests reported `33 passed`.
-- **Post-fast-forward validation:** the same Tier-1 gate passed; focused tests
-  reported `33 passed`.
-- **Closure-metadata validation:** execution-state JSON parsing and
-  `git diff --check` passed; execution-handoff and coordination-coherence tests
-  reported `2 passed`; the closure diff contains exactly the three stable
-  execution files.
-- **GitHub-observed evidence:** the remote feature branch equaled the approved
-  head before merge; pushed `origin/main` equaled the reviewed head; remote
-  feature-branch deletion was observed.
-- **Locally observed evidence:** local `main` equaled the reviewed head after
-  fast-forward; both Tier-1 gates passed; local feature-branch deletion was
-  observed.
-- **Validation not run:** full pytest, Ruff, mypy, and Docker-backed
-  `make validate` were `not_required` by the Tier-1 gate.
-- **Blockers and validation debt:** none.
-- **Authority impact:** none. Task execution, correction, merge, and PR
-  authority are false. No product, analytical, runtime, planning,
-  recommendation, real-data, sibling, coordination, capability, pilot, or
-  production authority changed. The P2 sequence remains unchanged.
+`README.md` has not been modified during this authoring session. No PR or merge
+has been created.

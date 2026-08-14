@@ -1,15 +1,12 @@
 # Active Task
 
-**Status:** merged
-**Task ID:** `MIP_ROOT_README_NARRATIVE_FLOW_POLISH_001`
+**Status:** authorized
+**Task ID:** `MIP_ROOT_README_EXTERNAL_REVIEW_CLARITY_AND_ONBOARDING_POLISH_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 **Local path:** `/Users/phani/Desktop/marketing_intelligence_platform`
-**Pre-authoring base:** `ebe2aae41433bf315f0da999c498d65c92e0030d`
-**Authorization provenance:** `1433a60dde979bae576cd6207e7ec7c4aa26dfee`
-**Finalized branch baseline:** `02948303eb41b31b06d9cd59a92fca4fb47e41c3`
-**Implementation commit:** `4360cf7b4fbe489d9af4a310afb63ae9c182eaf0`
-**Reviewed and merged head:** `26db57a67c6d5d57ff64005bd50c59e8980377a2`
-**Feature branch:** `docs/mip-root-readme-narrative-flow-polish-001`
+**Pre-authoring base:** `7c6708d602093d415c0063e8607c19cdaff4b9a5`
+**Authorization provenance:** `null` until the metadata-finalization commit
+**Feature branch:** `docs/mip-root-readme-external-review-clarity-and-onboarding-polish-001`
 **Execution mode:** `branch_and_fast_forward`
 **Risk tier:** Tier 1 — routine repository-local documentation
 **Compatibility or migration policy:** `not_applicable`
@@ -18,25 +15,27 @@
 
 ## Primary outcome
 
-Polish the existing root `README.md` narrative flow without broadly rewriting
-its content. Improve only the opening product definition and causal-learning
-setup, the learning-loop visual in “Why MIP exists,” the centerpiece “How MIP
-works” visual, and the ordering of journeys and core capabilities so a marketer,
-technical leader, or senior data scientist can quickly understand how MMM,
-experimentation, MIP, and AI connect before technical detail.
+Refine only the root `README.md` into a clearer, less repetitive, more
+scannable, and more actionable front door for a first-time external reviewer,
+marketer, technical leader, senior data scientist, or developer. The reader
+journey must progress coherently from why MIP exists → user jobs → system
+mechanics → concrete journeys → core capabilities → a successful first product
+experience through the hosted demo, local app, API, package, or CLI.
 
-This is one independently reviewable outcome because it is a narrow editorial
-polish of one existing repository front door. It does not redesign the README
-information architecture or change product behavior, contracts, architecture,
-governance, code, tests, fixtures, program state, or authority.
+This is one independently reviewable outcome because every edit serves one
+front-door usability journey in one Markdown file. The conceptual sections and
+onboarding instructions must be reviewed together: separating them would leave
+either an understandable product with no usable entry path or runnable commands
+without the product context needed to interpret their deterministic outputs.
+This task changes no behavior, contract, architecture, source, test, fixture,
+program state, or authority.
 
 ## Authorization provenance convention
 
-`authorization_head_sha` identifies
-`1433a60dde979bae576cd6207e7ec7c4aa26dfee`, the first `main` commit
-establishing this authorized task contract. That commit contained a null
-self-reference; this metadata-only finalization records its exact SHA as
-immutable authorization provenance. It must never be replaced by the metadata-finalization,
+`authorization_head_sha` identifies the first `main` commit establishing this
+authorized task contract. That commit may contain a null self-reference. One
+subsequent metadata-only commit must record the first commit SHA as immutable
+authorization provenance. It must never be replaced by the metadata-finalization,
 feature-branch, implementation, publication, review, or merge head.
 
 Create the feature branch only from synchronized metadata-finalized `main`. The
@@ -57,139 +56,288 @@ by the execution standard:
 - `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-Do not modify product/source code, tests, fixtures, apps, contracts, architecture
-documents, roadmaps, program files, governance or execution standards,
-dependencies, CI, Docker, data, MMM, GeoX, or any sibling repository.
+Do not modify product/source code, tests, fixtures, apps, contracts,
+architecture documents, roadmaps, program or P2 files, coordination state,
+governance or execution standards, dependencies, CI, Docker, data, MMM, GeoX,
+or any sibling repository.
 
-## Required editorial changes
+## Required reader journey and section roles
 
-### 1. Opening product definition
+Preserve the current major README information architecture, but remove or
+shorten adjacent repetition so each section has exactly one primary job:
 
-Replace the current list-heavy definition with two or three natural sentences:
-MIP connects MMM and causal experimentation into a continuous marketing
-measurement and planning system; MMM supplies the portfolio view; experiments
-supply stronger causal evidence where observational measurement is uncertain;
-MIP carries compatible learning into future measurement and planning; and AI
-makes the workflow easier to navigate without becoming analytical authority.
+1. **Why MIP exists:** conceptual problem and continuous causal-learning loop.
+2. **What can you do with MIP?:** high-level user jobs and questions.
+3. **How MIP works:** routing, evidence reconciliation, governance, and answer
+   mechanics.
+4. **Example decision journeys:** short concrete end-to-end examples.
+5. **Core capabilities:** structured capability inventory.
+6. **Demo and quick start:** how someone actually experiences or runs MIP.
 
-Keep the public demo link and concise current-version note. Do not reintroduce a
-large disclaimer or describe MIP as merely a portfolio workflow.
+Do not broadly rewrite unrelated sections merely for stylistic consistency.
 
-### 2. Why MIP exists: transition and learning-loop visual
+## 1. Refine “Why MIP exists”
 
-Replace the current short transition with a plain-language sequence that starts
-from MMM's broad portfolio view, explains observational uncertainty, shows how
-that uncertainty identifies valuable narrower GeoX/incrementality experiments,
-and explains how compatible evidence returns through the governed bridge for
-MMM-owned calibration/fitting. The improved portfolio evidence supports
-scenario/planning decisions, and remaining uncertainty becomes the next
-measurement question. MIP and AI coordinate and expose this process.
+Use approximately two or three compact paragraphs and one glanceable visual.
+Explain why the integrated causal-learning system is needed:
 
-Rebuild the visual so it remains glanceable while explicitly connecting:
+- MMM provides the broad portfolio view across channels.
+- Historical/observational variation can leave material channel or planning
+  uncertainty.
+- MIP assesses whether existing evidence is sufficient or stronger causal
+  evidence would be valuable.
+- Sufficient evidence can proceed toward scenario analysis and planning.
+- When stronger causal evidence is needed, MIP can engage the GeoX arm for a
+  targeted experiment.
+- GeoX produces causal lift evidence; compatible learning can strengthen future
+  MMM measurement.
+- The updated portfolio view supports scenario analysis, planning, and a
+  business decision/action.
+- A new question or material uncertainty can initiate another measurement
+  cycle.
+
+The visual must use this conceptual shape without an accidental self-loop:
 
 ```text
 Business / portfolio question
-  → MMM provides the current portfolio view
-  → assess what is known confidently versus uncertain
-  → identify a material measurement gap when evidence is weak
-  → design / run a targeted experiment
-  → GeoX produces governed causal lift evidence
-  → check quality, scope, uncertainty, freshness, and compatibility
-  → eligible evidence becomes CalibrationSignal
-  → MMM applies calibration through MMM-owned numerical behavior
-  → updated / eligible MMM evidence
-  → scenario and planning decisions
-  → remaining uncertainty / new business questions
-  → next measurement gap ↺
+            ↓
+MMM provides the portfolio view
+            ↓
+Where does material uncertainty remain?
+       ┌──────────────┴──────────────┐
+       │                             │
+Evidence sufficient          Stronger causal
+       │                      evidence needed
+       ↓                             ↓
+Scenario / planning          GeoX targeted experiment
+                                     ↓
+                              Causal lift evidence
+                                     ↓
+                             Compatible learning
+                              informs future MMM
+                                     ↓
+                             Updated portfolio view
+                                     ↓
+                              Scenario / planning
+       └──────────────┬──────────────┘
+                      ↓
+               Decision / action
+                      ↓
+        New question or material uncertainty
+                      ↓
+ Return to evidence assessment / routing when needed
 ```
 
-Do not imply raw GeoX results edit MMM coefficients, every experiment
-automatically calibrates MMM, or MIP performs MMM numerical calibration.
+Do not imply every uncertainty requires an experiment. The next action may use
+existing evidence, inspect or refresh MMM, require additional data, or engage
+GeoX. Keep `TrustReport`, `CalibrationSignal`, detailed lineage/freshness and
+estimand checks, full-panel Δμ, and gate implementation out of this high-level
+visual. Preserve that MIP coordinates while GeoX and MMM retain numerical
+authority.
 
-### 3. How MIP works: centerpiece system visual
+## 2. Redesign “What can you do with MIP?”
 
-Retain the current conceptual split across experiment/GeoX, MMM, and existing
-evidence, but show each path's intermediate work before convergence.
+Remove the current experiment → MMM → planning process diagram. Give this
+section a distinct, concise, user-oriented purpose: the business questions and
+jobs a user can bring to MIP. Organize a small number of scannable groups such
+as measurement, experimentation, evidence learning, planning, and trust/next
+action rather than presenting one long list.
 
-The visual must begin with the user question, show AI/MIP understanding the
-objective, and clarify KPI, channels, geography/population, time horizon,
-constraints, and available data/evidence before building the measurement or
-decision plan. It must then show:
+Cover representative questions:
 
-- **Experiment / GeoX path:** experiment/data readiness; design/assignment when
-  needed; GeoX inference; governed experiment readout.
-- **MMM path:** data/model readiness; MMM-owned fitting and diagnostics; current
-  portfolio measurement; eligible MMM decision surfaces.
-- **Existing-evidence path:** retrieve prior experiments, eligible MMM/model
-  artifacts, and prior trust/provenance; decide whether existing evidence
-  already answers the question.
+- Is this channel actually incremental?
+- Where is additional measurement most valuable?
+- Is existing evidence sufficient?
+- What experiment should be run when evidence is weak?
+- What does a completed experiment mean for the broader measurement system?
+- How should compatible experimental evidence inform MMM?
+- What happens under a different spend scenario?
+- Can budget be reallocated across channels?
+- Is the evidence trustworthy enough for the intended decision?
+- What should be measured next?
 
-At convergence, show scope/estimand normalization; lineage, freshness,
-uncertainty, quality, and compatibility checks; calibration eligibility;
-`CalibrationSignal` into MMM-owned calibration behavior only when eligible;
-retention of relevant non-calibration evidence as decision context; and trust
-and decision-eligibility evaluation.
+Use natural product language, not architecture terminology. Do not present
+deterministic/demo, partial, blocked, planned, or unauthorized functionality as
+fully live.
 
-Then branch by user need:
+## 3. Simplify “How MIP works”
 
-- measurement answer → explain incrementality and evidence;
-- planning answer → compare eligible full-panel Δμ scenario surfaces;
-- insufficient evidence → identify missing evidence and recommend additional
-  measurement or experimentation.
+Replace the dense current visual with five visually obvious stages:
 
-End with AI/MIP explaining the result, evidence used, uncertainty, trade-offs,
-blockers, and recommended next action, then connect the result back to the
-continuous learning loop. Use marketer-friendly labels first; technical
-contract names may appear sparingly where they clarify a handoff.
+1. Frame the question.
+2. Route to the appropriate evidence or analytical path.
+3. Reconcile and govern evidence.
+4. Answer the user's decision need.
+5. Explain the result and continue learning.
 
-### 4. Example decision journeys
+### Stage 1 — Frame the question
 
-Preserve the three existing short journeys:
+Begin with the business question. Summarize objective, KPI, channels,
+geography/population, time horizon, constraints, available data, and available
+evidence in one compact intake step.
 
-1. Channel incrementality — “Is this channel actually incremental?”
-2. Experiment → MMM learning — “We finished an experiment. What does this mean
-   for our MMM?”
-3. Budget planning — “How should I plan next quarter?”
+### Stage 2 — Route to the right path
 
-Add one and only one additional journey unless synchronized evidence proves a
-major distinct capability would otherwise be missing:
+Retain three clear paths:
 
-4. Measurement strategy / cold start — “We want to evaluate a new channel.
-   What should we measure first?”
+```text
+┌────────────────────┬────────────────────┬─────────────────────┐
+│ GeoX / Experiment  │ MMM                │ Existing Evidence   │
+│ readiness          │ readiness          │ retrieve prior      │
+│ → design           │ → fit / diagnose   │ evidence/artifacts  │
+│ → inference        │ → portfolio view   │ → provenance/trust  │
+│ → governed lift    │ → decision surface │ → assess sufficiency│
+└──────────┬─────────┴──────────┬─────────┴──────────┬──────────┘
+           └────────────────────┼─────────────────────┘
+                                ↓
+```
 
-Keep it short: business objective → clarify KPI/geography/decision → inspect
-historical data and existing evidence → determine whether MMM, experiment, or
-additional data collection is feasible → identify missing information →
-recommend the next measurement workflow.
+State compactly that GeoX owns experiment design, assignment, inference, and
+causal-lift truth; MMM owns fitting, diagnostics, calibration application,
+simulation, optimization, and MMM numerical truth; and existing evidence may
+answer the question without forcing new execution.
 
-### 5. Core capabilities
+### Stage 3 — Reconcile and govern evidence
 
-Keep the `Capability | What MIP does | Why it matters` table, but make its first
-column tell the decision story in this order:
+Summarize rather than assigning every check a separate node:
 
-1. Frame the business decision.
-2. Check data and evidence readiness.
-3. Identify the measurement gap and choose the workflow.
-4. Measure incrementality and orchestrate targeted experimentation.
-5. Reconcile experiment evidence and determine calibration eligibility.
-6. Build or refresh the portfolio view through MMM-owned measurement.
-7. Compare scenarios and support budget planning.
-8. Verify trust and decision eligibility.
-9. Explain the answer and recommend the next measurement/action.
+```text
+scope / estimand alignment
+→ quality, provenance, freshness, uncertainty, and compatibility
+→ calibration eligibility when relevant
+→ TrustReport / decision eligibility
+```
 
-Use concise capability names. Each row must state what MIP coordinates or
-checks and why it matters without assigning GeoX/MMM numerical computation to
-MIP. Where checks recur throughout the workflow, say so. Keep the existing
-“Technical foundations” subsection after the table.
+Keep `CalibrationSignal` visible only where it clarifies the sole authoritative
+GeoX → MMM handoff. Do not imply raw experiment output edits coefficients, MIP
+performs numerical calibration, or all experiments automatically calibrate MMM.
 
-## Preserved sections and factual invariants
+### Stage 4 — Answer the user need
 
-Make only minimal consistency edits to “How AI fits into MIP,” “Architecture
-and trust model,” “Current version and implementation maturity,” “Demo and
-quick start,” “Deeper documentation,” and “License.” Do not reopen them for a
-general rewrite.
+Show three outcomes:
 
-Preserve exactly these authority boundaries:
+- **Measurement answer:** causal/incrementality evidence, uncertainty, and
+  supporting evidence.
+- **Planning answer:** eligible scenario comparison, trade-offs, and decision
+  context.
+- **Evidence insufficient:** what is missing and the appropriate additional
+  data, measurement, or experiment.
+
+### Stage 5 — Explain and continue learning
+
+End with AI + MIP explaining evidence used, uncertainty, blockers, trade-offs,
+trust/eligibility where relevant, and the recommended next action. A new
+business question or material uncertainty may re-enter evidence assessment or
+workflow routing; it must not force GeoX.
+
+## 4. Rebuild “Demo and quick start”
+
+Turn this section into first-time-user onboarding, not a command list.
+
+### Hosted demo — try this first
+
+Keep `https://marketingintelligenceplatform.streamlit.app/` prominent. State
+that it uses synthetic fixtures, no production data, and demonstrates governed
+intake, advisory, readiness, routing, profiling, and calibration-mapping
+behavior without implying live MMM/GeoX execution. State from synchronized code
+that the public demo has no configured LLM provider and uses deterministic
+responses.
+
+Give a short, code-verified walkthrough using only current UI behavior. It may
+direct a reviewer to the Measurement Copilot's starter prompts and preloaded
+SaaS growth-planning journey, inspect readiness/evidence/blocking explanations,
+and use Advanced tools for cold-start advisory, readiness reports, calibration
+mapping, demo profiling, or intake overview. Do not claim upload support,
+persistence, live inference, lift/ROI/power estimation, or recommendations.
+
+### Local prerequisites and complete install
+
+Document verified requirements:
+
+- Git and a clone of this repository;
+- Python `>=3.11,<4.0`;
+- Poetry, with a brief direction to install it if absent.
+
+Provide a complete copyable HTTPS clone/install sequence using:
+
+```bash
+git clone https://github.com/Phani-Pavuluri/marketing_intelligence_platform.git
+cd marketing_intelligence_platform
+poetry install
+```
+
+### Canonical Streamlit app and first run
+
+Use the exact canonical command:
+
+```bash
+poetry run streamlit run app/streamlit_app.py
+```
+
+Explain the local URL/startup expectation and provide two to four implemented
+first-run actions. State that deterministic mode uses synthetic fixtures,
+requires no LLM provider/API key/database/external service, persists no uploaded
+data, and executes neither live MMM fitting nor live GeoX inference.
+
+### FastAPI interface
+
+Explain that developers/integrators can inspect the same deterministic workflow
+layer through the service wrapper. Use the verified startup command:
+
+```bash
+poetry run uvicorn mip.service.app:app --reload --host 127.0.0.1 --port 8000
+```
+
+Document `GET /health`, `GET /version`, and these implemented POST routes:
+
+- `/advisory/cold-start` with `{"sample_key":"dtc_skincare_ecommerce"}`;
+- `/readiness/assess` with
+  `{"sample_key":"national_mmm_ready_geox_blocked"}`;
+- `/calibration/map` with `{"sample_key":"valid_governed_evidence"}`;
+- `/intake/overview` with `{"example_key":"national_mmm_diagnostic"}`.
+
+Include at least one copyable `curl` request that succeeds against synchronized
+contracts. Validate every documented route/payload with the existing FastAPI
+test client or a locally started service before publication. Make the
+deterministic, advisory/non-production boundary visible.
+
+### Python/package usage
+
+Briefly show that notebooks and developers can call the shared deterministic
+workflow layer. If included, use a validated concise example based on an actual
+function such as:
+
+```python
+from mip.service.workflows import run_readiness_assess
+
+result = run_readiness_assess("national_mmm_ready_geox_blocked")
+print(result.model_dump_json(indent=2))
+```
+
+Run the final example against the synchronized installed package before
+publication; omit it rather than publishing an unverified import or signature.
+
+### CLI and contributor validation
+
+Document `poetry run mip-demo --help` as the existing deterministic JSON-file
+workflow CLI. Do not confuse it with a future design-only CLI. Mention
+`poetry run mip-app` only as the current backward-compatible legacy Streamlit
+shell; the root `app/streamlit_app.py` command remains canonical.
+
+Expose only existing repository validation commands and explain their purpose:
+
+- `make validate-host` — host validation;
+- `make validate` or `make validate-docker` — Docker-backed validation;
+- `make validate-public-deployment` — public deployment install/readiness gate.
+
+### Current limitations
+
+Finish onboarding with one concise boundary statement distinguishing the
+deterministic/demo experience from live certified GeoX execution, generally
+available MMM execution/calibration, production optimization/recommendations,
+real production-data integration, and fully live LLM-backed behavior.
+
+## Preserved factual and authority invariants
 
 - `TrustReport` is the sole trust verdict.
 - `CalibrationSignal` is the sole GeoX → MMM bridge.
@@ -197,55 +345,66 @@ Preserve exactly these authority boundaries:
 - GeoX owns experiment design/inference and experiment numerical truth.
 - MMM owns fitting, diagnostics, calibration application, simulation,
   optimization, and MMM numerical truth.
-- MIP owns orchestration, governance, consumer workflows, UX, and LLM behavior.
-- MIP does not edit MMM coefficients or recompute GeoX lift.
-- Experiment evidence must pass quality, compatibility, uncertainty, freshness,
-  and governance checks before it can inform MMM.
-- Do not imply automatic experiment-to-MMM recalibration.
-- Label current live engine, planning, and LLM maturity conservatively.
+- MIP owns orchestration, governance, evidence routing, consumer workflows, UX,
+  and LLM behavior.
+- MIP neither recomputes GeoX lift nor edits MMM coefficients.
+- Experiment evidence must satisfy required quality and compatibility conditions
+  before becoming calibration evidence; no automatic calibration is implied.
+- Demo, partial, blocked, planned, research-only, and unauthorized capabilities
+  must not be upgraded into shipped production functionality.
 
 ## Acceptance evidence and failure semantics
 
-The finished README must retain its existing major section order while making
-the opening, learning loop, system visual, four journeys, and capability
-progression observable exactly as described above. It must remain materially a
-polish of the current content, not another information-architecture rewrite.
+The completed README must let a first-time reader understand the product without
+section-level repetition and successfully choose a verified experience path.
+“Why” must contain two correctly converging evidence branches and no self-loop;
+“What” must present user jobs rather than repeat the learning process; “How”
+must retain all three analytical/evidence paths in a materially simpler
+five-stage visual; and onboarding must include verified hosted-demo guidance,
+clean installation, Streamlit first run, API, package, CLI, validation, and
+limitations.
 
-Fail closed without publication if links or commands do not resolve, a required
-visual stage or journey is absent, the capability order is wrong, a planned
-capability is stated as shipped, an invariant or authority boundary is weakened,
-or any implementation-content path other than `README.md` changes.
+Fail closed without publication if a link, command, import, route, payload, or
+UI walkthrough is unverified; a required branch/path is missing; sections still
+materially duplicate one another; an invariant is weakened; capability maturity
+is overstated; or any implementation-content path other than `README.md`
+changes.
 
 ## Tier-1 validation gate
 
 On the frozen publication tree:
 
-1. Run `git diff --check` and inspect `git diff -- README.md`.
+1. Run `git diff --check` and inspect the complete README diff.
 2. Programmatically verify every relative README link resolves.
-3. Verify the existing major headings remain in intended order and all four
-   journey headings exist.
-4. Verify the “Why MIP exists” loop contains the connected portfolio-view,
-   uncertainty, experiment, governed-lift, compatibility, calibration,
-   planning, and next-gap stages.
-5. Verify “How MIP works” explicitly contains objective clarification, three
-   analysis paths, path-specific steps, evidence convergence,
-   compatibility/trust, answer-versus-missing-evidence branches, and
-   explanation/next action.
-6. Verify the Core capabilities first-column order follows the declared
-   decision progression.
-7. Verify all referenced quick-start commands and entrypoints still exist.
-8. Discover and run relevant existing README/documentation tests.
-9. Parse `docs/execution/EXECUTION_STATE.json` as JSON.
-10. Verify implementation content changes only `README.md`, and verify P2,
-    program, architecture, source, and test surfaces are unchanged.
+3. Verify every documented clone/install/run/CLI/Make command and entrypoint
+   exists and matches `pyproject.toml`, the Makefile, or synchronized source.
+4. Validate each documented FastAPI route and request payload against the
+   actual request contracts and test client; validate every included Python
+   import and call signature by execution.
+5. Verify “Why MIP exists” has no self-loop; both evidence branches converge on
+   planning/decision; and recurrence returns to assessment/routing without
+   forcing GeoX.
+6. Verify “What can you do with MIP?” contains no duplicate learning-loop
+   process visual and presents grouped user jobs.
+7. Verify “How MIP works” contains the five stages, all three paths, summarized
+   governance, three outcomes, and a return-to-learning step while being
+   materially simpler than the synchronized baseline.
+8. Verify all authority invariants and conservative maturity language.
+9. Discover and run relevant README/documentation/deployment tests plus the
+   existing service-route/request-contract tests needed to prove examples.
+10. Parse `docs/execution/EXECUTION_STATE.json` as JSON.
+11. Verify implementation content changes only `README.md`, and P2, program,
+    architecture, source, tests, fixtures, dependencies, CI, Docker, and sibling
+    surfaces are unchanged.
 
-Full pytest, Ruff, mypy, and Docker-backed `make validate` are `not_required`
-for this Tier-1 Markdown-only surface unless synchronized repository-authored
-rules require them.
+Full-suite pytest, Ruff, mypy, and Docker-backed `make validate` are
+`not_required` for this Tier-1 Markdown-only surface unless synchronized
+repository-authored rules require them. The focused service tests validate
+documented existing behavior; this task does not modify tests or service code.
 
 ## Publication and review workflow
 
-Execute only after a fresh bootstrap verifies this authorization and the exact
+Execute only after a fresh bootstrap verifies this authorization and exact
 feature branch. Freeze the task-owned tree and run the Tier-1 gate. Update the
 three stable execution files to `ready_for_review`, preserving
 `task_execution_authorized: true`, `merge_authorized: false`, and
