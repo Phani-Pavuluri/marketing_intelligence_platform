@@ -5,7 +5,7 @@
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Pre-authoring base:** `7c6708d602093d415c0063e8607c19cdaff4b9a5`
-- **Authorization provenance:** `null` until metadata finalization
+- **Authorization provenance:** `3792368d819fff363b908e5f2168bef766e8ded8`
 - **Feature branch:** `docs/mip-root-readme-external-review-clarity-and-onboarding-polish-001`
 - **Risk tier:** Tier 1 — routine repository-local documentation
 - **Compatibility/migration policy:** `not_applicable`
@@ -46,9 +46,10 @@ before publishing them.
 
 ## Authorization provenance
 
-The first authorization commit may contain `authorization_head_sha: null`
-because it cannot embed its own Git SHA. One later metadata-only commit will
-record that first commit as immutable authorization provenance. The finalized
+The first authorization commit contained `authorization_head_sha: null`
+because it could not embed its own Git SHA. This metadata-only finalization
+records that first commit, `3792368d819fff363b908e5f2168bef766e8ded8`, as
+immutable authorization provenance. The finalized
 feature-branch baseline must descend from it, and the intervening diff may
 contain only the three stable execution files. No README or implementation
 change may occur before branch creation.
@@ -78,6 +79,11 @@ verification, README unchanged verification, focused execution-state governance
 tests, authorization ancestry, and local/remote equality after publication.
 Full pytest, Ruff, mypy, and Docker-backed `make validate` are `not_required`
 for this Tier-1 authoring-only metadata surface.
+
+The pre-finalization null self-reference produced the expected temporary
+governance-test result of `1 failed, 1 passed`. On finalized metadata, JSON,
+whitespace, changed-path, README-immutability, protected-surface, and focused
+governance checks passed; focused tests reported `2 passed`.
 
 ## Authority and program impact
 
