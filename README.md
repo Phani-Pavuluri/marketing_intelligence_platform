@@ -1,508 +1,260 @@
 # Marketing Intelligence Platform (MIP)
 
-Marketing Intelligence Platform with an LLM-powered conversational control plane that unifies causal experimentation, channel incrementality, MMM calibration, and strategic marketing planning into governed, explainable decision workflows.
+MIP is a causal marketing intelligence platform and control plane that connects
+experimentation, channel incrementality, MMM calibration, strategic planning,
+governed decision workflows, and conversational AI. It turns analytical
+evidence into explainable decision support without moving causal or statistical
+authority into the application—or into an LLM.
 
-## Demo
+**Try the deterministic public demo:**
+[marketingintelligenceplatform.streamlit.app](https://marketingintelligenceplatform.streamlit.app/)
 
-**Hosted demo:** [https://marketingintelligenceplatform.streamlit.app/](https://marketingintelligenceplatform.streamlit.app/)
+The hosted experience uses synthetic fixtures, calls no MMM or GeoX engine,
+uses no LLM or external service, and requires no secrets or API key. It is a
+portfolio/demo workflow, not a production measurement system.
 
-| | |
-|---|---|
-| **Mode** | Deterministic — no LLM provider configured or required |
-| **Data** | Synthetic/local demo fixtures only |
-| **Secrets / external services** | None |
+## Why MIP exists
 
-**Workflows shown:** cold-start advisory · demo profiling / readiness · calibration mapping · intake overview
+Experimentation and marketing mix modeling often live in separate workflows.
+An experiment may establish incrementality for one channel and period, while an
+MMM supports broader planning, but teams still have to decide whether the
+evidence is compatible, current, traceable, and strong enough to influence a
+budget decision.
 
-**Deployment record:** [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
+MIP provides the layer between analytical engines and decision workflows. It
+standardizes evidence and lineage, applies compatibility and release gates,
+routes only eligible artifacts, and makes uncertainty and blockers visible. A
+generic AI assistant cannot safely fill those gaps by inventing lift, fitting a
+model in prose, or upgrading weak evidence. MIP lets an LLM guide and explain
+the governed process while contracts, engines, gates, and human approvals keep
+their authority.
 
-## What this is
+## What users can achieve
 
-MIP is the **control-plane layer** for causal marketing intelligence. It owns contracts, evidence, release gates, `TrustReport` assembly, orchestration boundaries, and the planned LLM Decision Layer. Statistical engines compute estimands, run inference, and emit artifacts; MIP governs what may be trusted, promoted, or explained.
+MIP is designed to help teams answer questions such as:
 
-**MMM** and **GeoX/panel_exp** remain **separate analytical engine repositories**. MIP connects to those engines through **versioned adapters and governed contracts**—not by vendoring engine source inside this repo.
+- Which channels are actually incremental?
+- How should eligible experiment evidence affect an MMM?
+- Is the current evidence trustworthy enough for planning?
+- What data, KPI, controls, geography, history, and grain does this question
+  require?
+- What would change under a different spend scenario?
+- Can spend be reallocated next quarter, or is another experiment needed first?
 
-The intended product direction is a **local-first causal marketing intelligence workbench**: users describe a business goal, provide data, receive guidance on KPIs and controls, run diagnostics, draft configs, execute MMM and GeoX workflows through adapters, inspect governed artifacts, view dashboards and reports, and ask follow-up questions—all through an LLM-guided interface that routes to certified tools rather than inventing causal effects.
+Today, the repository supports governed intake, data/readiness inspection,
+typed evidence and decision contracts, trust gates, fixture-backed journeys,
+and safe explanations of what is answerable or blocked. Live end-to-end engine
+execution, certified GeoX-to-MMM calibration, numerical planning, optimization,
+and production recommendations remain gated or planned; the demo does not
+fabricate substitutes for them.
 
-## Current implemented spine
+## How MIP works
 
-The following is **implemented and tested** in this repository today:
-
-| Area | Status |
-|------|--------|
-| **Contracts** | Pydantic models for estimands, experiment evidence, calibration signals, decision surfaces, recommendations, and `TrustReport` |
-| **Evidence registry** | In-memory registry with add/get/list/find and trust-report helpers |
-| **Evaluation gates** | Release gates for evidence, calibration, decision surfaces, recommendations, and trust reports |
-| **TrustReport assembly/router** | Gate-driven confidence tiers, trust report construction, artifact routing |
-| **Calibration audit** | Trace and audit calibration signals against source evidence |
-| **Model calibration readiness** | Evaluate whether a model has compatible, non-blocked calibration signals |
-| **LLM safety layer (Phase 1)** | Deterministic intent classification, confidence-tier action policies, and `TrustReport` explanation context—**no real LLM calls** |
-| **Objective intake framework (Phase 2)** | Deterministic mapping of business objectives to data requirements, declared availability checks, and feasibility reports—**no LLM calls** |
-| **Data readiness diagnostics (Phase 3)** | Structural dataset profiling from records, readiness checks, and `DataReadinessReport` with optional objective feasibility integration—**no LLM calls or engine execution** |
-| **Config drafting (Phase 4)** | Deterministic `MMMConfigDraft` and `GeoXConfigDraft` from objective, feasibility, and readiness—**no engine execution** |
-| **Local workflow orchestrator (Phase 5A)** | `run_local_workflow()` wires intake → readiness → config draft into `WorkflowRunSummary`—**no UI or engine execution** |
-| **Local CLI demo runner (Phase 5B)** | `mip-demo` reads JSON input and prints/saves a governed `WorkflowRunSummary`—**no Streamlit, LLM, or engine execution** |
-| **Mock LLM explanation (Phase 5C)** | `MockLLMProvider` explains `WorkflowRunSummary` conversationally and deterministically—**no real LLM APIs or engine execution** |
-| **Streamlit demo shell (Phase 5D, legacy)** | `mip-app` runs the legacy JSON + MockLLM shell in `mip.app.streamlit_app`—**canonical local/public demo is `app/streamlit_app.py`** |
-| **Adapter interface contracts (Phase 6A)** | `mip.adapters` defines governed MMM/GeoX input/output bundle shapes—**no engine imports or model results** |
-| **Adapter governance wiring (Phase 6B)** | Placeholder adapter outputs map to `ExperimentEvidence` / `DecisionSurface` fixtures, gates, and `TrustReport`—**no engine execution** |
-| **MMM fixture dashboard/report (Phase 6C)** | `mip.reports.mmm_fixture` + Streamlit section show governed MMM placeholder flow—**no model execution** |
-| **Workflow run manifest (Phase 7A)** | `mip.orchestration` defines `WorkflowRunManifest`, deterministic plan/manifest builders, and safety assertions—**no autonomous agents or LLM planning** |
-| **Governed planner/router (Phase 7B)** | `mip.orchestration.router` selects allowed/blocked next actions from manifests—**display and routing only; no execution** |
-| **Human approval checkpoints (Phase 7C)** | `mip.orchestration.approvals` tracks local approval requests and enforces `blocked_until_approved`—**no automatic approval or execution** |
-| **Fixture engine orchestration (Phase 8A)** | `mip.orchestration.engine_fixtures` orchestrates MMM/GeoX adapter fixture paths—**placeholder outputs only** |
-| **Pinned sibling fixture imports (Phase 8B)** | `mip.adapters.sibling_fixtures` reads committed sibling-repo export JSON fixtures through adapter governance—**no live engine execution** |
-| **Read-only sibling export hooks (Phase 8C)** | `mip.adapters.sibling_export_hooks` discovers static JSON exports from explicit directories—**no sibling code execution** |
-| **Sibling repo compatibility registry (Phase 8D)** | `mip.adapters.sibling_compatibility` validates configured export paths and schema contracts before discovery—**read-only** |
-| **Local sibling export path wiring (Phase 8E)** | `mip.adapters.local_sibling_paths` wires default local `mmm`/`panel_exp` export directories through compatibility checks—**read-only JSON only** |
-| **Sibling export producer specs (Phase 8F)** | `docs/integrations/*_PRODUCER_SPEC.md` and `mip.adapters.sibling_producer_specs` define the sibling-side JSON writer contract—**no sibling code execution** |
-| **Architecture and roadmap docs** | Vision, ADRs, glossary, operating model, multi-repo integration, LLM vision, semantic/decision-readiness, critical invariants, conversational intake, and **governed agent role registry** (P8b) / agentic workflow governance roadmaps |
-
-**Not implemented yet:** MMM/GeoX engine execution, dashboards, reports, cloud or Ollama LLM providers, APIs, statistical model diagnostics, or autonomous agents. No fake statistical results or placeholder estimators in engine paths.
-
-## Target product experience
-
-The long-term user flow MIP is designed to support:
+The governed target flow is:
 
 ```text
-User business question
-  → domain / objective intake
-  → data requirement guidance (KPIs, controls, granularity)
-  → data readiness diagnostics
-  → MMM / GeoX config draft
-  → engine execution via adapters
-  → governed artifacts (evidence, surfaces, recommendations)
+Business question
+  → objective and data intake
+  → readiness checks and workflow selection
+  → eligible GeoX / MMM engine artifacts
+  → governed evidence and calibration compatibility
   → TrustReport
-  → dashboard / report
-  → follow-up Q&A over structured artifacts
+  → eligible simulation / planning / recommendation surfaces
+  → artifact-grounded conversational explanation
 ```
 
-Users should eventually be able to:
+Each stage runs only when its inputs and authority exist. In the current public
+demo, the path stops at fixture-backed intake, readiness, mapping, and governed
+explanation. Missing certified engine artifacts produce explicit blockers—not
+synthetic causal effects, ROI, or budget recommendations.
 
-- Describe a business goal and receive guidance on required KPIs, controls, and data granularity
-- Upload or point to local data and run readiness diagnostics
-- Draft MMM and GeoX configurations for engine validation and execution
-- Inspect outputs with tier-appropriate language, warnings, and blockers
-- View local dashboards and export governed reports
-- Ask follow-up questions grounded in artifacts, lineage, and `TrustReport`
+## Example decision journey
 
-This experience is **planned**, not shipped. The governance spine above exists so future UI and LLM layers can be contract-driven from day one.
+Suppose a user asks: **“Help me plan next quarter's media budget.”**
+
+MIP first clarifies the decision objective, KPI, planning horizon, channel
+scope, constraints, and available data. It evaluates whether the data has the
+required time, geography, controls, spend variation, and grain, then identifies
+which MMM or GeoX workflow—and which governed artifacts—would be needed.
+
+If eligible experiment evidence exists, MIP checks its quality, provenance, and
+compatibility before it can become calibration input. If a promoted MMM exposes
+an eligible full-panel Δμ surface, MIP can route that producer-owned artifact
+into the appropriate simulation or planning workflow. Gates then determine the
+`TrustReport`, confidence tier, limitations, and required human review. The
+conversation layer presents the certified results and their lineage without
+changing the numbers.
+
+Today, this journey is intentionally partial: MIP can demonstrate intake,
+readiness, evidence requirements, and governed refusal. The current P2 program
+does not yet have the certified GeoX/MMM evidence chain or authorized planning
+path needed to produce a next-quarter allocation.
+
+## MIP, MMM, and GeoX
+
+MIP coordinates three repositories with deliberately separate authority:
+
+| Repository | Authority |
+| --- | --- |
+| **MIP** | Orchestration, governance, consumer contracts, evidence routing, trust/reporting, LLM behavior, coordination, and UX |
+| **MMM** | Model fitting, diagnostics, calibration compatibility, simulation, optimization, and MMM numerical truth |
+| **GeoX / panel_exp** | Experiment design, assignment, inference, governed readouts, handoff eligibility, and experiment numerical truth |
+
+MIP consumes versioned artifacts and owner-repository evidence. It does not
+recompute, silently reinterpret, or supersede MMM or GeoX analytical truth.
+
+Three invariants define the decision boundary:
+
+- **`TrustReport` is the sole trust verdict.**
+- **`CalibrationSignal` is the sole GeoX → MMM bridge.**
+- **Full-panel Δμ is the sole MMM decision surface for production planning and
+  optimization.**
+
+See the [architecture](docs/architecture/ARCHITECTURE.md),
+[repository integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md),
+and the ADRs for [full-panel Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md),
+[experiments as calibration evidence](docs/adr/ADR-002-experiments-as-calibration-evidence.md),
+and [LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md).
+
+## Core capabilities
+
+### Measurement and causal evidence
+
+- Typed estimand, experiment-evidence, calibration, MMM-result, and
+  decision-surface contracts are implemented.
+- Data, objective, MMM, and GeoX readiness/intake workflows are implemented for
+  governed and fixture-backed use.
+- Static sibling-export discovery, compatibility checking, and MIP-side
+  ingestion boundaries are implemented; they do not constitute live engine
+  execution.
+- The certified GeoX producer → provenance-linked MMM compatibility → MIP
+  bridge is in progress at the program level and currently blocked.
+
+### Decision intelligence
+
+- Planning-input readiness, artifact-governance checks, answer eligibility,
+  and response-envelope contracts are implemented.
+- Fixture reports demonstrate the intended governed product shape.
+- Live scenario simulation, optimizer-backed allocations, and budget
+  recommendations are not currently authorized or shipped by MIP.
+
+### Governance
+
+- Pydantic contracts, evidence lineage, registries, deterministic release
+  gates, confidence tiers, calibration audit, and `TrustReport` assembly are
+  implemented and tested.
+- Unsupported claims and missing prerequisites are surfaced as warnings or
+  blockers rather than silently upgraded.
+- Production trust assembly, real-data workflows, and production release remain
+  separately gated.
+
+### AI interaction
+
+- Deterministic intent handling, guided intake, knowledge retrieval, dialogue
+  routing, grounded fallback, explanation helpers, and a read-only
+  conversational front door are implemented.
+- Provider adapters/configuration exist for guarded OpenAI and Groq paths, but
+  providers are disabled by default and the canonical hosted demo is
+  deterministic-only. Controlled live-provider/public acceptance remains
+  incomplete.
+- Broader artifact-grounded follow-up and governed action handoff are still
+  evolving; no LLM path receives analytical or approval authority.
 
 ## LLM Decision Layer
 
-The **LLM Decision Layer lives in MIP**, not inside the MMM or GeoX engine repos. It is intended to become the **primary interaction layer** for users: guiding intake, routing workflows, drafting configs, summarizing artifacts, and explaining `TrustReport` verdicts.
+**The LLM decides how to interact with governed capabilities and explains
+certified artifacts; it does not create causal or statistical truth.**
 
-### What LLMs will do
+The LLM may guide intake, route among allowed workflows, draft configurations,
+summarize diagnostics and artifacts, explain trust and uncertainty, and answer
+follow-up questions grounded in approved evidence. Deterministic contracts and
+routers validate those interactions and provide safe fallback behavior.
 
-- Guide users through objective and data intake
-- Configure and route approved workflows
-- Summarize diagnostics, gates, and uncertainty
-- Explain `TrustReport`, evidence quality, and calibration readiness
-- Surface measurement gaps and experiment opportunities
-- Draft MMM/GeoX configs for engine validation
-- Support follow-up Q&A over governed artifacts
+The LLM may not invent causal effects, run ungoverned inference, fit MMM by
+hallucination, create calibration authority, alter numerical contract fields,
+override `TrustReport`, bypass release gates, or approve production
+recommendations. Human and owner-repository approvals remain explicit.
 
-### What LLMs will not do
+For the detailed design and current provider boundaries, see the
+[LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md) and
+[LLM control-plane architecture](docs/architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md).
 
-- Estimate causal effects or run GeoX inference directly
-- Train MMM models or invent statistical results
-- Certify evidence or upgrade confidence tiers
-- Override `TrustReport` verdicts or bypass `CalibrationSignal` governance
-- Send raw experiment evidence into MMM
-- Approve production recommendations or bypass release gates
+## Current implementation state
 
-Production-facing results must pass evaluation gates and be labeled by **confidence tier** (`decision_ready`, `directional`, `diagnostic_only`, `research_only`, `blocked`).
+| Capability | Current state |
+| --- | --- |
+| Governance and contracts | **Implemented:** typed contracts, evidence registry, gates, confidence tiers, calibration audit, and trust assembly |
+| Intake and readiness | **Implemented:** deterministic objective/data intake and readiness workflows; several paths are fixture-oriented |
+| Demo and UI | **Fixture/demo:** chat-first deterministic Streamlit experience over synthetic local assets; hosted publicly, not production-ready |
+| Engine integration | **Partial:** MIP-side contracts, adapters, runtime boundaries, and static/fixture ingestion exist; no generally available certified live end-to-end engine path |
+| Certified GeoX → MMM evidence | **Blocked/in progress:** GeoX producer certification and provenance-linked MMM compatibility evidence are incomplete; the MIP bridge remains parked |
+| Planning and simulation | **Partial/planned:** readiness, governance, eligibility, and explanation contracts exist; live simulation, optimization, and recommendations are not authorized |
+| LLM-backed conversation | **Partial:** guarded read-only provider seams and deterministic fallback exist; public demo providers are disabled and live acceptance is incomplete |
 
-### LLM implementation status
+The machine-readable [P2 capability checkpoint ledger](docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json)
+and [current program state](docs/program/PROGRAM_CURRENT_STATE.md) are the
+authoritative sources for present dependency and eligibility status. Roadmaps
+describe direction, not shipped capability.
 
-| Phase | Status |
-|-------|--------|
-| Phase 0 — Documentation and scope lock | **Done** |
-| Phase 1 — Deterministic safety and explanation context | **Done** (`mip.llm`: intents, safety rules, `context_from_trust_report`) |
-| Phase 2 — Business objective intake and data requirements | **Done** (`mip.workflows.intake`) |
-| Phase 3 — Data readiness diagnostics | **Done** (`mip.workflows.readiness`) |
-| Phase 4 — MMM/GeoX config drafting | **Done** (`mip.workflows.configs`) |
-| Phase 5A — Local workflow orchestrator | **Done** (`mip.workflows.orchestrator`) |
-| Phase 5B — Local CLI demo runner | **Done** (`mip.cli.demo`, `mip-demo`) |
-| Phase 5C — MockLLM explanation provider | **Done** (`mip.llm.providers`, `mip.llm.explanations`) |
-| Phase 5D — Streamlit demo shell (legacy) | **Done** (`mip.app.streamlit_app`, `mip-app`; canonical demo: `app/streamlit_app.py`) |
-| Phase 6A — Adapter interface contracts | **Done** (`mip.adapters`) |
-| Phase 6B — Adapter fixture governance wiring | **Done** (`mip.adapters.governance`) |
-| Phase 6C — MMM fixture dashboard/report demo | **Done** (`mip.reports.mmm_fixture`) |
-| Phase 7A — Workflow run manifest governance | **Done** (`mip.orchestration`) |
-| Phase 7B — Governed planner/router | **Done** (`mip.orchestration.router`) |
-| Phase 7C — Human approval checkpoints | **Done** (`mip.orchestration.approvals`) |
-| Phase 8A — Fixture engine orchestration | **Done** (`mip.orchestration.engine_fixtures`) |
-| Phase 8B — Pinned sibling fixture adapter imports | **Done** (`mip.adapters.sibling_fixtures`) |
-| Phase 8C — Read-only sibling export hooks | **Done** (`mip.adapters.sibling_export_hooks`) |
-| Phase 8D — Sibling repo compatibility registry | **Done** (`mip.adapters.sibling_compatibility`) |
-| Phase 8E — Local sibling export path wiring | **Done** (`mip.adapters.local_sibling_paths`) |
-| Phase 8F — Sibling export producer specs | **Done** (`docs/integrations/`, `mip.adapters.sibling_producer_specs`) |
-| Semantic/decision-readiness tracks S1–S12 | **Documented** ([addendum](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)); not implemented |
-| Critical invariants + artifact selection G1–G20 | **Documented** ([addendum](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)); final governance roadmap layer |
-| Conversational intake + data handoff I1–I15 | **Documented** ([roadmap](docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)); not implemented |
-| Intake session contracts I1–I3 | **First product implementation** |
-| Phase 8G+ — LLM explanation payload, usage policy | **Next implementation** (G11–G20 as design constraints) |
-| Live engine adapters | **Planned** (blocked until golden scenarios + 8G–8H) |
+## Demo and quick start
 
-Provider order for **product surface (P7b):** **`disabled`/deterministic first** (default; no LLM required), then `local_ollama` for local dev, then `bring_your_own_key`, then optional `hosted_open_source` (experimental), then `platform_managed_key_later` (gated). **Canned/sample explanation modes are excluded** (`canned_demo`, `sample_explanation`, `template_llm_explanation`)—the platform should be either honestly deterministic or actually LLM-backed through an explicit provider.
+Open the
+[hosted deterministic demo](https://marketingintelligenceplatform.streamlit.app/)
+or run the canonical app locally with Python 3.11+ and Poetry:
 
-Phase 5C `MockLLMProvider` remains for early deterministic workflow tests; P7b product surface does **not** use canned explanations for user-facing demos.
-
-The public product surface should work without paid LLM infrastructure. Deterministic mode is the default. Optional LLM-backed explanations may use hosted open-source models, local Ollama for local use, or bring-your-own-key providers.
-
-**The LLM explains governed MIP outputs; it does not create measurement authority.**
-
-See [docs/architecture/LLM_DECISION_LAYER_VISION.md](docs/architecture/LLM_DECISION_LAYER_VISION.md), [docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md), [docs/roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md](docs/roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md), [docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md), [docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md), and [docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md](docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) for delivery phases, semantic readiness, artifact selection policies (G11–G20), intake/data handoff (I1–I15), and design constraints for 8G/8H.
-
-## Local-first workbench and UI access
-
-Initial product direction is **local-first**, with a **verified public hosted demo** on Streamlit Community Cloud.
-
-### UI access modes
-
-**Local UI** — user runs the app locally (e.g. `streamlit run`); access through `localhost`; best for development, private demos, debugging, and demo recordings.
-
-**Public hosted UI** — [deterministic public demo](https://marketingintelligenceplatform.streamlit.app/) on Streamlit Community Cloud; best for portfolio demos, stakeholder review, and lightweight product validation. Demo-safe, no paid infrastructure required. **Not production readiness.**
-
-```text
+```bash
 poetry install
-  → mip demo / mip app   (planned CLI entry points)
-  → localhost UI opens (P7)
-  → optional public URL (P9)
-  → user provides local or demo data
-  → diagnostics, workflows, dashboards, reports run locally
-  → follow-up Q&A over governed report payloads (deterministic or explicit LLM provider)
-```
-
-- **Streamlit/Gradio** is planned first for demo speed and iteration (P7 local UI, P9 public demo)
-- **FastAPI / Docker** is a later service/deployment layer (P10–P11), not required for the first UI demo
-- Marketing data stays on the user's machine in early releases
-- Reports export to local run folders (HTML first, Markdown second, PDF later)
-
-No cloud accounts, remote data upload, or autonomous production actions are required for the initial experience.
-
-See [docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md).
-
-## Repository architecture
-
-Three-repo model:
-
-| Repository | Role |
-|------------|------|
-| **MIP** (this repo) | Control plane: contracts, evidence, gates, `TrustReport`, orchestration, LLM layer, workflows, dashboards, reports, adapters |
-| **mmm** | MMM analytical engine: training, Δμ surfaces, diagnostics |
-| **panel_exp / GeoX** | Experimentation engine: geo/panel lift, design and inference diagnostics |
-
-MIP consumes engine outputs through **`src/mip/adapters/{mmm,geox}/`** (planned). Engines expose integration hooks under their own repos (e.g. `mmm/integrations/mip/`, `panel_exp/integrations/mip/`). MIP does not vendor engine source.
-
-See [docs/architecture/REPO_INTEGRATION_STRATEGY.md](docs/architecture/REPO_INTEGRATION_STRATEGY.md).
-
-## Governance principles
-
-- **`TrustReport`** is the sole trust verdict on engine and recommendation outputs; every production-facing path is tier-labeled.
-- **`CalibrationSignal`** is the only governed path from experiment evidence into MMM calibration—not raw experiment payloads.
-- **Release gates** block or downgrade artifacts that fail diagnostics, compatibility, or evidence requirements.
-- **Research vs production:** `research_only` and `diagnostic_only` tiers may inform exploration but not production automation without explicit human review.
-- **Full-panel Δμ** is the decision estimand for mix-level budget decisions (see ADR-001).
-- **LLMs explain and route**; statistical systems compute and certify.
-
-## Current status
-
-**Platform spine: largely complete.** Contracts, gates, trust assembly, evidence registry, calibration audit, model calibration readiness, and LLM Phase 1–5D deterministic workflow layers are implemented with passing tests.
-
-**Product surface:** **P7** local deterministic Streamlit shell (`app/streamlit_app.py`) plus **P7b** LLM provider/explanation governance contracts. Phase 5D `mip-app` legacy shell remains for earlier workflow demos. See [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md) for the planned single-page, chat-first product direction. See [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md) for canonical MIP-owned demo fixtures, industry reference schemas, and when to introduce engine-backed MMM/GeoX visuals.
-
-**Near-term focus:** Calibration report builder/export helpers on branch. Public demo: https://marketingintelligenceplatform.streamlit.app/
-
-## Roadmap
-
-| Document | Contents |
-|----------|----------|
-| [Platform roadmap](docs/roadmap/ROADMAP.md) | Phased delivery across contracts, engines, trust, APIs, orchestration |
-| [LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md) | Product vision, responsibilities, and hard boundaries |
-| [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md) | Phased LLM and workbench delivery |
-| [LLM reasoning and model guidance](docs/roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md) | Phases 8G–8N: explanation payloads, usage policy, eval harness |
-| [Semantic and decision-readiness roadmap](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md) | S1–S12: metrics, estimands, scope, actions, decision packets |
-| [Critical invariants and golden scenarios](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md) | G1–G20: product proof, artifact selection, ambiguity policies |
-| [Conversational intake and data handoff](docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md) | I1–I15: LLM conversation → upload/connect → readiness → export handoff |
-| [Platform completion gaps](docs/roadmap/PLATFORM_COMPLETION_GAPS_ROADMAP.md) | P1–P13: lifecycle, audit, certification |
-| [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md) | Consolidated P0–P20 implementation phases |
-| [Roadmap execution audit](docs/audits/ROADMAP_EXECUTION_AUDIT_001.md) | Theme grouping, blockers, canonical ownership |
-| [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md) | `mip demo` / `mip app`, Streamlit, providers, local artifacts |
-| [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md) | Three-repo boundaries and adapter contracts |
-
-**P1 implemented:** deterministic intake session and path recommendation contracts (`MMMIntakeSession`, `GeoXIntakeSession`, `IntakePathRecommendation`, `recommend_intake_path`).
-
-**P2 implemented:** required data asset and sample schema expectation contracts (`IntakePlan`, `RequiredDataAsset`, `build_intake_plan`). After a path recommendation, MIP can show the expected data shape before upload/connect.
-
-**P3 implemented:** `DataSourceRef` and intake manifest contracts (`MMMIntakeManifest`, `GeoXIntakeManifest`, `build_intake_manifest`). MIP can represent user-selected data source modes and tie them to session/recommendation/plan.
-
-**P4 implemented:** column mapping and semantic confirmation contracts (`ColumnMappingProposal`, `ColumnMappingConfirmation`, `SemanticMappingReport`, `build_semantic_mapping_report`).
-
-**P4b implemented:** experiment design objective and data requirement contracts (`ExperimentDesignObjective`, `ExperimentDesignIntake`, `MMMToGeoXDesignBridge`, `StandaloneGeoXDesignRequest`, `ExperimentDiagnosticRequest`, `build_experiment_design_intake`, `build_experiment_diagnostic_request`). MIP can represent MMM-driven and standalone GeoX design intent, map objectives to candidate KPI families, list objective-specific data requirements, and prepare future panel_exp diagnostic requests without executing design diagnostics.
-
-**P4c implemented:** common data intake workbench and preliminary profiling contracts (`CommonIntakeWorkbench`, `CommonDataProfileSummary`, `WorkflowSupportAssessment`, `LLMAnswerGroundingContext`, `build_common_intake_workbench`, `build_workflow_support_assessment`). MIP can represent shared intake metadata, governed profile summaries, workflow support assessment, and LLM-safe grounding context across MMM, GeoX, CalibrationSignal, and decision-review workflows. Actual ingestion, file parsing, table connectors, profiling computation, and engine diagnostics remain deferred.
-
-**P5 implemented:** workflow-specific readiness report contracts (`MMMDataReadinessReport`, `GeoXDesignReadinessReport`, `CalibrationSignalReadinessReport`, `DecisionReviewReadinessReport`, `build_workflow_readiness_reports`). MIP can now branch from common intake/workflow support assessment into MMM data readiness, GeoX design readiness, CalibrationSignal readiness, and decision-review readiness. These reports assess structural readiness only; engine diagnostics, CalibrationSignal transformation, TrustReport approval, and decision recommendations remain deferred.
-
-**P5b implemented:** general advisory and cold-start planning contracts (`ColdStartBusinessProfile`, `ColdStartAdvisoryPlan`, `WebsiteTrafficSourceProfile`, `build_cold_start_advisory_plan`). MIP can now represent advisory-only marketing guidance for users without formal measurement readiness, including business-profile-driven channel hypotheses, website traffic/source-informed hypotheses, tracking setup checklists, starter measurement plans, and learning agendas. Outputs are labeled by evidence mode and claim type and cannot claim ROI, causal lift, optimal mix, or decision authorization.
-
-**P6 implemented:** CalibrationSignal intake mapping contracts (`CalibrationEvidenceInput`, `CalibrationMappingRequirement`, `CalibrationMappingReport`, `map_evidence_to_calibration_signal`). MIP can now validate governed experiment evidence for CalibrationSignal compatibility, preserve source lineage, and map structurally valid evidence into `CalibrationSignal` contracts. This does not execute MMM calibration, estimate effects, certify causality, or approve decisions.
-
-**P7 implemented:** Local deterministic Streamlit workflow shell (`app/streamlit_app.py`). The UI exposes cold-start advisory, workflow readiness, CalibrationSignal mapping, and intake overview flows using sample fixtures and MIP core helpers. Deterministic mode only—no LLMs, MMM, GeoX, external APIs, or public hosting.
-
-**P7b implemented:** Pluggable LLM provider and explanation-governance contracts (`LLMProviderConfig`, `LLMExplanationRequest`, `LLMExplanationPlan`, `mip.workflows.intake.llm_explanation`). Represents disabled/deterministic, local Ollama, hosted open-source, BYOK, and future platform-managed-key modes. No LLM provider calls; governed input boundaries and explanation plans only.
-
-**P8 implemented:** Local/demo profiling for small synthetic tabular datasets (`mip.contracts.demo_profile`, `mip.workflows.intake.demo_profiling`). Demo profiles summarize website traffic, national media/outcome, DMA-week media/outcome, and experiment readout-like data into governed summaries used by advisory, readiness, and CalibrationSignal mapping workflows. Demo-only: no production ingestion, external connectors, raw-row LLM access, MMM/GeoX execution, or persistent storage.
-
-**P8b implemented:** Governed agent role, run manifest, failure packet, resolution plan, validation report, retry policy, escalation policy, and handoff packet contracts (`mip.contracts.agentic_workflow`, `mip.workflows.intake.agentic_recovery`). Prepares future agentic orchestration without LangGraph, runtime agents, LLM calls, autonomous retries, MMM execution, or GeoX execution. Agents remain reasoning/recovery surfaces, not measurement authorities.
-
-**P8c implemented:** Canonical Streamlit entrypoint clarified before public hosting. `app/streamlit_app.py` is the local/public deterministic demo app. Legacy `mip.app.streamlit_app` / `mip-app` remain for Phase 5D JSON workflow compatibility only.
-
-**P9 implemented:** Deterministic public demo preparation. `requirements.txt`, `runtime.txt`, and `.streamlit/config.toml` support Streamlit Community Cloud hosting of `app/streamlit_app.py` without LLM providers, secrets, FastAPI, Docker, or external services.
-
-**P9b implemented:** Deterministic public demo deployed and smoke-tested on Streamlit Community Cloud. Deployment record: [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md). This is a **non-production** deterministic demo using synthetic fixtures—not a production app or measurement service.
-
-**P10a implemented:** FastAPI service shell at `mip.service` with `GET /health` and `GET /version`.
-
-**P10b implemented:** Deterministic workflow API routes (`POST /advisory/cold-start`, `/readiness/assess`, `/calibration/map`, `/intake/overview`) using demo fixture keys.
-
-**P10b.1 implemented:** Service boundary cleanup—routes call `mip.workflows.*` directly; `app.demo_fixtures` limited to sample input resolution. See [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md).
-
-**P10c implemented:** Dockerfile for local deterministic FastAPI smoke testing. See [P10c Docker smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md).
-
-**P11 implemented:** API hardening — OpenAPI inspection, response/error contract tests, route metadata. See [P11 API hardening plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md).
-
-**P12 implemented:** SDK/API usage examples. See [P12 SDK and API usage examples](docs/examples/P12_SDK_API_USAGE_EXAMPLES_001.md) for deterministic Python SDK, FastAPI, and Docker usage examples.
-
-**Stage A implemented:** Synthetic deterministic fixtures at [examples/fixtures/stage_a/](examples/fixtures/stage_a/). Artificial, non-production inputs for advisory, readiness, calibration, intake, and governance demos — no MMM/GeoX execution outputs.
-
-**Stage A.2 implemented:** Fixture loader helpers in `mip.examples.stage_a_fixtures` for docs, tests, and future notebooks/guided demos.
-
-**Agent tooling audit (001):** [MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001](docs/audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md) — executability gaps, Cursor checklist, stop/go criteria.
-
-**Report / adapter / agent contract plan (001):** [MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001](docs/architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md) — **merged**.
-
-**Deterministic report contracts + Stage A.3 calibration adapter:** **merged** — `mip.contracts.deterministic_report`, `mip.examples.stage_a_adapters`.
-
-**Calibration report builder/export helpers:** **merged** — `mip.reports.calibration_reports` and `mip.reports.deterministic_reports` for local JSON export.
-
-**Stage A.3 advisory/readiness/intake adapter plan (001):** [STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md) — fixture→workflow mapping; governance examples test-only.
-
-**Stage A.3 cold-start advisory adapter:** **merged** — `mip.reports.advisory_reports`, golden path #1. Advisory output is advisory-only, not causal measurement.
-
-**Agent answerability and fallback contract plan (001):** [AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md) — five-state answerability machine.
-
-**Agent answerability contracts + deterministic evaluator:** **merged** — `mip.contracts.agent_answerability`, `mip.agents.answerability.evaluate_agent_answerability`.
-
-**Agent capability eval fixtures (001):** **merged** — `examples/fixtures/agent_capability_eval`, `mip.evaluation.agent_capability_fixtures` (10 cases).
-
-**MIP LLM control plane architecture (001):** [MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001](docs/architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md) — LLM-first interface, deterministic-core execution; shared control plane + MMM/GeoX adapters.
-
-**Next (implementation):** MIP tool registry contract; LLM explanation request/response contracts; readiness adapter remains `needs_contract_update`.
-
-1. **Stage A** — Synthetic deterministic fixture files — **merged**
-2. **Stage A.2** — Fixture loader helpers — **merged**
-3. **Agent tooling audit 001** — **merged**
-4. **Report/adapter/agent contract plan 001** — **merged**
-5. **Deterministic report contracts + calibration adapter** — **merged**
-6. **Calibration report builder/export helpers** — **merged**
-7. **Stage A.3 advisory/readiness/intake adapter plan** — **merged**
-8. **Stage A.3 cold-start advisory adapter** — **merged**
-9. **Agent answerability/fallback contract plan** — **merged**
-10. **Agent answerability contracts + evaluator** — **merged**
-11. **Agent capability eval fixtures** — **merged**
-12. **MIP LLM control plane architecture** — **documented**
-13. **P17** — LangGraph orchestration skeleton (after control-plane contracts)
-
-Live engine execution remains blocked until golden scenarios and safety evaluations exist.
-
-## Repository layout
-
-```text
-marketing_intelligence_platform/
-  README.md
-  pyproject.toml
-  requirements.txt   # P9 Streamlit Community Cloud runtime dependencies
-  runtime.txt        # Python 3.11 for hosted demo
-  .streamlit/        # Headless demo UI config (no secrets)
-  app/               # Canonical local/public Streamlit demo (P7/P8/P9)
-  docs/
-    vision/           # Vision and principles
-    architecture/     # Layers, boundaries, trust, LLM, local-first
-    roadmap/          # Phased delivery
-    audits/           # Roadmap execution audits
-    adr/              # Architecture decision records
-    glossary/         # Estimands and measurement terms
-    operating_model/  # Intake, evaluation, release gates
-  src/mip/
-    contracts/        # Governed Pydantic contracts
-    evidence/         # Registry, calibration audit, readiness
-    evaluation/       # Release gates
-    trust/            # TrustReport assembly and routing
-    llm/              # Deterministic safety and explanation context (Phase 1)
-    workflows/        # Workflow intake, readiness, configs, orchestrator (Phase 2–5A)
-      intake/         # Business objectives, data requirements, feasibility
-      readiness/      # Dataset profiling and readiness reports
-      configs/        # MMM and GeoX config drafts
-      orchestrator/   # Local workflow runner and summary
-    orchestration/    # Workflow manifest, planner router, approvals, fixture engines (Phase 7A–8A)
-    app/              # Legacy Phase 5D Streamlit shell (`mip-app`); canonical demo is `app/`
-    dashboard/        # Planned: tier-aware views
-    reports/          # Planned: governed report export
-  tests/              # Pytest suites
-```
-
-## Documentation index
-
-- [Platform vision](docs/vision/PLATFORM_VISION.md)
-- [Platform principles](docs/vision/PLATFORM_PRINCIPLES.md)
-- [Architecture](docs/architecture/ARCHITECTURE.md)
-- [Orchestration boundaries](docs/architecture/ORCHESTRATION_BOUNDARIES.md)
-- [Trust architecture](docs/architecture/TRUST_ARCHITECTURE.md)
-- [LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md)
-- [Local-first app strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
-- [Repo integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md)
-- [Public demo deployment record (P9b)](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
-- [P10 FastAPI/Docker wrapper plan](docs/service/P10_FASTAPI_DOCKER_WRAPPER_PLAN.md)
-- [P10c Docker service smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md)
-- [P11 API hardening and service packaging plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md)
-- [P12 SDK and API usage examples](docs/examples/P12_SDK_API_USAGE_EXAMPLES_001.md)
-- [Stage A synthetic fixtures](examples/fixtures/stage_a/README.md)
-- [Agent tooling and roadmap detail audit 001](docs/audits/MIP_AGENT_TOOLING_AND_ROADMAP_IMPLEMENTATION_DETAIL_AUDIT_001.md)
-- [Report, adapter, and agent contract plan 001](docs/architecture/MIP_REPORT_ADAPTER_AGENT_CONTRACT_PLAN_001.md)
-- [Stage A.3 advisory/readiness/intake adapter plan 001](docs/architecture/STAGE_A3_ADVISORY_READINESS_INTAKE_ADAPTER_PLAN_001.md)
-- [Agent answerability and fallback contract plan 001](docs/architecture/AGENT_ANSWERABILITY_AND_FALLBACK_CONTRACT_PLAN_001.md)
-- [MIP LLM control plane architecture 001](docs/architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md)
-- [Product entrypoint and demo experience plan](docs/product/PRODUCT_ENTRYPOINT_AND_DEMO_EXPERIENCE_PLAN_001.md)
-- [Synthetic demo dataset strategy](docs/product/SYNTHETIC_DEMO_DATASET_STRATEGY_PLAN_001.md)
-- [Deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md)
-- [Agentic workflow governance roadmap](docs/architecture/AGENTIC_WORKFLOW_GOVERNANCE_ROADMAP.md)
-- [Roadmap](docs/roadmap/ROADMAP.md)
-- [LLM Decision Layer roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md)
-- [LLM reasoning and model guidance](docs/roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md)
-- [Semantic and decision-readiness roadmap](docs/roadmap/PLATFORM_SEMANTIC_AND_DECISION_READINESS_ROADMAP.md)
-- [Critical invariants and golden scenarios](docs/roadmap/PLATFORM_CRITICAL_INVARIANTS_AND_GOLDEN_SCENARIOS.md)
-- [Conversational intake and data handoff](docs/roadmap/CONVERSATIONAL_INTAKE_AND_DATA_HANDOFF_ROADMAP.md)
-- [Platform completion gaps](docs/roadmap/PLATFORM_COMPLETION_GAPS_ROADMAP.md)
-- [Roadmap execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md)
-- [Roadmap execution audit](docs/audits/ROADMAP_EXECUTION_AUDIT_001.md)
-- ADRs: [001 Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md) · [002 Experiments](docs/adr/ADR-002-experiments-as-calibration-evidence.md) · [003 LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md)
-
-## Run local UI (canonical)
-
-**Canonical local demo app:**
-
-```bash
 poetry run streamlit run app/streamlit_app.py
 ```
 
-`app/streamlit_app.py` is the local/public deterministic demo entrypoint for P7/P8 workflows (advisory, readiness, calibration mapping, demo profiling, intake overview).
+The canonical app at `app/streamlit_app.py` runs in deterministic mode with
+synthetic/demo fixtures by default. It requires no LLM provider, API key,
+database, or external service and does not execute MMM or GeoX inference.
 
-The app runs in **deterministic mode by default**. It does not require LLM providers, API keys, FastAPI, Docker, or external services.
+The older `poetry run mip-app` entrypoint is retained for backward compatibility
+with the legacy workflow shell. For a deterministic JSON/CLI workflow, use
+`poetry run mip-demo --help`.
 
-**Legacy Phase 5D workflow shell** (JSON input + MockLLM over `run_local_workflow()`): retained for backward compatibility only.
-
-```bash
-poetry run mip-app
-```
-
-This launches `src/mip/app/streamlit_app.py`—a separate shell from the canonical demo above.
-
-## Public demo deployment
-
-**Hosted demo:** [https://marketingintelligenceplatform.streamlit.app/](https://marketingintelligenceplatform.streamlit.app/)
-
-**Canonical app entrypoint:** `app/streamlit_app.py`
-
-**Local command:**
-
-```bash
-poetry run streamlit run app/streamlit_app.py
-```
-
-**Hosting:** Streamlit Community Cloud — main file `app/streamlit_app.py`, Python 3.11 (`runtime.txt`), dependencies from `requirements.txt`.
-
-### Editable package-install contract
-
-Streamlit Cloud installs `requirements.txt` from the checked-out repository. The
-local package entry must remain `-e .`: it is a real editable package installation,
-not a `sys.path` workaround. The current chat-first fixture loader reads the
-repository-level `data/demo/domain_fixtures/saas_subscriptions/v1` assets. Those
-assets are not included in the current non-editable built wheel, so replacing
-`-e .` with `.` breaks clean requirements-only fixture loading. If package data is
-included in a future wheel, change this deployment contract only with a separate
-packaging implementation and validation update.
-
-Validate this path with:
-
-```bash
-make validate-public-deployment
-```
-
-The public demo is **deterministic-only** and requires **no secrets**, API keys, LLM providers, FastAPI, Docker, databases, or external services. It is **not production-ready**—a governed workflow shell over synthetic demo fixtures.
-
-**Deployment record:** [PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md) (P9b verified; commit `96cf98c`).
-
-**Re-deploy checklist:**
-
-- `poetry run pytest` passes
-- `poetry run ruff check .` passes
-- `poetry run mypy src tests app` passes
-- No secrets committed (no `.env`, `secrets.toml`, or tokens in repo)
-- `requirements.txt` present at repository root
-- Canonical app path confirmed: `app/streamlit_app.py`
-- Deterministic mode and Public Demo Safety copy visible in the app
-- No LLM provider selector or API-key fields exposed in the canonical app
-
-**Optional secondary host:** [Hugging Face Spaces](https://huggingface.co/docs/hub/spaces) can host a Streamlit demo later. Prefer the simple Streamlit Community Cloud path first. Docker-based Spaces belong to the later FastAPI/Docker phase (P10c) unless needed sooner.
-
-## Local API shell (P10a–P10b.1)
-
-Streamlit remains the **canonical public demo**. The FastAPI shell (`mip.service`) exposes deterministic workflow routes.
+The repository also contains a local deterministic FastAPI shell:
 
 ```bash
 poetry run uvicorn mip.service.app:app --reload --host 127.0.0.1 --port 8000
 curl http://127.0.0.1:8000/health
-curl http://127.0.0.1:8000/version
-curl -X POST http://127.0.0.1:8000/advisory/cold-start -H 'Content-Type: application/json' -d '{"sample_key":"dtc_skincare_ecommerce"}'
 ```
 
-Deterministic mode only — no LLM, secrets, external services, persistence, or measurement engine execution.
+See the [public deployment record](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md),
+[deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md), and
+[local development validation guide](docs/dev_validation_workflow.md).
 
-## Local Docker smoke (P10c)
+## Why MIP is different
 
-Packages the **FastAPI service only** for local smoke testing. Does not run Streamlit, enable LLM mode, or imply production deployment.
+Traditional analytics systems produce models. Generic AI assistants produce
+answers. MIP connects causal analytical engines to an AI decision layer through
+typed evidence, authority-preserving contracts, release gates, lineage, and
+explicit decision workflows. Its central product behavior is not merely to
+answer—it is to show what the evidence supports, what remains uncertain, and
+why a requested decision is allowed or blocked.
 
-```bash
-docker build -t mip-service:p10c .
-docker run --rm -p 8000:8000 mip-service:p10c
-# another shell:
-curl http://127.0.0.1:8000/health
-curl http://127.0.0.1:8000/version
-```
+## Deeper documentation
 
-If port 8000 is busy, map another host port: `docker run --rm -p 8001:8000 mip-service:p10c`.
-
-See [P10c Docker service smoke report](docs/service/P10C_DOCKER_SERVICE_SMOKE_REPORT.md). See [P11 API hardening plan](docs/service/P11_API_HARDENING_AND_SERVICE_PACKAGING_PLAN_001.md) for the planned API hardening and service packaging direction after P10c.
-
-## Development setup
-
-Requires Python ≥ 3.11. Uses Poetry-compatible `pyproject.toml`.
-
-```bash
-cd marketing_intelligence_platform
-make validate
-```
-
-`make validate` is the standard local validation command. It prefers the
-repository's Python 3.11 devcontainer image and falls back to host Poetry only
-when Docker is unavailable. Use `make validate-docker` to require Docker.
-See the [local validation workflow](docs/dev_validation_workflow.md) for the
-exact checks, CI-parity limitations, fallback behavior, and cleanup command.
-
-Minimal runtime dependencies: `pydantic`, `pandas`, `numpy`. Dev tools: `pytest`, `ruff`, `mypy`.
+- **Product and architecture:** [platform vision](docs/vision/PLATFORM_VISION.md),
+  [architecture](docs/architecture/ARCHITECTURE.md), and
+  [orchestration boundaries](docs/architecture/ORCHESTRATION_BOUNDARIES.md)
+- **LLM Decision Layer:** [vision](docs/architecture/LLM_DECISION_LAYER_VISION.md),
+  [control-plane architecture](docs/architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md),
+  and [roadmap](docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md)
+- **Local-first product:** [app and deployment strategy](docs/architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
+  and [demo deployment record](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md)
+- **MMM / GeoX integration:** [repository integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md)
+  and [producer specifications](docs/integrations/MIP_SIBLING_EXPORT_PRODUCER_SPEC.md)
+- **Trust and governance:** [trust architecture](docs/architecture/TRUST_ARCHITECTURE.md),
+  [release gates](docs/operating_model/RELEASE_GATES.md), and
+  [authority/freeze matrix](docs/program/AUTHORITY_AND_FREEZE_MATRIX.md)
+- **Roadmap:** [platform roadmap](docs/roadmap/ROADMAP.md) and
+  [execution sequence](docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md)
+- **Current program state:** [current state](docs/program/PROGRAM_CURRENT_STATE.md),
+  [P2 checkpoint ledger](docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json), and
+  [repository context index](docs/execution/REPOSITORY_CONTEXT_INDEX.md)
 
 ## License
 
