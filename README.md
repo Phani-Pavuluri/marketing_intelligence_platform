@@ -18,149 +18,120 @@ becoming the analytical authority.
 
 Marketing planning starts with the broad portfolio view. MMM helps teams
 understand how channels work together and compare choices across the media mix.
-Because it relies heavily on observational variation, however, some channel
-estimates can remain uncertain, correlated, or weakly identified.
+Because it learns largely from historical, observational variation, some
+important channel and planning questions can remain uncertain.
 
-Those uncertainties reveal where stronger causal evidence would be useful.
-Targeted geo and incrementality experiments answer narrower questions about a
-specific channel, campaign, population, geography, or period. When that
-evidence is high quality and compatible with the model's scope, it can return
-through MIP's governed calibration bridge. MMM—not MIP—then applies the eligible
-evidence through MMM-owned fitting and calibration behavior.
+MIP makes that uncertainty actionable. If existing evidence is sufficient, a
+team can move toward scenario analysis and planning. If stronger causal
+evidence would materially improve the decision, MIP can route a narrower
+question to GeoX for a targeted experiment. Compatible experimental learning
+can then strengthen future MMM measurement and the portfolio view used for
+planning.
 
-The stronger portfolio model can support better-informed scenario and planning
-decisions. Whatever remains uncertain becomes the next measurement question.
-MIP coordinates this learning cycle, and AI makes it easier for users to frame
-the question, follow the evidence, and understand the next action.
+MIP coordinates this cycle; GeoX and MMM retain authority over their own
+numerical work. The cycle ends in a business decision—not another analysis for
+its own sake—and begins again only when a new question or material uncertainty
+requires it.
 
 ```text
 Business / portfolio question
-              ↓
-MMM provides the current portfolio view
-              ↓
-Assess what is known confidently and what remains uncertain
-              ↓
-If evidence is weak, identify the material measurement gap
-              ↓
-Design and run a targeted experiment
-              ↓
-GeoX produces governed causal lift evidence
-              ↓
-Check quality, scope, uncertainty, freshness, and compatibility
-              ↓
-Eligible evidence becomes CalibrationSignal
-              ↓
-MMM applies calibration through MMM-owned numerical behavior
-              ↓
-Updated, eligible MMM evidence supports scenarios and planning
-              ↓
-Observe remaining uncertainty or new business questions
-              ↓
-Identify the next measurement gap ───────────────────────────┐
-              ↑                                              │
-              └──────────────────────────────────────────────┘
+            ↓
+MMM provides the portfolio view
+            ↓
+Where does material uncertainty remain?
+       ┌──────────────┴──────────────┐
+       │                             │
+Evidence sufficient          Stronger causal
+       │                      evidence needed
+       ↓                             ↓
+Scenario / planning          GeoX targeted experiment
+                                     ↓
+                              Causal lift evidence
+                                     ↓
+                             Compatible learning
+                              informs future MMM
+                                     ↓
+                             Updated portfolio view
+                                     ↓
+                              Scenario / planning
+       └──────────────┬──────────────┘
+                      ↓
+               Decision / action
+                      ↓
+        New question or material uncertainty
+                      ↓
+ Return to evidence assessment / routing when needed
 ```
 
-The result is a continuous learning system: stronger causal anchoring where
-evidence is compatible, better-informed channel-response beliefs, clearer
-planning confidence, and an explicit path to the next measurement action.
-Experiments do not automatically recalibrate a model; quality, uncertainty,
-freshness, and compatibility must be established first.
-
-Functionally, **GeoX provides experiment and incrementality truth**, **MMM
-provides portfolio measurement and planning truth**, and **MIP connects both
-into one governed decision workflow**.
+The next route may use existing evidence, refresh MMM, require more data, or
+engage GeoX; uncertainty does not automatically require an experiment.
 
 ## What can you do with MIP?
 
-The product connects a progression of questions that teams usually answer in
-separate tools:
+Bring MIP a decision or measurement job—not a choice of internal architecture.
+Current availability varies by capability; see
+[implementation maturity](#current-version-and-implementation-maturity).
 
-```text
-Measure channel incrementality
-        ↓
-Run targeted experiments where evidence is weak
-        ↓
-Bring compatible lift evidence back into MMM
-        ↓
-Improve channel-response understanding
-        ↓
-Compare alternative spend scenarios
-        ↓
-Plan or reallocate next-quarter budget
-```
+| User job | Questions MIP helps organize |
+| --- | --- |
+| **Measure** | Is this channel actually incremental? Do we already have enough evidence to answer? |
+| **Experiment** | Where is additional measurement most valuable? What targeted experiment would address weak evidence? |
+| **Connect the learning** | What does a completed experiment mean for the broader measurement system? Can compatible evidence inform future MMM measurement? |
+| **Plan** | What happens under a different spend scenario? Is cross-channel budget reallocation supportable? |
+| **Decide the next action** | Is the evidence trustworthy enough for this decision? What data, measurement, or experiment should come next? |
 
-That progression supports questions such as:
-
-- Is this channel incremental, and what lift did the campaign cause?
-- Where should we run an experiment next?
-- How should this experiment change what the MMM believes about the channel?
-- Can we move budget between channels?
-- What happens if we follow a different spend plan?
-- How should we plan next quarter?
-
-MIP turns these from isolated analyses into one learning and decision workflow:
-measure, learn, update the evidence base, plan, and decide what to measure next.
+MIP keeps the question, evidence, limitations, and next action connected even
+when the analytical work spans different systems.
 
 ## How MIP works
 
-The experience begins with a business question, not a model configuration.
+The experience begins with a business question, not a model configuration. The
+same five stages apply whether existing evidence is enough or new analytical
+work is needed.
 
 ```text
-User asks a business question
-  ↓
-AI + MIP understand the objective
-  ↓
-Clarify KPI, channels, geography / population, time horizon,
-constraints, and available data or evidence
-  ↓
-Build the required measurement or decision plan
-  ↓
-┌────────────────────────┬────────────────────────┬────────────────────────┐
-│ Experiment / GeoX path │ MMM path               │ Existing-evidence path │
-│                        │                        │                        │
-│ Check experiment and   │ Check data and model   │ Retrieve prior         │
-│ data readiness         │ readiness              │ experiments            │
-│          ↓             │          ↓             │          ↓             │
-│ Design / assignment    │ MMM-owned fitting and  │ Retrieve eligible MMM  │
-│ when needed            │ diagnostics            │ and model artifacts    │
-│          ↓             │          ↓             │          ↓             │
-│ GeoX inference         │ Current portfolio      │ Retrieve prior trust   │
-│          ↓             │ measurement            │ and provenance         │
-│ Governed experiment    │          ↓             │          ↓             │
-│ readout                │ Eligible MMM decision  │ Decide whether existing│
-│                        │ surfaces               │ evidence answers the Q │
-└────────────┬───────────┴────────────┬───────────┴────────────┬───────────┘
-             └────────────────────────┼────────────────────────┘
-                                      ↓
-Normalize scope and estimand; check lineage, freshness, uncertainty,
-quality, and compatibility
-                                      ↓
-Determine whether experiment evidence is calibration-eligible
-  → if eligible: CalibrationSignal enters MMM-owned calibration behavior
-  → if not eligible: preserve relevant evidence as decision context
-                                      ↓
-Assemble trust and evaluate decision eligibility
-                                      ↓
-┌──────────────────────┬────────────────────────┬─────────────────────────┐
-│ Measurement answer   │ Planning answer        │ Evidence insufficient   │
-│ Explain causal lift  │ Compare eligible       │ Identify what is missing│
-│ and supporting       │ full-panel Δμ scenario │ and recommend additional│
-│ evidence             │ surfaces               │ measurement / experiment│
-└──────────┬───────────┴────────────┬───────────┴────────────┬────────────┘
-           └────────────────────────┼────────────────────────┘
-                                    ↓
-AI + MIP explain the result, evidence used, uncertainty, trade-offs,
-blockers, and recommended next action
-                                    ↓
-Return the result to the continuous learning loop
+1. FRAME THE QUESTION
+   Business question → objective, KPI, channels, geography / population,
+   horizon, constraints, available data and evidence
+                                ↓
+2. ROUTE TO THE RIGHT PATH
+   ┌────────────────────┬────────────────────┬─────────────────────┐
+   │ GeoX / Experiment  │ MMM                │ Existing Evidence   │
+   │ readiness          │ readiness          │ retrieve prior      │
+   │ → design           │ → fit / diagnose   │ evidence/artifacts  │
+   │ → inference        │ → portfolio view   │ → provenance/trust  │
+   │ → governed lift    │ → decision surface │ → assess sufficiency│
+   └──────────┬─────────┴──────────┬─────────┴──────────┬──────────┘
+              └────────────────────┼─────────────────────┘
+                                   ↓
+3. RECONCILE AND GOVERN EVIDENCE
+   Scope / estimand alignment
+   → quality, provenance, freshness, uncertainty and compatibility
+   → calibration eligibility when relevant
+     (eligible GeoX evidence crosses to MMM only as CalibrationSignal)
+   → TrustReport / decision eligibility
+                                   ↓
+4. ANSWER THE USER NEED
+   ┌───────────────────┬───────────────────┬──────────────────────┐
+   │ Measurement       │ Planning          │ Evidence insufficient│
+   │ causal evidence,  │ eligible scenario │ explain what is       │
+   │ uncertainty and   │ comparison,       │ missing; identify the │
+   │ support           │ trade-offs/context│ right next measurement│
+   └─────────┬─────────┴─────────┬─────────┴──────────┬───────────┘
+             └───────────────────┼────────────────────┘
+                                 ↓
+5. EXPLAIN AND CONTINUE LEARNING
+   AI + MIP explain evidence used, uncertainty, blockers, trade-offs,
+   trust / eligibility and the recommended next action
+                                 ↓
+   A new question or material uncertainty may return to assessment / routing
 ```
 
-The conversational layer can ask about the KPI and business objective,
-channels, geography, population, time horizon, available spend/outcome/control
-data, planning constraints, and any existing experiments or models. It then
-routes to the appropriate governed workflow rather than trying to answer every
-question from language alone.
+GeoX owns experiment design, assignment, inference, and causal-lift truth. MMM
+owns fitting, diagnostics, calibration application, simulation, optimization,
+and MMM numerical truth. Existing evidence may answer the question without
+forcing a new model run or experiment; MIP coordinates and explains these
+governed paths rather than replacing their analytical authority.
 
 ## Example decision journeys
 
@@ -345,29 +316,135 @@ describe direction, not shipped capability.
 
 ## Demo and quick start
 
+### Hosted demo — try this first
+
 Open the
-[hosted deterministic demo](https://marketingintelligenceplatform.streamlit.app/)
-or run the canonical app locally with Python 3.11+ and Poetry:
+[hosted deterministic demo](https://marketingintelligenceplatform.streamlit.app/).
+It uses synthetic fixtures and no production data. It demonstrates governed
+intake, advisory, readiness, evidence routing, profiling, and calibration
+mapping; it does not run live MMM, GeoX, or LLM inference.
+
+A useful first review takes only a few minutes:
+
+1. In **Measurement copilot**, try “Should I use MMM, GeoX, or both?” to see how
+   the deterministic assistant explains method choice and its limits.
+2. Open the preloaded **SaaS growth-planning example** and move through its
+   measurement stages. Inspect the evidence, uncertainty, readiness, blocking
+   reasons, and required next artifact rather than treating fixture outputs as
+   live analysis.
+3. Switch to **Advanced tools** and compare a readiness report or calibration
+   mapping case that succeeds with one that is blocked. Cold-start advisory,
+   demo profiling, and intake-overview examples are available there too.
+
+The public app accepts no file uploads, persists no uploaded data, calls no
+external service, and has no configured LLM provider. Its responses are
+deterministic governed demonstrations—not production measurement decisions.
+
+### Local prerequisites and installation
+
+You need Git, [Poetry](https://python-poetry.org/docs/#installation), and Python
+`>=3.11,<4.0`. Clone and install the project from a clean directory:
 
 ```bash
+git clone https://github.com/Phani-Pavuluri/marketing_intelligence_platform.git
+cd marketing_intelligence_platform
 poetry install
+```
+
+### Run the canonical Streamlit app
+
+```bash
 poetry run streamlit run app/streamlit_app.py
 ```
 
-The canonical app at `app/streamlit_app.py` runs in deterministic mode with
-synthetic/demo fixtures. It requires no LLM provider, API key, database, or
-external service and does not execute MMM or GeoX inference.
+Streamlit normally opens `http://localhost:8501`. The canonical app runs with
+the same synthetic fixtures as the hosted demo. After launch:
 
-The older `poetry run mip-app` entrypoint remains for backward compatibility
-with the legacy workflow shell. For the deterministic JSON/CLI workflow, use
-`poetry run mip-demo --help`.
+1. Use a starter prompt to understand available workflows or required data.
+2. Activate the SaaS sample journey and inspect why later planning steps remain
+   blocked.
+3. Open **Advanced tools** to compare cold-start, readiness, calibration,
+   profiling, and intake cases.
 
-The repository also includes a local deterministic FastAPI shell:
+Deterministic mode requires no LLM provider, API key, database, or external
+service. It persists no uploaded data and executes neither live MMM fitting nor
+live GeoX inference.
+
+### Use the deterministic FastAPI interface
+
+Developers and integrators can inspect the shared deterministic workflow layer
+through a local API:
 
 ```bash
 poetry run uvicorn mip.service.app:app --reload --host 127.0.0.1 --port 8000
-curl http://127.0.0.1:8000/health
 ```
+
+In another terminal, check service metadata and run a fixture-backed readiness
+assessment:
+
+```bash
+curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/version
+curl -X POST http://127.0.0.1:8000/readiness/assess \
+  -H 'Content-Type: application/json' \
+  -d '{"sample_key":"national_mmm_ready_geox_blocked"}'
+```
+
+The service also exposes interactive OpenAPI documentation at
+`http://127.0.0.1:8000/docs`.
+
+| Method and route | Deterministic request body | Purpose |
+| --- | --- | --- |
+| `POST /advisory/cold-start` | `{"sample_key":"dtc_skincare_ecommerce"}` | Build a fixture-backed advisory plan |
+| `POST /readiness/assess` | `{"sample_key":"national_mmm_ready_geox_blocked"}` | Report structural workflow readiness and blockers |
+| `POST /calibration/map` | `{"sample_key":"valid_governed_evidence"}` | Demonstrate governed calibration mapping |
+| `POST /intake/overview` | `{"example_key":"national_mmm_diagnostic"}` | Explain deterministic workflow routing |
+
+These routes are advisory and non-production: their governance responses report
+that measurement-engine execution, LLMs, external services, persistence, and
+production connectors are disabled.
+
+### Use the Python package
+
+Notebooks and Python applications can call the same workflow layer directly:
+
+```python
+from mip.service.workflows import run_readiness_assess
+
+result = run_readiness_assess("national_mmm_ready_geox_blocked")
+print(result.model_dump_json(indent=2))
+```
+
+### CLI and contributor validation
+
+The existing CLI runs the deterministic JSON-file workflow; inspect its input
+options with:
+
+```bash
+poetry run mip-demo --help
+```
+
+The older `poetry run mip-app` entrypoint remains for backward compatibility
+with the legacy Streamlit workflow shell. The root
+`app/streamlit_app.py` command is canonical.
+
+Contributors can use the repository's existing validation targets:
+
+```bash
+make validate-host              # run the validation suite on the host
+make validate                   # run the Docker-backed validation suite
+make validate-docker            # explicit alias for Docker-backed validation
+make validate-public-deployment # verify public-demo installation/readiness
+```
+
+### Current limitations
+
+The hosted and local experiences are deterministic demonstrations. They do not
+provide live certified GeoX execution, a generally available live MMM fitting
+or calibration path, production budget optimization or recommendations, real
+production-data integration, or a fully live LLM-backed workflow. See
+[implementation maturity](#current-version-and-implementation-maturity) for the
+current boundary.
 
 See the [public deployment record](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md),
 [deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md), and
