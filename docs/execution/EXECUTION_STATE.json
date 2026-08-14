@@ -7,12 +7,12 @@
   "base_branch": "main",
   "base_sha": "fb3d4448c29eea5387e102777bf6bc1981ad6208",
   "task_authoring_start_sha": "fb3d4448c29eea5387e102777bf6bc1981ad6208",
-  "task_authoring_head_sha": null,
-  "authorization_head_sha": null,
+  "task_authoring_head_sha": "fc5124e88d6f7bae58236eaa07d06c45d7d3ef16",
+  "authorization_head_sha": "fc5124e88d6f7bae58236eaa07d06c45d7d3ef16",
   "authorization_head_convention": "first_main_commit_establishing_authorized_task_contract_then_immutable_provenance_recorded_by_metadata_only_finalization",
   "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_feature_branch_head",
   "feature_branch": "docs/mip-root-readme-product-story-refinement-001",
-  "feature_branch_created": false,
+  "feature_branch_created": true,
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": true,
@@ -86,5 +86,5 @@
   "review_decision": "authorized",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "prompt_strategy": "invocation_only_from_git_authored_task",
-  "task_authoring_note": "Task authoring and authorization only. README implementation does not exist. Authorization provenance is finalized by a second metadata-only main commit before feature-branch creation."
+  "task_authoring_note": "Task authoring and authorization only. README implementation does not exist. Immutable authorization provenance is the first task-contract commit; the feature branch is created from the later synchronized metadata-finalized main and must descend from that provenance."
 }

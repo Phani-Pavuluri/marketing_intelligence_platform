@@ -4,6 +4,7 @@
 - **Current decision:** `authorized`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Pre-authoring base:** `fb3d4448c29eea5387e102777bf6bc1981ad6208`
+- **Authorization provenance:** `fc5124e88d6f7bae58236eaa07d06c45d7d3ef16`
 - **Feature branch:** `docs/mip-root-readme-product-story-refinement-001`
 - **Risk tier:** Tier 1
 - **Compatibility/migration policy:** `not_applicable`
@@ -26,10 +27,11 @@ behavior, architecture, program state, sibling repository, or authority.
 
 ## Authorization provenance and branch baseline
 
-The first task-contract commit is immutable `authorization_head_sha`
-provenance. Because a Git commit cannot contain its own SHA, this initial
-authorization record temporarily leaves that field null. One subsequent
-metadata-only commit must populate it with the first commit SHA.
+The first task-contract commit,
+`fc5124e88d6f7bae58236eaa07d06c45d7d3ef16`, is immutable
+`authorization_head_sha` provenance. Because a Git commit cannot contain its
+own SHA, that initial authorization record contained a null self-reference.
+This subsequent metadata-only finalization records the first commit SHA.
 
 The feature branch is created only after finalization, from synchronized final
 `main`. Its starting head must descend from immutable authorization provenance,
@@ -51,10 +53,14 @@ dependency, CI/Docker, data, or sibling surface is changed.
 
 ## Validation classification
 
-- Metadata JSON parsing: required during finalization.
-- Stable-file coherence/governance test: required during finalization.
-- `git diff --check`: required during finalization.
-- Authoring-boundary and README-unchanged checks: required during finalization.
+- `python3 -m json.tool docs/execution/EXECUTION_STATE.json >/dev/null`:
+  passed.
+- `poetry run pytest -q tests/governance/test_repo_native_execution_handoff.py tests/test_cross_repository_coordination_control_plane.py`:
+  passed, `2 passed in 0.01s`.
+- `git diff --check`: passed.
+- Authoring-boundary check: passed; only the three stable execution files
+  differ from immutable authorization provenance during finalization.
+- README-unchanged check against pre-authoring base: passed.
 - Full pytest, Ruff, mypy, and Docker `make validate`: `not_required` for this
   Tier-1 metadata-authoring session.
 - README story/link/entrypoint tests: deferred to task execution because no

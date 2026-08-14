@@ -5,6 +5,7 @@
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 **Local path:** `/Users/phani/Desktop/marketing_intelligence_platform`
 **Pre-authoring base:** `fb3d4448c29eea5387e102777bf6bc1981ad6208`
+**Authorization provenance:** `fc5124e88d6f7bae58236eaa07d06c45d7d3ef16`
 **Feature branch:** `docs/mip-root-readme-product-story-refinement-001`
 **Execution mode:** `branch_and_fast_forward`
 **Risk tier:** Tier 1 — routine repository-local documentation
@@ -29,12 +30,13 @@ door rather than a useful standalone checkpoint.
 
 ## Authorization provenance convention
 
-`authorization_head_sha` identifies the first commit on `main` that establishes
-this authorized task contract. That commit may contain a null self-reference;
-a subsequent metadata-only commit records the first commit SHA. The recorded
-SHA is immutable authorization provenance and must never be replaced by the
-metadata-finalization commit, feature-branch head, implementation head, or
-review head.
+`authorization_head_sha` identifies
+`fc5124e88d6f7bae58236eaa07d06c45d7d3ef16`, the first commit on `main` that
+establishes this authorized task contract. That commit contained a null
+self-reference; this subsequent metadata-only commit records the first commit
+SHA. The recorded SHA is immutable authorization provenance and must never be
+replaced by the metadata-finalization commit, feature-branch head,
+implementation head, or review head.
 
 Create the feature branch only from synchronized metadata-finalized `main`.
 That finalized branch baseline must descend from immutable authorization
