@@ -1,9 +1,11 @@
 # Marketing Intelligence Platform (MIP)
 
-MIP is a causal marketing intelligence platform and control plane that connects
-incrementality measurement, experimentation, marketing mix modeling (MMM),
-calibration, budget and scenario planning, governed decision workflows, and
-conversational AI.
+MIP connects marketing mix modeling (MMM) and causal experimentation into a
+continuous measurement and planning system. MMM provides the portfolio view;
+targeted experiments provide stronger causal evidence where observational
+measurement is uncertain. MIP carries compatible learning into future
+measurement and planning, while AI helps people navigate the workflow without
+becoming the analytical authority.
 
 **Try the public demo:**
 [marketingintelligenceplatform.streamlit.app](https://marketingintelligenceplatform.streamlit.app/)
@@ -12,44 +14,51 @@ conversational AI.
 > with synthetic/demo data while live analytical and LLM integrations continue
 > to mature.
 
-Experiments strengthen what MMM can learn. MMM reveals where uncertainty
-matters for planning. MIP coordinates that learning loop, while AI makes the
-workflow accessible.
-
 ## Why MIP exists
 
-Marketing teams rarely have a single source of causal truth. MMM measures the
-portfolio: it helps explain how channels work together and supports planning
-across the full media mix. But because MMM learns from observational data, some
-channel estimates can remain uncertain, correlated, or sensitive to modeling
-assumptions.
+Marketing planning starts with the broad portfolio view. MMM helps teams
+understand how channels work together and compare choices across the media mix.
+Because it relies heavily on observational variation, however, some channel
+estimates can remain uncertain, correlated, or weakly identified.
 
-Controlled geo and incrementality experiments answer a different kind of
-question. They can provide stronger causal evidence about the lift created by a
-specific channel, campaign, population, geography, or period—but they are
-narrower than the portfolio view and do not answer every planning question.
+Those uncertainties reveal where stronger causal evidence would be useful.
+Targeted geo and incrementality experiments answer narrower questions about a
+specific channel, campaign, population, geography, or period. When that
+evidence is high quality and compatible with the model's scope, it can return
+through MIP's governed calibration bridge. MMM—not MIP—then applies the eligible
+evidence through MMM-owned fitting and calibration behavior.
 
-MIP connects these two evidence systems instead of leaving experiment results
-in one workflow and planning models in another. Compatible experiment evidence
-can provide causal anchors for MMM. In the other direction, weak or uncertain
-MMM evidence can reveal where a targeted experiment would be most valuable.
+The stronger portfolio model can support better-informed scenario and planning
+decisions. Whatever remains uncertain becomes the next measurement question.
+MIP coordinates this learning cycle, and AI makes it easier for users to frame
+the question, follow the evidence, and understand the next action.
 
 ```text
-Measure
-   ↓
-Identify uncertainty
-   ↓
-Experiment
-   ↓
-Learn causal lift
-   ↓
-Calibrate / improve MMM
-   ↓
-Plan
-   ↓
-Identify the next measurement gap ──────────┐
-   ↑                                        │
-   └────────────────────────────────────────┘
+Business / portfolio question
+              ↓
+MMM provides the current portfolio view
+              ↓
+Assess what is known confidently and what remains uncertain
+              ↓
+If evidence is weak, identify the material measurement gap
+              ↓
+Design and run a targeted experiment
+              ↓
+GeoX produces governed causal lift evidence
+              ↓
+Check quality, scope, uncertainty, freshness, and compatibility
+              ↓
+Eligible evidence becomes CalibrationSignal
+              ↓
+MMM applies calibration through MMM-owned numerical behavior
+              ↓
+Updated, eligible MMM evidence supports scenarios and planning
+              ↓
+Observe remaining uncertainty or new business questions
+              ↓
+Identify the next measurement gap ───────────────────────────┐
+              ↑                                              │
+              └──────────────────────────────────────────────┘
 ```
 
 The result is a continuous learning system: stronger causal anchoring where
@@ -99,29 +108,52 @@ The experience begins with a business question, not a model configuration.
 
 ```text
 User asks a business question
-            ↓
-MIP + AI understand the objective
-            ↓
-Ask clarifying questions and identify missing data
-            ↓
-Choose the measurement or planning workflow
-            ↓
-   ┌────────────────┬──────────────────┬──────────────────┐
-   │ Experiment path│ MMM path         │ Existing evidence│
-   │ GeoX design /  │ measurement /    │ prior experiments│
-   │ incrementality │ scenario analysis│ and model outputs│
-   └────────┬───────┴─────────┬────────┴─────────┬────────┘
-            └─────────────────┼──────────────────┘
-                              ↓
-Reconcile evidence and check compatibility, quality, and trust
-                              ↓
-      ┌───────────────────────┴────────────────────────┐
-      │ Evidence is sufficient   Evidence is incomplete│
-      │ → support the decision   → identify what is     │
-      │                          missing / what to test  │
-      └───────────────────────┬────────────────────────┘
-                              ↓
-Explain the result, uncertainty, trade-offs, and next action
+  ↓
+AI + MIP understand the objective
+  ↓
+Clarify KPI, channels, geography / population, time horizon,
+constraints, and available data or evidence
+  ↓
+Build the required measurement or decision plan
+  ↓
+┌────────────────────────┬────────────────────────┬────────────────────────┐
+│ Experiment / GeoX path │ MMM path               │ Existing-evidence path │
+│                        │                        │                        │
+│ Check experiment and   │ Check data and model   │ Retrieve prior         │
+│ data readiness         │ readiness              │ experiments            │
+│          ↓             │          ↓             │          ↓             │
+│ Design / assignment    │ MMM-owned fitting and  │ Retrieve eligible MMM  │
+│ when needed            │ diagnostics            │ and model artifacts    │
+│          ↓             │          ↓             │          ↓             │
+│ GeoX inference         │ Current portfolio      │ Retrieve prior trust   │
+│          ↓             │ measurement            │ and provenance         │
+│ Governed experiment    │          ↓             │          ↓             │
+│ readout                │ Eligible MMM decision  │ Decide whether existing│
+│                        │ surfaces               │ evidence answers the Q │
+└────────────┬───────────┴────────────┬───────────┴────────────┬───────────┘
+             └────────────────────────┼────────────────────────┘
+                                      ↓
+Normalize scope and estimand; check lineage, freshness, uncertainty,
+quality, and compatibility
+                                      ↓
+Determine whether experiment evidence is calibration-eligible
+  → if eligible: CalibrationSignal enters MMM-owned calibration behavior
+  → if not eligible: preserve relevant evidence as decision context
+                                      ↓
+Assemble trust and evaluate decision eligibility
+                                      ↓
+┌──────────────────────┬────────────────────────┬─────────────────────────┐
+│ Measurement answer   │ Planning answer        │ Evidence insufficient   │
+│ Explain causal lift  │ Compare eligible       │ Identify what is missing│
+│ and supporting       │ full-panel Δμ scenario │ and recommend additional│
+│ evidence             │ surfaces               │ measurement / experiment│
+└──────────┬───────────┴────────────┬───────────┴────────────┬────────────┘
+           └────────────────────────┼────────────────────────┘
+                                    ↓
+AI + MIP explain the result, evidence used, uncertainty, trade-offs,
+blockers, and recommended next action
+                                    ↓
+Return the result to the continuous learning loop
 ```
 
 The conversational layer can ask about the KPI and business objective,
@@ -196,22 +228,35 @@ Evidence is insufficient
   → feed the new learning into a future planning cycle
 ```
 
-Together, the journeys form the broader loop: **experiment → model → planning →
-next experiment**.
+### D. Measurement strategy / cold start
+
+**“We want to evaluate a new channel. What should we measure first?”**
+
+```text
+Business objective
+  → clarify the KPI, geography, and decision to be made
+  → inspect historical data and existing evidence
+  → assess whether MMM, an experiment, or more data collection is feasible
+  → identify missing information
+  → recommend the next measurement workflow
+```
+
+Together, the journeys form the broader loop: **choose what to measure →
+experiment → model → plan → choose the next measurement**.
 
 ## Core capabilities
 
 | Capability | What MIP does | Why it matters |
 | --- | --- | --- |
-| Objective and data guidance | Clarifies the decision, KPI, grain, history, controls, geography, and required inputs | Starts with the business decision and exposes missing information early |
-| Channel incrementality | Connects a channel question to existing causal evidence or an appropriate experiment path | Separates causal lift from descriptive attribution |
-| Experiment orchestration | Coordinates readiness, evidence intake, and governed handoff to/from GeoX | Makes targeted learning part of the measurement workflow |
-| MMM measurement | Routes eligible data and artifacts to MMM-owned measurement and diagnostics | Preserves a portfolio view across channels without moving model truth into MIP |
-| Experiment-to-MMM calibration | Checks whether experiment evidence is suitable to inform MMM and passes eligible evidence through the governed bridge | Adds causal anchors without blindly forcing narrow experiments into a broader model |
-| Evidence compatibility and trust | Checks quality, uncertainty, freshness, lineage, scope, and release conditions | Prevents weak or mismatched evidence from silently becoming decision-grade |
-| Scenario planning | Coordinates baseline/candidate plans and eligible MMM decision surfaces | Supports counterfactual trade-offs using producer-owned numerical results |
-| Measurement-gap detection | Identifies uncertainty or missing evidence and suggests what should be measured next | Turns “we do not know” into a concrete learning agenda |
-| Conversational decision support | Guides intake, connects relevant evidence, and explains results, blockers, and next actions | Makes sophisticated measurement workflows usable without hiding their limits |
+| Business decision framing | Clarifies the objective, KPI, channels, geography, time horizon, and constraints | Starts from the decision the user needs to make rather than a model configuration |
+| Data and evidence readiness | Checks required history, grain, spend, outcomes, controls, and available analytical artifacts | Exposes missing or unusable inputs before they undermine the workflow |
+| Measurement-gap and workflow selection | Identifies the material uncertainty and routes to existing evidence, MMM, GeoX, or additional data collection | Directs effort toward the evidence most likely to improve the decision |
+| Incrementality and targeted experimentation | Coordinates readiness and governed handoffs while GeoX owns design, assignment, inference, and lift | Turns a narrow causal question into usable experiment evidence without moving numerical truth into MIP |
+| Evidence reconciliation and calibration eligibility | Checks scope, estimand, quality, uncertainty, freshness, lineage, and compatibility throughout the workflow, then passes only eligible evidence through the governed bridge | Adds causal anchors without forcing every experiment into a broader model |
+| MMM portfolio measurement | Routes eligible data and calibration evidence to MMM-owned fitting, diagnostics, and portfolio measurement | Builds or refreshes the cross-channel view needed for planning while MMM retains numerical authority |
+| Scenario and budget planning | Coordinates baselines, candidate plans, constraints, and eligible MMM-owned decision surfaces | Supports counterfactual trade-offs using producer-owned full-panel Δμ results |
+| Trust and decision eligibility | Applies governance and release checks throughout, then assembles the sole trust verdict for the proposed use | Prevents weak, stale, or mismatched evidence from silently becoming decision-grade |
+| Explanation and next action | Connects the evidence, explains results and blockers, and recommends the next measurement or decision step | Makes sophisticated workflows usable while keeping uncertainty and authority visible |
 
 ### Technical foundations
 
