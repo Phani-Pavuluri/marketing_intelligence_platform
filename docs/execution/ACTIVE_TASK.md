@@ -1,11 +1,13 @@
 # Active Task
 
-**Status:** authorized
+**Status:** ready_for_review
 **Task ID:** `MIP_ROOT_README_EXTERNAL_REVIEW_CLARITY_AND_ONBOARDING_POLISH_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 **Local path:** `/Users/phani/Desktop/marketing_intelligence_platform`
 **Pre-authoring base:** `7c6708d602093d415c0063e8607c19cdaff4b9a5`
 **Authorization provenance:** `3792368d819fff363b908e5f2168bef766e8ded8`
+**Finalized branch baseline:** `8db4178cf719526ecd66275031faa8f1360256be`
+**Implementation commit:** `8722095e49b020b9165c75249b2f2724102354d5`
 **Feature branch:** `docs/mip-root-readme-external-review-clarity-and-onboarding-polish-001`
 **Execution mode:** `branch_and_fast_forward`
 **Risk tier:** Tier 1 — routine repository-local documentation
