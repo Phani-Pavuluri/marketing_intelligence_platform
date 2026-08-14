@@ -1,12 +1,13 @@
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 **Task ID:** `MIP_ROOT_README_INFORMATION_ARCHITECTURE_REFRESH_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 **Local path:** `/Users/phani/Desktop/marketing_intelligence_platform`
 **Pre-authoring base:** `a293ce52a813709ca624332123019139928cc51e`
 **Authorization provenance:** `81b4d9934e59f8fd1bbe70e48d61cc2c199967d0`
 **Implementation commit:** `c8cc22b020995ef01bde6bede87dfceaecc6d623`
+**Reviewed and merged head:** `99e3dabc962594a319ca37198fbc1665af48ceb0`
 **Feature branch:** `docs/mip-root-readme-information-architecture-refresh-001`
 **Execution mode:** `branch_and_fast_forward`
 **Risk tier:** Tier 1 — routine repository-local documentation
@@ -230,9 +231,28 @@ The README-only implementation is complete at
 the frozen publication tree: all relative links resolved, the required heading
 order and entrypoints were verified, `git diff --check` passed, and the focused
 README/deployment/documentation plus execution-coherence tests passed. The
-durable publication receipt is the exact remote feature-branch head after push;
-`reviewed_head_sha` remains null until external review.
+durable publication receipt `99e3dabc962594a319ca37198fbc1665af48ceb0`
+was externally approved, passed exact-head validation, and was fast-forwarded
+to `main`. The same Tier-1 gate passed after the fast-forward. Local and remote
+feature-branch deletion were observed before closure.
 
 No product, source, test, fixture, architecture, roadmap, governance, P2
 program, sibling-repository, analytical, runtime, planning, recommendation,
 pilot, production, merge, or PR authority changed.
+
+## Merge closure
+
+- Approval source: external user approval naming exact remote head
+  `99e3dabc962594a319ca37198fbc1665af48ceb0`.
+- Merge method: `git merge --ff-only`; no merge commit.
+- Main lineage: `bafdc423a383ecc32453298bf94230b86d5b660a` →
+  `99e3dabc962594a319ca37198fbc1665af48ceb0` → this metadata-only closure
+  commit.
+- Exact-head gate: 30 relative links resolved, 12 headings ordered, entrypoint
+  and Poetry-script checks passed, JSON/diff checks passed, and `33 passed`.
+- Post-fast-forward gate: the same checks passed and `33 passed`.
+- Cleanup: remote and local
+  `docs/mip-root-readme-information-architecture-refresh-001` branches were
+  deleted and their absence observed.
+- Authority impact: none. Task execution, correction, merge, and PR authority
+  are closed; capability authority remains unchanged.
