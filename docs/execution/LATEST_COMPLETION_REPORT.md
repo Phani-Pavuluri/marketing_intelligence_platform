@@ -1,7 +1,7 @@
-# MIP Root README External-Review Clarity and Onboarding Polish — Ready for Review
+# MIP Root README External-Review Clarity and Onboarding Polish — Merged
 
 - **Milestone:** `MIP_ROOT_README_EXTERNAL_REVIEW_CLARITY_AND_ONBOARDING_POLISH_001`
-- **Current decision:** `ready_for_review`
+- **Current decision:** `merged`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Pre-authoring base:** `7c6708d602093d415c0063e8607c19cdaff4b9a5`
@@ -9,7 +9,7 @@
 - **Finalized branch baseline:** `8db4178cf719526ecd66275031faa8f1360256be`
 - **Feature branch:** `docs/mip-root-readme-external-review-clarity-and-onboarding-polish-001`
 - **Implementation commit:** `8722095e49b020b9165c75249b2f2724102354d5`
-- **Exact published review head:** resolved from the remote feature-branch ref
+- **Approved and reviewed head:** `e212751158b008b2b6bb1bc53f574362d8c301d4`
 - **Risk tier:** Tier 1
 - **Compatibility/migration policy:** `not_applicable`
 
@@ -156,5 +156,43 @@ eligible and unauthorized. GeoX certification, MMM implementation,
 recommendations, runtime integration, real data, pilot, and production remain
 unauthorized.
 
-No validation debt or blocker remains for this Tier-1 milestone. No PR or merge
-was created. The branch is ready for exact-head external review.
+No validation debt or blocker remains for this Tier-1 milestone. No PR was
+created.
+
+## Merge and closure
+
+- **Approval provenance:** the user externally approved exact remote head
+  `e212751158b008b2b6bb1bc53f574362d8c301d4`.
+- **Authorization provenance:** immutable
+  `3792368d819fff363b908e5f2168bef766e8ded8`.
+- **Reviewed head:** `e212751158b008b2b6bb1bc53f574362d8c301d4`.
+- **Implementation commit:** `8722095e49b020b9165c75249b2f2724102354d5`.
+- **Merge method:** fast-forward only; `main` advanced from
+  `8db4178cf719526ecd66275031faa8f1360256be` to the exact reviewed head. No
+  merge commit, squash, rebase, force-push, or cherry-pick occurred.
+- **Exact-head validation:** JSON and `git diff --check` passed; all 31 relative
+  links resolved; Why branches, convergence, assessment return, and no-self-loop
+  checks passed; five user-job groups passed; the system visual retained five
+  stages, three paths, and three outcomes while shrinking from 60 to 50 lines;
+  10 commands, six API requests, the Python example, and CLI help passed;
+  focused tests reported `105 passed` with one existing Starlette/httpx
+  deprecation warning.
+- **Post-fast-forward validation:** the same Tier-1 gate passed; focused tests
+  again reported `105 passed` with the same existing warning.
+- **Closure-metadata validation:** execution-state JSON parsing and
+  `git diff --check` passed; execution-handoff and coordination-coherence tests
+  reported `2 passed`; the closure diff contains exactly the three stable
+  execution files.
+- **GitHub-observed evidence:** the remote feature branch equaled the approved
+  head before merge; pushed `origin/main` equaled the reviewed head; remote
+  feature-branch deletion was observed.
+- **Locally observed evidence:** local `main` equaled the reviewed head after
+  fast-forward; both Tier-1 gates passed; local feature-branch deletion was
+  observed.
+- **Validation not run:** full pytest, Ruff, mypy, and Docker-backed
+  `make validate` were `not_required` by the Tier-1 gate.
+- **Blockers and validation debt:** none.
+- **Authority impact:** none. Task execution, correction, merge, and PR
+  authority are false. No product, analytical, runtime, planning,
+  recommendation, real-data, sibling, coordination, capability, pilot, or
+  production authority changed. The P2 sequence remains unchanged.
