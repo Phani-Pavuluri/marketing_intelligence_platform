@@ -1,100 +1,221 @@
 # Active Task
 
-**Status:** merged
-**Task ID:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
+**Status:** authorized
+**Task ID:** `MIP_ROOT_README_INFORMATION_ARCHITECTURE_REFRESH_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
-**Feature branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
+**Local path:** `/Users/phani/Desktop/marketing_intelligence_platform`
+**Pre-authoring base:** `a293ce52a813709ca624332123019139928cc51e`
+**Feature branch:** `docs/mip-root-readme-information-architecture-refresh-001`
 **Execution mode:** `branch_and_fast_forward`
-**Risk tier:** Tier 3
+**Risk tier:** Tier 1 — routine repository-local documentation
+**Compatibility or migration policy:** `not_applicable`
 **Capability authority changed:** `false`
 **Unresolved execution-blocking design questions:** none
 
-## Objective
+## Primary outcome
 
-Create one machine-readable P2 capability-checkpoint ledger and align MIP program-navigation documents. The ledger distinguishes implementation on main, component validation, producer certification, consumer verification, and downstream eligibility. This task does not modify or certify GeoX/MMM, resume the parked bridge, construct CalibrationSignal, alter TrustReport/DecisionSurface, or authorize analytical, runtime, planning, recommendation, real-data, pilot, or production behavior.
+Rewrite the root `README.md` into a clear, progressively layered front door to
+MIP. A new reader must be able to understand what the platform is, why it
+exists, what users can achieve, the governed end-to-end decision flow, the
+MIP/MMM/GeoX architecture and authority boundaries, the LLM's role, current
+implementation maturity, demo and local quick-start paths, and where to find
+deeper documentation.
 
-## Prerequisite evidence
+This is one independently reviewable outcome because it changes one product
+navigation surface and can be validated through focused content, link,
+entrypoint, and changed-path checks. No independently useful product,
+contract, governance, source, test, or sibling-repository change is included.
 
-- MIP main: `c3897ed0b1ca096d186a9cabda36e1b926c4e71f`.
-- MMM main: `fe8e784923994406a2e4907d28debd872d61fd73`.
-- GeoX main: `b11646bab1f461964644a6526ef4967a8f04624d`.
-- Reviewed and rejected remote head: `35e03b2852022ef510f8fff409a06e26f975f29e`.
-- Existing implementation commit: `3727a7973f046a8046f6c349856949c7df1555eb`.
+## Authorization provenance convention
 
-## Owned paths
+`authorization_head_sha` identifies the first commit on `main` that establishes
+this authorized task contract. That commit may contain a null self-reference;
+a subsequent metadata-only commit records the first commit's SHA. The recorded
+SHA is immutable authorization provenance and must never be replaced by the
+metadata-finalization commit, feature-branch head, implementation head, or
+review head.
 
-The task may modify only:
+The feature branch is created from synchronized finalized `main` after the
+metadata-only finalization. That branch baseline must descend from
+`authorization_head_sha`. The diff from authorization provenance through the
+finalized branch baseline may contain only:
 
-- `docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json`
-- `docs/program/PROGRAM_CURRENT_STATE.md`
-- `docs/program/REPOSITORY_CHECKPOINTS.md`
-- `docs/program/NEXT_EXECUTION_SEQUENCE.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `tests/docs/test_p2_capability_checkpoint_ledger.py`
-- `tests/test_cross_repository_coordination_control_plane.py` only for the correction specified below
 - `docs/execution/ACTIVE_TASK.md`
 - `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-Source/runtime code, other tests or fixtures, coordination history/state, standards, CI, Docker, dependencies, MMM, GeoX, and the parked bridge are prohibited.
+No implementation change, including any `README.md` change, may precede branch
+creation. Execution must resolve the finalized branch baseline from Git and
+must not infer or retroactively change authorization provenance.
 
-## Preserved ledger behavior
+## Owned and prohibited paths
 
-Preserve schema `mip_p2_capability_checkpoint_ledger_v1`, the exact current repository pins, seven acyclic capability records, the exact six-item unauthorized execution sequence, and all false authority flags. Preserve paragraph-context-aware historical-pin validation: historical coordination provenance is permitted only when explicitly historical and remains rejected as current state.
+The sole implementation-owned path is:
 
-## Correction cycle 1 of 1 — complete
+- `README.md`
 
-The full Docker gate at rejected head `35e03b2852022ef510f8fff409a06e26f975f29e` failed because `tests/test_cross_repository_coordination_control_plane.py` validates a historical coordination snapshot but also hard-codes `MIP_COORDINATION_POST_MERGE_CLOSURE_RECONCILIATION_001` as the task ID in the mutable current execution files.
+Lifecycle updates to the three stable execution files are permitted only as
+required by the repository execution standard to record `in_progress`,
+`blocked`, or `ready_for_review` state and completion evidence. They are not an
+expansion of the implementation outcome.
 
-Modified only the stale mutable-current-task portion of that test at
-`17edf7aadc7967566cc8fbb2ecbb4be8fb8d29f7`. The correction preserves every
-assertion covering the historical coordination snapshot, historical repository
-pins, workstreams, blockers, ownership, authority, ordered historical sequence,
-protocol, history, and historical provenance.
+Prohibited changes include all product/source code, tests, fixtures, apps,
+contracts, architecture or roadmap documents, governance standards, execution
+standards, CI, dependencies, Docker surfaces, data, analytical/runtime
+behavior, and sibling repositories. Do not modify MMM or GeoX. Do not modify
+the P2 capability ledger, program sequence, authority/freeze matrix, or
+coordination state.
 
-The replacement generic lifecycle-coherence checks require:
+## Required README information architecture
 
-- current `EXECUTION_STATE.json` repository is MIP;
-- current task ID is a non-empty string and appears in `ACTIVE_TASK.md` and `LATEST_COMPLETION_REPORT.md`;
-- current status is represented consistently in the active task and report;
-- `merge_authorized`, `pr_creation_authorized`, and `capability_authorizations_changed` remain false;
-- the test must not require task-specific fields from the superseded closure task, including `current_mip_main_at_review` or `prior_task_closure_sha`.
+The README must be materially shorter and easier to scan than the current
+phase-by-phase ledger. Its narrative must progress approximately in this order:
 
-Historical coordination JSON or documentation was not changed to satisfy the
-test, and the test remains a lifecycle-coherence assertion rather than a simple
-existence check.
+1. **What MIP is** — a concise plain-English definition of the causal marketing
+   intelligence platform/control plane connecting experimentation, channel
+   incrementality, MMM calibration, strategic planning, governed workflows,
+   and a conversational LLM layer.
+2. **Why MIP exists** — the business problem created by disconnected
+   experimentation and MMM workflows, difficult evidence-to-planning
+   translation, weak lineage/governance, and unsafe generic-LLM inference.
+3. **What users can achieve** — concrete decision questions, with present and
+   future support labeled conservatively.
+4. **How MIP works** — one concise, repository-accurate governed flow from
+   business question through intake/readiness, eligible engine evidence,
+   governance/calibration, `TrustReport`, planning surfaces where available,
+   and artifact-grounded explanation. Do not imply an unimplemented live path.
+5. **Example decision journey** — use “Help me plan next quarter's media
+   budget” to show objective interpretation, data/evidence requirements,
+   readiness, eligible MMM/GeoX evidence, governed calibration, available MMM
+   decision surfaces, trust, limitations, and blockers without fabricating
+   statistical outputs.
+6. **MIP / MMM / GeoX architecture** — a concise three-repository authority
+   table: MIP owns orchestration, governance, consumer contracts, reporting,
+   LLM behavior, coordination, and UX; MMM owns fitting, diagnostics,
+   calibration compatibility, simulation/optimization, and MMM numerical
+   truth; GeoX/panel_exp owns experiment design, assignment, inference,
+   governed readouts, handoff eligibility, and experiment numerical truth.
+7. **Core capabilities** — organize by measurement/causal evidence, decision
+   intelligence, governance, and AI interaction rather than implementation
+   phases; label implemented, fixture/demo, in progress, and planned behavior.
+8. **LLM Decision Layer** — center the rule that the LLM chooses how to
+   interact with governed capabilities and explains certified artifacts; it
+   does not create causal or statistical truth. State allowed intake, routing,
+   config-drafting, summarization, explanation, and grounded follow-up roles,
+   plus prohibitions on invented effects, ungoverned inference, hallucinated
+   MMM fitting, calibration authority, trust overrides, gate bypasses, or
+   production approval. Link detailed provider/history material instead of
+   reproducing it.
+9. **Current implementation state** — one compact evidence-backed status table
+   covering governance/contracts, intake/readiness, demo/UI, engine
+   integration, certified GeoX-to-MMM evidence, planning/simulation, and the
+   LLM-backed conversational experience.
+10. **Demo / quick start** — keep the canonical hosted demo prominent and give
+    concise commands that map to real synchronized entrypoints. Explicitly
+    label deterministic, synthetic, fixture, local, and non-production modes.
+11. **Why MIP is different** — distinguish governed causal-engine decision
+    workflows from conventional model outputs and generic AI answers.
+12. **Deeper documentation** — link cleanly to canonical architecture, LLM,
+    local-first deployment, MMM/GeoX integration, contracts/governance,
+    roadmap, and current-program-state sources.
+
+Remove obsolete or redundant phase inventories and stale implementation
+history rather than moving them elsewhere in the README. Preserve useful
+technical depth, canonical terminology, and valid canonical links without
+repeating the product definition.
+
+## Preserved invariants and authority boundaries
+
+- `TrustReport` remains the sole trust verdict.
+- `CalibrationSignal` remains the sole GeoX-to-MMM bridge.
+- Full-panel Δμ remains the sole MMM decision surface.
+- MIP does not recompute or supersede MMM or GeoX numerical truth.
+- The LLM cannot create analytical authority, override trust, bypass gates, or
+  approve production recommendations.
+- Every capability claim must be verified against synchronized repository
+  code, tests, fixtures, canonical documents, and current program evidence.
+- Current, fixture/demo, in-progress, and planned behavior must be explicitly
+  distinguished; ambiguity must be resolved with conservative wording.
+- Valid hosted-demo and canonical documentation links must be preserved.
+- Local quick-start commands must be verified against real entrypoints and
+  package configuration rather than copied from stale prose.
+- Dashboards/reports, live engine execution, fixture versus live integration,
+  LLM-provider support, public versus local demo behavior, and GeoX/MMM
+  producer-consumer readiness require explicit reconciliation.
+
+This task does not authorize or alter
+`GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001`, GeoX
+certification, MMM implementation, the parked MIP GeoX/MMM bridge,
+`CalibrationSignal` construction, simulation, optimization, planning,
+recommendations, runtime integration, real data, pilot, or production. The P2
+capability ledger and its six-item sequence remain unchanged; the current GeoX
+milestone remains next eligible and unauthorized.
+
+## Acceptance evidence
+
+The completed README must let a new reader answer, in order: what MIP is; why
+it exists; which business questions it addresses; what the experience looks
+like; how the system works; what MIP, MMM, and GeoX own; why the LLM is not the
+analytical authority; what exists today; how to see or run it; and where deeper
+technical detail lives.
+
+Execution must provide deterministic evidence that:
+
+- all relative Markdown links in `README.md` resolve to repository paths;
+- the hosted demo link is retained if still canonical;
+- displayed commands correspond to synchronized entrypoints/configuration;
+- the required sections occur in the intended progressive order;
+- planned behavior is not represented as shipped;
+- the three project invariants above are present and unchanged;
+- the implementation-content diff is limited to `README.md`;
+- no product, analytical, runtime, sibling, governance, or capability authority
+  changed.
+
+If synchronized evidence conflicts or cannot establish a claim, use
+conservative wording. A broken required link, stale/nonexistent command,
+misstated authority, scope violation, or failed required validation is a
+fail-closed blocker; do not repair code, tests, or other documentation under
+this task.
 
 ## Required validation
 
-Passed on the correction tree and must be rerun on the exact receipt tree:
+Tier-1 execution, exact-head review, and post-fast-forward validation require:
 
 ```bash
-python3 -m json.tool docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json >/dev/null
-poetry run pytest -q tests/docs/test_p2_capability_checkpoint_ledger.py
-poetry run pytest -q tests/test_cross_repository_coordination_control_plane.py
-poetry run pytest -q tests/docs
-poetry run ruff check tests/docs/test_p2_capability_checkpoint_ledger.py tests/test_cross_repository_coordination_control_plane.py
-poetry run mypy
 git diff --check
-make validate
+git diff -- README.md
+find tests -type f \( -iname '*readme*.py' -o -iname '*documentation*.py' -o -iname '*docs*.py' \) -print
 ```
 
-All required correction-tree gates passed: ledger pytest `5 passed`,
-coordination pytest `1 passed`, documentation pytest `6 passed`, Ruff passed,
-mypy passed across 204 source files, `git diff --check` passed, and Docker
-`make validate` reported `2546 passed, 5 skipped, 1 warning`. Publish
-`ready_for_review` only after the final exact-tree validation receipt is
-created; otherwise publish an evidenced `blocked` state.
+Also perform a focused programmatic relative-link resolution check, an ordered
+heading/structure check, and entrypoint/command existence checks against the
+working tree. Run every relevant existing README/documentation test discovered
+by the command above and report its exact result. JSON-parse the execution
+state after lifecycle updates. Full Docker validation, full-suite pytest, Ruff,
+and mypy are `not_required` because this Tier-1 task changes only Markdown and
+lifecycle metadata, unless synchronized repository rules or a discovered
+repository-authored gate explicitly require them for this surface.
 
-## Git workflow
+Before publication, freeze the task-owned tree and rerun this focused gate on
+the exact tree represented by the durable validation-receipt commit. Any later
+task-owned change requires a new receipt head.
 
-Use the existing feature branch. Commit and push the correction and exact-tree validation receipt. Do not create a PR, merge, squash, rebase, force-push, or merge commit. Do not modify sibling repositories or change analytical, capability, merge, PR, pilot, or production authority.
+## Publication and review workflow
 
-## Closure
+Execute only on `docs/mip-root-readme-information-architecture-refresh-001`
+after verifying its identity, remote equality, and descent from immutable
+authorization provenance. Publish the exact remote feature-branch head with
+status `ready_for_review`, `task_execution_authorized: true`, correction
+authority false, merge/PR authority false, and no capability-authority change.
+Stop for external exact-head review.
 
-Externally approved head `ccc82f3eb62a6cbdbdd877b69bc645e12ce0b913` was
-fast-forwarded to `main`. The implementation is
-`17edf7aadc7967566cc8fbb2ecbb4be8fb8d29f7`. The complete Tier 3 gate passed
-before and after the fast-forward. The local and remote feature branches were
-deleted. No PR, merge commit, sibling modification, or capability-authority
-change occurred.
+Do not create a PR, merge, squash, rebase, force-push, cherry-pick, or merge
+commit. One correction cycle is available only after an explicit review
+decision. Merge requires separate external approval naming the exact remote
+head and the repository's fast-forward/closure workflow.
+
+## Deferred successors
+
+All product, analytical, integration, LLM-provider, planning, recommendation,
+real-data, pilot, production, and sibling-repository work remains deferred and
+requires separate repository-local authoring and authorization.

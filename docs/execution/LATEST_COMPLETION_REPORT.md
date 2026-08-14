@@ -1,84 +1,76 @@
-# MIP P2 Capability Checkpoint Ledger Recovery — Merged
+# MIP Root README Information Architecture Refresh — Authorization
 
-- **Milestone:** `MIP_P2_CAPABILITY_CHECKPOINT_LEDGER_RECOVERY_001`
-- **Branch:** `docs/mip-p2-capability-checkpoint-ledger-recovery-001`
-- **Correction implementation:** `17edf7aadc7967566cc8fbb2ecbb4be8fb8d29f7`
-- **Reviewed and rejected head:** `35e03b2852022ef510f8fff409a06e26f975f29e`
-- **Current decision:** `merged`
-- **Correction cycle:** `1 of 1 complete`
+- **Milestone:** `MIP_ROOT_README_INFORMATION_ARCHITECTURE_REFRESH_001`
+- **Decision:** `authorized`
+- **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
+- **Pre-authoring base:** `a293ce52a813709ca624332123019139928cc51e`
+- **Feature branch:** `docs/mip-root-readme-information-architecture-refresh-001`
+- **Risk tier:** Tier 1
+- **Compatibility/migration policy:** `not_applicable`
+- **Implementation:** none
+- **Task execution:** authorized
+- **Correction, merge, and PR authority:** false
+- **Capability authority:** unchanged
 
-## Behavior implemented
+## Authorized outcome
 
-The P2 capability-checkpoint ledger preserves exact current MIP, MMM, and GeoX
-pins, seven acyclic capability records, the six-item unauthorized sequence,
-and false capability authority. Its governance test permits historical
-coordination provenance only in explicit historical context and rejects stale
-pins when presented as current.
+Rewrite only the root `README.md` as MIP's progressively layered front door:
+product definition, problem, user outcomes, governed workflow, example decision
+journey, three-repository authority model, capability overview, LLM boundaries,
+current implementation state, demo/quick start, differentiation, and canonical
+documentation navigation.
 
-The correction changes only
-`tests/test_cross_repository_coordination_control_plane.py`. It preserves that
-test's immutable historical coordination snapshot checks and replaces the
-obsolete current-task pin with generic checks for MIP repository identity,
-non-empty task identity in all execution files, lifecycle-status coherence, and
-false merge, PR, and capability-authority flags.
+The implementation must replace the current long phase ledger with a shorter,
+capability-oriented narrative while preserving verified technical depth,
+hosted-demo access, real local entrypoints, current maturity labels, and the
+sole-authority invariants for `TrustReport`, `CalibrationSignal`, and full-panel
+Δμ.
 
-## Changed paths
+## Authorization provenance and branch baseline
 
-- `docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json`
-- `docs/program/PROGRAM_CURRENT_STATE.md`
-- `docs/program/REPOSITORY_CHECKPOINTS.md`
-- `docs/program/NEXT_EXECUTION_SEQUENCE.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `tests/docs/test_p2_capability_checkpoint_ledger.py`
-- `tests/test_cross_repository_coordination_control_plane.py`
+The first task-contract commit is immutable `authorization_head_sha`
+provenance. Because a Git commit cannot contain its own SHA, this initial
+authorization record temporarily leaves that field null. One subsequent
+metadata-only commit must populate it with the first commit SHA.
+
+The feature branch is created only after finalization, from synchronized final
+`main`. Its starting head must descend from immutable authorization provenance,
+and the intervening diff may contain only the three stable execution files.
+The branch head is not the authorization identity, and implementation must not
+rewrite authorization provenance.
+
+## Authoring boundary
+
+This authoring session may change only:
+
 - `docs/execution/ACTIVE_TASK.md`
 - `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-## Validation evidence
+`README.md` is not modified during authoring. No product, source, test,
+contract, governance-standard, roadmap, P2 ledger, coordination, sibling, or
+analytical surface is changed.
 
-- `python3 -m json.tool docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json >/dev/null` — passed.
-- `poetry run pytest -q tests/docs/test_p2_capability_checkpoint_ledger.py` — `5 passed`.
-- `poetry run pytest -q tests/test_cross_repository_coordination_control_plane.py` — `1 passed`.
-- `poetry run pytest -q tests/docs` — `6 passed`.
-- `poetry run ruff check tests/docs/test_p2_capability_checkpoint_ledger.py tests/test_cross_repository_coordination_control_plane.py` — passed.
-- `poetry run mypy` — passed: `Success: no issues found in 204 source files`.
-- `git diff --check` — passed.
-- Docker-backed `make validate` — passed: `2546 passed, 5 skipped, 1 warning`.
+## Validation classification
 
-The same gate is rerun on the exact receipt tree before publication. No required
-validation is omitted.
+- Metadata JSON parsing: required during finalization.
+- Stable-file coherence/governance test: required during finalization.
+- `git diff --check`: required during finalization.
+- Authoring-boundary diff: required during finalization.
+- Full pytest, Ruff, mypy, and Docker `make validate`: `not_required` for this
+  Tier-1 metadata authoring session.
+- README/link/entrypoint tests: deferred to task execution because no README
+  implementation exists yet.
 
-## Authority and limitations
+## Authority and sequencing
 
-No product, analytical, runtime, sibling, merge, PR, pilot, production, or
-capability authority changed. MMM and GeoX remain read-only. The parked MIP
-GeoX/MMM bridge remains blocked. No PR or merge was created. The branch is ready
-only for external exact-head review after the durable validation receipt is
-published.
+The P2 capability sequence is unchanged. The next eligible GeoX milestone
+remains `GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001` and
+remains unauthorized. GeoX certification, MMM implementation, the parked MIP
+bridge, `CalibrationSignal`, simulation, optimization, planning,
+recommendations, runtime integration, real data, pilot, and production remain
+unauthorized. Sibling repositories remain read-only; no coordination refresh is
+authorized.
 
-## Closure
-
-- **Approval source:** user-approved exact remote head
-  `ccc82f3eb62a6cbdbdd877b69bc645e12ce0b913`.
-- **Reviewed head:** `ccc82f3eb62a6cbdbdd877b69bc645e12ce0b913`.
-- **Implementation commit:** `17edf7aadc7967566cc8fbb2ecbb4be8fb8d29f7`.
-- **Merge method:** fast-forward only; `main` advanced from
-  `c3897ed0b1ca096d186a9cabda36e1b926c4e71f` to the reviewed head.
-- **Pre-merge validation:** JSON parsing; ledger pytest `5 passed`;
-  coordination pytest `1 passed`; documentation pytest `6 passed`; Ruff;
-  mypy across 204 source files; `git diff --check`; Docker `make validate`
-  `2546 passed, 5 skipped, 1 warning`.
-- **Post-fast-forward validation:** the same commands and results, including
-  Docker `make validate` `2546 passed, 5 skipped, 1 warning`.
-- **GitHub-observed evidence:** the approved remote branch matched the reviewed
-  head before merge; pushed `origin/main` matched the fast-forwarded main.
-- **Locally observed evidence:** all validation commands above passed; local
-  main matched origin/main before closure metadata.
-- **Cleanup:** local feature branch deleted; remote feature branch deleted.
-- **Validation not run / blockers:** none.
-- **Authority impact:** none. MMM and GeoX were not modified; no analytical,
-  runtime, capability, merge, PR, pilot, production, or product authority
-  changed.
-
-No PR and no merge commit were created.
+No PR, merge, squash, rebase, force-push, cherry-pick, or merge commit is
+authorized or created by task authoring.
