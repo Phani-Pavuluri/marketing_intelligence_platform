@@ -1,7 +1,7 @@
-# MIP Root README Product Story Refinement — Ready for Review
+# MIP Root README Product Story Refinement — Merged
 
 - **Milestone:** `MIP_ROOT_README_PRODUCT_STORY_REFINEMENT_001`
-- **Current decision:** `ready_for_review`
+- **Current decision:** `merged`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Pre-authoring base:** `fb3d4448c29eea5387e102777bf6bc1981ad6208`
@@ -9,8 +9,7 @@
 - **Finalized branch baseline:** `889913fb3f071d67d5c04596e384520932f8aa4b`
 - **Feature branch:** `docs/mip-root-readme-product-story-refinement-001`
 - **Implementation commit:** `4b942e94d2da6347b3f89afd7387b4fd1c3823c1`
-- **Published review head:** resolved from the exact remote feature-branch ref
-  after the durable validation-receipt commit is pushed
+- **Approved and reviewed head:** `df59b993cbfc4e0e9ffee363489dbd5097562b43`
 - **Risk tier:** Tier 1
 - **Compatibility/migration policy:** `not_applicable`
 
@@ -143,11 +142,43 @@ The README communicates target platform behavior and reports current maturity
 separately. It does not certify a live engine, provider, planning, or production
 capability. No validation debt or blocker remains for this Tier-1 milestone.
 
-## Review and publication
+## Merge and closure
 
-The branch is ready for external exact-head review after the final receipt is
-pushed and local/remote equality is verified. `reviewed_head_sha` and
-`approval_commit_sha` remain null. Merge and PR authority remain false.
+- **Approval provenance:** the user externally approved exact remote head
+  `df59b993cbfc4e0e9ffee363489dbd5097562b43`.
+- **Authorization provenance:** immutable
+  `fc5124e88d6f7bae58236eaa07d06c45d7d3ef16`.
+- **Reviewed head:** `df59b993cbfc4e0e9ffee363489dbd5097562b43`.
+- **Implementation commit:** `4b942e94d2da6347b3f89afd7387b4fd1c3823c1`.
+- **Merge method:** fast-forward only; `main` advanced from
+  `889913fb3f071d67d5c04596e384520932f8aa4b` to the exact reviewed head.
+- **Exact-head validation:** JSON and `git diff --check` passed; 31 relative
+  links resolved with none missing; 15 headings/journeys and seven required
+  story markers passed; app, CLI, service, and Poetry entrypoints passed; P2
+  surfaces were unchanged; focused tests reported `33 passed in 0.40s`.
+- **Post-fast-forward validation:** the same Tier-1 gate passed; focused tests
+  reported `33 passed in 0.38s`.
+- **Closure-metadata validation:** execution-state JSON parsing and
+  `git diff --check` passed; execution-handoff and coordination-coherence tests
+  reported `2 passed`; the closure diff contains exactly the three stable
+  execution files.
+- **GitHub-observed evidence:** the remote feature branch equaled the approved
+  head before merge; pushed `origin/main` equaled the reviewed head; remote
+  feature-branch deletion was observed.
+- **Locally observed evidence:** local `main` equaled the reviewed head after
+  fast-forward; both validation gates passed; local feature-branch deletion was
+  observed.
+- **Cleanup:** local and remote
+  `docs/mip-root-readme-product-story-refinement-001` branches were deleted.
+- **Validation not run:** full pytest, Ruff, mypy, and Docker `make validate`
+  were `not_required` by the Tier-1 gate.
+- **Blockers/validation debt:** none.
+- **Authority impact:** none. Task execution, correction, merge, and PR
+  authority are false. No product, analytical, runtime, planning,
+  recommendation, real-data, sibling, coordination, capability, pilot, or
+  production authority changed.
 
-No PR, merge, squash, rebase, force-push, cherry-pick, or merge commit was
-created.
+`approval_commit_sha` remains null because approval was external and no
+pre-merge approval-metadata commit was created. This is the sole post-merge
+closure commit. No PR, squash, rebase, force-push, cherry-pick, or merge commit
+was created.
