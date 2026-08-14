@@ -5,7 +5,7 @@
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Pre-authoring base:** `ebe2aae41433bf315f0da999c498d65c92e0030d`
-- **Authorization provenance:** `null` until metadata finalization
+- **Authorization provenance:** `1433a60dde979bae576cd6207e7ec7c4aa26dfee`
 - **Feature branch:** `docs/mip-root-readme-narrative-flow-polish-001`
 - **Risk tier:** Tier 1 — routine repository-local documentation
 - **Compatibility/migration policy:** `not_applicable`
@@ -25,9 +25,10 @@ and trust authority boundaries.
 
 ## Authorization provenance
 
-The first authorization commit may contain `authorization_head_sha: null`
-because it cannot embed its own Git SHA. One later metadata-only commit will
-record that first commit as immutable authorization provenance. The finalized
+The first authorization commit contained `authorization_head_sha: null`
+because it could not embed its own Git SHA. This metadata-only finalization
+records that first commit, `1433a60dde979bae576cd6207e7ec7c4aa26dfee`, as
+immutable authorization provenance. The finalized
 feature-branch baseline must descend from it, and the intervening diff may
 contain only the three stable execution files. No README or implementation
 change may occur before branch creation.
@@ -51,11 +52,19 @@ Only these files may change during task authoring:
 - `docs/execution/EXECUTION_STATE.json`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-Authoring validation requires JSON parsing, `git diff --check`, changed-path
-verification, README unchanged verification, focused execution-state governance
-tests, authorization ancestry, and local/remote equality after publication.
+Authoring validation passed JSON parsing, `git diff --check`, changed-path
+verification, and README unchanged verification. The pre-finalization
+self-reference state produced the expected governance-test result of `1 failed,
+1 passed` because `authorization_head_sha` was temporarily null; the focused
+execution-state governance tests must pass after this SHA is recorded.
+Authorization ancestry and local/remote equality are verified after publication.
 Full pytest, Ruff, mypy, and Docker-backed `make validate` are `not_required`
 for this Tier-1 authoring-only metadata surface.
+
+On the finalized metadata tree, JSON parsing and `git diff --check` passed;
+the changed-path set is exactly the three stable execution files; `README.md`,
+program, architecture, source, and test surfaces are unchanged; and the focused
+execution-handoff and coordination-coherence tests passed: `2 passed in 0.01s`.
 
 ## Authority and program impact
 
