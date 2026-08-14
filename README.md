@@ -1,107 +1,269 @@
 # Marketing Intelligence Platform (MIP)
 
 MIP is a causal marketing intelligence platform and control plane that connects
-experimentation, channel incrementality, MMM calibration, strategic planning,
-governed decision workflows, and conversational AI. It turns analytical
-evidence into explainable decision support without moving causal or statistical
-authority into the application—or into an LLM.
+incrementality measurement, experimentation, marketing mix modeling (MMM),
+calibration, budget and scenario planning, governed decision workflows, and
+conversational AI.
 
-**Try the deterministic public demo:**
+**Try the public demo:**
 [marketingintelligenceplatform.streamlit.app](https://marketingintelligenceplatform.streamlit.app/)
 
-The hosted experience uses synthetic fixtures, calls no MMM or GeoX engine,
-uses no LLM or external service, and requires no secrets or API key. It is a
-portfolio/demo workflow, not a production measurement system.
+> **Current version:** The public experience demonstrates the governed workflow
+> with synthetic/demo data while live analytical and LLM integrations continue
+> to mature.
+
+Experiments strengthen what MMM can learn. MMM reveals where uncertainty
+matters for planning. MIP coordinates that learning loop, while AI makes the
+workflow accessible.
 
 ## Why MIP exists
 
-Experimentation and marketing mix modeling often live in separate workflows.
-An experiment may establish incrementality for one channel and period, while an
-MMM supports broader planning, but teams still have to decide whether the
-evidence is compatible, current, traceable, and strong enough to influence a
-budget decision.
+Marketing teams rarely have a single source of causal truth. MMM measures the
+portfolio: it helps explain how channels work together and supports planning
+across the full media mix. But because MMM learns from observational data, some
+channel estimates can remain uncertain, correlated, or sensitive to modeling
+assumptions.
 
-MIP provides the layer between analytical engines and decision workflows. It
-standardizes evidence and lineage, applies compatibility and release gates,
-routes only eligible artifacts, and makes uncertainty and blockers visible. A
-generic AI assistant cannot safely fill those gaps by inventing lift, fitting a
-model in prose, or upgrading weak evidence. MIP lets an LLM guide and explain
-the governed process while contracts, engines, gates, and human approvals keep
-their authority.
+Controlled geo and incrementality experiments answer a different kind of
+question. They can provide stronger causal evidence about the lift created by a
+specific channel, campaign, population, geography, or period—but they are
+narrower than the portfolio view and do not answer every planning question.
 
-## What users can achieve
+MIP connects these two evidence systems instead of leaving experiment results
+in one workflow and planning models in another. Compatible experiment evidence
+can provide causal anchors for MMM. In the other direction, weak or uncertain
+MMM evidence can reveal where a targeted experiment would be most valuable.
 
-MIP is designed to help teams answer questions such as:
+```text
+Measure
+   ↓
+Identify uncertainty
+   ↓
+Experiment
+   ↓
+Learn causal lift
+   ↓
+Calibrate / improve MMM
+   ↓
+Plan
+   ↓
+Identify the next measurement gap ──────────┐
+   ↑                                        │
+   └────────────────────────────────────────┘
+```
 
-- Which channels are actually incremental?
-- How should eligible experiment evidence affect an MMM?
-- Is the current evidence trustworthy enough for planning?
-- What data, KPI, controls, geography, history, and grain does this question
-  require?
-- What would change under a different spend scenario?
-- Can spend be reallocated next quarter, or is another experiment needed first?
+The result is a continuous learning system: stronger causal anchoring where
+evidence is compatible, better-informed channel-response beliefs, clearer
+planning confidence, and an explicit path to the next measurement action.
+Experiments do not automatically recalibrate a model; quality, uncertainty,
+freshness, and compatibility must be established first.
 
-Today, the repository supports governed intake, data/readiness inspection,
-typed evidence and decision contracts, trust gates, fixture-backed journeys,
-and safe explanations of what is answerable or blocked. Live end-to-end engine
-execution, certified GeoX-to-MMM calibration, numerical planning, optimization,
-and production recommendations remain gated or planned; the demo does not
-fabricate substitutes for them.
+Functionally, **GeoX provides experiment and incrementality truth**, **MMM
+provides portfolio measurement and planning truth**, and **MIP connects both
+into one governed decision workflow**.
+
+## What can you do with MIP?
+
+The product connects a progression of questions that teams usually answer in
+separate tools:
+
+```text
+Measure channel incrementality
+        ↓
+Run targeted experiments where evidence is weak
+        ↓
+Bring compatible lift evidence back into MMM
+        ↓
+Improve channel-response understanding
+        ↓
+Compare alternative spend scenarios
+        ↓
+Plan or reallocate next-quarter budget
+```
+
+That progression supports questions such as:
+
+- Is this channel incremental, and what lift did the campaign cause?
+- Where should we run an experiment next?
+- How should this experiment change what the MMM believes about the channel?
+- Can we move budget between channels?
+- What happens if we follow a different spend plan?
+- How should we plan next quarter?
+
+MIP turns these from isolated analyses into one learning and decision workflow:
+measure, learn, update the evidence base, plan, and decide what to measure next.
 
 ## How MIP works
 
-The governed target flow is:
+The experience begins with a business question, not a model configuration.
 
 ```text
-Business question
-  → objective and data intake
-  → readiness checks and workflow selection
-  → eligible GeoX / MMM engine artifacts
-  → governed evidence and calibration compatibility
-  → TrustReport
-  → eligible simulation / planning / recommendation surfaces
-  → artifact-grounded conversational explanation
+User asks a business question
+            ↓
+MIP + AI understand the objective
+            ↓
+Ask clarifying questions and identify missing data
+            ↓
+Choose the measurement or planning workflow
+            ↓
+   ┌────────────────┬──────────────────┬──────────────────┐
+   │ Experiment path│ MMM path         │ Existing evidence│
+   │ GeoX design /  │ measurement /    │ prior experiments│
+   │ incrementality │ scenario analysis│ and model outputs│
+   └────────┬───────┴─────────┬────────┴─────────┬────────┘
+            └─────────────────┼──────────────────┘
+                              ↓
+Reconcile evidence and check compatibility, quality, and trust
+                              ↓
+      ┌───────────────────────┴────────────────────────┐
+      │ Evidence is sufficient   Evidence is incomplete│
+      │ → support the decision   → identify what is     │
+      │                          missing / what to test  │
+      └───────────────────────┬────────────────────────┘
+                              ↓
+Explain the result, uncertainty, trade-offs, and next action
 ```
 
-Each stage runs only when its inputs and authority exist. In the current public
-demo, the path stops at fixture-backed intake, readiness, mapping, and governed
-explanation. Missing certified engine artifacts produce explicit blockers—not
-synthetic causal effects, ROI, or budget recommendations.
+The conversational layer can ask about the KPI and business objective,
+channels, geography, population, time horizon, available spend/outcome/control
+data, planning constraints, and any existing experiments or models. It then
+routes to the appropriate governed workflow rather than trying to answer every
+question from language alone.
 
-## Example decision journey
+## Example decision journeys
 
-Suppose a user asks: **“Help me plan next quarter's media budget.”**
+These journeys describe how the platform connects evidence and decisions. The
+[current maturity](#current-version-and-implementation-maturity) section below
+distinguishes what is implemented today from the live integrations still in
+progress.
 
-MIP first clarifies the decision objective, KPI, planning horizon, channel
-scope, constraints, and available data. It evaluates whether the data has the
-required time, geography, controls, spend variation, and grain, then identifies
-which MMM or GeoX workflow—and which governed artifacts—would be needed.
+### A. Channel incrementality
 
-If eligible experiment evidence exists, MIP checks its quality, provenance, and
-compatibility before it can become calibration input. If a promoted MMM exposes
-an eligible full-panel Δμ surface, MIP can route that producer-owned artifact
-into the appropriate simulation or planning workflow. Gates then determine the
-`TrustReport`, confidence tier, limitations, and required human review. The
-conversation layer presents the certified results and their lineage without
-changing the numbers.
+**“Is this channel actually incremental?”**
 
-Today, this journey is intentionally partial: MIP can demonstrate intake,
-readiness, evidence requirements, and governed refusal. The current P2 program
-does not yet have the certified GeoX/MMM evidence chain or authorized planning
-path needed to produce a next-quarter allocation.
+```text
+Question
+  → inspect available evidence
+  → determine whether usable causal evidence already exists
+  → use or recommend an appropriate experiment
+  → obtain governed lift evidence
+  → explain the result, uncertainty, and limits
+```
 
-## MIP, MMM, and GeoX
+If the evidence is missing or too weak, MIP should make that gap actionable:
+what needs to be measured, for which channel or population, and why an
+experiment would improve the decision.
 
-MIP coordinates three repositories with deliberately separate authority:
+### B. Experiment → MMM learning
 
-| Repository | Authority |
-| --- | --- |
-| **MIP** | Orchestration, governance, consumer contracts, evidence routing, trust/reporting, LLM behavior, coordination, and UX |
-| **MMM** | Model fitting, diagnostics, calibration compatibility, simulation, optimization, and MMM numerical truth |
-| **GeoX / panel_exp** | Experiment design, assignment, inference, governed readouts, handoff eligibility, and experiment numerical truth |
+**“We finished an experiment. What does this mean for our MMM?”**
 
-MIP consumes versioned artifacts and owner-repository evidence. It does not
-recompute, silently reinterpret, or supersede MMM or GeoX analytical truth.
+```text
+Experiment result
+  → check channel, KPI, geography, population, timing, and estimand compatibility
+  → determine whether the evidence is eligible for calibration
+  → construct governed calibration evidence
+  → MMM consumes eligible calibration through its own numerical behavior
+  → future measurement and planning can reflect the stronger evidence
+```
+
+Raw experiment output never edits model coefficients directly. The only
+GeoX-to-MMM bridge is `CalibrationSignal`, and MMM remains responsible for
+compatibility decisions and the numerical application of calibration.
+
+### C. Budget planning
+
+**“How should I plan next quarter?”**
+
+When the required artifacts and approvals exist:
+
+```text
+Planning objective
+  → inspect the latest eligible MMM and experiment-informed evidence
+  → define baseline and candidate spend plans
+  → invoke MMM-owned simulation
+  → compare full-panel Δμ decision surfaces
+  → evaluate constraints and trust
+  → explain trade-offs and the recommended next step
+```
+
+The alternate path is just as important:
+
+```text
+Evidence is insufficient
+  → identify the material uncertainty
+  → recommend additional measurement or a targeted experiment
+  → feed the new learning into a future planning cycle
+```
+
+Together, the journeys form the broader loop: **experiment → model → planning →
+next experiment**.
+
+## Core capabilities
+
+| Capability | What MIP does | Why it matters |
+| --- | --- | --- |
+| Objective and data guidance | Clarifies the decision, KPI, grain, history, controls, geography, and required inputs | Starts with the business decision and exposes missing information early |
+| Channel incrementality | Connects a channel question to existing causal evidence or an appropriate experiment path | Separates causal lift from descriptive attribution |
+| Experiment orchestration | Coordinates readiness, evidence intake, and governed handoff to/from GeoX | Makes targeted learning part of the measurement workflow |
+| MMM measurement | Routes eligible data and artifacts to MMM-owned measurement and diagnostics | Preserves a portfolio view across channels without moving model truth into MIP |
+| Experiment-to-MMM calibration | Checks whether experiment evidence is suitable to inform MMM and passes eligible evidence through the governed bridge | Adds causal anchors without blindly forcing narrow experiments into a broader model |
+| Evidence compatibility and trust | Checks quality, uncertainty, freshness, lineage, scope, and release conditions | Prevents weak or mismatched evidence from silently becoming decision-grade |
+| Scenario planning | Coordinates baseline/candidate plans and eligible MMM decision surfaces | Supports counterfactual trade-offs using producer-owned numerical results |
+| Measurement-gap detection | Identifies uncertainty or missing evidence and suggests what should be measured next | Turns “we do not know” into a concrete learning agenda |
+| Conversational decision support | Guides intake, connects relevant evidence, and explains results, blockers, and next actions | Makes sophisticated measurement workflows usable without hiding their limits |
+
+### Technical foundations
+
+MIP's checks and balances are implemented through typed contracts and evidence
+lineage, deterministic routing and validation, compatibility and release gates,
+and explicit confidence tiers. `CalibrationSignal` carries eligible experiment
+evidence into MMM; `TrustReport` records the trust verdict; full-panel Δμ is the
+counterfactual surface used for MMM planning decisions. These artifacts keep
+the user experience explainable without turning prose into analytical truth.
+
+## How AI fits into MIP
+
+**The LLM is the conversational interface and orchestrator; it is not the
+causal measurement engine.**
+
+It can:
+
+- understand the user's objective and ask clarifying questions;
+- request missing information or data;
+- route to governed workflows and select approved tools;
+- summarize diagnostics and connect relevant artifacts; and
+- explain results, blockers, uncertainty, trade-offs, and next actions.
+
+It cannot:
+
+- invent causal lift or independently calculate GeoX inference;
+- hallucinate an MMM model or alter producer-owned numbers;
+- bypass experiment-compatibility or calibration requirements;
+- override `TrustReport`; or
+- authorize production recommendations.
+
+The LLM proposes and explains; deterministic tools, contracts, gates, and human
+approvals decide what is allowed. See the
+[LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md) and
+[LLM control-plane architecture](docs/architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md).
+
+## Architecture and trust model
+
+The analytical and orchestration responsibilities remain deliberately
+separate:
+
+```text
+GeoX → experiment design, inference, and experiment numerical truth
+MMM  → model fitting, calibration application, simulation, optimization,
+       and MMM numerical truth
+MIP  → orchestration, governance, decision workflows, evidence routing,
+       trust/reporting, UX, and LLM behavior
+```
+
+MIP consumes versioned, owner-produced artifacts. It does not edit MMM
+coefficients, recompute GeoX lift, or supersede either engine's analytical
+truth.
 
 Three invariants define the decision boundary:
 
@@ -110,90 +272,30 @@ Three invariants define the decision boundary:
 - **Full-panel Δμ is the sole MMM decision surface for production planning and
   optimization.**
 
-See the [architecture](docs/architecture/ARCHITECTURE.md),
+Experiment evidence must pass quality, uncertainty, freshness, compatibility,
+and governance checks before it can inform MMM. See the
+[architecture](docs/architecture/ARCHITECTURE.md),
 [repository integration strategy](docs/architecture/REPO_INTEGRATION_STRATEGY.md),
-and the ADRs for [full-panel Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md),
+[trust architecture](docs/architecture/TRUST_ARCHITECTURE.md), and ADRs for
+[full-panel Δμ](docs/adr/ADR-001-full-panel-delta-mu-decision-surface.md),
 [experiments as calibration evidence](docs/adr/ADR-002-experiments-as-calibration-evidence.md),
 and [LLM orchestration](docs/adr/ADR-003-llm-orchestration-over-certified-tools.md).
 
-## Core capabilities
-
-### Measurement and causal evidence
-
-- Typed estimand, experiment-evidence, calibration, MMM-result, and
-  decision-surface contracts are implemented.
-- Data, objective, MMM, and GeoX readiness/intake workflows are implemented for
-  governed and fixture-backed use.
-- Static sibling-export discovery, compatibility checking, and MIP-side
-  ingestion boundaries are implemented; they do not constitute live engine
-  execution.
-- The certified GeoX producer → provenance-linked MMM compatibility → MIP
-  bridge is in progress at the program level and currently blocked.
-
-### Decision intelligence
-
-- Planning-input readiness, artifact-governance checks, answer eligibility,
-  and response-envelope contracts are implemented.
-- Fixture reports demonstrate the intended governed product shape.
-- Live scenario simulation, optimizer-backed allocations, and budget
-  recommendations are not currently authorized or shipped by MIP.
-
-### Governance
-
-- Pydantic contracts, evidence lineage, registries, deterministic release
-  gates, confidence tiers, calibration audit, and `TrustReport` assembly are
-  implemented and tested.
-- Unsupported claims and missing prerequisites are surfaced as warnings or
-  blockers rather than silently upgraded.
-- Production trust assembly, real-data workflows, and production release remain
-  separately gated.
-
-### AI interaction
-
-- Deterministic intent handling, guided intake, knowledge retrieval, dialogue
-  routing, grounded fallback, explanation helpers, and a read-only
-  conversational front door are implemented.
-- Provider adapters/configuration exist for guarded OpenAI and Groq paths, but
-  providers are disabled by default and the canonical hosted demo is
-  deterministic-only. Controlled live-provider/public acceptance remains
-  incomplete.
-- Broader artifact-grounded follow-up and governed action handoff are still
-  evolving; no LLM path receives analytical or approval authority.
-
-## LLM Decision Layer
-
-**The LLM decides how to interact with governed capabilities and explains
-certified artifacts; it does not create causal or statistical truth.**
-
-The LLM may guide intake, route among allowed workflows, draft configurations,
-summarize diagnostics and artifacts, explain trust and uncertainty, and answer
-follow-up questions grounded in approved evidence. Deterministic contracts and
-routers validate those interactions and provide safe fallback behavior.
-
-The LLM may not invent causal effects, run ungoverned inference, fit MMM by
-hallucination, create calibration authority, alter numerical contract fields,
-override `TrustReport`, bypass release gates, or approve production
-recommendations. Human and owner-repository approvals remain explicit.
-
-For the detailed design and current provider boundaries, see the
-[LLM Decision Layer vision](docs/architecture/LLM_DECISION_LAYER_VISION.md) and
-[LLM control-plane architecture](docs/architecture/MIP_LLM_CONTROL_PLANE_ARCHITECTURE_001.md).
-
-## Current implementation state
+## Current version and implementation maturity
 
 | Capability | Current state |
 | --- | --- |
 | Governance and contracts | **Implemented:** typed contracts, evidence registry, gates, confidence tiers, calibration audit, and trust assembly |
-| Intake and readiness | **Implemented:** deterministic objective/data intake and readiness workflows; several paths are fixture-oriented |
-| Demo and UI | **Fixture/demo:** chat-first deterministic Streamlit experience over synthetic local assets; hosted publicly, not production-ready |
-| Engine integration | **Partial:** MIP-side contracts, adapters, runtime boundaries, and static/fixture ingestion exist; no generally available certified live end-to-end engine path |
+| Objective, data, and readiness guidance | **Implemented:** deterministic intake and readiness workflows; several paths use fixtures |
+| Demo and UI | **Deterministic/demo:** chat-first Streamlit experience over synthetic local assets; hosted publicly and not production-ready |
+| Engine integration | **Partial/in progress:** MIP-side contracts, adapters, runtime boundaries, and static/fixture ingestion exist; a generally available certified live end-to-end engine path does not |
 | Certified GeoX → MMM evidence | **Blocked/in progress:** GeoX producer certification and provenance-linked MMM compatibility evidence are incomplete; the MIP bridge remains parked |
 | Planning and simulation | **Partial/planned:** readiness, governance, eligibility, and explanation contracts exist; live simulation, optimization, and recommendations are not authorized |
-| LLM-backed conversation | **Partial:** guarded read-only provider seams and deterministic fallback exist; public demo providers are disabled and live acceptance is incomplete |
+| LLM-backed conversation | **Partial/in progress:** guarded read-only provider seams and deterministic fallback exist; public-demo providers are disabled and live acceptance is incomplete |
 
-The machine-readable [P2 capability checkpoint ledger](docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json)
+The [P2 capability checkpoint ledger](docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json)
 and [current program state](docs/program/PROGRAM_CURRENT_STATE.md) are the
-authoritative sources for present dependency and eligibility status. Roadmaps
+authoritative sources for current dependency and eligibility status. Roadmaps
 describe direction, not shipped capability.
 
 ## Demo and quick start
@@ -208,14 +310,14 @@ poetry run streamlit run app/streamlit_app.py
 ```
 
 The canonical app at `app/streamlit_app.py` runs in deterministic mode with
-synthetic/demo fixtures by default. It requires no LLM provider, API key,
-database, or external service and does not execute MMM or GeoX inference.
+synthetic/demo fixtures. It requires no LLM provider, API key, database, or
+external service and does not execute MMM or GeoX inference.
 
-The older `poetry run mip-app` entrypoint is retained for backward compatibility
-with the legacy workflow shell. For a deterministic JSON/CLI workflow, use
+The older `poetry run mip-app` entrypoint remains for backward compatibility
+with the legacy workflow shell. For the deterministic JSON/CLI workflow, use
 `poetry run mip-demo --help`.
 
-The repository also contains a local deterministic FastAPI shell:
+The repository also includes a local deterministic FastAPI shell:
 
 ```bash
 poetry run uvicorn mip.service.app:app --reload --host 127.0.0.1 --port 8000
@@ -225,15 +327,6 @@ curl http://127.0.0.1:8000/health
 See the [public deployment record](docs/demo/PUBLIC_DEMO_DEPLOYMENT_RECORD_P9B.md),
 [deterministic usage modes](docs/service/DETERMINISTIC_USAGE_MODES.md), and
 [local development validation guide](docs/dev_validation_workflow.md).
-
-## Why MIP is different
-
-Traditional analytics systems produce models. Generic AI assistants produce
-answers. MIP connects causal analytical engines to an AI decision layer through
-typed evidence, authority-preserving contracts, release gates, lineage, and
-explicit decision workflows. Its central product behavior is not merely to
-answer—it is to show what the evidence supports, what remains uncertain, and
-why a requested decision is allowed or blocked.
 
 ## Deeper documentation
 
