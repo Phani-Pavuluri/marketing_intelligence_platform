@@ -1,41 +1,46 @@
 {
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-  "task_id": "MIP_ROOT_README_EXTERNAL_REVIEW_CLARITY_AND_ONBOARDING_POLISH_001",
-  "status": "merged",
+  "task_id": "MIP_EXECUTION_LIFECYCLE_SINGLE_SOURCE_CONSISTENCY_001",
+  "status": "proposed",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
-  "base_sha": "7c6708d602093d415c0063e8607c19cdaff4b9a5",
-  "task_authoring_start_sha": "7c6708d602093d415c0063e8607c19cdaff4b9a5",
-  "task_authoring_head_sha": "3792368d819fff363b908e5f2168bef766e8ded8",
-  "authorization_head_sha": "3792368d819fff363b908e5f2168bef766e8ded8",
+  "base_sha": "4a392c7ecf7b421dae9fbd11e50eed01c168efa9",
+  "task_authoring_start_sha": "4a392c7ecf7b421dae9fbd11e50eed01c168efa9",
+  "task_authoring_head_sha": null,
+  "authorization_head_sha": null,
   "authorization_head_convention": "first_main_commit_establishing_authorized_task_contract_then_immutable_provenance_recorded_by_metadata_only_finalization",
-  "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_feature_branch_head",
-  "feature_branch": "docs/mip-root-readme-external-review-clarity-and-onboarding-polish-001",
-  "feature_branch_created": true,
+  "finalized_branch_baseline_resolution": "not_applicable_until_authorized",
+  "feature_branch": "feat/mip-execution-lifecycle-single-source-consistency-001",
+  "feature_branch_created": false,
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": false,
   "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
-  "reviewed_head_sha": "e212751158b008b2b6bb1bc53f574362d8c301d4",
+  "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
-  "implementation_commit_sha": "8722095e49b020b9165c75249b2f2724102354d5",
+  "implementation_commit_sha": null,
   "rejected_implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
-  "last_updated": "2026-08-14",
-  "blockers": [],
+  "last_updated": "2026-08-17",
+  "blockers": [
+    "GEOX_D5_POWER_CONTROL_GEOMETRY_REPAIR_002_NOT_CLOSED"
+  ],
   "maximum_correction_cycles": 1,
   "correction_cycles_completed": 0,
-  "correction_cycles_remaining": 0,
-  "risk_tier": "tier_1",
-  "compatibility_migration_policy": "not_applicable",
-  "full_suite_validation_required": false,
-  "validation_scope": "tier_1_readme_external_clarity_section_roles_learning_loop_five_stage_system_visual_first_time_onboarding_links_commands_ui_api_package_cli_tests_json_diff_exact_tree_receipt",
+  "correction_cycles_remaining": 1,
+  "risk_tier": "tier_2_execution_governance_single_source_lifecycle",
+  "compatibility_migration_policy": "in_place_mip_execution_metadata_migration_v1",
+  "full_suite_validation_required": true,
+  "validation_scope": "json_execution_contract_taskctl_unit_regressions_generated_view_determinism_transition_matrix_current_state_migration_ruff_mypy_diff_check_make_validate_exact_tree_receipt",
   "owned_implementation_paths": [
-    "README.md"
+    "AGENTS.md",
+    "docs/execution/TASK_EXECUTION_STANDARD.md",
+    "src/mip/execution/",
+    "tests/execution/"
   ],
   "task_authoring_boundary": [
     "docs/execution/ACTIVE_TASK.md",
@@ -44,18 +49,24 @@
   ],
   "unresolved_execution_blocking_design_questions": [],
   "affected_repositories": [
-    "Phani-Pavuluri/marketing_intelligence_platform"
+    "Phani-Pavuluri/marketing_intelligence_platform",
+    "Phani-Pavuluri/panel_exp",
+    "Phani-Pavuluri/MMM"
   ],
   "modified_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform"
   ],
-  "parked_product_workstreams": [
+  "coordination_workstream_id": "WS-MIP-EXECUTION-LIFECYCLE-SINGLE-SOURCE-001",
+  "coordination_capability_owner": "mip_execution_governance",
+  "dependencies": [
     {
-      "task_id": "MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001",
-      "status": "blocked",
-      "blocker_id": "BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001",
-      "blocked_head_merged_to_main": "480b32040ce185b8ff091435121c4bea6fc6c453",
-      "resolved": false
+      "dependency_id": "DEP-GEOX-D5-GEOMETRY-REPAIR-CLOSURE-001",
+      "repository": "Phani-Pavuluri/panel_exp",
+      "task_id": "GEOX_D5_POWER_CONTROL_GEOMETRY_REPAIR_002",
+      "state": "pending_closure",
+      "observed_main_sha": "79be6ca2656381672c3617fe71c5ffefbcb836e9",
+      "observed_feature_head_sha": "ff148324a668ff8abf696758f0b78461d5ca4994",
+      "resolution_condition": "GeoX live origin/main records GEOX_D5_POWER_CONTROL_GEOMETRY_REPAIR_002 merged/closed at an externally approved lineage; a blocked or ready-for-review feature branch does not satisfy this scheduling dependency."
     }
   ],
   "sibling_repositories_read_only": true,
@@ -77,17 +88,26 @@
   "recommendation_authorized": false,
   "runtime_integration_authorized": false,
   "real_data_authorized": false,
-  "root_cause_analysis_authorized": false,
-  "roi_analysis_authorized": false,
-  "pilot_recommendation_authorized": false,
+  "pilot_authorized": false,
   "production_authorized": false,
-  "next_task_id": "GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_RECOVERY_001",
+  "parked_product_workstreams": [
+    {
+      "task_id": "MIP_P2_GEOX_MMM_COMPATIBILITY_FIXTURE_BRIDGE_001",
+      "status": "blocked",
+      "blocker_id": "BLOCK-P2-GEOX-MMM-CERTIFIED-PAIR-PROVENANCE-001",
+      "blocked_head_merged_to_main": "480b32040ce185b8ff091435121c4bea6fc6c453",
+      "resolved": false
+    }
+  ],
+  "observed_sibling_pins": {
+    "geox_main": "79be6ca2656381672c3617fe71c5ffefbcb836e9",
+    "geox_active_branch_head": "ff148324a668ff8abf696758f0b78461d5ca4994",
+    "mmm_main": "fe8e784923994406a2e4907d28debd872d61fd73"
+  },
+  "next_task_id": "GEOX_EXECUTION_LIFECYCLE_SINGLE_SOURCE_ADOPTION_001",
   "next_task_authorized": false,
-  "review_decision": "merged",
-  "review_decision_source": "docs/execution/LATEST_COMPLETION_REPORT.md",
+  "review_decision": "proposed",
+  "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "prompt_strategy": "invocation_only_from_git_authored_task",
-  "task_authoring_note": "Immutable authorization provenance remains first task-contract commit 3792368d819fff363b908e5f2168bef766e8ded8. Externally approved head e212751158b008b2b6bb1bc53f574362d8c301d4 was fast-forwarded to main after exact-head and post-fast-forward Tier-1 validation; local and remote feature branches were deleted. This closure changes no product, analytical, P2, sibling, capability, merge, PR, pilot, or production authority.",
-  "merged_main_head_sha": "e212751158b008b2b6bb1bc53f574362d8c301d4",
-  "remote_feature_branch_cleanup": "observed_deleted_from_origin",
-  "local_feature_branch_cleanup": "observed_deleted"
+  "task_authoring_note": "Proposed governance rework staged by explicit user direction on 2026-08-17. Execution is intentionally not authorized until the in-flight GeoX D5 geometry repair is merged/closed. This task establishes MIP-owned single-source lifecycle control; GeoX and MMM adoption remain separate owner-repository milestones."
 }
