@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -11,13 +11,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `4a392c7ecf7b421dae9fbd11e50eed01c168efa9`
 - **Authorization provenance:** `e1839bcfad482b2f79343202ac68d25a666acc42`
 - **Feature branch:** `feat/mip-execution-lifecycle-single-source-consistency-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`
-- **Reviewed head:** `null`
+- **Reviewed head:** `c70681d8f03c7b5cf6555435f14f6648174c70d5`
 - **Rejected review head:** `6a21dbb94ab16438b266547f5cc1c51649980a9c`
 - **Rejected implementation commit:** `498027ef73304f747be852628891588ae41af039`
 - **Approval commit:** `null`
@@ -25,9 +25,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `1`
 - **Correction cycles remaining:** `0`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `not_applicable_before_merge`
-- **Remote feature-branch cleanup:** `not_applicable_before_merge`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
@@ -91,8 +91,11 @@ bootstrap, execution publication, correction, and post-merge closure.
   `0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`
 - Feature branch:
   `feat/mip-execution-lifecycle-single-source-consistency-001`
-- Published review head: the exact remote feature-branch receipt commit; it is
-  not self-embedded in its own tree.
+- Externally approved and reviewed head:
+  `c70681d8f03c7b5cf6555435f14f6648174c70d5`.
+- Merge method: exact-head fast-forward from synchronized main; no merge commit.
+- Local and remote feature-branch cleanup: observed deleted after the
+  fast-forwarded main was published.
 
 ## Changed paths
 
@@ -120,7 +123,8 @@ produces no diff.
 
 ## Validation
 
-Locally observed on the task-owned tree:
+Locally observed on the exact approved review tree before fast-forward and on
+the resulting exact main tree after fast-forward:
 
 - `python3 -m json.tool docs/execution/EXECUTION_STATE.json`: **passed**.
 - `poetry run pytest -q tests/execution`: **passed**, 29 tests.
@@ -132,10 +136,24 @@ Locally observed on the task-owned tree:
 - `poetry run python -m mip.execution.taskctl check`: **passed**.
 - `git diff --check`: **passed**.
 - Docker-backed `make validate`: **passed**, 2,575 passed, 5 skipped, 1
-  dependency deprecation warning; Ruff passed.
+  dependency deprecation warning; Ruff and mypy passed.
 
-The same declared gate is rerun on the final frozen receipt tree before
-publication. No required validation category is omitted.
+The post-fast-forward Docker gate initially reported the daemon unavailable;
+direct `docker info` succeeded and the immediate direct `make validate` retry
+passed in full. Closure metadata is validated separately before publication.
+No required validation category is omitted.
+
+## Merge and closure
+
+- Approval source: explicit external approval of exact remote head
+  `c70681d8f03c7b5cf6555435f14f6648174c70d5`.
+- Fast-forwarded implementation main:
+  `c70681d8f03c7b5cf6555435f14f6648174c70d5`.
+- Reviewed-head provenance is recorded in canonical state; the earlier rejected
+  review and implementation provenance remain preserved.
+- Task execution, correction, merge, and PR authority are false after closure.
+- Correction usage remains one completed cycle with zero remaining.
+- Local and remote feature branches were deleted and then verified absent.
 
 ## Cross-repository impact
 
@@ -161,4 +179,5 @@ calibration, simulation, optimization, planning, recommendation, runtime,
 real-data, pilot, production, merge, or PR authority changed. This implementation
 does not migrate GeoX or MMM and does not add CI/git-hook enforcement.
 
-No PR or merge was created. No local-only repository paths were introduced.
+No PR or merge commit was created. The externally approved head was
+fast-forwarded to `main`. No local-only repository paths were introduced.
