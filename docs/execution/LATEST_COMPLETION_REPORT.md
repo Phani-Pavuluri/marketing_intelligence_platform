@@ -4,6 +4,7 @@
 - **Current decision:** `authorized`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Pre-authoring base:** `4a392c7ecf7b421dae9fbd11e50eed01c168efa9`
+- **Authorization provenance:** `e1839bcfad482b2f79343202ac68d25a666acc42`
 - **Planned feature branch:** `feat/mip-execution-lifecycle-single-source-consistency-001`
 - **Risk tier:** Tier 2
 - **Execution authorized:** `true`
