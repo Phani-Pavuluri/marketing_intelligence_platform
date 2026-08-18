@@ -13,6 +13,8 @@
   "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_feature_branch_head",
   "feature_branch": "feat/mip-execution-lifecycle-single-source-consistency-001",
   "feature_branch_created": true,
+  "local_feature_branch_cleanup": "not_applicable_before_merge",
+  "remote_feature_branch_cleanup": "not_applicable_before_merge",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
   "task_execution_authorized": true,

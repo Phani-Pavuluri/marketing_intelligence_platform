@@ -16,6 +16,8 @@ Before task discovery or implementation:
    - `docs/execution/ACTIVE_TASK.md`
    - `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
    - the relevant `docs/program/` files.
+6. Run `python -m mip.execution.taskctl check` in the repository environment.
+   Fail closed if canonical state or either generated execution view diverges.
 
 Stop rather than guess if synchronization, history hydration, execution files,
 authorization, prerequisites, or repository state cannot be verified. Chats and
@@ -33,12 +35,14 @@ files, and exact feature branch. Resume only when tracked changes are
 task-owned. Run the active task's declared risk-tier validation gate for
 execution, exact-head review, and post-fast-forward validation. Docker-backed
 `make validate` remains required whenever Tier 3, the active task, the changed
-surface, or another repository-authored gate requires it. Write
-`docs/execution/LATEST_COMPLETION_REPORT.md`; update
-`docs/execution/EXECUTION_STATE.json` to `ready_for_review` with
-`merge_authorized: false`; commit and publish the exact remote feature-branch
-head; then stop without merging. Before final publication, freeze the task-owned
-tree and run the applicable gate on that exact tree. The final publication
+surface, or another repository-authored gate requires it. Write human-authored
+evidence outside the generated block in
+`docs/execution/LATEST_COMPLETION_REPORT.md`, then use
+`python -m mip.execution.taskctl transition` with explicit evidence to reach
+`ready_for_review`. Never hand-edit duplicated lifecycle fields. Run
+`python -m mip.execution.taskctl check`, commit and publish the exact remote
+feature-branch head, then stop without merging. Before final publication, freeze
+the task-owned tree and run the applicable gate on that exact tree. The final publication
 commit message is the durable validation receipt for its exact Git tree; it
 must identify the implementation parent, validation gate/results, evidence
 source, worktree state, and authority impact. Do not modify task-owned files
@@ -95,7 +99,8 @@ and rerun the active task's required risk-tier gate. Use `git merge --ff-only`;
 never create a pre-merge approval-metadata commit.
 
 After the fast-forwarded implementation is pushed and branch cleanup is
-observed, record approval provenance, reviewed head, validation, authority
-impact, resulting main lineage, and cleanup results in exactly one post-merge
-closure commit. Push and verify local/remote synchronization. No capability
-authority follows from task execution metadata.
+observed, use `python -m mip.execution.taskctl transition --to merged` with the
+exact reviewed head and explicit cleanup evidence. Record approval provenance,
+validation, authority impact, and resulting main lineage in exactly one
+post-merge closure commit, then run `taskctl check`. Push and verify local/remote
+synchronization. No capability authority follows from task execution metadata.

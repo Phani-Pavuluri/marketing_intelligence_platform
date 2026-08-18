@@ -39,6 +39,8 @@ Every new or resumed session must perform this sequence before task discovery:
 9. Prove `git rev-parse main` equals `git rev-parse origin/main`.
 10. Only then read `EXECUTION_STATE.json`, `ACTIVE_TASK.md`, the context index,
     relevant program files, prerequisites, and sibling-repository checkpoints.
+11. Run `python -m mip.execution.taskctl check` in the repository environment.
+    Canonical-state or generated-view divergence is a fail-closed blocker.
 
 Missing credentials, remote refs, history, Docker, dependencies, or verifiable
 state is a blocker. Do not substitute cached chat context.
@@ -49,6 +51,24 @@ Exactly one current copy exists at `docs/execution/ACTIVE_TASK.md`,
 `docs/execution/LATEST_COMPLETION_REPORT.md`, and
 `docs/execution/EXECUTION_STATE.json`. Future tasks replace these files in
 place; Git history preserves prior versions.
+
+`EXECUTION_STATE.json` is the sole mutable authority for lifecycle facts.
+`ACTIVE_TASK.md` is the human-authored task contract and
+`LATEST_COMPLETION_REPORT.md` is human-authored evidence; their delimited
+execution-view blocks are deterministic derivatives. Never hand-edit a generated
+block. Use:
+
+```bash
+python -m mip.execution.taskctl check
+python -m mip.execution.taskctl sync
+python -m mip.execution.taskctl transition --to <status> [explicit evidence]
+```
+
+`check` never repairs. `sync` changes only generated blocks and never canonical
+state. `transition` validates current state/views and the complete candidate set
+before writing canonical state and both views. Missing, duplicated, nested, or
+malformed markers and impossible or incomplete transitions fail with stable
+reason codes.
 
 ### Required delivery shape
 
@@ -119,6 +139,12 @@ complete; exact-head approval is absent; main moved; or the remote feature head
 changes after approval. Proposed, implemented, or validated never means
 authorized.
 
+All mutable lifecycle changes after metadata-finalized authorization use
+`taskctl transition`; view regeneration uses `taskctl sync`. Manual lifecycle
+edits across the three stable files are forbidden. The temporary null
+authorization SHA permitted by the two-commit authoring convention is finalized
+before the feature branch is executable and before `taskctl check` must pass.
+
 ## Execution and completion reporting
 
 Execution remains within owned files. Before review, Codex writes the completion
@@ -143,7 +169,8 @@ authority impact. Before authoring or executing it, agents must read the MIP
 coordination protocol/state, verify affected sibling remote mains, and stop on
 stale snapshots or duplicate ownership.
 
-The published feature branch ends at `ready_for_review` with
+The published feature branch ends at `ready_for_review`, reached through
+`taskctl transition` with explicit implementation evidence, with
 `task_execution_authorized: true`, `merge_authorized: false`,
 `reviewed_head_sha: null`, and `approval_commit_sha: null`. The exact review head
 is the remote branch ref; it cannot be embedded in its own commit.
@@ -241,7 +268,9 @@ force update does not satisfy this workflow.
 ## Single closure commit
 
 After the approved implementation is on remote `main` and cleanup has been
-observed, update only the stable task/state/report files and create exactly one
+observed, use `taskctl transition --to merged` with exact reviewed-head and
+branch-cleanup evidence, update only the human-authored completion narrative
+outside its generated block, run `taskctl check`, and create exactly one
 post-merge closure commit. It records:
 
 - approval source and exact reviewed head;
