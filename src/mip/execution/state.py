@@ -210,7 +210,6 @@ def validate_state(state: Mapping[str, Any]) -> None:
     elif status == "blocked":
         if not state["task_execution_authorized"] or not blockers:
             _fail("E_STATE_BLOCKED", "blocked requires execution authority and blockers")
-        _require_sha(state, "implementation_commit_sha")
         _require_null(state, "reviewed_head_sha", status)
     elif status == "ready_for_review":
         if not state["task_execution_authorized"] or blockers:

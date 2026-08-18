@@ -195,6 +195,69 @@ def test_ready_for_review_requires_explicit_implementation_and_cleared_blockers(
         transition_state(blocked, "ready_for_review", implementation_sha=SHA_C)
 
 
+def test_authorized_can_enter_pre_implementation_blocked_state() -> None:
+    state = authorized_state()
+    blocked = transition_state(state, "blocked", blockers=["BOOTSTRAP_FAILED"])
+    assert blocked["status"] == "blocked"
+    assert blocked["implementation_commit_sha"] is None
+    assert blocked["blockers"] == ["BOOTSTRAP_FAILED"]
+    validate_state(blocked)
+
+
+def test_direct_pre_implementation_blocked_state_is_valid() -> None:
+    state = authorized_state()
+    state.update(status="blocked", review_decision="blocked", blockers=["DEPENDENCY_MISSING"])
+    validate_state(state)
+
+
+def test_blocked_without_blockers_remains_invalid() -> None:
+    state = authorized_state()
+    state.update(status="blocked", review_decision="blocked")
+    with pytest.raises(TaskControlError, match="^E_STATE_BLOCKED:"):
+        validate_state(state)
+
+
+def test_blocked_with_implementation_provenance_remains_valid() -> None:
+    state = authorized_state()
+    state.update(
+        status="blocked",
+        review_decision="blocked",
+        blockers=["ENVIRONMENT_UNAVAILABLE"],
+        implementation_commit_sha=SHA_C,
+    )
+    validate_state(state)
+
+
+def test_blocked_returns_to_in_progress_after_explicit_clear() -> None:
+    blocked = transition_state(
+        authorized_state(), "blocked", blockers=["ANCESTRY_UNVERIFIED"]
+    )
+    resumed = transition_state(blocked, "in_progress", clear_blockers=True)
+    assert resumed["status"] == "in_progress"
+    assert resumed["blockers"] == []
+    assert resumed["implementation_commit_sha"] is None
+    validate_state(resumed)
+
+
+def test_in_progress_to_blocked_preserves_existing_implementation_provenance() -> None:
+    state = authorized_state()
+    state.update(
+        status="in_progress",
+        review_decision="in_progress",
+        implementation_commit_sha=SHA_C,
+    )
+    blocked = transition_state(state, "blocked", blockers=["ENVIRONMENT_UNAVAILABLE"])
+    assert blocked["implementation_commit_sha"] == SHA_C
+    validate_state(blocked)
+
+
+def test_pre_implementation_block_transition_preserves_protected_authority() -> None:
+    state = authorized_state()
+    blocked = transition_state(state, "blocked", blockers=["REPOSITORY_STATE_UNSAFE"])
+    for field in PROTECTED_AUTHORITY_FIELDS:
+        assert blocked.get(field) == state.get(field)
+
+
 def test_correction_counter_mismatch_and_implicit_completion_are_rejected() -> None:
     state = authorized_state()
     state["correction_cycles_remaining"] = 0
