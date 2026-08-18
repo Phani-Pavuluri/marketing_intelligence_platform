@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `feat/mip-execution-lifecycle-single-source-consistency-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `498027ef73304f747be852628891588ae41af039`
+- **Implementation commit:** `0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`
 - **Reviewed head:** `null`
 - **Rejected review head:** `6a21dbb94ab16438b266547f5cc1c51649980a9c`
 - **Rejected implementation commit:** `498027ef73304f747be852628891588ae41af039`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `not_applicable_before_merge`
 - **Remote feature-branch cleanup:** `not_applicable_before_merge`
 - **Capability authorizations changed:** `false`

@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,25 +13,25 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `feat/mip-execution-lifecycle-single-source-consistency-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `498027ef73304f747be852628891588ae41af039`
+- **Implementation commit:** `0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`
 - **Reviewed head:** `null`
 - **Rejected review head:** `6a21dbb94ab16438b266547f5cc1c51649980a9c`
 - **Rejected implementation commit:** `498027ef73304f747be852628891588ae41af039`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `not_applicable_before_merge`
 - **Remote feature-branch cleanup:** `not_applicable_before_merge`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## Required correction
+## Correction completed
 
 External review rejected exact remote review head
 `6a21dbb94ab16438b266547f5cc1c51649980a9c` and implementation commit
@@ -57,6 +57,12 @@ the two required transition paths, and protected-authority preservation. Do not
 change any other lifecycle semantics, task scope, product/capability authority,
 P2 state, or sibling state.
 
+Correction implementation commit:
+`0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`. The validator now accepts both
+null and valid-SHA implementation provenance for `blocked`; transition behavior
+preserves existing provenance and still requires explicit blockers or explicit
+blocker clearance.
+
 ## Outcome delivered
 
 MIP now has one repository-owned lifecycle control surface:
@@ -79,8 +85,10 @@ bootstrap, execution publication, correction, and post-merge closure.
   `0b38450ffc9771fd8eb86fd051261e1bb710163c`
 - Immutable authorization provenance:
   `e1839bcfad482b2f79343202ac68d25a666acc42`
-- Implementation commit:
+- Initial implementation commit:
   `498027ef73304f747be852628891588ae41af039`
+- Correction implementation commit:
+  `0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`
 - Feature branch:
   `feat/mip-execution-lifecycle-single-source-consistency-001`
 - Published review head: the exact remote feature-branch receipt commit; it is
@@ -115,15 +123,15 @@ produces no diff.
 Locally observed on the task-owned tree:
 
 - `python3 -m json.tool docs/execution/EXECUTION_STATE.json`: **passed**.
-- `poetry run pytest -q tests/execution`: **passed**, 22 tests.
-- focused execution plus existing governance compatibility: **passed**, 24 tests.
-- `poetry run pytest -q`: **passed**, 2,568 passed, 5 skipped, 1 dependency
+- `poetry run pytest -q tests/execution`: **passed**, 29 tests.
+- focused execution plus existing governance compatibility: **passed**, 31 tests.
+- `poetry run pytest -q`: **passed**, 2,575 passed, 5 skipped, 1 dependency
   deprecation warning.
 - `poetry run ruff check .`: **passed**.
 - `poetry run mypy src/mip`: **passed**, 208 source files.
 - `poetry run python -m mip.execution.taskctl check`: **passed**.
 - `git diff --check`: **passed**.
-- Docker-backed `make validate`: **passed**, 2,568 passed, 5 skipped, 1
+- Docker-backed `make validate`: **passed**, 2,575 passed, 5 skipped, 1
   dependency deprecation warning; Ruff passed.
 
 The same declared gate is rerun on the final frozen receipt tree before
