@@ -1,15 +1,15 @@
-# MIP Execution Lifecycle Single-Source Consistency — Proposed
+# MIP Execution Lifecycle Single-Source Consistency — Authorized
 
 - **Milestone:** `MIP_EXECUTION_LIFECYCLE_SINGLE_SOURCE_CONSISTENCY_001`
-- **Current decision:** `proposed`
+- **Current decision:** `authorized`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Pre-authoring base:** `4a392c7ecf7b421dae9fbd11e50eed01c168efa9`
 - **Planned feature branch:** `feat/mip-execution-lifecycle-single-source-consistency-001`
 - **Risk tier:** Tier 2
-- **Execution authorized:** `false`
+- **Execution authorized:** `true`
 - **Merge / PR authorized:** `false`
 
-## Proposed outcome
+## Authorized outcome
 
 Create the MIP-owned single-source execution lifecycle control that makes
 `EXECUTION_STATE.json` canonical for mutable lifecycle facts and makes the
@@ -27,18 +27,19 @@ included.
 
 ## Scheduling state
 
-Execution is intentionally deferred until the in-flight GeoX task
-`GEOX_D5_POWER_CONTROL_GEOMETRY_REPAIR_002` is merged/closed on GeoX
-`origin/main`.
+The GeoX prerequisite is satisfied. A fresh read-only clone verified live
+GeoX `origin/main` at `5ab881296c7c8248076bad61292b255aaade11d8`.
+Its stable execution state and closure report record
+`GEOX_D5_POWER_CONTROL_GEOMETRY_REPAIR_002` as merged and closed, with:
 
-Observed during authoring:
+- externally approved review head: `9d17ad44f3a8cb860dfed36af860487c0877d12b`;
+- implementation commit: `5a7b9ff9faecb50a28bab63688c9a53594fa733f`;
+- authorization-bearing contract: `5503ef3b8214a0f2bdb1f444c9b673ddce1ed587`.
 
-- MIP main: `4a392c7ecf7b421dae9fbd11e50eed01c168efa9`
-- GeoX main: `79be6ca2656381672c3617fe71c5ffefbcb836e9`
-- GeoX blocked feature head: `ff148324a668ff8abf696758f0b78461d5ca4994`
-- MMM main: `fe8e784923994406a2e4907d28debd872d61fd73`
-
-The blocked GeoX feature branch is not merged dependency evidence.
+MIP was synchronized at `2c44a78ce3dd0852201021d479827bc44927fe18`
+before this authorization update. MMM remains observed at
+`fe8e784923994406a2e4907d28debd872d61fd73`; no sibling state was modified and
+no coordination refresh was authorized.
 
 ## Why this is staged now
 
@@ -48,14 +49,18 @@ That permits the historical class of correction-cycle, status, blocker, SHA,
 and authority drift. The proposed milestone removes that duplication in the MIP
 governance owner before GeoX resumes the rest of its baseline-repair sequence.
 
-## Validation planned
+## Authorization validation
 
-The future implementation must run focused execution-governance tests, JSON
-validation, Ruff, mypy, `git diff --check`, and the repository Docker-backed
+The authorization update is limited to the three stable execution metadata
+files. JSON parsing, repository-authored execution-handoff validation,
+`git diff --check`, exact changed-path checks, authority checks, authorization
+ancestry, and local/remote equality are required before branch publication.
+
+The future implementation must still run focused execution-governance tests,
+JSON validation, Ruff, mypy, `git diff --check`, and the repository Docker-backed
 `make validate` gate on the frozen candidate tree.
 
-No implementation validation has run for this proposed task because execution is
-not authorized and the GeoX scheduling prerequisite is unresolved.
+No implementation validation has run in this authorization-only session.
 
 ## Deferred adoption order
 
@@ -66,4 +71,12 @@ After MIP implementation and exact-head merge:
 3. MMM adopts the control before its next P2 implementation.
 4. CI/git-hook enforcement and richer automation remain separate.
 
-No PR or merge is created by task authoring. No capability authority changes.
+The first main authorization commit may contain `authorization_head_sha: null`.
+A metadata-only finalization commit will record that first authorization commit
+as immutable provenance, and the feature branch will start from the finalized
+synchronized main. The intervening diff is restricted to the three stable
+execution files.
+
+No PR or merge is created by authorization. No product, analytical, P2,
+sibling, calibration, simulation, optimization, planning, recommendation,
+runtime, real-data, pilot, production, or capability authority changes.

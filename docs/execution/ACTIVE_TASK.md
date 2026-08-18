@@ -1,6 +1,6 @@
 # Active Task
 
-**Status:** proposed
+**Status:** authorized
 **Task ID:** `MIP_EXECUTION_LIFECYCLE_SINGLE_SOURCE_CONSISTENCY_001`
 **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 **Local path:** `/Users/phani/Desktop/marketing_intelligence_platform`
@@ -9,7 +9,7 @@
 **Execution mode:** `branch_and_fast_forward`
 **Risk tier:** Tier 2 — repository execution-governance state machine
 **Compatibility / migration policy:** `in_place_mip_execution_metadata_migration_v1`
-**Task execution authorized:** `false`
+**Task execution authorized:** `true`
 **Merge / PR authorized:** `false`
 **Unresolved execution-blocking design questions:** none
 
@@ -32,14 +32,12 @@ shipping only one of them would still permit divergent execution evidence.
 
 ## Scheduling prerequisite
 
-Execution is intentionally **not authorized yet**.
-
-Before this task may be authorized, live GeoX must record
-`GEOX_D5_POWER_CONTROL_GEOMETRY_REPAIR_002` as merged/closed on `origin/main`
-at an externally approved lineage. At authoring time GeoX main is
-`79be6ca2656381672c3617fe71c5ffefbcb836e9` and its blocked feature head is
-`ff148324a668ff8abf696758f0b78461d5ca4994`.
-A blocked or `ready_for_review` feature branch does not satisfy this prerequisite.
+The scheduling prerequisite is satisfied. Live GeoX `origin/main` at
+`5ab881296c7c8248076bad61292b255aaade11d8` records
+`GEOX_D5_POWER_CONTROL_GEOMETRY_REPAIR_002` as merged and closed. Its closure
+evidence records externally approved review head
+`9d17ad44f3a8cb860dfed36af860487c0877d12b` and implementation commit
+`5a7b9ff9faecb50a28bab63688c9a53594fa733f`.
 
 This is a temporary execution-governance detour. It does not alter the P2
 capability sequence or authorize GeoX certification, MMM fixtures, the parked MIP
