@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,23 +13,49 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `feat/mip-execution-lifecycle-single-source-consistency-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `498027ef73304f747be852628891588ae41af039`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `6a21dbb94ab16438b266547f5cc1c51649980a9c`
+- **Rejected implementation commit:** `498027ef73304f747be852628891588ae41af039`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `not_applicable_before_merge`
 - **Remote feature-branch cleanup:** `not_applicable_before_merge`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
+
+## Required correction
+
+External review rejected exact remote review head
+`6a21dbb94ab16438b266547f5cc1c51649980a9c` and implementation commit
+`498027ef73304f747be852628891588ae41af039`.
+
+Use the single authorized correction cycle only to repair blocked-state
+implementation provenance semantics:
+
+- `blocked` requires task execution authority, at least one explicit blocker,
+  null reviewed head, and false persisted merge/PR authority;
+- `implementation_commit_sha` is optional for `blocked`: null is valid before
+  implementation, and a valid SHA is valid after implementation exists;
+- `authorized -> blocked` must accept an explicit blocker without requiring an
+  implementation SHA;
+- `in_progress -> blocked` must preserve whatever valid implementation
+  provenance already exists;
+- `blocked -> in_progress` must succeed only after blockers are explicitly
+  cleared;
+- protected authority fields must remain unchanged.
+
+Add focused regressions for both blocked provenance forms, missing blockers,
+the two required transition paths, and protected-authority preservation. Do not
+change any other lifecycle semantics, task scope, product/capability authority,
+P2 state, or sibling state.
 
 ## Outcome delivered
 
