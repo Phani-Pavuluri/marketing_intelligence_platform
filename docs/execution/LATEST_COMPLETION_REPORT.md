@@ -1,183 +1,122 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `merged`
+**Current decision:** `authorized`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_EXECUTION_LIFECYCLE_SINGLE_SOURCE_CONSISTENCY_001`
+- **Task ID:** `MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `4a392c7ecf7b421dae9fbd11e50eed01c168efa9`
-- **Authorization provenance:** `e1839bcfad482b2f79343202ac68d25a666acc42`
-- **Feature branch:** `feat/mip-execution-lifecycle-single-source-consistency-001`
+- **Base SHA:** `b0f57701a55d5cbe1d94692bf378a23d03945646`
+- **Authorization provenance:** `null`
+- **Feature branch:** `audit/mip-geox-mmm-pending-work-and-llm-dependency-audit-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `false`
+- **Task execution authorized:** `true`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`
-- **Reviewed head:** `c70681d8f03c7b5cf6555435f14f6648174c70d5`
-- **Rejected review head:** `6a21dbb94ab16438b266547f5cc1c51649980a9c`
-- **Rejected implementation commit:** `498027ef73304f747be852628891588ae41af039`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
+- **Rejected review head:** `null`
+- **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `1`
-- **Correction cycles remaining:** `0`
-- **Review decision:** `merged`
-- **Local feature-branch cleanup:** `observed_deleted`
-- **Remote feature-branch cleanup:** `observed_deleted`
+- **Correction cycles completed:** `0`
+- **Correction cycles remaining:** `1`
+- **Review decision:** `authorized`
+- **Local feature-branch cleanup:** `null`
+- **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## Correction completed
+## Task-authoring outcome
 
-External review rejected exact remote review head
-`6a21dbb94ab16438b266547f5cc1c51649980a9c` and implementation commit
-`498027ef73304f747be852628891588ae41af039`.
+`MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001` is authorized as one
+MIP-owned, read-only, cross-repository documentation and coordination audit.
+The implementation artifact does not exist yet. No audit findings, dependency
+conclusions, eligibility recommendation, or handoff packet has been produced in
+this task-authoring session.
 
-Use the single authorized correction cycle only to repair blocked-state
-implementation provenance semantics:
+The task's only substantive deliverable is
+`docs/audits/MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001.md`.
+GeoX and MMM are evidence sources only. Coordination-state refresh is neither
+required nor authorized.
 
-- `blocked` requires task execution authority, at least one explicit blocker,
-  null reviewed head, and false persisted merge/PR authority;
-- `implementation_commit_sha` is optional for `blocked`: null is valid before
-  implementation, and a valid SHA is valid after implementation exists;
-- `authorized -> blocked` must accept an explicit blocker without requiring an
-  implementation SHA;
-- `in_progress -> blocked` must preserve whatever valid implementation
-  provenance already exists;
-- `blocked -> in_progress` must succeed only after blockers are explicitly
-  cleared;
-- protected authority fields must remain unchanged.
+## Authoring Git evidence
 
-Add focused regressions for both blocked provenance forms, missing blockers,
-the two required transition paths, and protected-authority preservation. Do not
-change any other lifecycle semantics, task scope, product/capability authority,
-P2 state, or sibling state.
+- Initial synchronized MIP main:
+  `b0f57701a55d5cbe1d94692bf378a23d03945646`.
+- MIP lifecycle consistency:
+  `poetry run python -m mip.execution.taskctl check` passed before authoring.
+- GeoX live remote main:
+  `2111cfb2197ea62531919791a1e794a5f601ee6e`.
+- GeoX lifecycle-authoritative remote branch:
+  `audit/geox-main-test-isolation-and-checkpoint-context-reassessment-001` at
+  `0f79d277afac4a8675bc3a1365ae89c6da8dcbf9`; authorization-head ancestry from
+  `b003d7915d635413fd45fcb98e4ee36ccbc0c7b8` was verified.
+- GeoX branch state observed during authoring: `ready_for_review`; this is live
+  concurrent work and is not merged capability evidence.
+- MMM live remote main:
+  `fe8e784923994406a2e4907d28debd872d61fd73`.
+- MMM active remote task branch: none declared by live merged execution state.
 
-Correction implementation commit:
-`0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`. The validator now accepts both
-null and valid-SHA implementation provenance for `blocked`; transition behavior
-preserves existing provenance and still requires explicit blockers or explicit
-blocker clearance.
-
-## Outcome delivered
-
-MIP now has one repository-owned lifecycle control surface:
-
-- `EXECUTION_STATE.json` is the sole mutable lifecycle authority;
-- `ACTIVE_TASK.md` and this report contain deterministic generated execution
-  views while preserving their human-authored bodies;
-- `python -m mip.execution.taskctl check` validates canonical state and both
-  views without repairing them;
-- `sync` regenerates only the delimited views and is byte-idempotent;
-- `transition` applies a declared lifecycle edge only with explicit evidence,
-  validates the complete candidate set, and preserves capability authority.
-
-`AGENTS.md` and `TASK_EXECUTION_STANDARD.md` now require this control during
-bootstrap, execution publication, correction, and post-merge closure.
-
-## Git evidence
-
-- Synchronized authorization baseline:
-  `0b38450ffc9771fd8eb86fd051261e1bb710163c`
-- Immutable authorization provenance:
-  `e1839bcfad482b2f79343202ac68d25a666acc42`
-- Initial implementation commit:
-  `498027ef73304f747be852628891588ae41af039`
-- Correction implementation commit:
-  `0e8c3562cdc5768d9d1e6205ac2c21e662bbd642`
-- Feature branch:
-  `feat/mip-execution-lifecycle-single-source-consistency-001`
-- Externally approved and reviewed head:
-  `c70681d8f03c7b5cf6555435f14f6648174c70d5`.
-- Merge method: exact-head fast-forward from synchronized main; no merge commit.
-- Local and remote feature-branch cleanup: observed deleted after the
-  fast-forwarded main was published.
-
-## Changed paths
-
-- `AGENTS.md`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
-- `docs/execution/TASK_EXECUTION_STANDARD.md`
-- `src/mip/execution/`
-- `tests/execution/`
-
-No product, analytical, P2/program, CI, Docker, dependency, or sibling path
-changed.
-
-## Acceptance evidence
-
-Focused tests cover the declared state/transition table, stable validation
-reason codes, divergent status/blocker/correction/SHA snapshots, malformed
-markers, body preservation, byte-idempotent synchronization, explicit review
-evidence, blocker handling, correction-counter consistency, merged closure
-contradictions, current-tree migration, and authority preservation.
-
-The migrated repository passes `taskctl check`, and a second `taskctl sync`
-produces no diff.
-
-## Validation
-
-Locally observed on the exact approved review tree before fast-forward and on
-the resulting exact main tree after fast-forward:
-
-- `python3 -m json.tool docs/execution/EXECUTION_STATE.json`: **passed**.
-- `poetry run pytest -q tests/execution`: **passed**, 29 tests.
-- focused execution plus existing governance compatibility: **passed**, 31 tests.
-- `poetry run pytest -q`: **passed**, 2,575 passed, 5 skipped, 1 dependency
-  deprecation warning.
-- `poetry run ruff check .`: **passed**.
-- `poetry run mypy src/mip`: **passed**, 208 source files.
-- `poetry run python -m mip.execution.taskctl check`: **passed**.
-- `git diff --check`: **passed**.
-- Docker-backed `make validate`: **passed**, 2,575 passed, 5 skipped, 1
-  dependency deprecation warning; Ruff and mypy passed.
-
-The post-fast-forward Docker gate initially reported the daemon unavailable;
-direct `docker info` succeeded and the immediate direct `make validate` retry
-passed in full. Closure metadata is validated separately before publication.
-No required validation category is omitted.
-
-## Merge and closure
-
-- Approval source: explicit external approval of exact remote head
-  `c70681d8f03c7b5cf6555435f14f6648174c70d5`.
-- Fast-forwarded implementation main:
-  `c70681d8f03c7b5cf6555435f14f6648174c70d5`.
-- Reviewed-head provenance is recorded in canonical state; the earlier rejected
-  review and implementation provenance remain preserved.
-- Task execution, correction, merge, and PR authority are false after closure.
-- Correction usage remains one completed cycle with zero remaining.
-- Local and remote feature branches were deleted and then verified absent.
+The sibling refs were fetched and inspected read-only. GeoX's worktree was
+clean. MMM had pre-existing local `.DS_Store` changes and local-only files; no
+switch, pull, edit, staging, commit, or cleanup was performed there. Remote
+evidence was read directly from fetched refs so local user state remained
+untouched.
 
 ## Cross-repository impact
 
-- Affected repositories: MIP, GeoX, MMM.
+- Affected repositories: MIP, GeoX, and MMM.
 - Modified repository: MIP only.
-- Workstream: `WS-MIP-EXECUTION-LIFECYCLE-SINGLE-SOURCE-001`.
-- Capability owner: `mip_execution_governance`.
-- Resolved dependency: `DEP-GEOX-D5-GEOMETRY-REPAIR-CLOSURE-001`.
-- GeoX merged evidence: `5ab881296c7c8248076bad61292b255aaade11d8`,
-  with approved review head `9d17ad44f3a8cb860dfed36af860487c0877d12b`.
-- Live MMM observation remained
-  `fe8e784923994406a2e4907d28debd872d61fd73`.
-- Consumer verification: no analytical consumer claim is made; GeoX and MMM
-  lifecycle adoption remain separate owner-repository tasks.
-- Newly eligible after merge: only separately authorized
-  `GEOX_EXECUTION_LIFECYCLE_SINGLE_SOURCE_ADOPTION_001`.
-- Coordination refresh: not authorized and not performed.
+- Workstream:
+  `WS-MIP-GEOX-MMM-PENDING-WORK-LLM-DEPENDENCY-AUDIT-001`.
+- Capability owner: `mip_cross_repository_program_audit`.
+- Dependencies observed:
+  `DEP-MIP-AUDIT-LIFECYCLE-BASELINE-001`,
+  `DEP-MIP-AUDIT-GEOX-LIVE-CONCURRENT-EVIDENCE-001`, and
+  `DEP-MIP-AUDIT-MMM-LIVE-EVIDENCE-001`.
+- Consumer verification: not performed; the implementation must inventory all
+  still-required producer and consumer verification from fresh evidence.
+- Newly eligible work: none authorized by task authoring.
+- Validation debt: GeoX's live branch reports four current-main defect classes;
+  MMM retains historical host-Poetry unavailability and existing warning debt.
+  These observations must be re-verified during audit execution.
+- Authority impact: audit documentation only; no analytical, runtime, P2, LLM,
+  sibling, planning, recommendation, real-data, pilot, or production authority
+  changed.
 
-## Authority and limitations
+## Scope and limitations
 
-No product, analytical, P2, sibling, GeoX-certification, MMM, bridge,
-calibration, simulation, optimization, planning, recommendation, runtime,
-real-data, pilot, production, merge, or PR authority changed. This implementation
-does not migrate GeoX or MMM and does not add CI/git-hook enforcement.
+The audit must re-fetch all three repositories. Authoring-time SHAs are durable
+provenance, not permission to use stale state. The active task defines the
+required six-lane separation, exact dependency-chain analysis, sequential versus
+parallel classification, pre-P2 LLM containment analysis, and repository-specific
+handoff/launcher constraints.
 
-No PR or merge commit was created. The externally approved head was
-fast-forwarded to `main`. No local-only repository paths were introduced.
+No product code, analytical code, contracts, schemas, fixtures, tests, roadmap,
+ledger, coordination state, sibling files, or runtime behavior changed during
+task authoring. The parked MIP bridge was not resumed. No `CalibrationSignal`
+was constructed, and no MMM calibration, simulation, or optimization ran.
+
+## Validation status
+
+- Pre-authoring worktree classification: **passed** for MIP and GeoX; MMM local
+  user-owned changes were recorded and preserved through remote-ref-only reads.
+- MIP fetch, fast-forward synchronization, and `main == origin/main`: **passed**.
+- Sibling remote fetch and exact main resolution: **passed**.
+- GeoX mutable remote branch identity/head/authorization ancestry inspection:
+  **passed**.
+- MMM active-branch inspection: **passed**; no active remote branch declared.
+- MIP pre-authoring `taskctl check`: **passed**.
+- Audit implementation validation: **not run**; task authoring only.
+- Docker-backed `make validate`: **not run** during authoring; required on the
+  later frozen implementation tree.
+
+No PR, merge, squash, rebase, force-push, cherry-pick, merge commit, or sibling
+modification was performed. The feature branch will be created empty from the
+finalized synchronized MIP authorization baseline and published before this
+authoring session ends.
