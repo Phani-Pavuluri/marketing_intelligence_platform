@@ -162,8 +162,9 @@ The remaining work is not “implement delta-mu from scratch.” It is to:
 - link MMM fixtures to a certified, exact GeoX producer artifact and preserve
   source hashes, schema/version pins, treatment decisions, warnings, and
   failure provenance;
-- verify GeoX compatibility at the actual certified producer/consumer pair,
-  including stale, blocked, unsupported, and migration behavior;
+- verify MMM-owned compatibility treatment of the GeoX evidence at the actual
+  certified producer/consumer pair, including stale, blocked, unsupported, and
+  migration behavior;
 - complete the reliability and calibration evidence still recorded by
   `docs/05_validation/monte_carlo_reliability_program.md`,
   `reliability_scorecard.md`, `reliability_threshold_governance.md`, and the
@@ -185,18 +186,38 @@ simulation, recommendation, or runtime authority.
 ### 6.1 Exact dependency chain
 
 ```text
-GeoX governed experiment/calibration-source evidence
-→ MIP-owned CalibrationSignal mapping/governance boundary
-→ MMM calibration compatibility and treatment
+GeoX governed experiment/readout truth and handoff eligibility
+→ CalibrationSignal as the sole governed GeoX-to-MMM bridge
+→ MMM-owned experiment-to-model compatibility and calibration treatment
 → MMM baseline-versus-candidate full-panel delta-mu evidence
-→ MIP planning-evidence assembly and governed explanation
+→ MIP consumer verification, evidence assembly, and governed explanation
 ```
+
+MIP is not an analytical step in the GeoX-to-MMM bridge. The current MIP P2
+consumer contract does not define a producer schema, construct
+`CalibrationSignal`, translate GeoX handoff eligibility into MMM compatibility,
+or determine calibration treatment. It normalizes producer artifacts without
+changing producer analytical values, validates shape/provenance, routes them,
+assembles evidence, and reports or explains the producer-owned states.
+
+MMM main contains an export-only GeoX/CLS adapter contract and implementation
+surface that can serialize offline source records as `CalibrationSignal`, but
+that component evidence does not by itself establish the exact certified
+serialized-artifact producer for the current P2 journey. Until a certified
+cross-repository producer/adapter contract names that role, serialized
+`CalibrationSignal` production is contract-defined and unresolved for P2; it
+is not assigned to MIP. GeoX retains its numerical truth and handoff-eligibility
+authority, while MMM alone owns model-specific compatibility, calibration
+treatment/model lineage, and MMM numerical truth. Evidence:
+`MIP:docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md`;
+`MMM:docs/05_validation/geox_cls_to_calibration_signal_adapter_contract.md`;
+`MMM:docs/05_validation/mmm_calibration_treatment_lineage_contract.md`.
 
 | Edge | Owner and required input | Required output/gate | Current blocker and authority boundary |
 |---|---|---|---|
-| GeoX evidence → mapping boundary | GeoX owns governed readout/source artifacts, exact schema/version pins, lineage, method eligibility, warnings, and producer certification. | A merged, certified producer checkpoint with combined validation. | Live GeoX branch is only ready for review and reports base defects. Existing source fixtures explicitly emit neither `CalibrationSignal` nor compatibility. GeoX cannot authorize the MIP mapping. Evidence: GeoX source manifest/validator; `MIP:docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json`. |
-| Mapping → `CalibrationSignal` | MIP owns the mapping/governance boundary; it consumes certified GeoX source truth without changing it. | Versioned, fail-closed mapping with immutable provenance and consumer tests. | Parked bridge is blocked and resume is unauthorized. This audit does not construct the signal. Evidence: `MIP:docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md`; execution-state blocked-task record. |
-| Signal → MMM compatibility/treatment | MMM owns compatibility state, calibration treatment, model lineage, supported range, and failures. | Provenance-linked MMM compatibility fixtures validated against the exact certified producer/contract pair. | Native compatibility code/fixtures exist, but are not certified against the pending producer artifact. Requires a new MMM task after producer certification; MIP cannot declare compatibility. Evidence: MMM compatibility code and calibration-lineage contract. |
+| GeoX evidence → `CalibrationSignal` bridge eligibility | GeoX owns governed readout/source artifacts, numerical values, exact schema/version pins, lineage, method eligibility, warnings, handoff eligibility, and producer certification. | A merged, certified GeoX producer checkpoint whose output is eligible for the governed bridge. | Live GeoX branch is only ready for review and reports base defects. Existing source fixtures explicitly emit neither `CalibrationSignal` nor compatibility. Evidence: GeoX source manifest/validator; `MIP:docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json`. |
+| Governed source → serialized `CalibrationSignal` | The exact P2 serializer/producer must be named by the certified producer/adapter contract. MMM main has an export-only GeoX/CLS adapter surface, but the current MIP P2 consumer contract assigns no construction role to MIP. | A versioned, fail-closed signal artifact that preserves GeoX values and immutable provenance without making the model-specific decision. | Current P2 evidence has not certified the exact producer/adapter pair. MIP may validate, normalize losslessly, route, and verify the artifact, but may not construct it or infer compatibility/treatment. Evidence: MIP P2 consumer contract; MMM GeoX/CLS adapter contract; GeoX source manifest. |
+| `CalibrationSignal` → MMM compatibility/treatment | MMM owns experiment-to-model compatibility state, calibration treatment, model lineage, supported range, and failures. | Provenance-linked MMM compatibility and treatment evidence validated against the exact certified producer/contract pair. | Native compatibility code/fixtures exist, but are not certified against the pending producer artifact. Requires a new MMM task after producer certification; neither GeoX nor MIP may declare or replace MMM compatibility. Evidence: MMM compatibility code and calibration-lineage contract. |
 | Treatment → full-panel `delta_mu` | MMM owns model execution and the canonical baseline/candidate full-panel comparison. | Typed simulation evidence with exact input lineage, baseline/candidate means, `delta_mu`, supported-range and failure state. | Component contract exists; certified P2 pair and provenance-linked consumer evidence do not. Optimization is outside this edge. Evidence: `MMM:mmm/contracts/public_simulation.py` and versioned fixtures. |
 | `delta_mu` → MIP planning evidence | MIP owns orchestration, report assembly, governed explanation, UX, and consumer verification. | Verified bridge, D6 release packet, fixture-only planning journey, then explicit later release decisions. | Bridge blocked; D6 and planning journey are downstream. An LLM may explain only validated artifacts and may not alter the analytical result. Evidence: `MIP:docs/program/NEXT_EXECUTION_SEQUENCE.md`, `PROGRAM_CURRENT_STATE.md`, and P2 consumer design. |
 
@@ -212,8 +233,11 @@ failures, and authorization flags must agree.
 2. GeoX producer certification precedes provenance-linked MMM fixture
    production because MMM cannot truthfully pin a producer artifact that is not
    merged and certified.
-3. The certified GeoX/MMM pair precedes resuming/re-authoring the MIP bridge
-   because the bridge must consume immutable upstream evidence, not speculate.
+3. Certified GeoX evidence, an explicitly named/certified
+   `CalibrationSignal` producer/adapter, and MMM-owned compatibility/treatment
+   evidence precede resuming/re-authoring the MIP bridge because MIP must
+   consume and verify immutable upstream artifacts rather than construct or
+   reinterpret their analytical states.
 4. The verified MIP bridge precedes D6 evidence; D6 must name the real producer
    and consumer versions, compatibility behavior, release/rollback order, and
    last-known-good set.
@@ -244,8 +268,11 @@ or release claims collapse the isolation and return to the sequential chain.
 1. Review the exact GeoX reassessment head; authorize and merge any necessary
    defect remediation under GeoX rules.
 2. Complete and certify the GeoX combined producer checkpoint on GeoX main.
-3. Authorize MMM provenance-linked compatibility/calibration/full-panel
-   `delta_mu` fixture evidence and publish it on MMM main.
+3. Establish the exact serialized `CalibrationSignal` producer/adapter in the
+   certified handoff contract, then authorize MMM provenance-linked
+   compatibility/calibration/full-panel `delta_mu` fixture evidence and
+   publish it on MMM main. The present evidence does not assign serialization
+   to MIP.
 4. Re-author or explicitly resume the MIP bridge only after verifying those
    exact merged refs.
 5. Produce D6 compatibility, release-order, rollback, last-known-good, and
@@ -314,7 +341,7 @@ authority freezes.
 
 | Classification | Work |
 |---|---|
-| Strictly sequential | GeoX defect disposition → GeoX producer certification → MMM provenance-linked compatibility and full-panel evidence → MIP bridge → D6 → planning journey → certified artifact-grounded evaluation/integration. |
+| Strictly sequential | GeoX defect disposition → GeoX producer certification → certified contract-defined `CalibrationSignal` serialization → MMM-owned compatibility/treatment and full-panel evidence → MIP consumer bridge → D6 → planning journey → certified artifact-grounded evaluation/integration. |
 | Safely parallel within isolation | Repository-local method research; MMM native-fixture reliability work; MIP benchmark design and fake-provider deterministic tests on immutable synthetic/approved public fixtures. |
 | Eligible but unauthorized | New GeoX repair/certification tasks after review disposition; MMM provenance task after producer certification; contained MIP benchmark/harness tasks; bridge resume only after its explicit prerequisites and new authority. |
 | Blocked | GeoX producer certification by current-main gate failures; cross-repo MMM fixture claim by missing certified producer; MIP bridge by upstream evidence; D6 by bridge; planning journey by D6; certified grounding/package integration by P2 plus lifecycle gates. |
@@ -333,7 +360,9 @@ authorization ancestry. Read the applicable program/roadmap evidence. Treat
 MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001 as a dated orientation
 snapshot only; freshly fetched Git is authority. Do not infer execution,
 merge, analytical, LLM-provider, recommendation, pilot, or production authority
-from the audit. Report the exact refs and current authorized action before work.
+from the audit. Preserve MIP as a lossless consumer/orchestrator: do not assign
+it `CalibrationSignal` construction, GeoX-to-MMM compatibility, or calibration
+treatment. Report the exact refs and current authorized action before work.
 ```
 
 When MIP Git contains an authorized executable task, the invocation-only
@@ -358,7 +387,8 @@ verify repository identity, task identity, branch name, and authorization
 ancestry before interpreting status. Treat the MIP cross-repository audit as a
 dated orientation snapshot only; GeoX Git owns GeoX truth and authority. Do not
 resume, repair, merge, certify, or promote anything unless current GeoX Git and
-an exact external approval authorize it.
+an exact external approval authorize it. Preserve GeoX ownership of readout
+truth and handoff eligibility without assigning it MMM model compatibility.
 ```
 
 GeoX already has a ready-for-review branch at this snapshot; do not issue a new
@@ -377,7 +407,9 @@ Resolve any main-declared active/resumable branch from its exact remote ref and
 verify identity and authorization ancestry. Treat the MIP cross-repository
 audit as dated orientation only; MMM Git owns compatibility, calibration,
 model, provenance, simulation, and optimization truth. Report current refs and
-authority, and do not execute merely because the audit calls work eligible.
+authority, preserve `CalibrationSignal` as the governed bridge, and do not
+assign its construction or MMM analytical decisions to MIP. Do not execute
+merely because the audit calls work eligible.
 ```
 
 MMM has no authorized task at this snapshot, so there is no execution launcher
@@ -412,7 +444,9 @@ then use only MMM's then-current committed invocation model.
 
 The present critical path is not “wait for all LLM work.” Deterministic LLM
 quality mechanics can be isolated and separately authorized now, while any
-claim grounded in live analytical truth must wait for the certified GeoX → MIP
-mapping → MMM compatibility/full-panel evidence → MIP planning chain. Every
-successor requires fresh Git verification and its own repository-local
-authorization.
+claim grounded in live analytical truth must wait for certified GeoX truth and
+handoff eligibility → contract-defined `CalibrationSignal` serialization →
+MMM-owned compatibility/treatment and full-panel evidence → MIP consumer
+verification and planning evidence. MIP does not compute or replace any of the
+upstream analytical states. Every successor requires fresh Git verification
+and its own repository-local authorization.
