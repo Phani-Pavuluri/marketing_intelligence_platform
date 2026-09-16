@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -11,13 +11,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `b0f57701a55d5cbe1d94692bf378a23d03945646`
 - **Authorization provenance:** `688dbe6d780d12a8e8964524326439f16729c746`
 - **Feature branch:** `audit/mip-geox-mmm-pending-work-and-llm-dependency-audit-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `474980f4ddfe3bb851fc9cf675d6e697a3fb3dbb`
-- **Reviewed head:** `null`
+- **Reviewed head:** `d8826a3c677b88b752d044ea7441243f49702aee`
 - **Rejected review head:** `4d0483b8bf4965b8c0b7f86fa5936001314a686a`
 - **Rejected implementation commit:** `3d323478320400c34fe9454b796fb638d9ac2eae`
 - **Approval commit:** `null`
@@ -25,9 +25,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `1`
 - **Correction cycles remaining:** `0`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
@@ -144,7 +144,9 @@ The parked MIP bridge was not resumed or modified. No `CalibrationSignal` was
 constructed. No MMM calibration, fit, simulation, or optimization was run. No
 GeoX repair or certification was performed. No provider/model/prompt was
 promoted, no recommendation was made, and no real-data, pilot, production, PR,
-merge, squash, rebase, force-push, cherry-pick, or merge commit occurred.
+squash, rebase, force-push, cherry-pick, or merge commit occurred. The only
+merge operation was the externally approved `git merge --ff-only` described in
+the closure record below.
 
 ## Validation evidence
 
@@ -183,3 +185,35 @@ merge, squash, rebase, force-push, cherry-pick, or merge commit occurred.
 Risk remained Tier 3 documentation/coordination audit risk solely because the
 cross-repository protocol and active task require the full Docker gate. No
 analytical, runtime, or capability risk surface changed.
+
+## Merge and closure
+
+- **External approval provenance:** the user approved exact remote review head
+  `d8826a3c677b88b752d044ea7441243f49702aee` for merge and closure.
+- **Lineage:** authorization provenance
+  `688dbe6d780d12a8e8964524326439f16729c746`; rejected review head
+  `4d0483b8bf4965b8c0b7f86fa5936001314a686a`; rejected implementation
+  `3d323478320400c34fe9454b796fb638d9ac2eae`; corrected implementation
+  `474980f4ddfe3bb851fc9cf675d6e697a3fb3dbb`; reviewed and merged head
+  `d8826a3c677b88b752d044ea7441243f49702aee`.
+- **Pre-merge exact-head validation:** `taskctl check`, lifecycle/ancestry and
+  ownership acceptance checks, `git diff --check`, and Docker-backed
+  `make validate` passed; 2575 passed, 5 skipped, 1 warning; Ruff passed; mypy
+  passed for 479 source files.
+- **Fast-forward:** synchronized main
+  `9bc48e04a932e3f89b91d7e9be7eb3bae9dcee7d` advanced with
+  `git merge --ff-only` to the exact approved head. No merge commit was created.
+- **Post-fast-forward validation:** the same Docker-backed gate passed on main
+  with 2575 passed, 5 skipped, 1 warning; Ruff and mypy passed.
+- **Publication:** main was pushed and local `main == origin/main` was verified
+  at the reviewed head before closure metadata.
+- **Cleanup:** local and remote branch
+  `audit/mip-geox-mmm-pending-work-and-llm-dependency-audit-001` were both
+  observed deleted after main publication.
+- **Closure paths:** this post-merge closure changes only
+  `docs/execution/EXECUTION_STATE.json`, the generated lifecycle block in
+  `docs/execution/ACTIVE_TASK.md`, and this report.
+- **Authority impact:** task execution, correction, merge, and PR authority are
+  false after closure; capability authorizations remain unchanged. The audit
+  neither authorizes nor executes any successor, analytical, P2, LLM, runtime,
+  recommendation, real-data, pilot, or production work.
