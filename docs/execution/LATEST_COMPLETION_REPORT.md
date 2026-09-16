@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,23 +13,42 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `audit/mip-geox-mmm-pending-work-and-llm-dependency-audit-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `3d323478320400c34fe9454b796fb638d9ac2eae`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `4d0483b8bf4965b8c0b7f86fa5936001314a686a`
+- **Rejected implementation commit:** `3d323478320400c34fe9454b796fb638d9ac2eae`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
+
+## Review rejection and correction authority
+
+External review rejected exact remote head
+`4d0483b8bf4965b8c0b7f86fa5936001314a686a` and implementation commit
+`3d323478320400c34fe9454b796fb638d9ac2eae`. The concrete defect is an
+incorrect assignment of the `CalibrationSignal` mapping/construction boundary
+to MIP. The single authorized correction must restore the current P2 ownership
+model: GeoX owns experiment/readout truth and handoff eligibility; MMM owns
+experiment-to-model compatibility, calibration treatment/model lineage, and
+MMM numerical truth; MIP owns orchestration, lossless consumer normalization,
+verification, evidence assembly, governance, reporting, explanation, and UX.
+If live Git does not identify the serialized `CalibrationSignal` producer, the
+audit must leave that construction role contract-defined/unresolved rather than
+assigning it to MIP.
+
+Correction execution is authorized for this defect only. No sibling,
+analytical, contract, ledger, coordination-state, runtime, capability, PR, or
+merge authority changed.
 
 ## Outcome
 
