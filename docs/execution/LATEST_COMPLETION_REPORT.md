@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `audit/mip-geox-mmm-pending-work-and-llm-dependency-audit-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `3d323478320400c34fe9454b796fb638d9ac2eae`
+- **Implementation commit:** `474980f4ddfe3bb851fc9cf675d6e697a3fb3dbb`
 - **Reviewed head:** `null`
 - **Rejected review head:** `4d0483b8bf4965b8c0b7f86fa5936001314a686a`
 - **Rejected implementation commit:** `3d323478320400c34fe9454b796fb638d9ac2eae`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -54,16 +54,21 @@ merge authority changed.
 
 Completed the MIP-owned, read-only cross-repository audit at
 `docs/audits/MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001.md`.
-Implementation commit:
-`3d323478320400c34fe9454b796fb638d9ac2eae`.
+Corrected implementation commit:
+`474980f4ddfe3bb851fc9cf675d6e697a3fb3dbb`. Rejected implementation
+`3d323478320400c34fe9454b796fb638d9ac2eae` remains lineage only.
 
 The audit records the exact live refs and lifecycle state for all three
 repositories; separates the six required governance, methodology, integration,
 LLM, and later-runtime lanes; inventories completed prerequisites and remaining
-work; maps every edge in the GeoX → MIP `CalibrationSignal` boundary → MMM
-compatibility/full-panel `delta_mu` → MIP planning chain; justifies sequential
-and safely parallel work; distinguishes eligibility from authorization; defines
-the pre-P2 LLM fixture boundary; and supplies Git-first handoff prompts.
+work. The corrected chain is GeoX-owned readout truth and handoff eligibility →
+`CalibrationSignal` as the sole governed bridge, with the exact certified P2
+serializer/producer contract-defined and unresolved rather than assigned to
+MIP → MMM-owned compatibility, calibration treatment/model lineage, and
+full-panel `delta_mu` → MIP lossless consumer verification, evidence assembly,
+governance, reporting, explanation, and UX. The audit also justifies sequential
+and safely parallel work, distinguishes eligibility from authorization, defines
+the pre-P2 LLM fixture boundary, and supplies Git-first handoff prompts.
 
 ## Git evidence and concurrency
 
@@ -99,7 +104,9 @@ performed. Sibling evidence was read from exact remote refs.
   `WS-MIP-GEOX-MMM-PENDING-WORK-LLM-DEPENDENCY-AUDIT-001`.
 - **Capability owner:** `mip_cross_repository_program_audit`; GeoX retains
   experiment/producer truth, MMM retains model/compatibility/simulation truth,
-  and MIP retains mapping/orchestration/reporting truth.
+  and MIP retains lossless consumer normalization, orchestration, verification,
+  evidence assembly, governance, reporting, explanation, and UX. MIP does not
+  construct `CalibrationSignal` or determine compatibility/calibration treatment.
 - **Observed dependencies/blockers:** the GeoX producer checkpoint; MMM
   provenance-linked compatibility/full-panel fixture checkpoint;
   `P2_MIP_GEOX_MMM_COMPATIBILITY_BRIDGE`;
@@ -151,6 +158,16 @@ merge, squash, rebase, force-push, cherry-pick, or merge commit occurred.
   dependency, blocker, path, and classification: **passed**; cited paths were
   verified with ref-scoped `git cat-file`, `git show`, `git grep`, or
   `git ls-tree`.
+- Correction evidence review: **passed** against the current MIP P2 consumer
+  contract, GeoX source-manifest/readout handoff evidence, and MMM
+  GeoX/CLS-adapter, compatibility, diagnostic-attachment, and
+  calibration-treatment-lineage contracts at the exact live refs above.
+- Ownership acceptance checks: **passed**. The audit assigns GeoX numerical
+  truth and handoff eligibility to GeoX; MMM compatibility, calibration
+  treatment/model lineage, and numerical truth to MMM; and only lossless
+  normalization, orchestration, verification, evidence assembly, governance,
+  reporting, explanation, and UX to MIP. It does not assign `CalibrationSignal`
+  construction or an analytical compatibility decision to MIP.
 - Sequential/parallel and eligibility/authorization review: **passed**; every
   parallel item has an isolation boundary and every recommendation is advisory.
 - Sibling pre/post status and no-change check: **passed**.
