@@ -1,17 +1,17 @@
 {
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-  "task_id": "MIP_DECISION_EVIDENCE_GAP_REGISTER_PROPOSAL_001",
-  "status": "merged",
+  "task_id": "MIP_ESTIMAND_PROTOCOL_DESIGN_001",
+  "status": "proposed",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
-  "base_sha": "fa930ad6e6524a462c45dea122987ffc88b7dc4c",
-  "task_authoring_start_sha": "fa930ad6e6524a462c45dea122987ffc88b7dc4c",
-  "task_authoring_head_sha": "d8dad41de11869b1611285c32dbc673d09658e71",
-  "authorization_head_sha": "d8dad41de11869b1611285c32dbc673d09658e71",
+  "base_sha": "8fcb309b9d55a4e52b868d9324145cfb93f4cb47",
+  "task_authoring_start_sha": "8fcb309b9d55a4e52b868d9324145cfb93f4cb47",
+  "task_authoring_head_sha": null,
+  "authorization_head_sha": null,
   "authorization_head_convention": "first_main_commit_establishing_authorized_task_contract_then_immutable_provenance_recorded_by_metadata_only_finalization",
-  "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_feature_branch_head",
-  "feature_branch": "docs/mip-decision-evidence-gap-register-proposal-001",
+  "finalized_branch_baseline_resolution": "pending_metadata_only_authorization_provenance_finalization",
+  "feature_branch": "docs/mip-estimand-protocol-design-001",
   "feature_branch_created": false,
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
@@ -19,9 +19,9 @@
   "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
-  "reviewed_head_sha": "42c53328336915e7c93b18fa463256206cb4187f",
+  "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
-  "implementation_commit_sha": "f98d8cbad654090047375b638961796c86766eb8",
+  "implementation_commit_sha": null,
   "rejected_implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
@@ -35,8 +35,8 @@
   "full_suite_validation_required": false,
   "validation_scope": "taskctl_check_json_structure_diff_check_changed_paths_review_tier_1_focused_gate",
   "owned_implementation_paths": [
-    "docs/roadmap/ROADMAP.md",
-    "docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md"
+    "docs/design/MIP_ESTIMAND_PROTOCOL_DESIGN_001.md",
+    "docs/roadmap/ROADMAP.md"
   ],
   "task_authoring_boundary": [
     "docs/execution/ACTIVE_TASK.md",
@@ -50,7 +50,16 @@
   "modified_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform"
   ],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "dependency_id": "DEP-DE0-REGISTER-PROPOSAL-MERGED-001",
+      "repository": "Phani-Pavuluri/marketing_intelligence_platform",
+      "task_id": "MIP_DECISION_EVIDENCE_GAP_REGISTER_PROPOSAL_001",
+      "state": "satisfied",
+      "observed_main_sha": "8fcb309b9d55a4e52b868d9324145cfb93f4cb47",
+      "resolution_condition": "MIP live origin/main records the register proposal task merged with the DE-0 row unchecked before DE-0 design authoring and again on the implementation tree."
+    }
+  ],
   "sibling_repositories_read_only": true,
   "coordination_refresh_authorized": false,
   "audit_artifact_authorized": false,
@@ -84,10 +93,10 @@
   ],
   "next_task_id": null,
   "next_task_authorized": false,
-  "review_decision": "merged",
+  "review_decision": "proposed",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "prompt_strategy": "invocation_only_from_git_authored_task",
-  "task_authoring_note": "Explicitly authorized by the user on 2026-09-19 at immutable authorization provenance d8dad41de11869b1611285c32dbc673d09658e71 as one MIP-owned Tier 1 documentation-only proposal (header-only P2 collision classification first, then all-unchecked DE-0..DE-11 register insertion). Authoring observed clean synchronized MIP origin/main fa930ad6e6524a462c45dea122987ffc88b7dc4c with taskctl check passing. No sibling evidence is required and no coordination-state refresh is authorized. Merge, PR, sibling, capability, analytical, runtime, pilot, and production authority are not granted.",
-  "local_feature_branch_cleanup": "observed_deleted",
-  "remote_feature_branch_cleanup": "observed_deleted"
+  "task_authoring_note": "Proposed-only authoring explicitly requested by the user on 2026-09-19 from clean synchronized MIP origin/main 8fcb309b9d55a4e52b868d9324145cfb93f4cb47 with taskctl check passing. This commit publishes the DE-0 design task contract as proposed and stops. No execution, correction, merge, PR, branch creation, implementation, capability, sibling-repository, or production authority is granted by this state.",
+  "local_feature_branch_cleanup": null,
+  "remote_feature_branch_cleanup": null
 }
