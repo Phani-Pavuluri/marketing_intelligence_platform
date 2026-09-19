@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** proposed
+**Status:** authorized
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -12,7 +12,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Authorization provenance:** `null`
 - **Feature branch:** `docs/mip-estimand-protocol-design-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `false`
+- **Task execution authorized:** `true`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `proposed`
+- **Review decision:** `authorized`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -198,9 +198,7 @@ pre-authorize or silently define those tasks.
 
 ## Git workflow and stop condition
 
-This authoring step publishes `proposed` state on `main` and stops. No
-execution occurs until a separate authorization finalizes the contract.
-Execution, when authorized, runs only on
+This task is authorized for execution on
 `docs/mip-estimand-protocol-design-001` from the exact finalized
 synchronized authorization baseline: create the design document, move the
 DE-0 row to `evidence_submitted` with the artifact SHA and empty

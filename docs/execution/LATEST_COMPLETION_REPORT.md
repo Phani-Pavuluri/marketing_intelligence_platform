@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `proposed`
+**Current decision:** `authorized`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -12,7 +12,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Authorization provenance:** `null`
 - **Feature branch:** `docs/mip-estimand-protocol-design-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `false`
+- **Task execution authorized:** `true`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,15 +25,15 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `proposed`
+- **Review decision:** `authorized`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## Task-authoring outcome (proposed, not authorized)
+## Task-authoring outcome (authorized, not yet executed)
 
-`MIP_ESTIMAND_PROTOCOL_DESIGN_001` is proposed as one Tier 1
+`MIP_ESTIMAND_PROTOCOL_DESIGN_001` is authorized as one Tier 1
 documentation-only task: a non-normative estimand-protocol design at
 `docs/design/MIP_ESTIMAND_PROTOCOL_DESIGN_001.md` (quantities,
 estimand-versus-planning distinction, R0 ownership, boundaries,
@@ -89,15 +89,16 @@ Category results from executed commands on the authored tree:
 
 ## Authority impact
 
-None. Proposed status is non-executable: `task_execution_authorized` is
-false, authorization SHAs are null, and every protected authority flag
-remains false. The task proposal itself grants no spend, optimization,
-recommendation, real-data, pilot, production, promotion, or runtime
-authority.
+None beyond the owned documentation paths. Authorized status grants
+execution on the declared feature branch only: `task_execution_authorized`
+is true while merge, PR, correction, and every protected authority flag
+remain false. This task grants no spend, optimization, recommendation,
+real-data, pilot, production, promotion, or runtime authority.
 
 ## Stop condition
 
-Authoring stops here. The next step, if taken, is a separate review and
-authorization decision on this exact proposed contract through the normal
-`proposed → authorized` chain. No branch, implementation, review
-publication, or merge follows from this commit.
+Authorization stops here. Execution follows separately on
+`docs/mip-estimand-protocol-design-001` from the finalized authorization
+baseline under the invocation-only contract, ending at
+`ready_for_review` or a Git-durable `blocked` state. No branch,
+implementation, review publication, or merge follows from this commit.
