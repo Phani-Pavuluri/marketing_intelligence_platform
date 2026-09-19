@@ -1,5 +1,17 @@
 # Roadmap Execution Sequence
 
+> **Historical classification (2026-09-19):** this document is retained as
+> historical reference only. The canonical product lifecycle is P0–P8 in
+> [ROADMAP.md](ROADMAP.md), governed by the R0–R6 gates. P2 phase-name
+> collision resolved as follows: (a) canonical P2 certified planning
+> evidence lifecycle in `ROADMAP.md` — retained; (b) legacy Phase 2
+> Reliability-First MMM Foundation in `ROADMAP.md` — historical; (c) the
+> P0–P20 implementation phases in this document (including P2 as I3
+> required data assets) — historical; (d) program-file working usage of P2
+> as the fixture-only cross-repository tranche — retained as working usage,
+> not roadmap authority. Nothing in this document authorizes execution; a
+> rename of this file, if pursued, is a separate successor task.
+
 ## Canonical decision-lifecycle sequence (2026-07-20)
 
 The primary sequence is P0–P8 in [ROADMAP.md](ROADMAP.md): product/authority
