@@ -9,9 +9,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Base SHA:** `8fcb309b9d55a4e52b868d9324145cfb93f4cb47`
-- **Authorization provenance:** `null`
+- **Authorization provenance:** `96d164aca8400f0ba59643d1e869ebc045180d38`
 - **Feature branch:** `docs/mip-estimand-protocol-design-001`
-- **Feature branch created:** `false`
+- **Feature branch created:** `true`
 - **Task execution authorized:** `true`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
