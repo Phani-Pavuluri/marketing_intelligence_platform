@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -16,7 +16,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `null`
+- **Implementation commit:** `685b7b21359a80ef0a83d0428d0c7ea1888f383d`
 - **Reviewed head:** `null`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
@@ -25,80 +25,87 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## Task-authoring outcome (authorized, not yet executed)
+## Implementation outcome
 
-`MIP_ESTIMAND_PROTOCOL_DESIGN_001` is authorized as one Tier 1
-documentation-only task: a non-normative estimand-protocol design at
-`docs/design/MIP_ESTIMAND_PROTOCOL_DESIGN_001.md` (quantities,
-estimand-versus-planning distinction, R0 ownership, boundaries,
-non-claims, version scope, re-verification triggers), plus the DE-0
-register row's move to `evidence_submitted` with the design artifact SHA
-recorded and acceptance SHA empty.
+Implemented the authorized Tier 1 design on
+`docs/mip-estimand-protocol-design-001`:
 
-Acceptance authority is the MIP program/governance owner; the exact
-review-head SHA will serve as review evidence only. No row reaches
-`accepted` in this task; that flip is a deferred successor. The document
-is a design proposal, not a new MIP contract or cross-repository schema.
+- Commit `95aa916a085e6e705674e8652704d884370a55ef`: new non-normative
+  design `docs/design/MIP_ESTIMAND_PROTOCOL_DESIGN_001.md` (110 lines)
+  with quantities per lifecycle stage, the estimand-versus-planning
+  distinction, R0 ownership mapping, boundaries, non-claims,
+  scope/version/fingerprint fields, re-verification triggers, producer
+  versus accepting authority, and no-authority impact.
+- Commit `685b7b21359a80ef0a83d0428d0c7ea1888f383d`: DE-0 row
+  `unchecked` / `not_eligible` → `evidence_submitted`, recording the
+  design artifact SHA and leaving acceptance SHA empty.
 
-No implementation exists yet. The feature branch
-`docs/mip-estimand-protocol-design-001` has not been created. No
-execution, correction, merge, PR, sibling, capability, analytical,
-runtime, pilot, or production authority is granted by this proposed
-state.
+Total branch diff vs the finalized baseline: 2 owned files, 111
+insertions, 1 deletion (the single row-status line). DE-1 through DE-11
+remain unchecked; no row reads `accepted`.
 
 ## Authoring Git evidence
 
-- Initial and pre-authoring synchronized MIP main:
-  `8fcb309b9d55a4e52b868d9324145cfb93f4cb47` (local `main` equals
-  `origin/main`, verified by fetch, `--ff-only` pull, `rev-parse`, and
-  `ls-remote`).
-- MIP lifecycle consistency:
-  `poetry run python -m mip.execution.taskctl check` passed on the
-  pre-authoring tree and is re-run on the authored tree below.
-- Worktree state at authoring: clean except permitted local-only
-  `?? .codex/config.toml`, which is never staged or committed.
-- Dependency satisfied: `MIP_DECISION_EVIDENCE_GAP_REGISTER_PROPOSAL_001`
-  is merged at `8fcb309` with the DE-0 row unchecked.
-- No sibling evidence was read or needed: the task neither affects nor
-  modifies MMM or GeoX, and no coordination-state refresh is authorized.
+- Authorization provenance:
+  `96d164aca8400f0ba59643d1e869ebc045180d38`, finalized at
+  `028c5abfed2aa89c6f44d6a68e1f0262ed3bf1c0`.
+- Branch created from the exact finalized baseline `028c5ab`; design
+  committed before the row flip, and the row records the design commit
+  SHA.
+- Pre-authoring synchronized MIP main was
+  `8fcb309b9d55a4e52b868d9324145cfb93f4cb47` with `taskctl check`
+  passing; no sibling evidence is required for this MIP-only task.
 
-## Validation performed for this authoring step
+## Validation performed on the frozen exact tree
 
-- `poetry run python -m mip.execution.taskctl sync` to regenerate both
-  lifecycle views from canonical state.
-- `poetry run python -m mip.execution.taskctl check` on the authored tree.
-- `python3 -m json.tool docs/execution/EXECUTION_STATE.json` structure check.
-- `git diff --check` for whitespace errors.
-- `git status` and `git diff --name-only` proving the authored diff contains
-  only the three task-authoring boundary paths.
-
-Category results from executed commands on the authored tree:
-
-- `taskctl sync`: passed.
 - `taskctl check`: passed.
 - `json.tool` structure check: passed.
 - `git diff --check`: passed.
-- Changed-path check: passed — only the three task-authoring boundary
-  paths differ from the base.
+- Changed-path check (`96d164a...HEAD` and `028c5ab...HEAD`): passed —
+  branch adds only the new design doc and the single DE-0 row line.
+- Manual review against all 13 acceptance items: passed — quantities per
+  stage, estimand-versus-planning distinction, R0 mapping, non-claims,
+  scope/version/fingerprint, re-verification triggers, producer versus
+  accepting authority (MIP program/governance owner; SHA is review
+  evidence only), no execution/capability authority, all four reference
+  links resolve, Tier 1 checks pass, document declares itself
+  non-normative (not a contract or schema), DE-0 reads
+  `evidence_submitted` with artifact SHA and empty acceptance SHA,
+  paths limited to the owned set.
+- Link check: passed — all four design-doc references resolve to
+  committed files.
+- Docker-backed `make validate`: not_required — Tier 1
+  documentation-only gate; no code, contract, package, analytical, or
+  runtime surface changed.
+- Local/remote branch-head equality: verified after push (recorded
+  below).
+
+## Cross-repository impact
+
+Affected and modified repository: MIP only. No sibling task, branch, or
+file was read, touched, or authorized. No coordination-state refresh was
+performed or required. No dependency or blocker IDs were created,
+advanced, resolved, or superseded beyond the satisfied register-merged
+dependency. No consumer verification arises from this design.
 
 ## Authority impact
 
-None beyond the owned documentation paths. Authorized status grants
-execution on the declared feature branch only: `task_execution_authorized`
-is true while merge, PR, correction, and every protected authority flag
-remain false. This task grants no spend, optimization, recommendation,
-real-data, pilot, production, promotion, or runtime authority.
+Execution on the owned documentation paths only; merge, PR, correction,
+and every protected authority flag remain false. This design grants no
+spend, optimization, recommendation, real-data, pilot, production,
+promotion, or runtime authority. No row was flipped to `accepted`.
 
 ## Stop condition
 
-Authorization stops here. Execution follows separately on
-`docs/mip-estimand-protocol-design-001` from the finalized authorization
-baseline under the invocation-only contract, ending at
-`ready_for_review` or a Git-durable `blocked` state. No branch,
-implementation, review publication, or merge follows from this commit.
+Implementation is published for external exact-head review by the named
+acceptance authority (MIP program/governance owner). No merge follows
+from this report; merging requires the exact approved remote head SHA
+through the repository's `branch_and_fast_forward` closure workflow.
+The accepted-flip successor, DE-1/DE-3 finalization, and all other
+deferred work remain unauthorized.
