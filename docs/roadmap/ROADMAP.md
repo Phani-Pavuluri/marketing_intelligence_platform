@@ -290,3 +290,34 @@ Initial implementation will be **deterministic and local-first**: Streamlit demo
 - [LLM Decision Layer vision](../architecture/LLM_DECISION_LAYER_VISION.md)
 - [LLM Decision Layer roadmap](./LLM_DECISION_LAYER_ROADMAP.md)
 - [Local-first app and deployment strategy](../architecture/LOCAL_FIRST_APP_AND_DEPLOYMENT_STRATEGY.md)
+
+## Decision-Evidence Gap Register (proposal, non-authorizing)
+
+**Status:** proposal only. Every row is `unchecked` / `not_eligible` at
+insertion with authority impact `none` and an empty acceptance SHA. Evidence
+completion never grants authority: no spend, optimization, recommendation,
+real-data use, pilot, production, promotion, or runtime integration follows
+from any row without a separate authority task and gate. No producer
+self-acceptance: the accepting authority is never the row's producing team.
+`369805d` is cited nowhere below; it may be cited only after verification
+against live Git on both sides.
+
+| ID | Bounded claim | Phase + governing gate | Owning team | Entry condition | Named evidence artifact | Acceptance authority | Acceptance SHA | Version scope + re-verification triggers | Status | Authority impact |
+|---|---|---|---|---|---|---|---|---|---|---|
+| DE-0 | Estimand protocol defines the measurable quantities before any criterion is set | P0 + R0 | MIP program owner | Register proposal merged | Estimand-protocol design with named acceptance | Named human/governance approver | — | v1 scope; re-verify on estimand, phase, or gate change | unchecked / not_eligible | none |
+| DE-1 | Measurement-readiness criteria for MMM inputs are stated and testable | P1 + R1/R3 | MIP benchmark owner | DE-0 design accepted | Measurement-readiness criteria | Named human/governance approver | — | v1 scope; re-verify on input contract or gate change | unchecked / not_eligible | none |
+| DE-2 | Experiment-design evidence requirements are stated before calibration claims | P1 + R1/R3 | GeoX truth owner (MIP records) | DE-0 design accepted | Experiment-evidence requirements | GeoX owner + MIP consumer verification | — | v1 scope; re-verify on design-standard or handoff change | unchecked / not_eligible | none |
+| DE-3 | Full-pipeline certification path records the known MMM upstream gap | P2 + R2–R4 | MMM truth owner (MIP records) | DE-0 design accepted; DE-1 criteria stated | Certification-path record citing the blocked Tier-1 runner | MMM owner + MIP consumer verification | — | v1 scope; re-verify on runner availability or compatibility change. Known gap: producer inputs exist (replay calibration compatibility, supported-range evidence, synthetic recovery worlds, calibration lineage) but MMM has no deterministic Tier-1 batch runner; its authoring attempt ended in an honest blocked receipt. Cited, not built. | unchecked / not_eligible | none |
+| DE-4 | Bounded human-supplied plan comparison stays comparison-only | P2 + R2–R4 | MIP planning owner | Certified producer evidence at an exact pin | Plan-comparison boundary statement | Named human/governance approver | — | v1 scope; re-verify on comparison-surface or gate change | unchecked / not_eligible | none |
+| DE-5 | Planning-evidence report assembly preserves lineage and limits claims | P2 + R2–R4 | MIP reporting owner | D6 compatibility evidence merged | Planning-evidence assembly criteria | Named human/governance approver | — | v1 scope; re-verify on report contract or lineage change | unchecked / not_eligible | none |
+| DE-6 | Evidence scanner detects stale or unsupported claims before planning use | P3 + R1/R3 | MIP benchmark owner | DE-0 design accepted | Scanner design (after DE-0) | Named human/governance approver | — | v1 scope; re-verify on scanner surface or fixture change | unchecked / not_eligible | none |
+| DE-7 | Handoff contract governs what crosses repository boundaries | P2/P4 + R4 | MIP release owner with MMM/GeoX owners | DE-0 design accepted | Handoff-contract design (after DE-0) | Producer owners + MIP consumer verification | — | v1 scope; re-verify on contract, version, or pin change | unchecked / not_eligible | none |
+| DE-8 | Comparator evidence supports only gate-permitted comparisons | P6 + R3–R6 | MMM/MIP owners | Gates permit comparator use | Comparator-use criteria | Owning-repo approver + consumer verification | — | v1 scope; re-verify on comparator truth or gate change | unchecked / not_eligible | none |
+| DE-9 | Controlled-outcome evidence is collected only where gates permit | P6/P7 + R5/R6 | Program owners | Explicit pilot/real-data authorization exists | Controlled-outcome collection criteria | Named human/governance approvers | — | v1 scope; re-verify on environment or authorization change | unchecked / not_eligible | none |
+| DE-10 | Ops lane stays supporting: jobs, recovery, and SLOs gate nothing by themselves | P5 + R5 | MIP platform owner | R5 controls defined | Ops supporting-role statement | MIP platform/security owner | — | v1 scope; re-verify on ops-surface or control change | unchecked / not_eligible | none |
+| DE-11 | Provider evaluation stays supporting: no model, prompt, or provider promotion follows | P3 + R1/R3 | MIP benchmark owner | Benchmark design approved | Provider-evaluation boundary statement | Named human/governance approver | — | v1 scope; re-verify on benchmark or provider-surface change | unchecked / not_eligible | none |
+
+Entry discipline restated: DE-0 design task first with named acceptance;
+DE-1/DE-3 criteria finalize after; DE-6 scanner and DE-7 handoff contract
+after DE-0; comparators and controlled outcomes only when gates permit;
+ops/LLM lanes stay supporting.
