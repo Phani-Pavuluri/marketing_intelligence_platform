@@ -1,257 +1,149 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** merged
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001`
+- **Task ID:** `MIP_DECISION_EVIDENCE_GAP_REGISTER_PROPOSAL_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `b0f57701a55d5cbe1d94692bf378a23d03945646`
-- **Authorization provenance:** `688dbe6d780d12a8e8964524326439f16729c746`
-- **Feature branch:** `audit/mip-geox-mmm-pending-work-and-llm-dependency-audit-001`
+- **Base SHA:** `fa930ad6e6524a462c45dea122987ffc88b7dc4c`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-decision-evidence-gap-register-proposal-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `474980f4ddfe3bb851fc9cf675d6e697a3fb3dbb`
-- **Reviewed head:** `d8826a3c677b88b752d044ea7441243f49702aee`
-- **Rejected review head:** `4d0483b8bf4965b8c0b7f86fa5936001314a686a`
-- **Rejected implementation commit:** `3d323478320400c34fe9454b796fb638d9ac2eae`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
+- **Rejected review head:** `null`
+- **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `1`
-- **Correction cycles remaining:** `0`
-- **Review decision:** `merged`
-- **Local feature-branch cleanup:** `observed_deleted`
-- **Remote feature-branch cleanup:** `observed_deleted`
+- **Correction cycles completed:** `0`
+- **Correction cycles remaining:** `1`
+- **Review decision:** `proposed`
+- **Local feature-branch cleanup:** `null`
+- **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
 ## Primary outcome
 
-Create one Git-authoritative MIP coordination audit at
-`docs/audits/MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001.md` that
-reconstructs the remaining work across MIP, GeoX, and MMM from freshly fetched
-repository evidence and explains exactly how that work gates, or can proceed in
-parallel with, the MIP LLM layer.
+Publish one Git-authoritative, Tier 1 documentation-only proposal that:
 
-The audit is a read-only evidence and sequencing milestone. It must distinguish
-observed state, dependency eligibility, repository-local authorization, and
-capability authority. It does not execute, authorize, repair, certify, or change
-any analytical, integration, LLM, runtime, pilot, or production capability.
+1. Classifies the stale `docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md` as
+   historical with a header-only change (no restructure, no rename),
+   resolving the known P2 phase-name collision with precise retire-vs-retain
+   scope; then
+2. Inserts the Decision-Evidence Gap Register (rows DE-0 through DE-11) as a
+   reviewed, explicitly non-authorizing proposal section in the canonical
+   `docs/roadmap/ROADMAP.md`, with every row `unchecked` / `not_eligible`
+   and authority impact `none` throughout at insertion.
+
+Classification is the first-commit boundary: it lands first on the feature
+branch and is verified before any register insertion. The rename stays a
+separate successor and is not bundled into the classification commit.
 
 ## Why this is one independently reviewable outcome
 
-Repository state, analytical-roadmap state, P2 integration state, and LLM
-dependency state must be reconciled in one artifact because the central audit
-question is the relationship among them. Splitting the inventory from the
-dependency/parallelism analysis or from the handoff prompts would produce an
-incomplete and potentially misleading coordination view. Any implementation,
-state refresh, task authorization, methodology change, or runtime change is an
-independent successor and is excluded.
+The collision context and the register content must be reviewed together: the
+classification commit states precisely which P2 meaning is retired versus
+retained, and the register insertion is only legible against that resolved
+namespace. Classification alone would leave the roadmap mid-sentence with no
+register to justify the retained meanings; insertion alone would land rows
+into a collided namespace. The rename, DE-0 design, archive moves, schema
+adoption, sequencing work, the Tier-1 runner, and AGENTS changes are each
+separately reviewable and are split off as successors below.
 
-## Authoring evidence and live concurrency boundary
+## Register objective and core rule
 
-Task authoring observed:
+Objective: a governed register (DE-0 estimand protocol through DE-11 provider
+evaluation) identifying where MIP needs measurement and experimentation
+evidence before future planning decisions. Goal is bounded proof — more
+calibrated, reproducible, transparent, safer evidence under declared
+conditions — never a claim of universally best MMM.
 
-- MIP `origin/main` at `b0f57701a55d5cbe1d94692bf378a23d03945646`,
-  with `MIP_EXECUTION_LIFECYCLE_SINGLE_SOURCE_CONSISTENCY_001` merged and
-  `poetry run python -m mip.execution.taskctl check` passing;
-- GeoX `origin/main` at `2111cfb2197ea62531919791a1e794a5f601ee6e`;
-- GeoX lifecycle-authoritative branch
-  `origin/audit/geox-main-test-isolation-and-checkpoint-context-reassessment-001`
-  at `0f79d277afac4a8675bc3a1365ae89c6da8dcbf9`, descending from authorization
-  head `b003d7915d635413fd45fcb98e4ee36ccbc0c7b8`, with task
-  `GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_REASSESSMENT_001` at
-  `ready_for_review`, one correction cycle consumed, and four current-main
-  validation-defect classes reported;
-- MMM `origin/main` at `fe8e784923994406a2e4907d28debd872d61fd73`,
-  with `MMM_EXECUTION_AUTHORITY_CLOSURE_CONSISTENCY_FIX_001` merged and no
-  declared active remote task branch.
+Core rule: evidence completion never grants authority. No spend,
+optimization, recommendation, real-data use, pilot, production, promotion, or
+runtime integration follows from any row without a separate authority task
+and gate.
 
-These are authoring observations, not frozen execution truth. The audit executor
-must fetch all three remotes again and report the newly observed exact SHAs.
-GeoX activity is live concurrent work: do not modify, supersede, sequence inside,
-or treat its feature branch as merged evidence. If the branch moves, is merged,
-is rejected, becomes blocked, or disappears, use the repository's current Git
-evidence and preserve the authoring observation as provenance.
+## Entry discipline
 
-## Required evidence bootstrap
+- Register proposal first, all rows unchecked.
+- DE-0 gets its own design task with named acceptance before DE-1/DE-3
+  criteria finalize.
+- Scanner (DE-6) and handoff contract (DE-7) after.
+- Comparators and controlled outcomes only when gates permit.
+- Ops and LLM lanes stay supporting.
 
-Perform the root `AGENTS.md` bootstrap exactly and run
-`poetry run python -m mip.execution.taskctl check` before audit work. Re-fetch
-GeoX and MMM without modifying their worktrees. Read each sibling's root
-`AGENTS.md`, `EXECUTION_STATE.json`, `ACTIVE_TASK.md`,
-`REPOSITORY_CONTEXT_INDEX.md`, and `LATEST_COMPLETION_REPORT.md` from exact
-remote refs. When a synchronized sibling main declares an active or resumable
-feature branch, inspect that exact remote branch and verify repository identity,
-task identity, declared branch, authorization ancestry, and remote head.
+## Row requirements
 
-At minimum, use these MIP sources:
+Every row carries: ID, bounded claim, phase plus governing gate, owning team,
+entry condition, named evidence artifact, acceptance authority, acceptance
+SHA (empty at insertion), version scope with re-verification triggers,
+status from the controlled vocabulary (`unchecked` / `not_eligible` at
+insertion), and authority impact defaulting to `none`. No producer
+self-acceptance: the accepting authority is never the row's producing team.
 
-- `docs/execution/EXECUTION_STATE.json`
-- `docs/execution/ACTIVE_TASK.md`
-- `docs/execution/REPOSITORY_CONTEXT_INDEX.md`
-- `docs/execution/LATEST_COMPLETION_REPORT.md`
-- `docs/program/LEAN_REPOSITORY_DELIVERY_STANDARD.md`
-- `docs/program/CROSS_REPOSITORY_COORDINATION_PROTOCOL.md`
-- `docs/program/CROSS_REPOSITORY_COORDINATION_STATE.json`
-- `docs/program/CROSS_REPOSITORY_COORDINATION_HISTORY.md`
-- `docs/program/PROGRAM_CURRENT_STATE.md`
-- `docs/program/NEXT_EXECUTION_SEQUENCE.md`
-- `docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json`
-- `docs/program/AUTHORITY_AND_FREEZE_MATRIX.md`
-- `docs/program/DEFERRED_AND_PARKED_WORK.md`
-- `docs/program/REPOSITORY_CHECKPOINTS.md`
-- `docs/roadmap/ROADMAP.md`
-- `docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md`
-- `docs/roadmap/LLM_DECISION_LAYER_ROADMAP.md`
-- `docs/roadmap/LLM_REASONING_AND_MODEL_GUIDANCE_ROADMAP.md`
-- `docs/roadmap/PLATFORM_COMPLETION_GAPS_ROADMAP.md`
-- `docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md`
+## DE-3 upstream citation (known gap, not built)
 
-Use the sibling context indexes to select current methodological, validation,
-contract, roadmap, investigation, and fixture evidence. The source set must
-include GeoX method-soundness/promotion/production-readiness and calibration
-source evidence, and MMM platform/reliability/calibration/provenance/public
-simulation evidence. Do not rely on filename inventories alone: read the
-evidence supporting every material conclusion.
+DE-3's full-pipeline certification path records the known MMM-side gap as
+cited context: producer inputs exist (replay calibration compatibility,
+supported-range evidence, synthetic recovery worlds, calibration lineage),
+but MMM has no deterministic Tier-1 batch runner — its authoring attempt
+ended in an honest blocked receipt. Citing it is this task's work; building
+the runner is not, and must not leak in.
 
-Git source precedence is mandatory. Synchronized remote repository evidence
-outranks coordination snapshots, roadmaps, archives, task documents in another
-repository, and chat. A feature branch can describe mutable lifecycle state but
-cannot satisfy a merged dependency.
+## Tracked constraints carried into this task
 
-## Required audit structure
+- The `369805d` SHA may be cited in task or register text only after
+  verification against live Git on both sides. It is currently a one-sided
+  citation: the MIP tree contains no reference to it, so no bilateral
+  coordination claim may rest on it until explicit Git evidence exists on
+  both sides.
+- The classification commit must state precisely which P2 meaning is retired
+  versus retained: (a) canonical P2 certified planning evidence lifecycle in
+  `ROADMAP.md` — retained; (b) legacy Phase 2 Reliability-First MMM
+  Foundation in `ROADMAP.md` — retired to historical; (c) execution-sequence
+  P2 (I3 required data assets) in `ROADMAP_EXECUTION_SEQUENCE.md` — retired
+  to historical; (d) program-file working usage (fixture-only cross-repository
+  tranche) — retained as working usage, not roadmap authority.
 
-The audit must have a dated evidence header with exact MIP, GeoX, and MMM remote
-main SHAs; exact lifecycle-authoritative feature-branch names and heads where
-present; commands or Git operations used to verify them; and an explicit
-snapshot/freshness limitation.
+## Authoring evidence
 
-It must explicitly separate these six lanes:
-
-1. repository execution-governance work;
-2. GeoX methodological roadmap;
-3. MMM methodological roadmap;
-4. P2 cross-repository integration;
-5. LLM/artifact-grounding evaluation; and
-6. later recommendation/runtime/pilot/production work.
-
-For every repository, record current task, lifecycle status, exact authoritative
-ref/head, execution/correction/merge/PR authority, capability authority,
-blockers, correction state, validation debt, recently completed prerequisites
-that materially affect eligibility, and the evidence path/ref for each claim.
-Separate current branch lifecycle from merged-main capability truth.
-
-## Required remaining-work inventory
-
-The audit must identify and evidence, without inventing task authority:
-
-- remaining GeoX methodological, validation, current-main defect remediation,
-  producer-certification, calibration-source, and P2 integration work;
-- remaining MMM methodological/reliability, GeoX compatibility, calibration,
-  provenance, full-panel delta-mu, public simulation/optimization, and P2
-  integration work;
-- remaining MIP P2 integration, parked bridge, D6, planning-evidence, LLM
-  benchmark/evaluation, package integration, artifact lifecycle, recommendation,
-  pilot, and production work;
-- completed or superseded items that materially change current eligibility; and
-- validation debt, deferred work, and frozen authority that must not be mistaken
-  for unfinished implementation.
-
-Do not flatten roadmap aspiration, implemented code, component validation,
-producer certification, consumer verification, merged capability, and execution
-authorization into one state. Where committed sources disagree because a
-snapshot is stale, apply the coordination protocol's live overlay and cite both
-the stale claim and the higher-precedence live resolution.
-
-## Dependency and parallelism analysis
-
-Render and explain the exact analytical chain:
-
-```text
-GeoX governed experiment/calibration-source evidence
-→ MIP-owned CalibrationSignal mapping/governance boundary
-→ MMM calibration compatibility and treatment
-→ MMM baseline-versus-candidate full-panel delta-mu evidence
-→ MIP planning-evidence assembly and governed explanation
-```
-
-The audit must map every edge to exact repository evidence and identify the
-owner, required input artifact/contract, output, validation or certification
-gate, consumer verification, current blocker, and authority boundary. It must
-not construct a `CalibrationSignal`, run calibration, simulate, optimize, or
-claim that a proposed/ready-for-review branch satisfies a merged prerequisite.
-
-Classify remaining work as:
-
-- strictly sequential, with the exact prerequisite and why it cannot overlap;
-- safely parallel, with the isolation boundary that prevents semantic drift;
-- eligible but unauthorized, naming the repository-local authority still
-  required;
-- blocked, naming the exact blocker and live resolution condition; or
-- deferred, naming the governing roadmap/gate.
-
-Every sequential-versus-parallel conclusion must be justified. The recommended
-eligibility sequence must be explicitly labeled advisory and must not be
-represented as task, merge, analytical, or capability authorization.
-
-## Deterministic work versus LLM work
-
-State exactly which LLM-layer activities depend on certified analytical truth
-and which may safely proceed earlier. Any pre-P2 LLM evaluation or infrastructure
-work may be described as safely parallel only when evidence supports explicit
-containment such as versioned synthetic or approved public fixtures, immutable
-expected outputs, no live MMM/GeoX invocation, no construction or alteration of
-analytical truth, no customer or real data, no persistent product artifacts, no
-provider/model/prompt promotion, no recommendation authority, and no claim of
-end-to-end P2 readiness.
-
-Distinguish benchmark design, deterministic orchestration/response-boundary
-tests, artifact-grounding evaluation, provider/model/prompt promotion, package
-integration, artifact persistence, and live runtime. For each, state its
-prerequisites, permitted fixture/artifact boundary, prohibited claims, and
-whether it is blocked, eligible-but-unauthorized, or deferred. Do not infer that
-LLM work is safe merely because it does not compute numerical truth.
-
-## Handoff and launch material
-
-Include ready-to-use orientation/handoff prompts for separate MIP, GeoX, and MMM
-chats. Each prompt must instruct the future chat to synchronize/fetch Git, read
-that repository's root `AGENTS.md` and execution files, resolve any exact remote
-feature branch, and treat the audit as a dated orientation snapshot rather than
-authority. The prompts must not embed mutable task meaning as an override.
-
-Include future Codex launch instructions only where consistent with the target
-repository's committed execution model. MIP execution/correction must use the
-invocation-only text `Synchronize from Git and execute the active task.`; a MIP
-merge launcher may add only the exact externally approved remote head SHA.
-For GeoX and MMM, quote or faithfully point to their then-current committed
-launcher model without broadening scope or authority. If no task is authorized,
-provide orientation text, not an execution launcher.
+Task authoring observed clean synchronized MIP `origin/main` at
+`fa930ad6e6524a462c45dea122987ffc88b7dc4c` with
+`poetry run python -m mip.execution.taskctl check` passing. No sibling
+evidence is required: this task neither reads nor writes MMM or GeoX, and no
+coordination-state refresh is authorized. The prior merged audit
+(`MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001`) and the program
+P2 ledger remain background context, not dependencies.
 
 ## Inputs, outputs, invariants, and failure semantics
 
-- **Inputs:** freshly fetched exact remote refs and the committed evidence named
-  above, including any lifecycle-authoritative sibling branch.
-- **Output:** only
-  `docs/audits/MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001.md`, plus
-  the required MIP lifecycle publication updates.
-- **Invariants:** MIP owns the audit; GeoX and MMM remain read-only; Git authority
-  and repository ownership are preserved; no product/analytical truth,
-  capability semantics, coordination ledger, or runtime behavior changes.
-- **Compatibility/migration:** `not_applicable`; no API, schema, state machine,
-  persisted artifact, version, or migration changes.
-- **Failure semantics:** stale/unfetchable refs, missing required history,
-  inconsistent task/branch identity or ancestry, an ownership/workstream
-  conflict, unsupported dependency claims, or inability to run a required gate
-  must fail closed. If a safe authorized MIP branch exists, publish a durable
-  `blocked` state with exact evidence and a live resolution condition.
+- **Inputs:** the two roadmap documents at the finalized authorization
+  baseline, plus this Git-authored contract.
+- **Output:** only the header-only classification of
+  `docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md` and the register proposal
+  section in `docs/roadmap/ROADMAP.md`, plus the required MIP lifecycle
+  publication updates.
+- **Invariants:** proposal-only and non-authorizing; every row unchecked at
+  insertion; authority impact none; Git authority and repository ownership
+  preserved; no product, analytical, capability, ledger, coordination-state,
+  or runtime behavior changes.
+- **Compatibility/migration:** `not_applicable`; no API, schema, state
+  machine, persisted artifact, version, or migration changes.
+- **Failure semantics:** any checked row at insertion, any bundled rename or
+  restructure, any widened classification diff, any sibling write, any
+  capability-authority change, or inability to run the Tier 1 gate must fail
+  closed. If a safe authorized branch exists at execution time, publish a
+  durable `blocked` state with exact evidence and a live resolution
+  condition.
 
 Unresolved execution-blocking design questions: none.
 
@@ -259,59 +151,47 @@ Unresolved execution-blocking design questions: none.
 
 Implementation may change only:
 
-- `docs/audits/MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001.md`
+- `docs/roadmap/ROADMAP.md` (register proposal section only)
+- `docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md` (header-only historical classification only)
 - `docs/execution/EXECUTION_STATE.json`
 - the generated lifecycle block in `docs/execution/ACTIVE_TASK.md`
 - `docs/execution/LATEST_COMPLETION_REPORT.md`
 
-The stable execution files are lifecycle publication paths, not additional audit
-deliverables. No coordination-state refresh is required or authorized.
+The stable execution files are lifecycle publication paths, not additional
+deliverables.
 
 ## Prohibited scope
 
-Do not modify GeoX or MMM; authorize or execute sibling tasks; alter product or
-analytical truth; repair GeoX defects; certify a producer; construct
-`CalibrationSignal`; run MMM calibration, fitting, simulation, or optimization;
-resume or modify the parked MIP bridge; change P2 capability semantics; modify
-LLM prompts/providers/runtime behavior; implement evaluation or infrastructure;
-change packages, contracts, schemas, fixtures, code, tests, CI, hooks, Docker,
-roadmaps, ledgers, coordination state, or repository standards; use real or
-customer data; create persistent product artifacts; make recommendations;
-authorize pilot/production; or modify any capability-authority flag.
-
-Do not create a PR, merge, squash, rebase, force-push, cherry-pick, create a
-merge commit, or modify/delete any sibling branch. Do not resume
-`feat/mip-p2-geox-mmm-compatibility-fixture-bridge-001`.
+Do not bundle the rename; move archives; adopt schemas; resequence
+`panel_exp`/MIP work; build the Tier-1 runner; change `AGENTS.md`;
+modify GeoX or MMM in any way; authorize or execute sibling tasks; alter
+product or analytical truth; construct `CalibrationSignal`; run calibration,
+fitting, simulation, or optimization; resume the parked MIP bridge; change P2
+capability semantics; modify LLM prompts, providers, or runtime behavior;
+change packages, contracts, schemas, fixtures, code, tests, CI, hooks, or
+Docker; alter roadmaps beyond the two owned surfaces; touch ledgers,
+coordination state, or repository standards; use real or customer data;
+create persistent product artifacts; make recommendations; authorize pilot,
+production, promotion, or runtime integration; modify any
+capability-authority flag; or create a PR, merge, squash, rebase,
+force-push, cherry-pick, or merge commit outside the repository's allowed
+`branch_and_fast_forward` flow.
 
 ## Acceptance evidence
 
-The completed artifact and report must prove:
+The completed proposal and report must prove:
 
-1. all three remote mains were freshly fetched and recorded at exact SHAs;
-2. every main-declared active/resumable sibling branch was checked at its exact
-   remote head with identity and authorization ancestry verified;
-3. repository ownership boundaries were preserved and sibling worktrees/files
-   were not changed;
-4. the six required lanes are visibly separate;
-5. each repository's current lifecycle, authority, blockers, corrections,
-   validation debt, recent prerequisites, and remaining work are evidence-linked;
-6. every dependency edge and blocked/eligible/deferred classification maps to an
-   exact Git ref and repository path;
-7. sequential and parallel work are explicitly justified;
-8. recommendation order is labeled eligibility guidance, never authorization;
-9. pre-P2 LLM work, if any, has explicit artifact/fixture containment and
-   prohibited-claim boundaries;
-10. handoff prompts force future chats to re-read Git and do not treat the audit
-    snapshot as authority;
-11. no coordination state, analytical/runtime behavior, capability semantics,
-    or authority flag changed; and
-12. changed paths are limited to the owned MIP paths.
-
-The completion report must include the protocol's cross-repository impact
-contract: affected/modified repositories, workstream and capability owner,
-dependency/blocker IDs observed or clarified, exact evidence refs/paths,
-consumer verification still required, newly eligible work, validation debt, and
-authority impact. Observing or recommending a successor never authorizes it.
+1. the classification diff is header-only with no restructure or rename;
+2. the retire-vs-retain statement names all four P2 meanings precisely;
+3. every register row DE-0 through DE-11 is present and `unchecked` /
+   `not_eligible` with authority impact `none` and empty acceptance SHA;
+4. no row is producer self-accepted;
+5. entry discipline (DE-0 first, DE-6/DE-7 after, gated comparators,
+   supporting ops/LLM lanes) is stated in text;
+6. DE-3 cites the MMM upstream gap without building it;
+7. `369805d` is cited only if verified against live Git, otherwise absent;
+8. no sibling path changed and no coordination state was refreshed; and
+9. changed paths are limited to the owned paths.
 
 ## Validation
 
@@ -322,34 +202,36 @@ poetry run python -m mip.execution.taskctl check
 python3 -m json.tool docs/execution/EXECUTION_STATE.json >/dev/null
 git diff --check
 git diff --name-only <authorization-head>...HEAD
-make validate
 ```
 
-Also perform a manual link/ref/evidence review of every SHA, branch, task ID,
-dependency, blocker, and path in the audit; verify local/remote MIP branch-head
-equality; record sibling pre/post worktree status and remote refs proving no
-sibling file changes; and classify each validation category as `passed`,
-`failed`, `blocked`, or `not_required`. Tier 3 and this task require the full
-Docker-backed repository gate.
+Also perform a manual review of every row status, SHA field, path, and the
+retire-vs-retain statement; verify local/remote branch-head equality; and
+classify each validation category as `passed`, `failed`, `blocked`, or
+`not_required`. Tier 1 uses this focused documentation gate; Docker-backed
+`make validate` is `not_required` (no code, contract, package, analytical,
+or runtime surface changes).
 
 ## Deferred successors
 
-All execution implied by the audit is deferred to separately authored and
-repository-locally authorized tasks, including GeoX defect remediation and
-producer certification; MMM compatibility/calibration/provenance/simulation or
-optimization; the parked MIP bridge, D6, and planning journey; LLM benchmark or
-infrastructure implementation; package integration; artifact lifecycle;
-recommendations; real-data runtime; pilot; and production. The audit may refine
-eligibility order but must not pre-authorize or silently define those tasks.
+Deliberately not in this task: DE-0's own estimand-protocol design task with
+named acceptance; the rename of the stale sequence doc; any archive moves;
+schema adoption; `panel_exp`/MIP sequencing work; the Tier-1 runner;
+`AGENTS.md` changes; and any execution, authorization, or capability claim
+flowing from any register row. The register may sequence future evidence work
+but must not pre-authorize or silently define those tasks.
 
 ## Git workflow and stop condition
 
-Execute only on
-`audit/mip-geox-mmm-pending-work-and-llm-dependency-audit-001` from the exact
-finalized synchronized authorization baseline. Create one independently
-reviewable audit implementation and a final exact-tree validation receipt,
-transition with explicit evidence to `ready_for_review`, push, verify the exact
-remote head, and stop for external exact-head review.
+This authoring step publishes `proposed` state on `main` and stops. No
+execution occurs until a separate authorization finalizes the contract.
+Execution, when authorized, runs only on
+`docs/mip-decision-evidence-gap-register-proposal-001` from the exact
+finalized synchronized authorization baseline: classification commit first
+with verification that nothing else shifted, then the all-unchecked register
+insertion, then the Tier 1 gate on the exact tree, transition with explicit
+evidence to `ready_for_review`, push, verify the exact remote head, and stop
+for external exact-head review.
 
-No audit implementation occurs during task authoring. No PR or merge is
-authorized.
+No implementation occurs during task authoring. No PR or merge is
+authorized. `direct_to_main` is not authorized; the mode remains
+`branch_and_fast_forward`.

@@ -1,17 +1,17 @@
 {
   "schema_version": "mip_repo_execution_state_v2",
   "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-  "task_id": "MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001",
-  "status": "merged",
+  "task_id": "MIP_DECISION_EVIDENCE_GAP_REGISTER_PROPOSAL_001",
+  "status": "proposed",
   "execution_mode": "branch_and_fast_forward",
   "base_branch": "main",
-  "base_sha": "b0f57701a55d5cbe1d94692bf378a23d03945646",
-  "task_authoring_start_sha": "b0f57701a55d5cbe1d94692bf378a23d03945646",
-  "task_authoring_head_sha": "688dbe6d780d12a8e8964524326439f16729c746",
-  "authorization_head_sha": "688dbe6d780d12a8e8964524326439f16729c746",
+  "base_sha": "fa930ad6e6524a462c45dea122987ffc88b7dc4c",
+  "task_authoring_start_sha": "fa930ad6e6524a462c45dea122987ffc88b7dc4c",
+  "task_authoring_head_sha": null,
+  "authorization_head_sha": null,
   "authorization_head_convention": "first_main_commit_establishing_authorized_task_contract_then_immutable_provenance_recorded_by_metadata_only_finalization",
-  "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_feature_branch_head",
-  "feature_branch": "audit/mip-geox-mmm-pending-work-and-llm-dependency-audit-001",
+  "finalized_branch_baseline_resolution": "pending_metadata_only_authorization_provenance_finalization",
+  "feature_branch": "docs/mip-decision-evidence-gap-register-proposal-001",
   "feature_branch_created": false,
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
@@ -19,23 +19,24 @@
   "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
-  "reviewed_head_sha": "d8826a3c677b88b752d044ea7441243f49702aee",
-  "rejected_review_head_sha": "4d0483b8bf4965b8c0b7f86fa5936001314a686a",
-  "implementation_commit_sha": "474980f4ddfe3bb851fc9cf675d6e697a3fb3dbb",
-  "rejected_implementation_commit_sha": "3d323478320400c34fe9454b796fb638d9ac2eae",
+  "reviewed_head_sha": null,
+  "rejected_review_head_sha": null,
+  "implementation_commit_sha": null,
+  "rejected_implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
-  "last_updated": "2026-09-15",
+  "last_updated": "2026-09-19",
   "blockers": [],
   "maximum_correction_cycles": 1,
-  "correction_cycles_completed": 1,
-  "correction_cycles_remaining": 0,
-  "risk_tier": "tier_3_cross_repository_documentation_coordination_audit",
+  "correction_cycles_completed": 0,
+  "correction_cycles_remaining": 1,
+  "risk_tier": "tier_1_routine_documentation_governance_guidance",
   "compatibility_migration_policy": "not_applicable_documentation_only_no_contract_schema_runtime_or_persisted_artifact_change",
-  "full_suite_validation_required": true,
-  "validation_scope": "fresh_remote_main_and_mutable_branch_evidence_cross_repository_ownership_and_dependency_traceability_markdown_structure_taskctl_consistency_changed_paths_diff_check_make_validate_exact_tree_receipt",
+  "full_suite_validation_required": false,
+  "validation_scope": "taskctl_check_json_structure_diff_check_changed_paths_review_tier_1_focused_gate",
   "owned_implementation_paths": [
-    "docs/audits/MIP_GEOX_MMM_PENDING_WORK_AND_LLM_DEPENDENCY_AUDIT_001.md"
+    "docs/roadmap/ROADMAP.md",
+    "docs/roadmap/ROADMAP_EXECUTION_SEQUENCE.md"
   ],
   "task_authoring_boundary": [
     "docs/execution/ACTIVE_TASK.md",
@@ -44,46 +45,15 @@
   ],
   "unresolved_execution_blocking_design_questions": [],
   "affected_repositories": [
-    "Phani-Pavuluri/marketing_intelligence_platform",
-    "Phani-Pavuluri/panel_exp",
-    "Phani-Pavuluri/MMM"
+    "Phani-Pavuluri/marketing_intelligence_platform"
   ],
   "modified_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform"
   ],
-  "coordination_workstream_id": "WS-MIP-GEOX-MMM-PENDING-WORK-LLM-DEPENDENCY-AUDIT-001",
-  "coordination_capability_owner": "mip_cross_repository_program_audit",
-  "dependencies": [
-    {
-      "dependency_id": "DEP-MIP-AUDIT-LIFECYCLE-BASELINE-001",
-      "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "task_id": "MIP_EXECUTION_LIFECYCLE_SINGLE_SOURCE_CONSISTENCY_001",
-      "state": "satisfied",
-      "observed_main_sha": "b0f57701a55d5cbe1d94692bf378a23d03945646",
-      "resolution_condition": "MIP live origin/main records the lifecycle single-source task merged and taskctl check passes before audit authoring and again on the implementation tree."
-    },
-    {
-      "dependency_id": "DEP-MIP-AUDIT-GEOX-LIVE-CONCURRENT-EVIDENCE-001",
-      "repository": "Phani-Pavuluri/panel_exp",
-      "task_id": "GEOX_MAIN_TEST_ISOLATION_AND_CHECKPOINT_CONTEXT_REASSESSMENT_001",
-      "state": "live_concurrent_ready_for_review_observed_not_a_merged_dependency",
-      "observed_main_sha": "2111cfb2197ea62531919791a1e794a5f601ee6e",
-      "observed_feature_head_sha": "0f79d277afac4a8675bc3a1365ae89c6da8dcbf9",
-      "resolution_condition": "At audit execution, re-fetch GeoX and read origin/main plus the exact lifecycle-authoritative remote branch when it still exists; record later movement rather than overwriting or treating the branch as merged capability evidence."
-    },
-    {
-      "dependency_id": "DEP-MIP-AUDIT-MMM-LIVE-EVIDENCE-001",
-      "repository": "Phani-Pavuluri/MMM",
-      "task_id": "MMM_EXECUTION_AUTHORITY_CLOSURE_CONSISTENCY_FIX_001",
-      "state": "satisfied_for_authoring_snapshot",
-      "observed_main_sha": "fe8e784923994406a2e4907d28debd872d61fd73",
-      "observed_feature_head_sha": null,
-      "resolution_condition": "At audit execution, re-fetch MMM and read origin/main execution evidence plus any then-declared lifecycle-authoritative remote branch before making a current-state claim."
-    }
-  ],
+  "dependencies": [],
   "sibling_repositories_read_only": true,
   "coordination_refresh_authorized": false,
-  "audit_artifact_authorized": true,
+  "audit_artifact_authorized": false,
   "execution_governance_changes_authorized": false,
   "product_or_analytical_changes_authorized": false,
   "geox_certification_authorized": false,
@@ -112,19 +82,12 @@
       "resume_authorized": false
     }
   ],
-  "observed_sibling_pins": {
-    "geox_main": "2111cfb2197ea62531919791a1e794a5f601ee6e",
-    "geox_active_branch": "audit/geox-main-test-isolation-and-checkpoint-context-reassessment-001",
-    "geox_active_branch_head": "0f79d277afac4a8675bc3a1365ae89c6da8dcbf9",
-    "mmm_main": "fe8e784923994406a2e4907d28debd872d61fd73",
-    "mmm_active_branch_head": null
-  },
   "next_task_id": null,
   "next_task_authorized": false,
-  "review_decision": "merged",
+  "review_decision": "proposed",
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "prompt_strategy": "invocation_only_from_git_authored_task",
-  "task_authoring_note": "Explicitly authorized by the user on 2026-09-15 at immutable authorization provenance 688dbe6d780d12a8e8964524326439f16729c746 as one MIP-owned read-only cross-repository audit artifact. Authoring observed clean synchronized MIP origin/main b0f57701a55d5cbe1d94692bf378a23d03945646; GeoX origin/main 2111cfb2197ea62531919791a1e794a5f601ee6e with lifecycle-authoritative ready_for_review branch head 0f79d277afac4a8675bc3a1365ae89c6da8dcbf9; and MMM origin/main fe8e784923994406a2e4907d28debd872d61fd73 with no declared active remote branch. The task authorizes audit documentation only and must re-verify all live evidence during execution.",
-  "local_feature_branch_cleanup": "observed_deleted",
-  "remote_feature_branch_cleanup": "observed_deleted"
+  "task_authoring_note": "Proposed-only authoring explicitly requested by the user on 2026-09-19 from clean synchronized MIP origin/main fa930ad6e6524a462c45dea122987ffc88b7dc4c with taskctl check passing. This commit publishes the task contract as proposed and stops. No execution, correction, merge, PR, branch creation, implementation, capability, sibling-repository, or production authority is granted by this state.",
+  "local_feature_branch_cleanup": null,
+  "remote_feature_branch_cleanup": null
 }
