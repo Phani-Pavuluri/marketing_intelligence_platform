@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -11,13 +11,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `fa930ad6e6524a462c45dea122987ffc88b7dc4c`
 - **Authorization provenance:** `d8dad41de11869b1611285c32dbc673d09658e71`
 - **Feature branch:** `docs/mip-decision-evidence-gap-register-proposal-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `f98d8cbad654090047375b638961796c86766eb8`
-- **Reviewed head:** `null`
+- **Reviewed head:** `42c53328336915e7c93b18fa463256206cb4187f`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -25,9 +25,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 

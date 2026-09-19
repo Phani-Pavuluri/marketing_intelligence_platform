@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -11,13 +11,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `fa930ad6e6524a462c45dea122987ffc88b7dc4c`
 - **Authorization provenance:** `d8dad41de11869b1611285c32dbc673d09658e71`
 - **Feature branch:** `docs/mip-decision-evidence-gap-register-proposal-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `f98d8cbad654090047375b638961796c86766eb8`
-- **Reviewed head:** `null`
+- **Reviewed head:** `42c53328336915e7c93b18fa463256206cb4187f`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -25,9 +25,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
@@ -101,11 +101,39 @@ promotion, or runtime authority. The two tracked constraints (369805d
 bilateral-verification rule; precise P2 retire-vs-retain) are carried in
 the Git-authored contract, not in chat.
 
+## Merge and closure
+
+- External approval: the user approved the exact remote review head
+  `42c53328336915e7c93b18fa463256206cb4187f` for merge and closure.
+- Lineage: authorization provenance
+  `d8dad41de11869b1611285c32dbc673d09658e71`; finalized baseline
+  `b9d70e43aa623bf75e311fdb208d04ddbe878f7b`; classification
+  `80e1df92ee178df6cace4346c65851f6494fa3bf`; register insertion
+  `f98d8cbad654090047375b638961796c86766eb8`; reviewed and merged head
+  `42c53328336915e7c93b18fa463256206cb4187f`.
+- Pre-merge exact-head validation on the approved tree: `taskctl check`,
+  `json.tool`, `git diff --check` passed; ancestry from the authorization
+  head and owned-paths-only diff verified; Docker-backed `make validate`
+  not_required per the authorized Tier 1 gate.
+- Fast-forward: synchronized main `b9d70e4` advanced with
+  `git merge --ff-only` to the exact approved head. No merge commit.
+- Post-fast-forward validation on main: same Tier 1 gate passed.
+- Publication: main pushed; local `main == origin/main` verified at the
+  reviewed head.
+- Cleanup: local and remote branch
+  `docs/mip-decision-evidence-gap-register-proposal-001` both observed
+  deleted after main publication.
+- Closure paths: this post-merge closure changes only
+  `docs/execution/EXECUTION_STATE.json`, the generated lifecycle block
+  in `docs/execution/ACTIVE_TASK.md`, and this report.
+- Authority impact: task execution, correction, merge, and PR authority
+  are false after closure; capability authorizations unchanged. The
+  register grants no spend, optimization, recommendation, real-data,
+  pilot, production, promotion, or runtime authority.
+
 ## Stop condition
 
-Implementation is published for external exact-head review. No merge
-follows from this report; merging requires the exact approved remote
-head SHA through the repository's `branch_and_fast_forward` closure
-workflow. Deferred successors (DE-0 design, rename, archives, schema,
-sequencing, Tier-1 runner, AGENTS changes, any row execution) remain
-unauthorized.
+Task closed as `merged`. Deferred successors (DE-0 estimand-protocol
+design with named acceptance, rename, archives, schema, sequencing,
+Tier-1 runner, AGENTS changes, any row execution) remain separately
+authored and unauthorized. No further action follows from this report.
