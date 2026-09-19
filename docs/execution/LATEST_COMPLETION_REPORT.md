@@ -9,9 +9,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Base SHA:** `fa930ad6e6524a462c45dea122987ffc88b7dc4c`
-- **Authorization provenance:** `null`
+- **Authorization provenance:** `d8dad41de11869b1611285c32dbc673d09658e71`
 - **Feature branch:** `docs/mip-decision-evidence-gap-register-proposal-001`
-- **Feature branch created:** `false`
+- **Feature branch created:** `true`
 - **Task execution authorized:** `true`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
