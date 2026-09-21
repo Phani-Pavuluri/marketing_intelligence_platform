@@ -11,6 +11,11 @@ GeoX, replace their canonical roadmaps, create a contract or schema, or grant
 spend, recommendation, optimization, runtime, pilot, production, or sibling
 authority. Later work requires a separate task in the owning repository.
 
+Packet composition rule: capability entries remain compact task-seed rows. They
+point to the owning repository's canonical design, contract, and evidence rather
+than copying roadmap prose. A row is never a work order and never authorizes its
+owner repository.
+
 ## 1. Operating model
 
 The platform answers a business question at the highest scope that the model
@@ -85,6 +90,27 @@ accepting role, exact reviewed SHA, and version-scoped re-verification.
 | CAP-016 | P2 | Incremental/hurdle reporting explains next-dollar decisions without replacing full-panel optimization | MMM + MIP | CAP-013 | Hurdle-rate report for incremental funding and finance explanation |
 | CAP-017 | P3 | Guided diagnose → remediate → re-optimize workflow bundles existing freshness, fingerprint, calibration, and optimization checks | MIP | CAP-004, CAP-005, CAP-010 | End-to-end receipt with every check, correction, and final lineage |
 | CAP-018 | P3 | Refresh and stale-model prompts identify when new data requires refit or revalidation rather than assuming freshness | MIP + MMM | CAP-003, CAP-009 | Data-as-of and structural-change diagnostics with explicit next action |
+| CAP-019 | P2 | Bounded external decision benchmark compares pinned Meridian/Robyn decision outputs on equivalent data and scenarios without declaring a universal winner | MMM + MIP | CAP-001, CAP-003, CAP-009, certified synthetic recovery | Versioned decision benchmark, disagreement taxonomy, synthetic/real-panel evidence, and explicit non-claims |
+
+### Per-entry controls
+
+Every CAP row has the following default control fields until a later owner task
+changes them through its own lifecycle:
+
+| Field | Value for CAP-001–CAP-019 |
+|---|---|
+| Status | `proposed` |
+| Authority impact | `none` |
+| Validation gate | Owner-repository focused gate plus exact-tree receipt; Tier 3/cross-repository rows require owner and consumer verification |
+| Acceptance authority | Named owner-repository governance or program authority; producer self-acceptance is prohibited |
+| Re-verification | Model, data, estimand, taxonomy, contract, engine version, evidence pin, or decision-scope change |
+
+No CAP row may be copied into an active task without retaining these fields.
+
+P3 is intentionally limited to named operational refinements: environment and
+recovery matrix, provider evaluation as supporting evidence, guided workflow
+bundling, data-refresh/staleness prompts, and reusable decision receipts. These
+items cannot gate analytical truth or authorize spend.
 
 ## 4. Package-diagnosable diagnostic contract
 
@@ -106,6 +132,56 @@ from MMM panels, configs, artifacts, or linked experiment evidence:
 Observational diagnostics do not prove causality. They identify risk and missing
 evidence; causal confirmation remains an experiment or other explicitly governed
 design.
+
+### Required adversarial evidence
+
+Capability tasks must include disagreement and break-the-pipeline fixtures where
+their surface can fail. At minimum, the evidence set should cover stale or
+scope-mismatched calibration, unsupported segment depth, spend outside support,
+missing remaining-horizon inputs, conflicting aggregate/child totals, unstable
+optimization, and disagreement between model-implied and experiment-reported
+effects. A passing happy path alone cannot promote a decision surface.
+
+The current MMM Tier-1 characterization and any merged deterministic runner are
+read-only inputs for numerical capability tasks when live Git confirms their
+exact paths and pins. MIP orchestration tasks must provide their own fixture
+gates for routing, scanner ranking, handoff completeness, warning/refusal, and
+outcome-registry behavior; they must not assume a numerical harness covers them.
+
+### Experiment handoff minimum
+
+CAP-008 is incomplete unless the MIP→GeoX packet carries the GeoX-owned fields:
+estimand and scope, feasibility, power/MDE, assignment design, carryover and
+spillover handling, test duration, cost, operational constraints, stop rules,
+readout owner, and the exact condition that returns the result to MMM
+calibration. MIP may request and route this evidence; it cannot invent GeoX
+feasibility or assignment truth.
+
+### External decision benchmark boundary
+
+CAP-019 compares pinned Meridian and Robyn runs against MMM/MIP on equivalent
+data, KPI, horizon, channel taxonomy, baseline, budget, constraints, and
+scenario. Primary comparisons are decision outputs: allocation ranking, top-k
+agreement, recommended allocation, incremental outcome, sensitivity, stability,
+and supported-range behavior. Fit metrics such as MAPE are supporting only.
+
+The benchmark must use synthetic known-truth worlds first, then certified real
+panels, and experiment-linked panels where available. Every disagreement is
+classified as taxonomy, estimand, baseline, scenario, support-range,
+calibration, structural, or unresolved. No engine wins authority from one
+benchmark and no external adapter is required when semantic equivalence cannot
+be established.
+
+### Additional policy safeguards
+
+- Finer segment claims require observed variation or an evaluated hierarchical
+  model; row presence alone is insufficient.
+- Reallocation policies should preserve exploration floors or explicitly record
+  when a channel/segment is intentionally zeroed.
+- Freshness rules must state when stale evidence forces refit/revalidation versus
+  when it only permits a warning.
+- Candidate comparisons should report regret or decision loss across plausible
+  scenarios, not only the point-optimal plan.
 
 ## 5. High-level-to-low-level decision process
 

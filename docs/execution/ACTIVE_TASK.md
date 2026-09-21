@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -15,19 +15,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-cross-repository-capability-roadmap-packet-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `3dc94c15bc6596e7e9799a84c081ebee3242d123`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `1ea6a21efa4409278d74775403254e74380fd4fc`
+- **Rejected implementation commit:** `3dc94c15bc6596e7e9799a84c081ebee3242d123`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -85,6 +85,18 @@ The implementation must include:
     without duplicating or overwriting them; and
 11. a future-task template for implementation, validation, publication, and
     exact-head review.
+12. a compact-row composition rule and per-entry status, authority impact,
+    validation gate, acceptance authority, and re-verification fields;
+13. explicit adversarial/disagreement fixture requirements, the current MMM
+    Tier-1 characterization/runner as a refreshable read-only input, and
+    fixture gates for MIP orchestration behavior;
+14. GeoX handoff minimums: feasibility, power/MDE, assignment,
+    carryover/spillover, cost, duration, constraints, stop rules, and return to
+    MMM calibration;
+15. the bounded Meridian/Robyn decision benchmark, its equivalent-input rule,
+    decision-output metrics, disagreement taxonomy, and non-authority boundary;
+16. named P3 refinements, exploration floors, freshness-triggered refit policy,
+    segment-support evidence, and regret-based candidate comparison.
 
 ## Required decision semantics
 
@@ -146,6 +158,9 @@ Acceptance requires:
 8. JSON, taskctl, diff, changed-path, and cross-repository pin checks pass;
 9. no sibling file or authority state changes; and
 10. the packet is explicitly non-authorizing and non-normative.
+11. the external comparator is bounded to decision evidence and does not claim
+    universal engine superiority; and
+12. per-entry status and authority impact are explicit for every capability.
 
 ## Validation
 
