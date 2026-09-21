@@ -1,23 +1,25 @@
+# TASK_AUTHORIZATION_REPORT
+
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `merged`
+**Current decision:** `proposed`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_ESTIMAND_PROTOCOL_DESIGN_001`
+- **Task ID:** `MIP_CROSS_REPOSITORY_CAPABILITY_ROADMAP_PACKET_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `8fcb309b9d55a4e52b868d9324145cfb93f4cb47`
-- **Authorization provenance:** `96d164aca8400f0ba59643d1e869ebc045180d38`
-- **Feature branch:** `docs/mip-estimand-protocol-design-001`
+- **Base SHA:** `fb232c4d3943df2198602ed976ba01a4dbe9e199`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-cross-repository-capability-roadmap-packet-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `685b7b21359a80ef0a83d0428d0c7ea1888f383d`
-- **Reviewed head:** `3911e1f360145f1fe8d20d1da38d847b762bc061`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -25,87 +27,57 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `merged`
-- **Local feature-branch cleanup:** `observed_deleted`
-- **Remote feature-branch cleanup:** `observed_deleted`
+- **Review decision:** `proposed`
+- **Local feature-branch cleanup:** `null`
+- **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## Implementation outcome
+## MIP_CROSS_REPOSITORY_CAPABILITY_ROADMAP_PACKET_001 — proposed task-authoring evidence
 
-Implemented the authorized Tier 1 design on
-`docs/mip-estimand-protocol-design-001`:
+This is a proposed, not authorized, MIP-owned Tier 3 documentation-only
+cross-repository roadmap packet. It consolidates future MMM, GeoX, and MIP
+capabilities into a single source proposal with priorities, ownership,
+dependencies, acceptance metrics, validation instructions, and agent rules.
 
-- Commit `95aa916a085e6e705674e8652704d884370a55ef`: new non-normative
-  design `docs/design/MIP_ESTIMAND_PROTOCOL_DESIGN_001.md` (110 lines)
-  with quantities per lifecycle stage, the estimand-versus-planning
-  distinction, R0 ownership mapping, boundaries, non-claims,
-  scope/version/fingerprint fields, re-verification triggers, producer
-  versus accepting authority, and no-authority impact.
-- Commit `685b7b21359a80ef0a83d0428d0c7ea1888f383d`: DE-0 row
-  `unchecked` / `not_eligible` → `evidence_submitted`, recording the
-  design artifact SHA and leaving acceptance SHA empty.
+The packet will be implemented only at
+`docs/roadmap/CROSS_REPOSITORY_CAPABILITY_ROADMAP_PACKET_001.md`; MMM and GeoX
+remain read-only. No capability, analytical, recommendation, optimization,
+runtime, pilot, production, or sibling authority is granted.
 
-Total branch diff vs the finalized baseline: 2 owned files, 111
-insertions, 1 deletion (the single row-status line). DE-1 through DE-11
-remain unchecked; no row reads `accepted`.
+## Authoring evidence
 
-## Authoring Git evidence
+- MIP main was synchronized and clean at
+  `fb232c4d3943df2198602ed976ba01a4dbe9e199` before authoring.
+- `poetry run python -m mip.execution.taskctl check` passed before authoring.
+- Live read-only sibling pins were refreshed and inspected:
+  - MMM `e33b925b3a0bbdd343ff3b7197c2051a2b7c7388`;
+  - GeoX/panel_exp `496c317bc44c31a89aff805896863bd7eb637b7e`.
+- MMM has an authorized independent DR-04 task; GeoX has a ready-for-review
+  task with a correction cycle. Neither sibling task is modified, depended on
+  as merged completion, or authorized by this proposal.
+- The MIP DE-0 estimand protocol is merged at the current MIP main and is the
+  prerequisite vocabulary for this packet.
 
-- Authorization provenance:
-  `96d164aca8400f0ba59643d1e869ebc045180d38`, finalized at
-  `028c5abfed2aa89c6f44d6a68e1f0262ed3bf1c0`.
-- Branch created from the exact finalized baseline `028c5ab`; design
-  committed before the row flip, and the row records the design commit
-  SHA.
-- Pre-authoring synchronized MIP main was
-  `8fcb309b9d55a4e52b868d9324145cfb93f4cb47` with `taskctl check`
-  passing; no sibling evidence is required for this MIP-only task.
+## Validation performed
 
-## Validation performed on the frozen exact tree
-
-- `taskctl check`: passed.
-- `json.tool` structure check: passed.
-- `git diff --check`: passed.
-- Changed-path check (`96d164a...HEAD` and `028c5ab...HEAD`): passed —
-  branch adds only the new design doc and the single DE-0 row line.
-- Manual review against all 13 acceptance items: passed — quantities per
-  stage, estimand-versus-planning distinction, R0 mapping, non-claims,
-  scope/version/fingerprint, re-verification triggers, producer versus
-  accepting authority (MIP program/governance owner; SHA is review
-  evidence only), no execution/capability authority, all four reference
-  links resolve, Tier 1 checks pass, document declares itself
-  non-normative (not a contract or schema), DE-0 reads
-  `evidence_submitted` with artifact SHA and empty acceptance SHA,
-  paths limited to the owned set.
-- Link check: passed — all four design-doc references resolve to
-  committed files.
-- Docker-backed `make validate`: not_required — Tier 1
-  documentation-only gate; no code, contract, package, analytical, or
-  runtime surface changed.
-- Local/remote branch-head equality: verified after push (recorded
-  below).
-
-## Cross-repository impact
-
-Affected and modified repository: MIP only. No sibling task, branch, or
-file was read, touched, or authorized. No coordination-state refresh was
-performed or required. No dependency or blocker IDs were created,
-advanced, resolved, or superseded beyond the satisfied register-merged
-dependency. No consumer verification arises from this design.
+- `poetry run python -m mip.execution.taskctl check`: passed before authoring.
+- Cross-repository protocol and coordination state: read; live overlays applied
+  because cached sibling pins were stale.
+- Proposed changed paths are limited to the three MIP execution-authoring files;
+  the future packet path is declared but not created in this proposal.
+- No sibling file, coordination state, contract, schema, code, test, or runtime
+  surface changed.
 
 ## Authority impact
 
-Execution on the owned documentation paths only; merge, PR, correction,
-and every protected authority flag remain false. This design grants no
-spend, optimization, recommendation, real-data, pilot, production,
-promotion, or runtime authority. No row was flipped to `accepted`.
+None. The state remains `proposed`; execution and correction are false; all
+capability flags remain false; no branch exists; no implementation, review,
+merge, PR, or sibling task is authorized.
 
 ## Stop condition
 
-Implementation is published for external exact-head review by the named
-acceptance authority (MIP program/governance owner). No merge follows
-from this report; merging requires the exact approved remote head SHA
-through the repository's `branch_and_fast_forward` closure workflow.
-The accepted-flip successor, DE-1/DE-3 finalization, and all other
-deferred work remain unauthorized.
+Authoring stops here. A separate exact contract authorization is required before
+creating the feature branch or implementing the roadmap packet.
+
+Unresolved execution-blocking design questions: none.
