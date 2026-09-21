@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -11,13 +11,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `8fcb309b9d55a4e52b868d9324145cfb93f4cb47`
 - **Authorization provenance:** `96d164aca8400f0ba59643d1e869ebc045180d38`
 - **Feature branch:** `docs/mip-estimand-protocol-design-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `685b7b21359a80ef0a83d0428d0c7ea1888f383d`
-- **Reviewed head:** `null`
+- **Reviewed head:** `3911e1f360145f1fe8d20d1da38d847b762bc061`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -25,9 +25,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
