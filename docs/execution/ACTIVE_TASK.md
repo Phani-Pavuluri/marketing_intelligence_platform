@@ -3,194 +3,262 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** merged
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_CROSS_REPOSITORY_CAPABILITY_ROADMAP_PACKET_001`
+- **Task ID:** `MIP_MULTI_RESOLUTION_PLANNING_AND_HIERARCHICAL_MODELING_ROADMAP_AMENDMENT_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `fb232c4d3943df2198602ed976ba01a4dbe9e199`
-- **Authorization provenance:** `d749beff0d1e74133f1d994197ddffbded7b1a26`
-- **Feature branch:** `docs/mip-cross-repository-capability-roadmap-packet-001`
+- **Base SHA:** `ac578ad2f5dfece99a853d2cd11b3b6d92af16b3`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-multi-resolution-planning-hierarchical-modeling-roadmap-amendment-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `780f880fe62ac99ef247122c754e11c0d8155753`
-- **Reviewed head:** `8b7007d213664ff0edea4e502d5bd13b5ab552e6`
-- **Rejected review head:** `1ea6a21efa4409278d74775403254e74380fd4fc`
-- **Rejected implementation commit:** `3dc94c15bc6596e7e9799a84c081ebee3242d123`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
+- **Rejected review head:** `null`
+- **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `1`
 - **Correction cycles remaining:** `0`
-- **Review decision:** `merged`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `observed_deleted`
 - **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## MIP_CROSS_REPOSITORY_CAPABILITY_ROADMAP_PACKET_001 — proposed task contract
+## MIP_MULTI_RESOLUTION_PLANNING_AND_HIERARCHICAL_MODELING_ROADMAP_AMENDMENT_001 — task contract
 
-**Status:** proposed; non-executable until separately authorized.
+**Status:** proposed; documentation implementation requires the separate lifecycle authorization recorded in Git.
 
 ## Primary outcome
 
-Publish one MIP-owned, non-authorizing roadmap packet at
-`docs/roadmap/CROSS_REPOSITORY_CAPABILITY_ROADMAP_PACKET_001.md`.
-The packet will consolidate the agreed MMM, GeoX, and MIP capability gaps into
-priority-ordered, agent-executable roadmap entries with ownership, dependencies,
-acceptance evidence, metrics, validation gates, and deferred successors.
+Create one MIP-owned roadmap amendment at
+`docs/roadmap/MIP_MULTI_RESOLUTION_PLANNING_AND_HIERARCHICAL_MODELING_ROADMAP_AMENDMENT_001.md`,
+with one bounded reference from
+`docs/roadmap/CROSS_REPOSITORY_CAPABILITY_ROADMAP_PACKET_001.md`. The amendment
+will layer future multi-resolution planning, hierarchical MMM research,
+cross-scope response abstractions, nested allocation, and experiment-evidence
+handoff direction onto the existing capability packet.
 
-The packet is a planning artifact. It does not modify MMM or GeoX, change any
-canonical sibling roadmap, create a contract or schema, authorize implementation,
-or grant analytical, recommendation, optimization, pilot, production, or runtime
-authority.
+This is a documentation-only, non-authorizing planning artifact. It preserves
+current analytical truth, current P2 sequencing, current production authority,
+the existing packet's concepts, and active MMM/GeoX work. It does not implement
+the amendment during this task.
 
 ## Why this is one outcome
 
-The packet is the single cross-repository source proposal from which later
-owner-repository roadmap and implementation tasks may be derived. Splitting it
-into separate capability documents would duplicate authority and make ownership,
-priority, and dependencies drift.
+The amendment is one independently reviewable roadmap boundary and the bounded
+packet pointer only makes its relationship discoverable. Capability rows,
+schemas, code, fixtures, or owner-repository adoption would be separate tasks.
+The implementation must extend existing CAP-001, CAP-002, CAP-003, CAP-006,
+CAP-007, CAP-009, CAP-013, CAP-015, CAP-019 and related rows by reference where
+they already cover the concept; it must not create a parallel hierarchy or
+renumber existing rows. New capability IDs are unnecessary unless live Git
+proves that an existing row cannot carry the concept, in which case the task
+must select the next available ID and explain the boundary.
 
-## Required packet contents
+## Required amendment content
 
-The implementation must include:
+### 1. Generic planning scope
 
-1. operating principles and explicit non-authority boundaries;
-2. P0–P3 priority definitions and prioritization metrics;
-3. P0 foundations: estimand protocol, model applicability/decision-readiness
-   registry, package-diagnosable validity checks, and warning/refusal semantics;
-4. P1 decision capabilities: scope-aware routing, high-level-to-low-level
-   allocation, strategy/segment estimands, experiment prioritization and the
-   MIP→GeoX handoff, calibration coverage/freshness, remaining-horizon
-   reallocation, macro/promotion scenarios, risk-aware optimization, and actual
-   outcome feedback;
-5. P2 advanced capabilities: interaction/halo/cannibalization analysis,
-   granular and strategy curves, and incremental/hurdle reporting;
-6. P3 operational refinements;
-7. ownership boundaries: MMM numerical truth, GeoX experiment truth, MIP
-   orchestration/claims/decision routing, and LLM interpretation only;
-8. package-relevant diagnostic metrics, including data quality, identifiability,
-   extrapolation, lag/saturation sensitivity, temporal stability, calibration
-   coverage, scenario validity, and optimizer stability;
-9. implementation instructions requiring one bounded task per owner repository,
-   exact scope, evidence, version/fingerprint, re-verification triggers, and
-   no silent authority expansion;
-10. insertion guidance mapping the packet into existing canonical roadmaps
-    without duplicating or overwriting them; and
-11. a future-task template for implementation, validation, publication, and
-    exact-head review.
-12. a compact-row composition rule and per-entry status, authority impact,
-    validation gate, acceptance authority, and re-verification fields;
-13. explicit adversarial/disagreement fixture requirements, the current MMM
-    Tier-1 characterization/runner as a refreshable read-only input, and
-    fixture gates for MIP orchestration behavior;
-14. GeoX handoff minimums: feasibility, power/MDE, assignment,
-    carryover/spillover, cost, duration, constraints, stop rules, and return to
-    MMM calibration;
-15. the bounded Meridian/Robyn decision benchmark, its equivalent-input rule,
-    decision-output metrics, disagreement taxonomy, and non-authority boundary;
-16. named P3 refinements, exploration floors, freshness-triggered refit policy,
-    segment-support evidence, and regret-based candidate comparison.
+Describe a general planning hierarchy from global or portfolio planning through
+regional, country/market × channel, and local geo × channel decisions. AMER,
+EMEA, APAC, US, DMA, state, and similar examples may illustrate the concept but
+must not become hard-coded geography names.
 
-## Required decision semantics
+Introduce `DecisionScope` or `PlanningScope` as a roadmap concept only, with
+geography hierarchy/grain, temporal grain, planning horizon, channel hierarchy,
+KPI/outcome, estimand, decision variables, baseline plan, movable and locked
+spend, constraints, value/currency basis, calibration/evidence scope, and
+supported-range requirements. The conceptual tuple is
+`(geography, time, channel, KPI, estimand, decision variables, constraints,
+value basis)`.
 
-The packet must distinguish exploratory simulation, decision-supported
-recommendation, execution-eligible output, and unsupported or experiment-required
-output. Warnings may permit exploration but must state the affected scope,
-limitation, required resolution, and whether execution is prohibited. User inputs
-and LLM suggestions must become visible structured constraints, weights, or
-scenarios; they may not silently change an optimizer objective.
+Explicitly distinguish data, model-estimation, experiment/calibration,
+scenario/simulation, optimization, and reporting/decision grains. Row presence
+at a finer grain cannot establish direct decision support.
 
-## Inputs and evidence
+Future artifacts may declare supported scopes and future requests may declare
+required scopes. The resolution vocabulary must distinguish directly supported,
+supported through a governed hierarchical model, supported only through explicit
+policy disaggregation, restricted, experiment-required, and unsupported.
 
-Read-only inputs are the merged DE-0 estimand protocol, the current MIP roadmap
-and coordination protocol, and live synchronized `origin/main` plus execution
-files for MMM and GeoX. The packet must record observed sibling SHAs and date
-them as orientation evidence, while stating that sibling repositories remain
-authoritative for their own roadmaps and tasks.
+### 2. MMM future research and response surfaces
 
-Observed orientation pins for this proposal:
+Preserve Ridge as the current certified/production baseline where live MMM Git
+supports that statement, reliability-first promotion, `CalibrationSignal` as
+the sole governed experiment-to-MMM bridge, TrustReport/release gates, and
+full-panel delta-mu as canonical numerical decision truth inside an MMM model
+scope. Do not say that Bayesian MMM replaces Ridge or that curves replace
+full-panel delta-mu generally.
 
-- MIP `main`: `fb232c4d3943df2198602ed976ba01a4dbe9e199`;
-- MMM `origin/main`: `e33b925b3a0bbdd343ff3b7197c2051a2b7c7388`;
-- GeoX/panel_exp `origin/main`: `496c317bc44c31a89aff805896863bd7eb637b7e9`.
+Record a future hierarchical geo/channel Bayesian challenger with conceptual
+partial pooling such as `beta[g,c] ~ Normal(mu[c], tau[c])`. Explain
+heterogeneous geographic response, sparse local markets, pooling toward a
+population/channel distribution, uncertainty propagation, and compatibility
+with experiment-informed calibration. It is a reliability-evidence challenger,
+not a predetermined successor; promotion depends on decision-grade recovery,
+not sophistication.
 
-These pins are evidence of orientation only, not sibling completion or
-authorization. A later implementation task must refresh them before use.
+Record centered, non-centered, and auto/adaptive parameterization as an
+inference-reliability research question. Use effective local information—geo
+observations, within-geo spend variation, signal/noise, number of geos, hierarchy
+variance, correlation/identifiability, and calibration coverage—instead of
+daily/weekly rules. The adaptive workflow is data geometry → initial candidate
+→ short pilot fit → sampler diagnostics → retain or switch → research or
+production fit. Diagnostics include divergences, R-hat, effective sample size,
+tree depth, energy/E-BFMI where supported, interval behavior, and posterior
+pathologies. If both parameterizations fail required diagnostics, fail closed.
 
-## Owned paths
+Extend reliability research across geo count, periods, heterogeneity, hierarchy
+variance, signal/noise, within-geo variation, cross-channel correlation, sparse
+versus dense markets, and calibration availability/freshness. Compare Ridge,
+centered Bayes, non-centered Bayes, and adaptive selection on full-panel
+delta-mu recovery, interval coverage, regret/decision loss, diagnostic
+parameter recovery, calibration recovery, divergence rate, effective sample
+size, false convergence, and compute cost. This task defines no thresholds.
 
-Implementation may change only:
+Within one MMM model scope, retain `delta_mu = mu(candidate full panel) -
+mu(baseline full panel)` as canonical truth. Curves/mROI are diagnostic,
+candidate-generation, search-acceleration, or explainability aids only. Across
+intentionally separate certified model scopes, a future `PortfolioResponseSurface`
+may support higher-level allocation when regional heterogeneity makes a unified
+model inappropriate. It may replace cross-region full-panel replay at that
+higher layer only after independently certified, comparable regional evidence.
+The amendment must not prohibit every possible unified global model.
 
-- `docs/roadmap/CROSS_REPOSITORY_CAPABILITY_ROADMAP_PACKET_001.md`;
-- `docs/execution/EXECUTION_STATE.json`;
-- generated lifecycle blocks in `docs/execution/ACTIVE_TASK.md`; and
-- `docs/execution/LATEST_COMPLETION_REPORT.md`.
+Cross-scope artifacts must preserve or expose KPI/value unit, currency/value and
+spend normalization, baseline, horizon, geo/channel scope, estimand,
+incremental/total semantics, uncertainty semantics, supported range, calibration
+state, fingerprints, TrustReport/readiness, lineage, restrictions, and warnings.
 
-## Prohibited scope
+### 3. Portfolio optimization and nesting
 
-Do not modify MMM or GeoX; edit existing canonical roadmap bodies; create
-implementation tasks in sibling repositories; change contracts, schemas,
-runtime behavior, prompts, model code, calibration, simulation, optimization,
-recommendation, authority flags, coordination state, or decision registers;
-archive or delete documents; use real/customer data; create a PR; merge,
-rebase, squash, force-push, or create a merge commit.
+Describe future global allocation over certified regional functions `F_r(B_r)`:
+maximize `sum_r F_r(B_r)` subject to total-budget conservation, regional
+floors/caps, business constraints, and permitted movement bounds. Convex
+optimization is eligible only when certified regional functions are concave over
+the permitted range and constraints are convex; explain marginal-value
+equalization `F'_r(B_r) = lambda` for unconstrained regions.
+
+State that SLSQP does not prove convexity, Hill/saturation surfaces may not be
+globally concave, and discrete commitments, thresholds, interactions, inventory,
+or other constraints may make the problem non-convex. Those cases remain
+governed constrained nonlinear optimization with diagnostics, multistart and
+stability checks, and explicit limitations.
+
+Connect to existing risk-aware optimization direction: future expected-value,
+downside-aware, probability/quantile, or robust views may be considered, with
+conceptual P20/P50/P80/P90 examples clearly framed as future examples rather
+than current policy. Preserve the separation of uncertainty evidence,
+optimization candidate, recommendation proposal, human approval, and
+execution.
+
+Capture nested global → regional → market/channel → local geo/channel planning.
+Each level declares supported scope, conserves parent budget where applicable,
+preserves provenance, separates model-derived allocation from policy
+disaggregation, exposes uncertainty and supported range, and reconciles to the
+parent where mathematically meaningful. No dataset must contain every level.
+
+### 4. GeoX and MIP ownership direction
+
+GeoX future evidence preserves experiment estimand, population/geography scope,
+treatment, KPI/units, exposure and outcome windows, uncertainty, lineage, and
+handoff eligibility. Research questions include local-to-broad prior use,
+national-to-local hierarchical components, heterogeneous effects, transportability,
+partial-pooling calibration, scope mismatch, sparse markets, and freshness.
+GeoX owns experimental truth and handoff eligibility; it does not fit
+hierarchical MMM, calculate response surfaces, optimize budgets, or determine
+MMM compatibility/calibration treatment. MMM owns experiment-to-model
+compatibility and calibration treatment.
+
+MIP is the future product/control-plane owner: interpret the planning question,
+resolve the requested scope, determine needed artifacts, check readiness and
+compatibility, route MMM/GeoX evidence, explain scenarios, preserve TrustReport
+and warnings, and require human approval where consequential. It does not fit
+models, pool parameters, calculate response curves/mROI/lift/calibration, or
+own numerical optimization truth. LLM behavior remains orchestration and
+explanation only.
+
+### 5. Sequence and authority preservation
+
+The amendment must explicitly leave the live P2 dependency sequence unchanged.
+It must not skip GeoX prerequisites, certify GeoX, authorize CalibrationSignal
+construction, start hierarchical Bayes, response surfaces, optimization, the
+parked bridge, D6 changes, LLM runtime, package integration, real-data work,
+recommendation, pilot, or production. Existing active MMM and GeoX tasks remain
+untouched. Roadmap appearance never makes a capability executable. Owner
+repository adoption is a later separately authorized task.
+
+Claims about Meridian, Robyn, PyMC, or industry practice are external context
+unless directly supported by repository evidence. Do not claim Meridian has an
+automatic centered/non-centered switch without authoritative evidence.
+
+## Compact task-seed requirements
+
+Include compact seeds for scope/grain compatibility, multi-resolution
+applicability, hierarchical Bayesian challenger, parameterization reliability,
+multi-resolution CalibrationSignal compatibility, portfolio response surfaces,
+cross-scope comparability, convex/nonlinear allocation, nested budget
+reconciliation, and risk-aware multi-level allocation. Each seed names owner
+repository, priority, prerequisites, prohibited authority, validation/reliability
+evidence, acceptance evidence, and re-verification triggers. Seeds are proposals,
+not work orders or authorization.
+
+## Ownership and prohibited scope
+
+MIP owns the roadmap architecture, scope semantics, coordination, product
+routing, and governance framing. MMM owns future modeling, pooling,
+parameterization, diagnostics, response surfaces, simulation, uncertainty,
+candidate generation, and numerical optimization. GeoX owns future experiment
+truth and experiment-side multi-resolution calibration evidence.
+
+Only MIP may change the two declared roadmap paths. Prohibit all MMM and GeoX
+file changes; analytical code; contracts, schemas, fixtures, unrelated tests,
+runtime/package behavior; `NEXT_EXECUTION_SEQUENCE.md` unless a reference-only
+change is proven necessary; P2 ledger state; coordination-state refresh;
+parked-bridge resumption; CalibrationSignal/Bayesian/response-surface/optimizer/
+LLM implementation; real data, pilot, production, PR, merge, squash, rebase,
+force-push, and cherry-pick.
+
+## Risk and validation
+
+Use the repository-defined Tier 3 cross-repository documentation/governance
+posture. The future implementation gate must include taskctl check; JSON parsing;
+changed-path boundary proof; available Markdown/link/reference validation;
+fresh cross-repository live-ref verification; ownership-pattern checks;
+`git diff --check`; exact-tree publication receipt; and local/remote feature-head
+equality. Run Docker `make validate` only if the live MIP risk rules require it;
+the task must record it as not required when the documentation-only gate allows
+omission. Validation must cover the acceptance criteria below and must not
+execute analytical or sibling work.
 
 ## Acceptance evidence
 
-Acceptance requires:
+The future implementation must prove that existing packet concepts are reused;
+planning is generic; all grains are distinguished; delta-mu remains canonical
+within scope; cross-scope surfaces are future certified abstractions; convexity
+is conditional; non-convex cases remain governed nonlinear problems; Bayesian
+work is a challenger; parameterization is diagnostic and fails closed; GeoX,
+MMM, and MIP boundaries and CalibrationSignal authority remain unchanged; no
+unestablished serialized producer is assigned; P2 ordering and active sibling
+work remain unchanged; roadmap rows grant no executable authority; owner adoption
+is separate; and external Meridian/PyMC/industry claims are properly qualified.
 
-1. all required packet sections are present;
-2. every capability has an owner, priority, dependency, bounded outcome,
-   acceptance evidence, metric, and re-verification trigger;
-3. all package-diagnosable diagnostics identify observable inputs and actions;
-4. warning/refusal, scope, calibration, disaggregation, and authority boundaries
-   are explicit;
-5. MMM/GeoX ownership and read-only sibling status are preserved;
-6. insertion guidance does not duplicate or silently alter canonical roadmaps;
-7. links and Markdown checks pass;
-8. JSON, taskctl, diff, changed-path, and cross-repository pin checks pass;
-9. no sibling file or authority state changes; and
-10. the packet is explicitly non-authorizing and non-normative.
-11. the external comparator is bounded to decision evidence and does not claim
-    universal engine superiority; and
-12. per-entry status and authority impact are explicit for every capability.
+## Deferred successors and stop condition
 
-## Validation
-
-On the frozen implementation tree run the repository taskctl check, JSON
-structure check, Markdown/link check, `git diff --check`, and an exact
-changed-path proof against the authorization head. Re-fetch and verify the
-recorded live sibling pins, manually verify every required section, and classify
-each category as passed, failed, blocked, or not_required. No Docker or
-analytical gate is required for this documentation-only packet unless the owner
-repository standard changes before execution.
-
-## Cross-repository impact
-
-Affected repositories are MIP, MMM, and GeoX/panel_exp; only MIP is modified.
-The workstream is planning/governance documentation. No dependency is resolved
-and no sibling task is authorized. The completion report must repeat the live
-pins, ownership boundaries, consumer-verification requirement, and authority
-impact.
-
-## Deferred successors
-
-Deferred work includes owner-repository roadmap insertion, MMM diagnostic or
-optimizer implementation, GeoX experiment capability, MIP scope-router or
-outcome-registry implementation, schema/contract adoption, and any capability
-or execution authorization. Each requires a separate task in the owning
-repository.
-
-## Stop condition
-
-This proposal stops at `proposed`. No branch or implementation may be created
-until a separate exact contract authorization transitions it to `authorized`.
-
-Unresolved execution-blocking design questions: none.
+Deferred successors are the owner-repository roadmap insertions, MMM
+hierarchical-model/reliability/response-surface/optimizer research, GeoX
+multi-resolution experiment evidence, MIP scope routing and governance
+implementation, any contract/schema, and all runtime, recommendation, pilot,
+production, or real-data work. The task stops after authoring, validation, and
+publication of the documentation-only outcome at `ready_for_review`; it does
+not implement the amendment. Unresolved execution-blocking design questions:
+none.
