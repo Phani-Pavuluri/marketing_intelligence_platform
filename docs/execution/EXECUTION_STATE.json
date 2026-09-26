@@ -28,8 +28,8 @@
   "last_updated": "2026-09-26",
   "blockers": [],
   "maximum_correction_cycles": 1,
-  "correction_cycles_completed": 1,
-  "correction_cycles_remaining": 0,
+  "correction_cycles_completed": 0,
+  "correction_cycles_remaining": 1,
   "risk_tier": "tier_3_cross_repository_roadmap_governance_documentation",
   "compatibility_migration_policy": "not_applicable_documentation_only_no_contract_schema_runtime_or_persisted_artifact_change",
   "full_suite_validation_required": false,
@@ -115,6 +115,6 @@
   "review_decision_source": "docs/execution/ACTIVE_TASK.md",
   "prompt_strategy": "invocation_only_from_git_authored_task",
   "task_authoring_note": "Explicitly authorized by the user on 2026-09-26 at immutable authorization provenance 9e4de817473a8faf822c98b5e04e3f8cf60d8774 as one MIP-owned Tier 3 documentation-only cross-repository roadmap amendment. Live read-only MMM and GeoX evidence was inspected; only MIP may be modified. The amendment preserves current analytical truth, P2 sequencing, production authority, and active sibling work; it grants no implementation or capability authority.",
-  "local_feature_branch_cleanup": "observed_deleted",
-  "remote_feature_branch_cleanup": "observed_deleted"
+  "local_feature_branch_cleanup": null,
+  "remote_feature_branch_cleanup": null
 }
