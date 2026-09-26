@@ -16,6 +16,13 @@ point to the owning repository's canonical design, contract, and evidence rather
 than copying roadmap prose. A row is never a work order and never authorizes its
 owner repository.
 
+This packet is amended in a bounded future-architecture document:
+[MIP multi-resolution planning and hierarchical modeling roadmap amendment 001](MIP_MULTI_RESOLUTION_PLANNING_AND_HIERARCHICAL_MODELING_ROADMAP_AMENDMENT_001.md).
+The amendment extends the packet's existing scope-aware routing, applicability,
+allocation, calibration, response-surface, simulation, optimization, and
+benchmark concepts by reference; it does not create a competing capability
+hierarchy or change the packet's authority boundary.
+
 ## 1. Operating model
 
 The platform answers a business question at the highest scope that the model
