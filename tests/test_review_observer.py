@@ -476,3 +476,17 @@ def test_export_bound_and_nonregular_evidence(
     monkeypatch.setattr(module, "MAX_EXPORT", 1)
     with pytest.raises(ObserverError, match="64 MiB"):
         observer.bundle(checkpoint, bundle)
+
+
+def test_unrelated_archived_branch_does_not_obstruct_current_task(
+    environment: tuple[Path, Path, dict[str, Any]], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root, _, state = environment
+    head = publish(root, state)
+    git(root, "branch", "archive/unrelated", head)
+    git(root, "push", "-q", "origin", "archive/unrelated")
+    observer = Observer(root)
+    calls = fake_runner(monkeypatch, observer)
+    assert observer.execute("init") == 0
+    assert observer.execute("scan") == 0
+    assert not calls and not observer.load().scan_errors

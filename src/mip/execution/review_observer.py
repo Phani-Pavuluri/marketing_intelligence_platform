@@ -369,7 +369,32 @@ class Observer:
     def candidates(self, refs: dict[str, str], ledger: Ledger) -> list[Checkpoint]:
         ledger.scan_errors = []
         checkpoints: list[Checkpoint] = []
+        try:
+            main_head = refs["refs/heads/main"]
+            scope = json.loads(self.blob(main_head, STATE_PATH))
+            validate_state(scope)
+        except (KeyError, ValueError, TypeError, AttributeError, TaskControlError, ObserverError):
+            ledger.scan_errors = ["Current main task authority could not be verified."]
+            return []
         for ref, sha in sorted(refs.items()):
+            if ref != "refs/heads/main":
+                if ref != "refs/heads/" + scope["feature_branch"]:
+                    continue
+                try:
+                    branch_scope = json.loads(self.blob(sha, STATE_PATH))
+                    if any(
+                        branch_scope.get(key) != scope.get(key)
+                        for key in (
+                            "repository",
+                            "task_id",
+                            "feature_branch",
+                            "authorization_head_sha",
+                        )
+                    ):
+                        raise ObserverError("Active branch disagrees with main task authority.")
+                except (ObserverError, ValueError, TypeError, AttributeError) as exc:
+                    ledger.scan_errors.append(f"{ref}: {exc}")
+                    continue
             commits = [sha]
             previous = ledger.observed_refs.get(ref) or ledger.observed_refs.get("refs/heads/main")
             if previous and previous != sha:

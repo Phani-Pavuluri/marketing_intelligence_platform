@@ -115,6 +115,10 @@ results stale; an older pass is never approval for a newer head.
 New commits between observed remote heads are inspected so a closure followed
 by later task authoring between polls is still found. Multiple new checkpoints
 are persisted as pending and drained one model review per scan.
+Automatic discovery follows current main and the feature branch declared by
+its canonical task authority. Archived or unrelated remote branches do not
+create reviews or obstruct the active task. Main history still supplies closures
+between polls. Explicit historical review remains available for a selected SHA.
 
 Exit 0 means no new work or a current advisory pass; 2 means findings or a user
 decision; 3 means blocked/error or a stale reviewed head. Watch continues polling
