@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,13 +13,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `ac578ad2f5dfece99a853d2cd11b3b6d92af16b3`
 - **Authorization provenance:** `9e4de817473a8faf822c98b5e04e3f8cf60d8774`
 - **Feature branch:** `docs/mip-multi-resolution-planning-hierarchical-modeling-roadmap-amendment-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `edf6cd6d3ddbed51dc060bcd4c958698cccd329a`
-- **Reviewed head:** `null`
+- **Reviewed head:** `f87915d2dcaa7c1ef4f1fc89516aa34c8a550a56`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -27,9 +27,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
