@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,13 +13,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `36b228e810e7fcfb220d5c39ae3c54abf3847dbc`
 - **Authorization provenance:** `f104c1f92b97b3b668b7e1aa27fda5531b25d3bc`
 - **Feature branch:** `feat/mip-codex-checkpoint-review-observer-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `16e616ffa55ca387cb57c82851e39f24fceab000`
-- **Reviewed head:** `null`
+- **Reviewed head:** `da5483c97b834bda33aa0e6bf3b23261278d996d`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -27,9 +27,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
@@ -120,8 +120,8 @@ Locally observed execution gate:
 - implementation path boundary: passed, four owned implementation paths plus
   lifecycle/evidence files only;
 - git diff --check: passed;
-- final frozen-tree publication gate and remote-head equality: required for
-  publication; exact results are bound to the final validation-receipt commit;
+- final frozen-tree publication gate and remote-head equality: passed; exact
+  results are bound to receipt da5483c97b834bda33aa0e6bf3b23261278d996d;
 - public-deployment and sibling/consumer gates: not_required, unchanged surfaces.
 
 The full suite's 5 skips and existing FastAPI/Starlette deprecation warning are
@@ -148,4 +148,58 @@ unchanged. This Tier 3 task retains user_exact_head approval.
 Deferred successors: independently durable receipt/verifier; OpenCode advisory
 discussion; shared reporting/background installation; delegated merge executor
 activation; separate sibling adoption. Stop at ready_for_review publication;
-no PR or merge is performed by this execution task.
+execution stopped at ready_for_review. Subsequent user-approved merge and
+closure are recorded below.
+
+
+## Merge closure
+
+Approval provenance: user instruction "proceed to merge", accepting the exact
+published head da5483c97b834bda33aa0e6bf3b23261278d996d reported immediately
+before that instruction. Approval mode: user_exact_head; delegated approval
+is not activated or used for this Tier 3 task.
+
+Authorization provenance: f104c1f92b97b3b668b7e1aa27fda5531b25d3bc.
+Finalized authorization baseline: 76f76d27e4ed05263adf7dfab7a62ede585ab0f3.
+Implementation commit: 16e616ffa55ca387cb57c82851e39f24fceab000.
+Approved reviewed and fast-forwarded implementation head:
+da5483c97b834bda33aa0e6bf3b23261278d996d.
+Validated exact tree: 2a5e7886f7f634c42f3440656ca1610514858941.
+
+Fresh Git checks proved unchanged remote feature head and synchronized main
+baseline, repository/task/branch identity, authorization ancestry, exact receipt
+tree, seven owned changed paths, and permitted local-only untracked content.
+The frozen commit receipt and execution evidence were reviewed. No pre-merge
+approval-metadata commit was created.
+
+Pre-merge gate on the exact approved head: passed. Post-fast-forward gate on
+main: passed. Each Docker make validate run reported 2601 tests passed, 5 skipped,
+one existing FastAPI/Starlette deprecation warning, Ruff passed, and mypy clean
+across 481 source files. The full gates include all 26 observer acceptance tests.
+Taskctl consistency, JSON/runtime schema equality, relative links and diff
+checks: passed in both phases. Historical and seeded real-Codex acceptance
+results remain recorded in the unchanged reviewed implementation evidence;
+this merge did not issue additional model reviews or control an agent.
+Public deployment, sibling/consumer checks: not_required, unchanged surfaces.
+Commands are locally observed validation and Git remote evidence; no GitHub
+API/browser-observed evidence is claimed.
+
+Main was pushed and exact local/remote equality was observed at the reviewed
+head before closure. Feature branch cleanup: local observed_deleted, remote
+observed_deleted, verified by branch deletion and empty local/remote queries.
+Taskctl transition to merged used the exact reviewed head and both cleanup
+observations. This single closure commit follows the approved implementation
+head; its Git identity provides the resulting main lineage. Closure changes
+only the three stable execution documents.
+
+Authority impact: the advisory MIP review tool is adopted under explicit user
+approval. It grants no delegated merge, product, analytical, capability, sibling,
+real-data, pilot or production authority. Taskctl V2 and the delegated-policy
+activation prerequisite remain unchanged. No watcher, daemon, OpenCode message,
+service restart, or automatic merge was started by this workflow.
+
+Deferred: durable independent receipts and verifier; OpenCode advisory
+integration; shared reporting/background installation; delegated merge executor
+activation; separately authorized sibling adoption. No successor task is
+authorized by this closure. Local-only .codex/ and docs/tasks/ artifacts were
+not committed.
