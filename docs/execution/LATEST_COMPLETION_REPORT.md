@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -18,7 +18,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `null`
+- **Implementation commit:** `c23cef613850e3cd6d56a78547006a3d20c1d248`
 - **Reviewed head:** `null`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
@@ -27,7 +27,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -42,4 +42,23 @@ focused tests. No waiver is requested or granted. The published ready state was
 not valid merge readiness; attempted taskctl transition to blocked returned
 E_TRANSITION_EDGE without changing state. A separate deterministic fixture
 repair is now authorized, with the validator parked and recovery deferred.
-No fixture implementation or gate has yet run for this successor.
+
+## Execution evidence
+
+Implementation commit: `c23cef613850e3cd6d56a78547006a3d20c1d248`.
+Only `tests/test_review_observer.py` changed for implementation (+147/−18);
+no observer runtime, taskctl, product, schema, validator, or live canonical
+state change. Synthetic repositories are authored from a fixture-owned
+canonical state that `validate_state` accepts; the live EXECUTION_STATE file
+is never read as a template (an autouse test guard fails any test that reads
+it). Added regressions prove the canonical state validates in authorized,
+changes_requested, corrected-ready (completed=1/remaining=0 with rejected
+provenance), and merged shapes. All pre-existing behavior assertions and
+negative cases preserved: dedup, historical review, closure, fail-closed
+boundaries, wrong-origin/corruption, lock/recovery, failure/staleness, result
+validation, CLI protocol, multiple checkpoints, export bounds, archived refs,
+schema parity, and atomic persistence.
+
+Validation on the exact tree below: full Docker `make validate`, Ruff/mypy,
+`taskctl check`, JSON parsing, `git diff --check`, owned-path/diff/authority
+boundary checks, and the frozen-tree publication receipt. No PR or merge.
