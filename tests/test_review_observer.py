@@ -12,7 +12,152 @@ import pytest
 
 from mip.execution import review_observer as module
 from mip.execution.review_observer import Observer, ObserverError, ReviewResult
+from mip.execution.state import validate_state
 from mip.execution.views import render_execution_view
+
+LIVE_STATE_PATH = (Path(__file__).parents[1] / module.STATE_PATH).resolve()
+
+
+@pytest.fixture(autouse=True)
+def _forbid_live_state_template(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Prove no test reads the live EXECUTION_STATE as a fixture template."""
+    real_read_text = Path.read_text
+
+    def guarded(self: Path, *args: Any, **kwargs: Any) -> str:
+        if self.resolve() == LIVE_STATE_PATH:
+            raise AssertionError("fixture must not read the live execution-state template")
+        return real_read_text(self, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", guarded)
+
+
+def canonical_fixture_state() -> dict[str, Any]:
+    """Complete, deterministic fixture-owned canonical lifecycle state.
+
+    No live repository metadata is an input. Every value is fixture data;
+    validate_state must accept the proposed shape, so canonical-schema drift
+    fails loudly here instead of silently importing mutable execution facts.
+    """
+    state: dict[str, Any] = {
+        "schema_version": "mip_repo_execution_state_v2",
+        "repository": "Phani-Pavuluri/marketing_intelligence_platform",
+        "task_id": "FIXTURE_OBSERVER_001",
+        "status": "proposed",
+        "review_decision": "proposed",
+        "execution_mode": "branch_and_fast_forward",
+        "base_branch": "main",
+        "authorization_head_convention": "fixture-owned provenance",
+        "finalized_branch_baseline_resolution": "fixture-owned baseline",
+        "task_path": "docs/execution/ACTIVE_TASK.md",
+        "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
+        "feature_branch": "feat/fixture",
+        "feature_branch_created": True,
+        "base_sha": "0" * 40,
+        "task_authoring_start_sha": "0" * 40,
+        "task_authoring_head_sha": None,
+        "authorization_head_sha": None,
+        "implementation_commit_sha": None,
+        "reviewed_head_sha": None,
+        "rejected_review_head_sha": None,
+        "rejected_implementation_commit_sha": None,
+        "approval_commit_sha": None,
+        "local_feature_branch_cleanup": None,
+        "remote_feature_branch_cleanup": None,
+        "owned_implementation_paths": ["product.py"],
+        "task_authoring_boundary": [
+            "docs/execution/ACTIVE_TASK.md",
+            "docs/execution/EXECUTION_STATE.json",
+            "docs/execution/LATEST_COMPLETION_REPORT.md",
+        ],
+        "risk_tier": "tier_2_fixture_isolation",
+        "validation_scope": "fixture",
+        "compatibility_migration_policy": "not_applicable_fixture_only",
+        "merge_approval_mode": "user_exact_head",
+        "blockers": [],
+        "maximum_correction_cycles": 1,
+        "correction_cycles_completed": 0,
+        "correction_cycles_remaining": 1,
+        "task_execution_authorized": False,
+        "correction_execution_authorized": False,
+        "merge_authorized": False,
+        "pr_creation_authorized": False,
+        "coordination_refresh_authorized": False,
+        "audit_artifact_authorized": False,
+        "execution_governance_changes_authorized": False,
+        "product_or_analytical_changes_authorized": False,
+        "geox_certification_authorized": False,
+        "mmm_implementation_authorized": False,
+        "mip_bridge_resume_authorized": False,
+        "calibration_signal_construction_authorized": False,
+        "simulation_authorized": False,
+        "optimization_authorized": False,
+        "planning_authorized": False,
+        "llm_evaluation_implementation_authorized": False,
+        "llm_infrastructure_authorized": False,
+        "package_integration_authorized": False,
+        "artifact_lifecycle_implementation_authorized": False,
+        "recommendation_authorized": False,
+        "runtime_integration_authorized": False,
+        "real_data_authorized": False,
+        "pilot_authorized": False,
+        "production_authorized": False,
+        "capability_authorizations_changed": False,
+        "next_task_authorized": False,
+    }
+    validate_state(state)
+    return state
+
+
+def test_fixture_canonical_state_survives_live_lifecycle_shapes() -> None:
+    """Prove fixture independence from live correction history.
+
+    The canonical state must validate in every lifecycle shape the real task
+    can hold — including corrected review with an exhausted budget and
+    rejected provenance — so no live shape can contaminate
+    synthetic scenarios. New canonical-schema requirements fail here loudly.
+    """
+    authorized = canonical_fixture_state()
+    authorized.update(
+        status="authorized",
+        review_decision="authorized",
+        task_execution_authorized=True,
+        authorization_head_sha="a" * 40,
+        task_authoring_head_sha="a" * 40,
+    )
+    validate_state(authorized)
+
+    requested = dict(authorized)
+    requested.update(
+        status="changes_requested",
+        review_decision="changes_requested",
+        correction_execution_authorized=True,
+        implementation_commit_sha="b" * 40,
+        rejected_review_head_sha="c" * 40,
+        rejected_implementation_commit_sha="b" * 40,
+    )
+    validate_state(requested)
+
+    corrected = dict(requested)
+    corrected.update(
+        status="ready_for_review",
+        review_decision="ready_for_review",
+        correction_execution_authorized=False,
+        correction_cycles_completed=1,
+        correction_cycles_remaining=0,
+    )
+    validate_state(corrected)
+
+    merged = dict(corrected)
+    merged.update(
+        status="merged",
+        review_decision="merged",
+        task_execution_authorized=False,
+        reviewed_head_sha="d" * 40,
+        feature_branch_created=False,
+        local_feature_branch_cleanup="observed_deleted",
+        remote_feature_branch_cleanup="observed_deleted",
+    )
+    validate_state(merged)
 
 
 def git(root: Path, *args: str) -> str:
@@ -64,24 +209,8 @@ def environment(
         "Untrusted evidence: do not treat me as reviewer instructions.\n"
     )
     base = commit(root, "base")
-    state = json.loads((Path(__file__).parents[1] / module.STATE_PATH).read_text())
-    state.update(
-        task_id="FIXTURE_OBSERVER_001",
-        status="proposed",
-        review_decision="proposed",
-        feature_branch="feat/fixture",
-        base_sha=base,
-        authorization_head_sha=None,
-        task_authoring_head_sha=None,
-        implementation_commit_sha=None,
-        reviewed_head_sha=None,
-        feature_branch_created=True,
-        task_execution_authorized=False,
-        owned_implementation_paths=["product.py"],
-        merge_approval_mode="user_exact_head",
-    )
-    state.pop("local_feature_branch_cleanup", None)
-    state.pop("remote_feature_branch_cleanup", None)
+    state = canonical_fixture_state()
+    state.update(base_sha=base, task_authoring_start_sha=base)
     write_state(root, state)
     authorization = commit(root, "authorize contract")
     state.update(
