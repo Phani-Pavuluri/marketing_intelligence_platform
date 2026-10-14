@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "receipt_kind": "supervised_owner_standing_approval_exception",
+  "receipt_id": "c212f1e0-8467-4834-9cb6-5f69ff3fd879",
+  "repository": "Phani-Pavuluri/marketing_intelligence_platform",
+  "task_id": "MIP_BOUNDED_WORK_PLAN_VALIDATOR_RECOVERY_001",
+  "feature_branch": "feat/mip-bounded-work-plan-validator-recovery-001",
+  "authorization_sha": "dfe68539590dd470a078fb77ad31258e3402affe",
+  "implementation_sha": "84120ffad113710c98f3567bf015277cb8fab16a",
+  "reviewed_remote_head_sha": "bdf9dd6fd7fe106f17c5ec1d22b26162c1fb8a54",
+  "reviewer_role": "independent_codex_coordinator",
+  "reviewer_session_id": "01a13bbb-b564-7960-96e8-dca067bfd32a",
+  "implementation_agent_session_id": "ses_ec4679ffaffeLeDmAoTVLSPDxr",
+  "reviewer_authored_implementation": false,
+  "decision": "approve_exact_reviewed_head",
+  "issued_at": "2026-10-14T21:51:57.494196+00:00",
+  "owner_authority": "Owner explicitly reaffirmed bypassing routine merge approvals on 2026-10-14 in this coordinating conversation after approving the operating model and authorizing setup implementation. This read-only validator implements that approved scope without new architecture or authority.",
+  "policy_exception": "Latest owner standing instruction is applied to this supervised exact-head decision, overriding older per-head prompts; automatic delegated merge activation is not claimed. Tier 3 validation remains unchanged.",
+  "validation": {
+    "focused": "85 passed, independently observed",
+    "docker_make_validate": "2687 passed, 5 skipped, 1 existing warning; Ruff passed; mypy 483 files clean, independently observed",
+    "taskctl": "passed",
+    "git_diff": "passed",
+    "source_evidence": "Git publication receipt, task/report, independent probes and local exact-tree validation log"
+  },
+  "authority_impact": "No task authorization, materialization, runtime, sibling, analytical, real-data, pilot or production authority added.",
+  "limitations": [
+    "Manual supervised exception only; no automatic merge verifier or policy activation."
+  ]
+}
