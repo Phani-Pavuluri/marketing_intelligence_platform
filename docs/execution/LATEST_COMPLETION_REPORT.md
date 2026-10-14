@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,13 +13,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `d8b100c9fa87e3af7b5a2af565a31b442ff7b46b`
 - **Authorization provenance:** `fc5d4ce487c12e4f90017b787674facb5863563c`
 - **Feature branch:** `docs/mip-delegated-routine-merge-policy-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `3bc54d1d4c7135779762f8f7eae29641d2c32542`
-- **Reviewed head:** `null`
+- **Reviewed head:** `403ec37877893832ab8e8eac5aa44d5a32e32958`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -27,9 +27,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
@@ -72,9 +72,9 @@ Validation categories (locally observed):
 - task-authoring boundary: passed, exactly the three stable execution files;
 - implementation changed-path boundary: passed, only three declared policy
   paths plus the three lifecycle/evidence files;
-- exact-tree final publication gate: required after lifecycle finalization;
-  its outcome is bound to the final publication commit message;
-- local/remote feature-head equality: required after final publication;
+- exact-tree final publication gate: passed; exact-tree results are bound to
+  publication receipt 403ec37877893832ab8e8eac5aa44d5a32e32958;
+- local/remote feature-head equality: passed before the approved merge;
 - public-deployment checks: not_required, no product/deployment change;
 - sibling live-ref/consumer verification: not_required, no sibling is affected.
 
@@ -95,4 +95,44 @@ model, service, or agent execution. No auto-merge has been performed.
 Deferred: observer, durable receipt and verifier, OpenCode advisory discussion,
 plain-language reporting service, executor activation, and sibling adoption.
 Local-only .codex/ and docs/tasks/ content is never committed.
-Stop: publish ready_for_review; do not merge this approval-authority task.
+Execution stopped at ready_for_review; subsequent externally approved merge
+and closure are recorded below.
+
+
+## Merge closure
+
+Approval provenance: the user accepted adoption of the policy by naming exact
+published remote head 403ec37877893832ab8e8eac5aa44d5a32e32958 in the coordinating
+conversation. This merge uses user_exact_head, not delegated routine approval.
+
+Authorization provenance: fc5d4ce487c12e4f90017b787674facb5863563c.
+Finalized authorization baseline: cf05bf788e994da5b86be566d9acb20e027cdf93.
+Implementation commit: 3bc54d1d4c7135779762f8f7eae29641d2c32542.
+Reviewed and fast-forwarded implementation head:
+403ec37877893832ab8e8eac5aa44d5a32e32958.
+Validated implementation tree: 98a642ea94c7f5ced37317957361cfc4971d5857.
+
+Exact-head checks verified unchanged remote feature head, synchronized unchanged
+main baseline, task/repository/branch identity, authorization ancestry, and
+changed-path ownership. No pre-merge approval-metadata commit was created.
+Pre-merge gate on the approved head: passed. Post-fast-forward gate on main:
+passed. Both Docker make validate runs reported 2575 passed, 5 skipped, and one
+existing FastAPI/Starlette deprecation warning; Ruff passed and mypy reported no
+issues in 479 source files. Focused governance check: 1 passed in each phase.
+Taskctl consistency, JSON/relative links, and diff checks: passed. Deployment
+and sibling consumer checks: not_required; no such surface changed. These are
+locally observed commands and Git remote evidence, not GitHub API/browser claims.
+
+Main was pushed and local/remote equality observed at the reviewed head before
+closure. Local feature-branch cleanup: observed_deleted. Remote feature-branch
+cleanup: observed_deleted, confirmed by deletion output and an empty remote
+head query. Taskctl transition to merged used the exact reviewed head and both
+cleanup observations. This single post-merge closure commit follows the reviewed
+implementation head; its commit identity provides the final main lineage.
+
+Authority impact: the approval-policy definition is adopted under the user's
+explicit approval. Product, analytical, capability, data-use, runtime, sibling,
+pilot, and production authority are unchanged. Routine delegated execution is
+not activated. The observer, durable independent receipt/verifier, advisory
+OpenCode integration, owner reporting automation, and executor activation remain
+separately authorized successors. No further task is authorized by this closure.

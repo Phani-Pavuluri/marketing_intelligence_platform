@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,13 +13,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `d8b100c9fa87e3af7b5a2af565a31b442ff7b46b`
 - **Authorization provenance:** `fc5d4ce487c12e4f90017b787674facb5863563c`
 - **Feature branch:** `docs/mip-delegated-routine-merge-policy-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `3bc54d1d4c7135779762f8f7eae29641d2c32542`
-- **Reviewed head:** `null`
+- **Reviewed head:** `403ec37877893832ab8e8eac5aa44d5a32e32958`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -27,9 +27,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
