@@ -3,18 +3,18 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `proposed`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_BOUNDED_WORK_PLAN_VALIDATOR_001`
+- **Task ID:** `MIP_REVIEW_OBSERVER_FIXTURE_ISOLATION_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `4951a6ff02c3a7124c458b6986b4fc7154495d47`
-- **Authorization provenance:** `f2ff9267d67998f322bc4fb132400ae5f0482fca`
-- **Feature branch:** `feat/mip-bounded-work-plan-validator-001`
+- **Base SHA:** `ea5bb210a471a0356d8b180c0aeee356e35b2b78`
+- **Authorization provenance:** `null`
+- **Feature branch:** `fix/mip-review-observer-fixture-isolation-001`
 - **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -27,12 +27,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-Owner requested implementation of autopilot setup on October 14, 2026.
-This is the first MIP-only validation checkpoint. Muse-Spark implements; Codex
-reviews. Implementation and gates have not yet run. No autopilot is active.
+## Why this successor exists
+
+Independent Codex review blocks validator head
+3af72b014987f8e76631ab3da3c4575f8e847d4d because the required full gate has
+nine observer-fixture failures. The validator itself independently passes 84
+focused tests. No waiver is requested or granted. The published ready state was
+not valid merge readiness; attempted taskctl transition to blocked returned
+E_TRANSITION_EDGE without changing state. A separate deterministic fixture
+repair is now authorized, with the validator parked and recovery deferred.
+No fixture implementation or gate has yet run for this successor.

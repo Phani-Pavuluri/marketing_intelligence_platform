@@ -7,7 +7,7 @@
   "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_empty_feature_branch_head",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_execution_authorized": true,
+  "task_execution_authorized": false,
   "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
@@ -42,14 +42,14 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_BOUNDED_WORK_PLAN_VALIDATOR_001",
-  "status": "authorized",
-  "review_decision": "authorized",
-  "base_sha": "4951a6ff02c3a7124c458b6986b4fc7154495d47",
-  "task_authoring_start_sha": "4951a6ff02c3a7124c458b6986b4fc7154495d47",
-  "task_authoring_head_sha": "f2ff9267d67998f322bc4fb132400ae5f0482fca",
-  "authorization_head_sha": "f2ff9267d67998f322bc4fb132400ae5f0482fca",
-  "feature_branch": "feat/mip-bounded-work-plan-validator-001",
+  "task_id": "MIP_REVIEW_OBSERVER_FIXTURE_ISOLATION_001",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "ea5bb210a471a0356d8b180c0aeee356e35b2b78",
+  "task_authoring_start_sha": "ea5bb210a471a0356d8b180c0aeee356e35b2b78",
+  "task_authoring_head_sha": null,
+  "authorization_head_sha": null,
+  "feature_branch": "fix/mip-review-observer-fixture-isolation-001",
   "feature_branch_created": true,
   "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
@@ -62,15 +62,12 @@
   "maximum_correction_cycles": 1,
   "correction_cycles_completed": 0,
   "correction_cycles_remaining": 1,
-  "risk_tier": "tier_3_bounded_work_plan_authority_boundary_tooling",
-  "compatibility_migration_policy": "new_plan_schema_v1_no_existing_taskctl_or_runtime_migration",
+  "risk_tier": "tier_2_review_observer_test_fixture_isolation",
+  "compatibility_migration_policy": "not_applicable_test_fixture_only_no_runtime_contract_change",
   "full_suite_validation_required": true,
-  "validation_scope": "bounded_plan_positive_negative_graph_path_schema_digest_no_side_effect_tests_docker_make_validate_taskctl_json_docs_owned_paths_receipt",
+  "validation_scope": "complete_observer_tests_synthetic_correction_lifecycle_regressions_docker_make_validate_taskctl_owned_paths_diff_receipt",
   "owned_implementation_paths": [
-    "src/mip/execution/work_plan.py",
-    "src/mip/execution/work_plan.schema.json",
-    "tests/test_work_plan.py",
-    "docs/execution/BOUNDED_WORK_PLANS.md"
+    "tests/test_review_observer.py"
   ],
   "task_authoring_boundary": [
     "docs/execution/ACTIVE_TASK.md",
@@ -86,20 +83,33 @@
   ],
   "dependencies": [
     {
-      "dependency_id": "DEP-MIP-PARALLEL-MODEL-MERGED-001",
+      "dependency_id": "DEP-MIP-OBSERVER-IMPLEMENTATION-MERGED-001",
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "task_id": "MIP_PARALLEL_AGENT_OPERATING_MODEL_001",
+      "task_id": "MIP_CODEX_CHECKPOINT_REVIEW_OBSERVER_001",
       "state": "satisfied",
-      "observed_main_sha": "4951a6ff02c3a7124c458b6986b4fc7154495d47",
-      "resolution_condition": "Owner-approved parallel model merged; explicit task authorization remains mandatory."
+      "observed_main_sha": "cf0ac9feafc65c3f35266b550cf33f5a4183203a",
+      "resolution_condition": "Review observer and its tests are merged on main."
     }
   ],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "user_exact_head",
-  "task_authoring_note": "Owner requested implement remaining autopilot setup on 2026-10-14. First independent outcome is a MIP-only bounded-plan validator; Muse-Spark owns implementation. This authorizes no plan materialization, successor execution, sibling change, dispatch, service control or merge activation.",
+  "task_authoring_note": "Owner authorized implementing autopilot setup. Required standalone fixture repair discovered during validator review; Muse-Spark implements test isolation only. Failed validator head remains parked, not mergeable; no waiver or additional correction cycle granted.",
   "local_feature_branch_cleanup": null,
   "remote_feature_branch_cleanup": null,
-  "coordination_workstream_id": "WS-MIP-BOUNDED-WORK-PLAN-VALIDATOR-001",
-  "coordination_capability_owner": "mip_execution_governance"
+  "coordination_workstream_id": "WS-MIP-REVIEW-OBSERVER-FIXTURE-ISOLATION-001",
+  "coordination_capability_owner": "mip_execution_governance",
+  "parked_setup_workstreams": [
+    {
+      "task_id": "MIP_BOUNDED_WORK_PLAN_VALIDATOR_001",
+      "feature_branch": "feat/mip-bounded-work-plan-validator-001",
+      "reviewed_head_sha": "3af72b014987f8e76631ab3da3c4575f8e847d4d",
+      "implementation_commit_sha": "8b51f3cba2dc4207e5f162f71ed4846d62acf79f",
+      "review_outcome": "blocked",
+      "merge_eligible": false,
+      "blocker_id": "BLOCK-MIP-OBSERVER-FIXTURE-CORRECTION-HISTORY-001",
+      "resolution_condition": "Merge independent fixture repair, then authorize a fresh validator recovery on the new baseline with all gates passing; do not merge failed gate head.",
+      "branch_lifecycle_limitation": "Published canonical ready_for_review despite failed mandatory gate; taskctl cannot transition ready_for_review to blocked and correction budget is exhausted. This durable successor record marks review blocked without hand-editing lifecycle or waiving validation."
+    }
+  ]
 }
