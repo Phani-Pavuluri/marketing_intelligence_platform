@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,13 +13,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `ea5bb210a471a0356d8b180c0aeee356e35b2b78`
 - **Authorization provenance:** `6393452e8e2f4cf4c9617d099aa73aa53d174c45`
 - **Feature branch:** `fix/mip-review-observer-fixture-isolation-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `c23cef613850e3cd6d56a78547006a3d20c1d248`
-- **Reviewed head:** `null`
+- **Reviewed head:** `6428afaa495b15f315f2ba6961cd5ca87b29cdb1`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -27,9 +27,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
@@ -62,3 +62,33 @@ schema parity, and atomic persistence.
 Validation on the exact tree below: full Docker `make validate`, Ruff/mypy,
 `taskctl check`, JSON parsing, `git diff --check`, owned-path/diff/authority
 boundary checks, and the frozen-tree publication receipt. No PR or merge.
+
+
+## Merge and single closure — October 14, 2026
+
+Owner approval provenance: after being shown exact fixture-repair head
+6428afaa495b15f315f2ba6961cd5ca87b29cdb1 and its passing independent review,
+the owner reaffirmed the instruction to bypass routine merge approval prompts
+("why you waiting on me to approve i asked to bypasss right"). The coordinator
+explicitly identified this reviewed routine head as the action being resumed.
+This contextual acceptance of the identified head is recorded as external owner
+approval; it is not activation of an unimplemented automatic merge mechanism,
+self-approval or an approval-metadata commit. Major decisions remain reserved.
+
+Exact reviewed head 6428afaa495b15f315f2ba6961cd5ca87b29cdb1;
+implementation c23cef613850e3cd6d56a78547006a3d20c1d248; authorization
+6393452e8e2f4cf4c9617d099aa73aa53d174c45; finalized main baseline
+24197d60b600b05f8b6d17a24e10cbea52e5de4b unchanged before merge.
+Independent Codex review passed. Exact-head and post-fast-forward Docker gates
+both passed: 2602 tests passed, 5 skipped, 1 existing warning; Ruff passed;
+mypy clean on 481 files. Taskctl, JSON, authoring/owned-path/diff and exact-head
+checks passed. Results are locally observed; supporting logs remain in .codex/.
+
+Main was fast-forwarded to the exact head and pushed; remote equality was
+observed. Local and remote task branches were deleted and absence observed
+before transition. This one closure changes only stable execution metadata and
+human evidence. Local/remote equality is verified again after publication.
+No product, analytical, sibling or runtime authority changed; validator remains
+parked until separately authorized recovery on the repaired main baseline.
+No waiver was used. Future routine automation still requires its verified
+implementation; this closure does not amend policy or authorize unknown heads.
