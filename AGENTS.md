@@ -92,7 +92,13 @@ verified refresh.
 
 ## Merge the externally approved head
 
-User approval must identify the exact remote feature-branch head SHA. Re-run the
+Approval must identify the exact remote feature-branch head SHA. User approval
+is the default and remains required for major or non-routine decisions. Future
+tasks may opt into delegated routine approval only under
+`docs/execution/DELEGATED_ROUTINE_MERGE_POLICY.md`, after its activation
+prerequisite is satisfied. Missing eligibility or independent exact-head
+evidence fails closed; this policy never approves its own adoption or changes.
+Re-run the
 mandatory bootstrap, re-fetch the feature branch, verify its head still equals
 the approved SHA, verify `main` has not moved beyond the authorization boundary,
 and rerun the active task's required risk-tier gate. Use `git merge --ff-only`;
@@ -104,3 +110,14 @@ exact reviewed head and explicit cleanup evidence. Record approval provenance,
 validation, authority impact, and resulting main lineage in exactly one
 post-merge closure commit, then run `taskctl check`. Push and verify local/remote
 synchronization. No capability authority follows from task execution metadata.
+
+## Guidance, review, and owner reporting
+
+Muse-Spark owns implementation approach and execution within Git-authorized
+tasks. Codex provides high-level goal guidance, independent evidence review,
+and productive discussion of findings and recommendations; it does not prescribe
+exact implementation prompts, take over product implementation, or impose
+automatic pause/release controls. Explain completed, ongoing, and planned work,
+goal impact, issues, and user decisions in plain language. Distinguish verified
+results from agent claims and plans. Follow the delegated merge policy's
+user-reserved decisions; agreement between agents does not expand authority.

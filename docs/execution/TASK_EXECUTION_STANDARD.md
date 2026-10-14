@@ -124,6 +124,12 @@ task proposed → user authorization → stable task metadata on main
 No pull request is required. `direct_to_main` is permitted only when the active
 task explicitly authorizes it.
 
+External approval defaults to the user's exact-head decision. Future routine
+tasks may use independent delegated approval only through
+[`DELEGATED_ROUTINE_MERGE_POLICY.md`](DELEGATED_ROUTINE_MERGE_POLICY.md), with
+explicit task opt-in and its activation prerequisite satisfied. The policy does
+not activate an automatic merge executor or change taskctl lifecycle semantics.
+
 ## Statuses and fail-closed rules
 
 Allowed V2 statuses are `idle`, `proposed`, `authorized`, `in_progress`,
@@ -242,8 +248,12 @@ one exists; terminal or chat output is not a completion report.
 
 ## Exact-head approval and merge
 
-Approval is an external user decision that names or unambiguously accepts the
-exact remote feature-branch head SHA reported for review. No pre-merge
+Approval is an external decision that names or unambiguously accepts the
+exact remote feature-branch head SHA reported for review. The default is an
+external user decision. Delegated routine approval is eligible only under
+[`DELEGATED_ROUTINE_MERGE_POLICY.md`](DELEGATED_ROUTINE_MERGE_POLICY.md); unclear
+classification, missing activation, or missing independent evidence requires
+the user. Approval-policy changes themselves require user approval. No pre-merge
 approval-metadata commit is created. Persisted `merge_authorized` remains false
 until closure because changing it would change the reviewed branch.
 
@@ -274,6 +284,8 @@ outside its generated block, run `taskctl check`, and create exactly one
 post-merge closure commit. It records:
 
 - approval source and exact reviewed head;
+- for a delegated routine merge, the user delegation provenance and independently
+  verified exact-head review receipt, including eligibility and validation;
 - authorization head and implementation/merged-main head;
 - validation evidence and GitHub/local synchronization;
 - validation-category statuses for the execution, exact-head, and
