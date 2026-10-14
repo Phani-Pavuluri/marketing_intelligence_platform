@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -15,19 +15,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `feat/mip-bounded-work-plan-validator-recovery-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `179c9a0919ce43862720a73561a7e908658f2d82`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `3c35cd0884f0f5b6d92f3eeefa096ab41c0a52a9`
+- **Rejected implementation commit:** `179c9a0919ce43862720a73561a7e908658f2d82`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -63,3 +63,21 @@ passed, JSON/schema parsed, `git diff --check` clean, Markdown links resolve,
 ownership-pattern and authority-boundary checks passed (MIP-only,
 execution-governance scope). No analytical or sibling execution was run;
 no PR or merge occurred.
+
+
+## Independent recovery review — correction requested
+
+Exact reviewed head 3c35cd0884f0f5b6d92f3eeefa096ab41c0a52a9;
+implementation 179c9a0919ce43862720a73561a7e908658f2d82. Codex did not
+implement these files. The original four findings are addressed and the fixed
+observer fixture permits the full suite. One remaining branch-contract mismatch
+is reproducible: is_valid_branch("@") is false, but git check-ref-format --branch
+"@" exits 0. The authored contract requires Git branch-equivalent semantics
+with main explicitly reserved; it does not authorize an additional rejection of
+this legal literal name. Correct that mismatch and inaccurate stricter-rule
+documentation, preserving invalid-name rejection and the no-side-effect contract.
+Prove legal @ and existing legal/invalid edge cases against real Git. No new
+capability or architecture meaning is selected; implement the existing contract.
+This task's single available correction cycle is authorized within owned paths.
+No full gate was rerun for this known-defective head; rerun the complete required
+frozen-tree gate on the corrected replacement before publishing readiness.
