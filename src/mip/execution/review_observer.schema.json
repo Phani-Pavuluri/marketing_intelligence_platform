@@ -1,0 +1,219 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "critical",
+            "major",
+            "minor",
+            "suggestion"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "source_path": {
+          "minLength": 1,
+          "title": "Source Path",
+          "type": "string"
+        },
+        "line": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Line"
+        },
+        "requirement": {
+          "minLength": 1,
+          "title": "Requirement",
+          "type": "string"
+        },
+        "observation": {
+          "minLength": 1,
+          "title": "Observation",
+          "type": "string"
+        },
+        "impact": {
+          "minLength": 1,
+          "title": "Impact",
+          "type": "string"
+        },
+        "proposed_correction": {
+          "minLength": 1,
+          "title": "Proposed Correction",
+          "type": "string"
+        },
+        "acceptance_evidence": {
+          "minLength": 1,
+          "title": "Acceptance Evidence",
+          "type": "string"
+        },
+        "user_decision_required": {
+          "title": "User Decision Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "severity",
+        "source_path",
+        "line",
+        "requirement",
+        "observation",
+        "impact",
+        "proposed_correction",
+        "acceptance_evidence",
+        "user_decision_required"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "OwnerUpdate": {
+      "additionalProperties": false,
+      "properties": {
+        "goal_impact": {
+          "minLength": 1,
+          "title": "Goal Impact",
+          "type": "string"
+        },
+        "completed": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Completed",
+          "type": "array"
+        },
+        "ongoing": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ongoing",
+          "type": "array"
+        },
+        "planned": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Planned",
+          "type": "array"
+        },
+        "issues": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "decisions_needed": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Decisions Needed",
+          "type": "array"
+        },
+        "recommendation": {
+          "minLength": 1,
+          "title": "Recommendation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "goal_impact",
+        "completed",
+        "ongoing",
+        "planned",
+        "issues",
+        "decisions_needed",
+        "recommendation"
+      ],
+      "title": "OwnerUpdate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "repository": {
+      "title": "Repository",
+      "type": "string"
+    },
+    "task_id": {
+      "title": "Task Id",
+      "type": "string"
+    },
+    "checkpoint_kind": {
+      "enum": [
+        "completion",
+        "closure"
+      ],
+      "title": "Checkpoint Kind",
+      "type": "string"
+    },
+    "reviewed_sha": {
+      "title": "Reviewed Sha",
+      "type": "string"
+    },
+    "verdict": {
+      "enum": [
+        "pass",
+        "changes_requested",
+        "needs_user",
+        "blocked"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    },
+    "summary": {
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "owner_update": {
+      "$ref": "#/$defs/OwnerUpdate"
+    }
+  },
+  "required": [
+    "schema_version",
+    "repository",
+    "task_id",
+    "checkpoint_kind",
+    "reviewed_sha",
+    "verdict",
+    "summary",
+    "findings",
+    "limitations",
+    "owner_update"
+  ],
+  "title": "ReviewResult",
+  "type": "object"
+}
