@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -15,19 +15,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `feat/mip-bounded-work-plan-validator-recovery-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `179c9a0919ce43862720a73561a7e908658f2d82`
+- **Implementation commit:** `84120ffad113710c98f3567bf015277cb8fab16a`
 - **Reviewed head:** `null`
 - **Rejected review head:** `3c35cd0884f0f5b6d92f3eeefa096ab41c0a52a9`
 - **Rejected implementation commit:** `179c9a0919ce43862720a73561a7e908658f2d82`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -57,12 +57,21 @@ for well-formed non-object JSON, and the 1 MiB bound enforced on bytes read.
 pass here — the observer suite passing under an active authorized task proves
 the fixture repair that unblocked this recovery.
 
-Validation on the exact tree below: full Docker `make validate` green
-(2686 passed, 5 skipped; Ruff and mypy clean on 483 files), `taskctl check`
-passed, JSON/schema parsed, `git diff --check` clean, Markdown links resolve,
-ownership-pattern and authority-boundary checks passed (MIP-only,
-execution-governance scope). No analytical or sibling execution was run;
-no PR or merge occurred.
+## Correction evidence (single authorized cycle)
+
+Correction implementation: `84120ffad113710c98f3567bf015277cb8fab16a`,
+confined to the three owned text paths (validator, tests, usage docs; schema
+unchanged). The lone name `@` is now accepted, matching `git
+check-ref-format --branch "@"` (exit 0, verified in both ref forms); the only
+remaining documented deviations from Git are the reserved `main` and refused
+leading-dash names. Invalid-name rejection and the no-side-effect contract
+are preserved; no new capability or architecture meaning selected.
+Edge-case proof against real Git now covers both ref forms for every accepted
+name plus the git-rejected battery. Validator tests stand at 85.
+
+Validation on the exact corrected tree below: full Docker `make validate`,
+Ruff/mypy, `taskctl check`, JSON/schema parsing, `git diff --check`,
+owned-path/link/authority checks, and the frozen-tree receipt. No PR or merge.
 
 
 ## Independent recovery review — correction requested
