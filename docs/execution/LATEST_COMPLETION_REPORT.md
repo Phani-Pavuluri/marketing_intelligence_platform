@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -15,19 +15,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `feat/mip-bounded-work-plan-validator-001`
 - **Feature branch created:** `true`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `943bf038b5eec563ec6cd3062c96d4cdebe52158`
+- **Implementation commit:** `8b51f3cba2dc4207e5f162f71ed4846d62acf79f`
 - **Reviewed head:** `null`
 - **Rejected review head:** `e10ba8c322b77b0fb9ee813b7ff8f34f2651c3ee`
 - **Rejected implementation commit:** `943bf038b5eec563ec6cd3062c96d4cdebe52158`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -53,15 +53,51 @@ codes: `0` valid proposal, `2` constraint violation, `3`
 missing/unreadable/oversized/malformed input. Duplicate JSON keys are rejected
 as malformed input (exit 3), never silently overwritten.
 
-Validation results on the exact published tree: Docker `make validate` passed
-(2667 passed, 5 skipped; Ruff clean; mypy clean on 483 files), including the
-66 new validator tests covering valid/sequenced/shared-path plans, digest
-stability, deterministic ordering, all named rejection classes, actual CLI exit
-codes and JSON, no repository mutation, and no side-effect channels.
-`taskctl check` passed; JSON/schema parsed; `git diff --check` clean;
-Markdown links resolve; ownership-pattern and authority-boundary checks passed
-(MIP-only, execution-governance scope). No analytical or sibling execution was
-run; no PR or merge occurred.
+Validation results on the exact corrected tree. Focused validator gate: 84/84
+new tests pass; Ruff and mypy clean on both owned source files (host Poetry;
+the Docker gate halts at pytest, below). `taskctl check` passed; JSON/schema
+parsed; `git diff --check` clean; Markdown links resolve; ownership-pattern
+and authority-boundary checks passed (MIP-only, execution-governance scope).
+Full Docker suite: 2676 passed, 5 skipped, 9 failed — all 9 failures are in
+`tests/test_review_observer.py` (an out-of-scope parallel-workstream suite)
+and are proven unrelated to this task's changes: those fixtures template the
+live `EXECUTION_STATE.json`, so any post-correction lifecycle history
+(rejected SHAs, completed correction cycle) invalidates their early-lifecycle
+fixture states; with a pristine template all 26 observer tests pass. No
+owned-scope remedy exists — observer fixtures and lifecycle rules are outside
+the authorized correction boundary. No analytical or sibling execution was
+run; no PR or merge occurred. Merge readiness: NOT READY pending an owner
+decision (successor to decouple observer fixtures from lifecycle history, or
+explicit waiver); the validator deliverable itself is complete with all four
+review findings resolved and behaviorally proven.
+
+## Correction evidence (single authorized cycle)
+
+Correction implementation: `8b51f3cba2dc4207e5f162f71ed4846d62acf79f`,
+confined to the existing owned paths (validator, tests, usage docs; schema
+unchanged). Each review finding is resolved behaviorally:
+
+1. Branch semantics now verified against real `git check-ref-format`:
+   leading-dash names refused as a documented CLI-safety rule stricter than
+   the `refs/heads/` form, every `.lock`-suffixed component refused matching
+   Git, and acceptance here implies Git acceptance (proven for legal edge
+   cases including slashes, dashes, dots, and mixed case).
+2. Every failure path emits one JSON result (`valid=false`,
+   `execution_authorized=false`) on stdout: lone-surrogate text exits 3 with
+   `INPUT_UNENCODABLE`, 1,100-level nesting exits 3 with a bounded structured
+   result, and no traceback or environment detail is printed.
+3. Well-formed non-object JSON (`[]`, strings, numbers, `null`) now exits 2
+   under `PLAN_TOP_LEVEL`, matching the authored exit classification.
+4. The 1 MiB bound is enforced on the bytes actually read (bounded
+   `read(MAX+1)` with no stat/read gap); oversized input exits 3 with
+   structured JSON.
+
+Validator tests grew from 66 to 84, adding Git cross-checks, surrogate/deep
+input, non-object classification, and non-UTF-8 cases. The full-suite
+`test_review_observer.py` coupling is documented in the validation paragraph
+above; the single authorized correction cycle is now consumed
+(completed=1, remaining=0), so no further correction under this task is
+possible — the remaining step is an owner merge/waiver/successor decision.
 
 
 ## Independent Codex review — changes requested
