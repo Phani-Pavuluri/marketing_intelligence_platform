@@ -11,10 +11,14 @@ The validator reads one UTF-8 JSON object of at most 1 MiB, writes one JSON
 result object to stdout, and returns an exit code:
 
 * ``0`` -- the plan is a valid proposal;
-* ``2`` -- the file parses as JSON but violates plan constraints;
+* ``2`` -- the file parses as JSON but violates plan constraints (including a
+  well-formed JSON value that is not an object);
 * ``3`` -- the input is missing, unreadable, oversized, or malformed
   (including duplicate JSON keys, which are rejected rather than silently
-  overwritten).
+  overwritten, unprocessable nesting, or text unrepresentable as UTF-8).
+
+Every failure prints one JSON result (``valid=false``,
+``execution_authorized=false``) on stdout. Diagnostics go to stderr.
 
 Diagnostics go to stderr. The validator performs no model call, no network
 access, no Git mutation, no worker start, and no taskctl transition.
@@ -108,15 +112,19 @@ def _problem(code: str, message: str) -> dict[str, str]:
 def is_valid_branch(name: object) -> bool:
     """Conservative ``git check-ref-format --branch`` equivalent.
 
-    Rejects a superset of what Git rejects (plus the reserved name ``main``),
-    so acceptance here implies Git would accept the name, while a few exotic
-    but legal Git names may be refused. Documented; deterministic; no Git call.
+    Accepts only names Git itself accepts (verified against
+    ``git check-ref-format refs/heads/<name>``), with two documented
+    stricter deviations: the reserved name ``main`` is refused, and names
+    starting with ``-`` are refused because the ``--branch`` form (and most
+    Git subcommands) would parse the leading dash as flags. No Git call.
     """
     if not isinstance(name, str) or name in ("", "@", "main"):
         return False
+    if name.startswith("-"):
+        return False
     if (
         name.startswith(("/", "."))
-        or name.endswith(("/", ".", ".lock"))
+        or name.endswith(("/", "."))
         or "//" in name
         or ".." in name
         or "@{" in name
@@ -127,6 +135,8 @@ def is_valid_branch(name: object) -> bool:
             return False
     for component in name.split("/"):
         if component in ("", ".") or component.startswith("."):
+            return False
+        if component.endswith(".lock"):
             return False
     return True
 
@@ -433,10 +443,16 @@ def validate_plan_object(plan: Any) -> tuple[bool, str | None, list[str], list[d
 
 
 def validate_file(path: Path) -> tuple[dict[str, Any], int]:
-    """Validate the plan file at *path*; return ``(result, exit_code)``."""
-    try:
-        size = path.stat().st_size
-    except OSError:
+    """Validate the plan file at *path*; return ``(result, exit_code)``.
+
+    Every return path yields a structured JSON result: no input, however
+    malformed, deeply nested, or unrepresentable, escapes as an empty stdout
+    or a traceback. The read itself is bounded to ``MAX_PLAN_BYTES + 1``
+    bytes, and the bound is enforced on the bytes actually read, so growth
+    between any size check and the read cannot exceed it.
+    """
+
+    def _unreadable() -> tuple[dict[str, Any], int]:
         return (
             _result(
                 None,
@@ -447,7 +463,13 @@ def validate_file(path: Path) -> tuple[dict[str, Any], int]:
             ),
             3,
         )
-    if size > MAX_PLAN_BYTES:
+
+    try:
+        with path.open("rb") as handle:
+            raw = handle.read(MAX_PLAN_BYTES + 1)
+    except OSError:
+        return _unreadable()
+    if len(raw) > MAX_PLAN_BYTES:
         return (
             _result(
                 None,
@@ -455,19 +477,6 @@ def validate_file(path: Path) -> tuple[dict[str, Any], int]:
                 None,
                 [],
                 [_problem("INPUT_OVERSIZED", "plan file exceeds 1 MiB")],
-            ),
-            3,
-        )
-    try:
-        raw = path.read_bytes()
-    except OSError:
-        return (
-            _result(
-                None,
-                False,
-                None,
-                [],
-                [_problem("INPUT_UNREADABLE", f"cannot read plan file: {path}")],
             ),
             3,
         )
@@ -481,39 +490,75 @@ def validate_file(path: Path) -> tuple[dict[str, Any], int]:
             3,
         )
     try:
-        parsed = json.loads(text, object_pairs_hook=_no_duplicate_object)
-    except _DuplicateKeyError as exc:
+        try:
+            parsed = json.loads(text, object_pairs_hook=_no_duplicate_object)
+        except _DuplicateKeyError as exc:
+            return (
+                _result(
+                    None,
+                    False,
+                    None,
+                    [],
+                    [_problem("INPUT_DUPLICATE_KEYS", f"duplicate JSON key: {exc}")],
+                ),
+                3,
+            )
+        except json.JSONDecodeError as exc:
+            return (
+                _result(
+                    None,
+                    False,
+                    None,
+                    [],
+                    [_problem("INPUT_MALFORMED", f"plan file is not valid JSON: {exc.msg}")],
+                ),
+                3,
+            )
+        if not isinstance(parsed, dict):
+            return (
+                _result(
+                    None,
+                    False,
+                    None,
+                    [],
+                    [_problem("PLAN_TOP_LEVEL", "plan must be a JSON object")],
+                ),
+                2,
+            )
+        valid, plan_id, ordered, problems = validate_plan_object(parsed)
+        if not valid:
+            return _result(plan_id, False, None, [], problems), 2
+        try:
+            digest = canonical_digest(parsed)
+        except Exception:  # noqa: BLE001 - unrepresentable text stays structured
+            return (
+                _result(
+                    plan_id,
+                    False,
+                    None,
+                    [],
+                    [
+                        _problem(
+                            "INPUT_UNENCODABLE",
+                            "plan contains text that cannot be represented as UTF-8",
+                        )
+                    ],
+                ),
+                3,
+            )
+        return _result(plan_id, True, digest, ordered, []), 0
+    except Exception as exc:  # noqa: BLE001 - bounded structured failure, no traceback
+        print(f"work_plan: {type(exc).__name__} while validating plan", file=sys.stderr)
         return (
             _result(
                 None,
                 False,
                 None,
                 [],
-                [_problem("INPUT_DUPLICATE_KEYS", f"duplicate JSON key: {exc}")],
+                [_problem("INPUT_UNBOUNDED", "plan input could not be processed")],
             ),
             3,
         )
-    except json.JSONDecodeError as exc:
-        return (
-            _result(
-                None,
-                False,
-                None,
-                [],
-                [_problem("INPUT_MALFORMED", f"plan file is not valid JSON: {exc.msg}")],
-            ),
-            3,
-        )
-    if not isinstance(parsed, dict):
-        return (
-            _result(
-                None, False, None, [], [_problem("INPUT_TOP_LEVEL", "plan must be a JSON object")]
-            ),
-            3,
-        )
-    valid, plan_id, ordered, problems = validate_plan_object(parsed)
-    digest = canonical_digest(parsed) if valid else None
-    return _result(plan_id, valid, digest, ordered, problems), 0 if valid else 2
 
 
 def build_parser() -> argparse.ArgumentParser:

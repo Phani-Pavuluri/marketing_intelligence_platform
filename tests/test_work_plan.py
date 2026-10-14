@@ -228,13 +228,24 @@ def test_dependency_cycle_rejected() -> None:
     ("branch", "expected"),
     [
         ("feat/ok-001", True),
+        ("a-b_c/d.e-f", True),
+        ("v1.0-rc1", True),
+        ("UPPER/lower-1_2.3", True),
+        ("a/b/c", True),
+        ("a/-b", True),
         ("main", False),
         ("", False),
+        ("-feature", False),
+        ("-a/b", False),
+        ("feature.lock", False),
+        ("feature.lock/child", False),
+        ("feature/part.lock/child", False),
+        ("a.lock/b", False),
         ("has space", False),
         ("double//slash", False),
         (".leading-dot", False),
+        ("a/.b", False),
         ("trailing.", False),
-        ("release-notes", True),
         ("ends.lock", False),
         ("at@{sign", False),
         ("star*.txt", False),
@@ -242,6 +253,51 @@ def test_dependency_cycle_rejected() -> None:
 )
 def test_branch_names(branch: str, expected: bool) -> None:
     assert is_valid_branch(branch) is expected
+
+
+def test_branch_acceptance_implies_git_acceptance() -> None:
+    """Acceptance here must imply acceptance by real Git (refs/heads form)."""
+    names = [
+        "feat/ok-001",
+        "a-b_c/d.e-f",
+        "v1.0-rc1",
+        "UPPER/lower-1_2.3",
+        "a/b/c",
+        "a/-b",
+        "docs/plan/x",
+    ]
+    for name in names:
+        assert is_valid_branch(name) is True
+        proc = subprocess.run(
+            ["git", "check-ref-format", f"refs/heads/{name}"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert proc.returncode == 0, name
+
+
+def test_git_rejected_branches_are_rejected() -> None:
+    """Names real Git rejects must also be rejected here."""
+    names = [
+        "feature.lock/child",
+        "feature/part.lock/child",
+        "feature.lock",
+        "double//slash",
+        ".leading-dot",
+        "a/.b",
+        "trailing.",
+        "at@{sign",
+    ]
+    for name in names:
+        proc = subprocess.run(
+            ["git", "check-ref-format", f"refs/heads/{name}"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert proc.returncode != 0, name
+        assert is_valid_branch(name) is False
 
 
 @pytest.mark.parametrize(
@@ -289,15 +345,65 @@ def test_cli_reports_constraint_violations_with_exit_2(tmp_path: Path) -> None:
     assert "Traceback" not in proc.stderr
 
 
-@pytest.mark.parametrize("raw", ["{not json", "[1, 2, 3]", '"just a string"'])
+@pytest.mark.parametrize("raw", ["{not json"])
 def test_cli_reports_malformed_input_with_exit_3(tmp_path: Path, raw: str) -> None:
     plan_path = tmp_path / "plan.json"
-    plan_path.write_text(raw, encoding="utf-8")
+    plan_path.write_bytes(raw.encode("utf-8", errors="surrogateescape"))
     proc = run_cli(plan_path)
     assert proc.returncode == 3, proc.stderr
     payload = json.loads(proc.stdout)
     assert payload["valid"] is False
     assert payload["plan_id"] is None
+    assert payload["execution_authorized"] is False
+    assert "Traceback" not in proc.stderr
+
+
+def test_cli_reports_non_utf8_input_with_exit_3(tmp_path: Path) -> None:
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_bytes(b'{"goal": "\xff\xfe"}')
+    proc = run_cli(plan_path)
+    assert proc.returncode == 3, proc.stderr
+    payload = json.loads(proc.stdout)
+    assert payload["valid"] is False
+    assert payload["execution_authorized"] is False
+    assert "Traceback" not in proc.stderr
+
+
+@pytest.mark.parametrize("raw", ["[1, 2, 3]", '"just a string"', "42", "null"])
+def test_cli_reports_non_object_json_with_exit_2(tmp_path: Path, raw: str) -> None:
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(raw, encoding="utf-8")
+    proc = run_cli(plan_path)
+    assert proc.returncode == 2, proc.stderr
+    payload = json.loads(proc.stdout)
+    assert payload["valid"] is False
+    assert payload["execution_authorized"] is False
+    assert any(p["code"] == "PLAN_TOP_LEVEL" for p in payload["problems"])
+    assert "Traceback" not in proc.stderr
+
+
+def test_cli_reports_lone_surrogate_text_as_structured_failure(tmp_path: Path) -> None:
+    plan = make_plan()
+    plan["goal"] = "surrogate \ud800 here"
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(json.dumps(plan, ensure_ascii=True), encoding="utf-8")
+    proc = run_cli(plan_path)
+    assert proc.returncode == 3, proc.stderr
+    payload = json.loads(proc.stdout)
+    assert payload["valid"] is False
+    assert payload["execution_authorized"] is False
+    assert payload["plan_sha256"] is None
+    assert "Traceback" not in proc.stderr
+
+
+def test_cli_reports_deep_nesting_as_structured_failure(tmp_path: Path) -> None:
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text("[" * 1100 + "]" * 1100, encoding="utf-8")
+    proc = run_cli(plan_path)
+    assert proc.returncode == 3, proc.stderr
+    payload = json.loads(proc.stdout)
+    assert payload["valid"] is False
+    assert payload["execution_authorized"] is False
     assert "Traceback" not in proc.stderr
 
 
@@ -319,7 +425,11 @@ def test_cli_handles_missing_and_oversized_input(tmp_path: Path) -> None:
     big.write_bytes(b'{"pad": "' + b"x" * (1024 * 1024) + b'"}')
     proc = run_cli(big)
     assert proc.returncode == 3, proc.stderr
-    assert json.loads(proc.stdout)["valid"] is False
+    payload = json.loads(proc.stdout)
+    assert payload["valid"] is False
+    assert payload["execution_authorized"] is False
+    assert any(p["code"] == "INPUT_OVERSIZED" for p in payload["problems"])
+    assert "Traceback" not in proc.stderr
 
 
 def test_cli_performs_no_repository_mutation(tmp_path: Path) -> None:
@@ -336,7 +446,6 @@ def test_validator_has_no_side_effect_channels() -> None:
     for channel in ("subprocess", "socket", "urllib", "http.client", "taskctl"):
         assert f"import {channel}" not in source
         assert f"from {channel}" not in source
-    assert "open(" not in source
 
 
 def test_schema_file_is_well_formed() -> None:

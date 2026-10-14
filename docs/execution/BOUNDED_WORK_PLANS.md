@@ -47,10 +47,14 @@ problems: array of {code, message}
 ```
 
 Exit codes: `0` valid proposal; `2` well-formed JSON that violates plan
-constraints; `3` missing, unreadable, oversized, or malformed input (non-UTF-8,
-bad JSON syntax, non-object top level, or duplicate JSON keys, which are
-rejected rather than silently overwritten). Failures never print tracebacks or
-environment details.
+constraints (including a well-formed JSON value that is not an object);
+`3` missing, unreadable, oversized, or malformed input (non-UTF-8,
+bad JSON syntax, duplicate JSON keys, which are rejected rather than
+silently overwritten, unprocessable nesting, or text unrepresentable as
+UTF-8 such as lone surrogates). Failures never print tracebacks or
+environment details; every failure still prints one JSON result with
+`valid=false` and `execution_authorized=false` on stdout. The read is
+bounded and the 1 MiB limit is enforced on the bytes actually read.
 
 ## Plan v1 reference
 
@@ -66,6 +70,12 @@ text), `owned_paths` (nonempty array of exact repository-relative filenames),
 `acceptance_evidence` (nonempty array of nonempty text), `risk_tier` (integer
 1, 2, or 3), `depends_on` (array of task IDs in the same plan), and
 `unresolved_design_questions` (must be an empty array).
+
+Branch names follow `git check-ref-format --branch` semantics, verified
+against real Git: no leading dash (a CLI-safety rule stricter than the
+`refs/heads/` form, which would accept it), no slash-separated component
+ending in `.lock`, no leading/trailing slashes or dots, no `..`, `@{`, `@`,
+control characters, spaces, `~^:?*[\\`, or components starting with a dot.
 
 Stable IDs start with a letter and contain only `A-Z`, `0-9`, `_`, at most 128
 characters. Task IDs and branches must be unique. Dependencies must name
