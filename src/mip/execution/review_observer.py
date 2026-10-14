@@ -463,6 +463,7 @@ class Observer:
 
     def run_codex(self, bundle: Path, report: Path) -> dict[str, Any]:
         output = report / "model-output.json"
+        output.unlink(missing_ok=True)
         command = [
             self.codex,
             "exec",

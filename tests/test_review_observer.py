@@ -362,6 +362,10 @@ def test_model_cli_timeout_and_failure(tmp_path: Path) -> None:
     observer.timeout = 5
     with pytest.raises(ObserverError, match="exit 5"):
         observer.run_codex(tmp_path, tmp_path)
+    (tmp_path / "model-output.json").write_text('{"old_result": true}')
+    executable.write_text("#!/usr/bin/env python3\nraise SystemExit(0)\n")
+    with pytest.raises(ObserverError, match="unavailable"):
+        observer.run_codex(tmp_path, tmp_path)
 
 
 def test_committed_schema_matches_runtime() -> None:

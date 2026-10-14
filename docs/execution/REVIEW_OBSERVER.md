@@ -24,6 +24,15 @@ publication and closure lineage/evidence. Distinguish asserted tests from
 independently established proof. Do not infer capability readiness from roadmap
 appearance, passing tests alone, documentation volume, or agent agreement.
 
+For historical user-approved closures, verify the recorded exact-head approval
+provenance against the reviewed receipt and closure lineage. The repository's
+closure record is durable evidence of the recorded decision. If the external
+conversation is unavailable, identify that as a verification limitation; do
+not request the same approval again solely for that absence. Report actual
+missing/mismatched approval identity or contradictory evidence as a finding.
+The stronger independent receipt requirement for future delegated routine
+merges must not be retroactively imposed on user-approved historical closures.
+
 Findings identify source path, line if known, requirement, observation, impact,
 proposed correction, and evidence that would resolve them. Offer recommendations
 and questions; Muse-Spark owns implementation choices. Mark material changes to
