@@ -3,7 +3,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,13 +13,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Base SHA:** `874eac0cc7e00c6eb6450e87e66b004ee0200f05`
 - **Authorization provenance:** `dfe68539590dd470a078fb77ad31258e3402affe`
 - **Feature branch:** `feat/mip-bounded-work-plan-validator-recovery-001`
-- **Feature branch created:** `true`
-- **Task execution authorized:** `true`
+- **Feature branch created:** `false`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `84120ffad113710c98f3567bf015277cb8fab16a`
-- **Reviewed head:** `null`
+- **Reviewed head:** `bdf9dd6fd7fe106f17c5ec1d22b26162c1fb8a54`
 - **Rejected review head:** `3c35cd0884f0f5b6d92f3eeefa096ab41c0a52a9`
 - **Rejected implementation commit:** `179c9a0919ce43862720a73561a7e908658f2d82`
 - **Approval commit:** `null`
@@ -27,9 +27,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `1`
 - **Correction cycles remaining:** `0`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 Fresh validator recovery is authorized on the merged fixture-repair baseline.
@@ -90,3 +90,40 @@ capability or architecture meaning is selected; implement the existing contract.
 This task's single available correction cycle is authorized within owned paths.
 No full gate was rerun for this known-defective head; rerun the complete required
 frozen-tree gate on the corrected replacement before publishing readiness.
+
+
+## Supervised merge and single closure — October 14, 2026
+
+Owner explicitly reaffirmed standing authorization to bypass routine merge
+approval prompts after approving the operating model and instructing implementation.
+This validator realizes that approved read-only setup meaning with no new
+architecture, task/merge authority or analytical capability. The latest owner
+instruction is applied as a supervised exception to older per-head prompts and
+eligibility restrictions, not as automatic policy activation. The declared
+Tier 3 gate is preserved unchanged. Major or materially changed decisions remain
+reserved for the owner; no general automated merge verifier is claimed.
+
+Independent Codex exact-head approval of
+bdf9dd6fd7fe106f17c5ec1d22b26162c1fb8a54 was persisted outside the reviewed
+tree at refs/notes/codex-supervised-reviews, note commit
+82116c4d3ad37e1825b4a9f524de63609771ec7e, with actual reviewer thread identity,
+implementation session identity, non-authorship, receipt UUID, source authority,
+validation and limitations. Implementation/authorization lineage remains
+canonical. Finalized main baseline 6549b8e030d6b2aaa02b9073323e5e86e2693678
+was unchanged before fast-forward; approved remote head equality reverified.
+
+Independent review, exact-head preflight and post-fast-forward Docker gates
+all passed: 2687 tests passed, 5 skipped, 1 existing warning; Ruff passed;
+mypy 483 files clean. Focused validator suite independently passed 85 tests.
+Taskctl, JSON, authoring/owned boundaries, diff and unchanged tracked tree passed.
+Actual command logs remain local-only in .codex/; report and publication/note
+receipts carry durable evidence. No failed category was waived.
+
+Main was fast-forwarded to the approved head, pushed and observed equal remotely.
+Both task branch deletions were observed before transition. This is exactly one
+closure commit limited to the three stable files; check and local/remote equality
+are verified after publication. Parked failed predecessor remains unmergeable;
+recovery delivers the validator on the repaired baseline, not its failed receipt.
+No sibling/product/analytical, automatic materialization/dispatch/approval,
+real-data, pilot or production authority is added. Future protocol/runtime
+implementation and activation remain separately definition-ready outcomes.
