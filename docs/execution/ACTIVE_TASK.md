@@ -3,23 +3,23 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** merged
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_REVIEW_OBSERVER_FIXTURE_ISOLATION_001`
+- **Task ID:** `MIP_BOUNDED_WORK_PLAN_VALIDATOR_RECOVERY_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `ea5bb210a471a0356d8b180c0aeee356e35b2b78`
-- **Authorization provenance:** `6393452e8e2f4cf4c9617d099aa73aa53d174c45`
-- **Feature branch:** `fix/mip-review-observer-fixture-isolation-001`
-- **Feature branch created:** `false`
+- **Base SHA:** `874eac0cc7e00c6eb6450e87e66b004ee0200f05`
+- **Authorization provenance:** `null`
+- **Feature branch:** `feat/mip-bounded-work-plan-validator-recovery-001`
+- **Feature branch created:** `true`
 - **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `c23cef613850e3cd6d56a78547006a3d20c1d248`
-- **Reviewed head:** `6428afaa495b15f315f2ba6961cd5ca87b29cdb1`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -27,75 +27,137 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `merged`
-- **Local feature-branch cleanup:** `observed_deleted`
-- **Remote feature-branch cleanup:** `observed_deleted`
+- **Review decision:** `proposed`
+- **Local feature-branch cleanup:** `null`
+- **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## MIP_REVIEW_OBSERVER_FIXTURE_ISOLATION_001 — task contract
+## MIP_BOUNDED_WORK_PLAN_VALIDATOR_RECOVERY_001 — task contract
 
-Primary mergeable outcome: make observer test fixtures independent of the
-repository's current execution lifecycle and task-specific authority metadata.
-This is a standalone test-isolation repair discovered while implementing the
-owner-authorized autopilot setup. Muse-Spark owns implementation; Codex reviews.
+### Primary outcome and ownership
 
-Only tests/test_review_observer.py is owned for implementation, plus the three
-stable execution files for lifecycle/evidence. Exact branch:
-fix/mip-review-observer-fixture-isolation-001. Tier 2 fixture repair; no observer
-runtime, taskctl, product, schema or validator source changes. No PR or merge.
-Required gate: all observer tests, explicit regression evidence against current
-and corrected/exhausted canonical lifecycle templates, Docker make validate,
-Ruff/mypy, taskctl, JSON, diff/auth-boundary/owned-path checks, frozen publication
-receipt and local/remote feature-head equality. Approval mode user_exact_head.
+Deliver a read-only MIP bounded-work-plan validator, its versioned JSON schema,
+behavioral tests and usage documentation. This independently mergeable checkpoint
+precedes owner-approval verification and canonical task materialization; it must
+never claim that a structurally valid plan authorizes execution. Muse-Spark owns
+implementation approach. Codex independently reviews evidence.
 
-Observed defect: environment fixture copies live EXECUTION_STATE.json then
-replaces selected fields. Post-correction flags/rejected heads/counters and task
-metadata contaminate synthetic proposed/authorized/ready/merged scenarios.
-At validator head 3af72b014987f8e76631ab3da3c4575f8e847d4d, Docker reports
-9 failing observer tests, 2676 passing and 5 skipped; the isolated validator
-suite independently passes 84. This is evidence, not permission to skip gates.
+Owned: src/mip/execution/work_plan.py; src/mip/execution/work_plan.schema.json;
+tests/test_work_plan.py; docs/execution/BOUNDED_WORK_PLANS.md; the three stable
+execution files for authorized lifecycle/evidence only. Exact branch:
+feat/mip-bounded-work-plan-validator-recovery-001. No other tracked or sibling files.
+No PR or merge during execution. Tier 3 authority-boundary tooling, required
+Docker make validate plus focused tests, Ruff/mypy, taskctl, JSON/schema, links,
+owned-path/auth-boundary/diff checks and frozen exact-tree receipt publication.
+Approval mode user_exact_head; routine merge activation remains off.
 
-Observable behavior: every synthetic observer repository is authored from a
-complete, deterministic fixture-owned canonical state valid under the existing
-state validator, with fixture-owned authorization/branch/implementation/evidence
-and authority provenance. Live task metadata is not an input to that fixture.
-Preserve all existing behavior assertions and negative cases; do not weaken
-observer/state validation, remove tests, skip failures or alter canonical live
-repository state to make tests pass. Any live-schema drift must fail explicit
-fixture validation instead of importing mutable execution facts. New required
-schema fields can be consciously adopted in fixture data by a future task.
+### Observable behavior and plan contract
 
-Acceptance: prove the full observer suite passes without reading the real
-EXECUTION_STATE as a fixture template, and the fixture remains valid when the
-real task is authorized, changes_requested, ready_for_review after correction
-with completed=1/remaining=0 and rejected history, or merged. Demonstrate this
-with isolated/in-memory temporary fixtures; never rewrite live canonical files.
-Tests must retain dedup, historical review, closure, wrong-origin/corruption,
-lock/recovery, failure/staleness, multiple checkpoints and archived-ref cases.
-Use meaningful regressions proving independence rather than implementation-only
-assertions. Validate the exact final task-owned tree under the required gate.
+Expose python -m mip.execution.work_plan validate --plan PATH. Read one UTF-8
+JSON object, at most 1 MiB. Return one JSON result on stdout; diagnostics go to
+stderr. No model call, network, Git mutation, worker start or taskctl transition
+is performed by this validator. Missing/unreadable/oversized/malformed input
+returns exit 3. Valid JSON violating plan constraints returns exit 2. A valid
+proposal returns exit 0; all result states carry execution_authorized=false.
 
-Prerequisite DEP-MIP-OBSERVER-IMPLEMENTATION-MERGED-001 is satisfied at
-cf0ac9feafc65c3f35266b550cf33f5a4183203a in current main ancestry.
-WS-MIP-REVIEW-OBSERVER-FIXTURE-ISOLATION-001 owns test isolation only; parked
-WS-MIP-BOUNDED-WORK-PLAN-VALIDATOR-001 owns different paths and is not executed.
-Only MIP affected/modified; siblings read-only; no coordination refresh.
+Plan v1 has exactly: schema_version (integer 1), repository (literal
+Phani-Pavuluri/marketing_intelligence_platform), plan_id (nonempty stable ID),
+goal (nonempty text), exclusions (nonempty array of nonempty text), tasks
+(nonempty array, at most 100). Unknown fields are rejected recursively.
+Each task has exactly: task_id (stable ID), feature_branch (valid Git branch
+name), outcome (nonempty text), observable_behavior (nonempty text),
+owned_paths (nonempty array of exact repository-relative file paths),
+acceptance_evidence (nonempty array of nonempty text), risk_tier (integer 1/2/3),
+depends_on (array of task IDs in this same plan),
+unresolved_design_questions (array, must be empty).
+Stable IDs use uppercase letters, digits and underscores, start with a letter,
+and contain at most 128 characters. Text must not be whitespace-only.
 
-The prior validator head is blocked for review and must not merge. Its canonical
-ready state cannot legally transition to blocked (E_TRANSITION_EDGE), and its
-correction cycle is exhausted. The parked_setup_workstreams record preserves
-this blocker durably without editing duplicated lifecycle fields or inventing
-another correction cycle. Do not merge, rebase, modify or execute the parked
-validator branch. Recovery on a fresh main baseline is a separately authored
-successor after this repair is merged; this task does not authorize recovery.
+Tasks/branches are unique. Dependencies cannot duplicate, refer to missing
+IDs or self, or contain a cycle. A valid result lists task IDs in deterministic
+topological order, choosing lexicographically smallest available ID at each
+step. This order is proposed sequencing, never live eligibility. Any repeated
+owned path across tasks requires one task to depend transitively on the other;
+otherwise reject as overlapping independent work. Paths are exact filenames,
+not globs/directories: reject absolute paths, traversal, empty/. components,
+backslashes, NUL, wildcard characters, .git/, .codex/, docs/tasks/ and the three
+stable execution metadata files. These stable files are implicit lifecycle
+ownership and never plan-authored implementation paths. Do not read/check
+existence of owned paths: new files and isolated proposal validation are allowed.
+Branches must satisfy git check-ref-format --branch equivalent semantics and
+must not be main. No shell interpolation of untrusted content.
 
-No product, analytical, sibling, runtime, worker dispatch, global settings,
-service restart, automated message, plan materialization, merge activation or
-capability authority. Documentation policy changes are prohibited. Missing
-owned-scope remedy must publish blocked rather than ready_for_review with a
-failed required gate. Completion must explicitly record every required gate
-category as passed/failed/blocked, limits and deferred recovery.
-Compatibility/migration: not_applicable. Unresolved execution-blocking design
-questions: none for fixture isolation. Publish ready_for_review only when all
-required gates pass, with a durable exact-tree receipt; stop without merging.
+Result fields: schema_version=1, plan_id (string or null when unavailable),
+valid (boolean), execution_authorized=false, plan_sha256 (64 lowercase hex or
+null if invalid), ordered_task_ids (empty for invalid), problems (array of
+objects with code and message). A valid digest is SHA256 of canonical parsed
+plan JSON: sorted keys, compact separators, ensure_ascii=false, UTF-8, no
+trailing newline. Duplicate JSON keys are rejected, not silently overwritten.
+Invalid input never yields valid=true or an execution-capable result. CLI
+failures are handled without traceback or leaking environment/secrets.
+
+### Acceptance evidence and boundaries
+
+Prove valid minimal and sequenced/shared-path plans; stable digest across input
+format/key order; deterministic order; rejection of missing/extra/wrong-type
+fields (including booleans as integers), duplicate keys/IDs/branches/dependencies,
+missing/self/cyclic prerequisites, unsequenced overlapping paths, invalid
+branches/paths, unresolved design questions, wrong repository/version,
+malformed/unreadable/oversized input. Test actual CLI exit codes and JSON; prove
+no repository mutation, subprocess model/network call or task authorization.
+Focused tests must be behavior-based and not merely mirror implementation.
+
+Document the owner experience, CLI/schema, error codes, exact digest meaning,
+proposal-versus-authorization distinction, and deferred successors. A plan does
+not prove live prerequisite completion, owner approval or producer/consumer
+compatibility. No sibling schema adapter or role adoption is delivered.
+
+Prerequisite DEP-MIP-PARALLEL-MODEL-MERGED-001 satisfied at
+4951a6ff02c3a7124c458b6986b4fc7154495d47. Workstream
+WS-MIP-BOUNDED-WORK-PLAN-VALIDATOR-001, owner mip_execution_governance.
+Only MIP is affected/modified. No coordination refresh or analytical, product,
+real-data, runtime, pilot, production, dispatch, auto-authoring or merge authority.
+Do not modify global settings, restart OpenCode or send messages to other agents.
+Validation/completion publication follow AGENTS.md and the execution standard.
+Git is authoritative; invocation-only execution prompt. Publish ready_for_review
+with an exact-tree validation receipt and stop without merging.
+
+Compatibility/migration: new plan v1, existing taskctl/observer/product contracts
+unchanged. Unresolved execution-blocking design questions: none for this outcome.
+Deferred independent outcomes: approval provenance/materialization, session
+binding/occupancy, dependency-aware dispatch, sibling adoption, advisory delivery,
+shared reporting and durable routine-merge activation. None is authorized here.
+
+
+### Recovery provenance and acceptance
+
+Owner: mip_execution_governance. This fresh task succeeds the parked predecessor
+whose exact failed-gate review head is 3af72b014987f8e76631ab3da3c4575f8e847d4d;
+its implementation evidence is 8b51f3cba2dc4207e5f162f71ed4846d62acf79f.
+Do not merge/rebase/execute or edit that old branch. On this new authorized
+branch, reuse only the four owned non-analytical source/test/schema/doc blobs
+from that immutable implementation as starting evidence, then independently
+verify behavior, all review corrections and every required gate. No historical
+receipt or correction count becomes this task's validation evidence.
+
+The prerequisite fixture repair is merged and closed at
+874eac0cc7e00c6eb6450e87e66b004ee0200f05; DEP-MIP-OBSERVER-FIXTURE-REPAIR-MERGED-001
+is satisfied. The prior blocker is resolved for this recovery's eligibility
+only; the parked head remains unmergeable. Source/workstream ownership is
+WS-MIP-BOUNDED-WORK-PLAN-VALIDATOR-RECOVERY-001; the parked workstream is not
+executed concurrently. Only MIP is affected and modified.
+
+Prove the previously found branch, structured malformed/deep/surrogate failure,
+valid JSON non-object exit 2 and actual 1 MiB read-bound issues are fixed.
+Git branch-equivalence evidence must include legal edge cases and invalid
+leading-dash/.lock components; a documented stricter rule cannot silently
+replace the authored semantics. Keep proposed plans execution_authorized=false.
+The entire required Docker gate must pass; publish blocked instead of readiness
+when any required category fails. Complete report must include actual commands,
+counts, all category dispositions and limits. Freeze and validate the final tree
+before receipt publication; no task-owned change after that receipt.
+
+This recovery does not authorize approval/materialization, successor dispatch,
+sibling adoption, automated messages, service control or automatic merging.
+The original contract above defines the validator behavior unchanged.
