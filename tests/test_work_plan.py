@@ -228,6 +228,7 @@ def test_dependency_cycle_rejected() -> None:
     ("branch", "expected"),
     [
         ("feat/ok-001", True),
+        ("@", True),
         ("a-b_c/d.e-f", True),
         ("v1.0-rc1", True),
         ("UPPER/lower-1_2.3", True),
@@ -256,9 +257,10 @@ def test_branch_names(branch: str, expected: bool) -> None:
 
 
 def test_branch_acceptance_implies_git_acceptance() -> None:
-    """Acceptance here must imply acceptance by real Git (refs/heads form)."""
+    """Acceptance here must imply acceptance by real Git in both ref forms."""
     names = [
         "feat/ok-001",
+        "@",
         "a-b_c/d.e-f",
         "v1.0-rc1",
         "UPPER/lower-1_2.3",
@@ -268,13 +270,17 @@ def test_branch_acceptance_implies_git_acceptance() -> None:
     ]
     for name in names:
         assert is_valid_branch(name) is True
-        proc = subprocess.run(
+        for command in (
             ["git", "check-ref-format", f"refs/heads/{name}"],
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
-        assert proc.returncode == 0, name
+            ["git", "check-ref-format", "--branch", name],
+        ):
+            proc = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            assert proc.returncode == 0, (name, command)
 
 
 def test_git_rejected_branches_are_rejected() -> None:

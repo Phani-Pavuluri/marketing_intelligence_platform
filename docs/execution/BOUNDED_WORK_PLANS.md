@@ -72,10 +72,12 @@ text), `owned_paths` (nonempty array of exact repository-relative filenames),
 `unresolved_design_questions` (must be an empty array).
 
 Branch names follow `git check-ref-format --branch` semantics, verified
-against real Git: no leading dash (a CLI-safety rule stricter than the
-`refs/heads/` form, which would accept it), no slash-separated component
-ending in `.lock`, no leading/trailing slashes or dots, no `..`, `@{`, `@`,
-control characters, spaces, `~^:?*[\\`, or components starting with a dot.
+against real Git in both the `--branch` and `refs/heads/` forms: no
+slash-separated component ending in `.lock`, no leading/trailing slashes or
+dots, no `..`, `@{`, control characters, spaces, `~^:?*[\\`, or components
+starting with a dot. The lone name `@` is legal per Git and accepted. Two
+documented deviations: `main` is reserved, and leading-dash names are refused
+as a CLI-safety rule (the `--branch` form parses a leading dash as flags).
 
 Stable IDs start with a letter and contain only `A-Z`, `0-9`, `_`, at most 128
 characters. Task IDs and branches must be unique. Dependencies must name

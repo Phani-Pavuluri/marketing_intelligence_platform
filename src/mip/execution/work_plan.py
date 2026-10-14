@@ -112,13 +112,14 @@ def _problem(code: str, message: str) -> dict[str, str]:
 def is_valid_branch(name: object) -> bool:
     """Conservative ``git check-ref-format --branch`` equivalent.
 
-    Accepts only names Git itself accepts (verified against
-    ``git check-ref-format refs/heads/<name>``), with two documented
-    stricter deviations: the reserved name ``main`` is refused, and names
-    starting with ``-`` are refused because the ``--branch`` form (and most
-    Git subcommands) would parse the leading dash as flags. No Git call.
+    Accepts exactly the names Git itself accepts (verified against both
+    ``git check-ref-format --branch <name>`` and ``refs/heads/<name>``),
+    with two documented deviations: the reserved name ``main`` is refused,
+    and names starting with ``-`` are refused because the ``--branch`` form
+    (and most Git subcommands) would parse the leading dash as flags.
+    Notably the lone name ``@`` is legal per Git and is accepted. No Git call.
     """
-    if not isinstance(name, str) or name in ("", "@", "main"):
+    if not isinstance(name, str) or name in ("", "main"):
         return False
     if name.startswith("-"):
         return False
