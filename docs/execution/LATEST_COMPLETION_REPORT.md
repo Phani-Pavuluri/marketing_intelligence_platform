@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -16,7 +16,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `null`
+- **Implementation commit:** `f845afb33366a8b55284e5d276665df80ae82b70`
 - **Reviewed head:** `null`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -34,3 +34,42 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 ## Current outcome
 
 Fresh owner-authorized runbook evidence recovery recorded; implementation not started. Prior rejected source is preserved in the parked workstream and external Git note; it is not merged or approved.
+
+## Execution evidence
+
+Implemented on `docs/mip-routine-runbook-evidence-recovery-001` at
+`f845afb33366a8b55284e5d276665df80ae82b70`: the reviewed runbook
+content (guide, 14-step executable sequence, evidence map) recovered
+as starting material from immutable rejected head `1a1536b` onto the
+current baseline, with live activation evidence re-verified at
+execution time. One owned path changed, nothing else.
+
+Delivered behavior: the operations guide records the activated
+routine-review path (activation receipt `205960c9…` on prerequisite
+`d69e0eb`, live notes target `2e6c0a4…`, policy SHA256 re-verified
+unchanged), the exact reviewer steps (observer review, full
+required-category execution with logs in the bundle, strict receipt
+composition, attach plus explicit push and verification, refusal
+rules) and operator steps (read-only preflight exit 0, unchanged
+standard merge flow, refusal rules), and unchanged owner-reserved
+decisions. No policy edit, no second activation, no executor, no
+service claim.
+
+Acceptance (Tier 1 gate, all pass on this implementation tree):
+runbook and preserved-guide structure present; only the three
+supported CLI subcommands invoked; no implicit push and no
+service/automatic-authorizer claims; activation receipt,
+prerequisite, live notes target, and policy hash all verified against
+live Git and the unmodified policy file; `taskctl check`, JSON
+parsing, and `git diff --check` pass. Full pytest, Docker, Ruff, and
+mypy recorded `not_required` (docs-only surface). Rejected
+predecessor SHAs (`1a1536b`/`de9999a`) appear only in this rejected-source
+history paragraph, never as current implementation evidence.
+
+Git identity: base `9ce0a27`, authorization `f449b6b`; implementation
+`f845afb33366a8b55284e5d276665df80ae82b70`; diff limited to the one
+owned path plus the three stable files via `taskctl` transitions.
+Authority unchanged across all protected flags; the worker neither
+approves nor merges. Local-only `.codex/` and `docs/tasks/` artifacts
+never staged. The prior review findings travel with the rejected
+source; this fresh head awaits independent review.
