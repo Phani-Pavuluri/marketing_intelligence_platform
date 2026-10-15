@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -12,12 +12,12 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Authorization provenance:** `f449b6b2f69019c6fee5127954438cf2600b0eda`
 - **Feature branch:** `docs/mip-routine-runbook-evidence-recovery-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `f845afb33366a8b55284e5d276665df80ae82b70`
-- **Reviewed head:** `null`
+- **Reviewed head:** `a431db963878e13f8c56ea1e31455554d9f2ef9d`
 - **Rejected review head:** `38ec749335bd333bb11adaf82cdba84d14cca786`
 - **Rejected implementation commit:** `f845afb33366a8b55284e5d276665df80ae82b70`
 - **Approval commit:** `null`
@@ -25,9 +25,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `1`
 - **Correction cycles remaining:** `0`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
@@ -75,4 +75,10 @@ owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags; the worker neither
 approves nor merges. Local-only `.codex/` and `docs/tasks/` artifacts
 never staged. The prior review findings travel with the rejected
-source; this fresh head awaits independent review.
+source; this fresh head is independently reviewed below.
+
+## Supervised delegated merge and single closure — October 15, 2026
+
+Independent observer review passed at exact head `a431db963878e13f8c56ea1e31455554d9f2ef9d` with real reviewer run `01a14094-c925-75e3-9446-07f4772e2128`; the valid result and event artifacts are preserved in the observer-owned report bundle. The strict receipt `04b3c6af-fa38-40f1-827d-4f668efa0517` was validated, attached under `refs/notes/mip-delegated-routine-merge-receipts`, pushed, and verified. Read-only delegated preflight returned eligible.
+
+The reviewed head was merged to main with `git merge --ff-only`, pushed, and the feature branch was deleted and observed absent remotely and locally. Native taskctl now records merged with both cleanup observations. This narrative is the one metadata-only closure commit after cleanup; no product, policy, capability, sibling, production, or new task authority was added.
