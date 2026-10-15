@@ -1,125 +1,50 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** merged
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_OWNER_UPDATE_INTEGRATION_001`
+- **Task ID:** `MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `0d311c0b5e803d3b904cd830b68dd5b5ac6e8e02`
-- **Authorization provenance:** `fadaeed5aaac62a847def910391caefff83d37f1`
-- **Feature branch:** `docs/owner-update-integration-001`
+- **Base SHA:** `ccbe3ce017764d6870233cc8b605b3eb559b27e7`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-delegated-routine-merge-operations-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `40c18c5f8a2c9a096f95bff87ad55f69cf651520`
-- **Reviewed head:** `d2f81caff48f0f76aa48d241ff2d290669505e9a`
-- **Rejected review head:** `8ac5ce8caaa40eb6760c378f732ad00ec8de51ae`
-- **Rejected implementation commit:** `1780342544b95f221f5f90e2427c30afe5c3a64f`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
+- **Rejected review head:** `null`
+- **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `1`
-- **Correction cycles remaining:** `0`
-- **Review decision:** `merged`
-- **Local feature-branch cleanup:** `observed_deleted`
-- **Remote feature-branch cleanup:** `observed_deleted`
+- **Correction cycles completed:** `0`
+- **Correction cycles remaining:** `1`
+- **Review decision:** `proposed`
+- **Local feature-branch cleanup:** `null`
+- **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## Primary mergeable outcome
+## One primary outcome
 
-Refresh `docs/program/OWNER_UPDATE.md` with the verified merged
-preflight outcome and current MIP/GeoX/MMM status, and add exactly one
-navigation link to it in `docs/program/PROGRAM_CURRENT_STATE.md`.
-Documentation only; one independently reviewable outcome.
+Task MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001, branch docs/mip-delegated-routine-merge-operations-001. Record the existing activated routine-review operating path in docs/execution/DELEGATED_ROUTINE_MERGE_OPERATIONS.md, so eligible future tasks use the already-reviewed receipt/preflight machinery without repeated owner prompts. This is Tier 1 operational documentation within the owner's explicit process-repair direction: “approved, also fix the process so we dont need these kind of approvals”. No new approval policy, code, service, activation or capability.
 
-## Resolved behavior and procedure
+## Scope and resolved behavior
 
-1. Run the mandatory session bootstrap and `taskctl check`; both pass
-   before any other step.
-2. Read live `origin/main`, execution state, active task, and completion
-   report for MIP, GeoX (`panel_exp`), and MMM read-only; record the
-   observed SHAs and observation date. No sibling writes and no
-   coordination-snapshot refresh.
-3. Reconcile the related unmerged branch `docs/owner-update-2026-10-14`
-   (`faffb64`, based at `75e514b`, carries no task authority): carry
-   forward content and evidence links that are still accurate, and rewrite
-   claims that went stale when the preflight merged and closed at
-   `0d311c0` (review `d69e0eb`, implementation `a36822b`). Do not
-   duplicate the branch and do not modify it.
-4. Rewrite the dated report header to the observation date; refresh the
-   MIP/GeoX/MMM positions strictly from the evidence read in step 2.
-5. Preserve pins and history: keep existing evidence links verbatim,
-   append new pins with dates, and never rewrite past-dated entries as
-   current.
-6. Add exactly one link line to `OWNER_UPDATE.md` in the
-   detailed-sources area of `PROGRAM_CURRENT_STATE.md`; no other
-   navigation, ledger, snapshot, or history edits.
-7. Plain language throughout; no invented percentages; verified outcomes
-   are distinguished from agent claims and proposals.
+Own only docs/execution/DELEGATED_ROUTINE_MERGE_OPERATIONS.md plus the three stable execution files with native generated views. All policy content/hash, AGENTS, state/controller/observer/receipt code, tests, other program docs and siblings are read-only. Preserve the original guide and append a concise end-to-end runbook: task authoring selects delegated_routine only when the existing Tier 1/2 eligibility is met; task authorization remains separate; implementation publishes its frozen receipt; independent Codex observer review produces real result/run artifacts; reviewer runs every required category on the exact tree and stores actual logs in the observer-owned bundle; reviewer composes the strict existing v1 receipt and verifies actual session identity, activation and semantic scope; attach, explicitly push and verify notes; read-only preflight passes; operator follows existing exact-head pre/post gates, ff-only merge, push/cleanup and one closure. No request to the owner inside the eligible path.
 
-## Scope and boundaries
+Reference the already-pushed activation receipt 205960c9-6c11-4c73-9cb7-a0d5f1b153ad on prerequisite d69e0eb85425a471ccaef44caabfea35140bd701, notes ref refs/notes/mip-delegated-routine-receipts. Explain current activation is verified from Git notes; the policy definition's historical status header does not replace that evidence. Do not change the pinned policy hash or create another activation. Distinguish structural/schema validation from independent substantive review and actual test execution; never synthesize fake observer output or run UUIDs. Record refusal conditions and owner-reserved decisions using the existing policy unchanged.
 
-Implementation owns only `docs/program/OWNER_UPDATE.md`,
-`docs/program/PROGRAM_CURRENT_STATE.md` (one link line), plus the three
-stable execution files with generated lifecycle blocks only. Everything
-else is read-only: policy, AGENTS, standards, taskctl and state code,
-observer/schema/adapter code, product/analytical/test code, all other
-docs including the coordination snapshot, ledger, and history, and all
-sibling repositories. No product code, no tests, no execution-state
-semantic change, no delegated activation or merge executor, no reporting
-service, no policy/governance change, no sibling authority change.
+## Acceptance and validation
 
-## Acceptance, validation, and publication
+One complete executable reviewer/operator sequence with actual CLI names, necessary evidence, role ownership and stop conditions; reference links resolve; no unsupported command or implicit push; current notes target/policy hash verified. No stale claim that activation is missing; no claim a service or automatic task authorizer exists. Gate for execution, independent exact-head review and post-FF: focused documentation structure/reference/command/activation-hash checks, native taskctl check, JSON, git diff --check, ancestry/owned paths and unchanged authority. Full pytest/Docker/Ruff/mypy not_required for this Tier 1 docs surface.
 
-Structure checks: required report sections present with a current dated
-header; an ongoing-positions table for MIP/GeoX/MMM; an evidence section
-whose SHA links resolve (remote-ref and blob checks); no stale
-pending-merge claims about already merged work; preserved history; a
-working navigation link. The implementation diff is limited to the owned
-paths. Tier 1 gate for execution, exact-head review, and
-post-fast-forward: prose structure/link/pin checks,
-`poetry run python -m mip.execution.taskctl check`, JSON parsing,
-`git diff --check`, and exact owned-path/ancestry/authority checks. The
-full pytest suite, Ruff, and mypy are not required (no code changes) and
-are recorded `not_required`, never waived. A stale pin presented as
-current, an unlinked report, an out-of-owned-path edit, or any required
-check failure fails review.
+This task explicitly uses merge_approval_mode delegated_routine under the existing activated policy. delegated_merge_required_validation = [taskctl_check, git_diff_check]; full_suite_validation_required=false. Receipt-required exact-tree tests/logs remain mandatory for those categories; other categories are not_required with reasons. Independent observer review and strict approval receipt/preflight are required before any merge; the worker never approves or merges. All protected authority remains false.
 
-Deferred successors: recurring Git-publication automation, a reporting
-service, the delegation activation decision and record, and any
-product/analytical work. Unresolved execution-blocking design questions:
-none. Compatibility: `not_applicable` (documentation only; no public
-contract, version, persisted artifact, or migration surface changes).
-
-## Authorization, dependencies, and preserved history
-
-This task is execution-authorized by the recorded owner direction and
-canonical state. No merge, correction, capability, or next-task authority is granted. The
-single satisfied dependency is
-`DEP-MIP-DELEGATED-PREFLIGHT-MERGED-001` (preflight merged and closed at
-`0d311c0`; observer and advisory evidence reused read-only).
-Affected/modified repository MIP only, workstream
-`WS-MIP-OWNER-UPDATE-INTEGRATION-001`, owner
-`mip_execution_governance`. Siblings are read-only context, not
-prerequisites; no ownership overlap exists (the related report branch
-carries no task ID or lifecycle state).
-
-When authorized, publish through native `taskctl` transitions with
-implementation evidence; freeze the task-owned tree and run the Tier 1
-gate on that exact tree; publish the validation-receipt commit; push the
-exact feature head, verify local/remote equality, and stop at
-`ready_for_review` with no merge, activation, or successor
-authorization.
-
-
-## Recorded owner direction and authoring review
-
-Owner repeatedly directed implementation and independent parallel work across MIP, GeoX and MMM, approved bounded follow-up work within existing goals, directed Git owner-report publication, and requested continuation. This action records that existing scope authority in Git; it does not approve merges or add goals, capabilities, architecture, analytical meaning or sibling authority.
-
-The definition-ready contract above is approved for execution within its named owned paths and validation gate. This authority is materialized in canonical state and native generated views in the metadata finalization. No unresolved execution-blocking design questions remain.
+Publish through native taskctl with implementation SHA and actual human evidence, freeze/gate the tree, publish the durable validation-receipt head, verify remote equality, and stop ready_for_review. Compatibility/migration not_applicable; unresolved execution-blocking design questions none. Deferred: code/services, new policy, automatic authorizers, sibling adoption and product work. Workstream WS-MIP-DELEGATED-ROUTINE-MERGE-OPERATIONS-001, owner mip_execution_governance; affected/modified MIP only. Existing preflight closure, verified activation and report closure are satisfied dependencies, not new authority.
