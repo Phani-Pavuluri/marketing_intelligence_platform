@@ -16,15 +16,15 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `57a2bda4e0e96fdee9bba049b116566636997615`
+- **Implementation commit:** `de9999a5c192e268af939bfd7dff40555fce3d3a`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `33fe9c240536e8dfe3af314e09af27c9ff42c5fd`
+- **Rejected implementation commit:** `57a2bda4e0e96fdee9bba049b116566636997615`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
 - **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
@@ -67,3 +67,24 @@ diff limited to the one owned path plus the three stable files via
 `taskctl` transitions. Authority unchanged across all protected
 flags; the worker neither approves nor merges. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
+
+## Correction cycle (reviewer-directed evidence and executability)
+
+Independent exact-head review of `33fe9c2` returned findings
+`MIP-DRMO-001` (no independently mapped evidence bundle) and `MIP-001`
+(major, no owner decision: runbook not fully executable). Both are
+addressed in `de9999a5c192e268af939bfd7dff40555fce3d3a` within the
+existing docs-only boundary: an evidence map binding every runbook
+claim to exact Git objects, read-only verify commands, and log
+locations, plus a complete 14-step executable sequence (reviewer steps
+1–7, operator steps 8–14) with exact CLI invocations, evidence
+destinations, and stop conditions. No reviewer artifacts were
+synthesized: observer result/run evidence and the final delegated
+receipt remain reviewer-role outputs after producer publication, and
+the runbook references only their real locations and commands. The
+reviewer's independent result was read as finding context and never
+committed. Tier 1 gate rerun on the corrected tree (structure,
+supported commands, evidence values, taskctl, JSON, diff checks all
+pass; full suite/Ruff/mypy remain not-required). This consumes the
+single correction cycle via explicit rejected-head provenance
+(`33fe9c2`/`57a2bda`).
