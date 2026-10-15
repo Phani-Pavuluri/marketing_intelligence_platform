@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -12,12 +12,12 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Authorization provenance:** `af040d9941c32eecb878badd49728c300aec028e`
 - **Feature branch:** `feat/mip-opencode-advisory-delivery-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `84906ab49cdcdca1ae721fdf72490b0e3608dbd0`
-- **Reviewed head:** `null`
+- **Reviewed head:** `917c432dbffc49bc9189713c19346fd1a7f82cd9`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -25,17 +25,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
 ## Current outcome
 
 Delivered the authorized advisory-delivery adapter on
-`feat/mip-opencode-advisory-delivery-001`. Muse-Spark implemented; no Codex
-implementation, inference, or merge performed.
+`feat/mip-opencode-advisory-delivery-001`. Muse-Spark implemented; Codex did
+not author implementation or inference. The owner approved exact remote head
+`917c432dbffc49bc9189713c19346fd1a7f82cd9`; it was fast-forwarded to main
+and feature-branch cleanup was observed.
 
 Delivered behavior: `python -m mip.execution.opencode_advisory` binds one
 explicit recipient (`bind --session ID --implementation-directory PATH`),
@@ -59,19 +61,18 @@ timeout/crash suppression; corrupt-state preservation; competing writers;
 bounded output; and status reporting. Focused gate
 `poetry run pytest -q tests/test_opencode_advisory.py
 tests/test_review_observer.py` passes (47 passed: 20 advisory + 27
-observer). Full native `poetry run pytest` passes in Docker (2724
-collected); `ruff check src tests app docs` and `mypy src tests app` pass;
+observer). Full native Docker `make validate` passes on the exact
+post-fast-forward tree (2707 passed, 5 skipped); `ruff check src tests app
+docs` and `mypy src tests app` pass;
 `taskctl check`, JSON parsing, and `git diff --check` pass.
 
 Source and validation limits: live smoke against a real implementation
 session was not performed; one early probe (`session.prompt` with
 `resume:false`) was sent to an existing local session during transport
 discovery and is unrelated to this task's evidence. Tests use isolated
-Git/observer fixtures with fake transports. Docker `make validate` as-run in
-this worktree exits nonzero solely on pre-existing unrelated untracked
-`.codex/auto-resume` lint errors (16 errors, all under `.codex/`); no
-task-owned file contributes. The exact publication tree (tracked files only)
-is clean under `ruff check src tests app docs` and `mypy src tests app`.
+Git/observer fixtures with fake transports. The exact post-fast-forward tree
+passed the required Docker gate; unrelated local-only `.codex/` artifacts were
+not staged or committed.
 
 Git identity and ancestry: base `c7215b9c2afe38bbe2191c03cd89a114ea82d9c4`,
 authorization head `af040d9941c32eecb878badd49728c300aec028e`, both ancestors
@@ -95,3 +96,18 @@ all protected capabilities remain false; `merge_authorized` false; no merge
 or capability authority follows. Local-only `.codex/` and `docs/tasks/`
 artifacts were never staged or committed; tracked worktree is task-owned
 only.
+
+## External merge and closure — October 14, 2026
+
+Owner approval identified exact remote feature head
+`917c432dbffc49bc9189713c19346fd1a7f82cd9`. Before closure, local `main` and
+`origin/main` both equaled that head, the approved authorization ancestry was
+verified, and the remote feature branch was observed deleted. The required
+post-fast-forward gates passed on that exact tree: focused advisory/observer
+tests `47 passed`; native Docker `make validate` `2707 passed, 5 skipped`;
+Ruff and mypy passed; taskctl, JSON parsing, diff, ancestry, and authority
+checks passed. The native lifecycle transition recorded reviewed head,
+execution closure, and observed local/remote branch cleanup. No PR, squash,
+rebase, force-push, capability authority, sibling write, or delegated-policy
+activation occurred. This closure is limited to the authorized MIP
+execution-governance task; dispatch remains a separately proposed successor.
