@@ -42,18 +42,18 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_OPENCODE_ADVISORY_DELIVERY_001",
-  "status": "merged",
-  "review_decision": "merged",
-  "base_sha": "c7215b9c2afe38bbe2191c03cd89a114ea82d9c4",
-  "task_authoring_start_sha": "c7215b9c2afe38bbe2191c03cd89a114ea82d9c4",
-  "task_authoring_head_sha": "af040d9941c32eecb878badd49728c300aec028e",
-  "authorization_head_sha": "af040d9941c32eecb878badd49728c300aec028e",
-  "feature_branch": "feat/mip-opencode-advisory-delivery-001",
+  "task_id": "MIP_DELEGATED_ROUTINE_MERGE_PREFLIGHT_001",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "67c18c370e220cc4a7f84023f582b6c663aec947",
+  "task_authoring_start_sha": "67c18c370e220cc4a7f84023f582b6c663aec947",
+  "task_authoring_head_sha": null,
+  "authorization_head_sha": null,
+  "feature_branch": "feat/mip-delegated-routine-merge-preflight-001",
   "feature_branch_created": false,
-  "reviewed_head_sha": "917c432dbffc49bc9189713c19346fd1a7f82cd9",
+  "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
-  "implementation_commit_sha": "84906ab49cdcdca1ae721fdf72490b0e3608dbd0",
+  "implementation_commit_sha": null,
   "rejected_implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
@@ -62,14 +62,14 @@
   "maximum_correction_cycles": 1,
   "correction_cycles_completed": 0,
   "correction_cycles_remaining": 1,
-  "risk_tier": "tier_2_advisory_delivery_transport",
-  "compatibility_migration_policy": "new_advisory_cli_and_local_only_binding_delivery_state_no_existing_schema_or_runtime_migration",
+  "risk_tier": "tier_3_decision_authority_preflight",
+  "compatibility_migration_policy": "additive_v1_approval_activation_notes_no_existing_schema_migration",
   "full_suite_validation_required": true,
-  "validation_scope": "advisory_delivery_and_observer_tests_docker_make_validate_taskctl_json_diff_owned_paths_exact_tree",
+  "validation_scope": "delegated_merge_plus_observer_advisory_tests_native_docker_make_validate_taskctl_json_diff_owned_paths_exact_tree",
   "owned_implementation_paths": [
-    "src/mip/execution/opencode_advisory.py",
-    "tests/test_opencode_advisory.py",
-    "docs/execution/OPENCODE_ADVISORY_DELIVERY.md"
+    "src/mip/execution/delegated_merge.py",
+    "tests/test_delegated_merge.py",
+    "docs/execution/DELEGATED_ROUTINE_MERGE_OPERATIONS.md"
   ],
   "task_authoring_boundary": [
     "docs/execution/ACTIVE_TASK.md",
@@ -90,24 +90,24 @@
       "task_id": "MIP_CODEX_CHECKPOINT_REVIEW_OBSERVER_001",
       "state": "satisfied",
       "merged_checkpoint_sha": "cf0ac9feafc65c3f35266b550cf33f5a4183203a",
-      "resolution_condition": "Existing advisory observer and strict review-result schema are merged ancestors of the synchronized baseline."
+      "resolution_condition": "Existing observer is a merged ancestor, reused read-only."
     },
     {
-      "dependency_id": "DEP-MIP-OBSERVER-FIXTURE-ISOLATION-MERGED-001",
+      "dependency_id": "DEP-MIP-ADVISORY-DELIVERY-MERGED-001",
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "task_id": "MIP_REVIEW_OBSERVER_FIXTURE_ISOLATION_001",
+      "task_id": "MIP_OPENCODE_ADVISORY_DELIVERY_001",
       "state": "satisfied",
-      "merged_checkpoint_sha": "874eac0cc7e00c6eb6450e87e66b004ee0200f05",
-      "resolution_condition": "Fixture isolation is merged; preserve existing observer tests and semantics."
+      "merged_checkpoint_sha": "67c18c370e220cc4a7f84023f582b6c663aec947",
+      "resolution_condition": "Exact approved delivery head is merged and closed; existing receipt/binding conventions remain read-only."
     }
   ],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "user_exact_head",
-  "task_authoring_note": "Owner requested dedicated parallel Muse implementation for independent MIP setup. Authorized only the bounded advisory-delivery adapter; Muse owns execution, Codex reviews. GeoX review-ready recovery is an independent workstream, not a dependency. No product, analytical, sibling or automatic merge authority.",
-  "local_feature_branch_cleanup": "observed_deleted",
-  "remote_feature_branch_cleanup": "observed_deleted",
-  "coordination_workstream_id": "WS-MIP-OPENCODE-ADVISORY-DELIVERY-001",
+  "task_authoring_note": "Owner explicitly directed removal of repeated routine approval conflict after approving delivery head 917c432. This bounded prerequisite supplies verifiable independent receipts/preflight, not self-activation, an executor or new product authority.",
+  "local_feature_branch_cleanup": null,
+  "remote_feature_branch_cleanup": null,
+  "coordination_workstream_id": "WS-MIP-DELEGATED-ROUTINE-MERGE-PREFLIGHT-001",
   "coordination_capability_owner": "mip_execution_governance",
   "parked_setup_workstreams": [
     {
