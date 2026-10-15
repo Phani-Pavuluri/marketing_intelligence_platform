@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "receipt_kind": "delegation_activation",
+  "receipt_id": "205960c9-6c11-4c73-9cb7-a0d5f1b153ad",
+  "policy_version": "mip-delegated-routine-merge-policy-v1",
+  "policy_sha256": "b1c223d6d63133127d8358fcd8bcde00660817a349056e5b59e2534ff50affb4",
+  "prerequisite_head_sha": "d69e0eb85425a471ccaef44caabfea35140bd701",
+  "decision": "activate",
+  "scope_tier_classes": [
+    1,
+    2
+  ],
+  "owner_decision_ref": "https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/6874424383bbba1705fc2aaa4cd6d211637b9a8d/docs/execution/ACTIVE_TASK.md#owner-authorization-delivery-and-preserved-boundaries",
+  "issued_at": "2026-10-15T08:10:50.721743+00:00",
+  "limitations": [
+    "MIP only; future tasks must explicitly opt into delegated_routine and satisfy independent exact-head receipt/preflight evidence.",
+    "No retroactive approval of existing user_exact_head tasks; no sibling adoption, task authorization or new capability authority.",
+    "Tier 3 and all user-reserved major decisions remain external owner decisions; no merge executor or unattended merge service is created."
+  ]
+}
