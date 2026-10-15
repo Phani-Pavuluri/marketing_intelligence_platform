@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `merged`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -12,12 +12,12 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Authorization provenance:** `9f34185c5b387ee2da7eacbc1ac01f5ea29b48d2`
 - **Feature branch:** `docs/mip-owner-update-refresh-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `3367cebcd68d736f7adbfeb3dcb461c7e382f892`
-- **Reviewed head:** `null`
+- **Reviewed head:** `bcdbd51df52e901b30c523be380f59cd1c82b93b`
 - **Rejected review head:** `b696e8dffb0f295f533c28276427634666a5ee43`
 - **Rejected implementation commit:** `e281d6ac55dfaee1602e8538c608bad0773ea200`
 - **Approval commit:** `null`
@@ -25,17 +25,15 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `1`
 - **Correction cycles remaining:** `0`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
 ## Current outcome
 
-Owner-authorized existing-report refresh implemented and published
-for review; implementation evidence follows below. Source observations
-were refreshed from live Git at implementation time.
+The owner-report refresh is merged by independently approved delegated fast-forward at bcdbd51df52e901b30c523be380f59cd1c82b93b. This single metadata closure follows actual push and observed branch cleanup; implementation and report evidence below describe the frozen reviewed publication.
 
 ## Authoring source observations
 
@@ -124,3 +122,12 @@ Reviewed exact published b696e8dffb0f295f533c28276427634666a5ee43, implementatio
 - The report incorrectly reserves its routine merge decision to the owner despite the authorized task's explicit delegated_routine path. Describe the existing eligibility and review requirement accurately without granting any authority.
 
 All findings fit the existing report-only outcome and owned paths. One correction cycle remains. Native changes_requested authorization materializes the existing owner reporting direction; it adds no scope, capability, policy, analytical or sibling authority. Recheck material source positions immediately before corrected publication and run the complete declared Tier 1 gate. Muse owns the prose/implementation choices.
+
+
+## Owner-report refresh delegated merge and single closure
+
+This eligible Tier 1 task explicitly opted into the existing activated policy. Actual independent Codex observer review passed at bcdbd51df52e901b30c523be380f59cd1c82b93b (reviewer 01a140db-5624-7ba3-9d1b-b43d508ccf93); real event/result/run artifacts are in /Users/phani/.codex/coordinator-workspaces/marketing_intelligence_platform/.codex/review-observer/reports/5b2ba2208bf361c095feac79215e4b0458593fc0c78e5c32d68446d83def7ca5. Reviewer did not author the implementation. Required exact-tree taskctl/diff plus documentation/JSON/ancestry/scope checks passed before and after FF; pytest/Docker/Ruff/mypy are not_required by this task, not waived.
+
+Strict v1 receipt c2ab740d-27b8-4914-b6ca-09b9a20c93b5 is pushed in refs/notes/mip-delegated-routine-receipts at 2b06928c6d01b96618397691d194f7e609117273. Native validate-receipt, attach, remote verification and fully read-only live preflight all passed before merging. User delegation provenance: activation 205960c9-6c11-4c73-9cb7-a0d5f1b153ad on d69e0eb85425a471ccaef44caabfea35140bd701, immutable owner decision https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/6874424383bbba1705fc2aaa4cd6d211637b9a8d/docs/execution/ACTIVE_TASK.md#owner-authorization-delivery-and-preserved-boundaries, unchanged actual policy SHA256 b1c223d6d63133127d8358fcd8bcde00660817a349056e5b59e2534ff50affb4. No new owner prompt was used.
+
+Lineage 35dc707957ab79b71fd37c07644680ac3956f85b -> reviewed bcdbd51df52e901b30c523be380f59cd1c82b93b (implementation 3367cebcd68d736f7adbfeb3dcb461c7e382f892) -> this single metadata-only closure. Implementation was pushed before observed remote/local branch cleanup; native taskctl performed merged transition. Rejected predecessors remain unchanged/unmerged. Notes, actual validation artifacts and operator preflight log are preserved locally and in pushed review-note evidence. No new goal, code, policy, capability, product, sibling or production authority. Modified MIP only; workstream WS-MIP-OWNER-UPDATE-REFRESH-001; owner mip_owner_reporting.
