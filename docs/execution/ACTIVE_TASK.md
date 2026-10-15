@@ -1,163 +1,66 @@
-# Active Task
-
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** merged
+**Status:** authorized
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_BOUNDED_WORK_PLAN_VALIDATOR_RECOVERY_001`
+- **Task ID:** `MIP_OPENCODE_ADVISORY_DELIVERY_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `874eac0cc7e00c6eb6450e87e66b004ee0200f05`
-- **Authorization provenance:** `dfe68539590dd470a078fb77ad31258e3402affe`
-- **Feature branch:** `feat/mip-bounded-work-plan-validator-recovery-001`
+- **Base SHA:** `c7215b9c2afe38bbe2191c03cd89a114ea82d9c4`
+- **Authorization provenance:** `c7215b9c2afe38bbe2191c03cd89a114ea82d9c4`
+- **Feature branch:** `feat/mip-opencode-advisory-delivery-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `false`
+- **Task execution authorized:** `true`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `84120ffad113710c98f3567bf015277cb8fab16a`
-- **Reviewed head:** `bdf9dd6fd7fe106f17c5ec1d22b26162c1fb8a54`
-- **Rejected review head:** `3c35cd0884f0f5b6d92f3eeefa096ab41c0a52a9`
-- **Rejected implementation commit:** `179c9a0919ce43862720a73561a7e908658f2d82`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
+- **Rejected review head:** `null`
+- **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `1`
-- **Correction cycles remaining:** `0`
-- **Review decision:** `merged`
-- **Local feature-branch cleanup:** `observed_deleted`
-- **Remote feature-branch cleanup:** `observed_deleted`
+- **Correction cycles completed:** `0`
+- **Correction cycles remaining:** `1`
+- **Review decision:** `authorized`
+- **Local feature-branch cleanup:** `null`
+- **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## MIP_BOUNDED_WORK_PLAN_VALIDATOR_RECOVERY_001 — task contract
+## Primary mergeable outcome
 
-### Primary outcome and ownership
+Deliver an already completed MIP checkpoint review to an explicitly verified Muse-Spark session through a separate advisory transport CLI. Muse-Spark is the sole implementation actor. Codex provides independent review and high-level guidance, never executes this product implementation in place of Muse. This outcome is independently useful before automated dispatch or bidirectional discussion handling.
 
-Deliver a read-only MIP bounded-work-plan validator, its versioned JSON schema,
-behavioral tests and usage documentation. This independently mergeable checkpoint
-precedes owner-approval verification and canonical task materialization; it must
-never claim that a structurally valid plan authorizes execution. Muse-Spark owns
-implementation approach. Codex independently reviews evidence.
+Create only `feat/mip-opencode-advisory-delivery-001` from synchronized post-authoring main, verifying exact authorization ancestry, metadata-only three-file authoring boundary and branch absence. Read root AGENTS, lean delivery standard, execution files and prerequisites; taskctl check must pass. Do not rely on chat for task scope.
 
-Owned: src/mip/execution/work_plan.py; src/mip/execution/work_plan.schema.json;
-tests/test_work_plan.py; docs/execution/BOUNDED_WORK_PLANS.md; the three stable
-execution files for authorized lifecycle/evidence only. Exact branch:
-feat/mip-bounded-work-plan-validator-recovery-001. No other tracked or sibling files.
-No PR or merge during execution. Tier 3 authority-boundary tooling, required
-Docker make validate plus focused tests, Ruff/mypy, taskctl, JSON/schema, links,
-owned-path/auth-boundary/diff checks and frozen exact-tree receipt publication.
-Approval mode user_exact_head; routine merge activation remains off.
+## Resolved behavior and interface
 
-### Observable behavior and plan contract
+`python -m mip.execution.opencode_advisory --repository PATH bind --session ID --implementation-directory PATH`: explicitly bind one recipient. Verify both supplied repositories identify canonical MIP origin; read OpenCode session.get to require exact session ID, expected implementation directory, provider opencode, model muse-spark-1.3-contributor-free, high variant and build agent. Preserve session project identity. No title lookup, session creation, model switch or guesses. Persist a strict version-1 binding under `.codex/opencode-advisory/` with repository, observed origins, recipient/session-directory/project/provider/model/variant/agent identity. Bind on a host that can verify both paths; the binding may subsequently be used by a separate review checkout of the same canonical repository.
 
-Expose python -m mip.execution.work_plan validate --plan PATH. Read one UTF-8
-JSON object, at most 1 MiB. Return one JSON result on stdout; diagnostics go to
-stderr. No model call, network, Git mutation, worker start or taskctl transition
-is performed by this validator. Missing/unreadable/oversized/malformed input
-returns exit 3. Valid JSON violating plan constraints returns exit 2. A valid
-proposal returns exit 0; all result states carry execution_authorized=false.
+`... send --event-key KEY` admits one advisory for a completed, non-stale completion event in the existing `.codex/review-observer/ledger.json`; `... status` reports binding and delivery states. Closure/merge events are ineligible. Reuse strict existing Ledger/Event/ReviewResult validation without changing observer/schema behavior or running scan/review/model inference. Match event/result repository, task, kind, SHA and verdict; resolve the current exact remote checkpoint and Git authorization/branch identity through the observer's existing read-only verification. Reject stale, incomplete, mismatched or corrupt evidence before sending. Read result only from its observer-owned report directory. No arbitrary message input or external report path.
 
-Plan v1 has exactly: schema_version (integer 1), repository (literal
-Phani-Pavuluri/marketing_intelligence_platform), plan_id (nonempty stable ID),
-goal (nonempty text), exclusions (nonempty array of nonempty text), tasks
-(nonempty array, at most 100). Unknown fields are rejected recursively.
-Each task has exactly: task_id (stable ID), feature_branch (valid Git branch
-name), outcome (nonempty text), observable_behavior (nonempty text),
-owned_paths (nonempty array of exact repository-relative file paths),
-acceptance_evidence (nonempty array of nonempty text), risk_tier (integer 1/2/3),
-depends_on (array of task IDs in this same plan),
-unresolved_design_questions (array, must be empty).
-Stable IDs use uppercase letters, digits and underscores, start with a letter,
-and contain at most 128 characters. Text must not be whitespace-only.
+Re-read session metadata before each send and match the persisted identity/directory/project/model/agent; validate review-checkout origin matches bound canonical origin. Directory changes, model mismatch or missing recipient fail closed. The verified binding records the separately observed implementation directory; it is not required to equal a review clone's path. No sibling recipients or sibling repository writes.
 
-Tasks/branches are unique. Dependencies cannot duplicate, refer to missing
-IDs or self, or contain a cycle. A valid result lists task IDs in deterministic
-topological order, choosing lexicographically smallest available ID at each
-step. This order is proposed sequencing, never live eligibility. Any repeated
-owned path across tasks requires one task to depend transitively on the other;
-otherwise reject as overlapping independent work. Paths are exact filenames,
-not globs/directories: reject absolute paths, traversal, empty/. components,
-backslashes, NUL, wildcard characters, .git/, .codex/, docs/tasks/ and the three
-stable execution metadata files. These stable files are implicit lifecycle
-ownership and never plan-authored implementation paths. Do not read/check
-existence of owned paths: new files and isolated proposal validation are allowed.
-Branches must satisfy git check-ref-format --branch equivalent semantics and
-must not be main. No shell interpolation of untrusted content.
+Format bounded advisory text with an event/session identity marker, reviewed task/head, summary, findings and recommendations, limitations and clearly identified owner-reserved decisions. Treat review data as advisory evidence, never task/approval/execution instructions. State that Git owns authorized scope and Muse owns implementation choices; no implementation command, correction authorization, merge approval or pause/release control is introduced. Findings marked user_decision_required remain explicitly pending owner input; agent agreement cannot resolve them. Optional pass feedback is advisory only.
 
-Result fields: schema_version=1, plan_id (string or null when unavailable),
-valid (boolean), execution_authorized=false, plan_sha256 (64 lowercase hex or
-null if invalid), ordered_task_ids (empty for invalid), problems (array of
-objects with code and message). A valid digest is SHA256 of canonical parsed
-plan JSON: sorted keys, compact separators, ensure_ascii=false, UTF-8, no
-trailing newline. Duplicate JSON keys are rejected, not silently overwritten.
-Invalid input never yields valid=true or an execution-capable result. CLI
-failures are handled without traceback or leaking environment/secrets.
+Transport uses the installed OpenCode CLI API session.prompt with structured text and resume:false, admitting input without scheduling new execution. A running session can receive advisory input at its normal delivery boundary; an idle session stays idle. Admission is not proof Muse read, agreed or implemented the finding. Bound API calls with timeouts. No terminal keystrokes, restart, abort, model changes, direct implementation prompt or human email/Slack message.
 
-### Acceptance evidence and boundaries
+Local strict version-1 delivery journal deduplicates repository/task/completion/SHA/recipient. Reserve an attempt atomically before the API call. Successful explicit API acknowledgment records admitted status and message ID; identical repeats make no API mutation. Rejected-before-call inputs make no send. Timeout/crash/invalid acknowledgment after reservation is indeterminate and never automatically resent; status exposes uncertainty for reconciliation. Do not claim exactly-once receipt or discussion agreement. Corrupt state fails closed without erasure. Serialize local writers. No Git worktree/branch/state mutation by this adapter; no Codex inference. Exit 0 for binding/admission/already-admitted/status success, 2 for identity/evidence/stale ineligibility, 3 for transport/state/indeterminate failure, with stable coded errors and no raw secrets in output. Internal code/layout choices belong to Muse within these observable semantics.
 
-Prove valid minimal and sequenced/shared-path plans; stable digest across input
-format/key order; deterministic order; rejection of missing/extra/wrong-type
-fields (including booleans as integers), duplicate keys/IDs/branches/dependencies,
-missing/self/cyclic prerequisites, unsequenced overlapping paths, invalid
-branches/paths, unresolved design questions, wrong repository/version,
-malformed/unreadable/oversized input. Test actual CLI exit codes and JSON; prove
-no repository mutation, subprocess model/network call or task authorization.
-Focused tests must be behavior-based and not merely mirror implementation.
+## Scope and independence
 
-Document the owner experience, CLI/schema, error codes, exact digest meaning,
-proposal-versus-authorization distinction, and deferred successors. A plan does
-not prove live prerequisite completion, owner approval or producer/consumer
-compatibility. No sibling schema adapter or role adoption is delivered.
+Implementation owns only `src/mip/execution/opencode_advisory.py`, `tests/test_opencode_advisory.py`, `docs/execution/OPENCODE_ADVISORY_DELIVERY.md`, plus the three stable execution files. ACTIVE_TASK changes generated lifecycle block only. Existing observer/schema, taskctl, context index, roadmap and product/analytical code are read-only. Local `.codex/`/docs/tasks artifacts never committed. All protected authority remains false. Compatibility is new CLI/local state only; no existing ledger/schema migration. Unresolved execution-blocking design questions: none.
 
-Prerequisite DEP-MIP-PARALLEL-MODEL-MERGED-001 satisfied at
-4951a6ff02c3a7124c458b6986b4fc7154495d47. Workstream
-WS-MIP-BOUNDED-WORK-PLAN-VALIDATOR-001, owner mip_execution_governance.
-Only MIP is affected/modified. No coordination refresh or analytical, product,
-real-data, runtime, pilot, production, dispatch, auto-authoring or merge authority.
-Do not modify global settings, restart OpenCode or send messages to other agents.
-Validation/completion publication follow AGENTS.md and the execution standard.
-Git is authoritative; invocation-only execution prompt. Publish ready_for_review
-with an exact-tree validation receipt and stop without merging.
+Affected/modified repository MIP only, workstream WS-MIP-OPENCODE-ADVISORY-DELIVERY-001, owner mip_execution_governance. Verified live overlay October 14: MIP baseline is this task's base; MMM main `6f60cd2896d56f67675c7eb94e23f6e9f6ef36a8` merged role adoption; GeoX main `de097237aef6c3681c467970acbc8f752c8ac251` and recovery branch `87d02b68939c8e5bc8074820e4960b33a7995a25` ready_for_review. Siblings are read-only context, not prerequisites. Reverify before execution, stop on ownership overlap, and do not refresh coordination snapshot. GeoX's review does not block this independent MIP work. Product bridge remains parked on certified sibling evidence. No consumer/product eligibility follows.
 
-Compatibility/migration: new plan v1, existing taskctl/observer/product contracts
-unchanged. Unresolved execution-blocking design questions: none for this outcome.
-Deferred independent outcomes: approval provenance/materialization, session
-binding/occupancy, dependency-aware dispatch, sibling adoption, advisory delivery,
-shared reporting and durable routine-merge activation. None is authorized here.
+## Acceptance, validation and publication
 
+Meaningful tests must prove correct binding; wrong origin/directory/project/model/agent/session; completed current review admission; stale/malformed/incomplete/closure rejection; reserved-owner labeling; no inference/Git mutation; idle resume:false semantics at API boundary; repeated delivery deduplication; timeout/ambiguous acknowledgment and crash reservation suppress resend; corrupt journals, competing writers and bounded output. Test transports and isolated Git/observer fixtures, not real implementation sessions as synthetic targets. Preserve full existing observer suite. A live smoke, if performed, may use a separate dedicated Muse test session and must label API admission versus actual acknowledgment; do not deliver fabricated findings to the implementation worker.
 
-### Recovery provenance and acceptance
+Tier 2 gate for execution, independent exact-head review and post-fast-forward: focused `poetry run pytest -q tests/test_opencode_advisory.py tests/test_review_observer.py`; full native Docker `make validate`; `poetry run python -m mip.execution.taskctl check`; JSON parsing; `git diff --check`; exact owned-path/ancestry/authority checks. All declared gates must pass. Missing prerequisites produce Git-durable blocked via native controller, never a waived gate or successful readiness claim.
 
-Owner: mip_execution_governance. This fresh task succeeds the parked predecessor
-whose exact failed-gate review head is 3af72b014987f8e76631ab3da3c4575f8e847d4d;
-its implementation evidence is 8b51f3cba2dc4207e5f162f71ed4846d62acf79f.
-Do not merge/rebase/execute or edit that old branch. On this new authorized
-branch, reuse only the four owned non-analytical source/test/schema/doc blobs
-from that immutable implementation as starting evidence, then independently
-verify behavior, all review corrections and every required gate. No historical
-receipt or correction count becomes this task's validation evidence.
-
-The prerequisite fixture repair is merged and closed at
-874eac0cc7e00c6eb6450e87e66b004ee0200f05; DEP-MIP-OBSERVER-FIXTURE-REPAIR-MERGED-001
-is satisfied. The prior blocker is resolved for this recovery's eligibility
-only; the parked head remains unmergeable. Source/workstream ownership is
-WS-MIP-BOUNDED-WORK-PLAN-VALIDATOR-RECOVERY-001; the parked workstream is not
-executed concurrently. Only MIP is affected and modified.
-
-Prove the previously found branch, structured malformed/deep/surrogate failure,
-valid JSON non-object exit 2 and actual 1 MiB read-bound issues are fixed.
-Git branch-equivalence evidence must include legal edge cases and invalid
-leading-dash/.lock components; a documented stricter rule cannot silently
-replace the authored semantics. Keep proposed plans execution_authorized=false.
-The entire required Docker gate must pass; publish blocked instead of readiness
-when any required category fails. Complete report must include actual commands,
-counts, all category dispositions and limits. Freeze and validate the final tree
-before receipt publication; no task-owned change after that receipt.
-
-This recovery does not authorize approval/materialization, successor dispatch,
-sibling adoption, automated messages, service control or automatic merging.
-The original contract above defines the validator behavior unchanged.
+Write human completion evidence outside generated report markers: delivered behavior, actual commands/counts, source and validation limits, Git identity/ancestry, changed paths, cross-repository impact, deferred automatic dispatch/bidirectional acknowledgment and unchanged authority. Use native taskctl transitions; freeze task-owned tree, run declared gate on that exact tree, and publish the receipt commit naming implementation parent, gate/results, evidence source, clean tracked state and authority impact. Verify exact local/remote branch equality, publish ready_for_review, then stop without merge or successor authorization. No additional user permission is needed for this already authorized scope.
