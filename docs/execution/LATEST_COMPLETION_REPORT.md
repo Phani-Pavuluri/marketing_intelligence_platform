@@ -18,13 +18,13 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **PR creation authorized:** `false`
 - **Implementation commit:** `f845afb33366a8b55284e5d276665df80ae82b70`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `38ec749335bd333bb11adaf82cdba84d14cca786`
+- **Rejected implementation commit:** `f845afb33366a8b55284e5d276665df80ae82b70`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
 - **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
@@ -33,7 +33,10 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## Current outcome
 
-Fresh owner-authorized runbook evidence recovery recorded; implementation not started. Prior rejected source is preserved in the parked workstream and external Git note; it is not merged or approved.
+Fresh owner-authorized runbook evidence recovery implemented and
+published for review; implementation evidence follows below. Prior
+rejected source is preserved in the parked workstream and external Git
+note; it is not merged or approved.
 
 ## Execution evidence
 
