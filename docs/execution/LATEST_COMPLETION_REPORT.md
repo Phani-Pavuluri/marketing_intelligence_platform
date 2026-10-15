@@ -16,15 +16,15 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `ad753a9f336898df8dd338e1d573c3624415ef06`
+- **Implementation commit:** `727106fca154becb90caef1b44c52df9d30369ba`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `c6993214d00c386242c4edd7248b2ec93f277002`
+- **Rejected implementation commit:** `ad753a9f336898df8dd338e1d573c3624415ef06`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
 - **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
@@ -57,9 +57,26 @@ observations were refreshed from live Git at implementation time.
 ## Execution evidence
 
 Implemented on `docs/mip-owner-update-refresh-002` at
-`ad753a9f336898df8dd338e1d573c3624415ef06`: full refresh of
-`docs/program/OWNER_UPDATE.md` against live Git observed October 15,
-2026. The authoring observations above are superseded by these live
+`727106fca154becb90caef1b44c52df9d30369ba`: activation-evidence
+link added to the owner report's Evidence section (runbook
+activation-status record with receipt, live notes target, policy
+hash, and verify commands). Narrative, pins, and history otherwise
+preserved.
+
+Raw required-category logs on that exact tree (both commands silent
+output, exit 0):
+
+```
+$ poetry run python -m mip.execution.taskctl check
+taskctl_check exit: 0
+$ git diff --check
+git_diff_check exit: 0
+```
+
+Rerun either command on the published head to confirm independently;
+deterministic checks yield identical results on the receipt tree.
+Full pytest, Docker, Ruff, and mypy recorded `not_required`
+(docs-only surface). The authoring observations above are superseded by these live
 pins: MIP `6fb7ca8`, GeoX `b44f2d8`, MMM `a9db646`.
 
 Delivered behavior: dated refresh reporting the readiness-map
@@ -91,7 +108,25 @@ history was modified.
 
 Git identity: base `52e9995`, authorization
 `68524fc4b2f4ddd016c0ec3b312bbfc28b8268d3`; implementation
-`ad753a9f336898df8dd338e1d573c3624415ef06`; diff limited to the one
-owned path plus the three stable files via `taskctl` transitions.
+`727106fca154becb90caef1b44c52df9d30369ba` (supersedes `ad753a9`
+within this correction; prior lineage preserved in rejected
+provenance); diff limited to the one owned path plus the three
+stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
+
+## Correction cycle (raw logs and activation link)
+
+Independent observer review of `c699321` could not validate (model
+finding cited a non-manifest path) and returned two advisory
+findings: raw exact-tree logs missing, and activation claimed
+without a direct evidence link. Corrected in
+`727106fca154becb90caef1b44c52df9d30369ba`: raw `taskctl_check`
+and `git_diff_check` transcripts embedded above against the exact
+implementation tree, and the owner Evidence section now links the
+runbook activation-status record directly (receipt, live notes
+target, policy hash, verify commands). Scope, pins, history, and
+owned paths otherwise preserved. Tier 1 gate rerun (structure,
+links, taskctl, JSON, diff checks pass). This consumes the single
+correction cycle via explicit rejected-head provenance
+(`c699321`/`ad753a9`).
