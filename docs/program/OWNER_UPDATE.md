@@ -1,51 +1,43 @@
 # Project owner update
 
-Updated October 15, 2026 (UTC). Published on feature branch
-`docs/owner-update-integration-001` for independent review; integration
-into MIP `main` is pending merge. Supersedes the unmerged draft branch
-`docs/owner-update-2026-10-14` (`faffb64`); every position below was
-re-verified against live Git on this date.
+Updated October 15, 2026 (UTC). Refresh of the integrated report;
+every position below was re-verified against live Git on this date.
 
 ## Overall position
 
-The routine-approval prerequisite is merged and closed on MIP main, but
-delegated merging is **not** activated. Product integration across the
-three projects is still unfinished. MMM and GeoX each have an authorized
-bounded task. Published branch-level implementation and receipt commits
-exist for both projects' recovery and test work, but neither reports a
-merged completion, and their independent-review outcomes were not
-verified here.
+MIP's routine-review operating path is fully merged: preflight verifier,
+runbook recovery, and this reporting line are all closed or in workflow
+on main. Delegated merging is activated by pushed note evidence, with
+routine follow-ups now eligible without repeated merge prompts. Product
+integration across the three projects is still unfinished. GeoX has a
+review-ready test repair with its branch published; MMM has an
+authorized policy-adoption task with no branch published yet.
 
 ## What we accomplished
 
 - **MIP:** the delegated routine merge preflight verifier was merged and
   closed (`0d311c0`; review `d69e0eb`, implementation `a36822b`).
-  Independent receipts, notes transport, and read-only preflight now
-  exist as reviewed code. No activation record, merge executor, or
-  capability change follows from this merge.
-- **MIP:** the owner-report integration task
-  (`MIP_OWNER_UPDATE_INTEGRATION_001`) is authorized and its
-  implementation is complete, pending independent review and merge;
-  this report is its deliverable.
-- **GeoX:** the rejection-record recovery stayed merged with its history
-  preserved, and a structured completion-evidence recovery task
-  (`GEOX_STRUCTURED_COMPLETION_EVIDENCE_RECOVERY_001`) is authorized on
-  main (`062d659`). Its declared branch
-  (`feat/geox-structured-completion-evidence-recovery-001`) has no live
-  remote head, so nothing is published under that task. A related branch
-  (`feat/geox-structured-completion-evidence-001`) carries unmerged
-  implementation and receipt commits under
-  `GEOX_STRUCTURED_COMPLETION_EVIDENCE_001`, reporting ready-for-review;
-  that task's relationship to the authorized recovery task and its review
-  outcome were not assessed here. The underlying completion-evidence
-  defect is not shown resolved.
-- **MMM:** the Muse-implementation / Codex-review role adoption stayed
-  merged, and a tests-only compatibility-completeness task
-  (`MMM_CALIBRATION_COMPATIBILITY_TEST_COMPLETENESS_001`) is authorized
-  on main (`46a0203`). Its declared branch exists ahead of that
-  baseline with published implementation and receipt commits reporting
-  ready-for-review; merge and independent-review outcome were not
-  verified here. No analytical behavior change is authorized.
+  Independent receipts, notes transport, and read-only preflight exist
+  as reviewed code.
+- **MIP:** the routine runbook (reviewer/operator sequence plus
+  evidence map) was recovered and merged (`4581d5a`; review
+  `a431db9`, implementation `f845afb`) after the first runbook head
+  was independently rejected and preserved unapproved.
+- **MIP:** the earlier owner-report integration merged (`ccbe3ce`;
+  review `d2f81ca`); this refresh task (`MIP_OWNER_UPDATE_REFRESH_001`)
+  is authorized and in implementation.
+- **GeoX:** a taskctl test-scaffold repair task
+  (`GEOX_TASKCTL_TEST_SCAFFOLD_REPAIR_001`) is review-ready on main
+  (`60602c3`, implementation `eab2459`) with its branch published at
+  `bc4ba64`; review and merge outcome were not verified here. No
+  controller, product, sibling, or authority change is authorized.
+  Earlier recovery branch states are superseded by this task.
+- **MMM:** a bounded routine-merge policy-adoption task
+  (`MMM_ROUTINE_MERGE_POLICY_ADOPTION_001`) is authorized on main
+  (`82cd379`) with no branch published and no implementation started.
+  Guidance only; no automation service and no approval delegation
+  beyond the quoted owner decision. Earlier role-adoption and
+  test-completeness states are superseded by this task.
 - **Local operations:** dedicated sessions and monitoring continue
   independently of this conversation. These local services are distinct
   from Git-delivered project capabilities.
@@ -54,17 +46,17 @@ verified here.
 
 | Project | Current position | Next step |
 |---|---|---|
-| MIP | Preflight merged and closed; delegation not activated. Owner-report refresh in implementation. | Review and merge this report branch; then record activation only through a separate explicit owner decision. |
-| GeoX | Recovery authorized on main; declared branch absent on the remote; a related branch carries unmerged implementation and receipt commits whose review outcome is unassessed. | Independent review of the published branch work and a merge decision under GeoX authority. |
-| MMM | Test-completeness authorized (tests only); branch ahead of the baseline with published implementation and receipt commits claiming ready-for-review; merge outcome unverified. | Independent review and merge decision under MMM authority. |
+| MIP | Runbook and reporting line merged; delegation activated by pushed note; this refresh in implementation. | Review and merge this report branch; no activation step remains. |
+| GeoX | Test-scaffold repair review-ready; branch published; merge outcome unverified. | Independent review and merge decision under GeoX authority. |
+| MMM | Policy adoption authorized; no branch published; implementation not started. | Implementation result and independent review under MMM authority. |
 
 ## Planned and dependent work
 
 1. Review and merge this owner-report branch under the applicable
    approval rule.
-2. Record delegation activation only through a separate explicit owner
-   authority decision after the merged prerequisite; no untracked report
-   activates anything.
+2. Use the activated delegated path for eligible routine follow-ups;
+   owner prompts remain for Tier 3, scope, capability, authority, and
+   policy changes.
 3. Progress GeoX and MMM implementation results once their contracts
    complete independent review.
 4. Resume dependent product work only after verifying GeoX producer
@@ -73,28 +65,25 @@ verified here.
 
 ## Your input
 
-The preflight merge decision is resolved (closed `0d311c0` under your
-exact-head approval). Still reserved for you: the delegation activation
-decision, this report branch's merge decision, and all goal, roadmap,
-capability, architecture, and production decisions. Goal, roadmap, and
-material scope changes remain yours; agent agreement cannot substitute
-for your explicit record. I will bring any actual choice with its impact
-and a recommendation.
+The preflight, runbook, and earlier owner-report merges are resolved.
+Still reserved for you: this report branch's merge decision and all
+goal, roadmap, capability, architecture, and production decisions.
+Goal, roadmap, and material scope changes remain yours; agent agreement
+cannot substitute for your explicit record. I will bring any actual
+choice with its impact and a recommendation.
 
 ## Evidence
 
 These links identify the exact Git snapshots checked for this update;
 they are technical supporting material, not required reading.
 
-- [MIP preflight closure report](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/0d311c0b5e803d3b904cd830b68dd5b5ac6e8e02/docs/execution/LATEST_COMPLETION_REPORT.md) — main `0d311c0b5e803d3b904cd830b68dd5b5ac6e8e02`.
-- [MIP preflight reviewed head](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/d69e0eb85425a471ccaef44caabfea35140bd701/docs/execution/LATEST_COMPLETION_REPORT.md) — `d69e0eb85425a471ccaef44caabfea35140bd701`.
-- [MIP owner-update integration task](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/b91375f4def9924f9944797b15035950e2dd973d/docs/execution/ACTIVE_TASK.md) — main `b91375f4def9924f9944797b15035950e2dd973d`.
-- [GeoX completion report](https://github.com/Phani-Pavuluri/panel_exp/blob/062d6599170b12d72af18dcc628782ff4985b506/docs/execution/LATEST_COMPLETION_REPORT.md) — main `062d6599170b12d72af18dcc628782ff4985b506`.
-- [MMM completion report](https://github.com/Phani-Pavuluri/MMM/blob/46a0203704a67898c27f42adb6e501d153584c4e/docs/execution/LATEST_COMPLETION_REPORT.md) — main `46a0203704a67898c27f42adb6e501d153584c4e`.
-- [MMM test-completeness branch head](https://github.com/Phani-Pavuluri/MMM/tree/48d1d9a4a14757158d89a84569526b1eaaf54110) — live remote branch `tests/mmm-calibration-compatibility-test-completeness-001` observed October 15, two commits ahead of main baseline; unmerged branch work, not merged evidence.
-- [GeoX related branch head](https://github.com/Phani-Pavuluri/panel_exp/tree/81664df0d687746a8ee990eada702a2a54cc23c0) — live remote branch `feat/geox-structured-completion-evidence-001` observed October 15; unmerged branch work under a related task, not merged evidence. The authorized recovery task's declared branch has no live remote head.
+- [MIP runbook recovery closure report](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/4581d5a27da142de53877fbae1e4420a5430c242/docs/execution/LATEST_COMPLETION_REPORT.md) — main `4581d5a27da142de53877fbae1e4420a5430c242`.
+- [MIP refresh task authorization](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/35dc707957ab79b71fd37c07644680ac3956f85b/docs/execution/ACTIVE_TASK.md) — main `35dc707957ab79b71fd37c07644680ac3956f85b`.
+- [GeoX completion report](https://github.com/Phani-Pavuluri/panel_exp/blob/60602c3ca106682daebd204afe177c15f41215a2/docs/execution/LATEST_COMPLETION_REPORT.md) — main `60602c3ca106682daebd204afe177c15f41215a2`.
+- [GeoX repair branch head](https://github.com/Phani-Pavuluri/panel_exp/tree/bc4ba647f3627eeb623faf165fb28adfada71269) — live remote branch `feat/geox-taskctl-test-scaffold-repair-001` observed October 15; unmerged branch work, not merged evidence.
+- [MMM completion report](https://github.com/Phani-Pavuluri/MMM/blob/82cd37948ad3d2bce0910f14e8a167aa001150a3/docs/execution/LATEST_COMPLETION_REPORT.md) — main `82cd37948ad3d2bce0910f14e8a167aa001150a3`.
 
-Earlier pins (`75e514b` MIP authorization snapshot, `9c6c6b2` GeoX,
-`6f60cd2` MMM) are preserved in history and superseded above. No
-roadmap, capability, authority, or historical coordination snapshot is
-changed by this report.
+Earlier pins (`0d311c0`, `d69e0eb`, `b91375f`, `062d659`, `46a0203`,
+`48d1d9a`, `81664df`, `75e514b`, `9c6c6b2`, `6f60cd2`) are preserved in
+history and superseded above. No roadmap, capability, authority, or
+historical coordination snapshot is changed by this report.
