@@ -16,15 +16,15 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `1780342544b95f221f5f90e2427c30afe5c3a64f`
+- **Implementation commit:** `40c18c5f8a2c9a096f95bff87ad55f69cf651520`
 - **Reviewed head:** `null`
-- **Rejected review head:** `890958eeff3db30b57f0e593cb52882daa19b88a`
-- **Rejected implementation commit:** `335b12c57eaba9848804cb500ddfdc1e561ce5c8`
+- **Rejected review head:** `8ac5ce8caaa40eb6760c378f732ad00ec8de51ae`
+- **Rejected implementation commit:** `1780342544b95f221f5f90e2427c30afe5c3a64f`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
 - **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
@@ -58,14 +58,16 @@ navigation link line; structural diff only).
 Delivered behavior: `docs/program/OWNER_UPDATE.md` (new, dated October
 15, 2026) reports the preflight merge/closure as resolved, the
 authorization of this task, live GeoX recovery
-(`GEOX_STRUCTURED_COMPLETION_EVIDENCE_RECOVERY_001`, main `062d659`)
-and MMM test-completeness
-(`MMM_CALIBRATION_COMPATIBILITY_TEST_COMPLETENESS_001`, main `46a0203`)
-positions with both implementation branches published and no completion
-reported, reserved owner decisions (activation, this branch's merge),
-and five resolving evidence links; prior pins are preserved as
-superseded history. `PROGRAM_CURRENT_STATE.md` gains exactly one link
-line in its detailed-sources area.
+(`GEOX_STRUCTURED_COMPLETION_EVIDENCE_RECOVERY_001`, main `062d659`;
+declared branch absent on the remote, related ready-for-review branch
+work unassessed) and MMM test-completeness
+(`MMM_CALIBRATION_COMPATIBILITY_TEST_COMPLETENESS_001`, main `46a0203`;
+branch ahead of baseline with published implementation and receipt
+commits claiming ready-for-review, merge outcome unverified) positions,
+reserved owner decisions (activation, this branch's merge), and
+resolving evidence links; prior pins are preserved as superseded
+history. `PROGRAM_CURRENT_STATE.md` gains exactly one link line in its
+detailed-sources area.
 
 Acceptance (Tier 1 gate, all pass): required sections present with a
 current dated header; no stale pending-merge claims; all five evidence
@@ -97,6 +99,27 @@ checks all pass; full suite/Ruff/mypy remain not-required). Rejected-head
 provenance (`890958e`/`335b12c`) is recorded in lifecycle state; the
 resume path leaves the single correction budget available for any
 re-review findings.
+
+## Second correction cycle (branch-baseline wording)
+
+Independent review of `8ac5ce8` required distinguishing the authorized
+task/branch baseline from published implementation branches. Live
+remote verification disagreed in part with the finding and the report
+follows the evidence: GeoX's declared recovery branch has no live
+remote head (finding confirmed), but a related branch carries unmerged
+implementation and receipt commits under a related ready-for-review
+task whose relationship and review outcome are unassessed; MMM's
+declared branch does not equal its baseline but sits two commits ahead
+of main `46a0203` with published implementation and receipt commits
+claiming ready-for-review (committed 00:47–00:48 PDT, after the review
+observation), so the report keeps a published-branch claim stated
+precisely with merge outcome unverified. Corrected at
+`40c18c5f8a2c9a096f95bff87ad55f69cf651520` with two branch-head
+evidence links added; scope, pins, history, and owned paths otherwise
+preserved. Tier 1 gate rerun on the corrected tree (all pass; full
+suite/Ruff/mypy remain not-required). This consumes the remaining
+correction budget via explicit rejected-head provenance
+(`8ac5ce8`/`17803425`).
 
 
 ## Execution authorization recorded — October 15, 2026
