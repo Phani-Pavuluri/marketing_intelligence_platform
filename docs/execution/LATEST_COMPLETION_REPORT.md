@@ -16,10 +16,10 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `335b12c57eaba9848804cb500ddfdc1e561ce5c8`
+- **Implementation commit:** `1780342544b95f221f5f90e2427c30afe5c3a64f`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `890958eeff3db30b57f0e593cb52882daa19b88a`
+- **Rejected implementation commit:** `335b12c57eaba9848804cb500ddfdc1e561ce5c8`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
@@ -49,7 +49,7 @@ implementation, not duplicated or modified. Tier 1 validation only;
 full suite, Ruff, and mypy are not required. Delegated activation, a
 reporting service, recurring automation, and product work are deferred.
 
-## Execution evidence
+## Execution evidence (corrected head)
 
 Implemented on `docs/owner-update-integration-001` at
 `335b12c57eaba9848804cb500ddfdc1e561ce5c8` (report refresh plus one
@@ -82,6 +82,21 @@ owned paths plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags; delegation not
 activated; the `faffb64` branch untouched. Local-only `.codex/` and
 `docs/tasks/` artifacts never staged.
+
+## Correction cycle (reviewer-directed prose accuracy fix)
+
+Independent exact-head review of `890958e` found no scope or product
+defect but required two lifecycle/publication claim corrections in
+`OWNER_UPDATE.md`: the report is published on the feature branch for
+review (not on MIP `main`), and implementation is complete pending
+review/merge (not ongoing). Corrected at
+`1780342544b95f221f5f90e2427c30afe5c3a64f`; evidence links, pins,
+history, and owned-path scope preserved verbatim. Tier 1 gate rerun on
+the corrected tree (structure, claims, links, taskctl, JSON, diff
+checks all pass; full suite/Ruff/mypy remain not-required). Rejected-head
+provenance (`890958e`/`335b12c`) is recorded in lifecycle state; the
+resume path leaves the single correction budget available for any
+re-review findings.
 
 
 ## Execution authorization recorded — October 15, 2026
