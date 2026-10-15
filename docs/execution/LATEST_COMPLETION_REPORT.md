@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -16,7 +16,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `null`
+- **Implementation commit:** `ad753a9f336898df8dd338e1d573c3624415ef06`
 - **Reviewed head:** `null`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -33,7 +33,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## Current outcome
 
-Owner-authorized existing-report refresh prepared; implementation not started. Source observations are context only and must be refreshed before publication.
+Owner-authorized existing-report refresh implemented and published
+for review; implementation evidence follows below. Source
+observations were refreshed from live Git at implementation time.
 
 ## Authoring source observations
 
@@ -51,3 +53,45 @@ Owner-authorized existing-report refresh prepared; implementation not started. S
     "workstream": "WS-GEOX-TIER1-CALLBACK-INJECTION-REPAIR-001"
   }
 }
+
+## Execution evidence
+
+Implemented on `docs/mip-owner-update-refresh-002` at
+`ad753a9f336898df8dd338e1d573c3624415ef06`: full refresh of
+`docs/program/OWNER_UPDATE.md` against live Git observed October 15,
+2026. The authoring observations above are superseded by these live
+pins: MIP `6fb7ca8`, GeoX `b44f2d8`, MMM `a9db646`.
+
+Delivered behavior: dated refresh reporting the readiness-map
+closure and this task's authorization; live GeoX repair position
+(authorized, branch work publishing off the current main line with a
+blocked marker needing GeoX-side reconciliation) and MMM
+response-surface position (definition-publication proposal
+authorized, branch work posted, no adoption); reserved decisions
+(goals/roadmap/capability/architecture/production, policy and
+activation changes, substantive disagreements), with this branch's
+merge proceeding through the delegated routine path rather than an
+owner prompt; and six resolving evidence links with prior pins
+preserved as superseded history. Technical IDs and hashes appear
+only in the evidence section; sibling canonical state was read from
+remote-main blobs, never from possibly stale local checkouts. Plain
+language with merged, reviewed, claimed, and proposed states
+distinguished.
+
+Acceptance (Tier 1 gate, all pass on this implementation tree):
+required report sections with current dated header; no stale
+pending-merge, main-publication, in-progress, monitoring, or
+owner-reserved-merge claims; narrative free of SHAs and task IDs;
+all evidence links resolve (MIP blobs locally; GeoX/MMM blobs and
+branch heads verified against live remotes); `taskctl check`, JSON
+parsing, and `git diff --check` pass. Full pytest, Docker, Ruff, and
+mypy recorded `not_required` (docs-only surface). Sibling mains were
+fetched read-only; no sibling file, branch, snapshot, ledger, or
+history was modified.
+
+Git identity: base `52e9995`, authorization
+`68524fc4b2f4ddd016c0ec3b312bbfc28b8268d3`; implementation
+`ad753a9f336898df8dd338e1d573c3624415ef06`; diff limited to the one
+owned path plus the three stable files via `taskctl` transitions.
+Authority unchanged across all protected flags. Local-only `.codex/`
+and `docs/tasks/` artifacts never staged.
