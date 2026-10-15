@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** proposed
+**Status:** authorized
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -9,10 +9,10 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Base SHA:** `d63a3de024d158c1bf78e57e29f3d87d5d54c8d6`
-- **Authorization provenance:** `null`
+- **Authorization provenance:** `2ac22c11e892d259823d7b530bc7e6861ee8b3f1`
 - **Feature branch:** `docs/mip-consumer-readiness-map-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `false`
+- **Task execution authorized:** `true`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `proposed`
+- **Review decision:** `authorized`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -49,4 +49,4 @@ Use the synchronized MIP, GeoX, and MMM main evidence and the reviewed worker fi
 
 Tier 1 documentation: source-backed row checks; all evidence links resolve; native taskctl check, JSON parsing, git diff --check, owned-path and ancestry checks. Full pytest/Docker/Ruff/mypy are not required for this docs-only surface. The task remains proposed until the owner-authorized task-authoring process records execution authority; no implementation or merge authority is granted here.
 
-If separately authorized, publish through native taskctl, obtain exact-tree review and validation, and stop at the required lifecycle checkpoint. One correction cycle. Compatibility/migration not_applicable. Deferred: certified GeoX provenance, bridge resumption, R12 adoption/implementation, and any product or analytical capability.
+Publish through native taskctl, obtain exact-tree review and validation, and stop at the required lifecycle checkpoint. One correction cycle. Compatibility/migration not_applicable. Deferred: certified GeoX provenance, bridge resumption, R12 adoption/implementation, and any product or analytical capability.
