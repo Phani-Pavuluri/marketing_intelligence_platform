@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-owner-update-refresh-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `e281d6ac55dfaee1602e8538c608bad0773ea200`
+- **Implementation commit:** `3367cebcd68d736f7adbfeb3dcb461c7e382f892`
 - **Reviewed head:** `null`
 - **Rejected review head:** `b696e8dffb0f295f533c28276427634666a5ee43`
 - **Rejected implementation commit:** `e281d6ac55dfaee1602e8538c608bad0773ea200`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -33,7 +33,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## Current outcome
 
-Owner-authorized existing-report refresh prepared; implementation not started. Source observations are context only and must be refreshed before publication.
+Owner-authorized existing-report refresh implemented and published
+for review; implementation evidence follows below. Source observations
+were refreshed from live Git at implementation time.
 
 ## Authoring source observations
 
@@ -55,38 +57,59 @@ Owner-authorized existing-report refresh prepared; implementation not started. S
 ## Execution evidence
 
 Implemented on `docs/mip-owner-update-refresh-001` at
-`e281d6ac55dfaee1602e8538c608bad0773ea200`: full refresh of
+`3367cebcd68d736f7adbfeb3dcb461c7e382f892`: corrected refresh of
 `docs/program/OWNER_UPDATE.md` against live Git observed October 15,
-2026.
+2026, addressing all four review findings.
 
 Delivered behavior: dated refresh reporting the runbook-recovery
-closure (`4581d5a`) and this task's authorization; live GeoX
-scaffold-repair position (review-ready on main `60602c3`,
-implementation `eab2459`, branch published at `bc4ba64`, merge
-outcome unverified) and MMM policy-adoption position (authorized on
-main `82cd379`, no branch published, implementation not started);
-reserved decisions (activation already recorded by pushed note;
-this branch's merge; goals/roadmap/capability/production); and five
-resolving evidence links with prior pins preserved as superseded
-history. Plain language with merged, reviewed, claimed, and proposed
+closure and this task's authorization; live GeoX scaffold-repair
+position (review-ready on main, implementation publishing to its
+branch, merge outcome unverified) and MMM policy-adoption position
+(merged and closed with branch cleanup observed); reserved decisions
+(goals/roadmap/capability/architecture/production, policy and
+activation changes, substantive disagreements), with this branch's
+merge proceeding through the delegated routine path rather than an
+owner prompt; and six resolving evidence links with prior pins
+preserved as superseded history. Technical IDs and hashes appear only
+in the evidence section; the narrative is plain language. The
+unverifiable monitoring claim was removed. Sibling canonical state was
+read from remote-main blobs, never from possibly stale local
+checkouts. Plain language with merged, reviewed, claimed, and proposed
 states distinguished.
 
 Acceptance (Tier 1 gate, all pass on this implementation tree):
 required report sections with current dated header; no stale
-pending-merge claims; all evidence SHAs resolve (MIP blobs locally;
-GeoX/MMM blobs in synchronized read-only checkouts; GeoX branch head
-via live remote read); `taskctl check`, JSON parsing, and
-`git diff --check` pass. Full pytest, Docker, Ruff, and mypy recorded
-`not_required` (docs-only surface). Sibling mains were fetched
-read-only; no sibling file, branch, snapshot, ledger, or history was
-modified.
+pending-merge, main-publication, in-progress, or owner-reserved-merge
+claims; all evidence SHAs resolve (MIP blobs locally; GeoX/MMM blobs
+and branch heads verified against live remotes); `taskctl check`,
+JSON parsing, and `git diff --check` pass. Full pytest, Docker, Ruff,
+and mypy recorded `not_required` (docs-only surface). Sibling mains
+were fetched read-only; no sibling file, branch, snapshot, ledger, or
+history was modified.
 
 Git identity: base `35dc707`, authorization
 `9f34185c5b387ee2da7eacbc1ac01f5ea29b48d2`; implementation
-`e281d6ac55dfaee1602e8538c608bad0773ea200`; diff limited to the one
+`3367cebcd68d736f7adbfeb3dcb461c7e382f892`; diff limited to the one
 owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
+
+## Correction cycle (four findings, evidence-verified)
+
+Independent review returned changes_requested with four prose defects
+plus coordinator-recorded extensions (stale MMM position, delegated
+merge reservation), all confined to the two owned paths. Corrected in
+`3367cebcd68d736f7adbfeb3dcb461c7e382f892`: stale authoring
+status replaced; narrative technical IDs moved to the evidence
+section; unverifiable monitoring claim removed; MMM position
+corrected to merged-and-closed (verified against the live remote
+main blob, not the stale local checkout — sibling reads now use
+remote-main blobs plus live branch reads as methodology); this
+branch's merge described through the delegated routine path with no
+owner prompt. Two branch-head evidence links added; scope, pins, and
+history otherwise preserved. Tier 1 gate rerun on the corrected tree.
+This consumes the single correction cycle via explicit rejected-head
+provenance (`b696e8d`/`e281d6a`).
 
 
 ## Independent review — bounded correction requested October 15, 2026
