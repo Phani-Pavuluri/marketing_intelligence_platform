@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -16,7 +16,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `null`
+- **Implementation commit:** `a49b58edf3cd4b4161697c78b6020def6433397d`
 - **Reviewed head:** `null`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -33,11 +33,54 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## Current outcome
 
-The next MIP coordination step is an authorized documentation task to map consumer readiness against the existing GeoX handoff evidence. It grants no implementation, certification, bridge-resumption, R12 adoption, or sibling authority.
+Owner-authorized consumer-readiness map implemented and published
+for review; implementation evidence follows below. The map is
+documentation only and grants no implementation, certification,
+bridge-resumption, R12 adoption, or sibling authority.
 
 ## Proposed task contract
 
 The map will record required consumer fields, merged evidence, missing certified GeoX-provenance-linked pairs, and a future verification case. Existing synthetic calibration fixtures remain explicitly unverified and non-blocking; the bridge remains blocked; the R12 response-surface definition is outside current consumer behavior. No implementation, certification, bridge resumption, R12 adoption, or sibling authority is included.
+
+## Readiness map execution evidence
+
+Implemented on `docs/mip-consumer-readiness-map-001` at
+`a49b58edf3cd4b4161697c78b6020def6433397d`: six-row source-backed
+readiness map in `docs/program/MIP_CONSUMER_READINESS_MAP.md`,
+observed October 15, 2026.
+
+Delivered behavior: each row carries requirement path plus pin,
+evidence path plus pin or explicit `MISSING`, missing owner
+decision, and future acceptance case. Envelope presence/value
+validators mapped from the actual consumer contract
+(`certification_status` verified absent there; it lives only in GeoX
+manifest vocabulary with unresolved meanings); five MMM goldens
+distinguished from missing certified-provenance pairs (golden
+lineage verified synthetic-only: no `source_commit`, no GeoX repo
+reference, no certification marker); sibling export-label surface
+verified absent on both live pins; parked bridge preserved; R12
+excluded with zero-reference evidence. Synthetic namespace isolation
+is a labeled unverified assumption, non-blocking because no
+consumer invariant branches on lineage IDs. No certification fields
+invented; producer definitions restated nowhere.
+
+Acceptance (Tier 1 gate, all pass on this implementation tree):
+six rows structurally complete; all pins resolve (MIP blobs locally;
+GeoX manifest blob and all five MMM golden blobs verified in
+checkouts at exactly the live pins; live remote equality confirmed
+for both sibling mains); `taskctl check`, JSON parsing, and
+`git diff --check` pass. Full pytest, Docker, Ruff, and mypy recorded
+`not_required` (docs-only surface). No sibling fetch or write was
+performed; no sibling file, branch, snapshot, ledger, or history was
+modified.
+
+Git identity: base `d63a3de`, authorization
+`2ac22c11e892d259823d7b530bc7e6861ee8b3f1`; implementation
+`a49b58edf3cd4b4161697c78b6020def6433397d`; diff limited to the one
+owned path plus the three stable files via `taskctl` transitions.
+Authority unchanged across all protected flags. Local-only `.codex/`
+and `docs/tasks/` artifacts never staged. Live pins at execution:
+MIP `421dd57`, GeoX `3c2f7ec`, MMM `a9db646`.
 
 ## Authoring source observations
 
