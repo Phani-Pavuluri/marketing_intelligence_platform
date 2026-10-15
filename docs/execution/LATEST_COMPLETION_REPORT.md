@@ -1,39 +1,43 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `merged`
+**Current decision:** `proposed`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_OWNER_UPDATE_REFRESH_001`
+- **Task ID:** `MIP_CONSUMER_READINESS_MAP_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `4581d5a27da142de53877fbae1e4420a5430c242`
-- **Authorization provenance:** `9f34185c5b387ee2da7eacbc1ac01f5ea29b48d2`
-- **Feature branch:** `docs/mip-owner-update-refresh-001`
+- **Base SHA:** `d63a3de024d158c1bf78e57e29f3d87d5d54c8d6`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-consumer-readiness-map-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `3367cebcd68d736f7adbfeb3dcb461c7e382f892`
-- **Reviewed head:** `bcdbd51df52e901b30c523be380f59cd1c82b93b`
-- **Rejected review head:** `b696e8dffb0f295f533c28276427634666a5ee43`
-- **Rejected implementation commit:** `e281d6ac55dfaee1602e8538c608bad0773ea200`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
+- **Rejected review head:** `null`
+- **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `1`
-- **Correction cycles remaining:** `0`
-- **Review decision:** `merged`
-- **Local feature-branch cleanup:** `observed_deleted`
-- **Remote feature-branch cleanup:** `observed_deleted`
+- **Correction cycles completed:** `0`
+- **Correction cycles remaining:** `1`
+- **Review decision:** `proposed`
+- **Local feature-branch cleanup:** `null`
+- **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
 ## Current outcome
 
-The owner-report refresh is merged by independently approved delegated fast-forward at bcdbd51df52e901b30c523be380f59cd1c82b93b. This single metadata closure follows actual push and observed branch cleanup; implementation and report evidence below describe the frozen reviewed publication.
+The next MIP coordination step is a proposed documentation task to map consumer readiness against the existing GeoX handoff evidence. It is not executable until the native authorization process records the owner's direction in Git.
+
+## Proposed task contract
+
+The map will record required consumer fields, merged evidence, missing certified GeoX-provenance-linked pairs, and a future verification case. Existing synthetic calibration fixtures remain explicitly unverified and non-blocking; the bridge remains blocked; the R12 response-surface definition is outside current consumer behavior. No implementation, certification, bridge resumption, R12 adoption, or sibling authority is included.
 
 ## Authoring source observations
 
