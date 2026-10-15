@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** proposed
+**Status:** authorized
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -9,10 +9,10 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Base SHA:** `0d311c0b5e803d3b904cd830b68dd5b5ac6e8e02`
-- **Authorization provenance:** `null`
+- **Authorization provenance:** `fadaeed5aaac62a847def910391caefff83d37f1`
 - **Feature branch:** `docs/owner-update-integration-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `false`
+- **Task execution authorized:** `true`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `proposed`
+- **Review decision:** `authorized`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -99,8 +99,8 @@ contract, version, persisted artifact, or migration surface changes).
 
 ## Authorization, dependencies, and preserved history
 
-This task is proposed, not authorized; execution authority is false and
-no merge, correction, capability, or next-task authority is granted. The
+This task is execution-authorized by the recorded owner direction and
+canonical state. No merge, correction, capability, or next-task authority is granted. The
 single satisfied dependency is
 `DEP-MIP-DELEGATED-PREFLIGHT-MERGED-001` (preflight merged and closed at
 `0d311c0`; observer and advisory evidence reused read-only).
