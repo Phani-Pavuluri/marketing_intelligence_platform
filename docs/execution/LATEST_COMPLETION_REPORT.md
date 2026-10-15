@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-consumer-readiness-map-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `a49b58edf3cd4b4161697c78b6020def6433397d`
+- **Implementation commit:** `c206e2ff8d8ff274c2f5ce94c005bcb96b1bcfc2`
 - **Reviewed head:** `null`
 - **Rejected review head:** `28ea591c8b438f9b5085cf8e51f264383b7d7c37`
 - **Rejected implementation commit:** `a49b58edf3cd4b4161697c78b6020def6433397d`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -45,12 +45,10 @@ The map will record required consumer fields, merged evidence, missing certified
 ## Readiness map execution evidence
 
 Implemented on `docs/mip-consumer-readiness-map-001` at
-`a49b58edf3cd4b4161697c78b6020def6433397d`: six-row source-backed
+`c206e2ff8d8ff274c2f5ce94c005bcb96b1bcfc2`: six-row source-backed
 readiness map in `docs/program/MIP_CONSUMER_READINESS_MAP.md`,
-observed October 15, 2026.
-
-Delivered behavior: each row carries requirement path plus pin,
-evidence path plus pin or explicit `MISSING`, missing owner
+observed October 15, 2026. Each row carries requirement path plus
+pin, evidence path plus pin or explicit `MISSING`, missing owner
 decision, and future acceptance case. Envelope presence/value
 validators mapped from the actual consumer contract
 (`certification_status` verified absent there; it lives only in GeoX
@@ -74,9 +72,26 @@ for both sibling mains); `taskctl check`, JSON parsing, and
 performed; no sibling file, branch, snapshot, ledger, or history was
 modified.
 
+## Correction cycle (MIP-CRM-001 evidence snapshots)
+
+Independent review of `28ea591` required independently reviewable
+central rows: exact full sibling SHAs plus mapped durable read-only
+evidence for the GeoX manifest, all five MMM golden fixtures with
+lineage fields, and the sibling export-label absence checks.
+Corrected in `c206e2ff8d8ff274c2f5ce94c005bcb96b1bcfc2` with an
+Evidence snapshots section recording full pins (MIP `421dd57…`,
+GeoX `3c2f7ec…`, MMM `a9db646…`), blob SHAs for the consumer,
+producer-specs, manifest, and all five goldens, per-golden state and
+lineage tables, and the exact absence-check commands with outputs.
+Certified-provenance gap and parked bridge stay explicit; no
+certification, bridge, R12, product, sibling, or capability authority
+added. Tier 1 gate rerun (11 SHAs present and resolving). This
+consumes the single correction cycle via explicit rejected-head
+provenance (`28ea591`/`a49b58e`).
+
 Git identity: base `d63a3de`, authorization
 `2ac22c11e892d259823d7b530bc7e6861ee8b3f1`; implementation
-`a49b58edf3cd4b4161697c78b6020def6433397d`; diff limited to the one
+`c206e2ff8d8ff274c2f5ce94c005bcb96b1bcfc2`; diff limited to the one
 owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged. Live pins at execution:
