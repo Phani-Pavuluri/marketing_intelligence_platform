@@ -42,32 +42,32 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_ROUTINE_RUNBOOK_EVIDENCE_RECOVERY_001",
-  "status": "merged",
-  "review_decision": "merged",
-  "base_sha": "9ce0a27da572f399ac9213854b005498806b0e46",
-  "task_authoring_start_sha": "9ce0a27da572f399ac9213854b005498806b0e46",
-  "task_authoring_head_sha": "f449b6b2f69019c6fee5127954438cf2600b0eda",
-  "authorization_head_sha": "f449b6b2f69019c6fee5127954438cf2600b0eda",
-  "feature_branch": "docs/mip-routine-runbook-evidence-recovery-001",
+  "task_id": "MIP_OWNER_UPDATE_REFRESH_001",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "4581d5a27da142de53877fbae1e4420a5430c242",
+  "task_authoring_start_sha": "4581d5a27da142de53877fbae1e4420a5430c242",
+  "task_authoring_head_sha": null,
+  "authorization_head_sha": null,
+  "feature_branch": "docs/mip-owner-update-refresh-001",
   "feature_branch_created": false,
-  "reviewed_head_sha": "a431db963878e13f8c56ea1e31455554d9f2ef9d",
-  "rejected_review_head_sha": "38ec749335bd333bb11adaf82cdba84d14cca786",
-  "implementation_commit_sha": "f845afb33366a8b55284e5d276665df80ae82b70",
-  "rejected_implementation_commit_sha": "f845afb33366a8b55284e5d276665df80ae82b70",
+  "reviewed_head_sha": null,
+  "rejected_review_head_sha": null,
+  "implementation_commit_sha": null,
+  "rejected_implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-10-15",
   "blockers": [],
   "maximum_correction_cycles": 1,
-  "correction_cycles_completed": 1,
-  "correction_cycles_remaining": 0,
+  "correction_cycles_completed": 0,
+  "correction_cycles_remaining": 1,
   "risk_tier": "tier_1_operational_documentation",
   "compatibility_migration_policy": "not_applicable",
   "full_suite_validation_required": false,
-  "validation_scope": "operations_doc_structure_commands_notes_policy_hash_taskctl_json_diff_exact_tree_receipt",
+  "validation_scope": "owner_report_source_pins_plain_language_links_no_capability_claims_taskctl_json_diff_owned_paths_exact_tree",
   "owned_implementation_paths": [
-    "docs/execution/DELEGATED_ROUTINE_MERGE_OPERATIONS.md"
+    "docs/program/OWNER_UPDATE.md"
   ],
   "task_authoring_boundary": [
     "docs/execution/EXECUTION_STATE.json",
@@ -83,31 +83,21 @@
   ],
   "dependencies": [
     {
-      "dependency_id": "DEP-MIP-REVIEWED-REJECTED-RUNBOOK-SOURCE-001",
+      "dependency_id": "DEP-MIP-OWNER-REPORT-INTEGRATED-001",
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "task_id": "MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001",
-      "state": "immutable_rejected_source_only",
-      "remote_head_sha": "1a1536bdaf327a6d05dfcbb27f71d5e39c97806d",
-      "implementation_commit_sha": "de9999a5c192e268af939bfd7dff40555fce3d3a",
-      "resolution_condition": "Only the owned operations guide may be reused as starting material; no predecessor metadata or validation evidence is reused."
-    },
-    {
-      "dependency_id": "DEP-MIP-PREFLIGHT-MERGED-001",
-      "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "task_id": "MIP_DELEGATED_ROUTINE_MERGE_PREFLIGHT_001",
       "state": "satisfied",
-      "merged_checkpoint_sha": "0d311c0b5e803d3b904cd830b68dd5b5ac6e8e02",
-      "resolution_condition": "Merged preflight and pushed existing activation reused unchanged."
+      "merged_checkpoint_sha": "ccbe3ce017764d6870233cc8b605b3eb559b27e7",
+      "resolution_condition": "Existing integrated report is refreshed; no reporting service or capability added."
     }
   ],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "delegated_routine",
-  "task_authoring_note": "Owner explicitly approved routine-process repair: “approved, also fix the process so we dont need these kind of approvals”. The exhausted publication has a stale implementation identity in human evidence. Fresh bounded recovery preserves the rejected head and imports only its reviewed guide content as starting material, not state or validation. No new goal, capability, policy, code or authority.",
-  "local_feature_branch_cleanup": "observed_deleted",
-  "remote_feature_branch_cleanup": "observed_deleted",
-  "coordination_workstream_id": "WS-MIP-ROUTINE-RUNBOOK-EVIDENCE-RECOVERY-001",
-  "coordination_capability_owner": "mip_execution_governance",
+  "task_authoring_note": "Materialize the owner's existing explicit request for ongoing high-level Git-backed updates (\"i want high level details\", \"why are these reports not on git\", \"then do it\") and continuous follow-through. Refresh only existing owner report; no new goals, policy, product, sibling or authority decision.",
+  "local_feature_branch_cleanup": null,
+  "remote_feature_branch_cleanup": null,
+  "coordination_workstream_id": "WS-MIP-OWNER-UPDATE-REFRESH-001",
+  "coordination_capability_owner": "mip_owner_reporting",
   "parked_setup_workstreams": [
     {
       "task_id": "MIP_BOUNDED_WORK_PLAN_VALIDATOR_001",
@@ -133,11 +123,11 @@
     }
   ],
   "prior_task": {
-    "task_id": "MIP_OWNER_UPDATE_INTEGRATION_001",
+    "task_id": "MIP_ROUTINE_RUNBOOK_EVIDENCE_RECOVERY_001",
     "status": "merged",
-    "reviewed_head_sha": "d2f81caff48f0f76aa48d241ff2d290669505e9a",
-    "closure_commit_sha": "ccbe3ce017764d6870233cc8b605b3eb559b27e7",
-    "resolution_condition": "Merged prerequisite context only; this task uses the separately recorded explicit owner process-repair decision."
+    "reviewed_head_sha": "a431db963878e13f8c56ea1e31455554d9f2ef9d",
+    "closure_commit_sha": "4581d5a27da142de53877fbae1e4420a5430c242",
+    "resolution_condition": "Read-only prior outcome, no new capability authority."
   },
   "delegated_merge_required_validation": [
     "taskctl_check",
