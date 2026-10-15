@@ -95,7 +95,7 @@
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "user_exact_head",
-  "task_authoring_note": "Owner-directed documentation-only successor: refresh OWNER_UPDATE.md with the merged preflight outcome and current repository status, link it from program navigation, preserve pins/history. Reconciles unmerged branch docs/owner-update-2026-10-14 without duplicating it. No code, activation, service, sibling or capability authority.",
+  "task_authoring_note": "Owner repeatedly directed implementation and independent parallel work across MIP, GeoX and MMM, approved bounded follow-up work within existing goals, directed Git owner-report publication, and requested continuation. This action records that existing scope authority in Git; it does not approve merges or add goals, capabilities, architecture, analytical meaning or sibling authority. Reviewed bounded task: MIP_OWNER_UPDATE_INTEGRATION_001. Scope and validation remain as proposed; canonical execution authority is finalized separately.",
   "local_feature_branch_cleanup": null,
   "remote_feature_branch_cleanup": null,
   "coordination_workstream_id": "WS-MIP-OWNER-UPDATE-INTEGRATION-001",
