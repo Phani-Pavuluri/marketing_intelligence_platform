@@ -1,7 +1,8 @@
 # Project owner update
 
-Updated October 15, 2026 (UTC). Published on MIP `main` through the
-authorized documentation workflow. Supersedes the unmerged draft branch
+Updated October 15, 2026 (UTC). Published on feature branch
+`docs/owner-update-integration-001` for independent review; integration
+into MIP `main` is pending merge. Supersedes the unmerged draft branch
 `docs/owner-update-2026-10-14` (`faffb64`); every position below was
 re-verified against live Git on this date.
 
@@ -21,8 +22,9 @@ reported completion.
   exist as reviewed code. No activation record, merge executor, or
   capability change follows from this merge.
 - **MIP:** the owner-report integration task
-  (`MIP_OWNER_UPDATE_INTEGRATION_001`) is authorized and being
-  implemented; this report is its first deliverable.
+  (`MIP_OWNER_UPDATE_INTEGRATION_001`) is authorized and its
+  implementation is complete, pending independent review and merge;
+  this report is its deliverable.
 - **GeoX:** the rejection-record recovery stayed merged with its history
   preserved, and a structured completion-evidence recovery task
   (`GEOX_STRUCTURED_COMPLETION_EVIDENCE_RECOVERY_001`) is authorized
