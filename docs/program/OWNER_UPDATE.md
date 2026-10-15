@@ -86,6 +86,7 @@ they are technical supporting material, not required reading.
 - [GeoX repair branch head](https://github.com/Phani-Pavuluri/panel_exp/tree/1d500ea5bbdeb05ac159a1b64b5db1ba39ecce45) — live remote repair branch observed October 15; not based on current main; unmerged branch work, not merged evidence.
 - [MMM completion report](https://github.com/Phani-Pavuluri/MMM/blob/a9db6469ed2654e19c20464c28717767990740ce/docs/execution/LATEST_COMPLETION_REPORT.md) — main `a9db6469ed2654e19c20464c28717767990740ce`.
 - [MMM response-surface branch head](https://github.com/Phani-Pavuluri/MMM/tree/e598a61e6b3daa1839e66bde84ac99c51a7a1344) — live remote branch observed October 15; unmerged branch work, not merged evidence.
+- [Delegated-merge activation verification record](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/6fb7ca8c1b7478409b3c6d831a17de7be6fe6392/docs/execution/DELEGATED_ROUTINE_MERGE_OPERATIONS.md) — runbook Activation status section: activation receipt `205960c9-6c11-4c73-9cb7-a0d5f1b153ad` on prerequisite `d69e0eb85425a471ccaef44caabfea35140bd701` under `refs/notes/mip-delegated-routine-receipts` (live target `2e6c0a4eb3b2ef5ab2c6a0a6bbc95e20fdd2328b`), verified with `git ls-remote origin <ref>`; the policy definition's historical inactive header is preserved unchanged so the pinned policy hash holds, and the pushed note — not the header — is the operative evidence.
 
 Earlier pins (`4581d5a`, `0d311c0`, `d69e0eb`, `b91375f`, `35dc707`,
 `062d659`, `60602c3`, `d081694`, `46a0203`, `82cd379`, `1905510`,
