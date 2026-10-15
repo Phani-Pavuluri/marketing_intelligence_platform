@@ -7,7 +7,7 @@
   "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_empty_feature_branch_head",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_execution_authorized": true,
+  "task_execution_authorized": false,
   "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
@@ -42,14 +42,14 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001",
-  "status": "authorized",
-  "review_decision": "authorized",
-  "base_sha": "ccbe3ce017764d6870233cc8b605b3eb559b27e7",
-  "task_authoring_start_sha": "ccbe3ce017764d6870233cc8b605b3eb559b27e7",
-  "task_authoring_head_sha": "d86f5c2a04d56470c66fe8a14ba5d2e374df38c8",
-  "authorization_head_sha": "d86f5c2a04d56470c66fe8a14ba5d2e374df38c8",
-  "feature_branch": "docs/mip-delegated-routine-merge-operations-001",
+  "task_id": "MIP_ROUTINE_RUNBOOK_EVIDENCE_RECOVERY_001",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "9ce0a27da572f399ac9213854b005498806b0e46",
+  "task_authoring_start_sha": "9ce0a27da572f399ac9213854b005498806b0e46",
+  "task_authoring_head_sha": null,
+  "authorization_head_sha": null,
+  "feature_branch": "docs/mip-routine-runbook-evidence-recovery-001",
   "feature_branch_created": false,
   "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
@@ -83,21 +83,30 @@
   ],
   "dependencies": [
     {
-      "dependency_id": "DEP-MIP-PREDECESSOR-CLOSED-001",
+      "dependency_id": "DEP-MIP-REVIEWED-REJECTED-RUNBOOK-SOURCE-001",
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "task_id": "MIP_OWNER_UPDATE_INTEGRATION_001",
+      "task_id": "MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001",
+      "state": "immutable_rejected_source_only",
+      "remote_head_sha": "1a1536bdaf327a6d05dfcbb27f71d5e39c97806d",
+      "implementation_commit_sha": "de9999a5c192e268af939bfd7dff40555fce3d3a",
+      "resolution_condition": "Only the owned operations guide may be reused as starting material; no predecessor metadata or validation evidence is reused."
+    },
+    {
+      "dependency_id": "DEP-MIP-PREFLIGHT-MERGED-001",
+      "repository": "Phani-Pavuluri/marketing_intelligence_platform",
+      "task_id": "MIP_DELEGATED_ROUTINE_MERGE_PREFLIGHT_001",
       "state": "satisfied",
-      "merged_checkpoint_sha": "ccbe3ce017764d6870233cc8b605b3eb559b27e7",
-      "resolution_condition": "Previous checkpoint merged/closed; current owner-directed task is independently bounded."
+      "merged_checkpoint_sha": "0d311c0b5e803d3b904cd830b68dd5b5ac6e8e02",
+      "resolution_condition": "Merged preflight and pushed existing activation reused unchanged."
     }
   ],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "delegated_routine",
-  "task_authoring_note": "External owner directive, verbatim: “approved, also fix the process so we dont need these kind of approvals”. This independently authorizes the bounded process-repair contract, preserving review/gates and major owner decisions. Adoption releases under that recorded owner decision plus independent exact-head acceptance; it does not approve itself under the policy being introduced. No new product or sibling authority.",
+  "task_authoring_note": "Owner explicitly approved routine-process repair: \u201capproved, also fix the process so we dont need these kind of approvals\u201d. The exhausted publication has a stale implementation identity in human evidence. Fresh bounded recovery preserves the rejected head and imports only its reviewed guide content as starting material, not state or validation. No new goal, capability, policy, code or authority.",
   "local_feature_branch_cleanup": null,
   "remote_feature_branch_cleanup": null,
-  "coordination_workstream_id": "WS-MIP-DELEGATED-ROUTINE-MERGE-OPERATIONS-001",
+  "coordination_workstream_id": "WS-MIP-ROUTINE-RUNBOOK-EVIDENCE-RECOVERY-001",
   "coordination_capability_owner": "mip_execution_governance",
   "parked_setup_workstreams": [
     {
@@ -110,6 +119,17 @@
       "blocker_id": "BLOCK-MIP-OBSERVER-FIXTURE-CORRECTION-HISTORY-001",
       "resolution_condition": "Merge independent fixture repair, then authorize a fresh validator recovery on the new baseline with all gates passing; do not merge failed gate head.",
       "branch_lifecycle_limitation": "Published canonical ready_for_review despite failed mandatory gate; taskctl cannot transition ready_for_review to blocked and correction budget is exhausted. This durable successor record marks review blocked without hand-editing lifecycle or waiving validation."
+    },
+    {
+      "task_id": "MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001",
+      "feature_branch": "docs/mip-delegated-routine-merge-operations-001",
+      "reviewed_head_sha": "1a1536bdaf327a6d05dfcbb27f71d5e39c97806d",
+      "implementation_commit_sha": "de9999a5c192e268af939bfd7dff40555fce3d3a",
+      "review_outcome": "blocked",
+      "merge_eligible": false,
+      "blocker_id": "BLOCK-MIP-RUNBOOK-IMPLEMENTATION-IDENTITY-001",
+      "resolution_condition": "Fresh recovery with current consistent implementation evidence and passing independent review; old head remains immutable and unapproved.",
+      "branch_lifecycle_limitation": "Native MIP cannot mark an exhausted review-ready head blocked; durable external rejection note 4ee5ffa08b21041b63bf3ef4e04f99e754c15930 plus this canonical successor record preserves the fail-closed decision without hand-editing lifecycle."
     }
   ],
   "prior_task": {

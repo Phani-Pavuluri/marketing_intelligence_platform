@@ -1,18 +1,18 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** authorized
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001`
+- **Task ID:** `MIP_ROUTINE_RUNBOOK_EVIDENCE_RECOVERY_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `ccbe3ce017764d6870233cc8b605b3eb559b27e7`
-- **Authorization provenance:** `d86f5c2a04d56470c66fe8a14ba5d2e374df38c8`
-- **Feature branch:** `docs/mip-delegated-routine-merge-operations-001`
+- **Base SHA:** `9ce0a27da572f399ac9213854b005498806b0e46`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-routine-runbook-evidence-recovery-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -33,7 +33,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## One primary outcome
 
-Task MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001, branch docs/mip-delegated-routine-merge-operations-001. Record the existing activated routine-review operating path in docs/execution/DELEGATED_ROUTINE_MERGE_OPERATIONS.md, so eligible future tasks use the already-reviewed receipt/preflight machinery without repeated owner prompts. This is Tier 1 operational documentation within the owner's explicit process-repair direction: “approved, also fix the process so we dont need these kind of approvals”. No new approval policy, code, service, activation or capability.
+Task MIP_ROUTINE_RUNBOOK_EVIDENCE_RECOVERY_001, branch docs/mip-routine-runbook-evidence-recovery-001. Record the existing activated routine-review operating path in docs/execution/DELEGATED_ROUTINE_MERGE_OPERATIONS.md, so eligible future tasks use the already-reviewed receipt/preflight machinery without repeated owner prompts. This is Tier 1 operational documentation within the owner's explicit process-repair direction: “approved, also fix the process so we dont need these kind of approvals”. No new approval policy, code, service, activation or capability.
 
 ## Scope and resolved behavior
 
@@ -48,3 +48,12 @@ One complete executable reviewer/operator sequence with actual CLI names, necess
 This task explicitly uses merge_approval_mode delegated_routine under the existing activated policy. delegated_merge_required_validation = [taskctl_check, git_diff_check]; full_suite_validation_required=false. Receipt-required exact-tree tests/logs remain mandatory for those categories; other categories are not_required with reasons. Independent observer review and strict approval receipt/preflight are required before any merge; the worker never approves or merges. All protected authority remains false.
 
 Publish through native taskctl with implementation SHA and actual human evidence, freeze/gate the tree, publish the durable validation-receipt head, verify remote equality, and stop ready_for_review. Compatibility/migration not_applicable; unresolved execution-blocking design questions none. Deferred: code/services, new policy, automatic authorizers, sibling adoption and product work. Workstream WS-MIP-DELEGATED-ROUTINE-MERGE-OPERATIONS-001, owner mip_execution_governance; affected/modified MIP only. Existing preflight closure, verified activation and report closure are satisfied dependencies, not new authority.
+
+
+## Recovery source, evidence and exact stop
+
+The previous runbook task is independently rejected at immutable 1a1536bdaf327a6d05dfcbb27f71d5e39c97806d (implementation de9999a5c192e268af939bfd7dff40555fce3d3a), with no correction cycles remaining. The actual observer found the human report's Current outcome still named rejected predecessor 57a2bda, despite canonical/receipt evidence naming de9999a. That is a publication-evidence mismatch, not a new product requirement. Preserve that branch without edits, merge/rebase/cherry-pick, deletion, or another correction. Native blocked transition is unavailable; canonical parked workstream and pushed rejection note record the external blocked review.
+
+As authorized starting material, reuse only docs/execution/DELEGATED_ROUTINE_MERGE_OPERATIONS.md from that exact source. Do not import its state, report, receipt or validation claims. Deliver the same complete runbook on the current main baseline with a fresh implementation and actual exact-tree validation. Write fresh human completion evidence that consistently names this task's actual current implementation SHA; old SHAs appear only under explicitly labelled rejected-source history, never Current outcome. Canonical state, human evidence and final publication receipt must agree. The previous commands/content already passed source review, but that does not replace this task's independent review or exact-tree gates.
+
+One primary mergeable outcome: the working operational handoff with trustworthy current implementation evidence. All owned paths, delegated mode, existing policy/activation, native gate, reviewer responsibilities and boundaries above remain unchanged. No producer-created independent review artifacts or receipt. Unresolved execution-blocking design questions: none.

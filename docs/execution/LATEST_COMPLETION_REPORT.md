@@ -1,18 +1,18 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `proposed`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_DELEGATED_ROUTINE_MERGE_OPERATIONS_001`
+- **Task ID:** `MIP_ROUTINE_RUNBOOK_EVIDENCE_RECOVERY_001`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `ccbe3ce017764d6870233cc8b605b3eb559b27e7`
-- **Authorization provenance:** `d86f5c2a04d56470c66fe8a14ba5d2e374df38c8`
-- **Feature branch:** `docs/mip-delegated-routine-merge-operations-001`
+- **Base SHA:** `9ce0a27da572f399ac9213854b005498806b0e46`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-routine-runbook-evidence-recovery-001`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,12 +25,12 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## Owner-directed process contract recorded
+## Current outcome
 
-Owner directive: “approved, also fix the process so we dont need these kind of approvals”. One bounded guidance outcome is recorded in the active contract; no implementation or self-approval performed. Existing protected authority/history remains unchanged.
+Fresh owner-authorized runbook evidence recovery recorded; implementation not started. Prior rejected source is preserved in the parked workstream and external Git note; it is not merged or approved.
