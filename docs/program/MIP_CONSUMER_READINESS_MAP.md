@@ -45,3 +45,67 @@ invariant ever touches those IDs.
 - MMM goldens: `MMM/tests/fixtures/mip_export/calibration_compatibility_v1/` (five states) at `a9db646`.
 - MMM response-surface status: authorized definition-publication task at `a9db646` (proposal only, not adopted).
 - Design meaning (referenced, not restated): `docs/roadmap/MIP_P2_CONSUMER_CONTRACT_AND_FIXTURE_JOURNEY_DESIGN_001.md`.
+
+## Evidence snapshots (read-only, October 15, 2026)
+
+Full pins: MIP `421dd57da7d1ef66a975762c8791a79b8784c06d`, GeoX
+`3c2f7ec3dfb196c3308e8fb8f67c68d8ff5dc69e`, MMM
+`a9db6469ed2654e19c20464c28717767990740ce`. Each blob below was read
+with `git rev-parse <commit>:<path>` / `git show` / `git ls-remote`
+against those pins; nothing was fetched, written, or modified.
+
+MIP consumer surface at `421dd57`:
+
+- `src/mip/contracts/geox_envelope_consumer.py`, blob
+  `b37a78809f505997c3e9f032aa27bc7e89d1d4e5`. `REQUIRED_FIELDS`
+  includes `provenance`, `release_gate_status`,
+  `downstream_eligibility`, `mip_consumption_status`,
+  `authorization_status` (absence → `REJECTED`); value-checked enums
+  are `artifact_kind` ∈ `KNOWN_KINDS`, `authorization_status` ∈
+  {`not_authorized`, `blocked`}, `mip_consumption_status` ∈
+  {`diagnostic_context_only`, `answerability_context_only`,
+  `blocked`}; outcomes capped at diagnostic/answerability context.
+  `certification_status` occurs nowhere in this file.
+- `src/mip/adapters/sibling_producer_specs.py`, blob
+  `37d4948c232f4bbcb9c2873f999f01b99e180bdf`. Required labels:
+  `static_export_file_only`, `not_live_engine_execution`,
+  `not_real_model_result`, `diagnostic_only`, `not_decision_ready`;
+  canonical sibling dirs `mmm/integrations/mip/exports/` and
+  `panel_exp/integrations/mip/exports/`.
+
+GeoX manifest at `3c2f7ec`, blob
+`367aeffe04b97e0baa0108cf0287c5b235f14618`: required-keys tuple
+present (fixture/evidence/readout/experiment IDs, versions,
+`certification_status`, KPI/estimand/channel/scope/window/method
+keys, status keys, producer version/commit, governed paths);
+provenance validated only as non-empty strings for `source_repo`,
+`source_commit`, `producer_package_version`, `created_by`;
+`certification_status` occurs 3 times as vocabulary with no
+certified-value definition in this file.
+
+MMM goldens at `a9db646` (all five share top-level keys and the same
+five lineage keys; lineage IDs are synthetic):
+
+| File | Blob SHA | `compatibility_state` | Lineage keys |
+|---|---|---|---|
+| `compatible.json` | `f6a760fac8e0be1f760376d99b72573505d9cd4f` | `compatible` | `configuration_hash`, `evaluation_id`, `evidence_artifact_id`, `model_artifact_id`, `panel_id` |
+| `compatible_with_warning.json` | `fa19b83f62a8fde9ca4c5f1185d6574a7c9270a5` | `compatible_with_warning` | same five |
+| `incompatible.json` | `34cf5d204da71a034deb065ba71e3c2f23e5ac65` | `incompatible` | same five |
+| `stale.json` | `92bb63606afc4c5346dc77334fedd47f2360ba48` | `stale` | same five |
+| `blocked.json` | `905e1addc148d46822b97ca4f09933db37a6b250` | `blocked` | same five |
+
+No golden contains `source_commit`, a GeoX repo reference, or a
+certification marker (verified by content search), so none pairs any
+state with certified GeoX provenance.
+
+Sibling export-label absence (both live pins), commands and outputs:
+
+- `ls mmm/integrations/mip/exports/` → `No such file or directory`;
+  `ls panel_exp/integrations/mip/exports/` → `No such file or
+  directory`.
+- Repo-wide search for `static_export_file_only` in both clones'
+  source and docs trees → no matches.
+
+These snapshots are point-in-time reads. Re-run the listed commands
+against the cited pins to confirm them independently; newer pins
+supersede these values without changing the row structure above.
