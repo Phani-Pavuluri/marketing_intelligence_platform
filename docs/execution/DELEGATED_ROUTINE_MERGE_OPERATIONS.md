@@ -86,3 +86,67 @@ Tests use isolated Git remotes, synthetic observer bundles with fixture
 run UUIDs, and fixture notes refs — never production sessions or the live
 execution state. The full existing observer and advisory suites are
 preserved.
+
+## End-to-end routine runbook
+
+This section is the executable handoff for eligible tasks. No owner
+prompt occurs anywhere inside the eligible path below.
+
+### Activation status (observed, not asserted)
+
+Delegation is activated by pushed Git-note evidence, not by the policy
+definition's historical status header (which is preserved unchanged so
+the pinned policy hash holds). Live verification on October 15, 2026:
+activation receipt `205960c9-6c11-4c73-9cb7-a0d5f1b153ad` on
+prerequisite `d69e0eb85425a471ccaef44caabfea35140bd701` under
+`refs/notes/mip-delegated-routine-receipts` resolving to
+`2e6c0a4eb3b2ef5ab2c6a0a6bbc95e20fdd2328b`; policy document SHA256
+`b1c223d6d63133127d8358fcd8bcde00660817a349056e5b59e2534ff50affb4`.
+Do not create another activation and do not edit the policy to flip its
+status. Preflight re-verifies activation, policy hash, and note
+presence on every use.
+
+### Reviewer sequence (Codex reviewer role, separate session only)
+
+1. Review the exact published remote head with the existing observer;
+   result, run events, and model output land in the observer-owned
+   report bundle. No other report location is accepted.
+2. Run every required validation category on the exact tree and store
+   the actual logs in that bundle. Executing tests is mandatory;
+   parsing a claimed summary never counts. Never synthesize observer
+   output or run UUIDs.
+3. Compose the strict v1 approval receipt: SHAs with ancestry, reviewer
+   UUID distinct from the `ses_` implementation session, report digest,
+   tier-locked categories with exact-tree references and evidence paths
+   inside the bundle, quoted canonical state, explicit routine
+   assertions, activation reference above, and unchanged authority.
+4. Verify actual session identity, activation currency, and semantic
+   scope (no contract-meaning, architecture, authority, or sibling
+   change) before writing anything.
+5. `attach` the receipt to the reviewed head (dedicated ref only),
+   push the notes ref explicitly, and verify the live remote value.
+   Refuse: any validation failure, any semantic doubt, any missing
+   evidence, any push ambiguity. A refusal stops the path with reasons;
+   it never becomes an approval.
+
+### Operator sequence (merge session)
+
+1. Run read-only `preflight` against the receipt; exit 0 is required.
+   Preflight fetches and writes nothing and repairs nothing.
+2. Follow the existing execution-standard merge flow unchanged:
+   re-verify ancestry and unchanged baselines, rerun the applicable
+   gate on the exact approved tree, `merge --ff-only`, re-validate,
+   push, observe branch cleanup, and record one closure commit with
+   delegation provenance and the receipt identity.
+3. Refuse and stop on any nonzero preflight, moved head or baseline,
+   missing receipt, or required-gate failure. The worker never approves
+   or merges on agent agreement, silence, or a passing test suite
+   alone. Unclear classification escalates to the owner.
+
+### Owner-reserved decisions (unchanged policy)
+
+Task authorization and goals, Tier 3 and non-routine work, scope and
+architecture, capabilities and authority, policy and activation
+changes, sibling matters, production actions, and substantive
+disagreements stay owner-decided. No prompt is removed for any of
+these; only the eligible routine path above runs without one.
