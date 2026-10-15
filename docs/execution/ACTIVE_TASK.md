@@ -9,7 +9,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
 - **Base SHA:** `c7215b9c2afe38bbe2191c03cd89a114ea82d9c4`
-- **Authorization provenance:** `c7215b9c2afe38bbe2191c03cd89a114ea82d9c4`
+- **Authorization provenance:** `af040d9941c32eecb878badd49728c300aec028e`
 - **Feature branch:** `feat/mip-opencode-advisory-delivery-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
