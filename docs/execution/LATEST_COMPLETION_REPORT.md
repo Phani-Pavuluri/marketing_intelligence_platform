@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `fix/mip-correction-publication-accounting-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `15fc59c1681b57c6d25b8672c0ddf03260e34ea5`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `cac458814161b7a7fbfd1a307f88deb2d5b5df8f`
+- **Rejected implementation commit:** `15fc59c1681b57c6d25b8672c0ddf03260e34ea5`
 - **Approval commit:** `null`
-- **Blockers:** `none`
+- **Blockers:** `MIP-ACCOUNTING-REPORT-AUTHORITY-001: completion report contradicts live delegation activation and task delegated-routine opt-in.`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -85,3 +85,10 @@ files via `taskctl` transitions only. Authority unchanged across
 all protected flags; delegation is not activated and this task
 is not eligible for its own delegated approval. Local-only
 `.codex/` and `docs/tasks/` artifacts were never staged.
+
+
+## Independent report-authority correction
+
+MIP-ACCOUNTING-REPORT-AUTHORITY-001 on cac458814161b7a7fbfd1a307f88deb2d5b5df8f: completion report says delegation is not activated and this task is not eligible for its own delegated approval. Both unqualified claims contradict existing activated policy, this task delegated_routine opt-in and publication receipt. Muse sustained the finding in msg_145c7fc35001E5uO8kEx4ZTgci. Accurately distinguish no activation BY THIS TASK from already-live activation, independent eligible reviewer approval from prohibited implementation self-approval. No new activation, policy, authority grant or code change requested. Preserve implementation and existing task meaning.
+
+Reviewer independently inspected exact source and regressions, verified ancestry/owned paths and ran full Docker on cac458814161b7a7fbfd1a307f88deb2d5b5df8f:2738 passed/5 skipped, Ruff/mypy clean. Actual log ~/.codex/quota-resume/milestones/MIP-accounting-cac4588-independent-docker.log. This is one genuine report-truthfulness correction under the remaining cycle, not missing reviewer evidence. The authorized task remains Tier2 with full_suite_validation_required true: reporting-only edit does NOT waive its declared full Docker/focused/native/handoff/Ruff/mypy/taskctl/JSON/diff/ownership/ancestry/authority gate on the corrected frozen tree. Keep human ACTIVE_TASK body unchanged. Use explicit --complete-correction, publish a newly validated receipt and verify exact remote head, then stop ready_for_review. No merge, policy expansion, product, analytical or sibling change.
