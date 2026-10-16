@@ -19,13 +19,15 @@ unchanged lint debt.
 ## What we accomplished
 
 - **MIP:** the diagnostic checklist recovery was merged and closed,
-  including the artifact-kind criterion and the MIP-REVIEW-006
-  diagnostic-vs-causal distinction, with provenance-tagged rows and
+  including the artifact-kind criterion and the diagnostic-vs-causal
+  quantity distinction, with provenance-tagged rows and
   mapped blob evidence.
 - **MIP:** this refresh is implemented and complete, pending
   independent review and merge.
-- **GeoX:** a native output provenance audit is authorized, with
-  branch work published. No controller, production, analytical,
+- **GeoX:** a native output provenance audit was independently
+  reviewed, returned for existing-field coverage and outcome
+  corrections, and republished as a corrected branch now awaiting
+  re-review. No controller, production, analytical,
   producer-certification, sibling, or authority change is
   authorized. Earlier provenance-definition and callback-repair
   states are superseded by this audit work.
@@ -36,9 +38,10 @@ unchanged lint debt.
   the inner runner continues after lint failure with reliability
   follow-up open. R12 remains unadopted; transformation-family
   comparison stays deferred in the roadmap, not implemented.
-- **Adopted choices now in effect:** status reports show every
-  simultaneous issue with the strongest blocker headlined; the two
-  recommended exact publications were owner-approved and delivered;
+- **Adopted choices now in effect:** MIP fixture evidence reports
+  show every simultaneous issue with the strongest blocker
+  headlined; the two recommended exact publications were
+  owner-approved and delivered;
   useful work continues until allowance exhaustion with durable
   handoff and automatic retry after verified reset (no purchase,
   no auto-consumed reset, no quota bypass); watcher and
@@ -50,8 +53,13 @@ unchanged lint debt.
 | Project | Current position | Next step |
 |---|---|---|
 | MIP | Operating path, runbook, readiness map, checklist recovery, and reporting line merged; delegation activated by pushed note; this refresh complete pending review. | Independent review and merge of this report branch through the delegated path; no activation step remains. |
-| GeoX | Provenance audit authorized; branch published; review not yet meaningful. | Independent review and merge decision under GeoX authority. |
+| GeoX | Provenance audit reviewed, corrected branch published, awaiting re-review. | Independent re-review and merge decision under GeoX authority. |
 | MMM | Endpoint repair merged and closed; lint debt disclosed. | Reliability follow-up and separately authorized fixture work under MMM authority. |
+
+A dedicated continuity audit is in review: full user-message
+inventory and source-verified correction-accounting and evidence
+incidents are being assessed. No holistic runtime repair is
+claimed; findings so far stay advisory and local.
 
 ## Planned and dependent work
 
@@ -87,13 +95,13 @@ they are technical supporting material, not required reading.
 - [MIP checklist recovery closure report](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/f4172eca3484612197e5180a8b567dc8134f269b/docs/execution/LATEST_COMPLETION_REPORT.md) — main `f4172eca3484612197e5180a8b567dc8134f269b`.
 - [MIP refresh task authorization](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/d47fd6d8d4b395f5ae7f69a43c41748f62c290fb/docs/execution/ACTIVE_TASK.md) — main `d47fd6d8d4b395f5ae7f69a43c41748f62c290fb`.
 - [GeoX completion report](https://github.com/Phani-Pavuluri/panel_exp/blob/099d70aeddf8c1be746c47d866bbc641f885cfd7/docs/execution/LATEST_COMPLETION_REPORT.md) — main `099d70aeddf8c1be746c47d866bbc641f885cfd7`.
-- [GeoX audit branch head](https://github.com/Phani-Pavuluri/panel_exp/tree/255a610682ae72b2a23b6f16c6c813df5406d1c7) — live remote audit branch observed October 16; unmerged branch work, not merged evidence.
+- [GeoX audit branch head](https://github.com/Phani-Pavuluri/panel_exp/tree/4c5e511e2d08e25d93fcbaa31bd7b2920dcaf7b8) — live remote corrected branch observed October 16 (reviewed, returned for corrections, republished for re-review); unmerged branch work, not merged evidence.
 - [MMM closure report](https://github.com/Phani-Pavuluri/MMM/blob/bc7cb8892e4832974912cb2582abadee80ab833a/docs/execution/LATEST_COMPLETION_REPORT.md) — main `bc7cb8892e4832974912cb2582abadee80ab833a`.
 - [MMM reviewed head](https://github.com/Phani-Pavuluri/MMM/blob/ab7e9b02f7442f2a0e0daa051efe49abb3c3b4a8/docs/execution/LATEST_COMPLETION_REPORT.md) — `ab7e9b02f7442f2a0e0daa051efe49abb3c3b4a8`, merged with branch cleanup observed.
 
 Earlier pins (`52e9995`, `6fb7ca8`, `0d311c0`, `d69e0eb`, `b91375f`,
 `35dc707`, `4581d5a`, `062d659`, `60602c3`, `b44f2d8`, `d081694`,
-`1d500ea`, `46a0203`, `82cd379`, `1905510`, `a9db646`, `48d1d9a`,
-`81664df`, `75e514b`, `9c6c6b2`, `6f60cd2`) are preserved in
+`1d500ea`, `255a610`, `46a0203`, `82cd379`, `1905510`, `a9db646`,
+`48d1d9a`, `81664df`, `75e514b`, `9c6c6b2`, `6f60cd2`) are preserved in
 history and superseded above. No roadmap, capability, authority, or
 historical coordination snapshot is changed by this report.
