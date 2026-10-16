@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-owner-progress-decisions-refresh-002`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `9019c4b8658c3d4d3b4ad5c93e7442a1cd1a95b4`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `31dd3bb0a7174e3c04d21e9e7c0c84b037f3ed13`
+- **Rejected implementation commit:** `9019c4b8658c3d4d3b4ad5c93e7442a1cd1a95b4`
 - **Approval commit:** `null`
-- **Blockers:** `none`
+- **Blockers:** `MIP-OWNER-REFRESH-002-TRUTHFULNESS-001: report misstates current lint debt, completed MMM review and pending exact-owner decision, and GeoX review stage.`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
