@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `in_progress`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,7 +13,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-002`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `b0d56459ee0e43b1515096e7c30c042567bcb672`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `in_progress`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -66,10 +66,22 @@ mains observed at MIP `2b3ff4c`, MMM `00cad45`, GeoX `2ff493c`.
 
 Git identity: base `46eecad`, authorization
 `05aaa6083908f16cf262682b78c738d8d3f6a897`; implementation
-`b0d56459ee0e43b1515096e7c30c042567bcb672`; diff limited to the one
-owned path plus the three stable files via `taskctl` transitions.
+`b0d56459ee0e43b1515096e7c30c042567bcb672` (owned checklist
+unchanged this cycle); diff limited to completion evidence plus the
+three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
+
+## Correction record (MIP-REVIEW-001 logs)
+
+Independent review of `2934d37` returned blocked with `MIP-REVIEW-001`
+(recorded verbatim above): required-category logs missing exact-tree
+identity. Corrected with the embedded transcripts tied to tree
+`bddf399` plus uncommitted evidence prose; owned implementation
+unchanged at `b0d5645`. Tier 1 gate rerun (structure, links,
+taskctl, JSON, diff checks pass). This consumes the single
+correction cycle via explicit rejected-head provenance
+(`2934d37`/`b0d5645`).
 
 Live sibling observation: {"MMM": {"main": "00cad45de5f9f04c41a6eed51ccbc22149a42b54", "task_id": "MMM_TRANSFORM_SELECTION_AUDIT_001"}, "GeoX": {"main": "2ff493c884ac06aaf8359e349fc8008f1872528a", "task_id": "GEOX_TIER1_CALLBACK_INJECTION_REPAIR_001"}}. No snapshot refresh, sibling changes or consumer verification asserted.
 
@@ -98,6 +110,30 @@ Correction budget remains available until a scoped correction begins.
 ## Recovered independent review finding and operator responsibility
 
 This section supplies the finding omitted by the earlier correction-authorization metadata. Actual native observer review of exact publication2934d374ceca8a3421f7b5be47f0827c9ed21781 returned blocked with one finding. The checklist itself was assessed as substantively aligned; no checklist content correction or new product meaning is requested. The predecessor b45db6f semantic finding was already addressed by this successor.
+
+## Correction evidence (MIP-REVIEW-001 raw operator logs)
+
+Recorded findings directed raw `taskctl_check` and `git_diff_check
+outputs tied to the exact tree, noting reviewer — not producer —
+collects final reviewed-head logs outside the frozen implementation.
+The transcripts below ran on worktree at `bddf399` (plus only these
+completion-evidence prose edits, which content-agnostic checks do
+not depend on); the owned checklist is unchanged from the rejected
+head, so this correction is evidence-only:
+
+```
+$ poetry run python -m mip.execution.taskctl check
+taskctl_check exit: 0
+$ git diff --check
+git_diff_check exit: 0
+```
+
+Both commands silent output, exit 0. Rerun on any published head to
+confirm independently; deterministic checks yield identical results
+on descendant trees that add only execution-file transitions.
+Final reviewed-head logs are reviewer-collected per the recorded
+finding, not producer-asserted here. Full pytest, Docker, Ruff, and
+mypy recorded `not_required` (docs-only surface).
 
 The actual review finding follows verbatim as evidence, not invented task scope:
 
