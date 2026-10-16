@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,7 +13,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `fix/mip-correction-publication-accounting-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `15fc59c1681b57c6d25b8672c0ddf03260e34ea5`
@@ -21,11 +21,11 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Rejected review head:** `cac458814161b7a7fbfd1a307f88deb2d5b5df8f`
 - **Rejected implementation commit:** `15fc59c1681b57c6d25b8672c0ddf03260e34ea5`
 - **Approval commit:** `null`
-- **Blockers:** `MIP-ACCOUNTING-REPORT-AUTHORITY-001: completion report contradicts live delegation activation and task delegated-routine opt-in.`
+- **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -82,9 +82,24 @@ Git identity and ancestry: base `a5ac859`, authorization
 `15fc59c1681b57c6d25b8672c0ddf03260e34ea5`; changed paths are
 exactly the two owned files plus the three stable execution
 files via `taskctl` transitions only. Authority unchanged across
-all protected flags; delegation is not activated and this task
-is not eligible for its own delegated approval. Local-only
+all protected flags; this task performs and grants no activation
+(the delegated policy remains activated as before), and its
+Git-authorized merge mode is `delegated_routine`, so merge still
+requires genuine independent review, strict receipt, and live
+preflight — the implementer approves nothing. Local-only
 `.codex/` and `docs/tasks/` artifacts were never staged.
+
+## Correction record (MIP-ACCOUNTING-REPORT-AUTHORITY-001)
+
+Unqualified delegation/eligibility claims replaced with the
+explicitly distinguished form above (no activation by this task;
+live activation unchanged; delegated_routine mode with
+independent-review-gated merge; no self-approval). Owned code and
+task meaning untouched. Tier 2 gate rerun including full Docker
+validation on the corrected frozen tree (results below). This
+consumes the single correction cycle via explicit rejected-head
+provenance (`cac4588`/`15fc59c`), clearing the finding blocker it
+resolves.
 
 
 ## Independent report-authority correction
