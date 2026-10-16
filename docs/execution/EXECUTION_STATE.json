@@ -42,18 +42,18 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_OWNER_REPORT_PUBLICATION_RECOVERY_004",
-  "status": "merged",
-  "review_decision": "merged",
-  "base_sha": "2dc87b10d106efa989576d93e423be74d02d6450",
-  "task_authoring_start_sha": "2dc87b10d106efa989576d93e423be74d02d6450",
-  "task_authoring_head_sha": "c4106002f42d646a2a460a858b4acbfd1a79a786",
-  "authorization_head_sha": "c4106002f42d646a2a460a858b4acbfd1a79a786",
-  "feature_branch": "docs/mip-owner-report-publication-recovery-004",
+  "task_id": "MIP_FIXTURE_JOURNEY_RESOLVER_001",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "5f7862b8bf5dc611afc7f18b360f852d5996d55b",
+  "task_authoring_start_sha": "5f7862b8bf5dc611afc7f18b360f852d5996d55b",
+  "task_authoring_head_sha": "5f7862b8bf5dc611afc7f18b360f852d5996d55b",
+  "authorization_head_sha": "5f7862b8bf5dc611afc7f18b360f852d5996d55b",
+  "feature_branch": "feat/mip-fixture-journey-resolver-001",
   "feature_branch_created": false,
-  "reviewed_head_sha": "fafffa3184ce698bc4df4b058e7357d457f37ca0",
+  "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
-  "implementation_commit_sha": "e5b6cc4af2f8bdc27ddf9bda2f83b1a14f3ffdf0",
+  "implementation_commit_sha": null,
   "rejected_implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
@@ -62,12 +62,13 @@
   "maximum_correction_cycles": 1,
   "correction_cycles_completed": 0,
   "correction_cycles_remaining": 1,
-  "risk_tier": "tier_1_operational_documentation",
+  "risk_tier": "tier_2_new_additive_package_behavior",
   "compatibility_migration_policy": "not_applicable",
-  "full_suite_validation_required": false,
-  "validation_scope": "plain_language_three_project_owner_progress_live_git_decisions_links_native_json_diff_exact_tree",
+  "full_suite_validation_required": true,
+  "validation_scope": "fixture_resolver_focused_tests_taskctl_json_diff_full_pytest_ruff_mypy_docker_make_validate_exact_tree_native_review",
   "owned_implementation_paths": [
-    "docs/program/OWNER_UPDATE.md"
+    "src/mip/evidence/fixture_journey.py",
+    "tests/evidence/test_fixture_journey.py"
   ],
   "task_authoring_boundary": [
     "docs/execution/EXECUTION_STATE.json",
@@ -81,23 +82,15 @@
   "modified_repositories": [
     "Phani-Pavuluri/marketing_intelligence_platform"
   ],
-  "dependencies": [
-    {
-      "dependency_id": "DEP-MIP-CORRECTED-OWNER-REPORT-SOURCE-004",
-      "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "state": "source_available_not_merge_dependency",
-      "source_head_sha": "83dfba7e0d6ad8ec95fd2b342931c21ec40f5a80",
-      "resolution_condition": "Carry the already-correct report source; rejected predecessor is not required or permitted to merge."
-    }
-  ],
+  "dependencies": [],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "delegated_routine",
-  "task_authoring_note": "Owner requested recurring Git-backed understandable reports and ordinary recommended corrections. Fresh report-only recovery carries the already-correct report and fixes contradictory completion-evidence currency. Preserves exhausted predecessor, all policy/authority/pins and existing activated routine review procedure.",
-  "local_feature_branch_cleanup": "observed_deleted",
-  "remote_feature_branch_cleanup": "observed_deleted",
-  "coordination_workstream_id": "WS-MIP-OWNER-REPORT-PUBLICATION-RECOVERY-004",
-  "coordination_capability_owner": "mip_program_owner_reporting",
+  "task_authoring_note": "Owner-adopted identity-first fixture evidence direction. Add one pure fixture-only resolver with exact producer-shaped normalized inputs, exhaustive twelve-row precedence, all-issue union and all-restriction claim intersection. No live consumer, sibling, bridge, certification, production, recommendation or analytical authority.",
+  "local_feature_branch_cleanup": null,
+  "remote_feature_branch_cleanup": null,
+  "coordination_workstream_id": "WS-MIP-FIXTURE-JOURNEY-RESOLVER-001",
+  "coordination_capability_owner": "mip_evidence_contract_owner",
   "parked_setup_workstreams": [
     {
       "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_003",
