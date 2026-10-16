@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -12,12 +12,12 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Authorization provenance:** `7f4c7f0e1b86bf53853afb3d02b153e52a5aaa53`
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
-- **Reviewed head:** `null`
+- **Reviewed head:** `ad0ec45ea06784290a6abcbccc2f51b37b6258ae`
 - **Rejected review head:** `fc215eab1c84354238f87e6dd9cd60de1c9a2e46`
 - **Rejected implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
 - **Approval commit:** `null`
@@ -25,9 +25,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `1`
 - **Correction cycles remaining:** `0`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
