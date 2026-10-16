@@ -309,7 +309,7 @@ def transition_state(
             _fail("E_TRANSITION_BLOCKER", "use --clear-blockers explicitly before review")
         candidate["blockers"] = []
         candidate["correction_execution_authorized"] = False
-        if current == "changes_requested":
+        if state.get("correction_execution_authorized"):
             if not complete_correction:
                 _fail(
                     "E_TRANSITION_CORRECTION_COUNTER",
