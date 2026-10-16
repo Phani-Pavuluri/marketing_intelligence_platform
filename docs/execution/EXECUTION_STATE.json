@@ -42,32 +42,33 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_001",
-  "status": "merged",
-  "review_decision": "merged",
-  "base_sha": "f4172eca3484612197e5180a8b567dc8134f269b",
-  "task_authoring_start_sha": "f4172eca3484612197e5180a8b567dc8134f269b",
-  "task_authoring_head_sha": "d5f27393e41082f7866fea1bba8d1ee412e7415b",
-  "authorization_head_sha": "d5f27393e41082f7866fea1bba8d1ee412e7415b",
-  "feature_branch": "docs/mip-owner-progress-decisions-refresh-001",
+  "task_id": "MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
+  "task_authoring_start_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
+  "task_authoring_head_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
+  "authorization_head_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
+  "feature_branch": "fix/mip-correction-publication-accounting-001",
   "feature_branch_created": false,
-  "reviewed_head_sha": "6ee288eb3a8a7c90e1445b9e52fe65cfd6a3ceb5",
-  "rejected_review_head_sha": "45f0cc686feddad55828e34efcfae3372617cb39",
-  "implementation_commit_sha": "dda3f1a8d3afa5cee4628d9c0e6d458fbf8ebfc1",
-  "rejected_implementation_commit_sha": "5a1402d8bde0b5927ba873721fb0cbc0c50a9883",
+  "reviewed_head_sha": null,
+  "rejected_review_head_sha": null,
+  "implementation_commit_sha": null,
+  "rejected_implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-10-16",
   "blockers": [],
   "maximum_correction_cycles": 1,
-  "correction_cycles_completed": 1,
-  "correction_cycles_remaining": 0,
-  "risk_tier": "tier_1_operational_documentation",
+  "correction_cycles_completed": 0,
+  "correction_cycles_remaining": 1,
+  "risk_tier": "tier_2_existing_state_machine_accounting_repair",
   "compatibility_migration_policy": "not_applicable",
-  "full_suite_validation_required": false,
-  "validation_scope": "plain_language_three_project_owner_progress_adopted_decisions_live_git_source_links_taskctl_json_diff_exact_tree",
+  "full_suite_validation_required": true,
+  "validation_scope": "existing_correction_route_counter_invariants_explicit_completion_initial_publication_exhaustion_focused_full_docker_ruff_mypy_native_json_diff_exact_tree",
   "owned_implementation_paths": [
-    "docs/program/OWNER_UPDATE.md"
+    "src/mip/execution/state.py",
+    "tests/execution/test_taskctl.py"
   ],
   "task_authoring_boundary": [
     "docs/execution/EXECUTION_STATE.json",
@@ -83,21 +84,21 @@
   ],
   "dependencies": [
     {
-      "dependency_id": "DEP-MIP-CHECKLIST-003-CLOSED",
+      "dependency_id": "DEP-MIP-OWNER-REPORT-CLOSED",
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
       "state": "satisfied",
-      "merged_checkpoint_sha": "f4172eca3484612197e5180a8b567dc8134f269b",
-      "resolution_condition": "Existing diagnostic checklist merged/closed; owner reporting may now publish without branch divergence."
+      "merged_checkpoint_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
+      "resolution_condition": "Owner-report publication is merged/closed before the distinct state-machine repair; no replacement of active report authority."
     }
   ],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "delegated_routine",
-  "task_authoring_note": "Owner explicitly requested continued work until allowance exhaustion, adopting recommended current approvals, automatic reset resumption, and high-level Git reports including those choices. This routine single-document refresh reports actual already-authorized outcomes and choices; no goal, roadmap, contract, product, capability, policy or sibling change. Task authority comes from owner reporting direction, not merge delegation.",
-  "local_feature_branch_cleanup": "observed_deleted",
-  "remote_feature_branch_cleanup": "observed_deleted",
-  "coordination_workstream_id": "WS-MIP-OWNER-PROGRESS-DECISIONS-001",
-  "coordination_capability_owner": "mip_program_owner_reporting",
+  "task_authoring_note": "Owner requested holistic continuity audit and bounded reliability fixes, continuous useful parallel development, Muse-owned implementation and independent review. Source-verified audit established an existing correction counter bypass through already allowed lifecycle detours. This task restores existing declared single-cycle accounting; no new transition, approval, SHA requirement, budget, capability, product or policy meaning is adopted.",
+  "local_feature_branch_cleanup": null,
+  "remote_feature_branch_cleanup": null,
+  "coordination_workstream_id": "WS-MIP-CORRECTION-ACCOUNTING-REPAIR-001",
+  "coordination_capability_owner": "mip_execution_reliability",
   "parked_setup_workstreams": [
     {
       "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_RECOVERY_002",
@@ -145,14 +146,18 @@
     }
   ],
   "prior_task": {
-    "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_ARTIFACT_KIND_RECOVERY_003",
+    "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_001",
     "status": "merged",
-    "reviewed_head_sha": "ad0ec45ea06784290a6abcbccc2f51b37b6258ae",
-    "closure_commit_sha": "f4172eca3484612197e5180a8b567dc8134f269b",
-    "resolution_condition": "Completed checklist stays closed; no repeated merge or reopened correction."
+    "reviewed_head_sha": "6ee288eb3a8a7c90e1445b9e52fe65cfd6a3ceb5",
+    "closure_commit_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
+    "resolution_condition": "Owner report closed; no report-content edits or reopened publication."
   },
   "delegated_merge_required_validation": [
+    "focused_tests",
+    "docker_make_validate",
     "taskctl_check",
-    "git_diff_check"
+    "git_diff_check",
+    "ruff",
+    "mypy"
   ]
 }
