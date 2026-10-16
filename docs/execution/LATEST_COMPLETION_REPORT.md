@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `in_progress`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,10 +13,10 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `63a23fc6f5ccd37fe24bb135e7f3f3abd67be519`
+- **Implementation commit:** `fc6501282a439126da86a1a724c5c2b75728c055`
 - **Reviewed head:** `null`
 - **Rejected review head:** `d3c302fff5551c8d737e9c99cfc88cda1a648c3b`
 - **Rejected implementation commit:** `63a23fc6f5ccd37fe24bb135e7f3f3abd67be519`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `in_progress`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -71,10 +71,29 @@ surface). No sibling fetch or write performed.
 
 Git identity: base `b0e7650`, authorization
 `5902e3d2433a9214a45c983f453eb64bd8fb5a60`; implementation
-`63a23fc6f5ccd37fe24bb135e7f3f3abd67be519`; diff limited to the one
-owned path plus the three stable files via `taskctl` transitions.
+`fc6501282a439126da86a1a724c5c2b75728c055` (supersedes `63a23fc`
+within this correction; prior lineage preserved in rejected
+provenance); diff limited to the one owned path plus the three
+stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
+
+## Correction cycle (MIP-DRC-001/002 mapped evidence)
+
+Independent review of `d3c302f` returned `changes_requested` with
+`MIP-DRC-001` (rules lacked exact paths/pins and replayable mapped
+evidence) and `MIP-DRC-002` (checklist cited `46eecad` against task
+base `b0e7650`). Corrected in
+`fc6501282a439126da86a1a724c5c2b75728c055`: normative pin
+standardized on the task base with documented ancestry (sources
+verified byte-identical through `46eecad`), plus a mapped-evidence
+section recording blob SHAs for all five cited MIP sources, the MMM
+proposal object presence at `e99768a8`, and the zero-R12 command
+transcript. Proposal-dependent checks that cannot replay from merged
+evidence are explicitly labeled unknown. Tier 1 gate rerun (pins
+resolve, no invented fields, taskctl/JSON/diff pass). This consumes
+the single correction cycle via explicit rejected-head provenance
+(`d3c302f`/`63a23fc`).
 
 ## Blocked: correction scope absent from Git (October 16, 2026)
 
