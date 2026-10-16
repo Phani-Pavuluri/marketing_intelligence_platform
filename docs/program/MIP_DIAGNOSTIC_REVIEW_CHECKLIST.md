@@ -16,7 +16,19 @@ verified present), GeoX `2ff493c`. Sibling live mains observed at
 MMM `4ccf8ca` and GeoX `2ff493c`; sibling contents below were read at
 exactly the cited pins.
 
-## 1. Quantity and units
+## Evidence provenance legend
+
+Each row is tagged. **[M] merged evidence:** replayable from the
+reviewed MIP tree or a cited merged sibling blob via the listed
+command. **[P] proposal-dependent:** verified read-only at pin
+`e99768a8` only; absent from the reviewed tree's manifest, so the
+reviewer re-verifies with `git cat-file -e
+e99768a8:docs/05_validation/mmm_response_surface_evidence_contract.md`
+(or the listed sibling command) and routes any mismatch to MMM.
+Nothing here is asserted from the proposal beyond its PROPOSED
+status, section topics, and read-verified semantics.
+
+## 1. Quantity and units [P]
 
 **Question:** does every curve quantity map to a MIP `CausalQuantity`
 with matching units, without silent conversion?
@@ -34,7 +46,7 @@ plus the proposal's transform-semantics note.
 `transformation_id` scheme presented as canonical (none exists in
 merged code) → record for MMM; do not map units silently.
 
-## 2. Scope and range
+## 2. Scope and range [M+P]
 
 **Question:** are supported scenarios, constraints, and range
 references present and record-scoped?
@@ -42,50 +54,56 @@ references present and record-scoped?
 (`supported_scenarios`, `constraints_supported`); proposal §1
 (record-level range labels with validators) and §5 (explicitly
 proposed per-point fields, length-matched, derived only against
-comparable bounds).
+comparable bounds; verified absent from merged MMM code, so
+proposed-only status is confirmed, not assumed).
 **Evidence required:** referenced bounds with matching scale;
 per-point arrays length-matched to the grid where claimed.
 **Mismatch/unknown:** per-grid-point evaluation asserted from
 record-level labels, or missing bounds → record for MMM.
 
-## 3. Uncertainty availability
+## 3. Uncertainty availability [M]
 
 **Question:** is availability resolved from referenced artifacts
 rather than assumed?
-**Existing rule:** merged MMM pattern carried in the proposal
-(`uncertainty_available: bool` requires an artifact reference;
-`MMMSimulationUncertaintyStatus` with `UNAVAILABLE` default) — not
+**Existing rule (merged MMM code at `4ccf8ca`):**
+`mmm/contracts/supported_range.py` (`uncertainty_available: bool`
+with invariant: available requires `uncertainty_artifact_reference`;
+unavailable cannot claim artifact or semantics) and
+`MMMSimulationUncertaintyStatus` defaulting `UNAVAILABLE` — not
 axiomatically unavailable and not axiomatically available.
 **Evidence required:** artifact reference for every `AVAILABLE` claim;
 absence stays unavailable.
 **Mismatch/unknown:** availability without artifact, or assumed
 semantics → record for MMM.
 
-## 4. Terminal failures and restrictions
+## 4. Terminal failures and restrictions [M+P]
 
 **Question:** do terminal status, failure codes, and restrictions
 propagate without conversion to success?
-**Existing rule:** proposal §4 (separate typed failures;
-`UNSUPPORTED_EXTRAPOLATION` requires a `BLOCKED`/`RESTRICTED` claim
-effect); MIP consumer rule that failure evidence never converts into
-success (envelope `BLOCKED` handling).
+**Existing rule:** merged `mmm/contracts/mip_failure.py`
+(`MMMFailureCode` vocabulary) plus proposal §4 (separate typed
+failures; `UNSUPPORTED_EXTRAPOLATION` requires a
+`BLOCKED`/`RESTRICTED` claim effect — proposal-dependent); MIP
+consumer rule that failure evidence never converts into success
+(envelope `BLOCKED` handling).
 **Evidence required:** failure/stage/disposition codes and restriction
 effects preserved verbatim.
 **Mismatch/unknown:** extrapolation presented as numeric position, or
 blocked/restricted converted → record for MMM.
 
-## 5. Provenance
+## 5. Provenance [M]
 
 **Question:** are artifact, model, run, and version identities
 non-empty and traceable?
 **Existing rule:** `decision_surface.py` `non_empty_ids`
 (`surface_id`, `model_id`, `artifact_fingerprint`); envelope
-`provenance` presence rule; proposal lineage fields.
+`provenance` presence rule; proposal lineage fields (shape only,
+values producer-owned).
 **Evidence required:** non-empty identity/version/lineage values;
 missing values fail closed, never defaulted.
 **Mismatch/unknown:** empty or defaulted identity → record for MMM.
 
-## 6. Diagnostic certification boundaries
+## 6. Diagnostic certification boundaries [M]
 
 **Question:** does the proposal stay diagnostic-only with no
 certified claims?
@@ -101,7 +119,7 @@ language, no adoption claim.
 record for MMM; a positive checklist result is documentation review
 only, never certification or adoption.
 
-## 7. Independence from calibration-bridge prerequisites
+## 7. Independence from calibration-bridge prerequisites [M]
 
 **Question:** is R12 kept out of bridge readiness?
 **Existing rule:** zero R12 references in MIP adapters, envelope
