@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** merged
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -12,12 +12,12 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Authorization provenance:** `e12b5ec391b3ea76a4d6acd979bb241606dabcc4`
 - **Feature branch:** `fix/mip-correction-accounting-acceptance-recovery-002`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `787b07d1490f32b9e766f4ac4ded88d0c404f715`
-- **Reviewed head:** `null`
+- **Reviewed head:** `61739bc05919deb7adaa3293ed2267650828c61c`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
@@ -25,9 +25,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
-- **Local feature-branch cleanup:** `null`
-- **Remote feature-branch cleanup:** `null`
+- **Review decision:** `merged`
+- **Local feature-branch cleanup:** `observed_deleted`
+- **Remote feature-branch cleanup:** `observed_deleted`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
