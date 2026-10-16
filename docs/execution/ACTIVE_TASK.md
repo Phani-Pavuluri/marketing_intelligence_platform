@@ -1,18 +1,18 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** authorized
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_DIAGNOSTIC_REVIEW_CHECKLIST_RECOVERY_002`
+- **Task ID:** `MIP_DIAGNOSTIC_REVIEW_CHECKLIST_ARTIFACT_KIND_RECOVERY_003`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `46eecad9b239ba95672b5f002cb1d80f1c30454f`
-- **Authorization provenance:** `05aaa6083908f16cf262682b78c738d8d3f6a897`
-- **Feature branch:** `docs/mip-diagnostic-review-checklist-002`
+- **Base SHA:** `2b3ff4c644cff00dede1559bb5b847d04ef53bf4`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -33,7 +33,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## One independently reviewable outcome and owner direction
 
-Publish docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md as an accurate, source-backed review aid for the PROPOSED MMM diagnostic-curve definition against existing MIP consumer invariants. This is the same ordinary documentation outcome already requested under continuous review/coordination, carried into a bounded successor because the predecessor exhausted its correction cycle. Muse owns implementation approach and wording; Codex independently reviews. No new capability, analytical truth, interface adoption, parser, certification or decision policy is authorized.
+Publish docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md as an accurate, source-backed review aid for the PROPOSED MMM diagnostic-curve definition against existing MIP consumer invariants. This is a bounded Tier 1 successor for the artifact-kind omission found on predecessor 14ff63f, which remains immutable and unapproved. Muse owns implementation approach and wording; Codex independently reviews. No new capability, analytical truth, interface adoption, parser, certification or decision policy is authorized.
 
 ## Observable behavior and acceptance
 
@@ -41,11 +41,13 @@ Cover all seven predecessor review families: quantity/units, scope/range, uncert
 
 Retain the original non-adoption boundaries: curves are diagnostic, cannot become certified decision evidence or replace full-panel delta-mu. Existing deterministic-report restrictions stand. Uncertainty requires evidence, failed evidence cannot become success, and R12 is not a prerequisite for the calibration bridge. A positive checklist is only documentation review.
 
-Use the predecessor exact head b45db6f923980620f6cfa93e30555a96ae6dda8b as read-only reference, not a merge/cherry-pick/rebase instruction. Its native review found substantive MIP-REVIEW-006 and explicitly resolved earlier operator-evidence findings004/005. Earlier rejected historical heads remain unapproved. Source facts must be checked independently; preserve useful content without reviving incorrect claims.
+Add one explicit artifact-kind criterion: proposed evidence must declare its artifact kind, be checked against the existing consumer `KNOWN_KINDS` vocabulary, and remain distinct from simulation, contribution/ROI, recommendation, TrustReport and certified decision artifacts. Unknown or mismatched kinds remain diagnostic review findings for the owning producer; the checklist does not adopt or transform artifacts.
+
+Use predecessor exact head 14ff63f210fc2699bdaf460c83c569581c194428 as read-only reference, not a merge/cherry-pick/rebase instruction. Its native review resolved the prior operator-evidence gap but found the artifact-kind omission; its correction budget is exhausted. Earlier rejected historical heads remain unapproved. Source facts must be checked independently; preserve useful content without reviving incorrect claims.
 
 ## Owned paths, dependencies and cross-repository impact
 
-Implementation owns only the checklist above plus stable3 execution files. No code, tests, schema, parser, fixture, roadmap, policy, ledger, historical snapshot, bridge or sibling writes. Historical MIP consumer source base b0e7650718556316fa585ac9d9b953cdf9831efa remains a verified evidence pin; current task baseline is this synchronized authoring lineage. MMM PROPOSED contract at e99768a8e43e020fe65a97e206a9e93101b364aa remains unadopted. GeoX callback closure2ff493c884ac06aaf8359e349fc8008f1872528a does not certify producer output. Read live source overlays before publication, preserve historical pins verbatim, and report observation date, actual sibling mains and consumer verification limitations. MIP-only modification; workstream WS-MIP-DIAGNOSTIC-REVIEW-CHECKLIST-002, owner mip_consumer_acceptance_documentation. Existing consumer-source dependency is satisfied; parked certified-pair bridge blocker remains unresolved and resume unauthorized.
+Implementation owns only the checklist above plus stable3 execution files. No code, tests, schema, parser, fixture, roadmap, policy, ledger, historical snapshot, bridge or sibling writes. Historical MIP consumer source base b0e7650718556316fa585ac9d9b953cdf9831efa remains a verified evidence pin; current task baseline is this synchronized authoring lineage. MMM PROPOSED contract at e99768a8e43e020fe65a97e206a9e93101b364aa remains unadopted. GeoX callback closure2ff493c884ac06aaf8359e349fc8008f1872528a does not certify producer output. Read live source overlays before publication, preserve historical pins verbatim, and report observation date, actual sibling mains and consumer verification limitations. MIP-only modification; workstream WS-MIP-DIAGNOSTIC-REVIEW-CHECKLIST-ARTIFACT-KIND-003, owner mip_consumer_acceptance_documentation. Existing consumer-source dependency is satisfied; parked certified-pair bridge blocker remains unresolved and resume unauthorized.
 
 ## Proportionate gate, evidence and publication
 
