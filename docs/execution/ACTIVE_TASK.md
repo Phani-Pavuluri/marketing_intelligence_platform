@@ -1,18 +1,18 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** authorized
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001`
+- **Task ID:** `MIP_CORRECTION_ACCOUNTING_ACCEPTANCE_RECOVERY_002`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `a5ac85980131e29a947c6040f96b76a9c0112056`
-- **Authorization provenance:** `c4976847bf89581d7fefd7022e15b0dd1957d3a5`
-- **Feature branch:** `fix/mip-correction-publication-accounting-001`
+- **Base SHA:** `71fbc3548744e44907f73faadc8f32524cafabfd`
+- **Authorization provenance:** `71fbc3548744e44907f73faadc8f32524cafabfd`
+- **Feature branch:** `fix/mip-correction-accounting-acceptance-recovery-002`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,11 +25,22 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
+
+## Recovery outcome and prior disposition
+
+MIP_CORRECTION_ACCOUNTING_ACCEPTANCE_RECOVERY_002 delivers the existing authorized accounting repair with its complete named acceptance evidence. The predecessor45d1271824f3b4061f750e5a734cb7bd707714d1 passed full independent Docker/native gates but failed genuine native exact-head review: no positive test proves initial non-correction blocked/resumed publication stays uncounted. Its one correction was already consumed fixing report authority prose, so that branch/counters remain immutable and unapproved. No owner decision or policy waiver is needed for this existing-scope recovery. Muse owns implementation; Codex independently reviews.
+
+Carry src/mip/execution/state.py byte-for-byte from45d1271 (reviewed one-condition fix); no additional runtime edit is authorized. Carry every existing assertion/test from that publication unchanged, then add positive acceptance evidence for initial non-correction blocked/resumed publication: blockers cleared through the existing path, successful ready publication without correction completion, counters completed0/remaining1 and correction_execution_authorized false throughout. Also positively prove any already-supported direct initially-blocked-to-ready route with explicit clear-blockers stays uncounted, preserving missing-clear rejection. Existing corrected-route, direct initial, round-trip, exhaustion/input-preservation and protected-authority tests remain green. These are acceptance requirements, not prescribed implementation code. Both owned files remain declared so the reviewed repair can be carried from the unmerged source onto current main; it is not a test-only successor that waits for a rejected head to merge.
+
+This new task owns the same state.py/test_taskctl.py plus stable3, with the inherited Tier2 full gate below. Verify source-byte identity to45d1271 and complete original-plus-new acceptance matrix before publication. No contract/graph/limits/error codes or approval meaning changes, no retroactive repair/reset, no predecessor merge/rebase/force-push. Owner report prerequisite is merged a5ac859; old45d1271 is source evidence only. Correct Current outcome and existing-live-delegation distinctions before first publication. One new task correction budget does not reset the exhausted predecessor. Unresolved execution-blocking design questions: none.
+
+## Preserved authorized repair behavior and validation contract
+
 
 ## One primary mergeable outcome and authority
 
@@ -49,6 +60,6 @@ Owned implementation: src/mip/execution/state.py and tests/execution/test_taskct
 
 Tier2 existing package/state-machine behavior repair, full_suite_validation_required true. Mandatory for execution, exact-head independent review and pre/post-fast-forward: meaningful focused tests/execution/test_taskctl.py regressions, full native controller and tests/governance/test_repo_native_execution_handoff.py, python -m mip.execution.taskctl check, JSON parsing, git diff --check, exact ownership/authorization ancestry and unchanged protected-authority evidence, Ruff/mypy according to the repository validation setup, and complete Docker-backed make validate. No host-only substitution, skipped mandatory category, newly excluded tests or duplicate Docker containers. Record actual commands, results, tested commit and actual Git tree; full validation failures are blockers. Native authoring must pass the full controller/handoff suite before publication. Use real independent reviewer evidence, strict receipt, existing activated delegated policy and native live preflight only if eligible; otherwise preserve existing owner-reserved decision boundaries. No task grants its own merge authority.
 
-MIP-only WS-MIP-CORRECTION-ACCOUNTING-REPAIR-001, owner mip_execution_reliability; prerequisite owner report is merged/closed at the task base. No sibling files or dependency resolutions. Deferred successors: evidence-binding/substance-admission remedies, lock instrumentation, future fixture-report resolver, certified-pair bridge, R12 and analytical/production work. These do not block this precisely defined accounting repair.
+MIP-only WS-MIP-CORRECTION-ACCOUNTING-ACCEPTANCE-002, owner mip_execution_reliability; owner report is merged/closed at a5ac85980131e29a947c6040f96b76a9c0112056, an ancestor of the task base. No sibling files or dependency resolutions. Deferred successors: evidence-binding/substance-admission remedies, lock instrumentation, future fixture-report resolver, certified-pair bridge, R12 and analytical/production work. These do not block this precisely defined accounting repair.
 
 Use native taskctl lifecycle and generated views; authorized human task meaning remains immutable. Record actual Current outcome before publication. Freeze the task-owned tree, run applicable gate on that exact tree, then final receipt names implementation parent, commands/results, raw evidence source, worktree state and authority impact. Any subsequent task-owned edit requires a new validated receipt. Push and verify exact remote feature head; stop ready_for_review or Git-durable blocked on a safe authorized branch. One correction cycle. No merge, PR, rebase, force-push, policy activation or successor execution by implementation. Unresolved execution-blocking design questions: none.

@@ -1,18 +1,18 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `proposed`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001`
+- **Task ID:** `MIP_CORRECTION_ACCOUNTING_ACCEPTANCE_RECOVERY_002`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `a5ac85980131e29a947c6040f96b76a9c0112056`
-- **Authorization provenance:** `c4976847bf89581d7fefd7022e15b0dd1957d3a5`
-- **Feature branch:** `fix/mip-correction-publication-accounting-001`
+- **Base SHA:** `71fbc3548744e44907f73faadc8f32524cafabfd`
+- **Authorization provenance:** `71fbc3548744e44907f73faadc8f32524cafabfd`
+- **Feature branch:** `fix/mip-correction-accounting-acceptance-recovery-002`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -33,4 +33,4 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## Current outcome
 
-Initial authoring record only: one existing correction-accounting bypass repair. Owner report is merged/closed before this task; no code, test pass or runtime remedy is asserted yet. Preserve existing lifecycle graph, limits, approval semantics and all protected authority. Actual outcome and exact-tree gate evidence replace this section before publication.
+Initial authoring only: fresh recovery of the existing reviewed accounting repair plus missing positive initial blocked/resumed acceptance. No implementation or gate result asserted yet. Predecessor45d1271 remains unmerged, unapproved and immutable with exhausted correction budget. All original behavior, protected authority and full validation requirements are preserved.

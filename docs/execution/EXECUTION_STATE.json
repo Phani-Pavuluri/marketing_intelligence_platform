@@ -7,7 +7,7 @@
   "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_empty_feature_branch_head",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_execution_authorized": true,
+  "task_execution_authorized": false,
   "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
@@ -42,14 +42,14 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001",
-  "status": "authorized",
-  "review_decision": "authorized",
-  "base_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
-  "task_authoring_start_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
-  "task_authoring_head_sha": "c4976847bf89581d7fefd7022e15b0dd1957d3a5",
-  "authorization_head_sha": "c4976847bf89581d7fefd7022e15b0dd1957d3a5",
-  "feature_branch": "fix/mip-correction-publication-accounting-001",
+  "task_id": "MIP_CORRECTION_ACCOUNTING_ACCEPTANCE_RECOVERY_002",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "71fbc3548744e44907f73faadc8f32524cafabfd",
+  "task_authoring_start_sha": "71fbc3548744e44907f73faadc8f32524cafabfd",
+  "task_authoring_head_sha": "71fbc3548744e44907f73faadc8f32524cafabfd",
+  "authorization_head_sha": "71fbc3548744e44907f73faadc8f32524cafabfd",
+  "feature_branch": "fix/mip-correction-accounting-acceptance-recovery-002",
   "feature_branch_created": false,
   "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
@@ -88,18 +88,36 @@
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
       "state": "satisfied",
       "merged_checkpoint_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
-      "resolution_condition": "Owner-report publication is merged/closed before the distinct state-machine repair; no replacement of active report authority."
+      "resolution_condition": "Owner report is closed; no report work overlaps."
+    },
+    {
+      "dependency_id": "DEP-MIP-ACCOUNTING-REVIEWED-SOURCE-002",
+      "repository": "Phani-Pavuluri/marketing_intelligence_platform",
+      "state": "source_available_not_merge_dependency",
+      "source_head_sha": "45d1271824f3b4061f750e5a734cb7bd707714d1",
+      "resolution_condition": "Preserve old publication unchanged and reuse its reviewed repair as source. This new task delivers the whole still-unmerged outcome with complete acceptance; no circular prerequisite to merge a rejected head."
     }
   ],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "delegated_routine",
-  "task_authoring_note": "Owner requested holistic continuity audit and bounded reliability fixes, continuous useful parallel development, Muse-owned implementation and independent review. Source-verified audit established an existing correction counter bypass through already allowed lifecycle detours. This task restores existing declared single-cycle accounting; no new transition, approval, SHA requirement, budget, capability, product or policy meaning is adopted.",
+  "task_authoring_note": "Owner requested continued reliability work and recommended ordinary decisions. Native exact-head review of45d1271 found one named acceptance test missing after the prior correction was spent. Fresh recovery delivers the same authorized repair with complete positive initial blocked/resumed proof; preserves rejected branch and counters, no new code meaning, policy, limits, authority or architecture.",
   "local_feature_branch_cleanup": null,
   "remote_feature_branch_cleanup": null,
-  "coordination_workstream_id": "WS-MIP-CORRECTION-ACCOUNTING-REPAIR-001",
+  "coordination_workstream_id": "WS-MIP-CORRECTION-ACCOUNTING-ACCEPTANCE-002",
   "coordination_capability_owner": "mip_execution_reliability",
   "parked_setup_workstreams": [
+    {
+      "task_id": "MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001",
+      "feature_branch": "fix/mip-correction-publication-accounting-001",
+      "reviewed_head_sha": "45d1271824f3b4061f750e5a734cb7bd707714d1",
+      "implementation_commit_sha": "15fc59c1681b57c6d25b8672c0ddf03260e34ea5",
+      "review_outcome": "changes_requested",
+      "merge_eligible": false,
+      "blocker_id": "MIP-REVIEW-001-BLOCKED-INITIAL-ROUTE-COVERAGE",
+      "resolution_condition": "Deliver the preserved reviewed repair plus missing named acceptance regression through this fresh recovery; old head and exhausted counters stay immutable and unapproved.",
+      "branch_lifecycle_limitation": "Published ready_for_review has exhausted its single correction; native transitions cannot reopen it. Preserve actual prior publication/rejection rather than reset counters or claim merge."
+    },
     {
       "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_RECOVERY_002",
       "feature_branch": "docs/mip-diagnostic-review-checklist-002",
@@ -146,11 +164,11 @@
     }
   ],
   "prior_task": {
-    "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_001",
-    "status": "merged",
-    "reviewed_head_sha": "6ee288eb3a8a7c90e1445b9e52fe65cfd6a3ceb5",
-    "closure_commit_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
-    "resolution_condition": "Owner report closed; no report-content edits or reopened publication."
+    "task_id": "MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001",
+    "status": "ready_for_review",
+    "reviewed_head_sha": "45d1271824f3b4061f750e5a734cb7bd707714d1",
+    "review_outcome": "changes_requested",
+    "merge_eligible": false
   },
   "delegated_merge_required_validation": [
     "focused_tests",
