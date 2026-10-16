@@ -1,60 +1,58 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** merged
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_OWNER_PROGRESS_DECISIONS_REFRESH_002`
+- **Task ID:** `MIP_OWNER_PROGRESS_DECISIONS_REFRESH_003`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `da55b40ae8025f7f28aa6e50c38ce98d246316fa`
-- **Authorization provenance:** `5ddaa0ac6429300250c69383ab2064c7ed3ea6bd`
-- **Feature branch:** `docs/mip-owner-progress-decisions-refresh-002`
+- **Base SHA:** `03874f8cca217bdde68a77692b03d70136e9b900`
+- **Authorization provenance:** `03874f8cca217bdde68a77692b03d70136e9b900`
+- **Feature branch:** `docs/mip-owner-progress-decisions-refresh-003`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `9a0c2cd9bf9f697ab5bd41e953413ed29837a2de`
-- **Reviewed head:** `553ab148a25f238858fa06d45c56dbf7a211457a`
-- **Rejected review head:** `31dd3bb0a7174e3c04d21e9e7c0c84b037f3ed13`
-- **Rejected implementation commit:** `9019c4b8658c3d4d3b4ad5c93e7442a1cd1a95b4`
+- **Implementation commit:** `null`
+- **Reviewed head:** `null`
+- **Rejected review head:** `null`
+- **Rejected implementation commit:** `null`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `1`
-- **Correction cycles remaining:** `0`
-- **Review decision:** `merged`
-- **Local feature-branch cleanup:** `observed_deleted`
-- **Remote feature-branch cleanup:** `observed_deleted`
+- **Correction cycles completed:** `0`
+- **Correction cycles remaining:** `1`
+- **Review decision:** `proposed`
+- **Local feature-branch cleanup:** `null`
+- **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## Primary outcome and existing owner direction
+## One owner-requested outcome
 
-Refresh only docs/program/OWNER_UPDATE.md with one dated plain-language report of completed, ongoing, planned and owner-gated work across MIP, GeoX and MMM. The owner already requested recurring Git-backed high-level reports including adopted choices and limitations. Muse owns report implementation and writing choices; Codex independently verifies source evidence, readability and exact publication. This is a separate routine reporting task after the accounting repair closes, not a new product or policy outcome.
+Publish one accurate, dated plain-language progress and decisions update at docs/program/OWNER_UPDATE.md across MIP, GeoX and MMM. Existing owner direction requests Git-backed high-level reports and continued independent streams; this is an ordinary documentation successor, not new product/governance/roadmap authority. Muse owns report writing and approach; Codex independently reviews it. Previous report refresh002 is merged/closed at03874f8cca217bdde68a77692b03d70136e9b900; preserve that history and exhausted correction accounting.
 
-## Observable report content and evidence
+## Observable behavior and resolved meaning
 
-Recheck live remote mains, each current declared feature branch and corresponding canonical execution/completion evidence before publication. Record verification time and exact source pins in a supporting evidence section; keep hashes and task IDs out of the plain-language narrative. Distinguish independently reviewed/merged outcomes, worker claims, authorized work in progress, and future proposals. Explain the goal impact of the accounting repair, zero-lint cleanup, fail-closed validation runner and guarded opt-in validation path in familiar language. Include actual issues and concrete owner decisions with recommendations and impact, without asking again for settled direction or treating approval as a completed merge.
+Reverify each live remote main, declared feature branch and canonical completion/execution evidence immediately before publication. Distinguish merged outcomes, independently reviewed publications, rejected candidates, corrections executing, claims and future proposals. Provide actual verification time (UTC) and pinned source links in a supporting Evidence section; narrative should explain goal impact without hashes/task IDs or internal workflow jargon.
 
-The accounting acceptance recovery is merged/closed at da55b40ae8025f7f28aa6e50c38ce98d246316fa from exact reviewed 61739bc05919deb7adaa3293ed2267650828c61c, after genuine native pass, strict delegated receipt, live preflight, pre/post full Docker gates and observed cleanup. Its source repair plus both positive initial-blocked acceptance routes are delivered; earlier rejected 45d1271 remains frozen. The report-count concern was resolved by command-scope evidence (36 source tests plus one governance test equals 37 combined), without a producer correction or changed publication. The broader continuity program remains incomplete; one reliability fix is not a holistic runtime repair.
+MIP correction accounting is delivered atda55b40ae8025f7f28aa6e50c38ce98d246316fa. Explicitly say the broader continuity program remains incomplete: this repair and loaded monitoring/reset processes do not prove all coordination/review/resumption gaps resolved. Preserve owner choices: all issues with strongest blocker applies fixture evidence reporting only; existing eligible routine delegation remains activated; useful work continues with quota-aware durable handoff and verified reset-aware retry, without claiming a new holistic runtime fix or automatic certification.
 
-GeoX's provenance audit is merged/closed at a360c4cfcfa48eeaaf215beec6f44c47a462d9b5. The owner-approved separate validation entrypoint is authorized by main 3d43ea4c2017e6673a1262a35d522512bd8c6ad4; determine its actual current published/execution/review state from live Git. Existing ordinary-run behavior, evaluated default-deny semantics, statistical truth, producer certification, final designation and consumer verification remain separate boundaries. Do not imply export/certification or sibling readiness from this opt-in path.
+GeoX's validation entrypoint preserves ordinary-run defaults and existing guardrail semantics. Initial published76a3979ad761b7d5a623f039d06d9f0f4a42b4fb was rejected for bypassing the enabled-validation scenario in tests and missing full-suite evidence. Correction authority33c3c6e5a6ef13de562af8a6e0704e8e54f3b56c was executing at authoring; verify latest exact branch state rather than labeling the old candidate a corrected publication. Report actual complete gate results only when complete; partial test progress is not a pass. Statistical baseline failures, certification/finality, export and consumer verification remain separate unresolved boundaries. Direction B was already approved; do not ask it again.
 
-MMM lint cleanup is merged/closed at b84105f820eb96ea8a3187f56a9b2c1bf1e7f941; earlier disclosed lint debt is resolved. The runner repair publication 7f9b48c5cdd4fe3a3b695fabb895dfeaf7fcf2af passed independent native/Docker/docs/metadata and real negative-control review. At authoring it remains unmerged pending the exact-head owner decision because executable scripts are outside the adopted automatic docs/tests/receipt policy. Verify any later actual decision or merge before stating current status; no automatic policy extension follows from its Tier1 label. R12 adoption, modeling-family expansion and analytical/production work remain deferred; no unnecessary new R12 decision is created by reporting.
+MMM zero-lint cleanup is delivered atb84105f820eb96ea8a3187f56a9b2c1bf1e7f941. Runner7f9b48c5cdd4fe3a3b695fabb895dfeaf7fcf2af passed independent review and actual failure-injection checks. The owner has now explicitly approved that exact publication by replying "approve and continue your work across all arms" to its exact-head question. Required final pre/post gates and merge/cleanup/closure are being handled separately; verify actual later merge before claiming delivered. Do not ask for that same approval again or imply the already completed independent review remains pending. MMM script maintenance remains outside its narrower automatic docs/tests/receipts policy; this exact approval does not expand policy. R12/model-family expansion remain deferred. Any proposed next milestone is advisory until source-authorized, not implementation completed.
 
-Accurately include adopted choices: MIP fixture-evidence reports show all simultaneous issues and headline the strongest blocker; this is not a new universal gate. The separate GeoX validation path preserves ordinary defaults. Routine eligible MIP work uses the existing activated delegated procedure; MMM's distinct committed policy boundary remains intact. Continued useful work and reset-aware resumption are owner-directed; do not claim a new runtime fix, service installation, continuous certification or automatic approval. Prior exact owner decisions stand and need no repeated approval.
+Explain completed, ongoing, planned/dependent work, actual issues, and real owner decisions with recommendation and impact. Do not invent a percentage or dependency readiness. Updated positions following earlier dated observations are normal refresh content, not retroactive rewriting. Missing local objects require history hydration or verified source exports, not a claim the closure never happened. Broader integration and producer/consumer readiness remain unfinished; report supports understanding and grants no capabilities.
 
-## Ownership, cross-repository impact and limitations
+## Owned scope, prerequisites and cross-repository impact
 
-Owned implementation is docs/program/OWNER_UPDATE.md plus the three stable execution files for lifecycle/evidence only. Existing navigation remains unchanged. No product code, tests, schema, fixtures/goldens, roadmap, governance/policy, capability flag, historical context pin, dependency resolution, bridge or sibling write is owned. MIP-only WS-MIP-OWNER-PROGRESS-DECISIONS-002, capability owner mip_program_owner_reporting. Read the cross-repository protocol and historical state, apply live evidence without refreshing their historical pins, and verify no ownership conflict. This report cannot certify a dependency or expand any project's execution authority.
+Owned implementation: docs/program/OWNER_UPDATE.md only, plus docs/execution/EXECUTION_STATE.json, ACTIVE_TASK.md and LATEST_COMPLETION_REPORT.md for native lifecycle/evidence. Read cross-repository protocol/state and verify affected live sibling SHAs and their execution/completion evidence; no overlapping owner/workstream, no sibling writes, no historical coordination-pin refresh. MIP-only WS-MIP-OWNER-PROGRESS-DECISIONS-003, capability owner mip_program_owner_reporting; predecessor report closure is satisfied. No product/test/schema/golden/math, runtime integration, authority/policy, roadmap, new capability, deployment, certification, bridge or dependency resolution. Ordinary reporting compatibility/migration not_applicable. Unresolved execution-blocking design questions: none.
 
-The local milestones/OWNER_UPDATE-next-draft.md is advisory preparation only and contains stale observations. Refresh it against actual Git, omit unsupported monitoring assertions, and correct obsolete claims that MMM independent review remains unfinished or that MIP recovery is unpublished. Preserve history through Git, with concise current prose rather than a chronological transcript.
+## Named acceptance, validation and publication
 
-## Validation and publication
+Tier1 documentation-only. For execution, independent exact-head review and pre/post-fast-forward: verify live source positions/decisions/links, truthful distinctions and plain readability, taskctl check, canonical JSON parsing, git diff --check, exact ownership/authorization ancestry and unchanged authority/historical metadata. Full native controller plus governance handoff suite required for authoring. Full product pytest/Docker/Ruff/mypy not_required. Exact taskctl_check and git_diff_check operator logs identify actual commit and Git tree; operator evidence is reviewer responsibility. Genuine independent review and no unresolved source findings required before delegated merge, plus existing strict receipt/identity/notes/live preflight and unchanged exact-head gates.
 
-Tier1 documentation reporting; compatibility/migration not_applicable. Required for execution, exact-head independent review and pre/post-fast-forward: verify three-project positions, actual decisions and resolving source links against live remote Git; verify narrative separates verified outcomes from claims/plans, with no invented percentages, stale pending approvals or unearned readiness; native python -m mip.execution.taskctl check; JSON parsing; git diff --check; exact ownership and authorization ancestry; unchanged protected authority and preserved historical metadata. Full native controller plus governance handoff suite and state/view checks are required for task authoring. Full product pytest, Docker, Ruff and mypy are not_required for this bounded report implementation surface. Actual delegated taskctl_check and git_diff_check operator logs must identify the reviewed commit and actual Git tree; missing reviewer logs are reviewer work.
-
-Use native lifecycle/projection commands; human task wording stays immutable after authorization. Replace initial Current outcome with actual implementation evidence before publication. Freeze the task-owned tree, run required checks, publish a durable receipt naming implementation parent, gate/results, evidence source, worktree and authority impact, verify exact remote head, and stop ready_for_review or genuine blocked. One correction cycle. No implementation merge/PR/history rewrite/policy activation or successor execution. Existing delegated_routine merge requires genuine independent exact-head review, strict receipt/identity/notes/live preflight and required pre/post gates. Unresolved execution-blocking design questions: none.
+Use native lifecycle/projections; human task meaning immutable after authorization. Current outcome must state actual evidence before publication. Freeze task-owned tree, run required gate, publish durable receipt with implementation parent, exact-tree results/evidence/worktree/authority, verify remote equality, stop ready_for_review or genuine Git-durable blocked. One correction cycle, no counter reset of predecessors. Task execution does not authorize merge, PR, history rewrite, successor execution, policy activation or sibling capability. Existing eligible delegated-routine merge is a separate independent reviewer action.
