@@ -8,8 +8,11 @@ adds no parser, schema, fixture, or analytical capability. Producer
 meanings belong to their repository owners — a mismatch is recorded for
 the owning producer, never resolved here.
 
-Observation pins: MIP `46eecad` (normative consumer sources), MMM
-`e99768a8` (proposal), GeoX `2ff493c`. Sibling live mains observed at
+Observation pins: MIP `b0e7650` (task base and normative consumer
+sources; verified byte-identical through `46eecad` — intermediate
+commits touched only execution files, proven by an empty diff on all
+source paths below), MMM `e99768a8` (proposal document object
+verified present), GeoX `2ff493c`. Sibling live mains observed at
 MMM `4ccf8ca` and GeoX `2ff493c`; sibling contents below were read at
 exactly the cited pins.
 
@@ -116,3 +119,57 @@ No interface adoption, schema/parser/fixture work, analytical
 execution, threshold or meaning changes, bridge execution, runtime
 integration, or capability grants. Findings belong to producer
 owners; MIP records them and reports them to the owner.
+
+## Mapped evidence (read-only, October 16, 2026)
+
+Each cited rule resolves below by exact path, pin, and blob SHA, all
+read with `git rev-parse <pin>:<path>`, `git show`, `git cat-file
+-e`, or `git ls-remote` — no fetch, no writes. Re-run any entry to
+confirm it independently.
+
+MIP consumer sources at `b0e7650` (verified byte-identical through
+`46eecad`):
+
+- `src/mip/contracts/geox_envelope_consumer.py`, blob
+  `b37a78809f505997c3e9f032aa27bc7e89d1d4e5` — `REQUIRED_FIELDS`
+  presence rule (missing → `REJECTED`) including `provenance`;
+  value-checked enums for `artifact_kind`, `authorization_status`,
+  `mip_consumption_status`; outcomes capped at diagnostic or
+  answerability context with `_CANNOT_SAY` bounds. Covers the
+  envelope BLOCKED and provenance rows.
+- `src/mip/contracts/deterministic_report.py`, blob
+  `6a2156643d3a6a638f1b947c953610a29a6ac172` —
+  `_FORBIDDEN_CLAIM_FRAGMENTS` includes `response_curve` and
+  `causal_lift`; deterministic agent reports cannot claim them.
+- `src/mip/contracts/decision_surface.py`, blob
+  `ee18ced61c50cea00c412d25be18cbdfcb90b5dc` —
+  `surface_certification_rules`: diagnostic curves and decomposition
+  cannot be certified; certified requires full-panel delta-mu plus a
+  reliability scorecard; `supported_scenarios` and
+  `constraints_supported` fields.
+- `src/mip/contracts/enums.py`, blob
+  `ffd8f392c9af96eb4665dadc4fb0d35b79d3a556` — `CausalQuantity`
+  values and `ArtifactStatus` lifecycle.
+- `src/mip/contracts/estimand.py`, blob
+  `55553406fd709488b20ad883de715a3b187e7f4e` — `Estimand` with
+  non-empty `target_metric`, `unit`, `treatment_definition`,
+  `aggregation_level`.
+
+Zero-R12 transcript (both commands exit 0; first prints nothing):
+
+```
+$ grep -rn "R12" src/mip/adapters/ src/mip/contracts/geox_envelope_consumer.py docs/program/P2_CAPABILITY_CHECKPOINT_LEDGER.json
+(no output)
+```
+
+MMM proposal at `e99768a8`: document
+`docs/05_validation/mmm_response_surface_evidence_contract.md`,
+object presence verified (`git cat-file -e
+e99768a8:docs/05_validation/mmm_response_surface_evidence_contract.md`).
+Sections 1–9 per the proposal (existing/proposed names, ownership,
+coordinate scales, scope failures, per-record shape, units/claims,
+curve-bundle recommendation, acceptance examples, reserved
+decisions). Proposal-dependent checks that cannot be replayed from
+merged MIP evidence are labeled unknown in the rows above and routed
+to the owning producer; nothing is asserted from the proposal beyond
+its PROPOSED status and section topics.
