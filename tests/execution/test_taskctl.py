@@ -320,3 +320,111 @@ def test_transition_preserves_product_and_capability_authority() -> None:
 
 def test_migrated_repository_tree_passes_check() -> None:
     check_repository(Path(__file__).parents[2])
+
+
+def _correction_in_progress_state() -> dict[str, object]:
+    state = authorized_state()
+    state.update(
+        status="in_progress",
+        review_decision="in_progress",
+        implementation_commit_sha=SHA_C,
+        correction_execution_authorized=True,
+    )
+    validate_state(state)
+    return state
+
+
+def _correction_blocked_state() -> dict[str, object]:
+    state = _correction_in_progress_state()
+    blocked = transition_state(state, "blocked", blockers=["EVIDENCE_UNAVAILABLE"])
+    assert blocked["correction_execution_authorized"] is True
+    assert blocked["correction_cycles_completed"] == 0
+    assert blocked["correction_cycles_remaining"] == 1
+    validate_state(blocked)
+    return blocked
+
+
+def test_correction_detour_to_review_requires_explicit_completion() -> None:
+    state = _correction_in_progress_state()
+    with pytest.raises(TaskControlError, match="^E_TRANSITION_CORRECTION_COUNTER:"):
+        transition_state(state, "ready_for_review", implementation_sha=SHA_C)
+    result = transition_state(
+        state, "ready_for_review", implementation_sha=SHA_C, complete_correction=True
+    )
+    assert result["correction_cycles_completed"] == 1
+    assert result["correction_cycles_remaining"] == 0
+    assert result["correction_execution_authorized"] is False
+    validate_state(result)
+
+
+def test_correction_blocked_to_review_requires_both_clear_and_completion() -> None:
+    blocked = _correction_blocked_state()
+    with pytest.raises(TaskControlError, match="^E_TRANSITION_BLOCKER:"):
+        transition_state(blocked, "ready_for_review", implementation_sha=SHA_C)
+    with pytest.raises(TaskControlError, match="^E_TRANSITION_CORRECTION_COUNTER:"):
+        transition_state(
+            blocked, "ready_for_review", implementation_sha=SHA_C, clear_blockers=True
+        )
+    result = transition_state(
+        blocked,
+        "ready_for_review",
+        implementation_sha=SHA_C,
+        clear_blockers=True,
+        complete_correction=True,
+    )
+    assert result["blockers"] == []
+    assert result["correction_cycles_completed"] == 1
+    assert result["correction_cycles_remaining"] == 0
+    assert result["correction_execution_authorized"] is False
+    validate_state(result)
+
+
+def test_correction_round_trip_counts_exactly_once() -> None:
+    correction = authorized_state()
+    correction.update(
+        status="changes_requested",
+        review_decision="changes_requested",
+        implementation_commit_sha=SHA_A,
+        rejected_review_head_sha=SHA_B,
+        rejected_implementation_commit_sha=SHA_A,
+        correction_execution_authorized=True,
+    )
+    validate_state(correction)
+    blocked = transition_state(correction, "blocked", blockers=["EVIDENCE_UNAVAILABLE"])
+    assert blocked["correction_execution_authorized"] is True
+    resumed = transition_state(blocked, "in_progress", clear_blockers=True)
+    assert resumed["correction_execution_authorized"] is True
+    assert resumed["correction_cycles_completed"] == 0
+    assert resumed["correction_cycles_remaining"] == 1
+    result = transition_state(
+        resumed, "ready_for_review", implementation_sha=SHA_C, complete_correction=True
+    )
+    assert result["correction_cycles_completed"] == 1
+    assert result["correction_cycles_remaining"] == 0
+    assert result["correction_execution_authorized"] is False
+    validate_state(result)
+
+
+def test_exhausted_correction_publication_fails_closed_without_mutation() -> None:
+    state = _correction_in_progress_state()
+    state.update(correction_cycles_completed=1, correction_cycles_remaining=0)
+    before = copy.deepcopy(state)
+    with pytest.raises(TaskControlError, match="^E_STATE_CORRECTION_COUNTER:"):
+        transition_state(
+            state, "ready_for_review", implementation_sha=SHA_C, complete_correction=True
+        )
+    assert state == before
+
+
+def test_initial_publication_without_correction_stays_uncounted() -> None:
+    state = authorized_state()
+    result = transition_state(state, "ready_for_review", implementation_sha=SHA_C)
+    assert result["correction_cycles_completed"] == 0
+    assert result["correction_cycles_remaining"] == 1
+    assert result["correction_execution_authorized"] is False
+    validate_state(result)
+    progressed = transition_state(authorized_state(), "in_progress")
+    fresh = transition_state(progressed, "ready_for_review", implementation_sha=SHA_C)
+    assert fresh["correction_cycles_completed"] == 0
+    assert fresh["correction_cycles_remaining"] == 1
+    validate_state(fresh)
