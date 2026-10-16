@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `fc6501282a439126da86a1a724c5c2b75728c055`
+- **Implementation commit:** `4f8f5572c130ec4affbdc10ba27d2145bf971924`
 - **Reviewed head:** `null`
 - **Rejected review head:** `c20dcc586b8d2ad8363e2fda996c0dbb31cd33b4`
 - **Rejected implementation commit:** `fc6501282a439126da86a1a724c5c2b75728c055`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -44,7 +44,8 @@ producer adoption or bridge authority.
 ## Execution evidence
 
 Implemented on `docs/mip-diagnostic-review-checklist-001` at
-`63a23fc6f5ccd37fe24bb135e7f3f3abd67be519`:
+`4f8f5572c130ec4affbdc10ba27d2145bf971924` (supersedes rejected
+`fc65012`, retained only in rejected provenance below):
 `docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md` covering all seven
 authorized review families (quantity/units, scope/range, uncertainty
 availability, terminal failures/restrictions, provenance,
@@ -71,12 +72,41 @@ surface). No sibling fetch or write performed.
 
 Git identity: base `b0e7650`, authorization
 `5902e3d2433a9214a45c983f453eb64bd8fb5a60`; implementation
-`fc6501282a439126da86a1a724c5c2b75728c055` (supersedes `63a23fc`
-within this correction; prior lineage preserved in rejected
-provenance); diff limited to the one owned path plus the three
-stable files via `taskctl` transitions.
+`4f8f5572c130ec4affbdc10ba27d2145bf971924`; diff limited to the one
+owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
+
+## Correction cycle (MIP-REVIEW-001/002/003 provenance tags and merged-code verification)
+
+Independent re-review of `d3c302f` returned `changes_requested`
+(`MIP-REVIEW-001/002/003`): execution evidence named the rejected
+implementation, required-category logs lacked exact-tree identity,
+and proposal-dependent rows lacked manifest-mapped provenance.
+Corrected in `4f8f5572c130ec4affbdc10ba27d2145bf971924`: current
+evidence names this implementation with the reviewed head recorded
+at publication; raw `taskctl_check`/`git_diff_check` transcripts
+are embedded against the exact tree below; rows carry `[M]` /
+`[M+P]` / `[P]` provenance tags with merged-code verification
+(uncertainty invariants and failure vocabulary confirmed in merged
+MMM code, per-point fields confirmed proposed-only by absence).
+Tier 1 gate rerun (pins resolve, taskctl/JSON/diff pass). This
+consumes the single correction cycle via explicit rejected-head
+provenance (`c20dcc5`/`fc65012`).
+
+## Raw required-category logs (exact tree `4f8f5572c130ec4affbdc10ba27d2145bf971924`)
+
+```
+$ poetry run python -m mip.execution.taskctl check
+taskctl_check exit: 0
+$ git diff --check
+git_diff_check exit: 0
+```
+
+Both commands silent output, exit 0. Rerun on the published head to
+confirm independently; deterministic checks yield identical results
+on the receipt tree. Full pytest, Docker, Ruff, and mypy recorded
+`not_required` (docs-only surface).
 
 ## Correction cycle (MIP-DRC-001/002 mapped evidence)
 
