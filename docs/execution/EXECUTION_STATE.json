@@ -42,18 +42,18 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_CORRECTION_ACCOUNTING_ACCEPTANCE_RECOVERY_002",
-  "status": "merged",
-  "review_decision": "merged",
-  "base_sha": "71fbc3548744e44907f73faadc8f32524cafabfd",
-  "task_authoring_start_sha": "71fbc3548744e44907f73faadc8f32524cafabfd",
-  "task_authoring_head_sha": "e12b5ec391b3ea76a4d6acd979bb241606dabcc4",
-  "authorization_head_sha": "e12b5ec391b3ea76a4d6acd979bb241606dabcc4",
-  "feature_branch": "fix/mip-correction-accounting-acceptance-recovery-002",
+  "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_002",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "da55b40ae8025f7f28aa6e50c38ce98d246316fa",
+  "task_authoring_start_sha": "da55b40ae8025f7f28aa6e50c38ce98d246316fa",
+  "task_authoring_head_sha": "da55b40ae8025f7f28aa6e50c38ce98d246316fa",
+  "authorization_head_sha": "da55b40ae8025f7f28aa6e50c38ce98d246316fa",
+  "feature_branch": "docs/mip-owner-progress-decisions-refresh-002",
   "feature_branch_created": false,
-  "reviewed_head_sha": "61739bc05919deb7adaa3293ed2267650828c61c",
+  "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
-  "implementation_commit_sha": "787b07d1490f32b9e766f4ac4ded88d0c404f715",
+  "implementation_commit_sha": null,
   "rejected_implementation_commit_sha": null,
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
@@ -62,13 +62,12 @@
   "maximum_correction_cycles": 1,
   "correction_cycles_completed": 0,
   "correction_cycles_remaining": 1,
-  "risk_tier": "tier_2_existing_state_machine_accounting_repair",
+  "risk_tier": "tier_1_operational_documentation",
   "compatibility_migration_policy": "not_applicable",
-  "full_suite_validation_required": true,
-  "validation_scope": "existing_correction_route_counter_invariants_explicit_completion_initial_publication_exhaustion_focused_full_docker_ruff_mypy_native_json_diff_exact_tree",
+  "full_suite_validation_required": false,
+  "validation_scope": "plain_language_three_project_owner_progress_live_git_decisions_links_native_json_diff_exact_tree",
   "owned_implementation_paths": [
-    "src/mip/execution/state.py",
-    "tests/execution/test_taskctl.py"
+    "docs/program/OWNER_UPDATE.md"
   ],
   "task_authoring_boundary": [
     "docs/execution/EXECUTION_STATE.json",
@@ -84,28 +83,21 @@
   ],
   "dependencies": [
     {
-      "dependency_id": "DEP-MIP-OWNER-REPORT-CLOSED",
+      "dependency_id": "DEP-MIP-ACCOUNTING-RECOVERY-CLOSED",
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
       "state": "satisfied",
-      "merged_checkpoint_sha": "a5ac85980131e29a947c6040f96b76a9c0112056",
-      "resolution_condition": "Owner report is closed; no report work overlaps."
-    },
-    {
-      "dependency_id": "DEP-MIP-ACCOUNTING-REVIEWED-SOURCE-002",
-      "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "state": "source_available_not_merge_dependency",
-      "source_head_sha": "45d1271824f3b4061f750e5a734cb7bd707714d1",
-      "resolution_condition": "Preserve old publication unchanged and reuse its reviewed repair as source. This new task delivers the whole still-unmerged outcome with complete acceptance; no circular prerequisite to merge a rejected head."
+      "merged_checkpoint_sha": "da55b40ae8025f7f28aa6e50c38ce98d246316fa",
+      "resolution_condition": "Accounting recovery is merged and closed; separate report authoring no longer overlaps the occupied task."
     }
   ],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "delegated_routine",
-  "task_authoring_note": "Owner requested continued reliability work and recommended ordinary decisions. Native exact-head review of45d1271 found one named acceptance test missing after the prior correction was spent. Fresh recovery delivers the same authorized repair with complete positive initial blocked/resumed proof; preserves rejected branch and counters, no new code meaning, policy, limits, authority or architecture.",
-  "local_feature_branch_cleanup": "observed_deleted",
-  "remote_feature_branch_cleanup": "observed_deleted",
-  "coordination_workstream_id": "WS-MIP-CORRECTION-ACCOUNTING-ACCEPTANCE-002",
-  "coordination_capability_owner": "mip_execution_reliability",
+  "task_authoring_note": "Existing explicit owner direction requests recurring Git-backed high-level reports including accomplishments, ongoing/planned work and adopted choices. Separate ordinary documentation refresh after the accounting repair closes; no new goal, capability, policy, analytical or sibling authority.",
+  "local_feature_branch_cleanup": null,
+  "remote_feature_branch_cleanup": null,
+  "coordination_workstream_id": "WS-MIP-OWNER-PROGRESS-DECISIONS-002",
+  "coordination_capability_owner": "mip_program_owner_reporting",
   "parked_setup_workstreams": [
     {
       "task_id": "MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001",
@@ -164,18 +156,14 @@
     }
   ],
   "prior_task": {
-    "task_id": "MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001",
-    "status": "ready_for_review",
-    "reviewed_head_sha": "45d1271824f3b4061f750e5a734cb7bd707714d1",
-    "review_outcome": "changes_requested",
-    "merge_eligible": false
+    "task_id": "MIP_CORRECTION_ACCOUNTING_ACCEPTANCE_RECOVERY_002",
+    "status": "merged",
+    "reviewed_head_sha": "61739bc05919deb7adaa3293ed2267650828c61c",
+    "closure_commit_sha": "da55b40ae8025f7f28aa6e50c38ce98d246316fa",
+    "resolution_condition": "Accounting recovery remains closed; no predecessor correction or merge is reopened."
   },
   "delegated_merge_required_validation": [
-    "focused_tests",
-    "docker_make_validate",
     "taskctl_check",
-    "git_diff_check",
-    "ruff",
-    "mypy"
+    "git_diff_check"
   ]
 }
