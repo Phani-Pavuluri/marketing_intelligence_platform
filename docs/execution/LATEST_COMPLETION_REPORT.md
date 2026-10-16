@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-owner-progress-decisions-refresh-003`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `65b014686345ec6835abee4ad33d02bc93655bb3`
+- **Implementation commit:** `284c5eeb690b53b9914c1f5e98019397720bac02`
 - **Reviewed head:** `null`
 - **Rejected review head:** `712cb93799416b3bbc063382f3a5035206c2e4db`
 - **Rejected implementation commit:** `65b014686345ec6835abee4ad33d02bc93655bb3`
 - **Approval commit:** `null`
-- **Blockers:** `MIP-REPORT003-CURRENT-FACTS-001: GeoX correction authorization is presented as completed corrected publication; explicit continuity-program incompleteness is omitted.`
+- **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -85,10 +85,25 @@ read survives in the deliverable.
 
 Git identity: base `03874f8`, authorization
 `f915d676f7a44ba3242f543d30570f4df704882a`; implementation
-`65b014686345ec6835abee4ad33d02bc93655bb3`; diff limited to the one
+`284c5eeb690b53b9914c1f5e98019397720bac02` (supersedes `65b0146`,
+retained in rejected provenance); diff limited to the one
 owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
-and `docs/tasks/` artifacts never staged. Live pins at execution:
+and `docs/tasks/` artifacts never staged.
+
+## Correction record (MIP-OWNER-REFRESH-002-TRUTHFULNESS-001)
+
+Review found the report presented an authorized correction as a
+completed corrected publication and omitted explicit
+continuity-program incompleteness. Corrected in
+`284c5eeb690b53b9914c1f5e98019397720bac02`: GeoX stage now reads
+correction-authorized-and-executing with no corrected publication
+yet (verified live branch state); continuity incompleteness stated
+explicitly as distinct from product-integration status. Tier 1 gate
+rerun (structure, claims, links, taskctl, JSON, diff checks pass).
+This consumes the single correction cycle via explicit
+rejected-head provenance, clearing the finding blocker it
+resolves. Live pins at execution:
 MIP `2dc87b1`, GeoX `3d43ea4`, MMM `d4f8deb`.
 
 
