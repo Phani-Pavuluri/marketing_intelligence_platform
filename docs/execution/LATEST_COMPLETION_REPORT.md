@@ -96,3 +96,25 @@ section, branch commit, or review note); then resume via
 `blocked` → `in_progress` and publish a corrected
 `ready_for_review` within the existing owned paths and Tier 1 gate.
 Correction budget remains available until a scoped correction begins.
+
+## Independent review findings to drive the bounded correction
+
+The independent observer review of exact head
+`d3c302fff5551c8d737e9c99cfc88cda1a648c3b` returned
+`changes_requested` with two non-owner findings:
+
+1. `MIP-DRC-001`: every substantive rule must name an exact source path and
+   pin, and the evidence manifest must include the cited sources. The checklist
+   leaves envelope BLOCKED/provenance, deterministic-report claim fragments,
+   zero-R12 references, and the MMM proposal without replayable mapped evidence.
+   Correct by adding concrete paths and pins, or marking unavailable evidence
+   explicitly unknown and routing it to the owning producer.
+2. `MIP-DRC-002`: the checklist cites MIP `46eecad`, while the task metadata
+   records base/source pin `b0e7650718556316fa585ac9d9b953cdf9831efa`.
+   Correct by using one consistent exact SHA, or documenting ancestry and
+   unchanged-source evidence.
+
+These findings are documentation and evidence corrections within the existing
+Tier 1 task. They do not authorize producer adoption, parser/schema work,
+bridge execution, certification, or a new capability. Observer report:
+`/Users/phani/.codex/quota-resume/mip-checklist-authoring/.codex/review-observer/reports/4ba5acf05a29f638a8eee14abed1cc00ee87f48bd94a169131a29caa4e323734/result.json`.
