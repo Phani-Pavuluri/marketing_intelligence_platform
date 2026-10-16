@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,7 +13,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
@@ -21,11 +21,11 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Rejected review head:** `fc215eab1c84354238f87e6dd9cd60de1c9a2e46`
 - **Rejected implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
 - **Approval commit:** `null`
-- **Blockers:** `MIP-CHECKLIST-003-LIVE-OBSERVATION-001: completion report presents incompatible sibling snapshots as live/current without historical attribution.`
+- **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -73,12 +73,25 @@ snapshot, ledger, or history modified.
 
 Git identity: base `2b3ff4c`, authorization
 `7f4c7f0e1b86bf53853afb3d02b153e52a5aaa53`; implementation
-`63bbbe1ff6668f08f3c038428d9647aaa1265e8e`; diff limited to the one
-owned path plus the three stable files via `taskctl` transitions.
+`63bbbe1ff6668f08f3c038428d9647aaa1265e8e` (owned checklist
+unchanged this cycle); diff limited to completion evidence plus the
+three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
 
-Live sibling observation: {"MMM": {"main": "00cad45de5f9f04c41a6eed51ccbc22149a42b54", "task_id": "MMM_TRANSFORM_SELECTION_AUDIT_001"}, "GeoX": {"main": "2ff493c884ac06aaf8359e349fc8008f1872528a", "task_id": "GEOX_TIER1_CALLBACK_INJECTION_REPAIR_001"}}. No snapshot refresh, sibling changes or consumer verification asserted.
+## Correction record (MIP-CHECKLIST-003-LIVE-OBSERVATION-001)
+
+Authoring-time sibling observation labeled historical with a current
+overlay added (live MMM `c907841` / GeoX `104a745` verified by remote
+reads; canonical state from remote-main blobs). No checklist, pin,
+scope, or authority change. Tier 1 gate rerun (structure, links,
+taskctl, JSON, diff checks pass). This consumes the single
+correction cycle via explicit rejected-head provenance
+(`fc215ea`/`63bbbe1`), clearing the finding blocker it resolves.
+
+Live sibling observation (authoring-time, historical — superseded by the current overlay below): {"MMM": {"main": "00cad45de5f9f04c41a6eed51ccbc22149a42b54", "task_id": "MMM_TRANSFORM_SELECTION_AUDIT_001"}, "GeoX": {"main": "2ff493c884ac06aaf8359e349fc8008f1872528a", "task_id": "GEOX_TIER1_CALLBACK_INJECTION_REPAIR_001"}}. No snapshot refresh, sibling changes or consumer verification asserted.
+
+Current overlay at correction time (October 16, 2026, live remote reads): MMM main `c907841` (exclusive-endpoint recovery authorized, no implementation); GeoX main `104a745` (provenance/finality definition authorized, no implementation). Sibling canonical state read from remote-main blobs. Historical coordination pins untouched.
 
 
 ## Independent source finding — bounded correction authorized

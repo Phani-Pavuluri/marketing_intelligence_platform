@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** changes_requested
+**Status:** ready_for_review
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,7 +13,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
@@ -21,11 +21,11 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Rejected review head:** `fc215eab1c84354238f87e6dd9cd60de1c9a2e46`
 - **Rejected implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
 - **Approval commit:** `null`
-- **Blockers:** `MIP-CHECKLIST-003-LIVE-OBSERVATION-001: completion report presents incompatible sibling snapshots as live/current without historical attribution.`
+- **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
