@@ -1,1 +1,157 @@
-{"authority_impact":{"capability_authority_added":false,"statement":"Routine documentation merge only; all protected authority remains unchanged.","task_authorization_changed":false},"authorization_sha":"7f4c7f0e1b86bf53853afb3d02b153e52a5aaa53","decision":"approve_exact_reviewed_head","delegation_provenance":{"activation_head_sha":"d69e0eb85425a471ccaef44caabfea35140bd701","activation_notes_ref":"refs/notes/mip-delegated-routine-receipts","activation_receipt_id":"205960c9-6c11-4c73-9cb7-a0d5f1b153ad","owner_decision_ref":"https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/6874424383bbba1705fc2aaa4cd6d211637b9a8d/docs/execution/ACTIVE_TASK.md#owner-authorization-delivery-and-preserved-boundaries","policy_sha256":"b1c223d6d63133127d8358fcd8bcde00660817a349056e5b59e2534ff50affb4","policy_version":"mip-delegated-routine-merge-policy-v1","user_reserved_unchanged":true},"eligibility":{"findings":[{"condition":"definition_ready_opt_in","evidence":"Task opts into delegated_routine and is authorized.","result":"pass"},{"condition":"tier_within_routine","evidence":"Tier 1 documentation correction within existing scope.","result":"pass"},{"condition":"ownership_verified","evidence":"Diff is limited to owned checklist and stable execution files.","result":"pass"},{"condition":"independent_review_exact_head","evidence":"Native observer pass at /Users/phani/.codex/quota-resume/mip003-review-7a41c0f/.codex/review-observer/reports/e1914fafd3b67027e2db5bd1a96ecf68689056dd7efb6e615c216bfa51e1dace.","result":"pass"},{"condition":"no_open_findings","evidence":"Exact review result has no findings or decisions.","result":"pass"},{"condition":"validation_all_pass","evidence":"taskctl and diff checks passed; other categories are Git-authored not_required.","result":"pass"},{"condition":"heads_and_baseline_stable","evidence":"Remote feature head and authorized main baseline verified.","result":"pass"},{"condition":"activation_current","evidence":"Activation receipt and policy hash match.","result":"pass"}],"quoted_state":{"all_protected_authority_false":true,"capability_authorizations_changed":false,"delegated_merge_required_validation":["taskctl_check","git_diff_check"],"full_suite_validation_required":false,"merge_approval_mode":"delegated_routine","owned_implementation_paths":["docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md"],"risk_tier":"tier_1_operational_documentation","task_authoring_boundary":["docs/execution/EXECUTION_STATE.json","docs/execution/ACTIVE_TASK.md","docs/execution/LATEST_COMPLETION_REPORT.md"],"validation_scope":"diagnostic_checklist_existing_quantity_distinctions_source_pins_taskctl_json_diff_owned_paths_exact_tree"},"routine_assertions":{"no_architecture_change":true,"no_authority_change":true,"no_contract_meaning_change":true,"no_sibling_impact":true,"within_authorized_scope":true},"tier_class":1},"feature_branch":"docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003","implementation_sha":"63bbbe1ff6668f08f3c038428d9647aaa1265e8e","issued_at":"2026-10-16T09:09:30.780717+00:00","limitations":["Read-only independent review and exact operator logs; no parser, adoption, certification or sibling readiness.","No full test/Docker/Ruff/mypy because task scope marks them not_required."],"main_baseline_sha":"311be59b830889a6e76dd8011de6f04be4137e16","merge_approval_mode":"delegated_routine","receipt_id":"ae79e5c5-6de9-4cc3-b6aa-7901d2b09d0f","receipt_kind":"delegated_routine_merge_approval","repository":"Phani-Pavuluri/marketing_intelligence_platform","reviewed_remote_head_sha":"ad0ec45ea06784290a6abcbccc2f51b37b6258ae","reviewer":{"implementation_agent_session_id":"ses_ec2f6185dffeqqBg2NoW8x4SMe","observer_report_digest":"e64b1e633721358abfb9a2a8c6c9ebe6661f32b673ae2d92be56c593b4f5d4a2","reviewer_authored_implementation":false,"role":"independent_codex_reviewer","session_id":"01a140ca-e78f-7a71-982a-6b1832e061b3"},"schema_version":1,"task_id":"MIP_DIAGNOSTIC_REVIEW_CHECKLIST_ARTIFACT_KIND_RECOVERY_003","validation":{"categories":{"docker_make_validate":{"detail":"Docs-only task; Docker not required.","evidence":[],"status":"not_required","tree_sha":null},"focused_tests":{"detail":"Docs-only task; full tests not required by Git-authored scope.","evidence":[],"status":"not_required","tree_sha":null},"git_diff_check":{"detail":"Exact published tree diff check passed.","evidence":["operator-evidence/diff.log"],"status":"pass","tree_sha":"ad0ec45ea06784290a6abcbccc2f51b37b6258ae"},"mypy":{"detail":"Docs-only task.","evidence":[],"status":"not_required","tree_sha":null},"ruff":{"detail":"Docs-only task.","evidence":[],"status":"not_required","tree_sha":null},"taskctl_check":{"detail":"Exact published tree taskctl check passed.","evidence":["operator-evidence/taskctl.log"],"status":"pass","tree_sha":"ad0ec45ea06784290a6abcbccc2f51b37b6258ae"}},"tier_class":1}}
+{
+  "schema_version": 1,
+  "receipt_kind": "delegated_routine_merge_approval",
+  "receipt_id": "16bc4f3c-aee4-469b-9120-349295cce83e",
+  "repository": "Phani-Pavuluri/marketing_intelligence_platform",
+  "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_ARTIFACT_KIND_RECOVERY_003",
+  "feature_branch": "docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003",
+  "merge_approval_mode": "delegated_routine",
+  "authorization_sha": "7f4c7f0e1b86bf53853afb3d02b153e52a5aaa53",
+  "implementation_sha": "63bbbe1ff6668f08f3c038428d9647aaa1265e8e",
+  "reviewed_remote_head_sha": "ad0ec45ea06784290a6abcbccc2f51b37b6258ae",
+  "main_baseline_sha": "311be59b830889a6e76dd8011de6f04be4137e16",
+  "reviewer": {
+    "role": "independent_codex_reviewer",
+    "session_id": "01a143ec-cce0-70b3-a525-9fb1b597b39e",
+    "implementation_agent_session_id": "ses_ec2f6185dffeqqBg2NoW8x4SMe",
+    "reviewer_authored_implementation": false,
+    "observer_report_digest": "e64b1e633721358abfb9a2a8c6c9ebe6661f32b673ae2d92be56c593b4f5d4a2"
+  },
+  "decision": "approve_exact_reviewed_head",
+  "issued_at": "2026-10-16T09:10:48.746554+00:00",
+  "delegation_provenance": {
+    "policy_version": "mip-delegated-routine-merge-policy-v1",
+    "activation_receipt_id": "205960c9-6c11-4c73-9cb7-a0d5f1b153ad",
+    "activation_notes_ref": "refs/notes/mip-delegated-routine-receipts",
+    "owner_decision_ref": "https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/6874424383bbba1705fc2aaa4cd6d211637b9a8d/docs/execution/ACTIVE_TASK.md#owner-authorization-delivery-and-preserved-boundaries",
+    "user_reserved_unchanged": true,
+    "activation_head_sha": "d69e0eb85425a471ccaef44caabfea35140bd701",
+    "policy_sha256": "b1c223d6d63133127d8358fcd8bcde00660817a349056e5b59e2534ff50affb4"
+  },
+  "validation": {
+    "tier_class": 1,
+    "categories": {
+      "focused_tests": {
+        "status": "not_required",
+        "detail": "Docs-only task; full tests not required by Git-authored scope.",
+        "tree_sha": null,
+        "evidence": []
+      },
+      "docker_make_validate": {
+        "status": "not_required",
+        "detail": "Docs-only task; Docker not required.",
+        "tree_sha": null,
+        "evidence": []
+      },
+      "taskctl_check": {
+        "status": "pass",
+        "detail": "Exact published tree taskctl check passed.",
+        "tree_sha": "ad0ec45ea06784290a6abcbccc2f51b37b6258ae",
+        "evidence": [
+          "operator-evidence/taskctl.log"
+        ]
+      },
+      "git_diff_check": {
+        "status": "pass",
+        "detail": "Exact published tree diff check passed.",
+        "tree_sha": "ad0ec45ea06784290a6abcbccc2f51b37b6258ae",
+        "evidence": [
+          "operator-evidence/diff.log"
+        ]
+      },
+      "ruff": {
+        "status": "not_required",
+        "detail": "Docs-only task.",
+        "tree_sha": null,
+        "evidence": []
+      },
+      "mypy": {
+        "status": "not_required",
+        "detail": "Docs-only task.",
+        "tree_sha": null,
+        "evidence": []
+      }
+    }
+  },
+  "eligibility": {
+    "tier_class": 1,
+    "routine_assertions": {
+      "within_authorized_scope": true,
+      "no_contract_meaning_change": true,
+      "no_architecture_change": true,
+      "no_authority_change": true,
+      "no_sibling_impact": true
+    },
+    "quoted_state": {
+      "risk_tier": "tier_1_operational_documentation",
+      "validation_scope": "diagnostic_checklist_existing_quantity_distinctions_source_pins_taskctl_json_diff_owned_paths_exact_tree",
+      "owned_implementation_paths": [
+        "docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md"
+      ],
+      "task_authoring_boundary": [
+        "docs/execution/EXECUTION_STATE.json",
+        "docs/execution/ACTIVE_TASK.md",
+        "docs/execution/LATEST_COMPLETION_REPORT.md"
+      ],
+      "merge_approval_mode": "delegated_routine",
+      "capability_authorizations_changed": false,
+      "all_protected_authority_false": true,
+      "delegated_merge_required_validation": [
+        "taskctl_check",
+        "git_diff_check"
+      ],
+      "full_suite_validation_required": false
+    },
+    "findings": [
+      {
+        "condition": "definition_ready_opt_in",
+        "result": "pass",
+        "evidence": "Task opts into delegated_routine and is authorized."
+      },
+      {
+        "condition": "tier_within_routine",
+        "result": "pass",
+        "evidence": "Tier 1 documentation correction within existing scope."
+      },
+      {
+        "condition": "ownership_verified",
+        "result": "pass",
+        "evidence": "Diff is limited to owned checklist and stable execution files."
+      },
+      {
+        "condition": "independent_review_exact_head",
+        "result": "pass",
+        "evidence": "Native observer pass at /Users/phani/.codex/quota-resume/mip003-review-7a41c0f/.codex/review-observer/reports/e1914fafd3b67027e2db5bd1a96ecf68689056dd7efb6e615c216bfa51e1dace."
+      },
+      {
+        "condition": "no_open_findings",
+        "result": "pass",
+        "evidence": "Exact review result has no findings or decisions."
+      },
+      {
+        "condition": "validation_all_pass",
+        "result": "pass",
+        "evidence": "taskctl and diff checks passed; other categories are Git-authored not_required."
+      },
+      {
+        "condition": "heads_and_baseline_stable",
+        "result": "pass",
+        "evidence": "Remote feature head and authorized main baseline verified."
+      },
+      {
+        "condition": "activation_current",
+        "result": "pass",
+        "evidence": "Activation receipt and policy hash match."
+      }
+    ]
+  },
+  "authority_impact": {
+    "capability_authority_added": false,
+    "task_authorization_changed": false,
+    "statement": "Routine documentation merge only; all protected authority remains unchanged."
+  },
+  "limitations": [
+    "Read-only independent review and exact operator logs; no parser, adoption, certification or sibling readiness.",
+    "No full test/Docker/Ruff/mypy because task scope marks them not_required."
+  ]
+}
