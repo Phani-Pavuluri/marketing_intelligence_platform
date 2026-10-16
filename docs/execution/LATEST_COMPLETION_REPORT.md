@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-002`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `b0d56459ee0e43b1515096e7c30c042567bcb672`
 - **Reviewed head:** `null`
-- **Rejected review head:** `2934d374ceca8a3421f7b5be47f0827c9ed21781`
+- **Rejected review head:** `a5dde7b8bb1c134a04c0a34bb4238ed534e17c8f`
 - **Rejected implementation commit:** `b0d56459ee0e43b1515096e7c30c042567bcb672`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -153,3 +153,15 @@ The actual review finding follows verbatim as evidence, not invented task scope:
 ```
 
 The missing exact-head taskctl_check and git_diff_check outputs are reviewer/operator evidence. Codex will collect actual logs identifying the final reviewed commit and Git tree outside the frozen implementation and supply them to a genuine evidence-complete review. Do not try to put the final publication's self-referential SHA into its own source tree or change otherwise-correct checklist semantics. Muse should accurately report the correction-handoff failure/resolution and existing gate results, use the native lifecycle to publish a ready_for_review replacement with a complete truthful receipt, and stop without merge. Root operator evidence must precede the next independent review. Existing bounded scope, validation, protected authority and correction budget remain unchanged; no new task, capability or owner decision.
+
+## Correction finding — exact-checkpoint operator evidence (October 16, 2026)
+
+Independent observer review of exact head  returned MIP-REVIEW-001: the required taskctl_check and git_diff_check transcripts did not identify the reviewed checkpoint. The reviewer/operator reran both required gates on that rejected exact head and recorded the actual outputs outside the implementation:
+
+- Reviewed head: 
+- Exact tree: 
+- taskctl_check transcript:  (exit 0)
+- git_diff_check transcript:  (exit 0)
+- Lineage record: 
+
+This is evidence for the bounded correction only. It does not authorize merge, adoption, certification, sibling work, or a new capability.
