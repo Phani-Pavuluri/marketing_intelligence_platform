@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-owner-progress-decisions-refresh-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `5a1402d8bde0b5927ba873721fb0cbc0c50a9883`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `45f0cc686feddad55828e34efcfae3372617cb39`
+- **Rejected implementation commit:** `5a1402d8bde0b5927ba873721fb0cbc0c50a9883`
 - **Approval commit:** `null`
-- **Blockers:** `none`
+- **Blockers:** `MIP-OWNER-REPORT-TRUTHFULNESS-001: report misstates GeoX review status, broadens fixture-report presentation direction, and omits the requested continuity-audit position.`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`

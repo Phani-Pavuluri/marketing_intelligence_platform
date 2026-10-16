@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-owner-progress-decisions-refresh-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `5a1402d8bde0b5927ba873721fb0cbc0c50a9883`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `45f0cc686feddad55828e34efcfae3372617cb39`
+- **Rejected implementation commit:** `5a1402d8bde0b5927ba873721fb0cbc0c50a9883`
 - **Approval commit:** `null`
-- **Blockers:** `none`
+- **Blockers:** `MIP-OWNER-REPORT-TRUTHFULNESS-001: report misstates GeoX review status, broadens fixture-report presentation direction, and omits the requested continuity-audit position.`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -81,3 +81,10 @@ owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged. Live pins at execution:
 MIP `d47fd6d`, GeoX `099d70a`, MMM `bc7cb88`.
+
+
+## Independent owner-report review — single bounded correction
+
+MIP-OWNER-REPORT-TRUTHFULNESS-001 on 45f0cc686feddad55828e34efcfae3372617cb39: update owner report within its original scope. GeoX review is not meaningless: initial audit was independently reviewed, returned for existing-field coverage/outcome corrections, and corrected branch is published (observed4c5e511e2d08e25d93fcbaa31bd7b2920dcaf7b8). Reverify latest exact branch and verification time, state the actual review stage without treating a branch as merged. Scope the adopted all-issues/strongest-blocker choice to MIP fixture evidence reports as authorized, not a new global gating rule. Include the required continuity-audit position: full user-message inventory and source-verified correction-accounting/evidence incidents are under review, no holistic runtime repair claimed. Keep roadmap/model-family expansion deferred and all capabilities unchanged. Remove internal finding IDs such as MIP-REVIEW-006 from owner prose in favor of their plain meaning. Existing completed publication approvals need no new owner acceptance.
+
+This is one ordinary report truthfulness/readability correction under the existing single cycle; no new decision or product scope. No reviewer appended task wording: immutable active-task body must remain identical. Preserve all authoritative state/provenance and historical observations with clear attribution; actual current outcomes must be fresh. Same Tier1 source/link/current-vs-planned/JSON/native/diff/ownership/authority gate on the corrected frozen tree, then native explicit --complete-correction directly from changes_requested, complete durable receipt, remote verification and stop ready_for_review. Missing operator logs remain reviewer duties. No merge, policy/capability/sibling authority or successor execution.
