@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-owner-progress-decisions-refresh-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `5a1402d8bde0b5927ba873721fb0cbc0c50a9883`
+- **Implementation commit:** `dda3f1a8d3afa5cee4628d9c0e6d458fbf8ebfc1`
 - **Reviewed head:** `null`
 - **Rejected review head:** `45f0cc686feddad55828e34efcfae3372617cb39`
 - **Rejected implementation commit:** `5a1402d8bde0b5927ba873721fb0cbc0c50a9883`
 - **Approval commit:** `null`
-- **Blockers:** `MIP-OWNER-REPORT-TRUTHFULNESS-001: report misstates GeoX review status, broadens fixture-report presentation direction, and omits the requested continuity-audit position.`
+- **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -40,19 +40,22 @@ observations were refreshed from live Git at implementation time.
 ## Execution evidence
 
 Implemented on `docs/mip-owner-progress-decisions-refresh-001` at
-`5a1402d8bde0b5927ba873721fb0cbc0c50a9883`: full refresh of
-`docs/program/OWNER_UPDATE.md` against live Git observed October 16,
-2026.
+`dda3f1a8d3afa5cee4628d9c0e6d458fbf8ebfc1`: truthfulness correction
+of the owner report against live Git observed October 16, 2026
+(supersedes `5a1402d`, retained in history below).
 
 Delivered behavior: dated refresh reporting the checklist-recovery
 closure and this task's authorization; live GeoX audit position
-(authorized, branch published at `255a610`, no implementation) and
-MMM endpoint-repair position (merged and closed at `bc7cb88`,
-reviewed `ab7e9b0`, with disclosed lint debt and reliability
-follow-up); adopted choices in effect (show-all/headline reporting,
-delivered exact publications, continued work until exhaustion with
-auto retry after verified reset, loaded watcher and quota-resume
-scheduling); reserved decisions (goals/roadmap/capability/
+(reviewed, corrected branch published at `4c5e511e` for re-review,
+no implementation) and MMM endpoint-repair position (merged and
+closed at `bc7cb88`, reviewed `ab7e9b0`, with disclosed lint debt
+and reliability follow-up); adopted choices scoped to MIP fixture
+evidence reports (show-all/headline reporting; delivered exact
+publications; continued work until exhaustion with auto retry
+after verified reset; loaded watcher and quota-resume scheduling);
+continuity-audit position included (user-message inventory and
+correction-accounting incidents under review, no holistic runtime
+repair claimed); reserved decisions (goals/roadmap/capability/
 architecture/production, policy and activation changes,
 substantive disagreements), with this branch's merge proceeding
 through the delegated routine path rather than an owner prompt;
@@ -76,10 +79,26 @@ history was modified.
 
 Git identity: base `f4172ec`, authorization
 `d5f27393e41082f7866fea1bba8d1ee412e7415b`; implementation
-`5a1402d8bde0b5927ba873721fb0cbc0c50a9883`; diff limited to the one
+`dda3f1a8d3afa5cee4628d9c0e6d458fbf8ebfc1` (supersedes `5a1402d`,
+retained in history); diff limited to the one
 owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
-and `docs/tasks/` artifacts never staged. Live pins at execution:
+and `docs/tasks/` artifacts never staged.
+
+## Correction record (MIP-OWNER-REPORT-TRUTHFULNESS-001)
+
+Review found the report misstated GeoX review stage, presented the
+fixture-report presentation direction globally, and omitted the
+continuity-audit position. Corrected in
+`dda3f1a8d3afa5cee4628d9c0e6d458fbf8ebfc1`: GeoX stage now reads
+reviewed/corrected-branch/awaiting-re-review with the `4c5e511e`
+link replacing `255a610`; adopted choices scoped to MIP fixture
+evidence reports; continuity-audit position included with no
+holistic-repair claim; internal finding ID removed from prose.
+Tier 1 gate rerun (structure, claims, links, taskctl, JSON, diff
+checks pass). This consumes the single correction cycle via
+explicit rejected-head provenance, clearing the finding blocker
+it resolves. Live pins at execution:
 MIP `d47fd6d`, GeoX `099d70a`, MMM `bc7cb88`.
 
 
