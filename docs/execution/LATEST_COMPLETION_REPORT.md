@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-owner-progress-decisions-refresh-002`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `9019c4b8658c3d4d3b4ad5c93e7442a1cd1a95b4`
+- **Implementation commit:** `9a0c2cd9bf9f697ab5bd41e953413ed29837a2de`
 - **Reviewed head:** `null`
 - **Rejected review head:** `31dd3bb0a7174e3c04d21e9e7c0c84b037f3ed13`
 - **Rejected implementation commit:** `9019c4b8658c3d4d3b4ad5c93e7442a1cd1a95b4`
 - **Approval commit:** `null`
-- **Blockers:** `MIP-OWNER-REFRESH-002-TRUTHFULNESS-001: report misstates current lint debt, completed MMM review and pending exact-owner decision, and GeoX review stage.`
+- **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -37,7 +37,9 @@ Owner-authorized existing-report refresh implemented and published
 for review; implementation evidence follows below. The local draft
 was refreshed against live Git (stale positions replaced, no
 monitoring assertions carried); source observations were refreshed
-from live Git at implementation time.
+from live Git at implementation time. A truthfulness correction
+for lint/runner/GeoX positions was applied in this cycle (see
+correction record); the implementation below is its tree.
 
 ## Execution evidence
 
@@ -78,10 +80,29 @@ history was modified.
 
 Git identity: base `da55b40`, authorization
 `5ddaa0ac6429300250c69383ab2064c7ed3ea6bd`; implementation
-`9019c4b8658c3d4d3b4ad5c93e7442a1cd1a95b4`; diff limited to the one
+`9a0c2cd9bf9f697ab5bd41e953413ed29837a2de` (supersedes `9019c4b`,
+retained in rejected provenance below); diff limited to the one
 owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
+
+## Correction record (MIP-OWNER-REFRESH-002-TRUTHFULNESS-001)
+
+Review found stale lint-debt, runner-stage, and GeoX-stage claims.
+Corrected in `9a0c2cd9bf9f697ab5bd41e953413ed29837a2de`: MMM
+zero-lint cleanup merged (true SHA
+`b84105f820eb96ea8a3187f56a9b2c1bf1e7f941`, verified via GitHub
+API commit + full diff — the coordinator-recorded variant ending
+`2e341f941` 404s and does not exist; noted here so no link is
+built on it); runner independently reviewed with only its owner
+publication decision pending; GeoX corrected branch published for
+re-review. Goal impact stated from merged closure evidence (Ruff
+zero, identical Docker suite, no exemption). Tier 1 gate rerun
+(structure, claims, links, taskctl, JSON, diff checks pass;
+six local blobs resolve, the lint-closure link resolves via the
+API-verified commit). This consumes the single correction cycle
+via explicit rejected-head provenance, clearing the finding
+blocker it resolves.
 
 
 ## Independent source review — one report truthfulness correction
