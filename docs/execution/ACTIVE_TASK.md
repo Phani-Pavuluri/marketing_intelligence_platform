@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-owner-progress-decisions-refresh-003`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `65b014686345ec6835abee4ad33d02bc93655bb3`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `712cb93799416b3bbc063382f3a5035206c2e4db`
+- **Rejected implementation commit:** `65b014686345ec6835abee4ad33d02bc93655bb3`
 - **Approval commit:** `null`
-- **Blockers:** `none`
+- **Blockers:** `MIP-REPORT003-CURRENT-FACTS-001: GeoX correction authorization is presented as completed corrected publication; explicit continuity-program incompleteness is omitted.`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
