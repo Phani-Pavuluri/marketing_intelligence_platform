@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `blocked`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -21,11 +21,11 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Rejected review head:** `d3c302fff5551c8d737e9c99cfc88cda1a648c3b`
 - **Rejected implementation commit:** `63a23fc6f5ccd37fe24bb135e7f3f3abd67be519`
 - **Approval commit:** `null`
-- **Blockers:** `none`
+- **Blockers:** `BLOCK-MIP-DIAGNOSTIC-CHECKLIST-FINDINGS-001`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Review decision:** `blocked`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -75,3 +75,24 @@ Git identity: base `b0e7650`, authorization
 owned path plus the three stable files via `taskctl` transitions.
 Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
+
+## Blocked: correction scope absent from Git (October 16, 2026)
+
+Remote correction commit `9be0b54` records `changes_requested` with
+correction authority and rejected provenance (`d3c302f`/`63a23fc`)
+but carries no findings: empty commit message, no report section, no
+review note, and no prompt content naming a defect. Local observer
+state holds no review event for this head. Attempted evidence:
+synchronized branch and main, verified remote/local head identity,
+read the correction commit and full report diff, checked observer
+ledger and notes refs — correction scope exists nowhere reachable.
+
+Recording `blocked` with
+`BLOCK-MIP-DIAGNOSTIC-CHECKLIST-FINDINGS-001` rather than inventing
+correction scope, per fail-closed rules. No file content changed for
+this transition beyond lifecycle metadata. Resolution condition:
+independent review findings recorded in Git (completion-report
+section, branch commit, or review note); then resume via
+`blocked` → `in_progress` and publish a corrected
+`ready_for_review` within the existing owned paths and Tier 1 gate.
+Correction budget remains available until a scoped correction begins.
