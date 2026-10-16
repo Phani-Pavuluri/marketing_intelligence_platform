@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `fc215eab1c84354238f87e6dd9cd60de1c9a2e46`
+- **Rejected implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
 - **Approval commit:** `null`
-- **Blockers:** `none`
+- **Blockers:** `MIP-CHECKLIST-003-LIVE-OBSERVATION-001: completion report presents incompatible sibling snapshots as live/current without historical attribution.`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -54,3 +54,10 @@ Implementation owns only the checklist above plus stable3 execution files. No co
 Tier1 docs-only gates for execution, exact-head review and pre/post-FF: seven families covered; each substantive rule has an exact resolving source path/pin; diagnostic/causal distinction explicit; no invented field, implicit adoption or silent conversion; R12/bridge separation; links/blob existence; native taskctl check, JSON parsing, git diff --check, owned paths, authorization ancestry and unchanged-authority checks. Full pytest/Docker/Ruff/mypy not_required for this documentation surface. Native handoff/controller tests are required for authoring metadata. Required delegated categories taskctl_check and git_diff_check need actual operator logs identifying exact reviewed commit and Git tree, outside the implementation where appropriate. Missing operator exports/logs are reviewer responsibilities, not automatic producer correction cycles.
 
 Use taskctl for lifecycle/projections. Freeze the task-owned tree; run required gates; write complete durable final publication receipt naming implementation parent, validation/results/evidence, worktree and authority impact; verify exact remote feature head, then stop ready_for_review or native blocked. Activated delegated_routine review/receipt/preflight remains mandatory before any routine merge; no new policy adoption or per-head owner approval for an eligible tree. One correction cycle; compatibility/migration not_applicable. No merge, PR, history rewrite, capability or successor execution. Unresolved execution-blocking design questions: none.
+
+
+## Independent source review — bounded reporting correction
+
+Exact rejected head fc215eab1c84354238f87e6dd9cd60de1c9a2e46 / implementation 63bbbe1ff6668f08f3c038428d9647aaa1265e8e. Finding MIP-CHECKLIST-003-LIVE-OBSERVATION-001: the completion report names MMM c907841 and GeoX104a745 as live mains in Execution evidence but its final Live sibling observation JSON names MMM00cad45 and GeoX2ff493c with older tasks, without historical qualification. Muse independently sustained this report-only inconsistency in review discussion. Publish one truthful current overlay, preserving any earlier observation explicitly as historical. Do not refresh historical coordination pins, change the checklist, or infer consumer verification/capability authority. The canonical feature_branch_created=false field is not part of this finding; retain repository-native semantics.
+
+The single existing correction cycle is now authorized for this report consistency class and genuinely necessary owned lifecycle evidence only. Muse owns correction approach. Same Tier1 exact-tree source/link/ownership/lineage/JSON/taskctl/diff gate and durable complete receipt; accurate Current outcome and live-versus-historical attribution throughout. Correct directly from native changes_requested and finish using explicit --complete-correction, preserving rejected provenance and budget; do not reset counters or take a lifecycle path that loses correction accounting. Freeze files, validate exact corrected tree, publish remote ready_for_review and stop. No owner approval, product scope, additional correction, merge or successor authority is granted by this review.

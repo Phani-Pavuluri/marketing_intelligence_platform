@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
 - **Reviewed head:** `null`
-- **Rejected review head:** `null`
-- **Rejected implementation commit:** `null`
+- **Rejected review head:** `fc215eab1c84354238f87e6dd9cd60de1c9a2e46`
+- **Rejected implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
 - **Approval commit:** `null`
-- **Blockers:** `none`
+- **Blockers:** `MIP-CHECKLIST-003-LIVE-OBSERVATION-001: completion report presents incompatible sibling snapshots as live/current without historical attribution.`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -79,3 +79,8 @@ Authority unchanged across all protected flags. Local-only `.codex/`
 and `docs/tasks/` artifacts never staged.
 
 Live sibling observation: {"MMM": {"main": "00cad45de5f9f04c41a6eed51ccbc22149a42b54", "task_id": "MMM_TRANSFORM_SELECTION_AUDIT_001"}, "GeoX": {"main": "2ff493c884ac06aaf8359e349fc8008f1872528a", "task_id": "GEOX_TIER1_CALLBACK_INJECTION_REPAIR_001"}}. No snapshot refresh, sibling changes or consumer verification asserted.
+
+
+## Independent source finding — bounded correction authorized
+
+MIP-CHECKLIST-003-LIVE-OBSERVATION-001 at fc215eab1c84354238f87e6dd9cd60de1c9a2e46: inconsistent current sibling snapshots in this report, detailed in ACTIVE_TASK. Muse agrees this is a narrow report defect, not a new owner decision. Checklist artifact-kind/diagnostic scope stays unchanged. Independent source-review discussion is retained in coordinator milestones/MIP-003-source-review-response.md; taskctl metadata convention is preserved. Rejected publication is not approved.
