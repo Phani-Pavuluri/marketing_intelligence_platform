@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `blocked`
+**Current decision:** `in_progress`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -21,11 +21,11 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Rejected review head:** `2934d374ceca8a3421f7b5be47f0827c9ed21781`
 - **Rejected implementation commit:** `b0d56459ee0e43b1515096e7c30c042567bcb672`
 - **Approval commit:** `null`
-- **Blockers:** `BLOCK-MIP-CHECKLIST-RECOVERY-FINDINGS-001`
+- **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `blocked`
+- **Review decision:** `in_progress`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -93,3 +93,27 @@ section, branch commit, or review note); then resume via
 `blocked` → `in_progress` and publish a corrected
 `ready_for_review` within the existing owned paths and Tier 1 gate.
 Correction budget remains available until a scoped correction begins.
+
+
+## Recovered independent review finding and operator responsibility
+
+This section supplies the finding omitted by the earlier correction-authorization metadata. Actual native observer review of exact publication2934d374ceca8a3421f7b5be47f0827c9ed21781 returned blocked with one finding. The checklist itself was assessed as substantively aligned; no checklist content correction or new product meaning is requested. The predecessor b45db6f semantic finding was already addressed by this successor.
+
+The actual review finding follows verbatim as evidence, not invented task scope:
+
+```json
+{
+  "id": "MIP-REVIEW-001",
+  "severity": "major",
+  "source_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
+  "line": 61,
+  "requirement": "Required delegated validation categories must have actual operator logs identifying the exact reviewed commit and Git tree; asserted results must be distinguished from independently established proof.",
+  "observation": "The completion report states that taskctl check and git diff --check passed, and the publication receipt repeats those claims, but the manifest bundle contains no operator output or log tying either required category to the reviewed tree. The task authority explicitly requires these logs.",
+  "impact": "The checkpoint\u2019s mandatory validation and publication evidence cannot be independently verified, so readiness for downstream delegated review or merge cannot be established.",
+  "proposed_correction": "Provide the exact taskctl_check and git_diff_check operator outputs, each identifying the reviewed tree, in the durable review/publication evidence, or rerun and publish those gates with their exact-tree evidence.",
+  "acceptance_evidence": "A reviewable evidence bundle contains successful taskctl_check and git_diff_check outputs with the reviewed tree identified, matching the publication receipt and reviewed SHA.",
+  "user_decision_required": false
+}
+```
+
+The missing exact-head taskctl_check and git_diff_check outputs are reviewer/operator evidence. Codex will collect actual logs identifying the final reviewed commit and Git tree outside the frozen implementation and supply them to a genuine evidence-complete review. Do not try to put the final publication's self-referential SHA into its own source tree or change otherwise-correct checklist semantics. Muse should accurately report the correction-handoff failure/resolution and existing gate results, use the native lifecycle to publish a ready_for_review replacement with a complete truthful receipt, and stop without merge. Root operator evidence must precede the next independent review. Existing bounded scope, validation, protected authority and correction budget remain unchanged; no new task, capability or owner decision.

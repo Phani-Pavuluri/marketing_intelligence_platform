@@ -43,8 +43,8 @@
   ],
   "next_task_authorized": false,
   "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_RECOVERY_002",
-  "status": "blocked",
-  "review_decision": "blocked",
+  "status": "in_progress",
+  "review_decision": "in_progress",
   "base_sha": "46eecad9b239ba95672b5f002cb1d80f1c30454f",
   "task_authoring_start_sha": "46eecad9b239ba95672b5f002cb1d80f1c30454f",
   "task_authoring_head_sha": "05aaa6083908f16cf262682b78c738d8d3f6a897",
@@ -58,9 +58,7 @@
   "approval_commit_sha": null,
   "capability_authorizations_changed": false,
   "last_updated": "2026-10-16",
-  "blockers": [
-    "BLOCK-MIP-CHECKLIST-RECOVERY-FINDINGS-001"
-  ],
+  "blockers": [],
   "maximum_correction_cycles": 1,
   "correction_cycles_completed": 0,
   "correction_cycles_remaining": 1,
