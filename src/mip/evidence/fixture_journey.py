@@ -11,6 +11,7 @@ touches real data, or grants analytical authority.
 
 from __future__ import annotations
 
+import math
 from collections.abc import Mapping
 from dataclasses import dataclass, field
 
@@ -206,11 +207,27 @@ _COMPAT_OK_STATES = frozenset({"compatible", "compatible_with_warning"})
 _SIM_OK_STATUSES = frozenset({"SUCCEEDED", "SUCCEEDED_WITH_LIMITATIONS"})
 _ELIGIBLE_HANDOFF = "eligible_for_compatibility_evaluation"
 _MARK_METHODS = frozenset({"diagnostic_only", "research_only"})
+_GEOX_PINNED_VERSION = "1.0"
+_GEOX_AUTH_FLAGS = frozenset(
+    {
+        "production_inference",
+        "assignment",
+        "causal_readout",
+        "calibration_signal_export",
+        "experiment_evidence_export",
+        "trust_report",
+        "decision_surface",
+        "recommendation_contract",
+        "llm_decisioning",
+        "budget_optimization",
+    }
+)
 
 _READOUT_REQUIRED = (
     "readout_id",
     "readout_version",
     "artifact_version",
+    "producer_package_version",
     "experiment_id",
     "fixture_id",
     "dataset_version",
@@ -367,6 +384,13 @@ def _get_bool(data: Mapping[str, object], key: str, where: str) -> bool:
     return value
 
 
+def _get_finite(data: Mapping[str, object], key: str, where: str) -> float:
+    value = data.get(key)
+    if isinstance(value, bool) or not isinstance(value, int | float) or not math.isfinite(value):
+        raise _fail("invalid_invariants", f"{where}.{key} must be a finite number")
+    return float(value)
+
+
 def _get_str_list(data: Mapping[str, object], key: str, where: str) -> tuple[str, ...]:
     value = data.get(key)
     if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
@@ -405,8 +429,6 @@ def _admit_readout(data: Mapping[str, object]) -> _Readout:
     )
     for key in (
         "readout_id",
-        "readout_version",
-        "artifact_version",
         "experiment_id",
         "fixture_id",
         "dataset_version",
@@ -416,6 +438,10 @@ def _admit_readout(data: Mapping[str, object]) -> _Readout:
         "effect_scale",
     ):
         _get_str(data, key, "geox_readout")
+    for key in ("readout_version", "artifact_version", "producer_package_version"):
+        version_value = data.get(key)
+        if version_value != _GEOX_PINNED_VERSION:
+            raise _fail("unknown_version", f"geox_readout.{key} is not a supported version")
     uncertainty_available = _get_bool(data, "uncertainty_available", "geox_readout")
     warnings = _get_str_list(data, "warnings", "geox_readout")
     blocked = _get_str_list(data, "blocked_reasons", "geox_readout")
@@ -437,8 +463,11 @@ def _admit_readout(data: Mapping[str, object]) -> _Readout:
         if key not in replay:
             raise _fail("missing_fields", f"geox_readout.replay_metadata.{key} is required")
     flags = _get_mapping(data, "authorization_flags", "geox_readout")
-    if any(value is True for value in flags.values()):
-        raise _fail("unmapped_literal", "true production authorization flags are never admitted")
+    if set(flags) != _GEOX_AUTH_FLAGS:
+        raise _fail("missing_fields", "authorization_flags must declare the full producer flag set")
+    for name, value in flags.items():
+        if value is not False:
+            raise _fail("invalid_invariants", f"authorization flag {name} is not explicitly false")
     commit_value = provenance.get("source_commit")
     commit = commit_value if isinstance(commit_value, str) else ""
     experiment_value = data.get("experiment_id")
@@ -627,13 +656,19 @@ def _admit_sim(data: Mapping[str, object]) -> _Sim:
             raise _fail("missing_fields", f"mmm_sim.{key} is required")
     if data.get("schema_version") != "mmm_public_simulation_export_v1":
         raise _fail("unknown_version", "mmm_sim.schema_version is not supported")
+    if data.get("producer_package_name") != "mmm":
+        raise _fail("unmapped_literal", "mmm_sim.producer_package_name must be mmm")
+    if data.get("artifact_kind") != "MMMPublicSimulationExport":
+        raise _fail("unmapped_literal", "mmm_sim.artifact_kind is not supported")
+    if data.get("artifact_schema_version") != "mmm_public_simulation_export_v1":
+        raise _fail("unknown_version", "mmm_sim.artifact_schema_version is not supported")
     status_value = data.get("status")
     if not isinstance(status_value, str) or status_value not in SIM_STATUSES:
         raise _fail("unmapped_literal", "mmm_sim.status is not known")
     run_value = data.get("run_id")
     if not isinstance(run_value, str) or not run_value:
         raise _fail("missing_fields", "mmm_sim.run_id is required")
-    for plan_key in ("baseline_plan", "candidate_plan"):
+    for plan_key, expected_role in (("baseline_plan", "BASELINE"), ("candidate_plan", "CANDIDATE")):
         plan = _get_mapping(data, plan_key, "mmm_sim")
         if plan.get("schema_version") != "mmm_simulation_plan_v1":
             raise _fail("unknown_version", f"mmm_sim.{plan_key}.schema_version is not supported")
@@ -647,15 +682,14 @@ def _admit_sim(data: Mapping[str, object]) -> _Sim:
         ):
             if key not in plan:
                 raise _fail("missing_fields", f"mmm_sim.{plan_key}.{key} is required")
-        role = plan.get("role")
-        if role not in {"BASELINE", "CANDIDATE"}:
-            raise _fail("unmapped_literal", f"mmm_sim.{plan_key}.role is not known")
+        if plan.get("role") != expected_role:
+            raise _fail(
+                "invalid_invariants", f"mmm_sim.{plan_key}.role must be {expected_role} in position"
+            )
         items = plan.get("items")
         if not isinstance(items, list) or not items:
             raise _fail("missing_fields", f"mmm_sim.{plan_key}.items must be non-empty")
-        total = plan.get("total_spend")
-        if not isinstance(total, int | float):
-            raise _fail("missing_fields", f"mmm_sim.{plan_key}.total_spend must be numeric")
+        total = _get_finite(plan, "total_spend", f"mmm_sim.{plan_key}")
         running = 0.0
         for item in items:
             if not isinstance(item, Mapping):
@@ -663,98 +697,111 @@ def _admit_sim(data: Mapping[str, object]) -> _Sim:
             for key in ("channel_id", "spend", "spend_unit"):
                 if key not in item:
                     raise _fail("missing_fields", f"mmm_sim.{plan_key}.items.{key} is required")
-            spend = item.get("spend")
-            if not isinstance(spend, int | float) or spend < 0:
+            item_spend = _get_finite(item, "spend", f"mmm_sim.{plan_key}.items")
+            if item_spend < 0:
                 raise _fail(
                     "invalid_invariants", f"mmm_sim.{plan_key}.items.spend must be non-negative"
                 )
-            running += float(spend)
-        if abs(running - float(total)) > 1e-9:
+            running += item_spend
+        if abs(running - total) > 1e-9:
             raise _fail(
                 "invalid_invariants", f"mmm_sim.{plan_key}.total_spend must equal item spends"
             )
+        if not isinstance(plan.get("plan_id"), str) or not plan["plan_id"]:
+            raise _fail("missing_fields", f"mmm_sim.{plan_key}.plan_id is required")
     comparison_raw = data.get("comparison")
+    if comparison_raw is None:
+        raise _fail("invalid_invariants", "mmm_sim.comparison must be a mapping, not null")
+    if not isinstance(comparison_raw, Mapping):
+        raise _fail("missing_fields", "mmm_sim.comparison must be a mapping")
     metrics: list[Mapping[str, object]] = []
     range_evals: list[Mapping[str, object]] = []
     uncertainty = "UNAVAILABLE"
     uncertainty_ref: str | None = None
-    if comparison_raw is not None:
-        if not isinstance(comparison_raw, Mapping):
-            raise _fail("missing_fields", "mmm_sim.comparison must be a mapping")
+    for key in (
+        "comparison_id",
+        "run_id",
+        "baseline_plan_id",
+        "candidate_plan_id",
+        "status",
+        "technical_summary",
+    ):
+        if key not in comparison_raw:
+            raise _fail("missing_fields", f"mmm_sim.comparison.{key} is required")
+    comp_status = comparison_raw.get("status")
+    if comp_status not in SIM_STATUSES:
+        raise _fail("unmapped_literal", "mmm_sim.comparison.status is not known")
+    baseline_plan = _get_mapping(data, "baseline_plan", "mmm_sim")
+    candidate_plan = _get_mapping(data, "candidate_plan", "mmm_sim")
+    if comparison_raw.get("run_id") != run_value:
+        raise _fail("invalid_invariants", "comparison.run_id must match export run_id")
+    if comparison_raw.get("baseline_plan_id") != baseline_plan.get("plan_id"):
+        raise _fail("invalid_invariants", "comparison.baseline_plan_id must match baseline plan")
+    if comparison_raw.get("candidate_plan_id") != candidate_plan.get("plan_id"):
+        raise _fail("invalid_invariants", "comparison.candidate_plan_id must match candidate plan")
+    raw_metrics = comparison_raw.get("metrics", [])
+    if not isinstance(raw_metrics, list):
+        raise _fail("missing_fields", "mmm_sim.comparison.metrics must be a list")
+    for metric in raw_metrics:
+        if not isinstance(metric, Mapping):
+            raise _fail("missing_fields", "mmm_sim.comparison.metrics entries must be mappings")
         for key in (
-            "comparison_id",
-            "run_id",
-            "baseline_plan_id",
-            "candidate_plan_id",
-            "status",
-            "technical_summary",
+            "metric_id",
+            "estimand",
+            "aggregation_scope",
+            "baseline_mu",
+            "candidate_mu",
+            "delta_mu",
+            "unit",
         ):
-            if key not in comparison_raw:
-                raise _fail("missing_fields", f"mmm_sim.comparison.{key} is required")
-        comp_status = comparison_raw.get("status")
-        if comp_status not in SIM_STATUSES:
-            raise _fail("unmapped_literal", "mmm_sim.comparison.status is not known")
-        raw_metrics = comparison_raw.get("metrics", [])
-        if not isinstance(raw_metrics, list):
-            raise _fail("missing_fields", "mmm_sim.comparison.metrics must be a list")
-        for metric in raw_metrics:
-            if not isinstance(metric, Mapping):
-                raise _fail("missing_fields", "mmm_sim.comparison.metrics entries must be mappings")
-            for key in (
-                "metric_id",
-                "estimand",
-                "aggregation_scope",
-                "baseline_mu",
-                "candidate_mu",
-                "delta_mu",
-                "unit",
-            ):
-                if key not in metric:
-                    raise _fail("missing_fields", f"mmm_sim.comparison.metrics.{key} is required")
-            base = metric.get("baseline_mu")
-            cand = metric.get("candidate_mu")
-            delta = metric.get("delta_mu")
-            if (
-                not isinstance(base, int | float)
-                or not isinstance(cand, int | float)
-                or not isinstance(delta, int | float)
-                or abs(float(delta) - (float(cand) - float(base))) > 1e-9
-            ):
-                raise _fail(
-                    "invalid_invariants", "delta_mu must equal candidate_mu minus baseline_mu"
-                )
-            metrics.append(metric)
-            unc_raw = metric.get("uncertainty", {})
-            if not isinstance(unc_raw, Mapping):
-                raise _fail("missing_fields", "metric.uncertainty must be a mapping")
-            unc_status, unc_ref = _admit_sim_uncertainty(
-                unc_raw, "mmm_sim.comparison.metrics.uncertainty"
+            if key not in metric:
+                raise _fail("missing_fields", f"mmm_sim.comparison.metrics.{key} is required")
+        base = _get_finite(metric, "baseline_mu", "mmm_sim.comparison.metrics")
+        cand = _get_finite(metric, "candidate_mu", "mmm_sim.comparison.metrics")
+        delta = _get_finite(metric, "delta_mu", "mmm_sim.comparison.metrics")
+        if abs(delta - (cand - base)) > 1e-9:
+            raise _fail(
+                "invalid_invariants", "delta_mu must equal candidate_mu minus baseline_mu"
             )
-            if unc_status != "AVAILABLE":
-                uncertainty = unc_status
-            elif uncertainty == "UNAVAILABLE":
-                uncertainty = "AVAILABLE"
-                uncertainty_ref = unc_ref
-        raw_ranges = comparison_raw.get("range_evaluations", [])
-        if not isinstance(raw_ranges, list):
-            raise _fail("missing_fields", "mmm_sim.comparison.range_evaluations must be a list")
-        for entry in raw_ranges:
-            if not isinstance(entry, Mapping):
-                raise _fail("missing_fields", "range_evaluations entries must be mappings")
-            for key in (
-                "range_record_id",
-                "channel_id",
-                "baseline_relation",
-                "candidate_relation",
-                "extrapolation",
-            ):
-                if key not in entry:
-                    raise _fail("missing_fields", f"range_evaluations.{key} is required")
-            candidate_relation = entry.get("candidate_relation")
-            extrapolation = entry.get("extrapolation")
-            if candidate_relation not in RANGE_RELATIONS or extrapolation not in EXTRAPOLATIONS:
-                raise _fail("unmapped_literal", "range_evaluations holds an unknown literal")
-            range_evals.append(entry)
+        metrics.append(metric)
+        unc_raw = metric.get("uncertainty", {})
+        if not isinstance(unc_raw, Mapping):
+            raise _fail("missing_fields", "metric.uncertainty must be a mapping")
+        unc_status, unc_ref = _admit_sim_uncertainty(
+            unc_raw, "mmm_sim.comparison.metrics.uncertainty"
+        )
+        if unc_status != "AVAILABLE":
+            uncertainty = unc_status
+        elif uncertainty == "UNAVAILABLE":
+            uncertainty = "AVAILABLE"
+            uncertainty_ref = unc_ref
+    raw_ranges = comparison_raw.get("range_evaluations", [])
+    if not isinstance(raw_ranges, list):
+        raise _fail("missing_fields", "mmm_sim.comparison.range_evaluations must be a list")
+    for entry in raw_ranges:
+        if not isinstance(entry, Mapping):
+            raise _fail("missing_fields", "range_evaluations entries must be mappings")
+        for key in (
+            "range_record_id",
+            "channel_id",
+            "baseline_relation",
+            "candidate_relation",
+            "extrapolation",
+        ):
+            if key not in entry:
+                raise _fail("missing_fields", f"range_evaluations.{key} is required")
+        baseline_relation = entry.get("baseline_relation")
+        candidate_relation = entry.get("candidate_relation")
+        extrapolation = entry.get("extrapolation")
+        if (
+            baseline_relation not in RANGE_RELATIONS
+            or candidate_relation not in RANGE_RELATIONS
+            or extrapolation not in EXTRAPOLATIONS
+        ):
+            raise _fail("unmapped_literal", "range_evaluations holds an unknown literal")
+        if not isinstance(entry.get("blocked"), bool):
+            raise _fail("invalid_invariants", "range_evaluations.blocked must be a boolean")
+        range_evals.append(entry)
     blocked_eval = any(entry.get("blocked") is True for entry in range_evals)
     restrictive_eval = any(
         entry.get("candidate_relation") != "WITHIN_SUPPORTED_RANGE"
@@ -799,20 +846,20 @@ def _admit_sim(data: Mapping[str, object]) -> _Sim:
     if status_value in {"BLOCKED", "FAILED"} and packet_raw is None:
         raise _fail("invalid_invariants", "blocked/failed exports require a failure_packet")
     manifest_raw = data.get("run_manifest")
-    if manifest_raw is not None:
-        if not isinstance(manifest_raw, Mapping):
-            raise _fail("missing_fields", "mmm_sim.run_manifest must be a mapping")
-        if manifest_raw.get("run_id") != run_value:
-            raise _fail("invalid_invariants", "run_manifest.run_id must match export run_id")
-        if manifest_raw.get("status") != status_value:
-            raise _fail("invalid_invariants", "run_manifest.status must equal export status")
+    if manifest_raw is None:
+        raise _fail("missing_fields", "mmm_sim.run_manifest is required")
+    if not isinstance(manifest_raw, Mapping):
+        raise _fail("missing_fields", "mmm_sim.run_manifest must be a mapping")
+    if manifest_raw.get("run_id") != run_value:
+        raise _fail("invalid_invariants", "run_manifest.run_id must match export run_id")
+    if manifest_raw.get("status") != status_value:
+        raise _fail("invalid_invariants", "run_manifest.status must equal export status")
     artifact_value = data.get("artifact_id")
-    if isinstance(artifact_value, str) and artifact_value:
-        artifact_id = artifact_value
-    else:
-        artifact_id = f"mmm_public_simulation:{run_value}"
-    if run_value not in artifact_id:
+    if not isinstance(artifact_value, str) or not artifact_value:
+        raise _fail("missing_fields", "mmm_sim.artifact_id must be producer-supplied")
+    if run_value not in artifact_value:
         raise _fail("invalid_invariants", "artifact_id must include run_id")
+    artifact_id = artifact_value
     warning_texts = tuple(f"limitation:{ref}" for ref in limitation_refs)
     return _Sim(
         status=status_value,

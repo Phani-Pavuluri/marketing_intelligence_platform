@@ -9,6 +9,13 @@ from mip.evidence.fixture_journey import (
     resolve_fixture_journey,
 )
 
+
+def as_list(value: object) -> list[object]:
+    """Narrow an object to a list for fixture builders."""
+    assert isinstance(value, list)
+    return value
+
+
 COMMIT = "fixture-commit-r01"
 
 
@@ -64,7 +71,18 @@ def base_readout(**overrides: object) -> dict[str, object]:
             "created_by": "contract",
         },
         "replay_metadata": {"assignment_seed": 1, "replay_version": "1.0"},
-        "authorization_flags": {},
+        "authorization_flags": {
+            "production_inference": False,
+            "assignment": False,
+            "causal_readout": False,
+            "calibration_signal_export": False,
+            "experiment_evidence_export": False,
+            "trust_report": False,
+            "decision_surface": False,
+            "recommendation_contract": False,
+            "llm_decisioning": False,
+            "budget_optimization": False,
+        },
     }
     readout.update(overrides)
     return readout
@@ -179,6 +197,9 @@ def base_sim(**overrides: object) -> dict[str, object]:
         },
         "supported_range_evidence_id": "sr-1",
         "status": "SUCCEEDED",
+        "producer_package_name": "mmm",
+        "artifact_kind": "MMMPublicSimulationExport",
+        "artifact_schema_version": "mmm_public_simulation_export_v1",
         "artifact_id": "mmm_public_simulation:run-1",
         "run_manifest": {"run_id": "run-1", "status": "SUCCEEDED"},
     }
@@ -373,7 +394,7 @@ def test_f08b_compat_mark_cofires_blocked() -> None:
 def test_f10_unavailable_uncertainty() -> None:
     sim = base_sim()
     comparison = as_dict(sim["comparison"])
-    metric = as_dict(comparison["metrics"][0])
+    metric = as_dict(as_list(comparison["metrics"])[0])
     metric["uncertainty"] = {"status": "UNAVAILABLE"}
     comparison["metrics"] = [metric]
     sim = {**sim, "comparison": comparison}
@@ -386,7 +407,7 @@ def test_f10_unavailable_uncertainty() -> None:
 def test_f11_range_restriction() -> None:
     sim = base_sim()
     comparison = as_dict(sim["comparison"])
-    evaluation = as_dict(comparison["range_evaluations"][0])
+    evaluation = as_dict(as_list(comparison["range_evaluations"])[0])
     evaluation["candidate_relation"] = "OUTSIDE_OBSERVED_BUT_SUPPORTED"
     evaluation["extrapolation"] = "LIMITED_EXTRAPOLATION"
     comparison["range_evaluations"] = [evaluation]
@@ -533,7 +554,7 @@ def test_collision_warned_plus_unavailable_headlines_uncertainty() -> None:
     )
     sim = base_sim()
     comparison = as_dict(sim["comparison"])
-    metric = as_dict(comparison["metrics"][0])
+    metric = as_dict(as_list(comparison["metrics"])[0])
     metric["uncertainty"] = {"status": "UNAVAILABLE"}
     comparison["metrics"] = [metric]
     sim = {**sim, "comparison": comparison}
@@ -584,3 +605,182 @@ def test_result_types() -> None:
     assert isinstance(
         resolve_fixture_journey({"schema_version": "wrong"}), FixtureJourneyFailure
     )
+
+
+def test_fjr001_unknown_geox_version_rejected() -> None:
+    result = resolve_fixture_journey(base_inputs(geox_readout=base_readout(readout_version="2.0")))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "unknown_version"
+
+
+def test_fjr001_wrong_sim_package_kind_rejected() -> None:
+    sim = base_sim(producer_package_name="other", artifact_kind="OtherExport")
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "unmapped_literal"
+
+
+def test_fjr001_missing_authorization_flags_rejected() -> None:
+    readout = base_readout(authorization_flags={"production_inference": False})
+    result = resolve_fixture_journey(base_inputs(geox_readout=readout))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "missing_fields"
+
+
+def test_fjr001_non_boolean_authorization_flag_rejected() -> None:
+    flags = dict(as_dict(base_readout()["authorization_flags"]))
+    flags["assignment"] = "no"
+    result = resolve_fixture_journey(
+        base_inputs(geox_readout=base_readout(authorization_flags=flags))
+    )
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr001_true_authorization_flag_rejected() -> None:
+    flags = dict(as_dict(base_readout()["authorization_flags"]))
+    flags["causal_readout"] = True
+    result = resolve_fixture_journey(
+        base_inputs(geox_readout=base_readout(authorization_flags=flags))
+    )
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr002_null_comparison_rejected() -> None:
+    result = resolve_fixture_journey(base_inputs(mmm_sim=base_sim(comparison=None)))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr002_missing_comparison_rejected() -> None:
+    sim = base_sim()
+    del sim["comparison"]
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "missing_fields"
+
+
+def test_fjr002_missing_run_manifest_rejected() -> None:
+    sim = base_sim()
+    del sim["run_manifest"]
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "missing_fields"
+
+
+def test_fjr002_mismatched_run_manifest_rejected() -> None:
+    sim = base_sim(run_manifest={"run_id": "run-1", "status": "FAILED"})
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr002_missing_artifact_id_rejected() -> None:
+    sim = base_sim()
+    del sim["artifact_id"]
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "missing_fields"
+
+
+def test_fjr002_mismatched_artifact_id_rejected() -> None:
+    result = resolve_fixture_journey(
+        base_inputs(mmm_sim=base_sim(artifact_id="mmm_public_simulation:other"))
+    )
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr003_nan_spend_rejected() -> None:
+    import math as _math
+
+    bad_plan = base_plan("BASELINE")
+    bad_plan["items"] = [{"channel_id": "channel", "spend": _math.nan, "spend_unit": "currency"}]
+    bad_plan["total_spend"] = _math.nan
+    result = resolve_fixture_journey(base_inputs(mmm_sim=base_sim(baseline_plan=bad_plan)))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr003_infinite_delta_rejected() -> None:
+    import math as _math2
+
+    sim = base_sim()
+    comparison = as_dict(sim["comparison"])
+    metric = as_dict(as_list(comparison["metrics"])[0])
+    metric["baseline_mu"] = 10.0
+    metric["candidate_mu"] = _math2.inf
+    metric["delta_mu"] = _math2.inf
+    comparison["metrics"] = [metric]
+    sim = {**sim, "comparison": comparison}
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr003_nan_delta_trio_rejected() -> None:
+    import math as _math3
+
+    sim = base_sim()
+    comparison = as_dict(sim["comparison"])
+    metric = as_dict(as_list(comparison["metrics"])[0])
+    metric["baseline_mu"] = _math3.nan
+    metric["candidate_mu"] = _math3.nan
+    metric["delta_mu"] = _math3.nan
+    comparison["metrics"] = [metric]
+    sim = {**sim, "comparison": comparison}
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr003_invalid_baseline_relation_rejected() -> None:
+    sim = base_sim()
+    comparison = as_dict(sim["comparison"])
+    evaluation = as_dict(as_list(comparison["range_evaluations"])[0])
+    evaluation["baseline_relation"] = "EVERYWHERE"
+    comparison["range_evaluations"] = [evaluation]
+    sim = {**sim, "comparison": comparison}
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "unmapped_literal"
+
+
+def test_fjr003_non_boolean_blocked_rejected() -> None:
+    sim = base_sim()
+    comparison = as_dict(sim["comparison"])
+    evaluation = as_dict(as_list(comparison["range_evaluations"])[0])
+    evaluation["blocked"] = "yes"
+    comparison["range_evaluations"] = [evaluation]
+    sim = {**sim, "comparison": comparison}
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr003_swapped_plan_roles_rejected() -> None:
+    sim = base_sim(baseline_plan=base_plan("CANDIDATE"), candidate_plan=base_plan("BASELINE"))
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr003_mismatched_comparison_plan_ids_rejected() -> None:
+    sim = base_sim()
+    comparison = as_dict(sim["comparison"])
+    comparison["baseline_plan_id"] = "plan-elsewhere"
+    sim = {**sim, "comparison": comparison}
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
+
+
+def test_fjr003_mismatched_comparison_run_id_rejected() -> None:
+    sim = base_sim()
+    comparison = as_dict(sim["comparison"])
+    comparison["run_id"] = "run-elsewhere"
+    sim = {**sim, "comparison": comparison}
+    result = resolve_fixture_journey(base_inputs(mmm_sim=sim))
+    assert isinstance(result, FixtureJourneyFailure)
+    assert result.code == "invalid_invariants"
