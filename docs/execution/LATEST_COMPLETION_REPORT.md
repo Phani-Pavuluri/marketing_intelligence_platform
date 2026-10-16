@@ -156,12 +156,12 @@ The missing exact-head taskctl_check and git_diff_check outputs are reviewer/ope
 
 ## Correction finding — exact-checkpoint operator evidence (October 16, 2026)
 
-Independent observer review of exact head  returned MIP-REVIEW-001: the required taskctl_check and git_diff_check transcripts did not identify the reviewed checkpoint. The reviewer/operator reran both required gates on that rejected exact head and recorded the actual outputs outside the implementation:
+Independent observer review of exact head a5dde7b8bb1c134a04c0a34bb4238ed534e17c8f returned MIP-REVIEW-001: the required taskctl_check and git_diff_check transcripts did not identify the reviewed checkpoint. The reviewer/operator reran both required gates on that rejected exact head and recorded the actual outputs outside the implementation:
 
-- Reviewed head: 
-- Exact tree: 
-- taskctl_check transcript:  (exit 0)
-- git_diff_check transcript:  (exit 0)
-- Lineage record: 
+- Reviewed head: a5dde7b8bb1c134a04c0a34bb4238ed534e17c8f
+- Exact tree: c3916cd42db8385ca5834e58d021e52a1286f7d7
+- taskctl_check transcript: /Users/phani/.codex/quota-resume/mip-recovery-002-operator-evidence-a5/operator-taskctl.log (exit 0)
+- git_diff_check transcript: /Users/phani/.codex/quota-resume/mip-recovery-002-operator-evidence-a5/operator-diff.log (exit 0)
+- Lineage record: /Users/phani/.codex/quota-resume/mip-recovery-002-operator-evidence-a5/operator-lineage.json
 
 This is evidence for the bounded correction only. It does not authorize merge, adoption, certification, sibling work, or a new capability.
