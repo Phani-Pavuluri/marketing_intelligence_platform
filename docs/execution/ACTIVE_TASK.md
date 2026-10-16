@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** blocked
+**Status:** in_progress
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -21,11 +21,11 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Rejected review head:** `d3c302fff5551c8d737e9c99cfc88cda1a648c3b`
 - **Rejected implementation commit:** `63a23fc6f5ccd37fe24bb135e7f3f3abd67be519`
 - **Approval commit:** `null`
-- **Blockers:** `BLOCK-MIP-DIAGNOSTIC-CHECKLIST-FINDINGS-001`
+- **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `blocked`
+- **Review decision:** `in_progress`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
