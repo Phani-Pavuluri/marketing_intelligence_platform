@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -16,7 +16,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
-- **Implementation commit:** `null`
+- **Implementation commit:** `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`
 - **Reviewed head:** `null`
 - **Rejected review head:** `null`
 - **Rejected implementation commit:** `null`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -33,6 +33,49 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## Current outcome
 
-Fresh bounded successor authoring prepared for the artifact-kind omission on predecessor exact head 14ff63f210fc2699bdaf460c83c569581c194428; implementation is not authored by Codex. The predecessor remains unchanged and unmerged with its correction budget exhausted. This task adds only the existing consumer KNOWN_KINDS and diagnostic-only artifact distinction to the checklist scope. No parser, producer proposal, bridge, certification or statistical truth is adopted by task authoring.
+Bounded successor implementation published for review: the
+artifact-kind criterion is in place with mapped evidence, the
+MIP-REVIEW-006 refinement is preserved, and all seven predecessor
+families plus the new criterion gate green. Predecessor exact head
+`14ff63f` remains unchanged and unmerged. No checklist beyond this
+scope, no producer proposal, bridge, or statistical truth adopted.
+
+## Execution evidence
+
+Implemented on `docs/mip-diagnostic-review-checklist-artifact-kind-recovery-003`
+at `63bbbe1ff6668f08f3c038428d9647aaa1265e8e`:
+`docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md` rebuilt from the
+read-only reference with the explicit artifact-kind criterion
+(declare kind, validate against consumer `KNOWN_KINDS`, distinct
+from simulation/contribution/ROI/recommendation/TrustReport/
+certified artifacts; mismatch recorded for MMM), plus the
+MIP-REVIEW-006 diagnostic-vs-causal distinction, provenance tags,
+mapped evidence with blob SHAs, and the R12 exclusion.
+
+Delivered behavior: seven predecessor families plus the new
+criterion, each with review question, existing source rule,
+required evidence, and mismatch routing; sibling positions read
+from remote-main blobs at live mains MMM `c907841`
+(exclusive-endpoint recovery authorized, no implementation) and
+GeoX `104a745` (provenance/finality definition authorized, no
+implementation); no invented fields, no parser/tests/adoption, R12
+excluded with evidence. Plain language with merged, reviewed,
+claimed, and proposed states distinguished.
+
+Acceptance (Tier 1 gate, all pass on this implementation tree):
+families plus criterion present with resolving sources verified at
+pins (MIP base `2b3ff4c` with byte-identity proven; MMM proposal
+object at `e99768a8`; live sibling mains observed); `taskctl
+check`, JSON parsing, and `git diff --check` pass. Full pytest,
+Docker, Ruff, and mypy recorded `not_required` (docs-only surface).
+No sibling fetch or write performed; no sibling file, branch,
+snapshot, ledger, or history modified.
+
+Git identity: base `2b3ff4c`, authorization
+`7f4c7f0e1b86bf53853afb3d02b153e52a5aaa53`; implementation
+`63bbbe1ff6668f08f3c038428d9647aaa1265e8e`; diff limited to the one
+owned path plus the three stable files via `taskctl` transitions.
+Authority unchanged across all protected flags. Local-only `.codex/`
+and `docs/tasks/` artifacts never staged.
 
 Live sibling observation: {"MMM": {"main": "00cad45de5f9f04c41a6eed51ccbc22149a42b54", "task_id": "MMM_TRANSFORM_SELECTION_AUDIT_001"}, "GeoX": {"main": "2ff493c884ac06aaf8359e349fc8008f1872528a", "task_id": "GEOX_TIER1_CALLBACK_INJECTION_REPAIR_001"}}. No snapshot refresh, sibling changes or consumer verification asserted.
