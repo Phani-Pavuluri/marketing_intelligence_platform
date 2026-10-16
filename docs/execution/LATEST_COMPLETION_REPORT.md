@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `changes_requested`
+**Current decision:** `ready_for_review`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,7 +13,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-002`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `true`
+- **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `b0d56459ee0e43b1515096e7c30c042567bcb672`
@@ -23,9 +23,9 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
-- **Correction cycles completed:** `0`
-- **Correction cycles remaining:** `1`
-- **Review decision:** `changes_requested`
+- **Correction cycles completed:** `1`
+- **Correction cycles remaining:** `0`
+- **Review decision:** `ready_for_review`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -76,12 +76,15 @@ and `docs/tasks/` artifacts never staged.
 
 Independent review of `2934d37` returned blocked with `MIP-REVIEW-001`
 (recorded verbatim above): required-category logs missing exact-tree
-identity. Corrected with the embedded transcripts tied to tree
-`bddf399` plus uncommitted evidence prose; owned implementation
-unchanged at `b0d5645`. Tier 1 gate rerun (structure, links,
-taskctl, JSON, diff checks pass). This consumes the single
-correction cycle via explicit rejected-head provenance
-(`2934d37`/`b0d5645`).
+identity. First corrected with embedded producer transcripts; re-review
+found those transcripts mislabeled the tree (`bddf399` belongs to
+another lineage). Corrected again here: the authoritative logs are
+reviewer-collected against reviewed head `a5dde7b` / exact tree
+`c3916cd` (verified `a5dde7b^{tree}`) at the three operator-evidence
+paths above; owned implementation unchanged at `b0d5645`. Tier 1 gate
+rerun (structure, links, taskctl, JSON, diff checks pass). This
+consumes the single correction cycle via explicit rejected-head
+provenance (`a5dde7b`/`b0d5645`).
 
 Live sibling observation: {"MMM": {"main": "00cad45de5f9f04c41a6eed51ccbc22149a42b54", "task_id": "MMM_TRANSFORM_SELECTION_AUDIT_001"}, "GeoX": {"main": "2ff493c884ac06aaf8359e349fc8008f1872528a", "task_id": "GEOX_TIER1_CALLBACK_INJECTION_REPAIR_001"}}. No snapshot refresh, sibling changes or consumer verification asserted.
 
@@ -113,27 +116,25 @@ This section supplies the finding omitted by the earlier correction-authorizatio
 
 ## Correction evidence (MIP-REVIEW-001 raw operator logs)
 
-Recorded findings directed raw `taskctl_check` and `git_diff_check
-outputs tied to the exact tree, noting reviewer — not producer —
-collects final reviewed-head logs outside the frozen implementation.
-The transcripts below ran on worktree at `bddf399` (plus only these
-completion-evidence prose edits, which content-agnostic checks do
-not depend on); the owned checklist is unchanged from the rejected
-head, so this correction is evidence-only:
+Recorded findings directed raw `taskctl_check` and `git_diff_check`
+outputs tied to the exact reviewed checkpoint — the prior revision
+of this section mislabeled the tree and is superseded here.
+Authoritative per-checkpoint logs were collected by the reviewer,
+not the producer, outside the frozen implementation:
 
-```
-$ poetry run python -m mip.execution.taskctl check
-taskctl_check exit: 0
-$ git diff --check
-git_diff_check exit: 0
-```
+- Reviewed head: `a5dde7b8bb1c134a04c0a34bb4238ed534e17c8f`
+- Exact tree: `c3916cd42db8385ca5834e58d021e52a1286f7d7`
+  (verified: `a5dde7b^{tree}` resolves to exactly this value)
+- `taskctl_check` transcript: `/Users/phani/.codex/quota-resume/mip-recovery-002-operator-evidence-a5/operator-taskctl.log` (exit 0)
+- `git_diff_check` transcript: `/Users/phani/.codex/quota-resume/mip-recovery-002-operator-evidence-a5/operator-diff.log` (exit 0)
+- Lineage record: `/Users/phani/.codex/quota-resume/mip-recovery-002-operator-evidence-a5/operator-lineage.json` (reviewed head, tree, live branch/remote equality, gate files)
 
-Both commands silent output, exit 0. Rerun on any published head to
-confirm independently; deterministic checks yield identical results
-on descendant trees that add only execution-file transitions.
-Final reviewed-head logs are reviewer-collected per the recorded
-finding, not producer-asserted here. Full pytest, Docker, Ruff, and
-mypy recorded `not_required` (docs-only surface).
+Producer-side runs during correction preparation (silent output,
+exit 0 on the worktree) are superseded by the reviewer logs above
+as checkpoint evidence; they are retained only as gate-run records
+in this section's history. Final reviewed-head logs remain
+reviewer-collected, not producer-asserted. Full pytest, Docker,
+Ruff, and mypy recorded `not_required` (docs-only surface).
 
 The actual review finding follows verbatim as evidence, not invented task scope:
 
