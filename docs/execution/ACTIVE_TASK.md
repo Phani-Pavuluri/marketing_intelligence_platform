@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** ready_for_review
+**Status:** changes_requested
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `fc6501282a439126da86a1a724c5c2b75728c055`
 - **Reviewed head:** `null`
-- **Rejected review head:** `d3c302fff5551c8d737e9c99cfc88cda1a648c3b`
-- **Rejected implementation commit:** `63a23fc6f5ccd37fe24bb135e7f3f3abd67be519`
+- **Rejected review head:** `c20dcc586b8d2ad8363e2fda996c0dbb31cd33b4`
+- **Rejected implementation commit:** `fc6501282a439126da86a1a724c5c2b75728c055`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`

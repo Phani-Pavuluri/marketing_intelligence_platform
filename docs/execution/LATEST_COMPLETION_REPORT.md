@@ -1,7 +1,7 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `ready_for_review`
+**Current decision:** `changes_requested`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
@@ -13,19 +13,19 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Feature branch:** `docs/mip-diagnostic-review-checklist-001`
 - **Feature branch created:** `false`
 - **Task execution authorized:** `true`
-- **Correction execution authorized:** `false`
+- **Correction execution authorized:** `true`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
 - **Implementation commit:** `fc6501282a439126da86a1a724c5c2b75728c055`
 - **Reviewed head:** `null`
-- **Rejected review head:** `d3c302fff5551c8d737e9c99cfc88cda1a648c3b`
-- **Rejected implementation commit:** `63a23fc6f5ccd37fe24bb135e7f3f3abd67be519`
+- **Rejected review head:** `c20dcc586b8d2ad8363e2fda996c0dbb31cd33b4`
+- **Rejected implementation commit:** `fc6501282a439126da86a1a724c5c2b75728c055`
 - **Approval commit:** `null`
 - **Blockers:** `none`
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `ready_for_review`
+- **Review decision:** `changes_requested`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -137,3 +137,29 @@ These findings are documentation and evidence corrections within the existing
 Tier 1 task. They do not authorize producer adoption, parser/schema work,
 bridge execution, certification, or a new capability. Observer report:
 `/Users/phani/.codex/quota-resume/mip-checklist-authoring/.codex/review-observer/reports/4ba5acf05a29f638a8eee14abed1cc00ee87f48bd94a169131a29caa4e323734/result.json`.
+
+## Independent re-review findings to drive the remaining correction
+
+The independent re-review of exact head
+`c20dcc586b8d2ad8363e2fda996c0dbb31cd33b4` found three further evidence
+defects. The observer failed closed while rendering one finding because its
+publication-receipt path was not in the evidence manifest; the substantive
+findings are preserved here:
+
+1. `MIP-REVIEW-001`: the current execution-evidence section still names the
+   rejected implementation instead of the corrected checkpoint. Rewrite the
+   current section to name the corrected implementation and reviewed head;
+   retain rejected-head details only as explicitly historical correction
+   context.
+2. `MIP-REVIEW-002`: required `taskctl_check` and `git_diff_check` evidence is
+   asserted but no complete logs or exact tree identity are attached. Publish
+   the actual logs tied to the corrected head, or mark the categories
+   unavailable and keep the task from passing.
+3. `MIP-REVIEW-003`: proposal-dependent claims rely on MMM sections that are
+   not mapped into the manifest. Map the exact proposal content at its pin, or
+   label each such claim unknown and route it to MMM.
+
+These remain documentation/evidence corrections within the existing Tier 1
+task. They do not authorize producer adoption, parser/schema work, bridge
+execution, certification, or a new capability. Observer model output:
+`/Users/phani/.codex/quota-resume/mip-checklist-authoring/.codex/review-observer/reports/4e06c9dc1a377d89560891e3338ccb044ebf117966d48d169d6fed7f16347024/model-output.json`.
