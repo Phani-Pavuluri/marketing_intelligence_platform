@@ -1,18 +1,18 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Execution Completion Report
 
-**Current decision:** `authorized`
+**Current decision:** `proposed`
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_OWNER_PROGRESS_DECISIONS_REFRESH_003`
+- **Task ID:** `MIP_OWNER_REPORT_PUBLICATION_RECOVERY_004`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `03874f8cca217bdde68a77692b03d70136e9b900`
-- **Authorization provenance:** `f915d676f7a44ba3242f543d30570f4df704882a`
-- **Feature branch:** `docs/mip-owner-progress-decisions-refresh-003`
+- **Base SHA:** `2dc87b10d106efa989576d93e423be74d02d6450`
+- **Authorization provenance:** `2dc87b10d106efa989576d93e423be74d02d6450`
+- **Feature branch:** `docs/mip-owner-report-publication-recovery-004`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,7 +25,7 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
@@ -33,4 +33,4 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 
 ## Current outcome
 
-Initial authoring only: one owner-requested plain-language report refresh after the previous report closed at 03874f8cca217bdde68a77692b03d70136e9b900. No report implementation or validation result is claimed. Existing scope, protected authority and historical metadata are preserved.
+Authoring only. Carry already-correct dated owner report from83dfba7 source and deliver truthful completion-evidence currency; predecessor is frozen/unapproved and not merged. No implementation or acceptance result yet. Protected authority/history unchanged.

@@ -7,7 +7,7 @@
   "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_empty_feature_branch_head",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_execution_authorized": true,
+  "task_execution_authorized": false,
   "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
@@ -42,14 +42,14 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_003",
-  "status": "authorized",
-  "review_decision": "authorized",
-  "base_sha": "03874f8cca217bdde68a77692b03d70136e9b900",
-  "task_authoring_start_sha": "03874f8cca217bdde68a77692b03d70136e9b900",
-  "task_authoring_head_sha": "f915d676f7a44ba3242f543d30570f4df704882a",
-  "authorization_head_sha": "f915d676f7a44ba3242f543d30570f4df704882a",
-  "feature_branch": "docs/mip-owner-progress-decisions-refresh-003",
+  "task_id": "MIP_OWNER_REPORT_PUBLICATION_RECOVERY_004",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "2dc87b10d106efa989576d93e423be74d02d6450",
+  "task_authoring_start_sha": "2dc87b10d106efa989576d93e423be74d02d6450",
+  "task_authoring_head_sha": "2dc87b10d106efa989576d93e423be74d02d6450",
+  "authorization_head_sha": "2dc87b10d106efa989576d93e423be74d02d6450",
+  "feature_branch": "docs/mip-owner-report-publication-recovery-004",
   "feature_branch_created": false,
   "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
@@ -83,22 +83,33 @@
   ],
   "dependencies": [
     {
-      "dependency_id": "DEP-MIP-PRIOR-REPORT-REFRESH-CLOSED",
+      "dependency_id": "DEP-MIP-CORRECTED-OWNER-REPORT-SOURCE-004",
       "repository": "Phani-Pavuluri/marketing_intelligence_platform",
-      "state": "satisfied",
-      "merged_checkpoint_sha": "03874f8cca217bdde68a77692b03d70136e9b900",
-      "resolution_condition": "Prior report is closed; fresh reporting task preserves history and counters."
+      "state": "source_available_not_merge_dependency",
+      "source_head_sha": "83dfba7e0d6ad8ec95fd2b342931c21ec40f5a80",
+      "resolution_condition": "Carry the already-correct report source; rejected predecessor is not required or permitted to merge."
     }
   ],
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "delegated_routine",
-  "task_authoring_note": "Existing explicit owner direction requests recurring Git-backed high-level reports including accomplishments, ongoing/planned work and adopted choices. Separate ordinary documentation refresh after the previous report closes; no new goal, capability, policy, analytical or sibling authority.",
+  "task_authoring_note": "Owner requested recurring Git-backed understandable reports and ordinary recommended corrections. Fresh report-only recovery carries the already-correct report and fixes contradictory completion-evidence currency. Preserves exhausted predecessor, all policy/authority/pins and existing activated routine review procedure.",
   "local_feature_branch_cleanup": null,
   "remote_feature_branch_cleanup": null,
-  "coordination_workstream_id": "WS-MIP-OWNER-PROGRESS-DECISIONS-003",
+  "coordination_workstream_id": "WS-MIP-OWNER-REPORT-PUBLICATION-RECOVERY-004",
   "coordination_capability_owner": "mip_program_owner_reporting",
   "parked_setup_workstreams": [
+    {
+      "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_003",
+      "feature_branch": "docs/mip-owner-progress-decisions-refresh-003",
+      "reviewed_head_sha": "83dfba7e0d6ad8ec95fd2b342931c21ec40f5a80",
+      "implementation_commit_sha": "284c5eeb690b53b9914c1f5e98019397720bac02",
+      "review_outcome": "changes_requested",
+      "merge_eligible": false,
+      "blocker_id": "MIP-REPORT003-COMPLETION-EVIDENCE-CURRENCY-001",
+      "resolution_condition": "Deliver the already-correct source owner report plus truthful current completion evidence through this fresh independently mergeable recovery; predecessor head/counters unchanged.",
+      "branch_lifecycle_limitation": "Native ready_for_review cannot reopen an exhausted correction. Preserve exact predecessor and actual source rejection without inventing merged/blocked lifecycle."
+    },
     {
       "task_id": "MIP_CORRECTION_PUBLICATION_ACCOUNTING_REPAIR_001",
       "feature_branch": "fix/mip-correction-publication-accounting-001",
@@ -156,11 +167,11 @@
     }
   ],
   "prior_task": {
-    "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_002",
-    "status": "merged",
-    "reviewed_head_sha": "553ab148a25f238858fa06d45c56dbf7a211457a",
-    "closure_commit_sha": "03874f8cca217bdde68a77692b03d70136e9b900",
-    "resolution_condition": "Prior report remains closed; no predecessor correction or merge reopened."
+    "task_id": "MIP_OWNER_PROGRESS_DECISIONS_REFRESH_003",
+    "status": "ready_for_review",
+    "reviewed_head_sha": "83dfba7e0d6ad8ec95fd2b342931c21ec40f5a80",
+    "review_outcome": "changes_requested",
+    "merge_eligible": false
   },
   "delegated_merge_required_validation": [
     "taskctl_check",
