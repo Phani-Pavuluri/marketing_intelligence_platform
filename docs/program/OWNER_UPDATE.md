@@ -11,10 +11,13 @@ MIP's correction-accounting repair is merged and closed, completing
 the reliability fix line on main. Delegated merging is activated by
 pushed note evidence, with routine follow-ups eligible without
 repeated merge prompts. Product integration across the three
-projects is still unfinished. GeoX has a validation-entrypoint task
-authorized with a corrected branch published for re-review. MMM has
-merged both its endpoint repair and its validation-runner
-reliability repair.
+projects is still unfinished. Separately, the broader continuity
+program — coordination, review coverage, and resumption behavior
+across the three projects — remains incomplete; no holistic runtime
+repair is claimed here. GeoX has a validation-entrypoint task
+authorized with a correction authorized and executing on its
+branch. MMM has merged both its endpoint repair and its
+validation-runner reliability repair.
 
 ## What we accomplished
 
@@ -25,11 +28,12 @@ reliability repair.
 - **MIP:** this refresh is implemented and complete, pending
   independent review and merge.
 - **GeoX:** the provenance audit merged and closed; a validation
-  entrypoint is authorized, and a corrected branch is published
-  for re-review after review-returned corrections. No controller,
-  production, analytical, producer-certification, sibling, or
-  authority change is authorized. Earlier finality-definition
-  states are superseded by this entrypoint work.
+  entrypoint is authorized, with a correction authorized and
+  executing on its branch (no corrected publication yet). No
+  controller, production, analytical, producer-certification,
+  sibling, or authority change is authorized. Earlier
+  finality-definition states are superseded by this entrypoint
+  work.
 - **MMM:** the endpoint repair merged and closed; the
   validation-runner reliability repair then merged and closed with
   corrected outcome prose, an independent exit-2 negative
@@ -52,7 +56,7 @@ reliability repair.
 | Project | Current position | Next step |
 |---|---|---|
 | MIP | Accounting repair merged; delegation activated by pushed note; this refresh complete pending review. | Independent review and merge of this report branch through the delegated path; no activation step remains. |
-| GeoX | Entry-point correction published for re-review; merge open. | Independent re-review and merge decision under GeoX authority. |
+| GeoX | Entry-point correction authorized and executing on its branch; no corrected publication yet. | Independent review of the corrected publication once published, then merge decision under GeoX authority. |
 | MMM | Runner reliability merged and closed. | Separately authorized fixture and analytical work under MMM authority. |
 
 ## Planned and dependent work
@@ -63,8 +67,8 @@ reliability repair.
 2. Use the activated delegated path for further eligible routine
    follow-ups; owner prompts remain for Tier 3, scope, capability,
    authority, and policy changes.
-3. Progress GeoX work once its corrected branch completes
-   independent re-review.
+3. Progress GeoX work once its executing correction publishes and
+   completes independent re-review.
 4. Resume dependent product work only after verifying GeoX producer
    evidence, MMM compatibility/provenance evidence, and MIP consumer
    prerequisites. Readiness proposals alone do not resolve dependencies.
@@ -89,7 +93,7 @@ they are technical supporting material, not required reading.
 - [MIP accounting-repair closure report](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/da55b40ae8025f7f28aa6e50c38ce98d246316fa/docs/execution/LATEST_COMPLETION_REPORT.md) — main `da55b40ae8025f7f28aa6e50c38ce98d246316fa`.
 - [MIP refresh task authorization](https://github.com/Phani-Pavuluri/marketing_intelligence_platform/blob/2dc87b10d106efa989576d93e423be74d02d6450/docs/execution/ACTIVE_TASK.md) — main `2dc87b10d106efa989576d93e423be74d02d6450`.
 - [GeoX completion report](https://github.com/Phani-Pavuluri/panel_exp/blob/3d43ea4c2017e6673a1262a35d522512bd8c6ad4/docs/execution/LATEST_COMPLETION_REPORT.md) — main `3d43ea4c2017e6673a1262a35d522512bd8c6ad4`.
-- [GeoX corrected branch head](https://github.com/Phani-Pavuluri/panel_exp/tree/33c3c6e5a6ef13de562af8a6e0704e8e54f3b56c) — live remote branch observed October 16; corrected publication for re-review; unmerged branch work, not merged evidence.
+- [GeoX entrypoint branch head](https://github.com/Phani-Pavuluri/panel_exp/tree/33c3c6e5a6ef13de562af8a6e0704e8e54f3b56c) — live remote branch observed October 16; correction authorized and executing, no corrected publication yet; unmerged branch work, not merged evidence.
 - [MMM reliability closure report](https://github.com/Phani-Pavuluri/MMM/blob/d4f8deb94ceff69fdf606567513bffac15f66170/docs/execution/LATEST_COMPLETION_REPORT.md) — main `d4f8deb94ceff69fdf606567513bffac15f66170`.
 - [MMM runner reviewed head](https://github.com/Phani-Pavuluri/MMM/blob/7f9b48c5cdd4fe3a3b695fabb895dfeaf7fcf2af/docs/execution/LATEST_COMPLETION_REPORT.md) — `7f9b48c5cdd4fe3a3b695fabb895dfeaf7fcf2af`, merged with branch cleanup observed.
 
