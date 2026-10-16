@@ -7,7 +7,7 @@
   "finalized_branch_baseline_resolution": "exact synchronized main after metadata finalization and exact initial local_remote_empty_feature_branch_head",
   "task_path": "docs/execution/ACTIVE_TASK.md",
   "completion_report_path": "docs/execution/LATEST_COMPLETION_REPORT.md",
-  "task_execution_authorized": true,
+  "task_execution_authorized": false,
   "correction_execution_authorized": false,
   "merge_authorized": false,
   "pr_creation_authorized": false,
@@ -42,14 +42,14 @@
     }
   ],
   "next_task_authorized": false,
-  "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_001",
-  "status": "authorized",
-  "review_decision": "authorized",
-  "base_sha": "b0e7650718556316fa585ac9d9b953cdf9831efa",
-  "task_authoring_start_sha": "b0e7650718556316fa585ac9d9b953cdf9831efa",
-  "task_authoring_head_sha": "5902e3d2433a9214a45c983f453eb64bd8fb5a60",
-  "authorization_head_sha": "5902e3d2433a9214a45c983f453eb64bd8fb5a60",
-  "feature_branch": "docs/mip-diagnostic-review-checklist-001",
+  "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_RECOVERY_002",
+  "status": "proposed",
+  "review_decision": "proposed",
+  "base_sha": "46eecad9b239ba95672b5f002cb1d80f1c30454f",
+  "task_authoring_start_sha": "46eecad9b239ba95672b5f002cb1d80f1c30454f",
+  "task_authoring_head_sha": null,
+  "authorization_head_sha": null,
+  "feature_branch": "docs/mip-diagnostic-review-checklist-002",
   "feature_branch_created": false,
   "reviewed_head_sha": null,
   "rejected_review_head_sha": null,
@@ -65,7 +65,7 @@
   "risk_tier": "tier_1_operational_documentation",
   "compatibility_migration_policy": "not_applicable",
   "full_suite_validation_required": false,
-  "validation_scope": "existing_consumer_diagnostic_checklist_source_pins_no_new_semantics_taskctl_json_diff_owned_paths_exact_tree",
+  "validation_scope": "diagnostic_checklist_existing_quantity_distinctions_source_pins_taskctl_json_diff_owned_paths_exact_tree",
   "owned_implementation_paths": [
     "docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md"
   ],
@@ -93,10 +93,10 @@
   "sibling_repositories_read_only": true,
   "next_task_id": null,
   "merge_approval_mode": "delegated_routine",
-  "task_authoring_note": "Materialize ordinary consumer-readiness review documentation under the owner existing continuous coordination, consumer acceptance/dependency alignment and high-level Git-backed reporting direction. This checklist records existing invariants and mismatches against a PROPOSED producer document; it creates no producer meaning, new consumer acceptance contract, analytical authority or R12/bridge prerequisite. Routine merge policy does not grant task authority.",
+  "task_authoring_note": "Reviewer materializes the owner repeated continuous-coordination and ordinary correction/successor direction. Same one-document outcome and existing consumer invariants as predecessor; no new capability, producer contract, governance or product meaning. next_task_authorized=false on predecessor prohibits worker self-authorization; this independent Git authoring establishes the explicit bounded successor before execution. User approval is reserved for material choices, not this already-settled artifact-type distinction.",
   "local_feature_branch_cleanup": null,
   "remote_feature_branch_cleanup": null,
-  "coordination_workstream_id": "WS-MIP-DIAGNOSTIC-REVIEW-CHECKLIST-001",
+  "coordination_workstream_id": "WS-MIP-DIAGNOSTIC-REVIEW-CHECKLIST-002",
   "coordination_capability_owner": "mip_consumer_acceptance_documentation",
   "parked_setup_workstreams": [
     {
@@ -120,14 +120,25 @@
       "blocker_id": "BLOCK-MIP-RUNBOOK-IMPLEMENTATION-IDENTITY-001",
       "resolution_condition": "Fresh recovery with current consistent implementation evidence and passing independent review; old head remains immutable and unapproved.",
       "branch_lifecycle_limitation": "Native MIP cannot mark an exhausted review-ready head blocked; durable external rejection note 4ee5ffa08b21041b63bf3ef4e04f99e754c15930 plus this canonical successor record preserves the fail-closed decision without hand-editing lifecycle."
+    },
+    {
+      "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_001",
+      "feature_branch": "docs/mip-diagnostic-review-checklist-001",
+      "reviewed_head_sha": "b45db6f923980620f6cfa93e30555a96ae6dda8b",
+      "implementation_commit_sha": "4f8f5572c130ec4affbdc10ba27d2145bf971924",
+      "review_outcome": "changes_requested",
+      "merge_eligible": false,
+      "blocker_id": "BLOCK-MIP-DIAGNOSTIC-QUANTITY-DISTINCTION-001",
+      "resolution_condition": "Publish a fresh source-backed checklist preserving diagnostic quantities separately from causal estimands, then pass independent exact-head review. Predecessor remains immutable and unapproved.",
+      "branch_lifecycle_limitation": "Native ready_for_review cannot transition to blocked after exhausted correction. This canonical successor record preserves rejection without manual lifecycle edits."
     }
   ],
   "prior_task": {
-    "task_id": "MIP_OWNER_UPDATE_REFRESH_002",
-    "status": "merged",
-    "reviewed_head_sha": "1d5a0a604dbd691843340626ee0539e16a6bb419",
-    "closure_commit_sha": "b0e7650718556316fa585ac9d9b953cdf9831efa",
-    "resolution_condition": "Owner report merged; no repeated merge or reopened correction."
+    "task_id": "MIP_DIAGNOSTIC_REVIEW_CHECKLIST_001",
+    "status": "review_rejected",
+    "reviewed_head_sha": "b45db6f923980620f6cfa93e30555a96ae6dda8b",
+    "merge_eligible": false,
+    "resolution_condition": "Preserved unmerged predecessor; successor addresses the already-authorized diagnostic/causal distinction without extending correction budget."
   },
   "delegated_merge_required_validation": [
     "taskctl_check",

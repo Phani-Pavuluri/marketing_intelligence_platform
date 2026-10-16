@@ -1,18 +1,18 @@
 <!-- BEGIN MIP TASKCTL EXECUTION VIEW -->
 # Active Task
 
-**Status:** authorized
+**Status:** proposed
 
 _Generated from `EXECUTION_STATE.json`; do not edit._
 
-- **Task ID:** `MIP_DIAGNOSTIC_REVIEW_CHECKLIST_001`
+- **Task ID:** `MIP_DIAGNOSTIC_REVIEW_CHECKLIST_RECOVERY_002`
 - **Repository:** `Phani-Pavuluri/marketing_intelligence_platform`
 - **Execution mode:** `branch_and_fast_forward`
-- **Base SHA:** `b0e7650718556316fa585ac9d9b953cdf9831efa`
-- **Authorization provenance:** `5902e3d2433a9214a45c983f453eb64bd8fb5a60`
-- **Feature branch:** `docs/mip-diagnostic-review-checklist-001`
+- **Base SHA:** `46eecad9b239ba95672b5f002cb1d80f1c30454f`
+- **Authorization provenance:** `null`
+- **Feature branch:** `docs/mip-diagnostic-review-checklist-002`
 - **Feature branch created:** `false`
-- **Task execution authorized:** `true`
+- **Task execution authorized:** `false`
 - **Correction execution authorized:** `false`
 - **Merge authorized:** `false`
 - **PR creation authorized:** `false`
@@ -25,30 +25,30 @@ _Generated from `EXECUTION_STATE.json`; do not edit._
 - **Maximum correction cycles:** `1`
 - **Correction cycles completed:** `0`
 - **Correction cycles remaining:** `1`
-- **Review decision:** `authorized`
+- **Review decision:** `proposed`
 - **Local feature-branch cleanup:** `null`
 - **Remote feature-branch cleanup:** `null`
 - **Capability authorizations changed:** `false`
 <!-- END MIP TASKCTL EXECUTION VIEW -->
 
-## One independently reviewable outcome
+## One independently reviewable outcome and owner direction
 
-Publish docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md as a source-backed checklist for reviewing the published PROPOSED MMM diagnostic-curve definition against existing MIP consumer invariants. This is ordinary consumer-readiness documentation within the owner's existing coordination and reporting goals. It neither adopts the producer proposal nor adds executable acceptance policy. Muse owns content and approach; Codex reviews evidence.
+Publish docs/program/MIP_DIAGNOSTIC_REVIEW_CHECKLIST.md as an accurate, source-backed review aid for the PROPOSED MMM diagnostic-curve definition against existing MIP consumer invariants. This is the same ordinary documentation outcome already requested under continuous review/coordination, carried into a bounded successor because the predecessor exhausted its correction cycle. Muse owns implementation approach and wording; Codex independently reviews. No new capability, analytical truth, interface adoption, parser, certification or decision policy is authorized.
 
-## Observable behavior and boundaries
+## Observable behavior and acceptance
 
-Each check names its review question, existing source rule, evidence required and a truthful mismatch/unknown result when unavailable. Cover quantity/units, scope and range, uncertainty availability, terminal failures/restrictions, provenance, diagnostic certification boundaries, and independence from calibration bridge prerequisites. Anchor existing rules to src/mip/contracts/enums.py, estimand.py, decision_surface.py and applicable envelope/report contracts. Read each referenced source before asserting a validator or field exists. Distinguish artifact types; do not require every diagnostic slope to become a causal quantity, assume different producer and consumer types interoperate, invent fields, or map units/semantics silently. A mismatch is recorded for the owning producer; the checklist does not resolve it.
+Cover all seven predecessor review families: quantity/units, scope/range, uncertainty availability, terminal failure/restrictions, provenance, diagnostic certification boundaries, and independence from calibration-bridge prerequisites. Each names a question, actual existing source rule, evidence and truthful mismatch/unknown handling. Distinguish a diagnostic modeling-scale response/slope from a causal estimand or level-space ROI. A diagnostic quantity need not map to CausalQuantity; lack of that mapping alone is not a producer mismatch. Require causal-estimand mapping only where causal meaning is claimed. Preserve units, scale, artifact type and allowed claims without silent conversions or invented semantics. Producer mismatches remain for the owning repository, not resolved by the checklist.
 
-Diagnostic curves cannot become certified decision evidence or replace full-panel delta-mu. Existing deterministic report claim prohibitions stay in force. Absent uncertainty stays unavailable; failure evidence never converts into success. A positive checklist result is documentation review only, never certification, contract adoption, parser support or executable compatibility. R12 is not a calibration-bridge prerequisite. Producer choices remain with their repository owners.
+Retain the original non-adoption boundaries: curves are diagnostic, cannot become certified decision evidence or replace full-panel delta-mu. Existing deterministic-report restrictions stand. Uncertainty requires evidence, failed evidence cannot become success, and R12 is not a prerequisite for the calibration bridge. A positive checklist is only documentation review.
 
-## Scope, dependencies and impact
+Use the predecessor exact head b45db6f923980620f6cfa93e30555a96ae6dda8b as read-only reference, not a merge/cherry-pick/rebase instruction. Its native review found substantive MIP-REVIEW-006 and explicitly resolved earlier operator-evidence findings004/005. Earlier rejected historical heads remain unapproved. Source facts must be checked independently; preserve useful content without reviving incorrect claims.
 
-Owned implementation is the one new checklist document plus the three stable execution files for native lifecycle/evidence. No navigation, code, tests, schema, parser, fixture, policy, ledger, historical snapshot, bridge, product or sibling changes. Modified MIP only; WS-MIP-DIAGNOSTIC-REVIEW-CHECKLIST-001; owner mip_consumer_acceptance_documentation. Preserve all parked blockers and protected authority.
+## Owned paths, dependencies and cross-repository impact
 
-Context live overlay: MMM proposal was published at e99768a8e43e020fe65a97e206a9e93101b364aa in docs/05_validation/mmm_response_surface_evidence_contract.md. It remains PROPOSED, with no contract adoption. GeoX callback repair is merged at 2ff493c884ac06aaf8359e349fc8008f1872528a, not producer certification. Reverify live source heads before publication and distinguish later ordinary task state from contract evidence. No shared snapshot refresh or sibling implementation is owned. Existing MIP consumer sources at base b0e7650718556316fa585ac9d9b953cdf9831efa are the checklist's normative references. No downstream blocker is resolved by publication.
+Implementation owns only the checklist above plus stable3 execution files. No code, tests, schema, parser, fixture, roadmap, policy, ledger, historical snapshot, bridge or sibling writes. Historical MIP consumer source base b0e7650718556316fa585ac9d9b953cdf9831efa remains a verified evidence pin; current task baseline is this synchronized authoring lineage. MMM PROPOSED contract at e99768a8e43e020fe65a97e206a9e93101b364aa remains unadopted. GeoX callback closure2ff493c884ac06aaf8359e349fc8008f1872528a does not certify producer output. Read live source overlays before publication, preserve historical pins verbatim, and report observation date, actual sibling mains and consumer verification limitations. MIP-only modification; workstream WS-MIP-DIAGNOSTIC-REVIEW-CHECKLIST-002, owner mip_consumer_acceptance_documentation. Existing consumer-source dependency is satisfied; parked certified-pair bridge blocker remains unresolved and resume unauthorized.
 
-## Acceptance, validation and publication
+## Proportionate gate, evidence and publication
 
-Tier 1 docs-only gate for execution, independent exact-tree review and pre/post-FF: all seven review families covered; each substantive rule has an exact resolving source path/pin; no invented fields or implicit adoption; unknowns/mismatches labeled; R12 and bridge separation explicit; source links verified against actual Git; taskctl check, JSON parsing, git diff --check, owned-path, ancestry and unchanged-authority checks. Required delegated receipt categories taskctl_check and git_diff_check need real logs tied to exact reviewed commit and Git tree. Full pytest/Docker/Ruff/mypy not_required for this docs-only surface. Existing activated delegated_routine route requires genuine native independent observer evidence, strict receipt and live eligible preflight; no new activation or per-head owner question for an eligible tree.
+Tier1 docs-only gates for execution, exact-head review and pre/post-FF: seven families covered; each substantive rule has an exact resolving source path/pin; diagnostic/causal distinction explicit; no invented field, implicit adoption or silent conversion; R12/bridge separation; links/blob existence; native taskctl check, JSON parsing, git diff --check, owned paths, authorization ancestry and unchanged-authority checks. Full pytest/Docker/Ruff/mypy not_required for this documentation surface. Native handoff/controller tests are required for authoring metadata. Required delegated categories taskctl_check and git_diff_check need actual operator logs identifying exact reviewed commit and Git tree, outside the implementation where appropriate. Missing operator exports/logs are reviewer responsibilities, not automatic producer correction cycles.
 
-Use python -m mip.execution.taskctl for lifecycle/view changes. Freeze the exact tree, run its gate, publish a complete receipt with implementation parent, evidence, results, worktree and authority. Verify exact remote head and stop ready_for_review or genuine blocked. No merge, PR, history rewrite or successor execution. One correction cycle; compatibility/migration not_applicable. Deferred: any actual producer-contract adoption, runtime integration, schema/parser/fixtures, new analytical meaning or bridge execution. Unresolved execution-blocking design questions: none.
+Use taskctl for lifecycle/projections. Freeze the task-owned tree; run required gates; write complete durable final publication receipt naming implementation parent, validation/results/evidence, worktree and authority impact; verify exact remote feature head, then stop ready_for_review or native blocked. Activated delegated_routine review/receipt/preflight remains mandatory before any routine merge; no new policy adoption or per-head owner approval for an eligible tree. One correction cycle; compatibility/migration not_applicable. No merge, PR, history rewrite, capability or successor execution. Unresolved execution-blocking design questions: none.
